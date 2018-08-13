@@ -1,7 +1,7 @@
 module.exports = {
     title: "YupaiTS的博客",
     description: "个人技术博客",
-    base: "/blog",
+    base: "/blog/",
     head: [
         ['link', { rel: 'icon', href: '/logo.jpg' }] //设置favicon
     ],
