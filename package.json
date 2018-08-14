@@ -2,5 +2,8 @@
     "scripts": {
         "docs:dev": "vuepress dev post",
         "docs:build": "vuepress build post"
+    },
+    "devDependencies": {
+        "vuepress": "^0.14.1"
     }
 }
