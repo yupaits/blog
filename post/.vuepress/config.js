@@ -43,6 +43,7 @@ module.exports = {
             {
                 text: 'Docker',
                 items: [
+                    { text: 'Docker容器命令', link: '/docker/6' },
                     { text: '安装Docker', link: '/docker/5' },
                     { text: 'Dockerfile指令', link: '/docker/4' },
                     { text: 'Docker镜像命令', link: '/docker/3' },
