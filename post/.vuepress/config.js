@@ -77,6 +77,7 @@ module.exports = {
             {
                 text: '实战总结',
                 items: [
+                    { text: '常见异常解决方案总结', link: '/in-action/10' },
                     { text: '开发实战总结', link: '/in-action/9' },
                     { text: 'GitLab使用手册', link: '/in-action/8' },
                     { text: 'SpringBoot和Vue单页面前后端分离项目的整合与构建', link: '/in-action/7' },
