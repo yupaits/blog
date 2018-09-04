@@ -1,0 +1,108 @@
+# 序列化与反序列化
+
+> 引用自[深入分析Java的序列化与反序列化](http://www.importnew.com/18024.html)、[Java对象的序列化与反序列化](http://www.importnew.com/17964.html)
+
+## 序列化与反序列化
+
+序列化（Serialization）是将对象的状态信息转换为可以存储或传输的形式的过程。一般将一个对象存储至一个存储媒介，例如档案或是记忆体缓冲等。在网络传输过程中，可以是字节或是XML等格式。而通过字节或XML编码格式可以还原完全相等的对象，这个还原的过程称为反序列化。
+
+## Java对象的序列化与反序列化
+
+在Java中，我们可以通过多种方式来创建对象，并且只要对象没有被回收我们都可以复用该对象。但是，我们创建出来的这些Java对象都是存在于JVM的堆内存中。只有JVM处于运行状态的收，这些对象才可能存在。一旦JVM停止运行，这些对象的状态也就随之丢失了。
+
+在真实的应用场景中，我们需要将这些对象持久化下来，并且能够在需要的时候把对象重新读取出来。Java的对象序列化可以帮助我们实现该功能。
+
+对象序列化机制（object serialization）是Java语言内建的一种对象持久化方式，通过对象序列化，可以把对象的状态保存为字节数组，并且可以在有需要的时候将这个字节数组通过反序列化的方式再转换成对象。对象序列化可以很容易地在JVM中的活动对象和字节数组（流）之间进行转换。
+
+在Java中，对象的序列化和反序列化被广泛应用到RMI（远程方法调用）及网络传输中。
+
+## 相关接口及类
+
+Java为了方便开发人员将Java对象进行序列化及反序列化提供了一套方便的API来支持。其中包括以下接口和类：
+
+```Java
+java.io.Serializable
+java.io.Externalizable
+ObjectOutput
+ObjectInput
+ObjectOutputStream
+ObjectInputStream
+```
+
+## Serializable接口
+
+类通过实现`java.io.Serializable`接口以启用其序列化功能。为实现此接口的类将无法使其任何状态序列化或反序列化。可序列化类的所有子类型本身都是可序列化的。**序列化接口没有方法或字段，仅用于标识可序列化的语义**。
+
+当试图对一个对象进行序列化的时候，如果遇到不支持Serializable接口的对象的情况下，将抛出 `NotSerializableException`。
+
+如果要序列化的类有父类，想同时将父类中定义过的变量持久化下来，那么父类也应该继承`java.io.Serializable`接口。
+
+## Externalizable接口
+
+除了Serializable之外，Java中还提供了另一个序列化接口`Externalizalbe`。
+
+Externalizable继承了Serializable，该接口中定义了两个抽象方法：`writeExternal()` 与 `readExternal()`。当使用Externalizable接口来进行序列化与反序列化的时候需要开发人员重写`wirteExernal()` 与 `readExternal()`方法。在使用Externalizable进行序列化的时候，在读取对象时，会调用被序列化类的无参构造方法去创建一个新的对象，然后再将被保存对象的字段的值分别填充到新对象中。所以，实现Externalizable接口的类必须要提供一个public的无参构造方法。
+
+## ObjectOutput和ObjectInput接口
+
+ObjectInput接口扩展自DataInput接口以包含对象的读操作。
+
+> DataInput接口用于从二进制流中读取字节，并根据所有Java基本类型数据进行重构。同时还提供根据UTF-8修改版格式的数据重构String的工具。
+
+> 对于此接口中的所有数据读取例程来说，如果再读取所需字节数之前已经到达文件末尾（end of file），则将抛出EOFException（IOException的一种）。如果因为到达文件末尾以外的其它原因无法读取字节，则将抛出IOException而不是EOFException。尤其是，再输入流已关闭的情况下，将抛出IOException。
+
+ObjectOutput扩展DataOutput接口以包含对象的写入操作。
+
+> DataOutput接口用于将数据从任意Java基本类型转换为一系列字节，并将这些字节写入二进制流。同时还提供了一个将String转换成UTF-8修改版格式并写入所得到的系列字节的工具。
+
+> 对于此接口中写入字节的所有方法，如果由于某种原因无法写入某个字节，将抛出IOException。
+
+## ObjectOutputStream类和ObjectInputStream类
+
+在Java中，一般使用ObjectOutputStream的`writeObject`方法把一个对象进行持久化。再使用ObjectInputStream的`readObject`方法从持久化存储中把对象读取出来。
+
+## transient关键字
+
+transient关键字的作用时控制变量的序列化，再变量声明前加上该关键字，可以阻止该变量被序列化到文件中，在被反序列化后，transient变量的值被设为初始值，如 int 型的是0，引用类型是 null。
+
+## 序列化ID
+
+虚拟机是否允许反序列化，不仅取决于类路径和功能代码是否一致，一个非常重要的一点是两个类的序列化ID是否一致（即类变量 `private static final long serialVersionUID`）。
+
+序列化ID在常见的IDE（如Eclipse、IDEA）中提供了两种生成策略，一个是固定的1L，一个是随机生成的一个不重复的long类型数据（实际上是使用JDK工具生成），在这里有一个建议，如果没有特殊需求，就是用默认的1L就可以，这样可以确保代码一致时反序列化成功。那么随机生成的序列化ID有什么作用呢，有些时候，通过改变序列化ID可以用来限制某些用户的使用。
+
+## 自定义序列化策略
+
+在序列化过程中，如果被序列化的类中定义了`writeObject`和`readObject`方法，虚拟机会试图调用对象类里的`writeObject`和`readObject`方法，进行用户自定义的序列化和反序列化。
+
+如果没有这样的方法，则默认调用的时ObjectOutputStream的`defaultWriteObject`方法以及ObjectInputStream的`defaultReadObject`方法。
+
+用户自定义的`writeObject`和`readObject`方法可以允许用户控制序列化的过程，比如可以在序列化的过程中动态改变序列化的数值。
+
+在使用ObjectOutputStream的`writeObject`方法和ObjectInputStream的`readObject`方法时，会通过反射的方式调用。`writeObject`方法会对类型进行检查，要求被序列化的类必须属于Enum、Array和Serializable类型中的任何一种。
+
+类型检查的源码如下：
+
+```Java
+if (obj instanceof String) {
+    writeString((String) obj, unshared);
+} else if (cl.isArray()) {
+    writeArray(obj, desc, unshared);
+} else if (obj instanceof Enum) {
+    writeEnum((Enum<?>) obj, desc, unshared);
+} else if (obj instanceof Serializable) {
+    writeOrdinaryObject(obj, desc, unshared);
+} else {
+    if (extendedDebugInfo) {
+        throw new NotSerializableException(cl.getName() + "\n" + debugInfoStack.toString());
+    } else {
+        throw new NotSerializableException(cl.getName());
+    }
+}
+```
+
+`writeObject`的调用栈为：
+
+```
+writeObject -> writeObject0 -> writeOrdinaryObject -> writeSerialData -> invokeWriteObject
+```

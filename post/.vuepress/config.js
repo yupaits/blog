@@ -28,8 +28,11 @@ module.exports = {
         {
             text: '系列专题',
             items: [
+                { text: 'Java基础知识', link: '/topics/java-base/base-syntax/' },
+                { text: 'Java进阶知识', link: '/topics/java-advanced/' },
+                { text: 'JVM虚拟机', link: '/topics/java-jvm/' },
                 { text: '基于Spring Cloud快速搭建微服务', link: '/topics/spring-cloud/' },
-                { text: 'Docker入门攻略', link: '/topics/docker/' }
+                { text: 'Docker入门攻略', link: '/topics/docker/' },
             ]
         },
         {
@@ -75,19 +78,55 @@ module.exports = {
         { text: 'GitHub', link: 'https://github.com/YupaiTS/blog' },
         ],
         sidebar: {
-            "/topics/spring-cloud/": [
-                {
-                    title: '基于Spring Cloud快速搭建微服务',
-                    collapsable: false,
-                    children: ['', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-                }
+            '/topics/spring-cloud/': [
+                getSidebarConfig('基于Spring Cloud快速搭建微服务', '', [
+                    '', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+                ])
             ],
-            "/topics/docker/": [
-                {
-                    title: 'Docker入门攻略',
-                    collapsable: false,
-                    children: ['', '1', '2', '3', '4', '5']
-                }
+            '/topics/docker/': [
+                getSidebarConfig('Docker入门攻略', '', [
+                    '', '1', '2', '3', '4', '5'
+                ])
+            ],
+            '/topics/java-base/': [
+                getSidebarConfig('基本语法', 'base-syntax/', [
+                    '', 'operator', 'choose-loop', 'class-object', 'extend-implements', 'exception', 'package-jar', 
+                    'serialize-deserialize', 'regex', 'overload-override'
+                ]),
+                getSidebarConfig('集合', 'collection/', [
+                    '', 'set', 'list', 'queue', 'map'
+                ]),
+                getSidebarConfig('线程', 'thread/', [
+                    '', 'runnable', 'callable', 'thread-state', 'thread-priority'
+                ]),
+                getSidebarConfig('IO', 'io/', [
+                    '', 'byte-stream', 'stream', 'convert-stream', 'compress-stream'
+                ]),
+                getSidebarConfig('网络', 'net/', ['', 'udp']),
+                getSidebarConfig('泛型', 'generic/', ['']),
+                getSidebarConfig('反射', 'reflection/', ['', 'invoke', 'dynamic-proxy']),
+                getSidebarConfig('源码分析', 'sourcecode/', [
+                    '', 'LinkedList', 'CopyOnWriteArrayList', 'HashMap', 'LinkedHashMap', 'ConcurrentHashMap'
+                ]),
+            ],
+            '/topics/java-advanced/': [
+                getSidebarConfig('Java进阶', '', [
+                    '', 'regex', 'lock', 'common-libs', 'system-property', 'lambda', 'java-thread', 'threadlocal',
+                    'hashmap-expansion', 'exception', 'problems'
+                ]),
+                getSidebarConfig('NIO', 'nio/', ['', 'tomcat-nio-model', 'epoll-selector', 'linux-io']),
+                getSidebarConfig('Java多线程', 'thread/', ['', '1', '2']),
+                getSidebarConfig('Java并发包', 'concurrent/', [
+                    '', 'concurrent-collection', 'cyclic-barrier', 'countdown-latch', 'semaphore'
+                ]),
+                getSidebarConfig('Netty', 'netty/', [''])
+            ],
+            '/topics/java-jvm/': [
+                getSidebarConfig('JVM虚拟机', '', ['', 'class-loader', 'gc']),
+                getSidebarConfig('JVM调优', 'tuning/', [
+                    '', 'console', 'gc', 'online-shop', 'knowledge-collection', 'concurrent-params'
+                ]),
+                getSidebarConfig('JVM调优工具', 'tuning-tools/', ['']),
             ]
         }
     },
@@ -102,5 +141,17 @@ module.exports = {
         config: md => {
             // 使用更多的 markdown-it 插件!
         }
+    }
+}
+
+function getSidebarConfig(title, pathPrefix, children) {
+    let transformedChildren = [];
+    children.forEach(item => {
+        transformedChildren.push(pathPrefix + item);
+    });
+    return {
+        title,
+        collapsable: false,
+        children: transformedChildren
     }
 }
