@@ -4,7 +4,8 @@ heroImage: /avatar.jpg
 actionText: 关于我 ->
 actionLink: /about
 features:
-- title: docs-manage
-  details: 文档管理系统，包含 shiro + jwt、spring security + jwt 和 OAuth2.0 三种认证授权的代码示例。
+- title: IDEA - 灵感
+- title: ACTION - 行动
+- title: ACCUMULATION - 积累
 footer: Copyright @ 2017-2018 YupaiTS
 ---

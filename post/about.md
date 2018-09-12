@@ -31,16 +31,31 @@ sidebar: auto
 |Git|⭐⭐⭐⭐⭐⭐⚪⚪⚪⚪|
 |Docker|⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪|
 |CI/CD|⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪|
-|Golang|⭐⭐⭐⭐⚪⚪⚪⚪⚪⚪|
+|Golang|⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪|
 |JQuery|⭐⭐⭐⭐⚪⚪⚪⚪⚪⚪|
 
 ## 作品与项目
 
-- [docs-manage](https://github.com/YupaiTS/docs-manage)  
-    一款前后端分离的文档管理系统，采用JWT作为鉴权的媒介。
+- [yugle](https://github.com/YupaiTS/yugle)
 
-- [yupaits-go](https://github.com/YupaiTS/yupaits-go)  
-    使用golang编写的一款RESTful风格API的后台服务。
+    鱼钩资讯，使用golang编写的一款基于gin框架的web服务，使用gin-jwt生成jwt，使用gorm作为ORM层框架，使用go_spider爬虫框架和robfig/cron定时任务调度框架。
 
-- [collection-ui](https://github.com/YupaiTS/collection_ui)  
+- [docs-manage](https://github.com/YupaiTS/docs-manage)
+
+    一款前后端分离的文档管理系统，包含 shiro + jwt、spring security + jwt 和 OAuth2.0 三种认证授权的代码示例。
+
+- [Todo-Tomato](in-action/3.md)
+
+    Todo-Tomato 是一款融合待办事项管理和番茄工作法，用于高效处理工作事务的工作利器。
+
+- [Ultimate-Spider](in-action/5.md)
+
+    Ultimate-Spider终极蜘蛛王，基于SpringBoot和WebMagic爬虫框架的一款爬虫应用。特点有：可视化爬虫配置，基于Quartz的爬虫任务调度。
+
+- [wechat-admin](in-action/2.md)
+
+    wechat-admin微信公众号管理平台是对多个公众号统一配置管理的平台。
+
+- [collection-ui](https://github.com/YupaiTS/collection_ui)
+
     用webpack+vue.js+vue-router写的一个网站界面。

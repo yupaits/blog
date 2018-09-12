@@ -10,11 +10,11 @@ List接口继承Collection接口，List集合代表一个元素有序、可重�
 
 ### ArrayList
 
-ArrayList时基于数组实现的List类，它封装了一个可以动态扩容的数组。详情见[ArrayList源码分析](../源码分析/ArrayList.md)。
+ArrayList时基于数组实现的List类，它封装了一个可以动态扩容的数组。详情见[ArrayList源码分析](../sourcecode/README.md)。
 
 ### LinkedList
 
-LinkedList实现了List和Deque接口，具备列表和双端队列的一些特性。详情见[LinkedList源码分析](../源码分析/LinkedList.md)。
+LinkedList实现了List和Deque接口，具备列表和双端队列的一些特性。详情见[LinkedList源码分析](../sourcecode/LinkedList.md)。
 
 ### Vector
 
