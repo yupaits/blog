@@ -59,7 +59,7 @@ $ go run example.go
 
 Gin使用 `encoding/json` 作为默认的json包，您可以通过 `-tags` 参数更改为 `jsoniter`。
 
-```sh
+```bash
 $ go build -tags=jsoniter .
 ```
 
@@ -475,7 +475,7 @@ func main() {
 ```
 
 **Sample request**
-```shell
+```bash
 $ curl -v -X POST \
   http://localhost:8080/loginJSON \
   -H 'content-type: application/json' \
@@ -557,7 +557,7 @@ func getBookable(c *gin.Context) {
 }
 ```
 
-```console
+```bash
 $ curl "localhost:8085/bookable?check_in=2018-04-16&check_out=2018-04-17"
 {"message":"Booking dates are valid!"}
 
@@ -646,7 +646,7 @@ func startPage(c *gin.Context) {
 ```
 
 Test it with:
-```sh
+```bash
 $ curl -X GET "localhost:8085/testing?name=appleboy&address=xyz&birthday=1992-03-15"
 ```
 
@@ -731,7 +731,7 @@ func main() {
 ```
 
 Test it with:
-```sh
+```bash
 $ curl -v --form user=user --form password=password http://localhost:8080/login
 ```
 
