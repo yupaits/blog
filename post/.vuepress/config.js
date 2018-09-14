@@ -26,6 +26,14 @@ module.exports = {
                 ]
             },
             {
+                text: 'Golang',
+                items: [
+                    { text: 'web框架Gin使用手册', link: '/golang/gin-doc' },
+                    { text: 'ORM框架gorm使用手册', link: '/golang/gorm' },
+                    { text: '爬虫框架go_spider', link: '/golang/go-spider' },
+                ]
+            },
+            {
                 text: '系列专题',
                 items: [
                     { text: 'Java基础知识', link: '/topics/java-base/base-syntax/' },
