@@ -1,6 +1,6 @@
 # 提供api方法取得类的结构
 
-› 引用自[Java 反射](http://www.importnew.com/17616.html)
+> 引用自[Java 反射](http://www.importnew.com/17616.html)
 
 ## 动态语言
 
@@ -19,7 +19,7 @@ eval(execString);
 
 - 加载完类之后, 在堆内存中会产生一个Class类型的对象(一个类只有一个Class对象), 这个对象包含了完整的类的结构信息,而且这个Class对象就像一面镜子,透过这个镜子看到类的结构,所以被称之为：反射。
 
-    › Instances of the class Class represent classes and interfaces in a running Java application. An enum is a kind of class and an annotation is a kind of interface. Every array also belongs to a class that is reflected as a Class object that is shared by all arrays with the same element type and number of dimensions(维度). The primitive Java types (boolean, byte, char, short, int, long, float, anddouble), and the keyword void are also represented as Class objects.
+    > Instances of the class Class represent classes and interfaces in a running Java application. An enum is a kind of class and an annotation is a kind of interface. Every array also belongs to a class that is reflected as a Class object that is shared by all arrays with the same element type and number of dimensions(维度). The primitive Java types (boolean, byte, char, short, int, long, float, anddouble), and the keyword void are also represented as Class objects.
 
 - 每个类被加载进入内存之后,系统就会为该类生成一个对应的java.lang.Class对象,通过该Class对象就可以访问到JVM中的这个类。
 
