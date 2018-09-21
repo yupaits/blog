@@ -108,7 +108,7 @@ module.exports = {
                     '', 'runnable', 'callable', 'thread-state', 'thread-priority'
                 ]),
                 getSidebarConfig('IO', 'io/', [
-                    '', 'byte-stream', 'stream', 'convert-stream', 'compress-stream'
+                    '', 'byte-stream', 'stream', 'convert-stream', 'zip-stream'
                 ]),
                 getSidebarConfig('网络', 'net/', ['', 'udp']),
                 getSidebarConfig('泛型', 'generic/', ['']),
