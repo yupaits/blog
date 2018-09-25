@@ -55,8 +55,8 @@
 
 1. HashCode被设计用来提高性能
 
-equals()方法与hashCode()方法的区别在于：
+    equals()方法与hashCode()方法的区别在于：
 
-如果两个对象equals，那么它们一定有相同的hashCode。如果两个对象的hashCode相同，但它们未必equals。
+    如果两个对象equals，那么它们一定有相同的hashCode。如果两个对象的hashCode相同，但它们未必equals。
 
-注：`==` 表示两个对象内存地址相同。
+    注：`==` 表示两个对象内存地址相同。
