@@ -1,20 +1,23 @@
 # Java多线程知识汇总(1)
 
+> 引用自[Java多线程知识小抄集(一)](https://blog.csdn.net/u013256816/article/details/51325246)
+
 1. interrupted与isInterrupted的区别
 
 interrupted()：测试当前线程是否已经是中断状态，执行后具有状态标志清除为false的功能。 
-isInterrupted()：测试线程Thread对象是否已经是中断状态，但不清除状态标志。 
+isInterrupted()：测试线程Thread对象是否已经是中断状态，但不清除状态标志。
+
 方法：
 
-    ```Java
-    public static boolean interrupted() {
-        return currentThread().isInterrupted(true);
-    }
-    public boolean isInterrupted() {
-        return isInterrupted(false);
-    }
-    private native boolean isInterrupted(boolean ClearInterrupted);1234567
-    ```
+```Java
+public static boolean interrupted() {
+    return currentThread().isInterrupted(true);
+}
+public boolean isInterrupted() {
+    return isInterrupted(false);
+}
+private native boolean isInterrupted(boolean ClearInterrupted);1234567
+```
 
 2. 终止正在运行的线程的三种方法：
 

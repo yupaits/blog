@@ -124,9 +124,7 @@ module.exports = {
                 ]),
                 getSidebarConfig('NIO', 'nio/', ['', 'tomcat-nio-model', 'epoll-selector', 'linux-io']),
                 getSidebarConfig('Java多线程', 'thread/', ['', '1', '2']),
-                getSidebarConfig('Java并发包', 'concurrent/', [
-                    '', 'concurrent-collection', 'cyclic-barrier', 'countdown-latch', 'semaphore'
-                ]),
+                getSidebarConfig('Java并发包', 'concurrent/', ['', 'concurrent-collection']),
                 getSidebarConfig('Netty', 'netty/', [''])
             ],
             '/topics/java-jvm/': [
