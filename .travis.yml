@@ -1,0 +1,30 @@
+language: node_js
+
+node_js:
+  - 8.11.3
+
+before_script:
+  - npm config set registry https://registry.npm.taobao.org
+  - npm config set strict-ssl false
+  - npm install
+
+script:
+  - npm run docs:build
+
+after_script:
+  - cd ./dist
+  - git init
+  - git config user.name ${USER_NAME}
+  - git config user.email ${USER_EMAIL}
+  - cp ../CNAME ./
+  - git add .
+  - git commit -m "构建并更新博客"
+  - git push -f "https://${GH_TOKEN}@${GH_REF}" master:gh_pages
+
+cache:
+  directories:
+    - node_modules
+
+branches:
+  only:
+    - master
