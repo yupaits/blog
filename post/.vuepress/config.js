@@ -130,9 +130,8 @@ module.exports = {
             '/topics/java-jvm/': [
                 getSidebarConfig('JVM虚拟机', '', ['', 'class-loader', 'gc']),
                 getSidebarConfig('JVM调优', 'tuning/', [
-                    '', 'console', 'gc', 'online-shop', 'knowledge-collection', 'concurrent-params'
-                ]),
-                getSidebarConfig('JVM调优工具', 'tuning-tools/', ['']),
+                    '', 'console', 'tuning-collection'
+                ])
             ]
         }
     },
