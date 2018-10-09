@@ -44,15 +44,15 @@ sidebar: auto
 
     一款前后端分离的文档管理系统，包含 shiro + jwt、spring security + jwt 和 OAuth2.0 三种认证授权的代码示例。
 
-- [Todo-Tomato](in-action/3.md)
+- [Todo-Tomato](in-action/todo-tomato-knowledge.md)
 
     Todo-Tomato 是一款融合待办事项管理和番茄工作法，用于高效处理工作事务的工作利器。
 
-- [Ultimate-Spider](in-action/5.md)
+- [Ultimate-Spider](in-action/ultimate-spider-knowledge.md)
 
     Ultimate-Spider终极蜘蛛王，基于SpringBoot和WebMagic爬虫框架的一款爬虫应用。特点有：可视化爬虫配置，基于Quartz的爬虫任务调度。
 
-- [wechat-admin](in-action/2.md)
+- [wechat-admin](in-action/wechat-admin.md)
 
     wechat-admin微信公众号管理平台是对多个公众号统一配置管理的平台。
 
