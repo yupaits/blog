@@ -40,7 +40,7 @@ module.exports = {
                     { text: 'Java进阶知识', link: '/topics/java-advanced/' },
                     { text: 'JVM虚拟机', link: '/topics/java-jvm/' },
                     { text: 'Spring/Spring Boot讲解', link: '/topics/spring-springboot-knowledge/' },
-                    { text: 'Spring Boot示例', link: '/topics/springboot-samples/' },
+                    { text: 'Spring Boot示例', link: '/topics/springboot-samples' },
                     { text: '基于Spring Cloud快速搭建微服务', link: '/topics/spring-cloud/' },
                     { text: 'Docker入门攻略', link: '/topics/docker/' },
                     { text: '设计模式', link: '/topics/design-pattern/' },
@@ -96,12 +96,7 @@ module.exports = {
             ],
             '/topics/spring-springboot-knowledge/': [
                 getSidebarConfig('Spring/Spring Boot讲解', '', [
-                    '',
-                ])
-            ],
-            '/topics/springboot-samples/': [
-                getSidebarConfig('Spring Boot示例', '', [
-                    '',
+                    '', 'spring-knowledge-points',
                 ])
             ],
             '/topics/spring-cloud/': [

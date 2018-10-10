@@ -2,4 +2,4 @@
 
 **类图**
 
-![factory](/images/工厂方法模式/factory.jpg)
+![factory](/images/工厂模式/factory.jpg)
