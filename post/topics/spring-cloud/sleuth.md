@@ -12,9 +12,13 @@ Spring Cloud Sleuth是对Zipkin的一个封装，对于Span、Trace等信息的�
 
 Spring Cloud Sleuth的概念图如下：
 
-![Spring Cloud Sleuth概念图](https://yqfile.alicdn.com/8ca36080f126c58f3f8cdbe02946832a8f1f82ba.png)
+![Spring Cloud Sleuth概念图](/images/快速搭建微服务-服务链路追踪/sleuth.png)
 
 ## 服务端配置
+
+启动类加上 `@EnableZipkinStreamServer` 注解声明当前应用为Sleuth服务端。
+
+### 使用MySQL存储链路追踪信息的配置
 
 - Maven 依赖
 
@@ -73,9 +77,63 @@ zipkin:
     type: mysql
 ```
 
-启动类加上 `@EnableZipkinStreamServer` 注解声明当前应用为Sleuth服务端。
+### 使用ElasticSearch存储链路追踪信息的配置
 
-### 客户端配置
+- Maven依赖
+
+```xml
+<dependency>
+    <groupId>io.zipkin.java</groupId>
+    <artifactId>zipkin-autoconfigure-ui</artifactId>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>io.zipkin.java</groupId>
+    <artifactId>zipkin-autoconfigure-storage-elasticsearch-http</artifactId>
+    <version>2.3.1</version>
+</dependency>
+```
+
+- 配置信息
+
+```yml
+spring:
+  application:
+    name: sleuth-server
+  sleuth:
+    stream:
+      enabled: false
+  rabbitmq:
+    host: 172.17.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+zipkin:
+  storage:
+    type: elasticsearch
+    elasticsearch:
+      cluster: elasticsearch
+      hosts: http://172.17.0.1:9200
+      index: zipkin
+      index-shards: 1
+      replicas: 1
+```
+
+## 客户端配置
 
 - Maven 依赖
 
@@ -105,7 +163,7 @@ spring:
     password: 
 ```
 
-### 建表SQL脚本
+## 建表SQL脚本
 
 使用MySQL存储链路追踪信息时，需要使用`io.zipkin.java:zipkin-storage-mysql`包内的`mysql.sql`脚本创建数据表，该脚本的内容如下：
 
