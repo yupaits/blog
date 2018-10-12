@@ -49,6 +49,8 @@ module.exports = {
             {
                 text: '运维部署',
                 items: [
+                    { text: 'Full GC排查流程', link: '/ops-deploy/full-gc-troubleshoot.md' },
+                    { text: '最佳日志实践', link: '/ops-deploy/best-log-practice.md' },
                     { text: 'GitLab-CI环境搭建与SpringBoot项目CI配置总结', link: '/ops-deploy/gitlab-ci-springboot' },
                     { text: '使用Gitee+Jenkins+Docker完成前后端分离项目的CI/CD', link: '/ops-deploy/gitee-jenkins-docker-ci-cd' },
                     { text: '使用GitHub和Jenkins自动构建并部署静态页面', link: '/ops-deploy/github-jenkins-ci-cd' },
