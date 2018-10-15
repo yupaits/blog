@@ -1,11 +1,16 @@
 module.exports = {
-    title: "YupaiTS的博客",
-    description: "俯仰一生，最惧无为。",
     base: "/",
     head: [
         ['link', { rel: 'icon', href: '/logo.jpg' }] //设置favicon
     ],
     dest: "dist",
+    locales: {
+        "/": {
+            lang: "zh-CN",
+            title: "YupaiTS的博客",
+            description: "俯仰一生，最惧无为。",
+        }
+    },
     themeConfig: {
         displayAllHeaders: false, //显示所有页面的标题链接，默认只展开显示当前页面的标题链接
         activeHeaderLinks: true, //活动的标题链接，可随鼠标上下滑动自动激活标题侧边栏标题高亮，需要markdown.anchor.permalink: true
