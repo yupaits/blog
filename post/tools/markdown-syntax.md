@@ -95,6 +95,44 @@ public static void main(String[] args) {
 | col 2 is      | centered      |   $12 |
 | zebra stripes | are neat      |    $1 |
 
+### 折叠块
+
+使用 `<details>` 标签表示一个可以折叠的块。
+
+```
+<details>
+    <summary>折叠块展示的标题</summary>
+    <p>折叠块的内容</p>
+    Hello, Wrold!
+</details>
+```
+
+<details>
+    <summary>折叠块展示的标题</summary>
+    <p>折叠块的内容</p>
+    Hello, Wrold!
+</details>
+
+### GitHub的checkbox列表
+
+在列表符号（即 `-` 或者 `*`）后面加上 `[x]` 或者 `[ ]`（注意中间的空格） 表示选中或者未选中的checkbox。
+
+```
+- [x] Java
+- [x] JavaScript
+- [x] HTML
+- [x] CSS
+- [ ] C++
+- [ ] Go
+```
+
+- [x] Java
+- [x] JavaScript
+- [x] HTML
+- [x] CSS
+- [ ] C++
+- [ ] Go
+
 ## 相关推荐
 
 ### 工具
