@@ -74,6 +74,7 @@ module.exports = {
                     {
                         text: '实用工具',
                         items: [
+                            { text: 'VS Code常用插件记录', link: '/tools/vscode-plugins' },
                             { text: 'Linux下安装Confluence', link: '/tools/linux-confluence' },
                             { text: 'Markdown语法', link: '/tools/markdown-syntax' },
                             { text: 'cron语法简单总结', link: '/tools/cron-syntax' },

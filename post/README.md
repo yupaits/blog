@@ -12,7 +12,3 @@ features:
   details: 不积跬步无以至千里，当积累的知识和经验足够多时，才能爆发出力量。
 footer: MIT License | Copyright @ 2017-2018 YupaiTS
 ---
-
-::: tip 作品展示
-[![yugle](/logos/yugle.ico)](https://yugle.yupaits.com/)
-:::
