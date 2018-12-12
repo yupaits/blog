@@ -257,7 +257,9 @@ sidebar: auto
     - 数据库开启事务、提交事务、回滚事务对应jdbc的三个api，Spring事务控制的本质是通过AOP把这三个方法增强在不同的地方调用，实现Spring的事务在方法之间的传播。
     - 数据库在开启事务到提交的过程中，数据库本身有异常都会回滚。 
     - 业务异常导致数据库回滚，是Spring通过调用 `jdbc rollback` 的api实现的。
-    
+
+1. Spring Security OAuth2 Client项目中@EnableOAuth2Sso注解修饰Application启动类时不起作用，需要放在@Configuration修饰的类上（通常是继承WebSecurityConfigurerAdapter的配置类）才能正常工作。
+
 ## Bootstrap
 
 1. 页面的modal元素记得加上 `data-backdrop='static'` 和 `data-keyboard='false'`，禁用非 modal 内点击和点击键盘 ESC 键 取消 modal。
@@ -265,7 +267,19 @@ sidebar: auto
 ## JQuery
 
 1. 批量删除并返回批量删除的结果时，ajax 方法中 async 一定要配置成 false，否则页面无法正确响应批量删除的结果。
+
 1. 使用 qrcodejs 生成二维码图片之后直接使用 `$('img').attr('src')` 返回的值是undefined，这时需要使用 `setTimeout(function(), delay_time)` 来拿到图片的 src 。
+
+1. js数组遍历删除元素的方法：
+
+    ```javascript
+    for (let i = 0; i < arr.length; i++) {
+        if (...) {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+    ```
 
 ## CSS
 1. 局部列表滚动查看css，height和max-height二选一。
@@ -281,6 +295,9 @@ sidebar: auto
         display: none;
     }
     ```
+
+## HTML
+1. 使用原生HTML进行表单开发时，如果没有指定 `<button>` 的 `type` 属性，则默认 `type="submit"`，最终导致点击之后 `window.location.href` 的路径中会自动多一个 `?`，这是因为原生的表单提交是以path后拼接form的参数进行请求的，所以在进行异步请求时需要指定提交的按钮为 `<button type="button">`。
 
 ## Vue.js
 1. 使用局部的 filter 代替 methods 中的方法格式化数据显示。
