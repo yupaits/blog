@@ -105,13 +105,13 @@ sidebar: auto
 
     - 参考：[Spring JDBC BeanPropertyRowMapper yes no ('Y','N') to boolean bean properties](https://stackoverflow.com/questions/15411843/spring-jdbc-beanpropertyrowmapper-yes-no-y-n-to-boolean-bean-properties)
 
-1. 使用zuul转发oauth2认证服务的路由，通过表单登录会报错：
+1. 使用Zuul转发OAuth2认证服务的路由，通过表单登录会报错：
 
     `full authentication is required to access this resource`
 
-    - 原因分析：在客户端中处于未认证的状态访问需要认证的资源时会跳转至oauth2认证服务的登录页面进行认证，而认证的过程中会发现判断request中没有 Authorization 请求头，而登录认证是需要 client_id 和 client_secret 信息存储在 Authorization 请求头里的，这就导致报错了。而根本的原因是从网关转发到认证服务的登录页面时直接重定向到了 auth-server/login 而不是 gateway/proxy/login 登录页面，重定向时丢失了 Authorization 信息。
+    - 原因分析：在客户端中处于未认证的状态访问需要认证的资源时会跳转至OAuth2认证服务的登录页面进行认证，而认证的过程中会发现判断request中没有 `Authorization` 请求头，而登录认证是需要 `client_id` 和 `client_secret` 信息存储在 `Authorization` 请求头里的，这就导致报错了。而根本的原因是从网关转发到认证服务的登录页面时直接重定向到了 `auth-server/login` 而不是 `gateway/proxy/login` 登录页面，重定向时丢失了 `Authorization` 信息。
 
-    - 解决方案：oauth2认证服务在做单点登录SSO时，不通过网关进行路由转发。
+    - 解决方案：OAuth2认证服务在做单点登录SSO时，不通过网关进行路由转发。
 
 ## Vue.js
 
