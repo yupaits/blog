@@ -223,7 +223,7 @@ ssh-keygen -t rsa -C "Email地址"
 
 ### 配置代码仓库
 
-打开**_config.yml**文件，配置代码仓库。
+打开 **_config.yml**文件，配置代码仓库。
 
 ```yaml
 deploy:
