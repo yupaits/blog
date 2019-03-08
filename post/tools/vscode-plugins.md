@@ -3,9 +3,17 @@ sidebar: auto
 ---
 # VS Code常用插件记录
 
-## Theme
+## 语言包
+
+- Chinese (Simplified) Language Pack for Visual Studio Code
+
+## 主题
 
 - Smile Theme
+
+## 快捷键
+
+- IntelliJ IDEA Keybindings
 
 ## HTML CSS JS
 
@@ -22,6 +30,7 @@ sidebar: auto
 ## Vue.js
 
 - Vetur
+- Ant Design Vue helper
 
 ## Markdown
 
@@ -35,3 +44,7 @@ sidebar: auto
 ## Golang
 
 - Go
+
+## 模板引擎
+
+- FreeMarker

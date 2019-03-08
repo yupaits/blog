@@ -260,6 +260,47 @@ sidebar: auto
 
 1. Spring Security OAuth2 Client项目中@EnableOAuth2Sso注解修饰Application启动类时不起作用，需要放在@Configuration修饰的类上（通常是继承WebSecurityConfigurerAdapter的配置类）才能正常工作。
 
+1. 检查幂等（是否重复请求）伪代码：
+
+    ```sql
+    CREATE TABLE `tb_unique` (
+        `request_id` varchar(64) NOT NULL COMMENT 'request id',
+        `gmt_create` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+        `gmt_modified` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '修改时间',
+        PRIMARY KEY (`request_id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='幂等表';
+    ```
+
+    ```Java
+    bool checkUnique(String requestId) {
+        try {
+            UniqueDO uniqueDO = buildUniqueDO(request);
+
+            //reqeustId唯一索引，重复则抛异常DataIntegrityViolationException
+            uniqueDao.insert(uniqueDO);
+
+            //插入成功说明之前没有数据，返回没有被幂等
+            return false;
+
+        } catch (DataIntegrityViolationException ex) {
+
+            //出现异常不一定时由于db里面有数据，可能是事务隔离级别导致，
+            //所以要再查一次，确认数据再db里面存在
+            UniqueDO uniqueDO = uniqueDao.selectByRequestId(requestId);
+
+            if (uniqueDO == null) {
+                //不存在数据则抛异常让方法重试
+                throw ex;
+            }
+
+            //存在返回被幂等
+            return true;
+        }
+    }
+    ```
+
+    requestId一般由客户端sdk生成和具体业务相关联。
+
 ## Bootstrap
 
 1. 页面的modal元素记得加上 `data-backdrop='static'` 和 `data-keyboard='false'`，禁用非 modal 内点击和点击键盘 ESC 键 取消 modal。
@@ -384,7 +425,32 @@ sidebar: auto
     - [申请Let's Encrypt通配符HTTPS证书](https://my.oschina.net/kimver/blog/1634575)
     - [How to configure Nginx with Let’s Encrypt on Debian/Ubuntu Linux](http://www.cyberciti.biz/faq/how-to-configure-nginx-with-free-lets-encrypt-ssl-certificate-on-debian-or-ubuntu-linux/)
 
+1. 使用 nginx 解决 CORS 问题
+
+    使用反向代理将服务端（接口提供方）与客户端（接口调用方）部署在同一个域下。
+
+1. 使用 nginx 解决 X-Frame-Options: deny 问题
+
+    使用[headers-more](https://github.com/openresty/headers-more-nginx-module)插件，推荐直接下载带headers-more模块的openresty，[下载地址](https://openresty.org/en/download.html)。
+
+    在 nginx.conf 中（一般是在server下）配置：
+
+    ```conf
+    # 删除 "X-Frame-Options" header
+    more_clear_headers 'X-Frame-Options';
+    # 设置 "X-Frame-Options: SAMEORIGIN" 同域可嵌入iframe
+    more_set_headers 'X-Frame-Options: SAMEORIGIN';
+    ```
+
 1. 指定MySQL时区，在mysqld.conf中增加 `default-time-zone='+8:00'` 配置。
+
+1. 在做微信公众号开发时，需要在公网上调用开发机器的接口，除了使用花生壳等软件进行内网穿透之外，如果有富余的公网服务器资源，可以使用一些简单方便的内网穿透工具，推荐 [ichWebpass](https://github.com/sosont/ichWebpass)。
+
+## Windows
+
+1. 为了在windows系统上安装docker，需要将win10系统升级到专业版开启HyperV虚拟机才行。
+    
+    win10专业版升级密钥：DR9VN-GF3CR-RCWT2-H7TR8-82QGT
 
 ## Linux
 1. Ubuntu/Debian开机启动脚本 `spider.sh` 示例：
@@ -414,8 +480,6 @@ sidebar: auto
 
 1. 取消sudo密码：`sudo visudo` 进入编辑界面；添加行 `username ALL=(ALL) NOPASSWD:ALL`，username为登录用户名，如果想作用于某个用户组则使用 `%usergroup ALL=(ALL:ALL) NOPASSWD:ALL`。
 
-    
-
 ## Docker
 1. 使用docker-compose的build参数构建docker镜像时，要注意指定的context目录下默认的Dockerfile文件名必须为 `Dockerfile`。如果想使用其他文件名，可以通过 `-f filename` 指定。 
 
@@ -428,3 +492,12 @@ sidebar: auto
         "dns": ["114.114.114.114", "8.8.8.8"]
     }
     ```
+
+1. 使用docker-compose来部署redash时，注意需要先创建redash数据库才能启动：
+
+    ```bash
+    sudo docker-compose run --rm server create_db
+    sudo docker-compose up -d
+    ```
+
+1. 使用docker方式部署consul时，由于consul在docker虚拟网络中无法正确识别注册服务的hostname，因此需要在注册服务中配置 spring.cloud.consul.discovery.hostname=192.168.1.xxx (注册服务的局域网ip，要注意的是必须是docker宿主机所在地局域网ip，使用172.17.0.1等docker内网ip也不行)，才能确保consul正确地进行健康检查。
