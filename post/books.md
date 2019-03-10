@@ -33,6 +33,10 @@ sidebar: auto
 
 ## 小说
 
+- [刺杀骑士团长](https://www.amazon.cn/dp/B079FLYB49/ref=tmm_pap_swatch_0)
+
+![刺杀骑士团长](/books/刺杀骑士团长.jpg)
+
 ### 推理小说
 
 - [无人生还](https://www.amazon.cn/dp/B00E9KKX72/ref=sr_1_2)
