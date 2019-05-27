@@ -93,7 +93,7 @@ sidebar: auto
 
 1. `Caused by: io.lettuce.core.RedisCommandExecutionException: ERR value is not an integer or out of range`
 
-    - 原因分析：出现该错误的原因是使用自定义的RestTemplate构造RedisAtomicLong是，RestTemplate的序列化方式可能不是RedisAtomicLong支持的。
+    - 原因分析：出现该错误的原因是使用自定义的RestTemplate构造RedisAtomicLong时，RestTemplate的序列化方式可能不是RedisAtomicLong支持的。
 
     - 解决方案：可以在构造RedisAtomicLong时使用 `new RedisAtomicLong(FLAG_KEY, redisConnectionFactory)` 代替 `new RedisAtomicLong(FLAG_KEY, redisTemplate)`。使用RedisAtomicLong类型默认支持的序列化方式进行构造不会出现此错误。
 
