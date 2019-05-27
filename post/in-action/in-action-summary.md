@@ -446,6 +446,38 @@ sidebar: auto
 
 1. 在做微信公众号开发时，需要在公网上调用开发机器的接口，除了使用花生壳等软件进行内网穿透之外，如果有富余的公网服务器资源，可以使用一些简单方便的内网穿透工具，推荐 [ichWebpass](https://github.com/sosont/ichWebpass)。
 
+1. gitlab pg数据库配置
+
+    修改`/var/opt/gitlab/postgresql/data/pg_hba.conf`文件，增加下面的配置：
+
+    ```
+    host all all 192.168.1.10/22 trust
+    ```
+
+    上述的修改会在使用`gitlab-ctl reconfigure`命令之后失效，通过修改gitlab配置文件中pg数据库的entries可以避免这种情况。具体为：
+
+    在gitlab.rb中增加
+
+    ```toml
+    postgresql['custom_pg_hba_entries'] = {
+      APPLICATION: [{ # APPLICATION should identify what the settings are used for
+        type: 'host',
+        database: 'all',
+        user: 'all',
+        cidr: '192.168.1.0/24',
+        method: 'trust',
+        #option: 0
+      }]
+    }
+    ```
+
+    **注意：** 这里的`APPLICATION`对象是一个数组，有些gitlab版本默认不是数组，需要手动修改。
+
+## Git
+
+1. GitHub 现在支持创建私有代码仓库了，但使用时需要注意：将 GitHub 的 repository 从 ***public*** 切换成 ***private*** 再切回 ***public*** 之后，需要 `push` 代码到 `master` 分支才能让已经404的 `Github Pages` 页面恢复正常。
+
+
 ## Windows
 
 1. 为了在windows系统上安装docker，需要将win10系统升级到专业版开启HyperV虚拟机才行。

@@ -74,6 +74,7 @@ module.exports = {
                     {
                         text: '实用工具',
                         items: [
+                            { text: '搭建OpenLDAP服务', link: '/tools/openldap' },
                             { text: 'VS Code常用插件记录', link: '/tools/vscode-plugins' },
                             { text: 'Linux下安装Confluence', link: '/tools/linux-confluence' },
                             { text: 'Markdown语法', link: '/tools/markdown-syntax' },
