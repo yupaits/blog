@@ -53,6 +53,12 @@ Markdown 是一种轻量级的「标记语言」，它的优点很多，目前�
 
 **粗体** _斜体_
 
+### 删除线
+
+用两个`~~`包含一段文本即可在该段文本上显示删除线。
+
+~~标记删除的文本~~ 
+
 ### 代码框
 
 ![Markdown代码框](http://ww3.sinaimg.cn/large/6aee7dbbgw1effg1lsa97j20lt0a8dgs.jpg)
