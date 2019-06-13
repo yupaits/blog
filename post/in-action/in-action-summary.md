@@ -512,6 +512,26 @@ sidebar: auto
 
 1. 取消sudo密码：`sudo visudo` 进入编辑界面；添加行 `username ALL=(ALL) NOPASSWD:ALL`，username为登录用户名，如果想作用于某个用户组则使用 `%usergroup ALL=(ALL:ALL) NOPASSWD:ALL`。
 
+1. linux系统添加ssh公钥的方式：
+
+    - 本地
+
+        ```bash
+        # 覆盖
+        cat [ssh_pub_key] > ~/.ssh/authorized_keys
+
+        # 追加
+        cat [ssh_pub_key] >> ~/.ssh/authorized_keys
+        ```
+
+    - 远程
+
+        ```bash
+        scp ~/.ssh/id_rsa.pub root@[remote-server-ip]:/root/.ssh/authorized_keys
+        ```
+
+        **注：** 需要输入远程服务器的登录密码进行认证。
+
 ## Docker
 1. 使用docker-compose的build参数构建docker镜像时，要注意指定的context目录下默认的Dockerfile文件名必须为 `Dockerfile`。如果想使用其他文件名，可以通过 `-f filename` 指定。 
 
