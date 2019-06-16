@@ -88,6 +88,7 @@ module.exports = {
                         items: [
                             { text: '常见异常解决方案总结', link: '/in-action/exception-solution' },
                             { text: '开发实战总结', link: '/in-action/in-action-summary' },
+                            { text: 'flatten-maven-plugin插件配置说明', link: '/in-action/flatten-maven-plugin' },
                             { text: 'GitLab使用手册', link: '/in-action/gitlab-manual' },
                             { text: 'SpringBoot和Vue单页面前后端分离项目的整合与构建', link: '/in-action/springboot-vue-build' },
                             { text: 'Git分支管理', link: '/in-action/git-branch-manage' },
