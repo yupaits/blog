@@ -387,6 +387,14 @@ sidebar: auto
 
 1. Vue的 `filters` 块中的过滤器不能加载自身 `data()` 块中的变量，如果需要使用 `data()` 中的变量对数据进行转换时可以将过滤器的逻辑写在 `methods` 块中。
 
+1. 在使用基于Vue的前端框架进行开发时，有些框架组件无法对点击事件进行监听和处理（如 `ant-design-vue` 的 `popconfirm` 组件，详见 [Could you add a property in PopConfirm to stop click event propagation?](https://github.com/ant-design/ant-design/issues/7233)），而如果此时正好需要阻止某个组件的点击事件向上层元素传播时，可以使用如下方式：
+
+    ```html
+    <div @click="e => e.stopPropagation()">
+      <a-popconfirm></a-popconfirm>
+    </div>
+    ```
+
 ## 缓存
 1. 使用 redis-cli 进入 redis 的命令行模式时，可以使用 `keys **` 查看所有 key 值，使用 `get [key]` 查看 key 对应的 value 值。需要注意的是，使用 `keys **` 查看到的 key 值如果使用 "" 包括，那么 `get [key]` 的 key 也需要用 "" 包括起来。
 
