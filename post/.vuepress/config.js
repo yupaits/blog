@@ -74,6 +74,7 @@ module.exports = {
                     {
                         text: '实用工具',
                         items: [
+                            { text: '发布jar包到Maven中央仓库', link: '/tools/jar-maven-central' },
                             { text: '搭建OpenLDAP服务', link: '/tools/openldap' },
                             { text: 'VS Code常用插件记录', link: '/tools/vscode-plugins' },
                             { text: 'Linux下安装Confluence', link: '/tools/linux-confluence' },
