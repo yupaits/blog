@@ -55,7 +55,7 @@ sidebar: auto
 
 ![无人生还](/books/无人生还.jpg)
 
-- [悬崖上的谋杀]()
+- [悬崖上的谋杀](https://www.amazon.cn/dp/B07RQWP5KV/ref=sr_1_13?__mk_zh_CN=%E4%BA%9A%E9%A9%AC%E9%80%8A%E7%BD%91%E7%AB%99&keywords=%E9%98%BF%E5%8A%A0%E8%8E%8E+%E5%85%8B%E9%87%8C%E6%96%AF%E8%92%82&qid=1561728859&s=gateway&sr=8-13)
 
 ![悬崖上的谋杀](/books/悬崖上的谋杀.png)
 
