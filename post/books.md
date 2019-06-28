@@ -33,15 +33,31 @@ sidebar: auto
 
 ## 小说
 
+- [解忧杂货铺](https://www.amazon.cn/dp/B00JZ96ZI8/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1561727949&sr=8-12)
+
+![解忧杂货铺](/books/解忧杂货铺.jpg)
+
 - [刺杀骑士团长](https://www.amazon.cn/dp/B079FLYB49/ref=tmm_pap_swatch_0)
 
 ![刺杀骑士团长](/books/刺杀骑士团长.jpg)
 
 ### 推理小说
 
+- [白夜行](https://www.amazon.cn/dp/B00ARB0HBO/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1561727949&sr=8-1)
+
+![白夜行](/books/白夜行.jpg)
+
+- [虚无的十字架](https://www.amazon.cn/dp/B00YOBMT6E/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=1561727949&sr=8-6)
+
+![虚无的十字架](/books/虚无的十字架.jpg)
+
 - [无人生还](https://www.amazon.cn/dp/B00E9KKX72/ref=sr_1_2)
 
 ![无人生还](/books/无人生还.jpg)
+
+- [悬崖上的谋杀]()
+
+![悬崖上的谋杀](/books/悬崖上的谋杀.jpg)
 
 ### 科幻小说
 
