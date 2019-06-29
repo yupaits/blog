@@ -23,7 +23,7 @@ sidebar: auto
 
 首先需要在 https://issues.sonatype.org/secure/Dashboard.jspa 注册一个账号，创建一个新项目的 issue 并提交。
 
-![创建issue](https://monkeywie.github.io/2018/07/23/publish-jar-to-maven/1532326564463.png)
+![创建issue](/images/发布jar包到Maven中央仓库/创建issue.png)
 
 - Project 选择 Community Support，Issue type 选择 New Project。
 - 注意 Group Id，如果有对应域名的话则使用域名对应的 Group Id（例如 netty 项目的域名是 netty.io，则 Group Id 为 io.netty），没有自己的域名最好就填 com.github.xxx，因为在 issue 里审核员会询问你是否拥有 Group Id 对应的域名并且要求你进行技术验证，没有的话审核会不通过，而托管在 github 上的话就可以直接使用 github 的域名来完成审核。
@@ -32,7 +32,7 @@ sidebar: auto
 
 创建成功后等 1-2 个小时左右就会有工作人员评论 issue，问你是否持有域名。
 
-![issue审核](https://monkeywie.github.io/2018/07/23/publish-jar-to-maven/1532332576577.png)
+![issue审核](/images/发布jar包到Maven中央仓库/issue审核.png)
 
 如果是用com.github.xxx的 Group Id，就回复要使用com.github.xxx作为你的域名，否则有域名就回复有就好,接着等待工作人员确认(我等了一天)，确认成功之后 issue 的状态就会变成RESOLVED，这个时候就有资格上传 jar 包到 maven 仓库了。
 
