@@ -163,8 +163,8 @@ check_interval = 0
   token = "266dc28d04f012a5ead3987c1f004e"
   executor = "ssh"
   [runners.ssh]
-    user = "yupaits"
-    password = "1115"
+    user = "root"
+    password = "password"
     host = "172.17.0.1"
     port = "22"
     identity_file = "/root/.ssh/id_rsa"
