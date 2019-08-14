@@ -113,6 +113,14 @@ sidebar: auto
 
     - 解决方案：OAuth2认证服务在做单点登录SSO时，不通过网关进行路由转发。
 
+1. 在使用Mybatis-Plus的 `getOne(Wrapper<T> wrapper)` 方法查询单条数据时，出现了以下错误：
+
+    `org.springframework.dao.DataIntegrityViolationException: Error attempting to get column 'id' from result set.  Cause: java.sql.SQLDataException: Value '1161534535095926785' is outside of valid range for type java.lang.Integer; Value '1161534535095926785' is outside of valid range for type java.lang.Integer; nested exception is java.sql.SQLDataException: Value '1161534535095926785' is outside of valid range for type java.lang.Integer`
+
+    - 原因分析：从报错信息看，应该是id字段的类型错误导致的实际的Long值超出了Integer取值范围，校对之后发现数据库中该字段类型是BIGINT，而实体类中属性的类型为Long，并没有问题。仔细排查发现原因是实体类上使用的lombok `@Buidler` 注解导致该类没有无参构造方法，从而导致Mybatis-Plus无法正确映射字段类型。
+
+    - 解决方案：在实体类上添加lombok `@NoArgsConstructor` 和 `@AllArgsConstructor` 注解。
+
 ## Vue.js
 
 1. Vue.js2.x 报 `Cannot read property '__ob__' of undefined` 的错误。
