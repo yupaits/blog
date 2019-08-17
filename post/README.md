@@ -10,5 +10,5 @@ features:
   details: 百言不如一行，用行动去检验、去求证、去突破，行在当下。
 - title: ACCUMULATION - 积累
   details: 不积跬步无以至千里，当积累的知识和经验足够多时，才能爆发出力量。
-footer: MIT License | Copyright @ 2017-2018 YupaiTS
+footer: MIT License | Copyright @ 2017-2019 YupaiTS
 ---
