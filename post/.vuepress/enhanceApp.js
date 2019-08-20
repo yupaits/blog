@@ -42,12 +42,12 @@ function useGitalk(router) {
         if ($page) {
             $page.appendChild(commentsContainer);
             if (typeof Gitalk !== 'undefined' && Gitalk instanceof Function) {
-                renderGitalk(to.path);
+                renderGitalk();
             }
         }
     }
 
-    function renderGitalk(path) {
+    function renderGitalk() {
         const gitalk = new Gitalk({
             clientID: '5680169c83c7f32a7352',
             clientSecret: '1a71f599143d186c5e8fd00f3f96f482d8ff71ea',
@@ -55,7 +55,7 @@ function useGitalk(router) {
             owner: 'yupaits',
             admin: ['yupaits'],
             distractionFreeMode: false,
-            id: path,
+            id: location.pathname,
             language: 'zh-CN'
         });
         gitalk.render('gitalk-container');
