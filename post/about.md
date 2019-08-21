@@ -35,6 +35,10 @@ sidebar: auto
 
 ## 作品与项目
 
-- [docs-manage](https://github.com/YupaiTS/docs-manage)
+- [docs-manage](https://github.com/yupaits/docs-manage)
 
     一款前后端分离的文档管理系统，包含 shiro + jwt、spring security + jwt 和 OAuth2.0 三种认证授权的代码示例。
+
+- [yutool](https://github.com/yupaits/yutool)
+
+    该项目整理了个人工作学习过程中编写的一些示例应用以及针对通用业务场景封装的相关工具及中间件，主要使用的技术为Spring Boot和Spring Boot Starter。
