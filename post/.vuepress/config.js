@@ -54,6 +54,8 @@ module.exports = {
                             { text: '基于Spring Cloud快速搭建微服务', link: '/topics/spring-cloud/' },
                             { text: 'Docker入门攻略', link: '/topics/docker/' },
                             { text: '设计模式', link: '/topics/design-pattern/' },
+                            { text: '分布式系统原理', link: '/topics/distribution/' },
+                            { text: '大型网络应用架构', link: '/topics/architecture/' },
                         ]
                     },
                     {
