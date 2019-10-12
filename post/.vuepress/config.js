@@ -162,6 +162,12 @@ module.exports = {
                         getSidebarConfig('JVM调优', 'tuning/', [
                             '', 'console', 'tuning-collection'
                         ])
+                    ],
+                    '/topics/distribution/': [
+                        getSidebarConfig('分布式系统原理', '', ['', 'cap', 'eventually-consistent', 'idempotent', 'disaster-tolerance'])
+                    ],
+                    '/topics/architecture/': [
+                        getSidebarConfig('大型网络应用架构', '', ['', 'mq', 'cache', 'load-balance', 'cluster', 'data-sync', 'high-availability'])
                     ]
                 }
             }
