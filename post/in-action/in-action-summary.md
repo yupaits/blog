@@ -414,6 +414,13 @@ sidebar: auto
 
 1. gitlab-runner的 `config.toml` 在 `[runners.docker] `中配置 `extra_hosts = ["xxx.xxx.com:172.17.0.1"]`可实现runner容器的ip和host映射关系的配置。
 
+1. 设置maven的 `setting.xml` 中 mirror 节点的 `mirrorOf` 有以下配置策略：
+
+    - *：everything
+    - external:*：everything not on the localhost and not file based
+    - repo,repo1：repo or repo1
+    - *,!repo1：everything except repo1
+
 ## 部署
 1. windows 下使用 Nginx 相关命令如下：
     ```
@@ -485,7 +492,6 @@ sidebar: auto
 
 1. GitHub 现在支持创建私有代码仓库了，但使用时需要注意：将 GitHub 的 repository 从 ***public*** 切换成 ***private*** 再切回 ***public*** 之后，需要 `push` 代码到 `master` 分支才能让已经404的 `Github Pages` 页面恢复正常。
 
-
 ## Windows
 
 1. 为了在windows系统上安装docker，需要将win10系统升级到专业版开启HyperV虚拟机才行。
@@ -539,6 +545,14 @@ sidebar: auto
         ```
 
         **注：** 需要输入远程服务器的登录密码进行认证。
+
+1. ssh对目录的权限有要求，具体如下：
+
+    |目录/文件|权限|
+    |---|---|
+    |~/.ssh|700|
+    |~/.ssh/*|600|
+    |~/.ssh/config|700|
 
 ## Docker
 1. 使用docker-compose的build参数构建docker镜像时，要注意指定的context目录下默认的Dockerfile文件名必须为 `Dockerfile`。如果想使用其他文件名，可以通过 `-f filename` 指定。 
