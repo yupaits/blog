@@ -41,6 +41,7 @@ module.exports = {
                             { text: 'web框架Gin使用手册', link: '/golang/gin-doc' },
                             { text: 'ORM框架gorm使用手册', link: '/golang/gorm' },
                             { text: '爬虫框架go_spider', link: '/golang/go-spider' },
+                            { text: '跨平台GUI工具fyne', link: '/golang/fyne' },
                         ]
                     },
                     {
@@ -56,13 +57,14 @@ module.exports = {
                             { text: '设计模式', link: '/topics/design-pattern/' },
                             { text: '分布式系统原理', link: '/topics/distribution/' },
                             { text: '大型网络应用架构', link: '/topics/architecture/' },
+                            { text: '玩转树莓派', link: '/topics/raspberry-pi/' },
                         ]
                     },
                     {
                         text: '运维部署',
                         items: [
-                            { text: 'Full GC排查流程', link: '/ops-deploy/full-gc-troubleshoot.md' },
-                            { text: '最佳日志实践', link: '/ops-deploy/best-log-practice.md' },
+                            { text: 'Full GC排查流程', link: '/ops-deploy/full-gc-troubleshoot' },
+                            { text: '最佳日志实践', link: '/ops-deploy/best-log-practice' },
                             { text: 'GitLab-CI环境搭建与SpringBoot项目CI配置总结', link: '/ops-deploy/gitlab-ci-springboot' },
                             { text: '使用Gitee+Jenkins+Docker完成前后端分离项目的CI/CD', link: '/ops-deploy/gitee-jenkins-docker-ci-cd' },
                             { text: '使用GitHub和Jenkins自动构建并部署静态页面', link: '/ops-deploy/github-jenkins-ci-cd' },
@@ -76,6 +78,7 @@ module.exports = {
                     {
                         text: '实用工具',
                         items: [
+                            { text: '开发环境搭建', link: '/tools/dev-env-build' },
                             { text: '发布jar包到Maven中央仓库', link: '/tools/jar-maven-central' },
                             { text: '搭建OpenLDAP服务', link: '/tools/openldap' },
                             { text: 'VS Code常用插件记录', link: '/tools/vscode-plugins' },
@@ -113,7 +116,7 @@ module.exports = {
                     ],
                     '/topics/spring-springboot-knowledge/': [
                         getSidebarConfig('Spring/Spring Boot讲解', '', [
-                            '', 'spring-knowledge-points',
+                            '', 'spring-knowledge-points'
                         ])
                     ],
                     '/topics/spring-cloud/': [
@@ -168,6 +171,9 @@ module.exports = {
                     ],
                     '/topics/architecture/': [
                         getSidebarConfig('大型网络应用架构', '', ['', 'mq', 'cache', 'load-balance', 'cluster', 'data-sync', 'high-availability'])
+                    ],
+                    '/topics/raspberry-pi/': [
+                        getSidebarConfig('玩转树莓派', '', ['', 'aria2-downloader', 'golang-web-app'])
                     ]
                 }
             }
