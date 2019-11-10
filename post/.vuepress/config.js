@@ -173,7 +173,7 @@ module.exports = {
                         getSidebarConfig('大型网络应用架构', '', ['', 'mq', 'cache', 'load-balance', 'cluster', 'data-sync', 'high-availability'])
                     ],
                     '/topics/raspberry-pi/': [
-                        getSidebarConfig('玩转树莓派', '', ['', 'aria2-downloader', 'golang-web-app'])
+                        getSidebarConfig('玩转树莓派', '', ['', 'aria2-downloader'])
                     ]
                 }
             }
