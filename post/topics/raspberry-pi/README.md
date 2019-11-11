@@ -8,7 +8,7 @@ go-pi-monitor 是在 [gopsutil](https://github.com/shirou/gopsutil) 的基础上
 
 在 Raspbian 上安装 GoLang 1.12.5 版本的脚本如下：
 
-```sh
+```bash
 #install_go_pi.sh
 cd $HOME
 FileName='go1.12.5.linux-armv6l.tar.gz'
@@ -25,7 +25,7 @@ source ~/.bashrc
 
 下载 go-pi-monitor 并进行编译运行：
 
-```sh
+```bash
 git clone https://github.com/yupaits/go-pi-monitor.git
 cd go-pi-monitor
 go build app/main.go

@@ -6,7 +6,7 @@
 
 使用以下命令安装 Aria2：
 
-```sh
+```bash
 sudo apt install aria2
 ```
 
@@ -97,20 +97,20 @@ WantedBy=multi-user.target
 
 重新载入服务，并设置开机启动：
 
-```sh
+```bash
 sudo systemctl daemon-reload
 sudo systemctl enable aria
 ```
 
 查看 Aria2 服务状态：
 
-```sh
+```bash
 sudo systemctl status aria
 ```
 
 启动、停止、重启 Aria2 服务：
 
-```sh
+```bash
 sudo systemctl (start、stop、restart) aria
 ```
 
