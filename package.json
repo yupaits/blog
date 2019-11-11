@@ -4,7 +4,7 @@
         "docs:build": "node ./builds/addMarkdown.js && vuepress build post && node ./builds/delMarkdown.js"
     },
     "devDependencies": {
-        "vuepress": "^1.2.0"
+        "vuepress": "^0.14.11"
     },
     "dependencies": {
         "gitalk": "^1.5.0"
