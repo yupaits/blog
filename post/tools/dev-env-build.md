@@ -33,6 +33,41 @@ services:
         - /var/run/docker.sock:/var/run/docker.sock
         - ~/docker/portainer/data:/data
     restart: always
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: sql123
+    volumes:
+      - ~/docker/mysql/data:/var/lib/mysql
+      - ~/docker/mysql/conf:/etc/mysql/conf.d
+    restart: always
+
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost:8000'
+    volumes:
+      - ~/docker/gitlab/conf:/etc/gitlab
+      - ~/docker/gitlab/logs:/var/log/gitlab
+      - ~/docker/gitlab/data:/var/opt/gitlab
+    ports:
+      - '22:22'
+      - '8000:80'
+    restart: always
+  
+  gitlab-runner:
+    image: gitlab/gitlab-runner
+    container_name: gitlab-runner
+    volumes:
+      - ~/docker/gitlab-runner/conf:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
 ```
 
 未完待续……
