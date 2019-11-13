@@ -18,4 +18,21 @@ sidebar: auto
 
 ## 使用 docker-compose 部署
 
+以上工具的 `docker-compose.yml` 文件内容如下：
+
+```yaml
+version: '3.1'
+
+services:
+  portainer: 
+    image: portainer/portainer
+    container_name: portainer
+    ports:
+        - 9000:9000
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - ~/docker/portainer/data:/data
+    restart: always
+```
+
 未完待续……
