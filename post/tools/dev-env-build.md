@@ -139,7 +139,16 @@ services:
       - ~/docker/sonarqube/logs:/opt/sonarqube/logs
       - ~/docker/sonarqube/data:/opt/sonarqube/data
     ports:
-      - '9900:9000'
+      - 9900:9000
+    restart: always
+
+  nexus3:
+    image: sonatype/nexus3
+    container_name: nexus3
+    volumes:
+      - ~/docker/nexus/data:/nexus-data
+    ports:
+      - 8081:8081
     restart: always
 ```
 
