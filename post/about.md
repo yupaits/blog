@@ -42,3 +42,5 @@ sidebar: auto
 - [yutool](https://github.com/yupaits/yutool)
 
     该项目整理了个人工作学习过程中编写的一些示例应用以及针对通用业务场景封装的相关工具及中间件，主要使用的技术为Spring Boot和Spring Boot Starter。
+
+<Vssue title="关于我"/>
