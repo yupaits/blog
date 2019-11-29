@@ -575,3 +575,5 @@ sidebar: auto
     ```
 
 1. 使用docker方式部署consul时，由于consul在docker虚拟网络中无法正确识别注册服务的hostname，因此需要在注册服务中配置 spring.cloud.consul.discovery.hostname=192.168.1.xxx (注册服务的局域网ip，要注意的是必须是docker宿主机所在地局域网ip，使用172.17.0.1等docker内网ip也不行)，才能确保consul正确地进行健康检查。
+
+<Vssue title="开发实战总结"/>

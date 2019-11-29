@@ -68,3 +68,5 @@ sidebar: auto
 - [三体全集](https://www.amazon.cn/dp/B00OB3SNMY/ref=sr_1_1)
 
 ![三体全集](/books/三体全集.jpg)
+
+<Vssue title="阅读书单"/>
