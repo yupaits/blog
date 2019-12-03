@@ -66,6 +66,7 @@ module.exports = {
           {
             text: '运维部署',
             items: [
+              { text: 'Linux系统设置静态IP', link: '/ops-deploy/linux-static-ip' },
               { text: 'Full GC排查流程', link: '/ops-deploy/full-gc-troubleshoot' },
               { text: '最佳日志实践', link: '/ops-deploy/best-log-practice' },
               { text: 'GitLab-CI环境搭建与SpringBoot项目CI配置总结', link: '/ops-deploy/gitlab-ci-springboot' },
