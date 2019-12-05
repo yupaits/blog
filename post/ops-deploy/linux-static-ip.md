@@ -54,7 +54,7 @@ ZONE=
 
 找到 `/etc/netplan/` 目录下的 `yaml` 格式配置文件，修改配置文件内容为：
 
-```yaml{7}
+```yaml{5}
 networK:
     ethernets:
         p8p1:
