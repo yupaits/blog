@@ -45,6 +45,11 @@ sidebar: auto
 
 - Go
 
+## Flutter
+
+- Flutter
+- Dart
+
 ## Docker
 
 - Docker
