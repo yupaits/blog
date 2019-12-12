@@ -301,6 +301,16 @@ sidebar: auto
 
     requestId一般由客户端sdk生成和具体业务相关联。
 
+1. profile为default时会读取 `application.yml` 的配置，而当profile不是default时，会读取对应的 `applicaiton-{profile}.yml` 的配置。需要注意的是，如果 `application.yml` 和 `application-{profile}.yml` 中存在相同的配置项时，`application.yml` 的优先级更高，所以一般在 `application.yml` 中设置共用的配置项。
+
+1. 在SpringMVC中 `@RequestBody` 注解修饰的对象如果存在 `@DateTimeFormat` 注解修饰的属性，而且使用 jackson 进行反序列，那么 `@DateTimeFormat` 注解实际上是不起作用的，此时需要使用 `@JsonFormat` 注解进行代替。示例如下：
+
+    ```Java
+    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startTime;
+    ```
+
 ## Bootstrap
 
 1. 页面的modal元素记得加上 `data-backdrop='static'` 和 `data-keyboard='false'`，禁用非 modal 内点击和点击键盘 ESC 键 取消 modal。
@@ -394,6 +404,29 @@ sidebar: auto
       <a-popconfirm></a-popconfirm>
     </div>
     ```
+
+1. Vue的 `style scoped` 中的样式不起作用时，可以新增一个无scoped修饰的 `style` 来定义css样式，例如：
+
+    ```css
+    <style scoped>
+    .scoped-style {
+      background-color: black;
+    }
+    </style>
+    
+    <style>
+    .global-style {
+      color: white;
+    }
+    </style>
+    ```
+
+1. 在Vue中使用JSX语法时，需要注意以下方面：
+
+    - 所有的运算赋值操作都需要在 `{}` 中，如获取变量值，调用方法等。
+    - 不支持Vue的过滤器，需要使用方法来代替。
+    - 事件监听 `@click="handleClick(param)"` => `onClick={this.handleClick.bind(this, param)}`，`@click.native="handleNativeClick(param)"` => `nativeOnClick={this.handleNativeClick.bind(this, param)}`，这里需要使用js原生的`bind`方法来进行方法调用。
+    - 不支持Vue的指令，常用的指令的备选解决方案：`v-if="condition"` => `v-show="condition"` 或者 `{condition ? <div>JSX</div> : ''}`；`<li v-for="item in items" :key="item">{{item}}</li>` => `{items.map((item, index) => {return <li>{{item}}</li>})}`。
 
 ## 缓存
 1. 使用 redis-cli 进入 redis 的命令行模式时，可以使用 `keys **` 查看所有 key 值，使用 `get [key]` 查看 key 对应的 value 值。需要注意的是，使用 `keys **` 查看到的 key 值如果使用 "" 包括，那么 `get [key]` 的 key 也需要用 "" 包括起来。
