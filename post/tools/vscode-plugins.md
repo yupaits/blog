@@ -45,6 +45,10 @@ sidebar: auto
 
 - Go
 
+## Python
+
+- Python
+
 ## Flutter
 
 - Flutter
