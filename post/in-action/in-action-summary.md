@@ -426,7 +426,7 @@ sidebar: auto
     - 所有的运算赋值操作都需要在 `{}` 中，如获取变量值，调用方法等。
     - 不支持Vue的过滤器，需要使用方法来代替。
     - 事件监听 `@click="handleClick(param)"` => `onClick={this.handleClick.bind(this, param)}`，`@click.native="handleNativeClick(param)"` => `nativeOnClick={this.handleNativeClick.bind(this, param)}`，这里需要使用js原生的`bind`方法来进行方法调用。
-    - 不支持Vue的指令，常用的指令的备选解决方案：`v-if="condition"` => `v-show="condition"` 或者 `{condition ? <div>JSX</div> : ''}`；`<li v-for="item in items" :key="item">{{item}}</li>` => `{items.map((item, index) => {return <li>{{item}}</li>})}`。
+    - 不支持Vue的指令，常用的指令的备选解决方案：`v-if="condition"` => `v-show="condition"` 或者 `{condition ? <div>JSX</div> : ''}`；`<li v-for="item in items" :key="item">{item}</li>` => `{items.map((item, index) => {return <li>{item}</li>})}`。
 
 ## 缓存
 1. 使用 redis-cli 进入 redis 的命令行模式时，可以使用 `keys **` 查看所有 key 值，使用 `get [key]` 查看 key 对应的 value 值。需要注意的是，使用 `keys **` 查看到的 key 值如果使用 "" 包括，那么 `get [key]` 的 key 也需要用 "" 包括起来。
