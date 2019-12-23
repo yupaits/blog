@@ -1288,7 +1288,7 @@ type Company struct {
 ### 创建对象
 创建过程中可用的回调
 ```go
-// begin transaction 开始事物
+// begin transaction 开始事务
 BeforeSave
 BeforeCreate
 // save before associations 保存前关联
@@ -1304,7 +1304,7 @@ AfterSave
 ### 更新对象
 更新过程中可用的回调
 ```go
-// begin transaction 开始事物
+// begin transaction 开始事务
 BeforeSave
 BeforeUpdate
 // save before associations 保存前关联
@@ -1318,7 +1318,7 @@ AfterSave
 ### 删除对象
 删除过程中可用的回调
 ```go
-// begin transaction 开始事物
+// begin transaction 开始事务
 BeforeDelete
 // delete self 删除自己
 AfterDelete
@@ -1381,7 +1381,7 @@ if db.Model(&user).Related(&credit_card).RecordNotFound() {
     // 没有信用卡被发现处理...
 }
 ```
-### 事物 {#t}
+### 事务 {#t}
 要在事务中执行一组操作，一般流程如下。
 ```go
 // 开始事务
