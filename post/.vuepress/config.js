@@ -82,6 +82,7 @@ module.exports = {
           {
             text: '实用工具',
             items: [
+              { text: 'GitHub 编程语言色彩一览', link: '/tools/github-language-color' },
               { text: '开发环境搭建', link: '/tools/dev-env-build' },
               { text: '发布jar包到Maven中央仓库', link: '/tools/jar-maven-central' },
               { text: '搭建OpenLDAP服务', link: '/tools/openldap' },
