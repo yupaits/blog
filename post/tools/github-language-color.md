@@ -154,7 +154,7 @@
 |Assembly|#6E4C13|![Assembly](https://img.shields.io/badge/Assembly-6E4C13.svg)|
 |Gnuplot|#f0a9f0|![Gnuplot](https://img.shields.io/badge/Gnuplot-f0a9f0.svg)|
 |FLUX|#88ccff|![FLUX](https://img.shields.io/badge/FLUX-88ccff.svg)|
-|C#|#178600|![C#](https://img.shields.io/badge/C#-178600.svg)|
+|C#|#178600|![C#](https://img.shields.io/badge/C%23-178600.svg)|
 |Turing|#cf142b|![Turing](https://img.shields.io/badge/Turing-cf142b.svg)|
 |Vala|#fbe5cd|![Vala](https://img.shields.io/badge/Vala-fbe5cd.svg)|
 |ECL|#8a1267|![ECL](https://img.shields.io/badge/ECL-8a1267.svg)|
