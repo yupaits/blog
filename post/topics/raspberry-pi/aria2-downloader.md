@@ -45,7 +45,7 @@ max-concurrent-downloads=5
 continue=true
 #同服务器连接数
 max-connection-per-server=5
-最小文件分片大小，下载线程数上限取决于能分出多少片，对于小文件重要
+#最小文件分片大小，下载线程数上限取决于能分出多少片，对于小文件重要
 min-split-size=10M
 #单文件最大线程数，建议值：5
 split=10
