@@ -207,7 +207,10 @@ module.exports = {
     ['@vuepress/active-header-links'],
     ['@vuepress/medium-zoom'],
     ['@vuepress/back-to-top'],
-    ['@vuepress/nprogress']
+    ['@vuepress/nprogress'],
+    ['vuepress-plugin-baidu-autopush', {
+      hm: 'a8a29b59be0e5e3c2482c676b6e31f02'
+    }]
   ]
 }
 

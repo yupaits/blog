@@ -15,7 +15,8 @@
         "date-fns": "^1.28.5",
         "github-markdown-css": "^3.0.1",
         "vssue": "^1.2.2",
-        "vuepress": "^1.2.0"
+        "vuepress": "^1.2.0",
+        "vuepress-plugin-baidu-autopush": "^1.0.1"
     },
     "dependencies": {}
 }
