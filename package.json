@@ -17,7 +17,9 @@
         "github-markdown-css": "^3.0.1",
         "vssue": "^1.2.2",
         "vuepress": "^1.2.0",
-        "vuepress-plugin-baidu-autopush": "^1.0.1"
+        "vuepress-plugin-baidu-autopush": "^1.0.1",
+        "vuepress-plugin-code-copy": "^1.0.4",
+        "vuepress-plugin-sitemap": "^2.3.1"
     },
     "dependencies": {}
 }

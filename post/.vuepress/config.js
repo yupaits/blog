@@ -1,7 +1,12 @@
 module.exports = {
   base: "/",
   head: [
-    ['link', { rel: 'icon', href: '/logo.jpg' }] //设置favicon
+    ['link', {rel: 'icon', href: '/logo.jpg'}], //设置favicon
+    ['meta', {name: 'robots', content: 'all'}],
+    ['meta', {name: 'author', content: 'yupaits'}],
+    ['meta', {name: 'keywords', content: 'yupaits, YupaiTS, 博客'}],
+    ['meta', {name: 'apple-mobile-web-app-capable', content: 'yes'}],
+    ['script', {src: 'https://hm.baidu.com/hm.js?a8a29b59be0e5e3c2482c676b6e31f02'}]
   ],
   dest: "dist",
   locales: {
@@ -20,7 +25,7 @@ module.exports = {
     docsDir: 'post',
     docsBranch: 'master',
     editLinks: true,
-    smoothScroll: true,
+    smoothScroll: false,
     locales: {
       "/": {
         label: '简体中文',
@@ -206,9 +211,11 @@ module.exports = {
     }],
     ['@vuepress/medium-zoom'],
     ['@vuepress/back-to-top'],
-    ['vuepress-plugin-baidu-autopush', {
-      hm: 'a8a29b59be0e5e3c2482c676b6e31f02'
-    }]
+    ['sitemap', {
+      hostname: 'https://blog.yupaits.com'
+    }],
+    ['vuepress-plugin-baidu-autopush'],
+    ['vuepress-plugin-code-copy', true]
   ]
 }
 
