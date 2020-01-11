@@ -204,10 +204,8 @@ module.exports = {
       clientId: '5680169c83c7f32a7352',
       clientSecret: '1a71f599143d186c5e8fd00f3f96f482d8ff71ea'
     }],
-    ['@vuepress/active-header-links'],
     ['@vuepress/medium-zoom'],
     ['@vuepress/back-to-top'],
-    ['@vuepress/nprogress'],
     ['vuepress-plugin-baidu-autopush', {
       hm: 'a8a29b59be0e5e3c2482c676b6e31f02'
     }]
