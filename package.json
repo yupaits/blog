@@ -1,7 +1,8 @@
 {
     "scripts": {
         "docs:dev": "vuepress dev post",
-        "docs:build": "vuepress build post"
+        "docs:build": "vuepress build post",
+        "docs:deploy": "bash deploy.sh"
     },
     "devDependencies": {
         "@vssue/api-github-v3": "^1.1.2",
