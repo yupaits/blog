@@ -1,0 +1,26 @@
+---
+title: 工具整合
+---
+
+## GitLab-CI整合SonarQube
+
+……
+
+## GitLab整合Jira
+
+### 一、整合步骤
+
+#### 1、打开项目页面，进入 设置 → 集成 → 项目服务 → JIRA
+
+![GitLab-Jira](/images/工具整合/GitLab-Jira.png)
+
+#### 2、填写并保存JIRA配置
+
+![GitLab的Jira配置](/images/工具整合/GitLab的Jira配置.png)
+
+Username 统一使用 gitlab-admin。
+
+### 二、整合示例
+提交代码时在提交说明中填写Jira Issue的ID（如下图的 STUDYCLOUD-3）即可自动关联上Jira。
+
+![GitLab-Jira整合示例](/images/工具整合/GitLab-Jira整合示例.png)

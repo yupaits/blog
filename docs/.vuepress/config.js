@@ -69,11 +69,9 @@ module.exports = {
               'gitlab-ci-springboot',
               'github-jenkins-ci-cd',
               'gitee-jenkins-docker-ci-cd',
-              'git-branch-manage',
             ]),
             getSidebarConfig('记录', 'record/', [
               'github-language-color',
-              'dev-env-build',
               'vscode-plugins',
               'jar-maven-central',
               'openldap',
@@ -95,6 +93,16 @@ module.exports = {
               'cron-syntax',
               'linux-command',
               'markdown-syntax',
+            ]),
+            getSidebarConfig('项目管理', 'project-manage/', [
+              'project-standards',
+              'demand-analysis',
+              'project-decision',
+              'jira-basic-concepts',
+              'git-branch-manage',
+              'gitflow-model',
+              'tool-integration',
+              'dev-env-build',
             ]),
           ],
           '/posts/': [
@@ -119,12 +127,24 @@ module.exports = {
               'manage-complexity-is-the-core-value',
               'tech-and-team',
               'what-a-senior-programmer-looks-like',
+              'what-should-do-when-the-core-employee-leaving',
             ]),
             getSidebarConfig('行业', 'industry/', [
+              'what-is-new-retailing',
               'how-econnoisseur-earn-money',
               'people-safety-prictices',
             ]),
+            getSidebarConfig('资讯', 'information/', [
+              '2019-queen-of-the-internet-report',
+              '90s-entering-the-anxiety-age',
+              'how-much-to-build-5g-base-station',
+              'the-king-of-hacker',
+            ]),
             getSidebarConfig('思考', 'thinking/', [
+              'how-to-become-a-technology-bull',
+              'your-hard-work-doesnot-mean-reward',
+              '30-ceo-give-me-9-truth',
+              'talking-about-philosophy-and-programming',
               'a-good-engineer-must-have-the-skill',
               'growth-experience-from-0-to-200-people-group',
               'growth-in-one-year-at-alibaba',
@@ -141,6 +161,9 @@ module.exports = {
               'base-component', 'system-architecture'
             ]),
             getSidebarConfig('业务场景', 'business/', []),
+            getSidebarConfig('Checklist', 'checklist/', [
+              'api-security-checklist', 'code-review-checklist'
+            ]),
           ],
           '/dev/': [
             getSidebarConfig('', '', ['']),
