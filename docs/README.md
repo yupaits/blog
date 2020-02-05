@@ -3,7 +3,7 @@ home: true
 heroImage: /avatar.jpg
 heroText: 
 actionText: 前往博客 →
-actionLink: /blogs
+actionLink: /blog/
 features:
 - title: IDEA - 灵感
   details: 怀着敬畏与好奇，探索未知，寻找自然界的法则与世界运行的规律。
