@@ -8,8 +8,8 @@
             <div>
               <a :href="site.link" target="_blank">{{site.name}}</a>
               <Badge :text="site.tag" type="error" v-if="site.tag"/>
+              <img :src="site.versionImage" :alt="site.name" class="ml-1" v-if="site.versionImage">
             </div>
-            <img :src="site.versionImage" :alt="site.name" class="mt-1" v-if="site.versionImage">
           </div>
         </div>
       </div>
@@ -31,12 +31,12 @@ export default {
 }
 @media screen and (max-width: 719px) {
   .site-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 @media screen and (min-width: 719px) {
   .site-container {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 </style>
