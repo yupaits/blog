@@ -16,6 +16,9 @@
         </div>
       </div>
     </div>
+    <div slot="page-bottom">
+      <div class="text-center">MIT License | © 2017-present yupaits</div>
+    </div>
   </layout>
 </template>
 
