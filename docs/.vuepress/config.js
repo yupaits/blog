@@ -141,6 +141,8 @@ module.exports = {
               'the-king-of-hacker',
             ]),
             getSidebarConfig('思考', 'thinking/', [
+              'what-is-the-difference-between-a-great-person-and-an-ordinary-person',
+              'how-to-teach-yourself-in-an-area',
               'how-to-become-a-technology-bull',
               'your-hard-work-doesnot-mean-reward',
               '30-ceo-give-me-9-truth',
