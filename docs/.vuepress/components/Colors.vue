@@ -10,7 +10,7 @@
         <div v-for="(color, index) in mainColor.subColors" :key="color.label" 
           :style="{backgroundColor: color.color, color: fontColor(mainColor, index)}" class="color-item">
           <span>{{color.label}}</span>
-          <span class="pull-right">{{color.color}}</span>
+          <span class="pull-right color-font">{{color.color}}</span>
         </div>
       </div>
     </div>
@@ -42,19 +42,22 @@ export default {
 .colors-container {
   display: grid;
   grid-template-rows: 1fr;
-  grid-gap: 3rem 2rem;
+  grid-gap: 3rem 3rem;
 }
 @media screen and (max-width: 719px) {
   .colors-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 @media screen and (min-width: 719px) {
   .colors-container {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 .color-item {
   padding: 8px 16px;
+}
+.color-font {
+  font-family: "Fira Code", Consolas, Monaco, monospace
 }
 </style>
