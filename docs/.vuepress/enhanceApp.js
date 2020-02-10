@@ -3,6 +3,7 @@ import tools from './data/tools'
 import projects from './data/projects'
 import books from './data/books'
 import profile from './data/profile'
+import colors from './data/colors'
 
 export default ({
     Vue, // VuePress 正在使用的 Vue 构造函数
@@ -16,6 +17,7 @@ export default ({
     Vue.prototype.$projects = projects
     Vue.prototype.$books = books
     Vue.prototype.$profile = profile
+    Vue.prototype.$colors = colors
 
     router.beforeEach((to, from, next) => {
         // 对每个页面点击添加百度统计

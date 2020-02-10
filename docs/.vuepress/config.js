@@ -71,6 +71,7 @@ module.exports = {
               'gitee-jenkins-docker-ci-cd',
             ]),
             getSidebarConfig('记录', 'record/', [
+              'design-color',
               'github-language-color',
               'vscode-plugins',
               'jar-maven-central',
