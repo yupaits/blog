@@ -357,7 +357,7 @@ export default {
       },
       {
         label: 'Blue Gray',
-        darkIndex: [0, 1, 2, 3],
+        darkIndex: [0, 1, 2, 3, 11],
         subColors: [
           {label: '50', color: '#ECEFF1'},
           {label: '100', color: '#CFD8DC'},

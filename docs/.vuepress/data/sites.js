@@ -34,6 +34,7 @@ export default [
       {name: '二维码梦工厂', link: 'https://cli.im/url', tag: '二维码'},
       {name: 'DesignEvo', link: 'https://www.designevo.com/', tag: 'Logo制作'},
       {name: 'Canva', link: 'https://www.designevo.com/', tag: '设计'},
+      {name: 'Color Hunt', link: 'https://colorhunt.co/', tag: '配色'},
     ]
   },
   {
