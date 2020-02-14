@@ -132,6 +132,8 @@ module.exports = {
             ]),
             getSidebarConfig('行业', 'industry/', [
               'what-is-new-retailing',
+              'payment-industry-knowledge',
+              '3-statements-of-finance',
               'how-econnoisseur-earn-money',
               'people-safety-prictices',
             ]),
@@ -163,7 +165,9 @@ module.exports = {
             getSidebarConfig('架构设计', 'architecture/', [
               'base-component', 'system-architecture'
             ]),
-            getSidebarConfig('业务场景', 'business/', []),
+            getSidebarConfig('业务场景', 'business/', [
+              'payment-system'
+            ]),
             getSidebarConfig('Checklist', 'checklist/', [
               'api-security-checklist', 'code-review-checklist'
             ]),
