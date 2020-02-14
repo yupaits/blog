@@ -346,6 +346,28 @@ title: 开发实战总结
     }
     ```
 
+1. 一个基于网格的响应式布局简单示例：
+
+    ```css
+    .grid-container {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-gap: 1rem;
+    }
+    @media screen and (max-width: 719px) {
+        .grid-container {
+            grid-template-columns: 1fr;
+        }
+    }
+    @media screen and (min-width: 719px) {
+        .grid-container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    ```
+
+    浏览器窗口宽度大于719px时，元素呈2列排布，反之呈1列排布。
+
 ## HTML
 1. 使用原生HTML进行表单开发时，如果没有指定 `<button>` 的 `type` 属性，则默认 `type="submit"`，最终导致点击之后 `window.location.href` 的路径中会自动多一个 `?`，这是因为原生的表单提交是以path后拼接form的参数进行请求的，所以在进行异步请求时需要指定提交的按钮为 `<button type="button">`。
 
