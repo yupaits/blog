@@ -8,6 +8,14 @@ export default [
     description: '该项目整理了个人工作学习过程中编写的一些示例应用以及针对通用业务场景封装的相关工具及中间件，主要使用的技术为Spring Boot和Spring Boot Starter。'
   },
   {
+    name: 'yutool-samples',
+    logo: '/github-logo.jpg',
+    site: '',
+    repo: 'https://github.com/yupaits/yutool-samples',
+    link: '/projects/yutool-samples.html',
+    description: 'yutool示例应用，包括各个组件使用的中间件的简单整合示例以及yutool所有组件综合使用示例。'
+  },
+  {
     name: 'docs-manage',
     logo: '/github-logo.jpg',
     site: '',
