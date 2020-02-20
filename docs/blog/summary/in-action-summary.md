@@ -310,6 +310,22 @@ title: 开发实战总结
     private LocalDateTime startTime;
     ```
 
+1. Spring AOP 的切入点（PointCut）表达式使用规则：
+
+    ```
+    execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-pattern(param-pattern) throws-pattern?)
+    ```
+
+    - `?` 的部分表示可省略
+    - `*` 用来代表任意字符
+    - `..` 用来表示任意个参数
+    - `modifiers-pattern` 表示修饰符如 public、protected 等
+    - `ret-type-pattern` 表示方法返回类型
+    - `declaring-type-pattern` 表示特定的类
+    - `name-pattern` 表示方法名称
+    - `param-pattern` 表示参数
+    - `throws-pattern` 表示抛出的异常
+
 ## Bootstrap
 
 1. 页面的modal元素记得加上 `data-backdrop='static'` 和 `data-keyboard='false'`，禁用非 modal 内点击和点击键盘 ESC 键 取消 modal。
