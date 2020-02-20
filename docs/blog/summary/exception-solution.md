@@ -122,6 +122,22 @@ title: 常见异常解决方案总结
 
     - 解决方案：在实体类上添加lombok `@NoArgsConstructor` 和 `@AllArgsConstructor` 注解。
 
+1. 在进行 Spring AOP 编程时，有时会出现以下错误：
+
+    ```
+    Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'xxx' defined in class path resource [xxx]: Initialization of bean failed;……
+    ...
+    Caused by: org.springframework.aop.framework.AopConfigException: Could not generate CGLIB subclass of class ……
+    ...
+    Caused by: java.lang.IllegalArgumentException: Cannot subclass final class ……
+    ```
+
+    - 解决方案：通常情况下是由于切面的切入点表达式过于通用，包含了被 `final` 修饰的类，Java中不允许继承被 `final` 所修饰的类，而CGLIB增强是通过继承原对象后动态创建子类来实现的，导致了这样的错误。可以通过以下两种方法解决：
+        1. 取消使用 `final` 修饰目标类
+        2. 调整PointCut切入点条件，过滤掉 `final` 修饰的类
+
+    - 参考：[Problems with Aop in spring boot](https://stackoverflow.com/questions/36775611/problems-with-aop-in-spring-boot)；[spring aop问题](https://www.cnblogs.com/skychenjiajun/p/8867038.html)
+
 ## Vue.js
 
 1. Vue.js2.x 报 `Cannot read property '__ob__' of undefined` 的错误。
