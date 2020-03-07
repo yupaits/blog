@@ -600,6 +600,26 @@ export default {
           {label: 'magenta-9', color: '#780650'},
           {label: 'magenta-10', color: '#520339'},
         ]
+      },
+      {
+        label: 'Gray / 中性',
+        emotion: '主次关系',
+        lightIndex: [0, 1, 2, 3, 4],
+        subColors: [
+          {label: 'gray-1', color: '#ffffff'},
+          {label: 'gray-2', color: '#fafafa'},
+          {label: 'gray-3', color: '#f5f5f5'},
+          {label: 'gray-4', color: '#f0f0f0'},
+          {label: 'gray-5', color: '#d9d9d9'},
+          {label: 'gray-6', color: '#bfbfbf'},
+          {label: 'gray-7', color: '#8c8c8c'},
+          {label: 'gray-8', color: '#595959'},
+          {label: 'gray-9', color: '#434343'},
+          {label: 'gray-10', color: '#262626'},
+          {label: 'gray-11', color: '#1f1f1f'},
+          {label: 'gray-12', color: '#141414'},
+          {label: 'gray-13', color: '#000000'},
+        ]
       }
     ]
   }
