@@ -604,7 +604,7 @@ export default {
       {
         label: 'Gray / 中性',
         emotion: '主次关系',
-        lightIndex: [0, 1, 2, 3, 4],
+        darkIndex: [0, 1, 2, 3, 4],
         subColors: [
           {label: 'gray-1', color: '#ffffff'},
           {label: 'gray-2', color: '#fafafa'},
