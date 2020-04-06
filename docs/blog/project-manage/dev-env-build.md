@@ -9,6 +9,9 @@ title: 开发环境搭建
 |OpenLDAP|开源的LDAP协议实现。|[OpenLDAP](https://github.com/osixia/docker-openldap)|
 |GitLab|Git仓库管理工具|[GitLab使用手册](https://blog.yupaits.com/in-action/gitlab-manual.html)|
 |GitLab-CI|GitLab默认集成的持续集成工具|[GitLab-CI Runner](https://docs.gitlab.com/runner/)|
+|Confluence|专业的企业知识管理与协同软件，可用于构建企业wiki|--|
+|Jira|项目与事务跟踪工具，广泛应用于缺陷跟踪、客户服务、需求收集、流程审批、任务跟踪、项目跟踪和敏捷管理等工作领域|--|
+|Crowd|Confluence与Jira单点登录|--|
 |SonarQube|代码质量管理平台|[SonarQube](https://docs.sonarqube.org/latest/)|
 |Nexus|Maven仓库管理器|[Sonatype Help](https://help.sonatype.com/docs)|
 |Portainer|Docker可视化管理工具|[Portainer安装](https://www.portainer.io/installation/)|
@@ -40,8 +43,8 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - mysql_conf:/etc/mysql/conf.d
-      - mysql_data:/var/lib/mysql
+      - ${env_path}/volumes/mysql/conf:/etc/mysql
+      - ${env_path}/volumes/mysql/data:/var/lib/mysql
     restart: always
 
   gitlab-runner:
@@ -66,7 +69,7 @@ services:
       # LDAP基本DN。为空，默认取LDAP_DOMAIN的值
       LDAP_BASE_DN: 
       # LDAP管理员密码。默认是 admin
-      LDAP_ADMIN_PASSWORD: password
+      LDAP_ADMIN_PASSWORD: ldap123
       # LDAP配置密码。默认是 config
       LDAP_CONFIG_PASSWORD: config
     # 使用现有的LDAP数据库
@@ -146,10 +149,41 @@ services:
     depends_on: 
       - postgres
     restart: unless-stopped
+  
+  confluence:
+    image: yupaits/atlassian-confluence:6.9.0
+    container_name: confluence
+    ports:
+      - 8090:8090
+      - 8091:8091
+    volumes:
+      - ${env_path}/volumes/confluence/home:/var/atlassian/confluence
+      - ${env_path}/volumes/confluence/logs:/opt/atlassian/confluence/logs
+    restart: unless-stopped
+
+  jira:
+    image: yupaits/atlassian-jira:7.10.0
+    container_name: jira
+    ports:
+      - 8080:8080
+    volumes:
+      - ${env_path}/volumes/jira/home:/var/atlassian/jira
+      - ${env_path}/volumes/jira/logs:/opt/atlassian/jira/logs
+    restart: unless-stopped
+
+  crowd:
+    image: yupaits/atlassian-crowd:3.2.1
+    container_name: crowd
+    environment: 
+      - JVM_MINIMUM_MEMORY=384m
+      - JVM_MAXIMUM_MEMORY=768m
+    ports:
+      - 8095:8095
+    volumes:
+      - ${env_path}/volumes/crowd:/var/atlassian/application-data/crowd
+    restart: unless-stopped
 
 volumes:
-  mysql_conf:
-  mysql_data:
   sonarqube_conf:
   sonarqube_extensions:
   sonarqube_logs:
@@ -160,7 +194,7 @@ volumes:
 
 - phpLDAPadmin
 
-初始的登录账号密码为：`cn=admin,dc=yupaits,dc=com` `password`
+初始的登录账号密码为：`cn=admin,dc=yupaits,dc=com` `ldap123`
 
 - gitlab-runner
 
@@ -174,5 +208,31 @@ check_interval = 0
 - sonarqube
 
 初始登录账号密码为：`admin` `admin`
+
+在宿主机执行 `sudo nano /etc/sysctl.conf` 追加写入 `vm.max_map_count=262144`，执行 `sudo sysctl -p` 使配置生效
+
+- mysql
+
+注释 `docker-compose.yml` 第21-23行，执行以下指令：
+
+```bash
+sudo docker-compose up -d
+cd ${env_path}/volumes  # ${env_path}替换为实际的目录
+sudo docker cp mysql:/etc/mysql mysql/
+sudo mv mysql/mysql mysql/conf
+sudo docker cp mysql:/var/lib/mysql mysql/data
+```
+
+取消21-23注释再执行 `sudo docker-compose up -d`
+
+- altalassian
+
+    破解步骤：
+
+    1. 执行 `java -jar confluence_keygen.jar`
+    2. 填写 Name 和 Server ID，点击 `.gen!` 生成 Key
+    3. 点击 `.patch!` 选择 `atlassian-extras-2.4.jar`，如果破解的 Jar 包名称不是则重命名为 `atlassian-extras-2.4.jar`
+    4. 将破解之后的 `atlassian-extras-2.4.jar` 覆盖当前实例的相应 Jar 包（名称和版本可能不一样，要修改成当前实例中的 Jar 包名称）
+    5. 重启服务，填写 Key，完成安装
 
 <Vssue title="开发环境搭建"/>
