@@ -120,6 +120,8 @@ module.exports = {
               'programming-10-commandments',
             ]),
             getSidebarConfig('职场', 'workplace/', [
+              'develop-leader-growth-manual',
+              'tech-team-manage',
               '5-levels-of-engineers-and-career-development', 
               '30-things-junior-need-to-mastered',
               'be-a-down-to-earth-programmer',
