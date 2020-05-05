@@ -157,6 +157,7 @@ module.exports = {
               'management-career-thinking-in-jingdong',
             ]),
             getSidebarConfig('趋势', 'trend/', [
+              'intelligent-writing-2.0',
               'huawei-launches-top-10-trends-for-2025'
             ]),
             getSidebarConfig('语录', 'quotes/', ['three-quotes']),
