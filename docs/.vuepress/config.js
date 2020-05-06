@@ -120,6 +120,8 @@ module.exports = {
               'programming-10-commandments',
             ]),
             getSidebarConfig('职场', 'workplace/', [
+              'develop-leader-growth-manual',
+              'tech-team-manage',
               '5-levels-of-engineers-and-career-development', 
               '30-things-junior-need-to-mastered',
               'be-a-down-to-earth-programmer',
@@ -157,6 +159,7 @@ module.exports = {
               'management-career-thinking-in-jingdong',
             ]),
             getSidebarConfig('趋势', 'trend/', [
+              'intelligent-writing-2.0',
               'huawei-launches-top-10-trends-for-2025'
             ]),
             getSidebarConfig('语录', 'quotes/', ['three-quotes']),
