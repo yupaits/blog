@@ -138,6 +138,62 @@ title: 常见异常解决方案总结
 
     - 参考：[Problems with Aop in spring boot](https://stackoverflow.com/questions/36775611/problems-with-aop-in-spring-boot)；[spring aop问题](https://www.cnblogs.com/skychenjiajun/p/8867038.html)
 
+1. 同时使用 Lombok 的 `@Builder` 和 `@Data` 注解时，如果存在 `final` 修饰的属性并且手动添加了构造方法，则无法使用 `@NoArgsConstructor` 和 `@AllArgsConstructor`，并且会出现以下错误：
+
+    ```Java
+    @Data
+    @Builder
+    public class VoWrapper<V extends BaseVo> implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        /**
+        * vo对象
+        */
+        private final V vo;
+
+        /**
+        * 自定义字段键值
+        */
+        private Map<Long, Object> fields;
+
+        public VoWrapper(V vo) {
+            this.vo = vo;
+        }
+    }
+    ```
+
+    ```
+    Error:(17, 1) java: 无法将类 com.yupaits.yutool.metadata.base.VoWrapper<V>中的构造器 VoWrapper应用到给定类型;
+                    需要: V
+                    找到: V,java.util.Map<java.lang.Long,java.lang.Object>
+                    原因: 实际参数列表和形式参数列表长度不同
+    ```
+
+    - 解决方案：在手动编写的构造方法上增加 `@Tolerate` 注解，让 Lombok 不识别此构造方法。
+    ```Java {16}
+    @Data
+    @Builder
+    public class VoWrapper<V extends BaseVo> implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        /**
+        * vo对象
+        */
+        private final V vo;
+
+        /**
+        * 自定义字段键值
+        */
+        private Map<Long, Object> fields;
+
+        @Tolerate
+        public VoWrapper(V vo) {
+            this.vo = vo;
+        }
+    }
+    ```
+    - 参考：[记lombok@Data和@Builder一起用无法添加无参构造方法的坑](https://blog.csdn.net/w605283073/article/details/89221853)
+
 ## Vue.js
 
 1. Vue.js2.x 报 `Cannot read property '__ob__' of undefined` 的错误。
