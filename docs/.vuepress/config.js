@@ -7,7 +7,7 @@ module.exports = {
     ['meta', {name: 'keywords', content: 'yupaits, YupaiTS, 博客'}],
     ['meta', {name: 'apple-mobile-web-app-capable', content: 'yes'}],
     ['script', {'data-ad-client': 'ca-pub-8239100633886634', async: 'async', src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'}],
-    ['script', {src: 'https://hm.baidu.com/hm.js?a8a29b59be0e5e3c2482c676b6e31f02'}]
+    ['script', {src: 'https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d'}]
   ],
   dest: "dist",
   locales: {
@@ -278,7 +278,7 @@ module.exports = {
     ['@vuepress/medium-zoom'],
     ['@vuepress/back-to-top'],
     ['sitemap', {
-      hostname: 'https://blog.yupaits.com'
+      hostname: 'https://www.yupaits.com'
     }],
     ['vuepress-plugin-code-copy', true],
     ['vuepress-plugin-baidu-autopush']
