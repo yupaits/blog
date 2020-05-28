@@ -3,7 +3,8 @@ export default {
     '俯仰一生，最惧无为',
     '格物致知，正心诚意',
     '谋定而后动，知止而有得',
-    '识人辨物，唯有用心'
+    '识人辨物，唯有用心',
+    '疾风知劲草，板荡识诚臣。勇夫安识义，智者必怀仁。'
   ],
   personalInfo: {
     // 昵称
@@ -55,8 +56,8 @@ export default {
       },
       {
         label: 'Docker Hub',
-        account: '',
-        link: ''
+        account: 'yupaits',
+        link: 'https://hub.docker.com/u/yupaits'
       }
     ]
   },
