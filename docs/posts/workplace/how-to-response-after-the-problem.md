@@ -53,7 +53,7 @@ ta们态度端正，工作积极，会从自己身上找原因。**这种正能�
 
 但是，有少部分人，努力却没有成功，就有可能是方法不对，导致效率低下。
 
-![方法比努力重要](https://mmbiz.qpic.cn/mmbiz_png/YrezxckhYOx0Or3SCWchNr7ic1YNIXQx0hfTg38ZvicBr2tkzqcIfXL57usIq2umBibO40CwRYV3JSLWXPkqqxt9A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![方法比努力重要](/images/遇到问题后的本能反应_会决定职场发展的高度/方法不对导致效率低下.jpg)
 
 **努力是成功的必要条件**，但并不是努力，一切问题就能够解决。遇到这类员工，要帮助和引导他们往更高的认知上走。
 

@@ -6,7 +6,7 @@ title: 高级人才的价值在于管理复杂性的能力
 
 前段时间，甲骨文中国的裁员事件，引发了对大龄IT人员去向的热议。我看到以下的信息：
 
-![甲骨文中国裁员](https://mmbiz.qpic.cn/mmbiz_png/cqepQJEiaf3QiaN4KpZpUSYgKqhV3Nw0b79veLn9BUHeCnvtOC71oyvsBWLXRPKq4a1uvAjec1HTw9opOYumEoog/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![甲骨文中国裁员](/images/高级人才的价值在于管理复杂性的能力/甲骨文中国裁员.jpg)
 
 但我的看法是，这里引用的具体事例其实是岗位错配的结果，并不代表大龄IT人员没有价值。而高级人才的价值，在于**管理复杂性的能力**。
 
@@ -106,7 +106,7 @@ IT从业人员，绝大部分都是知识工作者，而**知识工作者其实�
 
 当然，专才技术岗还有一条出路，就是去做架构设计师。但架构设计师绝对不是只懂技术就可以的。我们集团的首席架构师对一个好的架构师的定义如下，我非常认同：
 
-![架构师能力](https://mmbiz.qpic.cn/mmbiz_png/cqepQJEiaf3RObrb75VHjBoSmC2mJsBExe4yFeMia3PHWvItaxqqPSCQHtWvvSETWYHtgotkFFflJWOwjfJIQIMw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![架构师能力](/images/高级人才的价值在于管理复杂性的能力/架构师能力.png)
 
 1. Technical Excellence 技术牛 - 这个不用多说；
 

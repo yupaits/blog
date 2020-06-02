@@ -12,16 +12,16 @@ title: 阿里高级技术专家方法论：如何写复杂业务代码？
 
 简单的介绍下业务背景，零售通是给线下小店供货的B2B模式，我们希望通过数字化重构传统供应链渠道，提升供应链效率，为新零售助力。阿里在中间是一个平台角色，提供的是Bsbc中的service的功能。
 
-![业务背景](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naI9VZvDlbO1uwW9AQWINn07EVLHSpxLePU9y4k2qpCfWavCXhViadsx6a0oVDBCctnhBE5JTpFRqVw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![业务背景](/images/阿里高级技术专家方法论_如何写复杂业务代码/001.jpg)
 
 商品力是零售通的核心所在，一个商品在零售通的生命周期如下图所示：
 
-![商品生命周期](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naI9VZvDlbO1uwW9AQWINn07EIzrvj2keutqxKSTK2UuvuCzoaL2GMibzNrn8GOjN9jhYCA8VloYyWw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![商品生命周期](/images/阿里高级技术专家方法论_如何写复杂业务代码/002.jpg)
 
 在上图中红框标识的是一个运营操作的“上架”动作，这是非常关键的业务操作。上架之后，商品就能在零售通上面对小店进行销售了。因为上架操作非常关键，所以也是商品域中最复杂的业务之一，涉及很多的数据校验和关联操作。
 针对上架，一个简化的业务流程如下所示：
 
-![商品上架流程](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naI9VZvDlbO1uwW9AQWINn07nvdSbkPlribtPbViarUhg0BG5711nRL5yTs0bI57UXUpd35VpJrM6WiaQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![商品上架流程](/images/阿里高级技术专家方法论_如何写复杂业务代码/003.jpg)
 
 ### 过程分解
 
@@ -31,7 +31,7 @@ title: 阿里高级技术专家方法论：如何写复杂业务代码？
 
 不过，这里存在一个问题：即很多同学过度的依赖工具或是辅助手段来实现分解。比如在我们的商品域中，类似的分解手段至少有3套以上，有自制的流程引擎，有依赖于数据库配置的流程处理：
 
-![自制流程引擎](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3S6Wy5sjU8zsmhOoQpDI0YW6l2ncwzOrqmKmZZryNxSa8e2U4EBicwCsA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![自制流程引擎](/images/阿里高级技术专家方法论_如何写复杂业务代码/004.jpg)
 
 本质上来讲，这些辅助手段做的都是一个pipeline的处理流程，没有其它。因此，我建议此处最好保持KISS（Keep It Simple and Stupid），即**最好是什么工具都不要用，次之是用一个极简的Pipeline模式，最差是使用像流程引擎这样的重方法**。
 
@@ -39,7 +39,7 @@ title: 阿里高级技术专家方法论：如何写复杂业务代码？
 
 回到商品上架的问题，这里问题核心是工具吗？是设计模式带来的代码灵活性吗？显然不是，**问题的核心应该是如何分解问题和抽象问题**，知道金字塔原理的应该知道，此处，我们可以使用结构化分解将问题解构成一个有层级的金字塔结构：
 
-![将问题分解成金字塔结构](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3S7O8lP3r2OmicqhZm0MWicSqrvIl99sDRq3Z0bJZAclDQQibgQ3IRoqF9Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![将问题分解成金字塔结构](/images/阿里高级技术专家方法论_如何写复杂业务代码/005.jpg)
 
 按照这种分解写的代码，就像一本书，目录和内容清晰明了。
 
@@ -140,7 +140,7 @@ public class OnSaleProcessPhase {
 
 因此，在做过程分解的时候，我建议工程师不要把太多精力放在工具上，放在设计模式带来的灵活性上。而是应该多花时间在对问题分析，结构化分解，最后通过合理的抽象，形成合适的阶段（Phase）和步骤（Step）上。
 
-![过程分解](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3St6FyPicicp2W5C7hLkZxJ68m6l50APPkTDnNjPa3DkqnW0ZEiay86McicQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![过程分解](/images/阿里高级技术专家方法论_如何写复杂业务代码/006.jpg)
 
 ### 过程分解后的两个问题
 
@@ -202,13 +202,13 @@ if (backOffer.getStockAmount() < 1){
 
 有没有发现，使用模型的表达要清晰易懂很多，而且也不需要做关于组合品的判断了，因为我们在系统中引入了更加贴近现实的对象模型（CombineBackOffer继承BackOffer），通过对象的多态可以消除我们代码中的大部分的if-else。
 
-![对象模型](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3SRVmxWAHE3ViavD6Z9Xr12jMT4iaJmjfvwE4RxblKptKqNV65EQA7WdOw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![对象模型](/images/阿里高级技术专家方法论_如何写复杂业务代码/007.jpg)
 
 ### 过程分解+对象模型
 
 通过上面的案例，我们可以看到**有过程分解要好于没有分解，过程分解+对象模型要好于仅仅是过程分解**。对于商品上架这个case，如果采用过程分解+对象模型的方式，最终我们会得到一个如下的系统结构：
 
-![系统结构](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3SuFS95fQCTBlPOq6TRsVouia2F4d8XialibNtCibWveO1nEpGf1Nso49VIw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![系统结构](/images/阿里高级技术专家方法论_如何写复杂业务代码/008.jpg)
 
 ## 写复杂业务的方法论
 
@@ -224,7 +224,7 @@ if (backOffer.getStockAmount() < 1){
 
 其过程如下图所示：
 
-![上下结合过程](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3SIB1VhqiajMGzyricOsB6wBM0P05QJzFfiaBk7icGduwhRTl09LYG7NeRtw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![上下结合过程](/images/阿里高级技术专家方法论_如何写复杂业务代码/009.jpg)
 
 使用这种上下结合的方式，我们就有可能在面对任何复杂的业务场景，都能写出干净整洁、易维护的代码。
 
@@ -250,7 +250,7 @@ if (backOffer.getStockAmount() < 1){
 
 下沉的过程如下图所示，假设两个use case中，我们发现uc1的step3和uc2的step1有类似的功能，我们就可以考虑让其下沉到Domain层，从而增加代码的复用性。
 
-![能力下沉](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3SmAQibkGIK7xxJMgqcNSF6PfMHhCSuM0H1zAoRBQstZLmAaa7yrmOyqA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![能力下沉](/images/阿里高级技术专家方法论_如何写复杂业务代码/010.jpg)
 
 指导下沉有两个关键指标：
 
@@ -297,7 +297,7 @@ public class CSPU {
 
 但是，不管是业务技术还是底层技术人员，有一些思维和能力都是共通的。比如，**分解问题的能力，抽象思维，结构化思维等等**。
 
-![思维和能力](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wy97TPLhia8lHE3uJcWHnU3SMHsysE15U8LvP3rbE7YicDXDZflpuqBwDTAnjHtEX2NOxDOLP7KnxOw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![思维和能力](/images/阿里高级技术专家方法论_如何写复杂业务代码/011.jpg)
 
 用我的话说就是：**“做不好业务开发的，也做不好技术底层开发，反之亦然”。业务开发一点都不简单，只是我们很多人把它做“简单”了**。
 

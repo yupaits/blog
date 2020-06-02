@@ -28,11 +28,11 @@ title: 技术人具备“结构化思维”意味着什么？
 
 **套路是指我们解决问题的方法论，这个也非常重要**。比如，5W2H 分析法就是一个非常好的，可以帮助我们分析问题的一个“套路”。试想一下，面对任何一个问题，你都能从 Why、Who、When、Where、What、How 和 How much（如下图所示），七个方面去思考。是不是比不知道这个方法论的人，用点状的思考，5W2H 分析法就全面得多。
 
-![5W2H分析法](https://mmbiz.qpic.cn/mmbiz_jpg/LwZPmXjm4WzunicYrJASCkePwqQSNHAtQSoVmA46fic25oKc1ACkIRFNCNhRzAgzbID3dibeoic8icr2Opcs10YAdqw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![5W2H分析法](/images/技术人具备结构化思维意味着什么/001.jpg)
 
 例如，我们在对问题域进行分析和领域知识提炼的时候，就可以用上5W2H。5W2H模型给出了具有指导意义的约束，要求我们提炼的领域知识必须具备模型的六个要素。这就好比两位侃侃而谈的交谈者，因为有了确定的主题与话题边界，一场本来是漫无目的野鹤闲云似的闲聊就变成了一次深度交流的专题高端对话。
 
-![问题域分析](https://mmbiz.qpic.cn/mmbiz_png/Z6bicxIx5naJuDT1Qq3FNG6sDjSticujtGrqSjuC74JTzJxDZXbiag2Tez31aRUFel6LnQReKlA5BibhYS9Meia1D7w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![问题域分析](/images/技术人具备结构化思维意味着什么/002.jpg)
 
 逻辑是一种能力，而套路是方法论，是经验。逻辑是道的东西，而方法论是术的东西。二者都很重要，只有熟练的掌握二者我们才能更好的进行结构化思考。
 
@@ -53,7 +53,7 @@ title: 技术人具备“结构化思维”意味着什么？
 
 比如面对“系统 bug 多”的问题，向上抽象是“提升代码质量”，向下抽象是“加强测试”，都可以作为中心，选择哪个为中心取决于你当前要解决的问题是什么。
 
-![建立中心示例](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wz6RFrF7oyr0gwNDROe7TmiaUUkdGxLfrOe3v8AUD5EcpYpRDY9hxZftUib4u2q4cOQKOvHr6bLGmqg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![建立中心示例](/images/技术人具备结构化思维意味着什么/003.jpg)
 
 ### 结构化分解
 
@@ -63,11 +63,11 @@ title: 技术人具备“结构化思维”意味着什么？
 
 比如我们要对衣服进行分类，如果按照季节和风格进行分类，就会出现互相重叠，并且不能穷尽的情况，也就不满足 MECE。这种分类是逻辑混乱的。
 
-![混乱分解](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wz6RFrF7oyr0gwNDROe7TmiavkYJbq9NaRvCFJbVo5gyvCOLRYsFOtafE3MoSm5KChteAOCo7iceAvQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![混乱分解](/images/技术人具备结构化思维意味着什么/004.jpg)
 
 我们可以按季节分：春秋装，冬装，夏装。除了这3类之外，没有其他季节了，这个就是「不遗漏」。
 
-![不遗漏分解](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wz6RFrF7oyr0gwNDROe7TmiaPlicfyf6ZIWmv6mWQx57dTlwa5Zaxqm37iaGy45hnGrjKlSJ9YawYhsA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![不遗漏分解](/images/技术人具备结构化思维意味着什么/005.jpg)
 
 ## 结构化思维应用
 
@@ -77,7 +77,7 @@ title: 技术人具备“结构化思维”意味着什么？
 
 这里，我们就能用上结构化思维来帮我们理清思路，从而有条不紊的开展工作了。我们要知道对一个企业来说，核心要素无外乎就是业务、技术和人，也就是说这三个要素是我们要建立的中心。基于这个中心，我们可以进行进一步拆解，形成子结构。然后对子结构再进行分析找到应对策略。这样一步步递进，我们就已经在用结构化思维解决如何落地新团队的问题了。
 
-![团队三要素](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wz6RFrF7oyr0gwNDROe7TmiaDGJYfld6PkbUnXkicZA3R3VicOOPp9QomjFK87xq3kHsKzYxzsDicATxQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![团队三要素](/images/技术人具备结构化思维意味着什么/006.jpg)
 
 #### 1. 熟悉业务
 
@@ -109,11 +109,11 @@ title: 技术人具备“结构化思维”意味着什么？
 
 这个问题的中心很明确，接下来，看看我是如何使用结构化思维来解这个问题的。首先我们从空间顺序进行分解，也就是打造极客文化，我们可以去做哪些事情。
 
-![空间顺序分解](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wz6RFrF7oyr0gwNDROe7TmiaNxw16hFXakTsma9ibBGhlIcKTxmTEBY5PKCndVaQiaefWhF2BiaOcMASg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![空间顺序分解](/images/技术人具备结构化思维意味着什么/007.jpg)
 
 确定完要做的事情，我们还可以按照时间顺序对如何落地这些事情进行分解。
 
-![时间顺序分解](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wz6RFrF7oyr0gwNDROe7TmiaRu91Y4yLhr4hUFU25PMEShMXSwGICZ2PMJichgiau10wZAQQIiak6LUEg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![时间顺序分解](/images/技术人具备结构化思维意味着什么/008.jpg)
 
 这样把按照这两个维度进行结构化拆解的方案给到老板，老板就会很清晰地知道你的规划和落地策略了。
 
@@ -129,7 +129,7 @@ title: 技术人具备“结构化思维”意味着什么？
 
 这是一个经典的表述问题的结构，也是麦肯锡推荐的问题解决的框架。
 
-![麦肯锡解决问题框架](https://mmbiz.qpic.cn/mmbiz_png/LwZPmXjm4Wz6RFrF7oyr0gwNDROe7TmiayabQJrmn7STmYTgFEtlgKGicbg6neq5ykop7QHvlEibCjs9xbJQrmXDw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![麦肯锡解决问题框架](/images/技术人具备结构化思维意味着什么/009.jpg)
 
 类似的框架还有 zoom in/zoom out。 我们说事情时，应该像电影镜头一样，先从远拉近，再由近拉远。zoom in 是先从宏观背景开始，首先让大家知道你的事情发生的背景，为什么这事重要？然后讲到具体细节，怎么做成的？解决了什么问题？背后的思考是什么？最后 Zoom out，再从细节调回到整体，结果是什么，带来的客户价值是什么，你对未来的思考是什么。
 

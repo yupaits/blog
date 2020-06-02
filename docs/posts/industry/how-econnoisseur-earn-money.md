@@ -30,7 +30,7 @@ title: 互联网黑产：那些职业羊毛党到底如何月赚几十万？
 
 一般人因为只有一个手机号，所以都只会注册一次享受一次优惠。但是，有需求，自然就有供给。一条养卡、注册账号、代收短信验证码、薅羊毛的产业链就这样形成了。
 
-![黑产产业链](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMicun6s0uV31fe78CZAQF7hCBPibcoOo3J3snM0KuzkFiabFyA4MGa01s3w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![黑产产业链](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/001.jpg)
 
 图片来源：新京报
 
@@ -40,7 +40,7 @@ title: 互联网黑产：那些职业羊毛党到底如何月赚几十万？
 
 据之前媒体报道，语音类验证码五五开，短信类验证码三七开，卡商占七成。目前较大的卡商平台有星辰、Thewolf、爱乐赞、玉米、爱码等。平台手机卡很多，有的平台能提供上万个网站的接收验证码服务，几百万张手机号。
 
-![卡商](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMicuK1wHtIiaTl4fJCns5PUduAdJLXl5F7WR20vg4h2ogqKGJmpcPia6vkw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![卡商](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/002.jpg)
 
 图片来源网络
 
@@ -80,7 +80,7 @@ Uber车主还建了刷单群，在群里有专门的黑话，辅助刷单的叫�
 
 **更高级的做法是利用模拟软件+虚拟定位，足不出户就能刷单**。只需要买一个可以修改串号的安卓手机，同时登录几个乘客和司机账号，通过电脑虚拟操作，模拟跑一圈就完成一单。可变成本几乎为零。通过刷单，月净收入可以达到1.5-2.5万。
 
-![刷单](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMicbiahzicvpbMLib6xgBoz4cJmDc0XNemmuWtzmJaNmq0q9FJUpib0D356jg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![刷单](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/004.jpg)
 
 **也有职业刷单人，专门帮司机刷单，一个月最高月入10万。**
 
@@ -88,7 +88,7 @@ Uber车主还建了刷单群，在群里有专门的黑话，辅助刷单的叫�
 
 但是刷单仍然活跃网上，哪里有补贴，哪里就有刷单。外卖，拼团，生鲜电商，互联网金融，统统不能幸免。 双12线下活动时，武汉出现一名刷单哥，带着百部手机代刷优惠，一天赚上千元。
 
-![手动刷单](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMickjWF1RcvmvjFNrsCiaChyloPRADO8JibUV1kXT78vpKWGFbB0zo5gEXQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![手动刷单](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/005.jpg)
 
 **手动刷单，这种薅法，不侵权不作弊，平台拿你也没办法，缺点就是成本有点高。**
 
@@ -106,7 +106,7 @@ P2P爆雷让很多参与者倾家荡产，观望者望而怯之，但在一些�
 
 2017年底，现金贷监管后，一部分人还清贷款，上岸重新做人。
 
-![P2P借贷](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMiciciaOv9Iv0TKfDFyiahmIUROjlbh3AJ2dROgd10toeR88TmswNGOPzicPg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![P2P借贷](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/007.jpg)
 
 这样做风险非常大，你必须和现在的朋友圈断绝关系，不能再用自己的身份证办手机卡，还可能成为老赖。
 
@@ -132,7 +132,7 @@ P2P爆雷让很多参与者倾家荡产，观望者望而怯之，但在一些�
 
 今年3月份，知名自媒体三表龙门阵写了篇文章，自述企鹅号被盗经历，一名叫露露的河南女子，用他的号平均每天发五篇娱乐八卦文章，六十天收益高达7.5万，最高一篇文章分了1.2万。而自己之前日常更新文章却根本没赚到钱。
 
-![洗稿](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMicWkNA6cxpddaib9SIoaINvUWFW0iaoml08rycMo7ZbKnI8IoqSYic6v91w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![洗稿](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/008.jpg)
 
 相信，全天下自媒体人都会好奇，内容平台一出手补贴几个亿，但 **自己辛苦更新原创，一共也就赚了几十块钱，补贴都到哪里去了？**
 
@@ -142,17 +142,17 @@ P2P爆雷让很多参与者倾家荡产，观望者望而怯之，但在一些�
 
 他们雇佣兼职写手来洗稿，以学生、宝妈和上班族为主，群里领取任务，价格通常为千字10元。也有全职写手，公司开在二三线城市，工资一个月三四千元，加上提成，优秀者月入过万不是问题。
 
-![洗稿推广](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMicFCddNvVMZCXwicP79g4mOWyXXWjXVcH5SaL4v8NPHWk5r1EBV7libzKw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![洗稿推广](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/009.jpg)
 
 通常，洗稿内容集中在娱乐明星八卦故事，利用明星效应，调动起读者窥私欲，再靠着劲爆的标题和捕风捉影的内容，能带来大量阅读。
 
-![洗稿文章](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMicwg8JAcvjwwutUW00BicOrsNZuYvtl8fD9KuZhrLo53vpH6AvJZYS8rg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![洗稿文章](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/010.jpg)
 
 图片文章可能出自大妈之手
 
 **一篇文章阅读量过百万，广告分成+补贴，收益多的上万元**。据新榜报道，30人的做号集团，一个月平台分成700多万。还有UC平台上有留言，一日收益达900元；两年拿下一辆路虎；期待下月收入破4万。
 
-![评论爆料](https://mmbiz.qpic.cn/mmbiz_jpg/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMic17mp0EDeyibWmoQcBKsMYk9jbwtc4Fw25ct4tZKVFGAwS0JnFvakYYQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![评论爆料](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/011.jpg)
 
 ## 5、倒卖付费课程：零边际成本
 
@@ -166,7 +166,7 @@ P2P爆雷让很多参与者倾家荡产，观望者望而怯之，但在一些�
 
 二道贩子再通过淘宝，百度贴吧、微信群、个人号等渠道推广，哪有不赚钱的。有些人做倒卖，3个月就赚到20万。
 
-![倒卖知识付费](https://mmbiz.qpic.cn/mmbiz_png/iaBzXFiaky1uR8V7wQSSmU13LJkBF5OhMicVO4ibIWyl8gtR4mRrKZY6FOdRKn0cdwWR1Ql09Sic5Kk1j9QWE3QR6cw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![倒卖知识付费](/images/互联网黑产_那些职业羊毛党到底如何月赚几十万/012.png)
 
 从二道贩子买过课程的人，同样做起三道贩子、四道贩子…… **永远不知道你买到的课程是几手，但这无所谓，质量都一样**。
 

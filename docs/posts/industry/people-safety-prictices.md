@@ -26,7 +26,7 @@ title: 中通安全合规之人员安全实践
 
 中通天眼系统由用户端的天眼APP和人事端的天眼WEB管理后台组成，用户端的天眼APP负责基础的人员信息收集和身份校验，完成后可以在人事端的天眼WEB管理后台查看采集的信息和校验结果。
 
-![天眼系统](https://mmbiz.qpic.cn/mmbiz_png/rw0ibKapR537baEm1aY3yeiayRtic2hibjg6hpCwTV0OiaUe6ksp1QLngNIia3Xll0ROnCKhhoKibVC4fLvHMOhBSP2zg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![天眼系统](/images/中通安全合规之人员安全实践/001.jpg)
 
 图1  天眼系统
 
@@ -34,7 +34,7 @@ title: 中通安全合规之人员安全实践
 
 在入职办公室内设置了专用于人事信息登记的移动终端，负责人员入职登记工作的人事需要在开启天眼系统时使用中通宝盒进行身份验证，通过后即可开启天眼系统进行入职人员身份登记。
 
-![天眼系统定制移动终端](https://mmbiz.qpic.cn/mmbiz_jpg/rw0ibKapR537baEm1aY3yeiayRtic2hibjg65JAuTefQNqicHP5SbgfBOfa1I5s5GTiaDZbialZ2RpTP5o7kCvibyx886A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![天眼系统定制移动终端](/images/中通安全合规之人员安全实践/002.jpg)
 
 图2  天眼系统定制移动终端
 
@@ -50,7 +50,7 @@ title: 中通安全合规之人员安全实践
 2. 在进行人脸校验时，除了进行活体检测，还会截取当前的人脸照片，通过公安网的接口校验身份证信息与人脸是否匹配，防止身份证盗用问题
 3. 完成身份信息的读取后，通过物流从业人员黑名单、法院执行人黑名单等系统的接口对人员历史进行审查，避免履历造假、身份异常等问题
 
-![天眼系统APP](https://mmbiz.qpic.cn/mmbiz_jpg/rw0ibKapR537baEm1aY3yeiayRtic2hibjg66aLn3NTs0Of1aTxWLNmoI0pickxZfLRTZa9tqsCOpf7xbJ15xQMib7VA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![天眼系统APP](/images/中通安全合规之人员安全实践/003.jpg)
 
 图3 天眼系统APP
 
@@ -58,7 +58,7 @@ title: 中通安全合规之人员安全实践
 
 在完成人员入职登记后，人事即可在天眼WEB管理后台查看人员信息收集情况以及安全校验情况，在确认无误后即可直接登记入职并自动推送到人事系统，避免重复的录入工作和背景审查工作。
 
-![天眼系统WEB](https://mmbiz.qpic.cn/mmbiz_png/rw0ibKapR537baEm1aY3yeiayRtic2hibjg6RWFQHtRH0sU0icU8HV8Aq78Yrwicf7MCdE4P2xBFfmQxF3EhLXAEd1LQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![天眼系统WEB](/images/中通安全合规之人员安全实践/004.jpg)
 
 图4 天眼系统WEB
 
@@ -78,7 +78,7 @@ title: 中通安全合规之人员安全实践
 
 对于分布于全国的普通业务员们，中通安全会定期的通过漫画、通知等贴近一线业务员的方式推送信息安全知识。为了提高一线业务员的参与度，在信息安全活动中设置有奖竞答环节。只有不断地引导员工进行安全知识学习，才能营造良好的安全意识，将安全管理落实到员工的自我管理。
 
-![中通安全培训体系](https://mmbiz.qpic.cn/mmbiz_png/rw0ibKapR537baEm1aY3yeiayRtic2hibjg6K4M37V7DKoeu8jaJsuRUiaClxxBSHTibqCkSnh8gzP0nI1gtb3MtOtMg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![中通安全培训体系](/images/中通安全合规之人员安全实践/005.jpg)
 
 图5 中通安全培训体系
 
@@ -86,7 +86,7 @@ title: 中通安全合规之人员安全实践
 
 人员的安全意识很难通过量化的数字进行显现，但是通过具体的行为很容易判断出一个人的安全意识是否及格。中通快递因为企业人员较多，所面临的信息安全相关的威胁也较多。其中最多的就是钓鱼邮件问题，为了提高企业人员应对钓鱼邮件的安全意识，除了培训和宣传外，中通安全在开源的钓鱼框架gophish上做了二次开发，不定期的针对不同的部门和人员进行不同主题的钓鱼测试，并要求所有的中招人员重新参加中通安全组织的专项安全意识培训和考试。通过钓鱼测试极大的提高了企业员工应对钓鱼邮件的安全意识。
 
-![gophish钓鱼系统](https://mmbiz.qpic.cn/mmbiz_png/rw0ibKapR537baEm1aY3yeiayRtic2hibjg6bpNXnTv0GpbE8IYQiaF3IvR2HGJorMvBZ6GSm34Qz2W1icpjI0K15wqA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![gophish钓鱼系统](/images/中通安全合规之人员安全实践/006.jpg)
 
 图6 gophish钓鱼系统
 
@@ -100,11 +100,11 @@ title: 中通安全合规之人员安全实践
 
 SSO负责验证人员是否可以登录系统，而登录了系统后可做什么则由统一权限安全管控系统负责。中通安全开发统一权限安全管控系统将所有的应用权限进行集中管理，通过灵活的权限管理可以快速的判断人员的权限情况，对人员的权限进行最小化管理。另外通过与风控等系统的联动，可以判断出人员的操作是否存在风险并及时进行告警和通知。关于统一权限安全管控系统的具体详情可以参考中通安全应急响应中心的文章中通统一权限安全管控系统实践。
 
-![中通宝盒和中通统一认证（SSO）系统](https://mmbiz.qpic.cn/mmbiz_png/rw0ibKapR536V9mUKFGlkBxPTpyQ9nSq1draFfAuH75zOxF0h8Qs3ccv4rqoLF6bFPibDDCad146Bm83JLB37moQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![中通宝盒和中通统一认证（SSO）系统](/images/中通安全合规之人员安全实践/007.jpg)
 
 图7 中通宝盒和中通统一认证（SSO）系统
 
-![中通统一权限安全管控系统](https://mmbiz.qpic.cn/mmbiz_png/rw0ibKapR537baEm1aY3yeiayRtic2hibjg6ZPkDrsrrMywPSg6bfp21VDYzJewhDdutmibpwhFnaUvjkt95Ckxntfg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![中通统一权限安全管控系统](/images/中通安全合规之人员安全实践/008.jpg)
 
 图8 中通统一权限安全管控系统
 
@@ -118,7 +118,7 @@ SSO负责验证人员是否可以登录系统，而登录了系统后可做什�
 
 自动审计系统为了满足公司内审和外审的工作，会从各个核心系统中读取各类操作日志，自动进行日志分析和确认。而在人员发起离职流程后，自动审计系统会自动分析员工的历史行为，若存在异常行为会推送相关的领导进行确认，只有当所有的审计异常信息被确认，才能通过离职申请。在离职人员完成最后的离职流程后，自动审计系统除了会自动停用离职人员的帐号外，还会定期检查离职人员的帐号状况，避免未经授权的帐号启用等异常情况。
 
-![帐号异常信息审计](https://mmbiz.qpic.cn/mmbiz_png/rw0ibKapR537baEm1aY3yeiayRtic2hibjg66BUVPtMhkGerIibx5KUgBu3uYgcrIStwM4vyVMSm0wibb4O7b22MsLiaA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![帐号异常信息审计](/images/中通安全合规之人员安全实践/009.jpg)
 
 图 9  帐号异常信息审计
 

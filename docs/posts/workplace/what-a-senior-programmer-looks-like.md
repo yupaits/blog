@@ -54,7 +54,7 @@ title: 大家在寻找的高级程序员到底是什么样子的？
 
 我对程序员在这三个维度的理解大致是以下这个样子。
 
-![能力三维度](https://mmbiz.qpic.cn/mmbiz_png/oB5bd6W6hI1kHOHNXePZUEYyLb9FtE248eyQ6QIibgYJcykzAUMFnCdTTeOgkDJC5wqF3ibbFtQTDl7Xibvctl8Aw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![能力三维度](/images/大家在寻找的高级程序员到底是什么样子的/001.jpg)
 
 先卖个关子，文章的最后我会将这三个维度组合起来，你会发现一片新的天地。
 
@@ -101,7 +101,7 @@ title: 大家在寻找的高级程序员到底是什么样子的？
 
 两位社会心理学家在1999年做的4项研究，证实了下面的这个曲线的存在。
 
-![The Dunning-Kruger Effect](https://mmbiz.qpic.cn/mmbiz_jpg/oB5bd6W6hI1kHOHNXePZUEYyLb9FtE24m71noYicn6ZIYx2C0MC5SPFvL1Q23lKMeppRveWsV1r31tict0SZsHDQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![The Dunning-Kruger Effect](/images/大家在寻找的高级程序员到底是什么样子的/002.jpg)
 
 在这种状态下，人最容易高估自己，这也是很多导致产生很多“假高级程序员”的原因所在。
 
@@ -137,7 +137,7 @@ title: 大家在寻找的高级程序员到底是什么样子的？
 
 再带着下面的「不可能三角」去寻找合适的技术框架、解决方案。尽可能的寻求最优的平衡，而不是走极端。
 
-![不可能三角](https://mmbiz.qpic.cn/mmbiz_png/oB5bd6W6hI1kHOHNXePZUEYyLb9FtE24IzWZuda2DfG4c52ibvN8ko3Q36RTb0y728jaIFGibhTd3oOZwkgbAy1A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![不可能三角](/images/大家在寻找的高级程序员到底是什么样子的/003.jpg)
 
 如果拿捏不准，可以将多个方案各自的优缺点罗列出来，向Leader寻求建议。
 
@@ -213,11 +213,11 @@ KISS 原则：保持简单，愚蠢（Keep it simple, stupid）。
 
 常规的搭建一个闭环的过程大多是这样的。
 
-![闭环](https://mmbiz.qpic.cn/mmbiz_png/oB5bd6W6hI1kHOHNXePZUEYyLb9FtE24pwJGESafh90V659jAklJhLwN3CJmRwqfCOQQ5bWNKjRnmVL8aDcGXA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![闭环](/images/大家在寻找的高级程序员到底是什么样子的/004.jpg)
 
 这里所说的自驱动的“闭环”是这样的。
 
-![自驱动闭环](https://mmbiz.qpic.cn/mmbiz_png/oB5bd6W6hI1kHOHNXePZUEYyLb9FtE24goSbBIpicwbic2HAEyZXjA7Xra50qCS6usXGWdB5Vxmibs7UuDURB3VoQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![自驱动闭环](/images/大家在寻找的高级程序员到底是什么样子的/005.jpg)
 
 如何才能变成这样呢？**只要做一件事，尽可能多的对外输出自己的知识**。
 
@@ -233,7 +233,7 @@ KISS 原则：保持简单，愚蠢（Keep it simple, stupid）。
 
 前面文章里说到，我会将「专业技能」、「连接外部的能力」、「领导力」三个维度组合起来给你看。就是下面这个样子。
 
-![能力三维度组合](https://mmbiz.qpic.cn/mmbiz_png/oB5bd6W6hI1kHOHNXePZUEYyLb9FtE24VL1wCTicDZbZPAicsG5ibVGHsXNzLpYhTwBicrEl3CxCEjLmZ4fkzgHckw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![能力三维度组合](/images/大家在寻找的高级程序员到底是什么样子的/006.png)
 
 你会发现这里面包含了程序员在进阶后的几个常见岗位。
 

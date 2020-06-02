@@ -12,7 +12,7 @@ title: 如何避免「三分钟热度」，找到人生的「热爱」
 
 它正好描绘了一个人从事一项活动时，随着技巧的提升和挑战的增长，他对这项活动的体验发生了什么变化。
 
-![心流通道模型](https://mmbiz.qpic.cn/mmbiz_png/JEPMe5MVCkwk33v6fTllh5oXOeEOXUXhTWYcLPiahHicsdYFCcXPWrjaEYsa73M0Zmia8bfs6yc26bbaTicR74CfIA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![心流通道模型](/images/如何避免三分钟热度_找到人生的热爱/001.jpg)
 
 假设这张图所描绘的是小明打网球的情景。
 
@@ -67,7 +67,7 @@ title: 如何避免「三分钟热度」，找到人生的「热爱」
 
 浅层的兴趣，不能长久，也不能带来浑然忘我的深刻乐趣。
 
-![兴趣的三个层次](https://mmbiz.qpic.cn/mmbiz_jpg/JEPMe5MVCkwk33v6fTllh5oXOeEOXUXhnYJJ9lA8dLHvFrCLv08Ew5zQmdBqOtaJ9VxicJ1qIEbwxUic0lyd1s1A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![兴趣的三个层次](/images/如何避免三分钟热度_找到人生的热爱/002.jpg)
 
 心理学家米哈里·契克森米哈赖也介绍了乐趣的3个层次，以音乐为例：
 

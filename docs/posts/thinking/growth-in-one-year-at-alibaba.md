@@ -30,7 +30,7 @@ title: 阿里一年，聊聊我成长了什么
 
 这个话题，可能是这一年思考的最多个的一个点，钻研是好事，但是实际上大多时候的深入钻研并不在实际工作中有用，且研究得越深，忘得越快，因为研究得越深，那么这个技术点关联的技术点就越多，边边角角的忘了，核心的东西不容易串起来。那么什么是真正的技术能力，我画一张图概括一下：
 
-![真正的技术能力](https://mmbiz.qpic.cn/mmbiz_png/yH2gnJbDwoFnbSgAAzQ6ugkyEg86oVfGKsI0ETjY3Gt5HxvqN6ucAnjd3TsjopC8wOmicQGWuCUfAXDt6wr4R9Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![真正的技术能力](/images/阿里一年_聊聊我成长了什么/001.jpg)
 
 简而言之，技术能力 = 解决问题的能力，那么同样都在解决问题，大家之间的技术高低又有什么区分呢？我认为有以下几个层次：
 
@@ -93,7 +93,7 @@ title: 阿里一年，聊聊我成长了什么
 
 对于这种看法，说难听点就是四个字----目光短浅。我们看：
 
-![提高看问题的视野](https://mmbiz.qpic.cn/mmbiz_png/yH2gnJbDwoFnbSgAAzQ6ugkyEg86oVfGZOkntsATicbCKwKuDAr91Q3icYYKgL2kbKf8f2NZMpCq8TZpUELTLDKA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![提高看问题的视野](/images/阿里一年_聊聊我成长了什么/002.jpg)
 
 如果以普通的视角去看，那么一颗树那也就只是一棵树而已，但是如果跳脱出目前的视角，站在更高的角度去看，它其实是森林的一部分。你的主管并不是因为他是你的主管所以他就应该你比更高瞻远瞩，而是因为他看问题的高度比你更高、想得更远、做得更深，所以才成为了你的主管。
 

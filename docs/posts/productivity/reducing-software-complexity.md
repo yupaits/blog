@@ -20,7 +20,7 @@ title: 降低软件复杂性的一般原则和方法
 
 John Ousterhout选择从认知的负担和开发工作量的角度来定义软件的复杂性，并且给出了一个复杂度量公式：
 
-![复杂度量公式](https://mmbiz.qpic.cn/mmbiz_png/hEx03cFgUsVBicbtG06JicmgL07b1e0TGj3yHTvyPukmGsRibqBlA3sQSwXEjIjBsoSZpAQ7Us22GicL6ic0EQIHdmQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![复杂度量公式](/images/降低软件复杂性的一般原则和方法/001.png)
 
 子模块的复杂度Cp乘以该模块对应的开发时间权重值tp，累加后得到系统的整体复杂度C。系统整体的复杂度并不简单等于所有子模块复杂度的累加，还要考虑开发维护该模块所花费的时间在整体时间中的占比（对应权重值tp）。也就是说，即使某个模块非常复杂，如果很少使用或修改，也不会对系统的整体复杂度造成大的影响。
 
@@ -50,7 +50,7 @@ John Ousterhout选择从认知的负担和开发工作量的角度来定义软�
 
 战略编程，是指重视设计并愿意投入时间，短时间内可能会降低工作效率，但是长期看，会增加系统的可维护性和迭代效率。
 
-![战术编程与战略编程](https://mmbiz.qpic.cn/mmbiz_png/hEx03cFgUsUGKHUdiaqGbDWOOgjWJRcV7dPT4GK6o39T9UD0x29od1IvYYMpQCnLcdsJ904zCibTvpX5USDiaJZnQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![战术编程与战略编程](/images/降低软件复杂性的一般原则和方法/002.png)
 
 设计系统时，很难在开始阶段就面面俱到。好的设计应该体现在一个个小的模块上，修改Bug时，也应该抱着设计新系统的心态，完工后让人感觉不到“修补”的痕迹。经过累积，最终形成一个完善的系统。从长期看，对于中大型的系统，将日常开发时间的10%-15%用于设计是值得的。有一种观点认为，创业公司需要追求业务迭代速度和节省成本，可以容忍糟糕的设计，这是用错误的方法去追求正确的目标。降低开发成本最有效的方式是雇佣优秀的工程师，而不是在设计上做妥协。
 
@@ -66,7 +66,7 @@ John Ousterhout选择从认知的负担和开发工作量的角度来定义软�
 
 软件系统由不同的层次组成，层次之间通过接口来交互。在严格分层的系统里，内部的层只对相邻的层次可见，这样就可以将一个复杂问题分解成增量步骤序列。由于每一层最多影响两层，也给维护带来了很大的便利。分层系统最有名的实例是TCP/IP网络模型。
 
-![TCP/IP网络模型](https://mmbiz.qpic.cn/mmbiz_png/hEx03cFgUsUGKHUdiaqGbDWOOgjWJRcV7gCRSo9HibmPZuOuuAtusX8icE6icAdW9JM9H3qsLcJyKxPpLoF5NygmRw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![TCP/IP网络模型](/images/降低软件复杂性的一般原则和方法/003.png)
 
 在分层系统里，每一层应该具有不同的抽象。TCP/IP模型中，应用层的抽象是用户接口和交互；传输层的抽象是端口和应用之间的数据传输；网络层的抽象是基于IP的寻址和数据传输；链路层的抽象是适配和虚拟硬件设备。如果不同的层具有相同的抽象，可能存在层次边界不清晰的问题。
 
@@ -90,7 +90,7 @@ John Ousterhout选择从认知的负担和开发工作量的角度来定义软�
 
 深模块（Deep Module）指的是拥有强大功能和简单接口的模块。深模块是抽象的最佳实践，通过排除模块内部不重要的信息，让用户更容易理解和使用。
 
-![深模块与浅模块](https://mmbiz.qpic.cn/mmbiz_jpg/hEx03cFgUsUGKHUdiaqGbDWOOgjWJRcV745s2MIGIzRbpqyD9Yp56oSWiaSrd9pW9nMiaKfU6Wh8MZ4vrEHzbsib0A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![深模块与浅模块](/images/降低软件复杂性的一般原则和方法/004.jpg)
 
 Unix操作系统文件I/O是典型的深模块，以Open函数为例，接口接受文件名为参数，返回文件描述符。但是这个接口的背后，是几百行的实现代码，用来处理文件存储、权限控制、并发控制、存储介质等等，这些对用户是不可见的。
 
