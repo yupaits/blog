@@ -182,7 +182,7 @@ module.exports = {
             getSidebarConfig('数据结构', 'data-structure/', ['common-data-structure']),
             getSidebarConfig('算法', 'algorithm/', ['search', 'sort', 'graph', 'bit-operation']),
             getSidebarConfig('设计模式', 'design-pattern/', [
-              'singleton', 'factory', 'decorator', 'adapter', 'observer', 'chain-of-responsibility', 
+              'overview', 'gof-23-patterns', 'singleton', 'factory', 'decorator', 'adapter', 'observer', 'chain-of-responsibility', 
               'strategy', 'composite', 'template-method', 'proxy'
             ]),
             getSidebarConfig('分布式系统原理', 'distribution/', [
