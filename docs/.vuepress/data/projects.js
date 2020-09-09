@@ -8,6 +8,14 @@ export default [
     description: '该项目整理了个人工作学习过程中编写的一些示例应用以及针对通用业务场景封装的相关工具及中间件，主要使用的技术为Spring Boot和Spring Boot Starter。'
   },
   {
+    name: 'yutool-cli',
+    logo: '/github-logo.jpg',
+    site: '',
+    repo: 'https://github.com/yupaits/yutool-cli',
+    link: '/projects/yutool-cli.html',
+    description: '一个在线可视化，可定制的代码生成器。'
+  },
+  {
     name: 'yutool-samples',
     logo: '/github-logo.jpg',
     site: '',

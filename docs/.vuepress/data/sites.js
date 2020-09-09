@@ -1,5 +1,40 @@
 export default [
   {
+    category: '免费图片',
+    sites: [
+      {name: 'Unsplash', link: 'https://unsplash.com/'},
+      {name: 'Pexels', link: 'https://www.pexels.com/'},
+      {name: 'Gratisography', link: 'https://gratisography.com/'},
+      {name: 'picjumbo', link: 'https://picjumbo.com/'},
+      {name: 'Pixabay', link: 'https://pixabay.com/zh/'},
+      {name: 'FREEIMAGES', link: 'https://cn.freeimages.com/'},
+      {name: 'Canva', link: 'https://www.canva.com/photos/free/'},
+      {name: 'reshot', link: 'https://www.reshot.com/'},
+      {name: 'rawpixel', link: 'https://www.rawpixel.com/'},
+      {name: 'Morguefile', link: 'https://morguefile.com/'},
+      {name: 'pxhere', link: 'https://pxhere.com/'},
+      {name: 'ISO Republic', link: 'https://isorepublic.com/'},
+    ]
+  },
+  {
+    category: '免费音乐',
+    sites: [
+      {name: 'Bensound', link: 'https://www.bensound.com/'},
+      {name: 'WOWA', link: 'https://www.wowa.me/'},
+      {name: 'Incompetech', link: 'https://incompetech.com/music/'},
+      {name: 'filmmusic', link: 'https://incompetech.filmmusic.io/search/'},
+      {name: 'Free Music Archive', link: 'http://freemusicarchive.org/'},
+      {name: 'CCMixter', link: 'http://ccmixter.org/'},
+      {name: 'Jamendo Music', link: 'https://www.jamendo.com/'},
+      {name: 'Free Loops', link: 'http://free-loops.com/'},
+      {name: 'Freesound', link: 'https://freesound.org/'},
+      {name: 'Internet Archive’s Netlabels Collection', link: 'https://archive.org/details/netlabels'},
+      {name: 'Jukedeck', link: 'https://www.jukedeck.com/'},
+      {name: 'Sound Image', link: 'http://soundimage.org/'},
+      {name: 'Sound Bible', link: 'http://soundbible.com/', tag: '音效网站'},
+    ]
+  },
+  {
     category: '在线工具',
     sites: [
       {name: 'xiaopiu', link: 'https://www.xiaopiu.com/', tag: '原型设计'},
@@ -24,8 +59,6 @@ export default [
       {name: 'github:buttons', link: 'https://buttons.github.io/'},
       {name: '鲁班H5', link: 'https://h5.luban-h5.com/', tag: 'H5制作'},
       {name: '科研学术搜索', link: 'https://www.sciencesoft.cn/so/', tag: '学术'},
-      {name: 'pixabay', link: 'https://pixabay.com/zh/', tag: '图片资源'},
-      {name: 'FREEIMAGES', link: 'https://cn.freeimages.com/', tag: '图片资源'},
       {name: '搞定抠图', link: 'https://www.gaoding.com/koutu', tag: '抠图'},
       {name: '智图', link: 'https://zhitu.isux.us/', tag: '图片压缩'},
       {name: 'ACONVERT.COM', link: 'https://www.aconvert.com/cn/', tag: '文件转换'},
