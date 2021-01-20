@@ -14,6 +14,11 @@ title: VS Code常用插件记录
 
 - IntelliJ IDEA Keybindings
 
+## Project Manage
+
+- Project Manager
+- Todo Tree
+
 ## HTML CSS JS
 
 - Auto Close Tag
@@ -39,6 +44,8 @@ title: VS Code常用插件记录
 ## Git
 
 - GitLens
+- Git History
+- Git Graph
 
 ## Golang
 
