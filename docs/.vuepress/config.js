@@ -168,7 +168,7 @@ module.exports = {
           '/design/': [
             getSidebarConfig('', '', ['']),
             getSidebarConfig('架构设计', 'architecture/', [
-              'base-component', 'system-architecture'
+              'base-component', 'system-architecture', 'distributed-lock', 'history-data-clean'
             ]),
             getSidebarConfig('业务场景', 'business/', [
               'payment-system'
