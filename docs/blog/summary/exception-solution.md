@@ -194,6 +194,20 @@ title: 常见异常解决方案总结
     ```
     - 参考：[记lombok@Data和@Builder一起用无法添加无参构造方法的坑](https://blog.csdn.net/w605283073/article/details/89221853)
 
+1. Spring Boot项目启动报错：
+
+    ```Java
+    Caused by: org.springframework.context.ApplicationContextException: Unable to start ServletWebServerApplicationContext due to missing ServletWebServerFactory bean.
+    at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getWebServerFactory(ServletWebServerApplicationContext.java:203)
+    at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:179)
+    at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:153)
+    ... 8 common frames omitted
+    ```
+
+    - 参考： [spring boot启动找不到ServletWebServerFactory bean](https://www.jianshu.com/p/eb36833186c)
+
+    - 原因：pom.xml里spring-boot-starter-jetty的scope为provided（打包时不会打进jar包或war包），但IDEA的启动配置里没有勾选 “Include dependencies with "Provided" scope“，导致运行时没有将这个包加入，使得启动时没有找到相关的Web容器相关类。
+
 ## Vue.js
 
 1. Vue.js2.x 报 `Cannot read property '__ob__' of undefined` 的错误。
