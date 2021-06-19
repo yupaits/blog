@@ -48,6 +48,11 @@ module.exports = {
           {text: '项目', link: '/projects/'},
           {text: '书单', link: '/books'},
           {text: '关于我', link: '/about'},
+          {text: '快捷入口', items: [
+            {text: '语雀', link: 'https://www.yuque.com/yupaits'},
+            {text: 'GitHub', link: 'https://github.com/yupaits'},
+            {text: '码云', link: 'https://gitee.com/yupaits'}
+          ]}
         ],
         sidebar: {
           '/blog/': [
