@@ -51,7 +51,8 @@ module.exports = {
           {text: '快捷入口', items: [
             {text: '语雀', link: 'https://www.yuque.com/yupaits'},
             {text: 'GitHub', link: 'https://github.com/yupaits'},
-            {text: '码云', link: 'https://gitee.com/yupaits'}
+            {text: '码云', link: 'https://gitee.com/yupaits'},
+            {text: 'LeetCode', link: 'https://leetcode-cn.com/u/yupaits/'}
           ]}
         ],
         sidebar: {
