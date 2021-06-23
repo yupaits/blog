@@ -279,7 +279,8 @@ module.exports = {
       owner: 'yupaits',
       repo: 'blog',
       clientId: '5680169c83c7f32a7352',
-      clientSecret: '1a71f599143d186c5e8fd00f3f96f482d8ff71ea'
+      clientSecret: '1a71f599143d186c5e8fd00f3f96f482d8ff71ea',
+      proxy: (url) => 'https://cors-anywhere.azm.workers.dev/' + url
     }],
     ['@vuepress/medium-zoom'],
     ['@vuepress/back-to-top'],
