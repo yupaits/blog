@@ -275,7 +275,7 @@ module.exports = {
   },
   plugins: [
     ['@vssue/vuepress-plugin-vssue', {
-      platform: 'github',
+      platform: 'github-v4',
       owner: 'yupaits',
       repo: 'blog',
       clientId: '5680169c83c7f32a7352',
