@@ -8,10 +8,10 @@ before_script:
   - yarn
 
 script:
-  - yarn docs:build
+  - yarn build
 
 after_script:
-  - cd ./dist
+  - cd ./pulic
   - git init
   - git config user.name ${USER_NAME}
   - git config user.email ${USER_EMAIL}
