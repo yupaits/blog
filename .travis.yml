@@ -11,8 +11,7 @@ script:
   - yarn build
 
 after_script:
-  - ls
-  - cd ./pulic
+  - cd ./public
   - git init
   - git config user.name ${USER_NAME}
   - git config user.email ${USER_EMAIL}
