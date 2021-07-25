@@ -421,7 +421,7 @@ crisp:
 footer:
   owner:
     enable: true
-    since: 2017
+    since: 2016
   custom_text:
   copyright: true # Copyright of theme and framework
 
