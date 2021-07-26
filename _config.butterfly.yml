@@ -13,6 +13,7 @@ menu:
   标签: /tags/ || fas fa-tags
   专题 || fas fa-list:
     设计模式: /categories/设计模式/ || fas fa-bezier-curve
+    架构设计: /categories/架构设计/ || fas fa-server
   项目: /projects/ || fas fa-chart-bar
   书单: /books/ || fas fa-book
   站点: /sites/ || fas fa-sitemap
