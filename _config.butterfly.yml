@@ -18,14 +18,14 @@ menu:
     设计模式: /categories/设计模式/ || fas fa-bezier-curve
     分布式系统原理: /categories/分布式系统原理/ || fas fa-network-wired
     大型网络应用架构: /categories/大型网络应用架构/ || fas fa-network-wired
-    Java基础: /categories/Java基础/ || fas fa-java
-    Java进阶: /categories/Java进阶/ || fas fa-java
-    JVM虚拟机: /categories/JVM虚拟机/ || fas fa-java
-    Spring: /categories/Spring/ || fas fa-dev
-    SpringCloud: /categories/SpringCloud/ || fas fa-dev
-    Golang: /categories/Golang/ || fas fa-dev
-    Docker: /categories/Docker/ || fas fa-docker
-    树莓派: /categories/树莓派/ || fas fa-raspberry-pi
+    Java基础: /categories/Java基础/ || fab fa-java
+    Java进阶: /categories/Java进阶/ || fab fa-java
+    JVM虚拟机: /categories/JVM虚拟机/ || fab fa-java
+    Spring: /categories/Spring/ || fab fa-dev
+    SpringCloud: /categories/SpringCloud/ || fab fa-dev
+    Golang: /categories/Golang/ || fab fa-dev
+    Docker: /categories/Docker/ || fab fa-docker
+    树莓派: /categories/树莓派/ || fab fa-raspberry-pi
   项目: /projects/ || fas fa-chart-bar
   书单: /books/ || fas fa-book
   站点: /sites/ || fas fa-sitemap
