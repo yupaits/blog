@@ -14,7 +14,7 @@ menu:
   专题 || fas fa-list:
     文章收录: /categories/文章收录/ || fas fa-newspaper
     架构设计: /categories/架构设计/ || fas fa-server
-    数据结构&算法: /categories/数据结构&算法/ || fas fa-database
+    数据结构-算法: /categories/数据结构-算法/ || fas fa-database
     设计模式: /categories/设计模式/ || fas fa-bezier-curve
     分布式系统原理: /categories/分布式系统原理/ || fas fa-network-wired
     大型网络应用架构: /categories/大型网络应用架构/ || fas fa-network-wired
