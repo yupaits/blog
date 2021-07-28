@@ -74,9 +74,7 @@ tags:
 
 当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。
 
-::: tip 总结
-所以，blocking IO的特点就是在IO执行的两个阶段都被block了。
-:::
+> **所以，blocking IO的特点就是在IO执行的两个阶段都被block了。**
 
 ### 非阻塞I/O（nonblocking IO）
 
@@ -86,9 +84,7 @@ linux下，可以通过设置socket使其变为non-blocking。当对一个non-bl
 
 当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。
 
-::: tip 总结
-所以，nonblocking IO的特点是用户进程需要**不断的主动询问**kernel数据好了没有。
-:::
+> 所以，nonblocking IO的特点是用户进程需要**不断的主动询问**kernel数据好了没有。
 
 ### I/O多路复用（IO multiplexing）
 
@@ -98,9 +94,7 @@ IO multiplexing就是我们说的select，poll，epoll，有些地方也称这�
 
 <span style="color: red;">当用户进程调用了select，那么整个进程会被block</span>，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。
 
-::: tip 总结
-所以，I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。
-:::
+> 所以，I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。
 
 这个图和blocking IO的图其实并没有太大的不同，事实上，还更差一些。因为这里需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection。
 
@@ -172,9 +166,7 @@ struct pollfd {
 
 pollfd结构包含了要监视的event和发生的event，不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。 和select函数一样，poll返回后，需要轮询pollfd来获取就绪的描述符。
 
-::: tip 总结
-从上面看，select和poll都需要在返回后，<span style="color: red;">通过遍历文件描述符来获取已经就绪的socket</span>。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降。
-:::
+> 从上面看，select和poll都需要在返回后，<span style="color: red;">通过遍历文件描述符来获取已经就绪的socket</span>。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降。
 
 ### epoll
 
@@ -432,6 +424,4 @@ static void modify_event(int epollfd,int fd,int state){
 
 2. IO的效率不会随着监视fd的数量的增长而下降。epoll不同于select和poll轮询的方式，而是通过每个fd定义的回调函数来实现的。只有就绪的fd才会执行回调函数。
 
-::: tip 总结
-如果没有大量的idle -connection或者dead-connection，epoll的效率并不会比select/poll高很多，但是当遇到大量的idle- connection，就会发现epoll的效率大大高于select/poll。
-:::
+> **如果没有大量的idle -connection或者dead-connection，epoll的效率并不会比select/poll高很多，但是当遇到大量的idle- connection，就会发现epoll的效率大大高于select/poll。**

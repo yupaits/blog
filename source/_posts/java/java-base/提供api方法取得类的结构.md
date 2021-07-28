@@ -93,9 +93,7 @@ Method Constructor Field这些类都实现了java.lang.reflect.Member接口,程�
 
 - setXxx(Object obj, Xxx val): 将obj对象的该成员变量值设置成val值.此处的Xxx对应8种基本类型, 如果该成员类型是引用类型, 则取消set后面的Xxx;
 
-::: tip 注意：
-getDeclaredField方法可以获取所有的成员变量，包括private修饰的成员变量。
-:::
+> getDeclaredField方法可以获取所有的成员变量，包括private修饰的成员变量。
 
 ```Java
 public class Client {

@@ -82,7 +82,7 @@ func main() {
 
 ## 数据库
 
-### 连接数据库 {#dbc}
+### 连接数据库 {dbc}
 要连接到数据库首先要导入驱动程序。例如
 ``` go
 import _ "github.com/go-sql-driver/mysql"
@@ -141,14 +141,12 @@ GORM正式支持上述的数据库，如果您使用的是不受支持的数据�
 
 
 
-### 迁移 {#m}
+### 迁移 {m}
 
 #### 自动迁移
 自动迁移模式将保持更新到最新。
 
-::: danger 警告：
-自动迁移**仅仅**会创建表，缺少列和索引，并且不会改变现有列的类型或删除未使用的列以保护数据。
-:::
+> 自动迁移**仅仅**会创建表，缺少列和索引，并且不会改变现有列的类型或删除未使用的列以保护数据。
 
 ``` go
 db.AutoMigrate(&User{})
@@ -232,7 +230,7 @@ db.Model(&User{}).RemoveIndex("idx_user_name")
 
 ## 模型
 
-### 模型定义 {#md}
+### 模型定义 {md}
 ``` go
 type User struct {
     gorm.Model
@@ -280,7 +278,7 @@ type CreditCard struct {
     Number  string
 }
 ```
-### 约定 {#c}
+### 约定 {c}
 #### `gorm.Model` 结构体
 基本模型定义`gorm.Model`，包括字段`ID`，`CreatedAt`，`UpdatedAt`，`DeletedAt`，你可以将它嵌入你的模型，或者只写你想要的字段
 ``` go
@@ -387,7 +385,7 @@ db.Model(&user).Update("name", "jinzhu") // 将会设置`UpdatedAt`为当前时�
 
 ### 关联
 
-#### 属于 {#bt}
+#### 属于 {bt}
 ```go
 // `User`属于`Profile`, `ProfileID`为外键
 type User struct {
@@ -431,7 +429,7 @@ type User struct {
     ProfileID int
 }
 ```
-#### 包含一个 {#ho}
+#### 包含一个 {ho}
 ```go
 // User 包含一个 CreditCard, UserID 为外键
 type User struct {
@@ -480,7 +478,7 @@ type User struct {
 }
 ```
 
-#### 包含多个 {#hm}
+#### 包含多个 {hm}
 ```go
 // User 包含多个 emails, UserID 为外键
 type User struct {
@@ -524,7 +522,7 @@ type User struct {
   Profiles []Profile `gorm:"ForeignKey:UserID;AssociationForeignKey:Refer"`
 }
 ```
-#### 多对多 {#mtm}
+#### 多对多 {mtm}
 ```go
 // User 包含并属于多个 languages, 使用 `user_languages` 表连接
 type User struct {
@@ -553,7 +551,7 @@ type CustomizeAccount struct {
 }
 ```
 译者注：这里设置好像缺失一部分
-#### 多种包含 {#p}
+#### 多种包含 {p}
 支持多种的包含一个和包含多个的关联
 ```go
 type Cat struct {
@@ -577,7 +575,7 @@ type Cat struct {
 ```
 注意：多态属性和多对多显式不支持，并且会抛出错误。
 
-#### 关联模式 {#am}
+#### 关联模式 {am}
 关联模式包含一些帮助方法来处理关系事情很容易。
 ```go
 // 开始关联模式
@@ -618,7 +616,7 @@ db.Model(&user).Association("Languages").Clear()
 
 ## CRUD:读写数据
 <!-- toc -->
-### 创建 {#c}
+### 创建 {c}
 #### 创建记录
 ```go
 user := User{Name: "Jinzhu", Age: 18, Birthday: time.Now()}
@@ -658,7 +656,7 @@ func (user *User) BeforeCreate(scope *gorm.Scope) error {
 db.Set("gorm:insert_option", "ON CONFLICT").Create(&product)
 // INSERT INTO products (name, code) VALUES ("name", "code") ON CONFLICT;
 ```
-### 查询 {#q}
+### 查询 {q}
 ```go
 // 获取第一条记录，按主键排序
 db.First(&user)
@@ -987,7 +985,7 @@ db.Table("deleted_users").Pluck("name", &names)
 db.Select("name, age").Find(&users)
 ```
 
-#### Scan {#Scan}
+#### Scan {Scan}
 将结果扫描到另一个结构中。
 ```go
 type Result struct {
@@ -1002,7 +1000,7 @@ db.Table("users").Select("name, age").Where("name = ?", 3).Scan(&result)
 db.Raw("SELECT name, age FROM users WHERE name = ?", 3).Scan(&result)
 ```
 
-#### Scopes {#Scopes}
+#### Scopes {Scopes}
 将当前数据库连接传递到`func(*DB) *DB`，可以用于动态添加条件
 ```go
 func AmountGreaterThan1000(db *gorm.DB) *gorm.DB {
@@ -1045,7 +1043,7 @@ db.Table("deleted_users").Where("name = ?", "jinzhu").Delete()
 //// DELETE FROM deleted_users WHERE name = 'jinzhu';
 ```
 
-### 预加载 {#p}
+### 预加载 {p}
 ```go
 db.Preload("Orders").Find(&users)
 //// SELECT * FROM users;
@@ -1080,7 +1078,7 @@ db.Preload("Orders.OrderItems").Find(&users)
 db.Preload("Orders", "state = ?", "paid").Preload("Orders.OrderItems").Find(&users)
 ```
 
-### 更新 {#u}
+### 更新 {u}
 #### 更新全部字段
 `Save`将包括执行更新SQL时的所有字段，即使它没有更改
 ```go
@@ -1185,7 +1183,7 @@ db.Model(&user).Set("gorm:update_option", "OPTION (OPTIMIZE FOR UNKNOWN)").Updat
 //// UPDATE users SET name='hello', updated_at = '2013-11-17 21:34:10' WHERE id=111 OPTION (OPTIMIZE FOR UNKNOWN);
 ```
 
-### 删除/软删除 {#d}
+### 删除/软删除 {d}
 **警告** 删除记录时，需要确保其主要字段具有值，GORM将使用主键删除记录，如果主要字段为空，GORM将删除模型的所有记录
 ```go
 // 删除存在的记录
@@ -1228,7 +1226,7 @@ db.Unscoped().Delete(&order)
 //// DELETE FROM orders WHERE id=10;
 ```
 
-### 关联 {#a}
+### 关联 {a}
 默认情况下，当创建/更新记录时，GORM将保存其关联，如果关联具有主键，GORM将调用Update来保存它，否则将被创建。
 ```go
 user := User{
@@ -1329,7 +1327,7 @@ BeforeDelete
 AfterDelete
 // commit or rollback transaction 提交或回滚事务
 ```
-### 查询对象 {#querying-an-object}
+### 查询对象 {querying-an-object}
 查询过程中可用的回调
 ```go
 // load data from database 从数据库加载数据
@@ -1369,7 +1367,7 @@ func (u *User) AfterCreate(scope *gorm.Scope) (err error) {
 ```
 
 ## 高级用法
-### 错误处理 {#eh}
+### 错误处理 {eh}
 执行任何操作后，如果发生任何错误，GORM将其设置为`*DB`的`Error`字段
 ```go
 if err := db.Where("name = ?", "jinzhu").First(&user).Error; err != nil {
@@ -1386,7 +1384,7 @@ if db.Model(&user).Related(&credit_card).RecordNotFound() {
     // 没有信用卡被发现处理...
 }
 ```
-### 事务 {#t}
+### 事务 {t}
 要在事务中执行一组操作，一般流程如下。
 ```go
 // 开始事务
@@ -1423,7 +1421,7 @@ func CreateAnimals(db *gorm.DB) err {
   return nil
 }
 ```
-### SQL构建 {#sb}
+### SQL构建 {sb}
 #### 执行原生SQL
 ```go
 db.Exec("DROP TABLE users;")
@@ -1472,7 +1470,7 @@ for rows.Next() {
   // do something
 }
 ```
-### 通用数据库接口sql.DB {#g}
+### 通用数据库接口sql.DB {g}
 从`*gorm.DB`连接获取通用数据库接口[*sql.DB](http://golang.org/pkg/database/sql/#DB)
 ```go
 // 获取通用数据库对象`*sql.DB`以使用其函数
@@ -1487,7 +1485,7 @@ db.DB().SetMaxIdleConns(10)
 db.DB().SetMaxOpenConns(100)
 ```
 
-### 复合主键 {#cpk}
+### 复合主键 {cpk}
 将多个字段设置为主键以启用复合主键
 ```go
 type Product struct {
@@ -1495,7 +1493,7 @@ type Product struct {
     LanguageCode string `gorm:"primary_key"`
 }
 ```
-### 日志 {#l}
+### 日志 {l}
 Gorm有内置的日志记录器支持，默认情况下，它会打印发生的错误
 ```go
 // 启用Logger，显示详细日志
@@ -1515,7 +1513,7 @@ db.SetLogger(log.New(os.Stdout, "\r\n", 0))
 ```
 
 ## 开发
-### 架构 {#a}
+### 架构 {a}
 Gorm使用可链接的API，`*gorm.DB`是链的桥梁，对于每个链API，它将创建一个新的关系。
 ```go
 db, err := gorm.Open("postgres", "user=gorm dbname=gorm sslmode=disable")
@@ -1542,7 +1540,7 @@ db.First(&user)
 
 对于上面的例子，将调用`querying`，参考[查询回调](https://github.com/jasperxu/gorm-zh/blob/master/callbacks.md#querying-an-object)
 
-### 写插件 {#w}
+### 写插件 {w}
 GORM本身由`Callbacks`提供支持，因此您可以根据需要完全自定义GORM
 #### 注册新的callback
 ```go
