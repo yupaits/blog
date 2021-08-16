@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>阿里高级技术专家方法论：如何写复杂业务代码？ | yupaits的博客</title><meta name="keywords" content="生产力"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="原文地址：阿里高级技术专家方法论：如何写复杂业务代码？ 转载    阿里妹导读：张建飞是阿里巴巴高级技术专家，一直在致力于应用架构和代码复杂度的治理。最近，他在看零售通商品域的代码。面对零售通如此复杂的业务场景，如何在架构和代码层面进行应对，是一个新课题。结合实际的业务场景，Frank 沉淀了一套“如何写复杂业务代码”的方法论，在此分享给大家，相信同样的方法论可以复制到大部分复杂业务场景。  一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里高级技术专家方法论：如何写复杂业务代码？">
+<meta property="og:url" content="http://yupaits.com/2020/06/02/post/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%EF%BC%9F/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="原文地址：阿里高级技术专家方法论：如何写复杂业务代码？ 转载    阿里妹导读：张建飞是阿里巴巴高级技术专家，一直在致力于应用架构和代码复杂度的治理。最近，他在看零售通商品域的代码。面对零售通如此复杂的业务场景，如何在架构和代码层面进行应对，是一个新课题。结合实际的业务场景，Frank 沉淀了一套“如何写复杂业务代码”的方法论，在此分享给大家，相信同样的方法论可以复制到大部分复杂业务场景。  一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover1.png">
+<meta property="article:published_time" content="2020-06-01T18:09:50.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.481Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="生产力">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover1.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/06/02/post/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%EF%BC%9F/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '阿里高级技术专家方法论：如何写复杂业务代码？',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover1.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">阿里高级技术专家方法论：如何写复杂业务代码？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-06-01T18:09:50.000Z" title="undefined 2020-06-02 02:09:50">2020-06-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/">文章收录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="阿里高级技术专家方法论：如何写复杂业务代码？"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIzOTU0NTQ0MA==&mid=2247491068&idx=1&sn=2e724face6f7e1df5e81c377c84862a6&chksm=e92920f3de5ea9e574cdc9b183e837aab9eb032694d44f44c61b4637d8e477e0c0de831f7f51&scene=0&xtrack=1&key=32c60e053085a25a672fef3da7f5f0b0666caa58a1f830e928c40b77255c6a73bcf6acd0e1e3cfad8cf2e7c7b0e89095c6e81ea34543fa81fdffbb826f4d9dd7b8f57e090dd84e4e565000490e445567&ascene=14&uin=NzY4MDc0NTEx&devicetype=Windows+10&version=62060833&lang=zh_CN&pass_ticket=YFdki/C91SuYZ9EN4uME0o15SyEjun/i+YMf4Zcr9bJk2Sgt4KHnETaywmWxCaEh">阿里高级技术专家方法论：如何写复杂业务代码？</a> <mark class="hl-label green">转载</mark> </p>
+</blockquote>
+<blockquote>
+<p>阿里妹导读：张建飞是阿里巴巴高级技术专家，一直在致力于应用架构和代码复杂度的治理。最近，他在看零售通商品域的代码。面对零售通如此复杂的业务场景，如何在架构和代码层面进行应对，是一个新课题。结合实际的业务场景，Frank 沉淀了一套“如何写复杂业务代码”的方法论，在此分享给大家，相信同样的方法论可以复制到大部分复杂业务场景。</p>
+</blockquote>
+<h2 id="一个复杂业务的处理过程"><a href="#一个复杂业务的处理过程" class="headerlink" title="一个复杂业务的处理过程"></a>一个复杂业务的处理过程</h2><h3 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h3><p>简单的介绍下业务背景，零售通是给线下小店供货的B2B模式，我们希望通过数字化重构传统供应链渠道，提升供应链效率，为新零售助力。阿里在中间是一个平台角色，提供的是Bsbc中的service的功能。</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/001.jpg" alt="业务背景"></p>
+<p>商品力是零售通的核心所在，一个商品在零售通的生命周期如下图所示：</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/002.jpg" alt="商品生命周期"></p>
+<p>在上图中红框标识的是一个运营操作的“上架”动作，这是非常关键的业务操作。上架之后，商品就能在零售通上面对小店进行销售了。因为上架操作非常关键，所以也是商品域中最复杂的业务之一，涉及很多的数据校验和关联操作。<br>针对上架，一个简化的业务流程如下所示：</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/003.jpg" alt="商品上架流程"></p>
+<h3 id="过程分解"><a href="#过程分解" class="headerlink" title="过程分解"></a>过程分解</h3><p>像这么复杂的业务，我想应该没有人会写在一个service方法中吧。一个类解决不了，那就分治吧。</p>
+<p>说实话，能想到分而治之的工程师，已经做的不错了，至少比没有分治思维要好很多。我也见过复杂程度相当的业务，连分解都没有，就是一堆方法和类的堆砌。</p>
+<p>不过，这里存在一个问题：即很多同学过度的依赖工具或是辅助手段来实现分解。比如在我们的商品域中，类似的分解手段至少有3套以上，有自制的流程引擎，有依赖于数据库配置的流程处理：</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/004.jpg" alt="自制流程引擎"></p>
+<p>本质上来讲，这些辅助手段做的都是一个pipeline的处理流程，没有其它。因此，我建议此处最好保持KISS（Keep It Simple and Stupid），即<strong>最好是什么工具都不要用，次之是用一个极简的Pipeline模式，最差是使用像流程引擎这样的重方法</strong>。</p>
+<p>除非你的应用有极强的流程可视化和编排的诉求，否则我非常不推荐使用流程引擎等工具。第一，它会引入额外的复杂度，特别是那些需要持久化状态的流程引擎；第二，它会割裂代码，导致阅读代码的不顺畅。大胆断言一下，<strong>全天下估计80%对流程引擎的使用都是得不偿失的</strong>。</p>
+<p>回到商品上架的问题，这里问题核心是工具吗？是设计模式带来的代码灵活性吗？显然不是，<strong>问题的核心应该是如何分解问题和抽象问题</strong>，知道金字塔原理的应该知道，此处，我们可以使用结构化分解将问题解构成一个有层级的金字塔结构：</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/005.jpg" alt="将问题分解成金字塔结构"></p>
+<p>按照这种分解写的代码，就像一本书，目录和内容清晰明了。</p>
+<p>以商品上架为例，程序的入口是一个上架命令（OnSaleCommand）, 它由三个阶段（Phase）组成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Command</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnSaleNormalItemCmdExe</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> OnSaleContextInitPhase onSaleContextInitPhase;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> OnSaleDataCheckPhase onSaleDataCheckPhase;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> OnSaleProcessPhase onSaleProcessPhase;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">execute</span><span class="params">(OnSaleNormalItemCmd cmd)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        OnSaleContext onSaleContext = init(cmd);</span><br><span class="line"></span><br><span class="line">        checkData(onSaleContext);</span><br><span class="line"></span><br><span class="line">        process(onSaleContext);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Response.buildSuccess();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> OnSaleContext <span class="title">init</span><span class="params">(OnSaleNormalItemCmd cmd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> onSaleContextInitPhase.init(cmd);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkData</span><span class="params">(OnSaleContext onSaleContext)</span> </span>&#123;</span><br><span class="line">        onSaleDataCheckPhase.check(onSaleContext);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(OnSaleContext onSaleContext)</span> </span>&#123;</span><br><span class="line">        onSaleProcessPhase.process(onSaleContext);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个Phase又可以拆解成多个步骤（Step），以OnSaleProcessPhase为例，它是由一系列Step组成的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Phase</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OnSaleProcessPhase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PublishOfferStep publishOfferStep;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> BackOfferBindStep backOfferBindStep;</span><br><span class="line">    <span class="comment">//省略其它step</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(OnSaleContext onSaleContext)</span></span>&#123;</span><br><span class="line">        SupplierItem supplierItem = onSaleContext.getSupplierItem();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 生成OfferGroupNo</span></span><br><span class="line">        generateOfferGroupNo(supplierItem);</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 发布商品</span></span><br><span class="line">        publishOffer(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前后端库存绑定 backoffer域</span></span><br><span class="line">        bindBackOfferStock(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 同步库存路由 backoffer域</span></span><br><span class="line">        syncStockRoute(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置虚拟商品拓展字段</span></span><br><span class="line">        setVirtualProductExtension(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发货保障打标 offer域</span></span><br><span class="line">        markSendProtection(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 记录变更内容ChangeDetail</span></span><br><span class="line">        recordChangeDetail(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 同步供货价到BackOffer</span></span><br><span class="line">        syncSupplyPriceToBackOffer(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果是组合商品打标，写扩展信息</span></span><br><span class="line">        setCombineProductExtension(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 去售罄标</span></span><br><span class="line">        removeSellOutTag(offerId);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送领域事件</span></span><br><span class="line">        fireDomainEvent(supplierItem);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 关闭关联的待办事项</span></span><br><span class="line">        closeIssues(supplierItem);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到了吗，这就是商品上架这个复杂业务的业务流程。需要流程引擎吗？不需要，需要设计模式支撑吗？也不需要。对于这种业务流程的表达，简单朴素的组合方法模式（Composed Method）是再合适不过的了。</p>
+<p>因此，在做过程分解的时候，我建议工程师不要把太多精力放在工具上，放在设计模式带来的灵活性上。而是应该多花时间在对问题分析，结构化分解，最后通过合理的抽象，形成合适的阶段（Phase）和步骤（Step）上。</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/006.jpg" alt="过程分解"></p>
+<h3 id="过程分解后的两个问题"><a href="#过程分解后的两个问题" class="headerlink" title="过程分解后的两个问题"></a>过程分解后的两个问题</h3><p>的确，使用过程分解之后的代码，已经比以前的代码更清晰、更容易维护了。不过，还有两个问题值得我们去关注一下：</p>
+<p>★ 领域知识被割裂肢解</p>
+<p>什么叫被肢解？因为我们到目前为止做的都是过程化拆解，导致没有一个聚合领域知识的地方。每个Use Case的代码只关心自己的处理流程，知识没有沉淀。</p>
+<p>相同的业务逻辑会在多个Use Case中被重复实现，导致代码重复度高，即使有复用，最多也就是抽取一个util，代码对业务语义的表达能力很弱，从而影响代码的可读性和可理解性。</p>
+<p>★ 代码的业务表达能力缺失</p>
+<p>试想下，在过程式的代码中，所做的事情无外乎就是取数据–做计算–存数据，在这种情况下，要如何通过代码显性化的表达我们的业务呢？说实话，很难做到，因为我们缺失了模型，以及模型之间的关系。脱离模型的业务表达，是缺少韵律和灵魂的。</p>
+<p>举个例子，在上架过程中，有一个校验是检查库存的，其中对于组合品（CombineBackOffer）其库存的处理会和普通品不一样。原来的代码是这么写的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span> isCombineProduct = supplierItem.getSign().isCombProductQuote();</span><br><span class="line"></span><br><span class="line"><span class="comment">// supplier.usc warehouse needn&#x27;t check</span></span><br><span class="line"><span class="keyword">if</span> (WarehouseTypeEnum.isAliWarehouse(supplierItem.getWarehouseType())) &#123;</span><br><span class="line">    <span class="comment">// quote warehosue check</span></span><br><span class="line">    <span class="keyword">if</span> (CollectionUtil.isEmpty(supplierItem.getWarehouseIdList()) &amp;&amp; !isCombineProduct) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ExceptionFactory.makeFault(ServiceExceptionCode.SYSTEM_ERROR, <span class="string">&quot;亲，不能发布Offer，请联系仓配运营人员，建立品仓关系！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// inventory amount check</span></span><br><span class="line">    Long sellableAmount = <span class="number">0L</span>;</span><br><span class="line">    <span class="keyword">if</span> (!isCombineProduct) &#123;</span><br><span class="line">        sellableAmount = normalBiz.acquireSellableAmount(supplierItem.getBackOfferId(), supplierItem.getWarehouseIdList());</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//组套商品</span></span><br><span class="line">        OfferModel backOffer = backOfferQueryService.getBackOffer(supplierItem.getBackOfferId());</span><br><span class="line">        <span class="keyword">if</span> (backOffer != <span class="keyword">null</span>) &#123;</span><br><span class="line">            sellableAmount = backOffer.getOffer().getTradeModel().getTradeCondition().getAmountOnSale();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sellableAmount &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ExceptionFactory.makeFault(ServiceExceptionCode.SYSTEM_ERROR, <span class="string">&quot;亲，实仓库存必须大于0才能发布，请确认已补货.\r[id:&quot;</span> + supplierItem.getId() + <span class="string">&quot;]&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，如果我们在系统中引入领域模型之后，其代码会简化为如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(backOffer.isCloudWarehouse())&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (backOffer.isNonInWarehouse())&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> BizException(<span class="string">&quot;亲，不能发布Offer，请联系仓配运营人员，建立品仓关系！&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (backOffer.getStockAmount() &lt; <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> BizException(<span class="string">&quot;亲，实仓库存必须大于0才能发布，请确认已补货.\r[id:&quot;</span> + backOffer.getSupplierItem().getCspuCode() + <span class="string">&quot;]&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有没有发现，使用模型的表达要清晰易懂很多，而且也不需要做关于组合品的判断了，因为我们在系统中引入了更加贴近现实的对象模型（CombineBackOffer继承BackOffer），通过对象的多态可以消除我们代码中的大部分的if-else。</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/007.jpg" alt="对象模型"></p>
+<h3 id="过程分解-对象模型"><a href="#过程分解-对象模型" class="headerlink" title="过程分解+对象模型"></a>过程分解+对象模型</h3><p>通过上面的案例，我们可以看到<strong>有过程分解要好于没有分解，过程分解+对象模型要好于仅仅是过程分解</strong>。对于商品上架这个case，如果采用过程分解+对象模型的方式，最终我们会得到一个如下的系统结构：</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/008.jpg" alt="系统结构"></p>
+<h2 id="写复杂业务的方法论"><a href="#写复杂业务的方法论" class="headerlink" title="写复杂业务的方法论"></a>写复杂业务的方法论</h2><p>通过上面案例的讲解，我想说，我已经交代了复杂业务代码要怎么写：<strong>即自上而下的结构化分解+自下而上的面向对象分析</strong>。</p>
+<p>接下来，让我们把上面的案例进行进一步的提炼，形成一个可落地的方法论，从而可以泛化到更多的复杂业务场景。</p>
+<h3 id="上下结合"><a href="#上下结合" class="headerlink" title="上下结合"></a>上下结合</h3><p>所谓上下结合，是指我们要<strong>结合自上而下的过程分解和自下而上的对象建模</strong>，螺旋式的构建我们的应用系统。这是一个动态的过程，两个步骤可以交替进行、也可以同时进行。</p>
+<p>这两个步骤是相辅相成的，<strong>上面的分析可以帮助我们更好的理清模型之间的关系，而下面的模型表达可以提升我们代码的复用度和业务语义表达能力</strong>。</p>
+<p>其过程如下图所示：</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/009.jpg" alt="上下结合过程"></p>
+<p>使用这种上下结合的方式，我们就有可能在面对任何复杂的业务场景，都能写出干净整洁、易维护的代码。</p>
+<h3 id="能力下沉"><a href="#能力下沉" class="headerlink" title="能力下沉"></a>能力下沉</h3><p>一般来说实践DDD有两个过程：</p>
+<p>★ 套概念阶段：了解了一些DDD的概念，然后在代码中“使用”Aggregation Root，Bounded Context，Repository等等这些概念。更进一步，也会使用一定的分层策略。然而这种做法一般对复杂度的治理并没有多大作用。</p>
+<p>★ 融会贯通阶段：术语已经不再重要，理解DDD的本质是统一语言、边界划分和面向对象分析的方法。</p>
+<p>大体上而言，我大概是在1.7的阶段，因为有一个问题一直在困扰我，就是哪些能力应该放在Domain层，是不是按照传统的做法，将所有的业务都收拢到Domain上，这样做合理吗？说实话，这个问题我一直没有想清楚。</p>
+<p>因为在现实业务中，很多的功能都是用例特有的（Use case specific）的，如果“盲目”的使用Domain收拢业务并不见得能带来多大的益处。相反，这种收拢会导致Domain层的膨胀过厚，不够纯粹，反而会影响复用性和表达能力。</p>
+<p>鉴于此，我最近的思考是我们应该采用<strong>能力下沉</strong>的策略。</p>
+<p>所谓的能力下沉，是指我们不强求一次就能设计出Domain的能力，也不需要强制要求把所有的业务功能都放到Domain层，而是采用实用主义的态度，即只对那些需要在多个场景中需要被复用的能力进行抽象下沉，而不需要复用的，就暂时放在App层的Use Case里就好了。</p>
+<blockquote>
+<p>注：Use Case是《架构整洁之道》里面的术语，简单理解就是响应一个Request的处理过程。</p>
+</blockquote>
+<p>通过实践，<strong>我发现这种循序渐进的能力下沉策略，应该是一种更符合实际、更敏捷的方法。因为我们承认模型不是一次性设计出来的，而是迭代演化出来的</strong>。</p>
+<p>下沉的过程如下图所示，假设两个use case中，我们发现uc1的step3和uc2的step1有类似的功能，我们就可以考虑让其下沉到Domain层，从而增加代码的复用性。</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/010.jpg" alt="能力下沉"></p>
+<p>指导下沉有两个关键指标：</p>
+<ul>
+<li>复用性</li>
+<li>内聚性</li>
+</ul>
+<p>复用性是告诉我们When（什么时候该下沉了），即有重复代码的时候。内聚性是告诉我们How（要下沉到哪里），功能有没有内聚到恰当的实体上，有没有放到合适的层次上（因为Domain层的能力也是有两个层次的，一个是Domain Service这是相对比较粗的粒度，另一个是Domain的Model这个是最细粒度的复用）。</p>
+<p>比如，在我们的商品域，经常需要判断一个商品是不是最小单位，是不是中包商品。像这种能力就非常有必要直接挂载在Model上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CSPU</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line">    <span class="keyword">private</span> String baseCode;</span><br><span class="line">    <span class="comment">//省略其它属性</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单品是否为最小单位。</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMinimumUnit</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> StringUtils.equals(code, baseCode);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 针对中包的特殊处理</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMidPackage</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> StringUtils.equals(code, midPackageCode);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之前，因为老系统中没有领域模型，没有CSPU这个实体。你会发现像判断单品是否为最小单位的逻辑是以StringUtils.equals(code, baseCode)的形式散落在代码的各个角落。这种代码的可理解性是可想而知的，至少我在第一眼看到这个代码的时候，是完全不知道什么意思。</p>
+<h2 id="业务技术要怎么做"><a href="#业务技术要怎么做" class="headerlink" title="业务技术要怎么做"></a>业务技术要怎么做</h2><p>写到这里，我想顺便回答一下很多业务技术同学的困惑，也是我之前的困惑：即业务技术到底是在做业务，还是做技术？业务技术的技术性体现在哪里？</p>
+<p>通过上面的案例，我们可以看到业务所面临的复杂性并不亚于底层技术，要想写好业务代码也不是一件容易的事情。业务技术和底层技术人员唯一的区别是他们所面临的问题域不一样。</p>
+<p>业务技术面对的问题域变化更多、面对的人更加庞杂。而底层技术面对的问题域更加稳定、但对技术的要求更加深。比如，如果你需要去开发Pandora，你就要对Classloader有更加深入的了解才行。</p>
+<p>但是，不管是业务技术还是底层技术人员，有一些思维和能力都是共通的。比如，<strong>分解问题的能力，抽象思维，结构化思维等等</strong>。</p>
+<p><img src="/images/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA_%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81/011.jpg" alt="思维和能力"></p>
+<p>用我的话说就是：<strong>“做不好业务开发的，也做不好技术底层开发，反之亦然”。业务开发一点都不简单，只是我们很多人把它做“简单”了</strong>。</p>
+<p>因此，如果从变化的角度来看，业务技术的难度一点不逊色于底层技术，其面临的挑战甚至更大。因此，我想对广大的从事业务技术开发的同学说：沉下心来，夯实自己的基础技术能力、OO能力、建模能力… 不断提升抽象思维、结构化思维、思辨思维… 持续学习精进，写好代码。我们可以在业务技术岗做的很”技术“！。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这篇文章是我最近思考的一些总结，大部分思想是继承自我原来写的COLA架构，该架构已经开源，目前在集团内外都有比较广泛的使用。</p>
+<p>这一篇主要是在COLA的基础上，针对复杂业务场景，做了进一步的架构落地。个人感觉可以作为COLA的最佳实践来使用。</p>
+<p>另外，本文讨论的问题之大和篇幅之短是不成正比的。原因是我假定你已经了解了一些DDD和应用架构的基础知识。如果觉得在理解上有困难，我建议可以先看下《领域驱动设计》和《架构整洁之道》这两本书。</p>
+<p>如果没有那么多时间，也可以快速浏览下我之前的两篇文章应用架构之道 和 领域建模去知晓一下我之前的思想脉络。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/06/02/post/%E9%98%BF%E9%87%8C%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF%E4%B8%93%E5%AE%B6%E6%96%B9%E6%B3%95%E8%AE%BA%EF%BC%9A%E5%A6%82%E4%BD%95%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%EF%BC%9F/">http://yupaits.com/2020/06/02/post/阿里高级技术专家方法论：如何写复杂业务代码？/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%94%9F%E4%BA%A7%E5%8A%9B/">生产力</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/06/02/post/%E5%A4%A7%E5%AE%B6%E5%9C%A8%E5%AF%BB%E6%89%BE%E7%9A%84%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E5%91%98%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E5%AD%90%E7%9A%84%EF%BC%9F/"><img class="prev-cover" src="/img/cover/post-cover6.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">大家在寻找的高级程序员到底是什么样子的？</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/02/post/%E9%99%8D%E4%BD%8E%E8%BD%AF%E4%BB%B6%E5%A4%8D%E6%9D%82%E6%80%A7%E7%9A%84%E4%B8%80%E8%88%AC%E5%8E%9F%E5%88%99%E5%92%8C%E6%96%B9%E6%B3%95/"><img class="next-cover" src="/img/cover/post-cover1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">降低软件复杂性的一般原则和方法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/06/02/post/如何避免「三分钟热度」，找到人生的「热爱」/" title="如何避免「三分钟热度」，找到人生的「热爱」"><img class="cover" src="/img/cover/post-cover5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-02</div><div class="title">如何避免「三分钟热度」，找到人生的「热爱」</div></div></a></div><div><a href="/2020/06/02/post/技术人具备“结构化思维”意味着什么？/" title="技术人具备“结构化思维”意味着什么？"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-02</div><div class="title">技术人具备“结构化思维”意味着什么？</div></div></a></div><div><a href="/2020/02/04/post/无我编程的10条诫律/" title="无我编程的10条诫律"><img class="cover" src="/img/cover/post-cover2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">无我编程的10条诫律</div></div></a></div><div><a href="/2020/02/04/post/电子邮件，应该是这样写滴（n个好习惯让我们避免互相伤害）/" title="电子邮件，应该是这样写滴（n个好习惯让我们避免互相伤害）"><img class="cover" src="/img/cover/post-cover1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">电子邮件，应该是这样写滴（n个好习惯让我们避免互相伤害）</div></div></a></div><div><a href="/2020/06/02/post/30张图看懂《SCRUM捷径》/" title="30张图看懂《SCRUM捷径》"><img class="cover" src="/img/cover/post-cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-02</div><div class="title">30张图看懂《SCRUM捷径》</div></div></a></div><div><a href="/2020/02/04/post/一套摆脱疲劳的自救指南/" title="一套摆脱疲劳的自救指南"><img class="cover" src="/img/cover/post-cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">一套摆脱疲劳的自救指南</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">一个复杂业务的处理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">业务背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B%E5%88%86%E8%A7%A3"><span class="toc-number">1.2.</span> <span class="toc-text">过程分解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B%E5%88%86%E8%A7%A3%E5%90%8E%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-number">1.3.</span> <span class="toc-text">过程分解后的两个问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B%E5%88%86%E8%A7%A3-%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.4.</span> <span class="toc-text">过程分解+对象模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%A4%8D%E6%9D%82%E4%B8%9A%E5%8A%A1%E7%9A%84%E6%96%B9%E6%B3%95%E8%AE%BA"><span class="toc-number">2.</span> <span class="toc-text">写复杂业务的方法论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E7%BB%93%E5%90%88"><span class="toc-number">2.1.</span> <span class="toc-text">上下结合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%BD%E5%8A%9B%E4%B8%8B%E6%B2%89"><span class="toc-number">2.2.</span> <span class="toc-text">能力下沉</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E6%8A%80%E6%9C%AF%E8%A6%81%E6%80%8E%E4%B9%88%E5%81%9A"><span class="toc-number">3.</span> <span class="toc-text">业务技术要怎么做</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">4.</span> <span class="toc-text">后记</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

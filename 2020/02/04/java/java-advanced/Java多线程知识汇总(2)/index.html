@@ -1,0 +1,408 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java多线程知识汇总(2) | yupaits的博客</title><meta name="keywords" content="Java,多线程"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Java多线程知识汇总(2) 引用自Java多线程知识小抄集(二)   ConcurrentHashMap ConcurrentHashMap是线程安全的HashMap，内部采用分段锁来实现，默认初始容量为16，装载因子为0.75f，分段16，每个段的HashEntry&lt;K,V&gt;[]大小为2。键值都不能为null。每次扩容为原来容量的2倍，ConcurrentHashMap不会对整个容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程知识汇总(2)">
+<meta property="og:url" content="http://yupaits.com/2020/02/04/java/java-advanced/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB(2)/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="Java多线程知识汇总(2) 引用自Java多线程知识小抄集(二)   ConcurrentHashMap ConcurrentHashMap是线程安全的HashMap，内部采用分段锁来实现，默认初始容量为16，装载因子为0.75f，分段16，每个段的HashEntry&lt;K,V&gt;[]大小为2。键值都不能为null。每次扩容为原来容量的2倍，ConcurrentHashMap不会对整个容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover10.png">
+<meta property="article:published_time" content="2020-02-04T01:41:37.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.473Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover10.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/02/04/java/java-advanced/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB(2)/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java多线程知识汇总(2)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover10.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java多线程知识汇总(2)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-04T01:41:37.000Z" title="undefined 2020-02-04 09:41:37">2020-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E8%BF%9B%E9%98%B6/">Java进阶</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java多线程知识汇总(2)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Java多线程知识汇总-2"><a href="#Java多线程知识汇总-2" class="headerlink" title="Java多线程知识汇总(2)"></a>Java多线程知识汇总(2)</h1><blockquote>
+<p>引用自<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013256816/article/details/51325309">Java多线程知识小抄集(二)</a></p>
+</blockquote>
+<ol start="27">
+<li><p>ConcurrentHashMap</p>
+<p>ConcurrentHashMap是线程安全的HashMap，内部采用分段锁来实现，默认初始容量为16，装载因子为0.75f，分段16，每个段的HashEntry&lt;K,V&gt;[]大小为2。<strong>键值都不能为null</strong>。每次扩容为原来容量的2倍，ConcurrentHashMap不会对整个容器进行扩容，而只对某个segment进行扩容。在获取size操作的时候，不是直接把所有segment的count相加就可以可到整个ConcurrentHashMap大小，也不是在统计size的时候把所有的segment的put, remove, clean方法全部锁住，这种方法太低效。在累加count操作过程中，之前累加过的count发生变化的几率非常小，所有ConcurrentHashMap的做法是先尝试2（RETRIES_BEFORE_LOCK）次通过不锁住Segment的方式统计各个Segment大小，如果统计的过程中，容器的count发生了变化，再采用加锁的方式来统计所有的Segment的大小。</p>
+</li>
+<li><p>线程安全的非阻塞队列</p>
+<p>非阻塞队列有ConcurrentLinkedQueue, ConcurrentLinkedDeque。<strong>元素不能为null</strong>。以ConcurrentLinkedQueue为例，有头head和尾tail两个指针，遵循FIFO的原则进行入队和出队，方法有add(E e), peek()取出不删除, poll()取出删除, remove(Object o)，size(), contains(Object o), addAll(Collection c), isEmpty()。ConcurrentLinkedDeque是双向队列，可以在头和尾两个方向进行相应的操作。</p>
+</li>
+<li><p>阻塞队列</p>
+<p>阻塞队列（BlockingQueue）是一个支持两个附加操作的队列。这两个附加的操作支持阻塞的插入和移除方法。<br>支持阻塞的插入方法：意思是当队列满时，队列会阻塞插入元素的线程，直到队列不满。<br>支持阻塞的移除方法：意思是队列为空时，获取元素的线程会等待队列变为非空。<br><strong>任何阻塞队列中的元素都不能为null.</strong></p>
+</li>
+<li><p>阻塞队列的插入和移除操作处理方式：</p>
+<table>
+<thead>
+<tr>
+<th>方法-处理方法</th>
+<th>抛出异常</th>
+<th>返回特殊值</th>
+<th>可能阻塞等待</th>
+<th>可设定等待时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>入队</td>
+<td>add(e)</td>
+<td>offer(e)</td>
+<td>put(e)</td>
+<td>offer(e,timeout,unit)</td>
+</tr>
+<tr>
+<td>出队</td>
+<td>remove()</td>
+<td></td>
+<td>poll()</td>
+<td>take()</td>
+</tr>
+<tr>
+<td>查看</td>
+<td>element()</td>
+<td>peek()</td>
+<td>无</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<p><strong>如果是无界队列，队列不可能出现满的情况，所以使用put或offer方法永远不会被阻塞，而且使用offer方法时，该方法永远返回true.</strong></p>
+</li>
+<li><p>Java里的阻塞队列</p>
+<ul>
+<li>ArrayBlockingQueue:一个由数组结构组成的有界阻塞队列。 </li>
+<li>LinkedeBlockingQueue:一个有链表结构组成的有界阻塞队列。 </li>
+<li>PriorityBlockingQueue:一个支持优先级排序的无界阻塞队列 </li>
+<li>DelayQueue:一个使用优先级队列实现的无界阻塞队列。 </li>
+<li>SynchronousQueue:一个不存储元素的阻塞队列。 </li>
+<li>LinkedTransferQueue:一个由链表结构组成的无界阻塞队列。 </li>
+<li>LinkedBlockingDeque:一个由链表结构组成的双向阻塞队列。</li>
+</ul>
+</li>
+<li><p>ArrayBlockingQueue</p>
+<p>此队列按照FIFO的原则对元素进行排序，可以设定为公平ArrayBlockingQueue(int capacity, boolean fair)，默认为不公平。初始化时必须设定容量大小ArrayBlockingQueue(int capactiy)。</p>
+</li>
+<li><p>LinkedBlockingQueue</p>
+<p>与ArrayBlockingQueue一样，按照FIFO原则进行排序，与ArrayBlockingQueue不同的是内部实现是一个链表结构，且不能设置为公平的。默认和最大长度为Integer.MAX_VALUE。</p>
+</li>
+<li><p>PriorityBlockingQueue</p>
+<p>是一个支持优先级的无界阻塞队列，默认初始容量为11，默认情况下采用自然顺序升序排列，不能保证同优先级元素的顺序。内部元素要么实现Comparable接口，要么在初始化的时候指定构造函数的Comparator来对元素进行排序，有关Comparable与Comparator的细节可以参考：<a target="_blank" rel="noopener" href="http://blog.csdn.net/u013256816/article/details/50899416">Comparable与Comparator浅析</a>。</p>
+</li>
+<li><p>DelayQueue</p>
+<p>DelayQueue是一个支持延时获取元素的无界阻塞队列。内部包含一个PriorityQueue来实现，队列中的元素必须实现Delay接口，在创建元素时可以指定多久才能从队列中获取当前元素。只有在延迟期满时才能从队列中提取元素。<br>DelayQueue非常有用，可以将DelayQueue运用在下面应用场景。 </p>
+<ul>
+<li>缓存系统的设计：可以用DelayQueue保存缓存元素的有效期，使用一个线程循环查询DelayQueue,一旦能从DelayQueue中获取元素时，表示缓存有效期到了。 </li>
+<li>定时任务调度：使用DelayQueue保存当天将会执行的任务和执行时间，一旦从DelayQueue中获取到任务就开始执行，比如TimerQueue就是使用DelayQueue实现的。</li>
+</ul>
+</li>
+<li><p>SynchronousQueue</p>
+<p>是一个不存储元素的阻塞队列，每一个put操作必须等待一个take操作，否则不能继续添加元素，非常适合传递性场景。支持公平访问队列。默认情况下线程采用非公平策略访问队列。</p>
+</li>
+<li><p>LinkedTransferQueue</p>
+<p>是一个由链表结构组成的无界阻塞TransferQueue队列。相对于其他阻塞队列，LinkedTransferQueue多了tryTransfer和transfer方法。<br>transfer方法：如果当前有消费者正在等待接收元素（消费者使用take()或者带时间限制的poll方法时），transfer方法可以把生产者传入的元素立刻transfer给消费者，如果没有消费者在等待接收元素，transfer方法会将元素存放在队列的tail节点，并等到该元素被消费者消费了才返回。<br>tryTransfer方法：用来试探生产者传入的元素是否能直接传给消费者。如果没有消费者等待接收元素，则返回false。和transfer方法的区别是tryTransfer方法无论消费者是否接收，方法立刻返回，而transfer方法是必须等到消费者消费了才返回。</p>
+</li>
+<li><p>LinkedBlockingDeque</p>
+<p>LinkedBlockingDeque是一个由链表结构组成的双向阻塞队列。所谓双向队列是指可以从队列的两端插入和移除元素。双向队列因为多了一个操作队列的入口，在多线程同时入队时，也就减少了一半的竞争。相对其他的阻塞队列，LinkedBlockingDeque多了addFirst, addLast, offerFirst, offerLast, peekFirst, peekLast等方法。</p>
+</li>
+<li><p>Fork/Join框架</p>
+<p>Fork/Join框架是JDK7提供的一个用于并行执行任务的框架，是一个把大任务切分为若干子任务并行的执行，最终汇总每个小任务后得到大任务结果的框架。我们再通过Fork和Join来理解下Fork/Join框架。Fork就是把一个大任务划分成为若干子任务并行的执行，Join就是合并这些子任务的执行结果，最后得到这个大任务的结果。</p>
+<p>使用Fork/Join框架时，首先需要创建一个ForkJoin任务，它提供在任务中执行fork()和join操作的机制。通常情况下，我们不需要直接继承ForkJoinTask，只需要继承它的子类，Fork/Join框架提供了两个子类：RecursiveAction用于没有返回结果的任务；RecursiveTask用于有返回结果的任务。ForkJoinTask需要通过ForkJoinPool来执行。</p>
+<p>任务分割出的子任务会添加到当前工作线程所维护的双端队列中，进入队列的头部。当一个工作线程的队列里暂时没有任务时，它会随机从其他工作线程的队列的尾部获取一个任务。（工作窃取算法work-stealing）</p>
+<p>示例：计算1+2+3+…+100的结果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutionException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ForkJoinPool;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.RecursiveTask;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CountTask</span> <span class="keyword">extends</span> <span class="title">RecursiveTask</span>‹<span class="title">Integer</span>› </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THRESHOLD = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> end;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CountTask</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Integer <span class="title">compute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">boolean</span> canCompute = (end-start) &lt;= THRESHOLD;</span><br><span class="line">        <span class="keyword">if</span>(canCompute) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=start;i&lt;=end;i++) &#123;</span><br><span class="line">                sum += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> middle = (start+end)/<span class="number">2</span>;</span><br><span class="line">            CountTask leftTask = <span class="keyword">new</span> CountTask(start,middle);</span><br><span class="line">            CountTask rightTask = <span class="keyword">new</span> CountTask(middle+<span class="number">1</span>,end);</span><br><span class="line">            leftTask.fork();</span><br><span class="line">            rightTask.fork();</span><br><span class="line">            <span class="keyword">int</span> leftResult = leftTask.join();</span><br><span class="line">            <span class="keyword">int</span> rightResult = rightTask.join();</span><br><span class="line">            sum = leftResult+rightResult;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ForkJoinPool forkJoinPool = <span class="keyword">new</span> ForkJoinPool();</span><br><span class="line">        CountTask task = <span class="keyword">new</span> CountTask(<span class="number">1</span>,<span class="number">100</span>);</span><br><span class="line">        Future‹Integer› result = forkJoinPool.submit(task);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(result.get());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException | ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(task.isCompletedAbnormally()) &#123;</span><br><span class="line">            System.out.println(task.getException());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>原子类</p>
+<p>Java中Atomic包里一共提供了12个类，属于4种类型的原子更新方式，分别是原子更新基本类型、原子更新数组、原子更新引用、原子更新属性（字段）。Atomic包里的类基本都是使用Unsafe实现的包装类。 </p>
+<p>1）原子更新基本类型：AtomicBoolean，AtomicInteger, AtomicLong.<br>2）原子更新数组：AtomicIntegerArray，AtomicLongArray, AtomicReferenceArray.<br>3）原子更新引用类型：AtomicReference, AtomicStampedReference, AtomicMarkableReference.  </p>
+<ol start="4">
+<li>原子更新字段类型：AtomicReferenceFieldUpdater, AtomicIntegerFieldUpdater, AtomicLongFieldUpdater.</li>
+</ol>
+</li>
+<li><p>原子更新基本类型</p>
+<p>AtomicBoolean，AtomicInteger, AtomicLong三个类提供的方法类似，以AtomicInteger为例：有int addAndGet(int delta), boolean compareAndSet(int expect, int update), int getAndIncrement(), void lazySet(int newValue)，int getAndSet(int newValue)。其中大多数的方法都是调用compareAndSet方法实现的，譬如getAndIncrement():</p>
+</li>
+</ol>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAndIncrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="keyword">int</span> current = get();</span><br><span class="line">        <span class="keyword">int</span> next = current + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (compareAndSet(current, next))</span><br><span class="line">            <span class="keyword">return</span> current;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">compareAndSet</span><span class="params">(<span class="keyword">int</span> expect, <span class="keyword">int</span> update)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> unsafe.compareAndSwapInt(<span class="keyword">this</span>, valueOffset, expect, update);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+sun.misc.Unsafe只提供三种CAS方法：compareAndSwapObject, compareAndSwapInt和compareAndSwapLong，再看AtomicBoolean源码，发现它是先把Boolean转换成整形，再使用compareAndSwapInt进行CAS，原子更新char,float,double变量也可以用类似的思路来实现。
+</code></pre>
+<ol start="42">
+<li><p>原子更新数组</p>
+<p>以AtomicIntegerArray为例，此类主要提供原子的方式更新数组里的整形，常用方法如下：<br>int addAndGet(int i, int delta)：以原子的方式将输入值与数组中索引i的元素相加。<br>boolean compareAndSet(int i, int expect, int update)：如果当前值等于预期值，则以原子方式将数组位置i的元素设置成update值。<br>AtomicIntegerArray的两个构造方法：<br>AtomicIntegerArray(int length)：指定数组的大小，并初始化为0<br>AtomicIntegerArray(int [] array)：对给定的数组进行拷贝。<br>案例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> value[] = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">AtomicIntegerArray aia = <span class="keyword">new</span> AtomicIntegerArray(value);</span><br><span class="line">System.out.println(aia.getAndSet(<span class="number">1</span>, <span class="number">9</span>));</span><br><span class="line">System.out.println(aia.get(<span class="number">1</span>));</span><br><span class="line">System.out.println(value[<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
+<p>运行结果：2 9 2</p>
+</li>
+<li><p>CountDownLatch</p>
+<p>CountDownLatch允许一个或多个线程等待其他线程完成操作。CountDownLatch的构造函数接收一个int类型的参数作为计数器，如果你想等待N个点完成，这里就传入N（CountDownLatch(int count)）。<br>CountDownLatch的方法有：await(), await(long timeout, TimeUnit unit), countDown(), getCount()等。</p>
+<p>计数器必须大于等于0，只是等于0的时候，计数器就是零，调用await方法时不会阻塞当前线程。CountDownLatch不可能重新初始化或者修改CountDownLatch对象的内部计数器的值。一个线程调用countDown方法happens-before另一个线程调用的await()方法。</p>
+</li>
+<li><p>CyclicBarrier</p>
+<p>让一组线程达到一个屏障时被阻塞，知道最后一个线程到达屏障时，屏障才会开门，所有被屏障拦截的线程才会继续运行。CyclicBarrier默认的构造方法是CyclicBarrier(int parties)，其参数表示屏障拦截的线程数量，每个线程调用await方法告诉CyclicBarrier我已经达到了屏障，然后当前线程被阻塞。CyclicBarrier还提供了一个更高级的构造函数CyclicBarrier(int parties, Runnable barrierAction)用于在线程达到屏障时，优先执行barrierAction，方便处理更复杂的业务场景，举例如下。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.BrokenBarrierException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CyclicBarrier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CyclicBarrierTest</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> CyclicBarrier c = <span class="keyword">new</span> CyclicBarrier(<span class="number">2</span>,<span class="keyword">new</span> A());</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                <span class="keyword">try</span></span><br><span class="line">                &#123;</span><br><span class="line">                    System.out.println(<span class="number">1</span>);</span><br><span class="line">                    c.await();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">catch</span> (InterruptedException | BrokenBarrierException e)</span><br><span class="line">                &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="number">2</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(<span class="number">3</span>);</span><br><span class="line">            c.await();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (InterruptedException | BrokenBarrierException e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="number">4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            System.out.println(<span class="number">5</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：3 1 5 2 4</p>
+</li>
+<li><p>CyclicBarrier和CountDownLatch的区别</p>
+<p>CountDownLatch的计数器只能使用一次，而CyclicBarrier的计数器可以使用reset()方法重置。</p>
+</li>
+<li><p>Semaphore</p>
+<p>Semaphore(信号量)是用来控制同事访问特定资源的线程数量，它协调各个线程，以保证合理的使用公共资源。Semaphore有两个构造函数：Semaphore(int permits)默认是非公平的，Semaphore(int permits, boolean fair)可以设置为公平的。应用案例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SemaphoreTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> THREAD_COUNT=<span class="number">30</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ExecutorService threadPool = Executors.newFixedThreadPool(<span class="number">30</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Semaphore s = <span class="keyword">new</span> Semaphore(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;THREAD_COUNT;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> a = i;</span><br><span class="line">            threadPool.execute(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">                </span>&#123;</span><br><span class="line">                    <span class="keyword">try</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        s.acquire();</span><br><span class="line">                        System.out.println(<span class="string">&quot;do something....&quot;</span>+a);</span><br><span class="line">                        s.release();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">catch</span> (InterruptedException e)</span><br><span class="line">                    &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        threadPool.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由上例可以看出Semaphore的用法非常的简单，首先线程使用Semaphore的acquire()方法获取一个许可证，使用完之后调用release()方法归还许可证。还可以用tryAcquire()方法尝试获取许可证。Semaphore还提供了一些其他方法： int availablePermits()返回此信号量中当前可用的许可证数；int getQueueLength()返回正在等待获取许可证的线程数；boolean hasQueuedThreads()是否有线程正在等待获取许可证；void reducePermits(int reduction)减少reduction个许可证，是个protected方法；Collection‹Thread› getQueuedThreads()返回所有等待获取许可证的线程集合，也是一个protected方法。</p>
+</li>
+<li><p>线程间交换数据的Exchanger</p>
+<p>Exchanger是一个用于线程间协作的工具类。Exchanger用于进行线程间的数据交换。它提供一个同步点，在这个同步点，两个线程可以交换彼此的数据。这两个线程通过exchange方法交换数据，如果第一个线程先执行exchange()方法，它会一直等待第二个线程也执行exchange方法。当两个线程都到达同步点时，这两个线程就可以交换数据，将本现场生产出来的数据传递给对方。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.concurrent.Exchanger;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExchangerTest</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Exchanger&lt;String&gt; exchanger = <span class="keyword">new</span> Exchanger&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ExecutorService threadPool = Executors.newFixedThreadPool(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        threadPool.execute(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                String A = <span class="string">&quot;I&#x27;m A!&quot;</span>;</span><br><span class="line">                <span class="keyword">try</span></span><br><span class="line">                &#123;</span><br><span class="line">                    String B = exchanger.exchange(A);</span><br><span class="line">                    System.out.println(<span class="string">&quot;In 1-&quot;</span>+Thread.currentThread().getName()+<span class="string">&quot;: &quot;</span>+B);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">catch</span> (InterruptedException e)</span><br><span class="line">                &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        threadPool.execute(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">            </span>&#123;</span><br><span class="line">                <span class="keyword">try</span></span><br><span class="line">                &#123;</span><br><span class="line">                    String B=<span class="string">&quot;I&#x27;m B!&quot;</span>;</span><br><span class="line">                    String A = exchanger.exchange(B);</span><br><span class="line">                    System.out.println(<span class="string">&quot;In 2-&quot;</span>+Thread.currentThread().getName()+<span class="string">&quot;: &quot;</span>+A);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">catch</span> (InterruptedException e)</span><br><span class="line">                &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        threadPool.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In 2-pool-1-thread-2: I&#x27;m A!</span><br><span class="line">In 1-pool-1-thread-1: I&#x27;m B!</span><br></pre></td></tr></table></figure>
+
+<p>如果两个线程有一个没有执行exchange(V x)方法，则会一直等待，如果担心有特殊情况发生，避免一直等待，可以使用exchange(V x, long timeout, TimeUnit unit)设置最大等待时长。</p>
+</li>
+<li><p>Java中的线程池ThreadPoolExecutor</p>
+<p>可以通过ThreadPoolExecutor来创建一个线程池：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize, <span class="keyword">long</span> keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>corePoolSize（线程池基本大小）：当向线程池提交一个任务时，若线程池已创建的线程数小于corePoolSize，即便此时存在空闲线程，也会通过创建一个新线程来执行该任务，直到已创建的线程数大于或等于corePoolSize时，才会根据是否存在空闲线程，来决定是否需要创建新的线程。除了利用提交新任务来创建和启动线程（按需构造），也可以通过 prestartCoreThread() 或 prestartAllCoreThreads() 方法来提前启动线程池中的基本线程。</p>
+</li>
+<li><p>maximumPoolSize（线程池最大大小）：线程池所允许的最大线程个数。当队列满了，且已创建的线程数小于maximumPoolSize，则线程池会创建新的线程来执行任务。另外，对于无界队列，可忽略该参数。</p>
+</li>
+<li><p>keepAliveTime（线程存活保持时间）：默认情况下，当线程池的线程个数多于corePoolSize时，线程的空闲时间超过keepAliveTime则会终止。但只要keepAliveTime大于0，allowCoreThreadTimeOut(boolean) 方法也可将此超时策略应用于核心线程。另外，也可以使用setKeepAliveTime()动态地更改参数。</p>
+</li>
+<li><p>unit（存活时间的单位）：时间单位，分为7类，从细到粗顺序：NANOSECONDS（纳秒），MICROSECONDS（微妙），MILLISECONDS（毫秒），SECONDS（秒），MINUTES（分），HOURS（小时），DAYS（天）；</p>
+</li>
+<li><p>workQueue（任务队列）：用于传输和保存等待执行任务的阻塞队列。可以使用此队列与线程池进行交互：</p>
+<p>  如果运行的线程数少于 corePoolSize，则 Executor 始终首选添加新的线程，而不进行排队。<br>  如果运行的线程数等于或多于 corePoolSize，则 Executor 始终首选将请求加入队列，而不添加新的线程。<br>  如果无法将请求加入队列，则创建新的线程，除非创建此线程超出 maximumPoolSize，在这种情况下，任务将被拒绝。  </p>
+</li>
+<li><p>threadFactory（线程工厂）：用于创建新线程。由同一个threadFactory创建的线程，属于同一个ThreadGroup，创建的线程优先级都为Thread.NORM_PRIORITY，以及是非守护进程状态。threadFactory创建的线程也是采用new Thread()方式，threadFactory创建的线程名都具有统一的风格：pool-m-thread-n（m为线程池的编号，n为线程池内的线程编号）;</p>
+</li>
+<li><p>handler（线程饱和策略）：当线程池和队列都满了，则表明该线程池已达饱和状态。</p>
+<p>  ThreadPoolExecutor.AbortPolicy：处理程序遭到拒绝，则直接抛出运行时异常 RejectedExecutionException。(默认策略)<br>  ThreadPoolExecutor.CallerRunsPolicy：调用者所在线程来运行该任务，此策略提供简单的反馈控制机制，能够减缓新任务的提交速度。<br>  ThreadPoolExecutor.DiscardPolicy：无法执行的任务将被删除。<br>  ThreadPoolExecutor.DiscardOldestPolicy：如果执行程序尚未关闭，则位于工作队列头部的任务将被删除，然后重新尝试执行任务（如果再次失败，则重复此过程）。</p>
+</li>
+</ul>
+<p>可以使用两个方法向线程池提交任务，分别为execute()和submit()方法。execute()方法用于提交不需要返回值的任务，所以无法判断任务是否被线程池执行成功。submit()方法用于提交需要返回值的任务，线程池会返回一个Future类型的对象，通过这个对象可以判断任务是否执行成功。如Future‹Object› future = executor.submit(task);</p>
+<p>利用线程池提供的参数进行监控，参数如下：</p>
+<ul>
+<li>getTaskCount()：线程池需要执行的任务数量。</li>
+<li>getCompletedTaskCount()：线程池在运行过程中已完成的任务数量，小于或等于taskCount。</li>
+<li>getLargestPoolSize()：线程池曾经创建过的最大线程数量，通过这个数据可以知道线程池是否满过。如等于线程池的最大大小，则表示线程池曾经满了。</li>
+<li>getPoolSize()：线程池的线程数量。如果线程池不销毁的话，池里的线程不会自动销毁，所以这个大小只增不减。</li>
+<li>getActiveCount()：获取活动的线程数。</li>
+</ul>
+</li>
+<li><p>shutdown和shutdownNow</p>
+<p>可以调用线程池的shutdown或者shutdownNow方法来关闭线程池。他们的原理是遍历线程池的工作线程，然后逐个调用线程的interrupt方法来中断线程，所以无法响应中断的任务可能永远无法停止。</p>
+<p>区别：shutdown方法将执行平缓的关闭过程：不在接收新的任务，同时等待已提交的任务执行完成——包括哪些还未开始执行的任务。shutdownNow方法将执行粗暴的关闭过程：它将尝试取消所有运行中的任务，并且不再启动队列中尚未开始执行的任务。</p>
+<p>只要调用了这两个关闭方法中的任意一个,isShutdown方法就会返回true，当所有的任务都已关闭后，才表示线程池关闭成功，这时调用isTerminated方法会返回true。至于应该调用哪一种方法来关闭线程池，应该由提交到线程池的任务特性决定，通常调用shutdown方法来关闭线程池，如果任务不一定要执行完，则可以调用shutdownNow方法。</p>
+</li>
+<li><p>扩展ThreadPoolExecutor</p>
+<p>可以通过继承线程池来自定义线程池，重写线程池的beforeExecute, afterExecute和terminated方法。在执行任务的线程中将调用beforeExecute和afterExecute等方法，在这些方法中还可以添加日志、计时、监视或者统计信息收集的功能。无论任务是从run中正常返回，还是抛出一个异常而返回，afterExecute都会被调用。如果任务在完成后带有一个Error，那么就不会调用afterExecute。如果beforeExecute抛出一个RuntimeException，那么任务将不被执行，并且afterExecute也不会被调用。在线程池完成关闭时调用terminated，也就是在所有任务都已经完成并且所有工作者线程也已经关闭后，terminated可以用来释放Executor在其生命周期里分配的各种资源，此外还可以执行发送通知、记录日志或者手机finalize统计等操作。详细可以参考<a target="_blank" rel="noopener" href="http://blog.csdn.net/u013256816/article/details/50403962">《JAVA多线程之扩展ThreadPoolExecutor》</a></p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/02/04/java/java-advanced/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB(2)/">http://yupaits.com/2020/02/04/java/java-advanced/Java多线程知识汇总(2)/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover10.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/04/java/java-advanced/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB(1)/"><img class="prev-cover" src="/img/cover/post-cover7.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java多线程知识汇总(1)</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/04/java/java-advanced/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB(3)/"><img class="next-cover" src="/img/cover/post-cover11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java多线程知识汇总(3)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/04/java/java-advanced/Java多线程知识点/" title="Java多线程知识点"><img class="cover" src="/img/cover/post-cover8.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Java多线程知识点</div></div></a></div><div><a href="/2020/02/04/java/java-base/Runnable/" title="Runnable"><img class="cover" src="/img/cover/post-cover4.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Runnable</div></div></a></div><div><a href="/2020/02/04/java/java-base/Thread/" title="Thread"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Thread</div></div></a></div><div><a href="/2020/02/04/java/java-base/callable/" title="Callable"><img class="cover" src="/img/cover/post-cover5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Callable</div></div></a></div><div><a href="/2020/02/04/java/java-base/线程优先级/" title="线程优先级"><img class="cover" src="/img/cover/post-cover8.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">线程优先级</div></div></a></div><div><a href="/2020/02/04/java/java-base/线程状态/" title="线程状态"><img class="cover" src="/img/cover/post-cover1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">线程状态</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB-2"><span class="toc-number">1.</span> <span class="toc-text">Java多线程知识汇总(2)</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

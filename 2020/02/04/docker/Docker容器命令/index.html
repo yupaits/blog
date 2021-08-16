@@ -1,0 +1,541 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Docker容器命令 | yupaits的博客</title><meta name="keywords" content="Docker,容器"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Docker容器命令 引用自《Docker系列教程05-容器常用命令》- 周立  本节我们来讨论Docker容器的常用命令。 新建并启动容器[重要]使用以下 docker run 命令即可新建并启动一个容器。该命令是我们最常用的命令了，它有很多选项，下面笔者列举一些常用的选项。 ① -d选项：表示后台运行 ② -P选项：随机端口映射 ③ -p选项：指定端口映射，有以下四种格式。 ip:hostPo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker容器命令">
+<meta property="og:url" content="http://yupaits.com/2020/02/04/docker/Docker%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="Docker容器命令 引用自《Docker系列教程05-容器常用命令》- 周立  本节我们来讨论Docker容器的常用命令。 新建并启动容器[重要]使用以下 docker run 命令即可新建并启动一个容器。该命令是我们最常用的命令了，它有很多选项，下面笔者列举一些常用的选项。 ① -d选项：表示后台运行 ② -P选项：随机端口映射 ③ -p选项：指定端口映射，有以下四种格式。 ip:hostPo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover5.png">
+<meta property="article:published_time" content="2020-02-04T01:41:37.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.473Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="容器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover5.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/02/04/docker/Docker%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Docker容器命令',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover5.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Docker容器命令</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-04T01:41:37.000Z" title="undefined 2020-02-04 09:41:37">2020-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Docker/">Docker</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Docker容器命令"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Docker容器命令"><a href="#Docker容器命令" class="headerlink" title="Docker容器命令"></a>Docker容器命令</h1><blockquote>
+<p>引用自<a target="_blank" rel="noopener" href="http://www.itmuch.com/docker/05-docker-command-containers/">《Docker系列教程05-容器常用命令》- 周立</a></p>
+</blockquote>
+<p>本节我们来讨论Docker容器的常用命令。</p>
+<h2 id="新建并启动容器-重要"><a href="#新建并启动容器-重要" class="headerlink" title="新建并启动容器[重要]"></a>新建并启动容器[重要]</h2><p>使用以下 <code>docker run</code> 命令即可新建并启动一个容器。该命令是我们最常用的命令了，它有很多选项，下面笔者列举一些常用的选项。</p>
+<p>① -d选项：表示后台运行</p>
+<p>② -P选项：随机端口映射</p>
+<p>③ -p选项：指定端口映射，有以下四种格式。</p>
+<p>ip:hostPort:containerPort</p>
+<p>ip::containerPort</p>
+<p>hostPort:containerPort</p>
+<p>containerPort</p>
+<p>④ –network选项：指定网络模式，该选项有以下可选参数：</p>
+<p>–network=bridge： 默认选项，表示连接到默认的网桥。</p>
+<p>–network=host：容器使用宿主机的网络。</p>
+<p>–network=container:NAME_or_ID：告诉Docker让新建的容器使用已有容器的网络配置。</p>
+<p>–network=none：不配置该容器的网络，用户可自定义网络配置。</p>
+<p>示例1：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run java /bin/<span class="built_in">echo</span> <span class="string">&#x27;Hello World&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样终端会打印Hello World的字样，跟在本地直接执行 <code>/bin/echo &#39;Hello World&#39;</code> 一样。</p>
+<p>示例2：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 91:80 nginx</span><br></pre></td></tr></table></figure>
+
+<p>这样就能启动一个Nginx容器。在本例中，我们为docker run添加了两个参数，含义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d                           # 后台运行</span><br><span class="line">-p 宿主机端口:容器端口         # 开放容器端口到宿主机端口</span><br></pre></td></tr></table></figure>
+
+<p>访问 <a target="_blank" rel="noopener" href="http://docker宿主机ip:91/">http://Docker宿主机IP:91/</a> ，将会看到如图12-3的界面：</p>
+<p><img src="http://www.itmuch.com/images/docker/12-3.png" alt="Nginx首页"></p>
+<p>图12-3 Nginx首页</p>
+<p><strong>TIPS</strong></p>
+<p>需要注意的是，使用docker run命令创建容器时，会先检查本地是否存在指定镜像。如果本地不存在该名称的镜像，Docker就会自动从Docker Hub下载镜像并启动一个Docker容器。</p>
+<h2 id="列出容器-重要"><a href="#列出容器-重要" class="headerlink" title="列出容器[重要]"></a>列出容器[重要]</h2><p>使用 <code>docker ps</code> 命令即可列出运行中的容器。执行该命令后，可看到类似于如下的表格。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                         NAMES</span><br><span class="line">784fd3b294d7        nginx               &quot;nginx -g &#x27;daemon off&quot;   20 minutes ago      Up 2 seconds        443/tcp, 0.0.0.0:91-&gt;80/tcp   backstabbing_archimedes</span><br></pre></td></tr></table></figure>
+
+<p>如需列出所有容器（包括已停止的容器），可使用-a参数。</p>
+<p>该表格包含了七列，含义如下：</p>
+<p>① CONTAINER_ID：表示容器ID。</p>
+<p>② IMAGE：表示镜像名称。</p>
+<p>③ COMMAND：表示启动容器时运行的命令。</p>
+<p>④ CREATED：表示容器的创建时间。</p>
+<p>⑤ STATUS：表示容器运行的状态。Up表示运行中，Exited表示已停止。</p>
+<p>⑥ PORTS：表示容器对外的端口号。</p>
+<p>⑦ NAMES：表示容器名称。该名称默认由Docker自动生成，也可使用docker run命令的–name选项自行指定。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps [OPTIONS]</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–all, -a</td>
+<td>false</td>
+<td>列出所有容器，包括未运行的容器，默认只展示运行的容器</td>
+</tr>
+<tr>
+<td>–filter, -f</td>
+<td></td>
+<td>根据条件过滤显示内容</td>
+</tr>
+<tr>
+<td>–format</td>
+<td></td>
+<td>通过Go语言模板文件展示镜像</td>
+</tr>
+<tr>
+<td>–last, -n</td>
+<td>-1</td>
+<td>显示最近创建n个容器（包含所有状态）</td>
+</tr>
+<tr>
+<td>–latest, -l</td>
+<td>false</td>
+<td>显示最近创建的容器（包含所有状态）</td>
+</tr>
+<tr>
+<td>–no-trunc</td>
+<td>false</td>
+<td>不截断输出</td>
+</tr>
+<tr>
+<td>–quiet, -q</td>
+<td>false</td>
+<td>静默模式，只展示容器的编号</td>
+</tr>
+<tr>
+<td>–size, -s</td>
+<td>false</td>
+<td>显示总文件大小</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker ps -n 5</span><br><span class="line">docker ps -a -q</span><br></pre></td></tr></table></figure>
+
+<h2 id="停止容器-重要"><a href="#停止容器-重要" class="headerlink" title="停止容器[重要]"></a>停止容器[重要]</h2><p>使用 <code>docker stop</code> 命令，即可停止容器。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–time, -t</td>
+<td>10</td>
+<td>强制杀死容器前等待的时间，单位是秒</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop 784fd3b294d7</span><br></pre></td></tr></table></figure>
+
+<p>其中784fd3b294d7 是容器ID，当然也可使用 <code>docker stop 容器名称</code> 来停止指定容器。</p>
+<h2 id="强制停止容器-重要"><a href="#强制停止容器-重要" class="headerlink" title="强制停止容器[重要]"></a>强制停止容器[重要]</h2><p>可使用 <code>docker kill</code> 命令停止一个或更多运行着的容器。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">kill</span> [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–signal, -s</td>
+<td>KILL</td>
+<td>向容器发送一个信号</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">kill</span> 784fd3b294d7</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动已停止的容器-重要"><a href="#启动已停止的容器-重要" class="headerlink" title="启动已停止的容器[重要]"></a>启动已停止的容器[重要]</h2><p>使用 <code>docker run</code> 命令，即可新建并启动一个容器。对于已停止的容器，可使用 <code>docker start</code> 命令来启动。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–attach, -a</td>
+<td>false</td>
+<td>连接STDOUT/STDERR并转发信号</td>
+</tr>
+<tr>
+<td>–checkpoint</td>
+<td></td>
+<td>从该检查点还原</td>
+</tr>
+<tr>
+<td>–checkpoint-dir</td>
+<td></td>
+<td>使用自定义的检查点存储目录</td>
+</tr>
+<tr>
+<td>–detach-keys</td>
+<td></td>
+<td>覆盖断开容器的关键顺序</td>
+</tr>
+<tr>
+<td>–interactive, -i</td>
+<td>false</td>
+<td>连接容器的STDIN</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start 784fd3b294d7</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启容器-重要"><a href="#重启容器-重要" class="headerlink" title="重启容器[重要]"></a>重启容器[重要]</h2><p>可使用 <code>docker restart</code> 命令来重启容器。该命令实际上是先执行了 <code>docker stop</code> 命令，然后执行了 <code>docker start</code> 命令。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–time, -t</td>
+<td>10</td>
+<td>关闭容器前等待的时间，单位是秒</td>
+</tr>
+</tbody></table>
+<h2 id="进入容器-重要"><a href="#进入容器-重要" class="headerlink" title="进入容器[重要]"></a>进入容器[重要]</h2><p>某场景下，我们可能需要进入运行中的容器。</p>
+<p>① 使用 <code>docker attach</code> 命令进入容器。</p>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach 784fd3b294d7</span><br></pre></td></tr></table></figure>
+
+<p>很多场景下，使用 <code>docker attach</code> 命令并不方便。当多个窗口同时attach到同一个容器时，所有窗口都会同步显示。同理，如果某个窗口发生阻塞，其他窗口也无法执行操作。</p>
+<p>② 使用 <code>nsenter</code> 进入容器</p>
+<p>nsenter工具包含在util-linux 2.23或更高版本中。为了连接到容器，我们需要找到容器第一个进程的PID，可通过以下命令获取：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --format <span class="string">&quot;&#123;&#123;.State.Pid&#125;&#125;&quot;</span> <span class="variable">$CONTAINER_ID</span></span><br></pre></td></tr></table></figure>
+
+<p>获得PID后，就可使用nsenter命令进入容器了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nsenter --target <span class="string">&quot;<span class="variable">$PID</span>&quot;</span> --mount --uts --ipc --net --pid</span><br></pre></td></tr></table></figure>
+
+<p>下面给出一个完整的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># docker ps</span></span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                         NAMES</span><br><span class="line">784fd3b294d7        nginx               <span class="string">&quot;nginx -g &#x27;daemon off&quot;</span>   55 minutes ago      Up 3 minutes        443/tcp, 0.0.0.0:91-&gt;80/tcp   backstabbing_archimedes</span><br><span class="line">[root@localhost ~]<span class="comment"># docker inspect --format &quot;&#123;&#123;.State.Pid&#125;&#125;&quot; 784fd3b294d7</span></span><br><span class="line">95492</span><br><span class="line">[root@localhost ~]<span class="comment"># nsenter --target 95492 --mount --uts --ipc --net --pid</span></span><br><span class="line">root@784fd3b294d7:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>读者也可将以上两条命令封装成一个Shell，从而简化进入容器的过程。</p>
+<p>③ docker exec</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it 容器id /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除容器-重要"><a href="#删除容器-重要" class="headerlink" title="删除容器[重要]"></a>删除容器[重要]</h2><p>使用 <code>docker rm</code> 命令即可删除指定容器。</p>
+<p>命令格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–force, -f</td>
+<td>false</td>
+<td>通过SIGKILL信号强制删除正在运行中的容器</td>
+</tr>
+<tr>
+<td>–link, -l</td>
+<td>false</td>
+<td>删除容器间的网络连接</td>
+</tr>
+<tr>
+<td>–volumes, -v</td>
+<td>false</td>
+<td>删除与容器关联的卷</td>
+</tr>
+</tbody></table>
+<p>例1：删除指定容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm 784fd3b294d7</span><br></pre></td></tr></table></figure>
+
+<p>该命令只能删除已停止的容器，如需删除正在运行的容器，可使用-f参数。</p>
+<p>例2：删除所有的容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f $(docker ps -a -q)</span><br></pre></td></tr></table></figure>
+
+<h2 id="导出容器"><a href="#导出容器" class="headerlink" title="导出容器"></a>导出容器</h2><p>将容器导出成一个压缩包文件。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–output, -o</td>
+<td></td>
+<td>将内容写到文件而非STDOUT</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> red_panda &gt; latest.tar</span><br><span class="line">docker <span class="built_in">export</span> --output=<span class="string">&quot;latest.tar&quot;</span> red_panda</span><br></pre></td></tr></table></figure>
+
+<h2 id="导入容器"><a href="#导入容器" class="headerlink" title="导入容器"></a>导入容器</h2><p>使用 <code>docker import</code> 命令即可从归档文件导入内容并创建镜像。</p>
+<p>命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>名称，缩写</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–change, -c</td>
+<td></td>
+<td>将Dockerfile指令应用到创建的镜像</td>
+</tr>
+<tr>
+<td>–message, -m</td>
+<td></td>
+<td>为导入的镜像设置提交信息</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import nginx2.tar nginx</span><br></pre></td></tr></table></figure>
+
+<p><strong>拓展阅读</strong></p>
+<p>Docker的网络：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/userguide/networking/">https://docs.docker.com/engine/userguide/networking/</a><br>Docker命令：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/docker/">https://docs.docker.com/engine/reference/commandline/docker/</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/02/04/docker/Docker%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4/">http://yupaits.com/2020/02/04/docker/Docker容器命令/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a><a class="post-meta__tags" href="/tags/%E5%AE%B9%E5%99%A8/">容器</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/04/docker/Dockerfile%E6%8C%87%E4%BB%A4/"><img class="prev-cover" src="/img/cover/post-cover3.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Dockerfile指令</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/04/docker/docker-compose-yml%E5%91%BD%E4%BB%A4/"><img class="next-cover" src="/img/cover/post-cover1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">docker-compose.yml命令</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/04/使用Gitee-Jenkins-Docker完成前后端分离项目的CI-CD/" title="使用Gitee+Jenkins+Docker完成前后端分离项目的CI/CD"><img class="cover" src="/img/cover/post-cover11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">使用Gitee+Jenkins+Docker完成前后端分离项目的CI/CD</div></div></a></div><div><a href="/2020/02/04/docker/Dockerfile指令/" title="Dockerfile指令"><img class="cover" src="/img/cover/post-cover3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Dockerfile指令</div></div></a></div><div><a href="/2020/02/04/docker/docker-compose-yml命令/" title="docker-compose.yml命令"><img class="cover" src="/img/cover/post-cover1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">docker-compose.yml命令</div></div></a></div><div><a href="/2020/02/04/docker/docker-compose命令/" title="docker-compose命令"><img class="cover" src="/img/cover/post-cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">docker-compose命令</div></div></a></div><div><a href="/2020/02/04/docker/docker-image/" title="Docker镜像命令"><img class="cover" src="/img/cover/post-cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Docker镜像命令</div></div></a></div><div><a href="/2020/02/04/docker/安装Docker/" title="安装Docker"><img class="cover" src="/img/cover/post-cover4.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">安装Docker</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">Docker容器命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%B9%B6%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">新建并启动容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.2.</span> <span class="toc-text">列出容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.3.</span> <span class="toc-text">停止容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.4.</span> <span class="toc-text">强制停止容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%B7%B2%E5%81%9C%E6%AD%A2%E7%9A%84%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.5.</span> <span class="toc-text">启动已停止的容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.6.</span> <span class="toc-text">重启容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.7.</span> <span class="toc-text">进入容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8-%E9%87%8D%E8%A6%81"><span class="toc-number">1.8.</span> <span class="toc-text">删除容器[重要]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E5%AE%B9%E5%99%A8"><span class="toc-number">1.9.</span> <span class="toc-text">导出容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="toc-number">1.10.</span> <span class="toc-text">导入容器</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

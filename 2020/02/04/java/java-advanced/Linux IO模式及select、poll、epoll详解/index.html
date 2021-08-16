@@ -1,0 +1,384 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux IO模式及select、poll、epoll详解 | yupaits的博客</title><meta name="keywords" content="Java,IO"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Linux IO模式及select、poll、epoll详解 引用自Linux IO模式及 select、poll、epoll详解  本文讨论的背景是Linux环境下的network IO。 概念说明用户空间与内核空间现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux IO模式及select、poll、epoll详解">
+<meta property="og:url" content="http://yupaits.com/2020/02/04/java/java-advanced/Linux%20IO%E6%A8%A1%E5%BC%8F%E5%8F%8Aselect%E3%80%81poll%E3%80%81epoll%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="Linux IO模式及select、poll、epoll详解 引用自Linux IO模式及 select、poll、epoll详解  本文讨论的背景是Linux环境下的network IO。 概念说明用户空间与内核空间现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover5.png">
+<meta property="article:published_time" content="2020-02-04T01:41:37.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.473Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="IO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover5.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/02/04/java/java-advanced/Linux%20IO%E6%A8%A1%E5%BC%8F%E5%8F%8Aselect%E3%80%81poll%E3%80%81epoll%E8%AF%A6%E8%A7%A3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux IO模式及select、poll、epoll详解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover5.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux IO模式及select、poll、epoll详解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-04T01:41:37.000Z" title="undefined 2020-02-04 09:41:37">2020-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E8%BF%9B%E9%98%B6/">Java进阶</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>22分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux IO模式及select、poll、epoll详解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Linux-IO模式及select、poll、epoll详解"><a href="#Linux-IO模式及select、poll、epoll详解" class="headerlink" title="Linux IO模式及select、poll、epoll详解"></a>Linux IO模式及select、poll、epoll详解</h1><blockquote>
+<p>引用自<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000003063859">Linux IO模式及 select、poll、epoll详解</a></p>
+</blockquote>
+<p><code>本文讨论的背景是Linux环境下的network IO。</code></p>
+<h2 id="概念说明"><a href="#概念说明" class="headerlink" title="概念说明"></a>概念说明</h2><h3 id="用户空间与内核空间"><a href="#用户空间与内核空间" class="headerlink" title="用户空间与内核空间"></a>用户空间与内核空间</h3><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
+<h3 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h3><p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换。因此可以说，任何进程都是在操作系统内核的支持下运行的，是与内核紧密相关的。</p>
+<p>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ol>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。</li>
+<li>更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
+<li>选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。</li>
+</ol>
+<p>注：<strong>总而言之就是很耗资源</strong>，具体的可以参考这篇文章：<a target="_blank" rel="noopener" href="http://guojing.me/linux-kernel-architecture/posts/process-switch/">进程切换</a></p>
+<h3 id="进程的阻塞"><a href="#进程的阻塞" class="headerlink" title="进程的阻塞"></a>进程的阻塞</h3><p>正在执行的进程，由于期待的某些事件未发生，如请求系统资源失败、等待某种操作的完成、新数据尚未到达或无新工作做等，则由系统自动执行阻塞原语(Block)，使自己由运行状态变为阻塞状态。可见，进程的阻塞是进程自身的一种主动行为，也因此只有处于运行态的进程（获得CPU），才可能将其转为阻塞状态。<span style="color: red;">当进程进入阻塞状态，是不占用CPU资源的</span>。</p>
+<h3 id="文件描述符fd"><a href="#文件描述符fd" class="headerlink" title="文件描述符fd"></a>文件描述符fd</h3><p>文件描述符（File descriptor）是计算机科学中的一个术语，是一个用于表述指向文件的引用的抽象化概念。</p>
+<p>文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于UNIX、Linux这样的操作系统。</p>
+<h3 id="缓存I-O"><a href="#缓存I-O" class="headerlink" title="缓存I/O"></a>缓存I/O</h3><p>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</p>
+<p><strong>缓存 I/O 的缺点：</strong></p>
+<p>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2 id="IO模式"><a href="#IO模式" class="headerlink" title="IO模式"></a>IO模式</h2><p>刚才说了，对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
+<ol>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+</ol>
+<p>正是因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
+<ul>
+<li>阻塞 I/O（blocking IO）</li>
+<li>非阻塞 I/O（nonblocking IO）</li>
+<li>I/O 多路复用（ IO multiplexing）</li>
+<li>信号驱动 I/O（ signal driven IO）</li>
+<li>异步 I/O（asynchronous IO）</li>
+</ul>
+<p>注：由于signal driven IO在实际中并不常用，所以我这只提及剩下的四种IO Model。</p>
+<h3 id="阻塞I-O（blocking-IO）"><a href="#阻塞I-O（blocking-IO）" class="headerlink" title="阻塞I/O（blocking IO）"></a>阻塞I/O（blocking IO）</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：</p>
+<p><img src="/images/LinuxIO%E6%A8%A1%E5%BC%8F/blocking-io.png" alt="blocking-io"></p>
+<p>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。</p>
+<blockquote>
+<p><strong>所以，blocking IO的特点就是在IO执行的两个阶段都被block了。</strong></p>
+</blockquote>
+<h3 id="非阻塞I-O（nonblocking-IO）"><a href="#非阻塞I-O（nonblocking-IO）" class="headerlink" title="非阻塞I/O（nonblocking IO）"></a>非阻塞I/O（nonblocking IO）</h3><p>linux下，可以通过设置socket使其变为non-blocking。当对一个non-blocking socket执行读操作时，流程是这个样子：</p>
+<p><img src="/images/LinuxIO%E6%A8%A1%E5%BC%8F/nonblocking-io.png" alt="nonblocking-io"></p>
+<p>当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。</p>
+<blockquote>
+<p>所以，nonblocking IO的特点是用户进程需要<strong>不断的主动询问</strong>kernel数据好了没有。</p>
+</blockquote>
+<h3 id="I-O多路复用（IO-multiplexing）"><a href="#I-O多路复用（IO-multiplexing）" class="headerlink" title="I/O多路复用（IO multiplexing）"></a>I/O多路复用（IO multiplexing）</h3><p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。select/epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。</p>
+<p><img src="/images/LinuxIO%E6%A8%A1%E5%BC%8F/io-multiplexing.png" alt="io-multiplexing"></p>
+<p><span style="color: red;">当用户进程调用了select，那么整个进程会被block</span>，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。</p>
+<blockquote>
+<p>所以，I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。</p>
+</blockquote>
+<p>这个图和blocking IO的图其实并没有太大的不同，事实上，还更差一些。因为这里需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection。</p>
+<p>所以，如果处理的连接数不是很高的话，使用select/epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。select/epoll的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）</p>
+<p>在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，如上图所示，整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block。</p>
+<h3 id="异步I-O（asynchronous-IO）"><a href="#异步I-O（asynchronous-IO）" class="headerlink" title="异步I/O（asynchronous IO）"></a>异步I/O（asynchronous IO）</h3><p>linux下的asynchronous IO其实用得很少。先看一下它的流程：</p>
+<p><img src="/images/LinuxIO%E6%A8%A1%E5%BC%8F/async-io.png" alt="async-io"></p>
+<p>用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="blocking和non-blocking的区别"><a href="#blocking和non-blocking的区别" class="headerlink" title="blocking和non-blocking的区别"></a>blocking和non-blocking的区别</h4><p>调用blocking IO会一直block住对应的进程直到操作完成，而non-blocking IO在kernel还准备数据的情况下会立刻返回。</p>
+<h4 id="synchronous-IO和asynchronous-IO的区别"><a href="#synchronous-IO和asynchronous-IO的区别" class="headerlink" title="synchronous IO和asynchronous IO的区别"></a>synchronous IO和asynchronous IO的区别</h4><p>在说明synchronous IO和asynchronous IO的区别之前，需要先给出两者的定义。POSIX的定义是这样子的：</p>
+<ul>
+<li>A synchronous I/O operation causes the requesting process to be blocked until that I/O operation completes;</li>
+<li>An asynchronous I/O operation does not cause the requesting process to be blocked;</li>
+</ul>
+<p>两者的区别就在于synchronous IO做”IO operation”的时候会将process阻塞。按照这个定义，之前所述的blocking IO，non-blocking IO，IO multiplexing都属于synchronous IO。</p>
+<p>有人会说，non-blocking IO并没有被block啊。这里有个非常“狡猾”的地方，定义中所指的”IO operation”是指真实的IO操作，就是例子中的recvfrom这个system call。non-blocking IO在执行recvfrom这个system call的时候，如果kernel的数据没有准备好，这时候不会block进程。但是，当kernel中数据准备好的时候，recvfrom会将数据从kernel拷贝到用户内存中，这个时候进程是被block了，在这段时间内，进程是被block的。</p>
+<p>而asynchronous IO则不一样，当进程发起IO 操作之后，就直接返回再也不理睬了，直到kernel发送一个信号，告诉进程说IO完成。在这整个过程中，进程完全没有被block。</p>
+<p><strong>各个IO Model的比较如图所示：</strong></p>
+<p><img src="/images/LinuxIO%E6%A8%A1%E5%BC%8F/io-models.png" alt="io-models"></p>
+<p>通过上面的图片，可以发现non-blocking IO和asynchronous IO的区别还是很明显的。在non-blocking IO中，虽然进程大部分时间都不会被block，但是它仍然要求进程去主动的check，并且当数据准备完成以后，也需要进程主动的再次调用recvfrom来将数据拷贝到用户内存。而asynchronous IO则完全不同。它就像是用户进程将整个IO操作交给了他人（kernel）完成，然后他人做完后发信号通知。在此期间，用户进程不需要去检查IO操作的状态，也不需要主动的去拷贝数据。</p>
+<h2 id="I-O多路复用之select、poll、epoll详解"><a href="#I-O多路复用之select、poll、epoll详解" class="headerlink" title="I/O多路复用之select、poll、epoll详解"></a>I/O多路复用之select、poll、epoll详解</h2><p>select，poll，epoll都是IO多路复用的机制。I/O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。</p>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span> <span class="params">(<span class="keyword">int</span> n, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述副就绪（有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，可以 通过遍历fdset，来找到就绪的描述符。</p>
+<p>select目前几乎在所有的平台上支持，其良好跨平台支持也是它的一个优点。select的一 个缺点在于单个进程能够监视的文件描述符的数量存在最大限制，在Linux上一般为1024，可以通过修改宏定义甚至重新编译内核的方式提升这一限制，但 是这样也会造成效率的降低。</p>
+<h3 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">poll</span> <span class="params">(struct pollfd *fds, <span class="keyword">unsigned</span> <span class="keyword">int</span> nfds, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>不同与select使用三个位图来表示三个fdset的方式，poll使用一个 pollfd的指针实现。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> fd; <span class="comment">/* file descriptor */</span></span><br><span class="line">    <span class="keyword">short</span> events; <span class="comment">/* requested events to watch */</span></span><br><span class="line">    <span class="keyword">short</span> revents; <span class="comment">/* returned events witnessed */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>pollfd结构包含了要监视的event和发生的event，不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。 和select函数一样，poll返回后，需要轮询pollfd来获取就绪的描述符。</p>
+<blockquote>
+<p>从上面看，select和poll都需要在返回后，<span style="color: red;">通过遍历文件描述符来获取已经就绪的socket</span>。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降。</p>
+</blockquote>
+<h3 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h3><p>epoll是在2.6内核中提出的，是之前的select和poll的增强版本。相对于select和poll来说，epoll更加灵活，没有描述符限制。epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到内核的一个事件表中，这样在用户空间和内核空间的copy只需一次。</p>
+<h4 id="epoll操作过程"><a href="#epoll操作过程" class="headerlink" title="epoll操作过程"></a>epoll操作过程</h4><p>epoll操作过程需要三个接口，分别如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> size)</span>；<span class="comment">//创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span>；</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event * events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong><code>int epoll_create(int size);</code></strong></li>
+</ol>
+<p>创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大，这个参数不同于select()中的第一个参数，给出最大监听的fd+1的值，参数size并不是限制了epoll所能监听的描述符最大个数，只是对内核初始分配内部数据结构的一个建议。<br>当创建好epoll句柄后，它就会占用一个fd值，在linux下如果查看/proc/进程id/fd/，是能够看到这个fd的，所以在使用完epoll后，必须调用close()关闭，否则可能导致fd被耗尽。</p>
+<ol start="2">
+<li><strong><code>int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);</code></strong></li>
+</ol>
+<p>函数是对指定描述符fd执行op操作。</p>
+<ul>
+<li>epfd：是epoll_create()的返回值。</li>
+<li>op：表示op操作，用三个宏来表示：添加EPOLL_CTL_ADD，删除EPOLL_CTL_DEL，修改EPOLL_CTL_MOD。分别添加、删除和修改对fd的监听事件。</li>
+<li>fd：是需要监听的fd（文件描述符）</li>
+<li>epoll_event：是告诉内核需要监听什么事，struct epoll_event结构如下：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> &#123;</span></span><br><span class="line">  <span class="keyword">__uint32_t</span> events;  <span class="comment">/* Epoll events */</span></span><br><span class="line">  <span class="keyword">epoll_data_t</span> data;  <span class="comment">/* User data variable */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//events可以是以下几个宏的集合：</span></span><br><span class="line">EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）；</span><br><span class="line">EPOLLOUT：表示对应的文件描述符可以写；</span><br><span class="line">EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）；</span><br><span class="line">EPOLLERR：表示对应的文件描述符发生错误；</span><br><span class="line">EPOLLHUP：表示对应的文件描述符被挂断；</span><br><span class="line">EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的。</span><br><span class="line">EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong><code>int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);</code></strong></li>
+</ol>
+<p>等待epfd上的io事件，最多返回maxevents个事件。<br>参数events用来从内核得到事件的集合，maxevents告之内核这个events有多大，这个maxevents的值不能大于创建epoll_create()时的size，参数timeout是超时时间（毫秒，0会立即返回，-1将不确定，也有说法说是永久阻塞）。该函数返回需要处理的事件数目，如返回0表示已超时。</p>
+<h4 id="工作模式"><a href="#工作模式" class="headerlink" title="工作模式"></a>工作模式</h4><p>epoll对文件描述符的操作有两种模式：<strong>LT（level trigger）</strong>和<strong>ET（edge trigger）</strong>。LT模式是默认模式，LT模式与ET模式的区别如下：</p>
+<p>　　<strong>LT模式</strong>：当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。下次调用epoll_wait时，会再次响应应用程序并通知此事件。</p>
+<p>　　<strong>ET模式</strong>：当epoll_wait检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。如果不处理，下次调用epoll_wait时，不会再次响应应用程序并通知此事件。</p>
+<ol>
+<li><p>LT模式</p>
+<p> LT(level triggered)是缺省的工作方式，并且同时支持block和no-block socket.在这种做法中，内核告诉你一个文件描述符是否就绪了，然后你可以对这个就绪的fd进行IO操作。如果你不作任何操作，内核还是会继续通知你的。</p>
+</li>
+<li><p>ET模式</p>
+<p> ET(edge-triggered)是高速工作方式，只支持no-block socket。在这种模式下，当描述符从未就绪变为就绪时，内核通过epoll告诉你。然后它会假设你知道文件描述符已经就绪，并且不会再为那个文件描述符发送更多的就绪通知，直到你做了某些操作导致那个文件描述符不再为就绪状态了(比如，你在发送，接收或者接收请求，或者发送接收的数据少于一定量时导致了一个EWOULDBLOCK 错误）。但是请注意，如果一直不对这个fd作IO操作(从而导致它再次变成未就绪)，内核不会发送更多的通知(only once)</p>
+<p> ET模式在很大程度上减少了epoll事件被重复触发的次数，因此效率要比LT模式高。epoll工作在ET模式的时候，必须使用非阻塞套接口，以避免由于一个文件句柄的阻塞读/阻塞写操作把处理多个文件描述符的任务饿死。</p>
+</li>
+<li><p>总结</p>
+<p> 假如有这样一个例子：</p>
+<ol>
+<li>我们已经把一个用来从管道中读取数据的文件句柄(RFD)添加到epoll描述符</li>
+<li>这个时候从管道的另一端被写入了2KB的数据</li>
+<li>调用epoll_wait(2)，并且它会返回RFD，说明它已经准备好读取操作</li>
+<li>然后我们读取了1KB的数据</li>
+<li>调用epoll_wait(2)……</li>
+</ol>
+</li>
+</ol>
+<p><strong>LT模式：</strong></p>
+<p>如果是LT模式，那么在第5步调用epoll_wait(2)之后，仍然能受到通知。</p>
+<p><strong>ET模式：</strong></p>
+<p>如果我们在第1步将RFD添加到epoll描述符的时候使用了EPOLLET标志，那么在第5步调用epoll_wait(2)之后将有可能会挂起，因为剩余的数据还存在于文件的输入缓冲区内，而且数据发出端还在等待一个针对已经发出数据的反馈信息。只有在监视的文件句柄上发生了某个事件的时候 ET 工作模式才会汇报事件。因此在第5步的时候，调用者可能会放弃等待仍在存在于文件输入缓冲区内的剩余数据。</p>
+<p>当使用epoll的ET模型来工作时，当产生了一个EPOLLIN事件后，<br>读数据的时候需要考虑的是当recv()返回的大小如果等于请求的大小，那么很有可能是缓冲区还有数据未读完，也意味着该次事件还没有处理完，所以还需要再次读取：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(rs)&#123;</span><br><span class="line">  buflen = recv(activeevents[i].data.fd, buf, sizeof(buf), <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">if</span>(buflen &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="comment">// 由于是非阻塞的模式,所以当errno为EAGAIN时,表示当前缓冲区已无数据可读</span></span><br><span class="line">    <span class="comment">// 在这里就当作是该次事件已处理处.</span></span><br><span class="line">    <span class="keyword">if</span>(errno == EAGAIN)&#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(buflen == <span class="number">0</span>)&#123;</span><br><span class="line">     <span class="comment">// 这里表示对端的socket已正常关闭.</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span>(buflen == sizeof(buf)&#123;</span><br><span class="line">      rs = <span class="number">1</span>;   <span class="comment">// 需要再次读取</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">else</span>&#123;</span><br><span class="line">      rs = <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Linux中的EAGAIN含义</strong></p>
+<p>Linux环境下开发经常会碰到很多错误(设置errno)，其中EAGAIN是其中比较常见的一个错误(比如用在非阻塞操作中)。<br>从字面上来看，是提示再试一次。这个错误经常出现在当应用程序进行一些非阻塞(non-blocking)操作(对文件或socket)的时候。</p>
+<p>例如，以 O_NONBLOCK的标志打开文件/socket/FIFO，如果你连续做read操作而没有数据可读。此时程序不会阻塞起来等待数据准备就绪返回，read函数会返回一个错误EAGAIN，提示你的应用程序现在没有数据可读请稍后再试。<br>又例如，当一个系统调用(比如fork)因为没有足够的资源(比如虚拟内存)而执行失败，返回EAGAIN提示其再调用一次(也许下次就能成功)。</p>
+<h4 id="代码演示"><a href="#代码演示" class="headerlink" title="代码演示"></a>代码演示</h4><p>下面是一段不完整的代码且格式不对，意在表述上面的过程，去掉了一些模板代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IPADDRESS   <span class="meta-string">&quot;127.0.0.1&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PORT        8787</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE     1024</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LISTENQ     5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FDSIZE      1000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EPOLLEVENTS 100</span></span><br><span class="line"></span><br><span class="line">listenfd = socket_bind(IPADDRESS,PORT);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">events</span>[<span class="title">EPOLLEVENTS</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个描述符</span></span><br><span class="line">epollfd = epoll_create(FDSIZE);</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加监听描述符事件</span></span><br><span class="line">add_event(epollfd,listenfd,EPOLLIN);</span><br><span class="line"></span><br><span class="line"><span class="comment">//循环等待</span></span><br><span class="line"><span class="keyword">for</span> ( ; ; )&#123;</span><br><span class="line">    <span class="comment">//该函数返回已经准备好的描述符事件数目</span></span><br><span class="line">    ret = epoll_wait(epollfd,events,EPOLLEVENTS,<span class="number">-1</span>);</span><br><span class="line">    <span class="comment">//处理接收到的连接</span></span><br><span class="line">    handle_events(epollfd,events,ret,listenfd,buf);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//事件处理函数</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle_events</span><span class="params">(<span class="keyword">int</span> epollfd,struct epoll_event *events,<span class="keyword">int</span> num,<span class="keyword">int</span> listenfd,<span class="keyword">char</span> *buf)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> i;</span><br><span class="line">     <span class="keyword">int</span> fd;</span><br><span class="line">     <span class="comment">//进行遍历;这里只要遍历已经准备好的io事件。num并不是当初epoll_create时的FDSIZE。</span></span><br><span class="line">     <span class="keyword">for</span> (i = <span class="number">0</span>;i &lt; num;i++)</span><br><span class="line">     &#123;</span><br><span class="line">         fd = events[i].data.fd;</span><br><span class="line">        <span class="comment">//根据描述符的类型和事件类型进行处理</span></span><br><span class="line">         <span class="keyword">if</span> ((fd == listenfd) &amp;&amp;(events[i].events &amp; EPOLLIN))</span><br><span class="line">            handle_accpet(epollfd,listenfd);</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (events[i].events &amp; EPOLLIN)</span><br><span class="line">            do_read(epollfd,fd,buf);</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (events[i].events &amp; EPOLLOUT)</span><br><span class="line">            do_write(epollfd,fd,buf);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加事件</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add_event</span><span class="params">(<span class="keyword">int</span> epollfd,<span class="keyword">int</span> fd,<span class="keyword">int</span> state)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>;</span></span><br><span class="line">    ev.events = state;</span><br><span class="line">    ev.data.fd = fd;</span><br><span class="line">    epoll_ctl(epollfd,EPOLL_CTL_ADD,fd,&amp;ev);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理接收到的连接</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle_accpet</span><span class="params">(<span class="keyword">int</span> epollfd,<span class="keyword">int</span> listenfd)</span></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> clifd;     </span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">cliaddr</span>;</span>     </span><br><span class="line">     <span class="keyword">socklen_t</span>  cliaddrlen;     </span><br><span class="line">     clifd = accept(listenfd,(struct sockaddr*)&amp;cliaddr,&amp;cliaddrlen);     </span><br><span class="line">     <span class="keyword">if</span> (clifd == <span class="number">-1</span>)         </span><br><span class="line">     perror(<span class="string">&quot;accpet error:&quot;</span>);     </span><br><span class="line">     <span class="keyword">else</span> &#123;         </span><br><span class="line">         <span class="built_in">printf</span>(<span class="string">&quot;accept a new client: %s:%d\n&quot;</span>,inet_ntoa(cliaddr.sin_addr),cliaddr.sin_port);                       <span class="comment">//添加一个客户描述符和事件         </span></span><br><span class="line">         add_event(epollfd,clifd,EPOLLIN);     </span><br><span class="line">     &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//读处理</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">do_read</span><span class="params">(<span class="keyword">int</span> epollfd,<span class="keyword">int</span> fd,<span class="keyword">char</span> *buf)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> nread;</span><br><span class="line">    nread = read(fd,buf,MAXSIZE);</span><br><span class="line">    <span class="keyword">if</span> (nread == <span class="number">-1</span>)     &#123;         </span><br><span class="line">        perror(<span class="string">&quot;read error:&quot;</span>);         </span><br><span class="line">        close(fd); <span class="comment">//记住close fd        </span></span><br><span class="line">        delete_event(epollfd,fd,EPOLLIN); <span class="comment">//删除监听 </span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (nread == <span class="number">0</span>)     &#123;         </span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>,<span class="string">&quot;client close.\n&quot;</span>);</span><br><span class="line">        close(fd); <span class="comment">//记住close fd       </span></span><br><span class="line">        delete_event(epollfd,fd,EPOLLIN); <span class="comment">//删除监听 </span></span><br><span class="line">    &#125;     </span><br><span class="line">    <span class="keyword">else</span> &#123;         </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;read message is : %s&quot;</span>,buf);        </span><br><span class="line">        <span class="comment">//修改描述符对应的事件，由读改为写         </span></span><br><span class="line">        modify_event(epollfd,fd,EPOLLOUT);     </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//写处理</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">do_write</span><span class="params">(<span class="keyword">int</span> epollfd,<span class="keyword">int</span> fd,<span class="keyword">char</span> *buf)</span> </span>&#123;     </span><br><span class="line">    <span class="keyword">int</span> nwrite;     </span><br><span class="line">    nwrite = write(fd,buf,<span class="built_in">strlen</span>(buf));     </span><br><span class="line">    <span class="keyword">if</span> (nwrite == <span class="number">-1</span>)&#123;         </span><br><span class="line">        perror(<span class="string">&quot;write error:&quot;</span>);        </span><br><span class="line">        close(fd);   <span class="comment">//记住close fd       </span></span><br><span class="line">        delete_event(epollfd,fd,EPOLLOUT);  <span class="comment">//删除监听    </span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        modify_event(epollfd,fd,EPOLLIN); </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="built_in">memset</span>(buf,<span class="number">0</span>,MAXSIZE); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除事件</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delete_event</span><span class="params">(<span class="keyword">int</span> epollfd,<span class="keyword">int</span> fd,<span class="keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>;</span></span><br><span class="line">    ev.events = state;</span><br><span class="line">    ev.data.fd = fd;</span><br><span class="line">    epoll_ctl(epollfd,EPOLL_CTL_DEL,fd,&amp;ev);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//修改事件</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">modify_event</span><span class="params">(<span class="keyword">int</span> epollfd,<span class="keyword">int</span> fd,<span class="keyword">int</span> state)</span></span>&#123;     </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>;</span></span><br><span class="line">    ev.events = state;</span><br><span class="line">    ev.data.fd = fd;</span><br><span class="line">    epoll_ctl(epollfd,EPOLL_CTL_MOD,fd,&amp;ev);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//注：另外一端我就省了</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="epoll总结"><a href="#epoll总结" class="headerlink" title="epoll总结"></a>epoll总结</h4><p>在 select/poll中，进程只有在调用一定的方法后，内核才对所有监视的文件描述符进行扫描，而<strong>epoll事先通过epoll_ctl()来注册一 个文件描述符，一旦基于某个文件描述符就绪时，内核会采用类似callback的回调机制，迅速激活这个文件描述符，当进程调用epoll_wait() 时便得到通知</strong>。(<span style="color: red;">此处去掉了遍历文件描述符，而是通过监听回调的的机制</span>。这正是epoll的魅力所在。)</p>
+<p><strong>epoll的优点主要是一下几个方面：</strong></p>
+<ol>
+<li><p>监视的描述符数量不受限制，它所支持的FD上限是最大可以打开文件的数目，这个数字一般远大于2048,举个例子,在1GB内存的机器上大约是10万左 右，具体数目可以cat /proc/sys/fs/file-max察看,一般来说这个数目和系统内存关系很大。select的最大缺点就是进程打开的fd是有数量限制的。这对 于连接数量比较大的服务器来说根本不能满足。虽然也可以选择多进程的解决方案( Apache就是这样实现的)，不过虽然linux上面创建进程的代价比较小，但仍旧是不可忽视的，加上进程间数据同步远比不上线程间同步的高效，所以也不是一种完美的方案。</p>
+</li>
+<li><p>IO的效率不会随着监视fd的数量的增长而下降。epoll不同于select和poll轮询的方式，而是通过每个fd定义的回调函数来实现的。只有就绪的fd才会执行回调函数。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>如果没有大量的idle -connection或者dead-connection，epoll的效率并不会比select/poll高很多，但是当遇到大量的idle- connection，就会发现epoll的效率大大高于select/poll。</strong></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/02/04/java/java-advanced/Linux%20IO%E6%A8%A1%E5%BC%8F%E5%8F%8Aselect%E3%80%81poll%E3%80%81epoll%E8%AF%A6%E8%A7%A3/">http://yupaits.com/2020/02/04/java/java-advanced/Linux IO模式及select、poll、epoll详解/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/IO/">IO</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/04/java/java-advanced/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB(3)/"><img class="prev-cover" src="/img/cover/post-cover11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java多线程知识汇总(3)</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/04/java/java-base/ConcurrentHashMap/"><img class="next-cover" src="/img/cover/post-cover6.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ConcurrentHashMap</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/04/java/java-base/File类/" title="File类"><img class="cover" src="/img/cover/post-cover3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">File类</div></div></a></div><div><a href="/2020/02/04/java/java-base/压缩流/" title="压缩流"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">压缩流</div></div></a></div><div><a href="/2020/02/04/java/java-base/字符流/" title="字符流"><img class="cover" src="/img/cover/post-cover2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">字符流</div></div></a></div><div><a href="/2020/02/04/java/java-base/字节流/" title="字节流"><img class="cover" src="/img/cover/post-cover3.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">字节流</div></div></a></div><div><a href="/2020/02/04/java/java-base/转换流/" title="转换流"><img class="cover" src="/img/cover/post-cover2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">转换流</div></div></a></div><div><a href="/2020/02/04/FullGC排查流程/" title="Full GC排查流程"><img class="cover" src="/img/cover/post-cover5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Full GC排查流程</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux-IO%E6%A8%A1%E5%BC%8F%E5%8F%8Aselect%E3%80%81poll%E3%80%81epoll%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">Linux IO模式及select、poll、epoll详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">概念说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E4%B8%8E%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4"><span class="toc-number">1.1.1.</span> <span class="toc-text">用户空间与内核空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2"><span class="toc-number">1.1.2.</span> <span class="toc-text">进程切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E9%98%BB%E5%A1%9E"><span class="toc-number">1.1.3.</span> <span class="toc-text">进程的阻塞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6fd"><span class="toc-number">1.1.4.</span> <span class="toc-text">文件描述符fd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98I-O"><span class="toc-number">1.1.5.</span> <span class="toc-text">缓存I&#x2F;O</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">IO模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BB%E5%A1%9EI-O%EF%BC%88blocking-IO%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">阻塞I&#x2F;O（blocking IO）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E9%98%BB%E5%A1%9EI-O%EF%BC%88nonblocking-IO%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">非阻塞I&#x2F;O（nonblocking IO）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%88IO-multiplexing%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">I&#x2F;O多路复用（IO multiplexing）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5I-O%EF%BC%88asynchronous-IO%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">异步I&#x2F;O（asynchronous IO）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.2.5.</span> <span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#blocking%E5%92%8Cnon-blocking%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">blocking和non-blocking的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#synchronous-IO%E5%92%8Casynchronous-IO%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">synchronous IO和asynchronous IO的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B9%8Bselect%E3%80%81poll%E3%80%81epoll%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">I&#x2F;O多路复用之select、poll、epoll详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#select"><span class="toc-number">1.3.1.</span> <span class="toc-text">select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#poll"><span class="toc-number">1.3.2.</span> <span class="toc-text">poll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#epoll"><span class="toc-number">1.3.3.</span> <span class="toc-text">epoll</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#epoll%E6%93%8D%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">epoll操作过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">工作模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">代码演示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#epoll%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">epoll总结</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

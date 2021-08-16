@@ -1,0 +1,539 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>查找算法 | yupaits的博客</title><meta name="keywords" content="算法"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="顺序查找 思想： 这是最简单的算法，从头开始遍历每个元素，并将每个元素与查找元素比较，如果一致则返回。  时间复杂度： O(n)  空间复杂度： O(1)  代码示例：   1234567891011public int search(int[] array, int num) &amp;#123;    if (array &#x3D;&#x3D; null || array.length &#x3D;&#x3D; 0) &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查找算法">
+<meta property="og:url" content="http://yupaits.com/2020/02/04/datastructure-algorithm/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="顺序查找 思想： 这是最简单的算法，从头开始遍历每个元素，并将每个元素与查找元素比较，如果一致则返回。  时间复杂度： O(n)  空间复杂度： O(1)  代码示例：   1234567891011public int search(int[] array, int num) &amp;#123;    if (array &#x3D;&#x3D; null || array.length &#x3D;&#x3D; 0) &amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover1.png">
+<meta property="article:published_time" content="2020-02-04T01:41:37.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.473Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover1.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/02/04/datastructure-algorithm/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '查找算法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover1.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">查找算法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-04T01:41:37.000Z" title="undefined 2020-02-04 09:41:37">2020-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/">数据结构-算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="查找算法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h2><ul>
+<li><p><strong>思想：</strong> 这是最简单的算法，从头开始遍历每个元素，并将每个元素与查找元素比较，如果一致则返回。</p>
+</li>
+<li><p><strong>时间复杂度：</strong> O(n)</p>
+</li>
+<li><p><strong>空间复杂度：</strong> O(1)</p>
+</li>
+<li><p><strong>代码示例：</strong></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (array == <span class="keyword">null</span> || array.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (array[i] == num) &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><ul>
+<li><p><strong>思想：</strong> 二分查找前提是查找的数组是有序的，利用数据有序的特性提高查找性能。首先与数组中间位置的值比较，如果查找值大于中间位置值，则对数组右边以相同的思路查找，否则在左边以相同方式查找。这种方式使得每次查找范围变为原来的1/2。</p>
+</li>
+<li><p><strong>时间复杂度：</strong> O(log2n)</p>
+</li>
+<li><p><strong>空间复杂度：</strong> O(1)</p>
+</li>
+<li><p><strong>代码示例：</strong></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">halfSearch</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (array == <span class="keyword">null</span> || array.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> lo = <span class="number">0</span>, hi = array.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(lo &lt;= hi) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = lo + ((hi - lo) &gt;&gt; <span class="number">1</span>); <span class="comment">//此处考虑边界问题不能使用 (lo + hi) / 2</span></span><br><span class="line">        <span class="keyword">if</span> (array[mid] == num) &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (array[mid] &lt; num) &#123;</span><br><span class="line">            hi = mid - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            lo = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="hash算法"><a href="#hash算法" class="headerlink" title="hash算法"></a>hash算法</h2><ul>
+<li><strong>思想：</strong> 哈希表是根据设定的<strong>哈希函数H(key)和处理冲突方法</strong>将一组关键字映射到一个有限的地址区间上，并将关键字对应的值存储在该地址空间，可以通过关键字快速获取对应的值，这种表成为哈希表或散列，所得存储位置称为哈希地址或散列地址。作为线性数据结构与表格和队列等相比，哈希表无疑是查找速度比较快的一种。</li>
+<li><strong>时间复杂度：</strong> O(1)</li>
+</ul>
+<ol>
+<li><p>哈希函数：</p>
+<ol>
+<li>直接寻址法：取关键字或关键字的某个线性函数值为散列地址。即H(key)=key或H(key)=a?key + b，其中a和b为常数（这种散列函数叫做自身函数）。</li>
+<li>数字分析法：数字分析法就是找出数字的规律，尽可能利用这些数据来构造冲突几率较低的散列地址。比如一组员工的出生年月日，这时我们发现出生年月日的前几位数字大体相同，这样的话，出现冲突的几率就会很大，但是我们发现年月日的后几位表示月份和具体日期的数字差别很大，如果用后面的数字来构成散列地址，则冲突的几率会明显降低。</li>
+<li>平方取中法：取关键字平方后的中间几位作为散列地址。</li>
+<li>折叠法：将关键字分割成位数相同的几部分，最后一部分位数可以不同，然后取这几部分的叠加（去除进位）作为散列地址。</li>
+<li>除留余数法：取关键字被某个不大于散列表表长m的数p除后所得的余数为散列地址。即H(key)= key MOD p，p &lt;= m。不仅可以对关键字直接取模，也可在折叠、平方取中等运算之后取模。对p的选择很重要，一般取素数或m，若p选的不好，容易产生同义词。</li>
+</ol>
+</li>
+<li><p>hash冲突及解决</p>
+<p> hash冲突在所难免，解决冲突是一个复杂问题。冲突主要取决于：</p>
+<ul>
+<li>与散列函数有关，一个好的散列函数的值应尽可能平均分布。</li>
+<li>与解决冲突的哈希冲突函数有关。</li>
+<li>与负载因子的大小有关。太大不一定就好，而且浪费空间严重，负载因子和散列函数是联动的。</li>
+</ul>
+<p> 解决冲突的办法：</p>
+<ul>
+<li>开放地址法：线性探查法、平方探查法、伪随机序列法、双哈希函数法。</li>
+<li>拉链法：把所有同义词，及hash值相同的记录，用单链表连接起来。</li>
+</ul>
+</li>
+<li><p>应用：字符串哈希；加密哈希；集合哈希；布隆过滤器</p>
+</li>
+<li><p>不足：获取有序序列复杂度高</p>
+</li>
+</ol>
+<h2 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h2><ul>
+<li><strong>思想：</strong> 二叉查找树（Binary Search Tree），也称有序二叉树（Ordered Binary Tree），排序二叉树（Sorted Binary Tree），是指一棵空树或者具有下列性质的二叉树：1. 若任意节点的左子树不空，则左子树上所有节点的值均小于它的根节点的值；2. 若任意节点的右子树不空，则右子树上所有节点的值均大于它的根节点的值；3. 任意节点的左、右子树也分别为二叉查找树；4. 没有键值相等的节点（no duplicate nodes）。</li>
+<li><strong>时间复杂度：</strong> 插入和查找的时间复杂度均为O(logn)，最坏为O(n)</li>
+</ul>
+<ol>
+<li><p>插入</p>
+<ul>
+<li><p>如果当前节点是null，则创建新节点返回。</p>
+</li>
+<li><p>如果插入节点比当前节点值大，则插入其右孩子节点中。</p>
+</li>
+<li><p>如果插入节点比当前节点值小，则插入其左孩子节点中。</p>
+<ul>
+<li><p>复杂度：平均O(logn) 最坏O(n)</p>
+</li>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Tree <span class="title">insert</span><span class="params">(Tree root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Tree(val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (val == root.val) &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (val &gt; root.val) &#123;</span><br><span class="line">        root.right = insert(root.right, val);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        root.left = insert(root.left, val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查找</p>
+<ul>
+<li><p>某个值</p>
+<ul>
+<li><p>思想：查找方式有点类似二分查找方法，只是这里采用的树结构进行存储。首先与根节点进行判断:</p>
+<ol>
+<li>如果当前节点为null，则直接返回null。</li>
+<li>如果当前节点值与查找值相同则返回当前节点。</li>
+<li>如果当前节点值小于查找值，则以递归方式到当前节点的右孩子查找。</li>
+<li>如果当前节点值大于查找值，则以递归方式到当前节点的左孩子查找。</li>
+</ol>
+</li>
+<li><p>时间复杂度：平均O(logn) 最坏O(n)</p>
+</li>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Tree <span class="title">search</span><span class="params">(Tree root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.val = val) &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &gt; val) &#123;</span><br><span class="line">        <span class="keyword">return</span> search(root.left, val);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> search(root.right, val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>查找最小值</p>
+<ul>
+<li><p>思想：根据二叉查找树的特点，最小节点都是在最左节点上或者如果根节点无左孩子便是其本身。</p>
+</li>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Tree <span class="title">min</span><span class="params">(Tree root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> min(root.left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>查找最大节点</p>
+<ul>
+<li><p>思想：同最小节点。</p>
+</li>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Tree <span class="title">max</span><span class="params">(Tree root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> max(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>删除</p>
+<ul>
+<li><p>删除最小节点</p>
+<ul>
+<li><p>思想：找到根节点最左节点，如果其不存在右孩子则直接删除，否则用右孩子替换最左节点。需要注意的是根节点可能为null和不存在左孩子的情况。</p>
+</li>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Tree <span class="title">deleteMin</span><span class="params">(Tree root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">        root.left = deleteMin(root.left);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> root.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>删除最大节点</p>
+<ul>
+<li><p>思想：与删除最小节点类似，根据二叉搜索树的特性，最大节点是根节点的最右孩子。所以只要找到最右孩子节点，其存在左节点的话就用左节点替换否则直接删除。</p>
+</li>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Tree <span class="title">deleteMax</span><span class="params">(Tree root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">        root.right = deleteMax(root.right);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> root.left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>删除某个节点</p>
+<ul>
+<li><p>思想：要删除一个节点首先需要找到该节点的位置，采用上面的查找方式进行查找。找到节点后就是删除的问题，可以按照下面的策略进行删除。</p>
+<ol>
+<li>如果一个节点无左孩子和右孩子，那么就可以直接删除。</li>
+<li>如果只存在一个孩子节点，则用孩子节点替换。</li>
+<li>如果存在两个孩子节点，那么可以用其左孩子最大的节点或者右孩子最小节点替换，并删除最左孩子节点或最右孩子节点。</li>
+</ol>
+</li>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Tree <span class="title">delete</span><span class="params">(Tree root, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.val == val) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.left != <span class="keyword">null</span> &amp;&amp; root.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">            Tree leftBig = max(root.left);</span><br><span class="line">            root.val = leftBig.val;</span><br><span class="line">            root.left = delete(root.left, leftBig.val);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.left != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> root.left;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> root.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &lt; val) &#123;</span><br><span class="line">        root.right  = delete(root.right, val);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        root.left = delete(root.left, val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="AVL查找树"><a href="#AVL查找树" class="headerlink" title="AVL查找树"></a>AVL查找树</h2><ul>
+<li><strong>思想：</strong> 二叉树查找树在插入时没有对二叉树的深度和结构做一个调整，使得叶子节点深度不一，在查找时深度越深的节点时间复杂度越高。为了改进查找的时间复杂度，于是出现了平衡二叉树（AVL）。平衡二叉树使得每个节点的左节点和右节点的深度差不超过1。</li>
+</ul>
+<ol>
+<li><p>查找</p>
+<p> 查找与二叉查找树一样。</p>
+</li>
+<li><p>插入</p>
+<p> 当在AVL中插入新的结点时，需要根据实际情况对AVL中的某些结点做单旋转或双旋转操作，单旋转表示做一次顺时针或逆时针的旋转操作，而双旋转则做两次单旋转操作（先顺时针后逆时针，或者先逆时针后顺时针），单旋转发生在LL型插入和RR型插入，而双旋转则发生在LR型插入和RL型插入。以下的失去平衡点都指的是离插入点最近的那个失去平衡的结点。</p>
+<ul>
+<li>LL型：插入点位于失去平衡点的左孩子的左子树上；</li>
+<li>RR型：插入点位于失去平衡点的右孩子的右子树上；</li>
+<li>LR型：插入点位于失去平衡点的左孩子的右子树上；</li>
+<li>RR型：插入点位于失去平衡点的右孩子的左子树上。</li>
+</ul>
+<p> 插入思路 和二叉搜索树的插入一样，首先在树中找到对应的位置然后插入，接着自底向上向根节点折回，于在插入期间成为不平衡的所有节点上进行旋转来完成。因为折回到根节点的路途上最多有 1.5 乘 log n 个节点，而每次AVL 旋转都耗费恒定的时间，插入处理在整体上耗费 O(log n) 时间。具体插入过程如下:</p>
+<pre><code> 1. 如果当前结点为空，创建新结点返回.
+ 1. 如果当前结点值和插入值相同，不做处理返回。
+ 1. 如果插入值大于当前结点则插入到右其右孩子结点中。插入完成后比较左右孩子结点进行判断树是否失去平衡。如果是判断属于那种类型(RR, RL),并响应的旋转。最后更新当前结点的深度(孩子结点的最大深度加1，默认null深度为-1)。
+ 1. 否则插入到其做孩子上。 同样比较左右孩子的深度判断是否平衡，对于失去平衡的情况下做出调整。
+</code></pre>
+<ul>
+<li><p>代码示例：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> AvlNode <span class="title">insert</span><span class="params">(AnyType x, AvlNode t)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (t == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AvlNode(x, <span class="keyword">null</span>, <span class="keyword">null</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> compareResult = myCompare(x, t.element); </span><br><span class="line">    <span class="keyword">if</span> (compareResult &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        t.left = insert(x, t.left); </span><br><span class="line">        <span class="keyword">if</span> (height(t.left) - height(t.right) == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (myCompare(x, t.left.element) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//左左情况 </span></span><br><span class="line">                t = rotateWithLeftChild(t); </span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//左右情况</span></span><br><span class="line">                t = doubleWithLeftChild(t); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (compareResult &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        t.right = insert(x, t.right); </span><br><span class="line">        <span class="keyword">if</span> (height(t.right) - height(t.left) == <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (myCompare(x, t.right.element) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//右左情况 </span></span><br><span class="line">                t = doubleWithRightChild(t); </span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//右右情况 </span></span><br><span class="line">                t = rotateWithRightChild(t); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//完了之后更新height值 </span></span><br><span class="line">    t.height = Math.max(height(t.left), height(t.right)) + <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">return</span> t; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>删除</p>
+<p> 从AVL树中删除可以通过把要删除的节点向下旋转成一个叶子节点，接着直接剪除这个叶子节点来完成。因为在旋转成叶子节点期间最多有 log n个节点被旋转，而每次 AVL 旋转耗费恒定的时间，删除处理在整体上耗费 O(log n) 时间。 a.当被删除节点n是叶子节点，直接删除 b.当被删除节点n只有一个孩子，删除n，用孩子替代该节点的位置 c.当被删除结点n存在左右孩子时，真正的删除点应该是n的中序遍在前驱，或者说是左子树最大的节点，之后n的值替换为真正删除点的值。这就把c归结为a，b的问题。</p>
+<p> 从删除的结点处自低向上向根结点折回，根据当前结点的左右孩子深度判断是否平衡，如果不平衡则按选择规则进行旋转。最后更新当前结点深度，如此递归折回到根结点。</p>
+</li>
+</ol>
+<h2 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h2><ul>
+<li><p>定义</p>
+<p>  B-树是一种平衡的多路查找树，它在文件系统中很有用。 定义：一棵m 阶的B-树，或者为空树，或为满足下列特性的m 叉树：</p>
+<ul>
+<li>树中每个结点至多有m 棵子树；</li>
+<li>若根结点不是叶子结点，则至少有两棵子树；</li>
+<li>除根结点之外的所有非终端结点至少有⎡m/2⎤ 棵子树；</li>
+<li>所有的非终端结点中包含以下信息数据：（n，A0，K1，A1，K2，…，Kn，An） 其中：Ki（i=1,2,…,n）为关键码，且Ki&lt; Ki+1，Ai 为指向子树根结点的指针(i=0,1,…,n)，且指针Ai-1 所指子树中所有结点的关键码均小于Ki (i=1,2,…,n)，An 所指子树中所有结点的关键码均大于Kn， ⎡m/2⎤ −1 ≤ n ≤m −1 ，n 为关键码的个数。</li>
+<li>所有的叶子结点都出现在同一层次上，并且不带信息（可以看作是外部结点或查找失败的结点，实际上这些结点不存在，指向这些结点的指针为空</li>
+</ul>
+</li>
+<li><p>B-树的特性：</p>
+<ol>
+<li>关键字集合分布在整棵树中；</li>
+<li>任何一个关键字出现且只出现在一个节点中；</li>
+<li>搜索有可能在非叶子节点结束；</li>
+<li>其搜索性能等价于在关键字全集内做一次二分查找；</li>
+<li>自动层次控制。</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li><p>查找</p>
+<p> B-树的查找是由两个基本操作交叉进行的过程，即</p>
+<ul>
+<li>在B-树上找结点；</li>
+<li>在结点中找关键码。</li>
+</ul>
+<p> 由于，通常B-树是存储在外存上的，操作⑴就是通过指针在磁盘相对定位，将结点信息读入内存，之后，再对结点中的关键码有序表进行顺序查找或折半查找。因为，在磁盘上读取结点信息比在内存中进行关键码查找耗时多，每次向下搜索一层都需要从内存中加载磁盘信息，B-树的层次树是决定B-树查找效率的首要因素。</p>
+</li>
+<li><p>插入</p>
+<p> 在B-树上插入关键码与在二叉排序树上插入结点不同，关键码的插入不是在叶结点上 进行的，而是在最底层的某个非终端结点中添加一个关键码，若该结点上关键码个数不超过m-1 个，则可直接插入到该结点上；否则，该结点上关键码个数至少达到m 个，因而使该结点的子树超过了m棵，这与B-树定义不符。所以要进行调整，即结点的“分裂”。方法为：关键码加入结点后，将结点中的关键码分成三部分，使得前后两部分关键码个数个结点将其插入到父结点中。若插入父结点而使父结点中关键码个数超过m-1，则父结点继续分裂，直到插入某个父结点，其关键码个数小于m。可见，B-树是从底向上生长的。</p>
+</li>
+<li><p>删除</p>
+<p> 分两种情况： </p>
+<ol>
+<li><p>删除最底层结点中关键码</p>
+<ul>
+<li>若结点中关键码个数大于⎡m / 2⎤ -1，直接删去。</li>
+<li>否则除余项与左兄弟(无左兄弟，则找左兄弟)项数之和大于等于2( -1) 就与它 们父结点中的有关项一起重新分配</li>
+</ul>
+</li>
+<li><p>删除为非底层结点中关键码 若所删除关键码非底层结点中的Ki，则可以指针Ai 所指子树中的最小关键码X 替代 Ki，然后，再删除关键码X，直到这个X 在最底层结点上，即转为(1)的情形</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="B-树-1"><a href="#B-树-1" class="headerlink" title="B+树"></a>B+树</h2><ul>
+<li><p>定义</p>
+<ul>
+<li>有n 棵子树的结点中含有n 个关键码；</li>
+<li>所有的叶子结点中包含了全部关键码的信息，及指向含有这些关键码记录的指针，且 叶子结点本身依关键码的大小自小而大的顺序链接。</li>
+<li>所有的非终端结点可以看成是索引部分，结点中仅含有其子树根结点中最大（或最小）关键码。</li>
+</ul>
+</li>
+<li><p>B+树的特性</p>
+<ol>
+<li>所有关键字都出现在叶子结点的链表中（稠密索引），且链表中的关键字恰好是有序的；</li>
+<li>不可能在非叶子结点命中；</li>
+<li>非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储（关键字）数据的数据层；</li>
+<li>更适合文件索引系统；</li>
+</ol>
+</li>
+</ul>
+<ol>
+<li><p>查找</p>
+<p> 对B+树可以进行两种查找运算：</p>
+<ul>
+<li>从最小关键字起顺序查找；</li>
+<li>从根结点开始，进行随机查找。</li>
+</ul>
+<p> 在查找时，若非终端结点上的剧组机等于给定值，并不终止，而是继续向下直到叶子结点。因此，在B+树中，不管查找成功与否，每次查找都是走了一条从根到叶子结点的路径。其余同B-树的查找类似。</p>
+</li>
+<li><p>插入</p>
+<p> B+树的插入与B树的插入过程类似。不同的是B+树在叶结点上进行，如果叶结点中的关键码个数超过m，就必须分裂成关键码数目大致相同的两个结点，并保证上层结点中有这两个结点的最大关键码。</p>
+</li>
+<li><p>删除</p>
+<p> B+树的删除也仅在叶子结点进行，当叶子结点中的最大关键字被删除时，其在非终端结点中的值可以作为一个“分界关键字”存在。若因删除而使结点中关键字的个数少于m/2 （m/2结果取上界，如5/2结果为3）时，其和兄弟结点的合并过程亦和B-树类似。</p>
+</li>
+</ol>
+<h2 id="B-树和B-树最大的不同点"><a href="#B-树和B-树最大的不同点" class="headerlink" title="B+树和B-树最大的不同点"></a>B+树和B-树最大的不同点</h2><ol>
+<li><p>B-树的关键字和记录是放在一起的，叶子节点可以看作外部节点，不包含任何信息；B+树的非叶子节点中只有关键字和指向下一个节点的索引，记录只放在叶子节点中。</p>
+</li>
+<li><p>在B-树中，越靠近根节点的记录查找时间越快，只要找到关键字即可确定记录的存在；而B+树中每个记录的查找时间基本是一样的，都需要从根节点走到叶子节点，而且在叶子节点中还要再比较关键字。从这个角度看B-树的性能好像要比B+树好，而在实际应用中却是B+树的性能要好些。因为B+树的非叶子节点不存放实际的数据，这样每个节点可容纳的元素个数比B-树多，树高比B-树小，这样带来的好处是减少磁盘访问次数。尽管B+树找到一个记录所需的比较次数要比B-树多，但是一次磁盘访问的时间相当于成百上千次内存比较的时间，因此实际中B+树的性能可能还会好些，而且B+树的叶子节点使用指针连接在一起，方便顺序遍历(例如查看一个目录下的所有文件，一个表中的所有记录等)，这也是很多数据库和文件系统使用B+树的缘故。</p>
+</li>
+<li><p>B+树支持range-query非常方便，而B树不支持。这是数据库选用B+树的最主要原因。</p>
+</li>
+</ol>
+<h2 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h2><ul>
+<li><p>思想</p>
+<p>  红黑树，一种二叉查找树，但在每个结点上增加一个存储位表示结点的颜色，可以是Red或Black。通过对任何一条从根到叶子的路径上各个结点着色方式的限制，红黑树确保没有一条路径会比其他路径长出俩倍，因而是接近平衡的。</p>
+</li>
+<li><p>特性</p>
+<ul>
+<li>节点是红色或黑色。 </li>
+<li>根是黑色。 </li>
+<li>所有叶子都是黑色（叶子是NIL节点）。 </li>
+<li>每个红色节点的两个子节点都是黑色。(从每个叶子到根的所有路径上不能有两个连续的红色节点) </li>
+<li>从任一节点到其每个叶子的所有简单路径 都包含相同数目的黑色节点。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>插入</p>
+<p> 红黑树插入的几种情况： </p>
+<ol>
+<li>z的叔叔y是红色的。 </li>
+<li>z的叔叔y是黑色的，且z是右孩子 </li>
+<li>z的叔叔y是黑色的，且z是左孩子</li>
+</ol>
+</li>
+<li><p>删除</p>
+<p> 红黑树删除的几种情况。 </p>
+<ol>
+<li>x的兄弟w是红色的。</li>
+<li>x的兄弟w是黑色的，且w的俩个孩子都是黑色的。</li>
+<li>x的兄弟w是黑色的，且w的左孩子是红色，w的右孩子是黑色。</li>
+<li>x的兄弟w是黑色的，且w的右孩子是红色的。</li>
+</ol>
+</li>
+</ol>
+<h2 id="红黑树和AVL树的比较"><a href="#红黑树和AVL树的比较" class="headerlink" title="红黑树和AVL树的比较"></a>红黑树和AVL树的比较</h2><ul>
+<li><p>红黑树</p>
+<ul>
+<li>(1)并不追求“完全平衡”——它只要求部分地达到平衡要求，降低了对旋转的要求，从而提高了性能。红黑树能够以O(log2 n) 的时间复杂度进行搜索、插入、删除操作。</li>
+<li>(2)此外，由于它的设计，任何不平衡都会在三次旋转之内解决。红黑树能够给我们一个比较“便宜”的解决方案。红黑树的算法时间复杂度和AVL相同，但统计性能比AVL树更高。</li>
+</ul>
+</li>
+<li><p>AVL树</p>
+<ul>
+<li>它的左子树和右子树都是AVL树，左子树和右子树的高度差不能超过;</li>
+<li>查找、插入和删除在平均和最坏情况下都是O(log n),增加和删除可能需要通过一次或多次树旋转来重新平衡这个树;</li>
+<li>一棵n个结点的AVL树的其高度保持在0(log2(n)),不会超过3/2log2(n+1) 一棵n个结点的AVL树的平均搜索长度保持在0(log2(n)). 一棵n个结点的AVL树删除一个结点做平衡化旋转所需要的时间为0(log2(n)).</li>
+</ul>
+</li>
+</ul>
+<h2 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/02/04/datastructure-algorithm/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">http://yupaits.com/2020/02/04/datastructure-algorithm/查找算法/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/04/architecture/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E6%8E%A2%E7%B4%A2/"><img class="prev-cover" src="/img/cover/post-cover9.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">系统架构探索</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/04/post/%E4%B8%80%E5%A5%97%E6%91%86%E8%84%B1%E7%96%B2%E5%8A%B3%E7%9A%84%E8%87%AA%E6%95%91%E6%8C%87%E5%8D%97/"><img class="next-cover" src="/img/cover/post-cover10.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">一套摆脱疲劳的自救指南</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/04/datastructure-algorithm/位运算/" title="位运算"><img class="cover" src="/img/cover/post-cover7.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">位运算</div></div></a></div><div><a href="/2020/02/04/datastructure-algorithm/图算法/" title="图算法"><img class="cover" src="/img/cover/post-cover2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">图算法</div></div></a></div><div><a href="/2020/02/04/datastructure-algorithm/排序算法/" title="排序算法"><img class="cover" src="/img/cover/post-cover8.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">排序算法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE"><span class="toc-number">1.</span> <span class="toc-text">顺序查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="toc-number">2.</span> <span class="toc-text">二分查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hash%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">hash算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91"><span class="toc-number">4.</span> <span class="toc-text">二叉搜索树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AVL%E6%9F%A5%E6%89%BE%E6%A0%91"><span class="toc-number">5.</span> <span class="toc-text">AVL查找树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-%E6%A0%91"><span class="toc-number">6.</span> <span class="toc-text">B-树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-%E6%A0%91-1"><span class="toc-number">7.</span> <span class="toc-text">B+树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-%E6%A0%91%E5%92%8CB-%E6%A0%91%E6%9C%80%E5%A4%A7%E7%9A%84%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-number">8.</span> <span class="toc-text">B+树和B-树最大的不同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="toc-number">9.</span> <span class="toc-text">红黑树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E5%92%8CAVL%E6%A0%91%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">10.</span> <span class="toc-text">红黑树和AVL树的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="toc-number">11.</span> <span class="toc-text">哈夫曼树</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

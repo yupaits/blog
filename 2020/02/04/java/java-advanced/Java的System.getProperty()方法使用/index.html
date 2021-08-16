@@ -1,0 +1,361 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java的System.getProperty()方法使用 | yupaits的博客</title><meta name="keywords" content="Java"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Java的System.getProperty()方法使用 引用自java的System.getProperty()方法使用  获取环境变量通过 System.getProperty(&quot;propertyName&quot;) 可以获得环境变量设置的值。 常见的Key值有：    key值 说明    java.version Java 运行时环境版本   java.vendor Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java的System.getProperty()方法使用">
+<meta property="og:url" content="http://yupaits.com/2020/02/04/java/java-advanced/Java%E7%9A%84System.getProperty()%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="Java的System.getProperty()方法使用 引用自java的System.getProperty()方法使用  获取环境变量通过 System.getProperty(&quot;propertyName&quot;) 可以获得环境变量设置的值。 常见的Key值有：    key值 说明    java.version Java 运行时环境版本   java.vendor Java">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover7.png">
+<meta property="article:published_time" content="2020-02-04T01:41:37.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.473Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover7.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/02/04/java/java-advanced/Java%E7%9A%84System.getProperty()%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java的System.getProperty()方法使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover7.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java的System.getProperty()方法使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-04T01:41:37.000Z" title="undefined 2020-02-04 09:41:37">2020-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E8%BF%9B%E9%98%B6/">Java进阶</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java的System.getProperty()方法使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Java的System-getProperty-方法使用"><a href="#Java的System-getProperty-方法使用" class="headerlink" title="Java的System.getProperty()方法使用"></a>Java的System.getProperty()方法使用</h1><blockquote>
+<p>引用自<a target="_blank" rel="noopener" href="https://blog.csdn.net/itomge/article/details/9098207">java的System.getProperty()方法使用</a></p>
+</blockquote>
+<h2 id="获取环境变量"><a href="#获取环境变量" class="headerlink" title="获取环境变量"></a>获取环境变量</h2><p>通过 <code>System.getProperty(&quot;propertyName&quot;)</code> 可以获得环境变量设置的值。</p>
+<p>常见的Key值有：</p>
+<table>
+<thead>
+<tr>
+<th>key值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>java.version</td>
+<td>Java 运行时环境版本</td>
+</tr>
+<tr>
+<td>java.vendor</td>
+<td>Java 运行时环境供应商</td>
+</tr>
+<tr>
+<td>java.vendor.url</td>
+<td>Java 供应商的 URL</td>
+</tr>
+<tr>
+<td>java.home</td>
+<td>Java 安装目录</td>
+</tr>
+<tr>
+<td>java.vm.specification.version</td>
+<td>Java 虚拟机规范版本</td>
+</tr>
+<tr>
+<td>java.vm.specification.vendor</td>
+<td>Java 虚拟机规范供应商</td>
+</tr>
+<tr>
+<td>java.vm.specification.name</td>
+<td>Java 虚拟机规范名称</td>
+</tr>
+<tr>
+<td>java.vm.version</td>
+<td>Java 虚拟机实现版本</td>
+</tr>
+<tr>
+<td>java.vm.vendor</td>
+<td>Java 虚拟机实现供应商</td>
+</tr>
+<tr>
+<td>java.vm.name</td>
+<td>Java 虚拟机实现名称</td>
+</tr>
+<tr>
+<td>java.specification.version</td>
+<td>Java 运行时环境规范版本</td>
+</tr>
+<tr>
+<td>java.specification.vendor</td>
+<td>Java 运行时环境规范供应商</td>
+</tr>
+<tr>
+<td>java.specification.name</td>
+<td>Java 运行时环境规范名称</td>
+</tr>
+<tr>
+<td>java.class.version</td>
+<td>Java 类格式版本号</td>
+</tr>
+<tr>
+<td>java.class.path</td>
+<td>Java 类路径</td>
+</tr>
+<tr>
+<td>java.library.path</td>
+<td>加载库时搜索的路径列表</td>
+</tr>
+<tr>
+<td>java.io.tmpdir</td>
+<td>默认的临时文件路径</td>
+</tr>
+<tr>
+<td>java.compiler</td>
+<td>要使用的 JIT 编译器的名称</td>
+</tr>
+<tr>
+<td>java.ext.dirs</td>
+<td>一个或多个扩展目录的路径</td>
+</tr>
+<tr>
+<td>os.name</td>
+<td>操作系统的名称</td>
+</tr>
+<tr>
+<td>os.arch</td>
+<td>操作系统的架构</td>
+</tr>
+<tr>
+<td>os.version</td>
+<td>操作系统的版本</td>
+</tr>
+<tr>
+<td>file.separator</td>
+<td>文件分隔符（在 UNIX 系统中是“/”）</td>
+</tr>
+<tr>
+<td>path.separator</td>
+<td>路径分隔符（在 UNIX 系统中是“:”）</td>
+</tr>
+<tr>
+<td>line.separator</td>
+<td>行分隔符（在 UNIX 系统中是“/n”）</td>
+</tr>
+<tr>
+<td>user.name</td>
+<td>用户的账户名称</td>
+</tr>
+<tr>
+<td>user.home</td>
+<td>用户的主目录</td>
+</tr>
+<tr>
+<td>user.dir</td>
+<td>用户的当前工作目录</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SystemPropertyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.getProperties().list(System.out);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">-- listing properties --</span><br><span class="line">java.runtime.name=Java(TM) SE Runtime Environment</span><br><span class="line">sun.boot.library.path=D:\Java\jdk1.8.0_131\jre\bin</span><br><span class="line">java.vm.version=25.131-b11</span><br><span class="line">java.vm.vendor=Oracle Corporation</span><br><span class="line">java.vendor.url=http://java.oracle.com/</span><br><span class="line">path.separator=;</span><br><span class="line">java.vm.name=Java HotSpot(TM) 64-Bit Server VM</span><br><span class="line">file.encoding.pkg=sun.io</span><br><span class="line">user.script=</span><br><span class="line">user.country=CN</span><br><span class="line">sun.java.launcher=SUN_STANDARD</span><br><span class="line">sun.os.patch.level=</span><br><span class="line">java.vm.specification.name=Java Virtual Machine Specification</span><br><span class="line">user.dir=E:\***</span><br><span class="line">java.runtime.version=1.8.0_131-b11</span><br><span class="line">java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment</span><br><span class="line">java.endorsed.dirs=D:\Java\jdk1.8.0_131\jre\lib\endorsed</span><br><span class="line">os.arch=amd64</span><br><span class="line">java.io.tmpdir=C:\Users\***\AppData\Local\Temp\</span><br><span class="line">line.separator=</span><br><span class="line"></span><br><span class="line">java.vm.specification.vendor=Oracle Corporation</span><br><span class="line">user.variant=</span><br><span class="line">os.name=Windows 10</span><br><span class="line">sun.jnu.encoding=GBK</span><br><span class="line">java.library.path=D:\Java\jdk1.8.0_131\bin;C:\WINDOWS\S...</span><br><span class="line">java.specification.name=Java Platform API Specification</span><br><span class="line">java.class.version=52.0</span><br><span class="line">sun.management.compiler=HotSpot 64-Bit Tiered Compilers</span><br><span class="line">os.version=10.0</span><br><span class="line">user.home=C:\Users\***</span><br><span class="line">user.timezone=</span><br><span class="line">java.awt.printerjob=sun.awt.windows.WPrinterJob</span><br><span class="line">file.encoding=UTF-8</span><br><span class="line">java.specification.version=1.8</span><br><span class="line">user.name=***</span><br><span class="line">java.class.path=D:\Java\jdk1.8.0_131\jre\lib\charsets...</span><br><span class="line">java.vm.specification.version=1.8</span><br><span class="line">sun.arch.data.model=64</span><br><span class="line">java.home=D:\Java\jdk1.8.0_131\jre</span><br><span class="line">sun.java.command=advanced.SystemPropertyTest</span><br><span class="line">java.specification.vendor=Oracle Corporation</span><br><span class="line">user.language=zh</span><br><span class="line">awt.toolkit=sun.awt.windows.WToolkit</span><br><span class="line">java.vm.info=mixed mode</span><br><span class="line">java.version=1.8.0_131</span><br><span class="line">java.ext.dirs=D:\Java\jdk1.8.0_131\jre\lib\ext;C:\W...</span><br><span class="line">sun.boot.class.path=D:\Java\jdk1.8.0_131\jre\lib\resource...</span><br><span class="line">java.vendor=Oracle Corporation</span><br><span class="line">file.separator=\</span><br><span class="line">java.vendor.url.bug=http://bugreport.sun.com/bugreport/</span><br><span class="line">sun.cpu.endian=little</span><br><span class="line">sun.io.unicode.encoding=UnicodeLittle</span><br><span class="line">sun.desktop=windows</span><br><span class="line">sun.cpu.isalist=amd64</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Java命令行运行参数说明"><a href="#Java命令行运行参数说明" class="headerlink" title="Java命令行运行参数说明"></a>Java命令行运行参数说明</h2><h3 id="查看参数列表"><a href="#查看参数列表" class="headerlink" title="查看参数列表"></a>查看参数列表</h3><p>虚拟机参数分为基本和扩展两类，在命令行中输入 <code>java</code> 就可以得到基本参数列表，输入 <code>java -X</code>就可以得到扩展参数列表。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">λ java</span><br><span class="line">用法: java [-options] class [args...]</span><br><span class="line">           (执行类)</span><br><span class="line">   或  java [-options] -jar jarfile [args...]</span><br><span class="line">           (执行 jar 文件)</span><br><span class="line">其中选项包括:</span><br><span class="line">    -d32          使用 32 位数据模型 (如果可用)</span><br><span class="line">    -d64          使用 64 位数据模型 (如果可用)</span><br><span class="line">    -server       选择 <span class="string">&quot;server&quot;</span> VM</span><br><span class="line">                  默认 VM 是 server.</span><br><span class="line"></span><br><span class="line">    -cp &lt;目录和 zip/jar 文件的类搜索路径&gt;</span><br><span class="line">    -classpath &lt;目录和 zip/jar 文件的类搜索路径&gt;</span><br><span class="line">                  用 ; 分隔的目录, JAR 档案</span><br><span class="line">                  和 ZIP 档案列表, 用于搜索类文件。</span><br><span class="line">    -D&lt;名称&gt;=&lt;值&gt;</span><br><span class="line">                  设置系统属性</span><br><span class="line">    -verbose:[class|gc|jni]</span><br><span class="line">                  启用详细输出</span><br><span class="line">    -version      输出产品版本并退出</span><br><span class="line">    -version:&lt;值&gt;</span><br><span class="line">                  警告: 此功能已过时, 将在</span><br><span class="line">                  未来发行版中删除。</span><br><span class="line">                  需要指定的版本才能运行</span><br><span class="line">    -showversion  输出产品版本并继续</span><br><span class="line">    -jre-restrict-search | -no-jre-restrict-search</span><br><span class="line">                  警告: 此功能已过时, 将在</span><br><span class="line">                  未来发行版中删除。</span><br><span class="line">                  在版本搜索中包括/排除用户专用 JRE</span><br><span class="line">    -? -<span class="built_in">help</span>      输出此帮助消息</span><br><span class="line">    -X            输出非标准选项的帮助</span><br><span class="line">    -ea[:&lt;packagename&gt;...|:&lt;classname&gt;]</span><br><span class="line">    -enableassertions[:&lt;packagename&gt;...|:&lt;classname&gt;]</span><br><span class="line">                  按指定的粒度启用断言</span><br><span class="line">    -da[:&lt;packagename&gt;...|:&lt;classname&gt;]</span><br><span class="line">    -disableassertions[:&lt;packagename&gt;...|:&lt;classname&gt;]</span><br><span class="line">                  禁用具有指定粒度的断言</span><br><span class="line">    -esa | -enablesystemassertions</span><br><span class="line">                  启用系统断言</span><br><span class="line">    -dsa | -disablesystemassertions</span><br><span class="line">                  禁用系统断言</span><br><span class="line">    -agentlib:&lt;libname&gt;[=&lt;选项&gt;]</span><br><span class="line">                  加载本机代理库 &lt;libname&gt;, 例如 -agentlib:hprof</span><br><span class="line">                  另请参阅 -agentlib:jdwp=<span class="built_in">help</span> 和 -agentlib:hprof=<span class="built_in">help</span></span><br><span class="line">    -agentpath:&lt;pathname&gt;[=&lt;选项&gt;]</span><br><span class="line">                  按完整路径名加载本机代理库</span><br><span class="line">    -javaagent:&lt;jarpath&gt;[=&lt;选项&gt;]</span><br><span class="line">                  加载 Java 编程语言代理, 请参阅 java.lang.instrument</span><br><span class="line">    -splash:&lt;imagepath&gt;</span><br><span class="line">                  使用指定的图像显示启动屏幕</span><br><span class="line">有关详细信息, 请参阅 http://www.oracle.com/technetwork/java/javase/documentation/index.html。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">λ java -X</span><br><span class="line">    -Xmixed           混合模式执行 (默认)</span><br><span class="line">    -Xint             仅解释模式执行</span><br><span class="line">    -Xbootclasspath:&lt;用 ; 分隔的目录和 zip/jar 文件&gt;</span><br><span class="line">                      设置搜索路径以引导类和资源</span><br><span class="line">    -Xbootclasspath/a:&lt;用 ; 分隔的目录和 zip/jar 文件&gt;</span><br><span class="line">                      附加在引导类路径末尾</span><br><span class="line">    -Xbootclasspath/p:&lt;用 ; 分隔的目录和 zip/jar 文件&gt;</span><br><span class="line">                      置于引导类路径之前</span><br><span class="line">    -Xdiag            显示附加诊断消息</span><br><span class="line">    -Xnoclassgc       禁用类垃圾收集</span><br><span class="line">    -Xincgc           启用增量垃圾收集</span><br><span class="line">    -Xloggc:&lt;file&gt;    将 GC 状态记录在文件中 (带时间戳)</span><br><span class="line">    -Xbatch           禁用后台编译</span><br><span class="line">    -Xms&lt;size&gt;        设置初始 Java 堆大小</span><br><span class="line">    -Xmx&lt;size&gt;        设置最大 Java 堆大小</span><br><span class="line">    -Xss&lt;size&gt;        设置 Java 线程堆栈大小</span><br><span class="line">    -Xprof            输出 cpu 配置文件数据</span><br><span class="line">    -Xfuture          启用最严格的检查, 预期将来的默认值</span><br><span class="line">    -Xrs              减少 Java/VM 对操作系统信号的使用 (请参阅文档)</span><br><span class="line">    -Xcheck:jni       对 JNI 函数执行其他检查</span><br><span class="line">    -Xshare:off       不尝试使用共享类数据</span><br><span class="line">    -Xshare:auto      在可能的情况下使用共享类数据 (默认)</span><br><span class="line">    -Xshare:on        要求使用共享类数据, 否则将失败。</span><br><span class="line">    -XshowSettings    显示所有设置并继续</span><br><span class="line">    -XshowSettings:all</span><br><span class="line">                      显示所有设置并继续</span><br><span class="line">    -XshowSettings:vm 显示所有与 vm 相关的设置并继续</span><br><span class="line">    -XshowSettings:properties</span><br><span class="line">                      显示所有属性设置并继续</span><br><span class="line">    -XshowSettings:locale</span><br><span class="line">                      显示所有与区域设置相关的设置并继续</span><br><span class="line"></span><br><span class="line">-X 选项是非标准选项, 如有更改, 恕不另行通知。</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/02/04/java/java-advanced/Java%E7%9A%84System.getProperty()%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8/">http://yupaits.com/2020/02/04/java/java-advanced/Java的System.getProperty()方法使用/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover7.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/04/java/java-advanced/Java%E5%BC%82%E5%B8%B8Exception/"><img class="prev-cover" src="/img/cover/post-cover5.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java异常Exception</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/04/java/java-advanced/NIO%E4%BB%8B%E7%BB%8D/"><img class="next-cover" src="/img/cover/post-cover2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">NIO介绍</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/04/FullGC排查流程/" title="Full GC排查流程"><img class="cover" src="/img/cover/post-cover5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Full GC排查流程</div></div></a></div><div><a href="/2020/02/04/Java枚举类实例/" title="Java枚举类实例"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Java枚举类实例</div></div></a></div><div><a href="/2020/02/04/Java运算符instanceof的用法/" title="Java运算符instanceof的用法"><img class="cover" src="/img/cover/post-cover8.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Java运算符instanceof的用法</div></div></a></div><div><a href="/2020/02/04/Java递归的实践/" title="Java递归的实践"><img class="cover" src="/img/cover/post-cover8.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Java递归的实践</div></div></a></div><div><a href="/2020/02/04/Java集合杂谈/" title="Java集合杂谈"><img class="cover" src="/img/cover/post-cover6.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Java集合杂谈</div></div></a></div><div><a href="/2020/02/04/SpringBoot和Vue单页面前后端分离项目的整合与构建/" title="SpringBoot和Vue单页面前后端分离项目的整合与构建"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">SpringBoot和Vue单页面前后端分离项目的整合与构建</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E7%9A%84System-getProperty-%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">Java的System.getProperty()方法使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.</span> <span class="toc-text">获取环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">1.2.</span> <span class="toc-text">Java命令行运行参数说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">查看参数列表</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基础组件设计 | yupaits的博客</title><meta name="keywords" content="组件,架构"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1、ORM组件设计核心功能 根据ID获取Entity 根据QueryWrapper获取第一个Entity 根据ID集合获取Entity列表 获取所有Entity列表 根据QueryWrapper获取Entity列表 根据IPage分页查询对象获取Entity分页数据 根据IPage分页查询对象和QueryWrapper获取Entity分页数据 保存Entity（ID不存在插入记录，ID存在更新记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础组件设计">
+<meta property="og:url" content="http://yupaits.com/2020/02/04/architecture/%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="1、ORM组件设计核心功能 根据ID获取Entity 根据QueryWrapper获取第一个Entity 根据ID集合获取Entity列表 获取所有Entity列表 根据QueryWrapper获取Entity列表 根据IPage分页查询对象获取Entity分页数据 根据IPage分页查询对象和QueryWrapper获取Entity分页数据 保存Entity（ID不存在插入记录，ID存在更新记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover5.png">
+<meta property="article:published_time" content="2020-02-04T04:26:39.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.469Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="组件">
+<meta property="article:tag" content="架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover5.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/02/04/architecture/%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '基础组件设计',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover5.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基础组件设计</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-04T04:26:39.000Z" title="undefined 2020-02-04 12:26:39">2020-02-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="基础组件设计"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1、ORM组件设计"><a href="#1、ORM组件设计" class="headerlink" title="1、ORM组件设计"></a>1、ORM组件设计</h2><h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li>根据ID获取Entity</li>
+<li>根据QueryWrapper获取第一个Entity</li>
+<li>根据ID集合获取Entity列表</li>
+<li>获取所有Entity列表</li>
+<li>根据QueryWrapper获取Entity列表</li>
+<li>根据IPage分页查询对象获取Entity分页数据</li>
+<li>根据IPage分页查询对象和QueryWrapper获取Entity分页数据</li>
+<li>保存Entity（ID不存在插入记录，ID存在更新记录）</li>
+<li>批量保存Entity</li>
+<li>根据ID删除Entity</li>
+<li>根据ID集合批量删除Entity</li>
+<li>根据Entity集合批量删除Entity</li>
+<li>根据ID获取Vo</li>
+<li>根据QueryWrapper获取第一个Vo</li>
+<li>根据ID集合获取Vo列表</li>
+<li>获取所有Vo列表</li>
+<li>根据QueryWrapper获取Vo列表</li>
+<li>根据IPage分页查询对象获取Vo分页数据</li>
+<li>根据IPage分页查询对象和QueryWrapper获取Vo分页数据</li>
+<li>保存Dto（ID不存在插入记录，ID存在更新记录）</li>
+<li>批量保存Dto</li>
+<li>根据ID集合统计数量</li>
+<li>根据QueryWrapper统计数量</li>
+<li>资源访问鉴权</li>
+</ul>
+<h3 id="关键实现逻辑"><a href="#关键实现逻辑" class="headerlink" title="关键实现逻辑"></a>关键实现逻辑</h3><ol>
+<li><p>逻辑删除</p>
+<ul>
+<li>解决思路：增加is_deleted字段</li>
+<li>具体实现：使用Mybatis-Plus的@TableLogic注解修饰实体类的deleted字段，然后通过Mybatis-Plus自带方法删除和查找会自动附带逻辑删除功能（自己写的xml不会）。3.1.1之前的版本还需要注入 LogicSqlInjector。</li>
+</ul>
+</li>
+<li><p>乐观锁实现</p>
+<ul>
+<li>解决思路：增加version字段</li>
+<li>具体实现：使用Mybatis-Plus的@Version注解修饰实体类的version字段，并注入 OptimisticLockerInterceptor。</li>
+</ul>
+</li>
+<li><p>数据库的唯一索引、联合唯一索引与逻辑删除的兼容性问题</p>
+<ul>
+<li>解决思路：定义逻辑唯一索引和逻辑联合索引</li>
+<li>具体实现：在Dto基类中定义 uniqueFields 和 unionKeyFields 方法用来标识逻辑唯一索引和联合唯一索引。Dto类按需重写这两个方法进行标识。</li>
+</ul>
+</li>
+<li><p>并发场景下的批量数据更新操作可能导致的死锁问题</p>
+<ul>
+<li>解决思路：批量待更新数据排序之后再执行更新操作</li>
+<li>具体实现：Dto基类中定义 comparator 方法返回Dto对象的默认 Comparator 实现。Dto类按需重写该方法以实现排序时的比较逻辑。</li>
+</ul>
+</li>
+<li><p>逻辑删除导致的数据更新查重问题</p>
+<ul>
+<li>解决思路：在代码层面使用逻辑查重</li>
+<li>具体实现：根据 uniqueFields 和 unionKeyFields 进行逻辑查重，从而避免数据库唯一索引或者唯一联合索引导致的数据更新冲突。</li>
+</ul>
+</li>
+<li><p>批量更新时的数据去重</p>
+<ul>
+<li>解决思路：在代码层面使用逻辑去重</li>
+<li>具体实现：根据 uniqueFields 和 unionKeyFields 进行Dto集合的逻辑去重。</li>
+</ul>
+</li>
+<li><p>审计功能</p>
+<ul>
+<li>解决思路：使用框架自带的字段填充功能或者hook方法写入</li>
+<li>具体实现：使用Mybatis-Plus的@TableField注解并结合自定义的 MetaObjectHandler 实现指定字段自动填充。</li>
+</ul>
+</li>
+<li><p>审计日志</p>
+<ul>
+<li>解决思路：在数据更新逻辑中增加 hook 方法</li>
+<li>具体实现：定义AuditLogger接口，并在数据更新逻辑中调用 AuditLogger的 log 方法。配置不同实体类与 AuditLogger实现的对应关系，或者使用全局 AuditLogger。</li>
+</ul>
+</li>
+</ol>
+<h2 id="2、缓存服务设计"><a href="#2、缓存服务设计" class="headerlink" title="2、缓存服务设计"></a>2、缓存服务设计</h2><h3 id="核心功能-1"><a href="#核心功能-1" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li>缓存数据设置</li>
+<li>缓存数据获取</li>
+<li>本地-分布式 两级缓存结构</li>
+<li>根据待缓存数据自动选择合适的缓存数据类型进行存储</li>
+<li>业务层与缓存层解耦</li>
+<li>缓存管理和监控平台，方便的查询、管理和监控线上缓存数据</li>
+</ul>
+<h3 id="关键实现逻辑-1"><a href="#关键实现逻辑-1" class="headerlink" title="关键实现逻辑"></a>关键实现逻辑</h3><ol>
+<li><p>本地-分布式 两级缓存结构的兼容策略</p>
+<ul>
+<li>解决思路：优先级 本地 &gt; 分布式</li>
+<li>具体实现：<ul>
+<li>更新操作：<ul>
+<li>更新数据库；</li>
+<li>删除本地缓存和分布式缓存。</li>
+</ul>
+</li>
+<li>查询操作：<ul>
+<li>查询本地缓存；</li>
+<li>本地缓存命中，返回缓存数据；</li>
+<li>本地缓存未命中，查询分布式缓存；</li>
+<li>分布式缓存命中，更新本地缓存，返回缓存数据；</li>
+<li>分布式缓存未命中，查询数据库，更新本地缓存和分布式缓存，返回数据。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>缓存数据类型自动适配</p>
+<ul>
+<li>解决思路：约定不同平台数据类型的对应关系</li>
+<li>具体实现：约定 Java 中的数据类型与 Redis 数据类型的对应关系，如 Java 中的 List 对应 Redis 中的 List。</li>
+</ul>
+</li>
+<li><p>业务层与缓存层解耦</p>
+<ul>
+<li>解决思路：业务层中配置是否启用缓存功能以及相应的缓存策略</li>
+<li>具体实现：<ul>
+<li>业务层的缓存配置信息的设置可以使用配置文件和自定义注解进行实现。</li>
+<li>使用 Spring Boot Starter 技术根据配置信息（如是否启用缓存功能）自动装配缓存配置 Configuration 类，Configuration 类中按需注入相关 Bean。</li>
+<li>在切面中编写缓存数据设置及获取的具体实现逻辑。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>缓存穿透</p>
+<ul>
+<li><p>解决思路：BloomFilter（布隆过滤）+ 缓存空值</p>
+</li>
+<li><p>具体实现：</p>
+<ul>
+<li>BloomFilter：BloomFilter 类似于一个 hbase set 用来判断某个元素（key）是否存在于某个集合中。这种方式在大数据场景应用比较多，比如 Hbase 中使用它去判断数据是否在磁盘上。还有在爬虫场景判断 url 是否已经被爬取过。这种方案可以加在第一种方案中，在缓存之前在加一层 BloomFilter ，在查询的时候先去 BloomFilter 去查询 key 是否存在，如果不存在就直接返回，存在再走查缓存 -&gt; 查 DB。</li>
+<li>缓存空值：之所以会发生穿透，就是因为缓存中没有存储这些空数据的 key。从而导致每次查询都到数据库去了。那么我们就可以为这些 key 对应的值设置为 null 丢到缓存里面去。后面再出现查询这个 key 的请求的时候，直接返回null 。这样，就不用在到数据库中去走一圈了，但是别忘了设置过期时间。</li>
+<li>流程图：</li>
+</ul>
+<p>  <img src="/images/%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png" alt="缓存穿透解决方案"></p>
+</li>
+</ul>
+</li>
+<li><p>缓存雪崩</p>
+<ul>
+<li>解决思路：互斥锁</li>
+<li>具体实现：多个线程同时去查询数据库的某条数据，那么我们可以在第一个查询数据的请求上使用一个互斥锁来锁住它。其他的线程走到这一步拿不到锁就等着，等第一个线程查询到了数据，然后做缓存。后面的线程进来发现已经有缓存了，就直接走缓存。</li>
+</ul>
+</li>
+<li><p>缓存击穿</p>
+<ul>
+<li><p>解决思路：</p>
+<ul>
+<li>事前：使用缓存集群，保证缓存服务的高可用</li>
+<li>事中：本地缓存 + 限流&amp;降级</li>
+<li>事后：开启Redis持久化机制，尽快恢复缓存集群</li>
+</ul>
+</li>
+<li><p>具体实现：</p>
+<ul>
+<li>事前：搭建Redis集群实现Redis服务的高可用</li>
+<li>事中：在Redis集群完全不可用的时候，使用本地缓存还能够支撑一阵。使用限流&amp;降级，保证数据库在面对大量请求还能提供服务。</li>
+<li>事后：一旦重启，就能从磁盘上自动加载数据恢复内存中的数据。</li>
+<li>流程图：</li>
+</ul>
+<p>  <img src="/images/%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png" alt="缓存击穿解决方案"></p>
+</li>
+</ul>
+</li>
+<li><p>根据Key前缀模糊删除</p>
+<ul>
+<li>解决思路：模糊查找 + 批量删除key</li>
+<li>具体实现：先根据Key前缀进行模糊查找，批量删除匹配到的Key。</li>
+</ul>
+</li>
+</ol>
+<h2 id="3、任务调度服务设计"><a href="#3、任务调度服务设计" class="headerlink" title="3、任务调度服务设计"></a>3、任务调度服务设计</h2><h3 id="核心功能-2"><a href="#核心功能-2" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li>任务管理<ul>
+<li>执行器</li>
+</ul>
+</li>
+<li>执行器管理</li>
+<li>日志管理<ul>
+<li>调度日志</li>
+<li>执行日志</li>
+</ul>
+</li>
+<li>运行报表</li>
+<li>失败告警</li>
+<li>调度中心<ul>
+<li>数据中心</li>
+<li>调度器</li>
+<li>任务回调处理</li>
+</ul>
+</li>
+<li>执行器<ul>
+<li>调度请求</li>
+<li>JobHandler</li>
+<li>任务回调</li>
+</ul>
+</li>
+</ul>
+<h2 id="4、数据权限设计"><a href="#4、数据权限设计" class="headerlink" title="4、数据权限设计"></a>4、数据权限设计</h2><h3 id="核心功能-3"><a href="#核心功能-3" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li>部门权限过滤<ul>
+<li>权限范围（设置到员工，默认是员工所属部门及下属部门）<ul>
+<li>仅自己（部门权限内且创建人是自己的）</li>
+<li>指定部门（按分配的部门用in过滤，不包含下级）</li>
+<li>指定部门及下属部门（按分配的部门用in过滤，包含下级部门）</li>
+<li>所有部门（可查看所有部门）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>特殊对象权限过滤<ul>
+<li>指定对象<ul>
+<li>用户（可多个）</li>
+<li>角色（可多个）</li>
+</ul>
+</li>
+<li>权限范围（同上述的部门权限范围）</li>
+</ul>
+</li>
+<li>业务关联对象权限过滤<ul>
+<li>门店权限过滤</li>
+<li>仓库权限过滤</li>
+</ul>
+</li>
+</ul>
+<h3 id="关键实现逻辑-2"><a href="#关键实现逻辑-2" class="headerlink" title="关键实现逻辑"></a>关键实现逻辑</h3><ol>
+<li><p>过滤策略的存储</p>
+<ul>
+<li>解决思路：数据库 + 缓存</li>
+<li>具体实现：对象的权限范围信息保存至数据库，不同对象按照权限范围查询出相关参数并保存到缓存，更新对象的过滤策略时自动更新相应缓存。</li>
+</ul>
+</li>
+<li><p>权限过滤的具体实现</p>
+<ul>
+<li>解决思路：权限过滤注解 + 查询方法切面</li>
+<li>具体实现：在业务ServiceImpl类上添加自定义权限过滤注解 @AuthFilter(name = “entity”)（注解中的name参数用于将数据库中的过滤策略与实体类关联起来），在 AuthFilterAspect 切面的 before 增强中获取过滤策略并转成查询条件存入 ThreadLocal 变量中，查询方法执行实际的业务逻辑从 ThreadLocal 中获取查询条件转换并拼接至 QueryWrapper 对象，使用拼接后的 QueryWrapper 对象进行查询。</li>
+</ul>
+</li>
+</ol>
+<h2 id="5、推送服务设计"><a href="#5、推送服务设计" class="headerlink" title="5、推送服务设计"></a>5、推送服务设计</h2><h3 id="核心功能-4"><a href="#核心功能-4" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li>移动APP通知推送</li>
+<li>Web网页消息推送</li>
+<li>短信发送</li>
+<li>短信回复统一处理</li>
+<li>邮件发送</li>
+</ul>
+<h3 id="关键实现逻辑-3"><a href="#关键实现逻辑-3" class="headerlink" title="关键实现逻辑"></a>关键实现逻辑</h3><ol>
+<li><p>批量消息并行推送</p>
+<ul>
+<li>解决思路：多线程 + 消息队列</li>
+<li>具体实现：使用多线程将批量消息打入消息队列，消息队列监听端接收消息后使用多线程执行具体的消息推送逻辑。</li>
+</ul>
+</li>
+<li><p>消息多渠道推送</p>
+<ul>
+<li>解决思路：PushProps设置多个推送渠道（如短信、邮件）</li>
+<li>具体实现：同一条消息根据PushProps中设置的多个推送渠道分别进行推送。</li>
+</ul>
+</li>
+<li><p>延迟（定时）推送</p>
+<ul>
+<li>解决思路：延迟队列</li>
+<li>具体实现：PushProps设置延迟推送相关参数，使用延迟队列实现延迟消息推送。</li>
+</ul>
+</li>
+</ol>
+<h2 id="6、文件服务设计"><a href="#6、文件服务设计" class="headerlink" title="6、文件服务设计"></a>6、文件服务设计</h2><h3 id="核心功能-5"><a href="#核心功能-5" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li>上传文件</li>
+<li>下载文件</li>
+<li>防盗链：通过设置Policy，将对象的访问权限限制在某些网站，或者某些IP段，从而对数据起到保护作用，防止对象被过度下载，以保护客户利益。</li>
+<li>租户隔离：支持创建多个子租户，每个子租户都有独立的访问口令，并且只能访问属于自己的存储空间，实现数据访问隔离。</li>
+<li>日志记录：记录访问请求的信息，包括请求时间、数据量大小、对象名称等。通过分析日志得到有价值的业务信息，如用户来源、使用习惯、恶意攻击等。</li>
+<li>图片处理：可以对存储的图片进行处理，例如图片缩略、格式转换、裁剪、缩放、水印等。</li>
+</ul>
+<h3 id="关键实现逻辑-4"><a href="#关键实现逻辑-4" class="headerlink" title="关键实现逻辑"></a>关键实现逻辑</h3><ol>
+<li><p>用户访问权限控制</p>
+<ul>
+<li>解决思路：访问文件时先进行鉴权</li>
+<li>具体实现：定义文件访问权限信息并进行持久化，向指定目标用户执行授权操作。用户访问文件时先通过 checkAccess 方法进行鉴权。</li>
+</ul>
+</li>
+<li><p>防盗链</p>
+<ul>
+<li>解决思路：增加IP白名单过滤</li>
+<li>具体实现：访问文件时在文件服务的拦截器中进行访问IP的白名单校验，校验通过才允许进行访问。</li>
+</ul>
+</li>
+<li><p>租户隔离</p>
+<ul>
+<li>解决思路：指定租户对应的fastdfs的store_group</li>
+<li>具体实现：上传文件、访问文件时在文件服务的拦截器中指定租户的store_group。</li>
+</ul>
+</li>
+<li><p>图片尺寸转换</p>
+<ul>
+<li>解决思路：访问时转换图片尺寸</li>
+<li>具体实现：访问图片文件时如果指定了图片尺寸参数（长和宽），则从fastdfs取到图片后通过图片工具转换成指定的尺寸之后再返回。</li>
+</ul>
+</li>
+</ol>
+<h2 id="7、消息队列服务设计"><a href="#7、消息队列服务设计" class="headerlink" title="7、消息队列服务设计"></a>7、消息队列服务设计</h2><h3 id="核心功能-6"><a href="#核心功能-6" class="headerlink" title="核心功能"></a>核心功能</h3><ul>
+<li>消息发布</li>
+<li>消息订阅</li>
+<li>延迟队列</li>
+<li>重试队列</li>
+<li>顺序队列</li>
+</ul>
+<h3 id="关键实现逻辑-5"><a href="#关键实现逻辑-5" class="headerlink" title="关键实现逻辑"></a>关键实现逻辑</h3><ol>
+<li><p>延迟队列</p>
+<ul>
+<li>解决思路：使用RabbitMQ死信队列</li>
+<li>具体实现：Queue中配置参数 <code>x-dead-letter-exchange</code>、<code>x-dead-letter-routing-key</code>，发送消息时给消息设置延迟毫秒值 <code>message.getMessageProperties().setExpiration(delayMillis);</code></li>
+</ul>
+</li>
+<li><p>重试队列</p>
+<ul>
+<li>解决思路：缓存 + RabbitMQ confirmCallback</li>
+<li>具体实现：发送可重试消息时缓存 <code>message</code> 和 <code>retryProps</code>，消息接收成功删除相关缓存，消费接收失败则读取缓存中的 <code>message</code> 和 <code>retryProps</code> 并执行重试操作。</li>
+</ul>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/02/04/architecture/%E5%9F%BA%E7%A1%80%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1/">http://yupaits.com/2020/02/04/architecture/基础组件设计/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BB%84%E4%BB%B6/">组件</a><a class="post-meta__tags" href="/tags/%E6%9E%B6%E6%9E%84/">架构</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/04/%E6%9C%80%E4%BD%B3%E6%97%A5%E5%BF%97%E5%AE%9E%E8%B7%B5/"><img class="prev-cover" src="/img/cover/post-cover1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">最佳日志实践</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/04/datastructure-algorithm/%E4%BD%8D%E8%BF%90%E7%AE%97/"><img class="next-cover" src="/img/cover/post-cover7.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">位运算</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/04/28/architecture/分布式锁/" title="分布式锁"><img class="cover" src="/img/cover/post-cover8.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-28</div><div class="title">分布式锁</div></div></a></div><div><a href="/2021/04/28/architecture/历史数据清理/" title="历史数据清理"><img class="cover" src="/img/cover/post-cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-28</div><div class="title">历史数据清理</div></div></a></div><div><a href="/2020/02/14/architecture/支付系统/" title="支付系统"><img class="cover" src="/img/cover/post-cover6.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-14</div><div class="title">支付系统</div></div></a></div><div><a href="/2020/02/04/architecture/系统架构探索/" title="系统架构探索"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">系统架构探索</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81ORM%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.</span> <span class="toc-text">1、ORM组件设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="toc-number">1.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="toc-number">1.2.</span> <span class="toc-text">关键实现逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E7%BC%93%E5%AD%98%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">2、缓存服务设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-1"><span class="toc-number">2.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91-1"><span class="toc-number">2.2.</span> <span class="toc-text">关键实现逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">3、任务调度服务设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-2"><span class="toc-number">3.1.</span> <span class="toc-text">核心功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%95%B0%E6%8D%AE%E6%9D%83%E9%99%90%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">4、数据权限设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-3"><span class="toc-number">4.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91-2"><span class="toc-number">4.2.</span> <span class="toc-text">关键实现逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1"><span class="toc-number">5.</span> <span class="toc-text">5、推送服务设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-4"><span class="toc-number">5.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91-3"><span class="toc-number">5.2.</span> <span class="toc-text">关键实现逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1"><span class="toc-number">6.</span> <span class="toc-text">6、文件服务设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-5"><span class="toc-number">6.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91-4"><span class="toc-number">6.2.</span> <span class="toc-text">关键实现逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1"><span class="toc-number">7.</span> <span class="toc-text">7、消息队列服务设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD-6"><span class="toc-number">7.1.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91-5"><span class="toc-number">7.2.</span> <span class="toc-text">关键实现逻辑</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

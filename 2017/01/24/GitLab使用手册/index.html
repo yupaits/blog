@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GitLab使用手册 | yupaits的博客</title><meta name="keywords" content="GitLab"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。随着Git的流行和DevOps的逐步落地，GitLab越来越成为日常工作中不可或缺的工具，本文是在实际开发过程中正确高效地使用GitLab方法的总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitLab使用手册">
+<meta property="og:url" content="http://yupaits.com/2017/01/24/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。随着Git的流行和DevOps的逐步落地，GitLab越来越成为日常工作中不可或缺的工具，本文是在实际开发过程中正确高效地使用GitLab方法的总结。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover7.png">
+<meta property="article:published_time" content="2017-01-24T10:01:02.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.469Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="GitLab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover7.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2017/01/24/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'GitLab使用手册',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover7.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">GitLab使用手册</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2017-01-24T10:01:02.000Z" title="undefined 2017-01-24 18:01:02">2017-01-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="GitLab使用手册"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。随着Git的流行和DevOps的逐步落地，GitLab越来越成为日常工作中不可或缺的工具，本文是在实际开发过程中正确高效地使用GitLab方法的总结。</p>
+<span id="more"></span>
+
+<h2 id="1、GitLab设置"><a href="#1、GitLab设置" class="headerlink" title="1、GitLab设置"></a>1、GitLab设置</h2><h3 id="1-1-使用SSH代替账号密码进行认证"><a href="#1-1-使用SSH代替账号密码进行认证" class="headerlink" title="1.1 使用SSH代替账号密码进行认证"></a>1.1 使用SSH代替账号密码进行认证</h3><p>Git提供了账号密码、SSH、GPG三种方式访问代码，其中使用最多最为方便的是SSH。</p>
+<h4 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh key"></a>生成ssh key</h4><p>生成ssh key需要<a target="_blank" rel="noopener" href="http://dev.posun.co:600/root/GitLab-Manual/wikis/%E5%AE%89%E8%A3%85git">安装Git</a>，在 Git Bash 中依次进行以下操作。</p>
+<ul>
+<li>设置Git的全局user的name和email</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email &quot;xxx@posun.cn&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成ssh key</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C “xxx@posun.cn”</span><br></pre></td></tr></table></figure>
+
+<p>之后会看到提示输入保存ssh key的文件名和加密串，建议直接回车跳过。</p>
+<ul>
+<li>查看ssh key</li>
+</ul>
+<p>完成上述操作之后，可以在当前用户的 <code>home</code> 目录下的 <code>.ssh</code> 文件夹中看到生成的 key，<strong>id_rsa</strong> 是私钥，<strong>id_rsa.pub</strong> 是公钥。</p>
+<h4 id="上传ssh-key"><a href="#上传ssh-key" class="headerlink" title="上传ssh key"></a>上传ssh key</h4><p>点击GitLab导航栏的用户头像下拉选择 <strong>设置</strong>，在左侧菜单栏选择 <strong>SSH密钥</strong> 进入 SSH 密钥添加页面，使用文本编辑器打开 <strong>id_rsa.pub</strong> 文件并全选复制粘贴至密钥添加页面的相应位置，填写密钥标题，点击 <strong>增加密钥</strong> 按钮即可完成ssh key的上传。</p>
+<h4 id="使用ssh的好处"><a href="#使用ssh的好处" class="headerlink" title="使用ssh的好处"></a>使用ssh的好处</h4><p>使用ssh之后，使用git方式（不是http/https方式）pull和push代码时不用每次都填写账号密码，方便快捷，并且更加安全，但是请妥善保管ssh key，谨防泄漏。</p>
+<h3 id="1-2-设置语言偏好"><a href="#1-2-设置语言偏好" class="headerlink" title="1.2 设置语言偏好"></a>1.2 设置语言偏好</h3><p>在GitLab导航栏点击个人头像下拉选择 <strong>设置</strong>，在左侧菜单栏选择 <strong>Profile</strong> 进入个人配置页面，在 <strong>主要设置</strong> -&gt; <strong>Preferred language</strong> 中选择 “简体中文”。</p>
+<h2 id="2、项目"><a href="#2、项目" class="headerlink" title="2、项目"></a>2、项目</h2><h3 id="2-1-如何新建一个项目"><a href="#2-1-如何新建一个项目" class="headerlink" title="2.1 如何新建一个项目"></a>2.1 如何新建一个项目</h3><p>点击GitLab导航条上的 <code>+</code> 下拉选择 <strong>新建项目</strong> 进入项目创建页面，GitLab提供了以下三种方式创建项目。</p>
+<h4 id="新建一个空白项目"><a href="#新建一个空白项目" class="headerlink" title="新建一个空白项目"></a>新建一个空白项目</h4><p>填写项目路径、名称、描述，选择项目可见等级之后，点击 <strong>创建项目</strong> 按钮即可创建一个空白项目。新项目一般采用此方式进行创建。</p>
+<h4 id="从模板创建"><a href="#从模板创建" class="headerlink" title="从模板创建"></a>从模板创建</h4><p>GitLab提供了三种项目模板：Ruby on Rails、Spring、NodeJS Express，可按需使用。</p>
+<h4 id="从其它代码仓库导入项目"><a href="#从其它代码仓库导入项目" class="headerlink" title="从其它代码仓库导入项目"></a>从其它代码仓库导入项目</h4><p>从GitHub等其它代码仓库导入项目。</p>
+<h3 id="2-2-如何管理项目成员"><a href="#2-2-如何管理项目成员" class="headerlink" title="2.2 如何管理项目成员"></a>2.2 如何管理项目成员</h3><h4 id="添加-导入项目成员"><a href="#添加-导入项目成员" class="headerlink" title="添加/导入项目成员"></a>添加/导入项目成员</h4><p>进入项目页面，在左侧菜单栏选择 <strong>设置</strong> -&gt; <strong>成员</strong>，在 <strong>添加成员</strong> 里依次选择 要邀请的成员（可多选）、角色权限和访问到期日期，点击 <strong>添加到项目</strong> 完成项目成员的添加。除了手动添加之外，还可以点击 <strong>导入</strong> 按钮进入导入成员页面，选择目标项目一键导入目标项目的成员。</p>
+<h4 id="项目成员管理"><a href="#项目成员管理" class="headerlink" title="项目成员管理"></a>项目成员管理</h4><p>项目成员页面还提供了成员管理的功能，可以修改成员的角色权限和访问到期日期，还可以踢出成员。</p>
+<h3 id="2-3-如何新建一个群组项目"><a href="#2-3-如何新建一个群组项目" class="headerlink" title="2.3 如何新建一个群组项目"></a>2.3 如何新建一个群组项目</h3><h4 id="创建一个群组"><a href="#创建一个群组" class="headerlink" title="创建一个群组"></a>创建一个群组</h4><p>在导航栏里点击 <code>+</code> 下拉选择 <strong>新建群组</strong> 进入新建群组页面，填写群组路径、群组名称、描述，上传群组图表，选择群组可见等级之后，点击 <strong>创建群组</strong> 按钮即可创建一个新的群组。</p>
+<h4 id="新建群组项目"><a href="#新建群组项目" class="headerlink" title="新建群组项目"></a>新建群组项目</h4><p>在群组主页点击 <strong>新项目</strong> 按钮进入新建群组项目页面，填写必要信息之后并提交即可创建一个群组项目，群组项目默认的可见等级为 <strong>私有</strong>，即只允许群组成员访问。</p>
+<p>个人项目在 <strong>设置</strong> -&gt; <strong>成员</strong> -&gt; <strong>与群组共享</strong> 里可以将项目共享给指定群组的成员。</p>
+<h4 id="子群组"><a href="#子群组" class="headerlink" title="子群组"></a>子群组</h4><p>在群组主页下拉选择并点击 <strong>新子群组</strong> 进入资群组创建页面，子群组可以对父群组的成员进一步细分，子群组成员可以访问父群组项目，非子群组的父群组成员无法访问子群组项目。</p>
+<h2 id="3、分支管理"><a href="#3、分支管理" class="headerlink" title="3、分支管理"></a>3、分支管理</h2><h3 id="3-1-分支的划分"><a href="#3-1-分支的划分" class="headerlink" title="3.1 分支的划分"></a>3.1 分支的划分</h3><p>工程的分支主要分为 <strong>master</strong>、<strong>dev</strong>、<strong>hotfix</strong>、<strong>feature</strong> 四类。</p>
+<ul>
+<li><strong>master</strong>：线上代码主分支，该代码和线上代码一致</li>
+<li><strong>dev</strong>: 开发分支，包含即将上线的新功能，由各个新功能开发分支经测试后合入，属于分支测试后的产物</li>
+<li><strong>feature</strong>: 功能开发分支，当有新开发任务时，开发需要从dev分支拉取feature分支，开发完毕经过分支测试后，可以进行pull request请求，申请将分支合入dev分支，该分支是开发过程中最常使用的分支</li>
+<li><strong>hotfix</strong>: bug修复分支，或紧急需求开发分支（一般不要在hotfix分支上进行新需求的开发）。该分支从master分支拉出，经开发测试完成之后，可以进行pull requets，申请将分支合入master</li>
+</ul>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>feature只能从dev分支拉出，hotfix分支只能从master拉出</li>
+<li>在进行pull request请求之前必须对当前的开发分支进行反合，即dev分支反合feature分支，master分支反合hotfix分支</li>
+<li>dev分支会在稳定之后合入master分支</li>
+<li>不能将master分支与feature反合，dev分支与hotfix反合</li>
+<li>开发只能将代码提交至对应的开发分支，不能直接提交到master分支或dev分支</li>
+</ul>
+<h3 id="3-2-分支的提交注意事项"><a href="#3-2-分支的提交注意事项" class="headerlink" title="3.2 分支的提交注意事项"></a>3.2 分支的提交注意事项</h3><p>分支提交的几点注意如下：</p>
+<ul>
+<li>在拉取新分支之前一定要确保本地的master分支和dev分支代码是最新的（在拉分支之前进行pull操作）</li>
+<li>分支的拉取和push请用git命令或16版本及以上idea完成，不要使用eclipse</li>
+<li>本地代码提交时需要确保本地分支对应的远程分支代码最新，具体在进行提交操作之前请进行pull操作</li>
+<li>代码提交时要进行相关注释，说明修改的代码内容；建议提高代码提交的频率，这样在出现问题时方便问题的定位与代码的回滚</li>
+<li>代码提交时要在本地解决冲突，冲突解决完成，并且代码在本地可以编译通过之后才能提交代码</li>
+<li>在windows下进行开发一定要注意git有关换行符的问题（crlf与lf的问题），具体请在git中设置相关的配置（git config –global core.autocrlf true ），并在开发工具中将默认的环境设置为linux，避免提交的代码出现大量的冲突。如果出现这种情况的冲突，请不要提交代码到远程仓库，本地解决之后再提交。</li>
+</ul>
+<h2 id="4、IntelliJ-IDEA使用GitLab"><a href="#4、IntelliJ-IDEA使用GitLab" class="headerlink" title="4、IntelliJ IDEA使用GitLab"></a>4、IntelliJ IDEA使用GitLab</h2><h3 id="4-1-安装Git"><a href="#4-1-安装Git" class="headerlink" title="4.1 安装Git"></a>4.1 安装Git</h3><h4 id="下载Git"><a href="#下载Git" class="headerlink" title="下载Git"></a>下载Git</h4><p>进入<a target="_blank" rel="noopener" href="https://git-scm.com/download">Git下载页面</a>，选择合适的版本下载。</p>
+<h4 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h4><p>Windows下双击下载好的 <code>Git-x.xx.x-64-bit.exe</code> 安装包执行安装，不建议更改 Git 默认勾选的配置。Git GUI按需使用，实际使用的频率一般比较低。</p>
+<h4 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h4><p>如果在安装时没有勾选 <strong>Checkout Windows-style, commit Unix-style line endings</strong> 项，可以在命令行中执行 <code>git config --global core.autocrlf true</code> 开启 <strong>提交代码时自动转换换行符</strong>。</p>
+<h3 id="4-2-安装IDEA-Git插件"><a href="#4-2-安装IDEA-Git插件" class="headerlink" title="4.2 安装IDEA Git插件"></a>4.2 安装IDEA Git插件</h3><h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><p>在IDEA中搜索 <code>Git Integration</code> 和 <code>.ignore</code> 插件并安装，安装完成之后重启IDEA。</p>
+<h4 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h4><ul>
+<li>IDEA Git插件的配置</li>
+</ul>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-Git%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE.png" alt="IDEA-Git插件配置"></p>
+<ul>
+<li>.ignore插件</li>
+</ul>
+<p><strong>.ignore</strong> 插件支持Git推送代码时自动忽略自定义配置的文件或者目录，防止将一些与开发无关的项目配置文件、构建文件推送到代码库，也减少了手动推送的风险。</p>
+<h3 id="4-3-从GitLab导入项目"><a href="#4-3-从GitLab导入项目" class="headerlink" title="4.3 从GitLab导入项目"></a>4.3 从GitLab导入项目</h3><h4 id="从远程仓库clone代码到本地"><a href="#从远程仓库clone代码到本地" class="headerlink" title="从远程仓库clone代码到本地"></a>从远程仓库clone代码到本地</h4><p>在配置好了ssh之后则可进行代码的clone，用http/https的方式不在本文的考虑范围内。clone远程代码到本地请使用git bash操作，不要使用ide，尤其是不要使用eclipse（本项目约定使用命令行进行）。<br><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/%E5%A4%8D%E5%88%B6Git%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E8%B7%AF%E5%BE%84.png" alt="复制Git代码仓库路径"></p>
+<p>使用复制好的链接clone代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@dev.posun.co:root/GitLab-Manual.git</span><br></pre></td></tr></table></figure>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/Git-SSH-Clone%E4%BB%A3%E7%A0%81.png" alt="Git-SSH-Clone代码"></p>
+<p>使用IDEA打开Git项目</p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA%E6%89%93%E5%BC%80Git%E9%A1%B9%E7%9B%AE.png" alt="IDEA打开Git项目"></p>
+<p>选择项目<strong>目录</strong>，点击“OK”</p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/%E9%80%89%E6%8B%A9Git%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95.png" alt="选择Git项目目录"></p>
+<p>成功导入Git项目</p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-Git%E9%A1%B9%E7%9B%AE.png" alt="IDEA-Git项目"></p>
+<h3 id="4-4-本地拉取新的分支并将分支push到远程仓库"><a href="#4-4-本地拉取新的分支并将分支push到远程仓库" class="headerlink" title="4.4 本地拉取新的分支并将分支push到远程仓库"></a>4.4 本地拉取新的分支并将分支push到远程仓库</h3><h4 id="分支操作菜单"><a href="#分支操作菜单" class="headerlink" title="分支操作菜单"></a>分支操作菜单</h4><p>IDEA中Git的操作菜单可以在以下两个地方找到。</p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-Git%E6%93%8D%E4%BD%9C%E8%8F%9C%E5%8D%95.png" alt="IDEA-Git操作菜单"></p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-Git%E6%93%8D%E4%BD%9C%E8%8F%9C%E5%8D%95-%E8%8F%9C%E5%8D%95%E6%A0%8F.png" alt="IDEA-Git操作菜单-菜单栏"></p>
+<p>分支操作菜单在IDEA界面的右下方有一个快捷入口。</p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-Git%E5%88%86%E6%94%AF%E8%8F%9C%E5%8D%95.png" alt="IDEA-Git分支菜单"></p>
+<h4 id="拉取分支操作流程"><a href="#拉取分支操作流程" class="headerlink" title="拉取分支操作流程"></a>拉取分支操作流程</h4><h5 id="创建本地dev分支"><a href="#创建本地dev分支" class="headerlink" title="创建本地dev分支"></a>创建本地dev分支</h5><p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0dev%E5%88%86%E6%94%AF.png" alt="IDEA-创建本地dev分支"></p>
+<h5 id="命名本地dev分支，最好跟远程分支保持一致"><a href="#命名本地dev分支，最好跟远程分支保持一致" class="headerlink" title="命名本地dev分支，最好跟远程分支保持一致"></a>命名本地dev分支，最好跟远程分支保持一致</h5><p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E5%91%BD%E5%90%8D%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png" alt="IDEA-命名本地分支"></p>
+<h5 id="从dev分支拉取feature分支"><a href="#从dev分支拉取feature分支" class="headerlink" title="从dev分支拉取feature分支"></a>从dev分支拉取feature分支</h5><p>拉取分支前需要确认当前本地分支在master或者dev分支，并且分支代码是最新的（拉取feature分支则当前分支需要是dev分支，拉取hotfix分支则要在master分支）</p>
+<ol>
+<li><p>切换到dev分支</p>
+<p> <img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E5%88%87%E6%8D%A2%E5%88%B0dev%E5%88%86%E6%94%AF.png" alt="IDEA-切换到dev分支"></p>
+</li>
+<li><p>pull dev分支代码，使代码最新</p>
+<p> <img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-pull%E5%88%86%E6%94%AF%E4%BB%A3%E7%A0%81.png" alt="IDEA-pull分支代码"></p>
+<p> <img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-pull%E4%BB%A3%E7%A0%81.png" alt="IDEA-pull代码"></p>
+</li>
+<li><p>创建新的feature分支</p>
+<p> <img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF.png" alt="IDEA-创建新的本地分支"></p>
+<p> 注意feature分支的命名，<strong>feature_任务编号_任务描述_分支创建日期</strong>。任务编号对应GitLab中项目的问题编号。</p>
+<p> <img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E5%88%9B%E5%BB%BAfeature%E5%88%86%E6%94%AF.png" alt="IDEA-创建feature分支"></p>
+</li>
+</ol>
+<h4 id="push新的feature分支到远程仓库"><a href="#push新的feature分支到远程仓库" class="headerlink" title="push新的feature分支到远程仓库"></a>push新的feature分支到远程仓库</h4><p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-push%20feature%E5%88%86%E6%94%AF%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93.png" alt="IDEA-push feature分支到远程仓库"></p>
+<p>push feature分支成功</p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/push%20feature%E5%88%86%E6%94%AF%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%88%90%E5%8A%9F.png" alt="push feature分支到远程仓库成功"></p>
+<h3 id="4-5-从开发分支上提交代码"><a href="#4-5-从开发分支上提交代码" class="headerlink" title="4.5 从开发分支上提交代码"></a>4.5 从开发分支上提交代码</h3><ul>
+<li>如果有新创建的文件，则在commit之前要进行add</li>
+</ul>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-git%20add%E6%96%B0%E6%96%87%E4%BB%B6.png" alt="IDEA-git add新文件"></p>
+<ul>
+<li>commit代码之前要检查代码更改的地方，不要提交一些非智力因素导致的合并错误。IDEA中有两种提交代码的方式。</li>
+</ul>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81.png" alt="IDEA-提交代码"></p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81-%E8%8F%9C%E5%8D%95%E6%A0%8F.png" alt="IDEA-提交代码-菜单栏"></p>
+<ul>
+<li>该面板可以查看有哪些文件进行了修改以及修改详情</li>
+</ul>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E6%9F%A5%E7%9C%8B%E4%BB%A3%E7%A0%81%E6%96%87%E4%BB%B6%E5%8F%98%E5%8A%A8%E4%BF%A1%E6%81%AF.png" alt="IDEA-查看代码文件变动信息"></p>
+<ul>
+<li>确认无误，添加注释，提交代码</li>
+</ul>
+<p>commit: 提交代码<br>commit and push：提交代码并推送至远程仓库</p>
+<p><strong>可以一次推送多次提交</strong>，一般一个功能点的修改提交一次代码，一个开发周期（半天、一天）推送一次代码。注意提交注释的格式 <code>tasknum#taskdesc:commit message</code>。</p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E5%A1%AB%E5%86%99%E6%8F%90%E4%BA%A4%E8%AF%B4%E6%98%8E.png" alt="IDEA-填写提交说明"></p>
+<p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E6%8F%90%E4%BA%A4%E5%AE%8C%E6%88%90%E6%8E%A8%E9%80%81%E4%BB%A3%E7%A0%81.png" alt="IDEA-提交完成推送代码"></p>
+<h3 id="4-6-查看代码提交历史"><a href="#4-6-查看代码提交历史" class="headerlink" title="4.6 查看代码提交历史"></a>4.6 查看代码提交历史</h3><h4 id="查看指定文件的提交历史"><a href="#查看指定文件的提交历史" class="headerlink" title="查看指定文件的提交历史"></a>查看指定文件的提交历史</h4><p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%9A%84%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png" alt="IDEA-查看文件的提交历史"></p>
+<h4 id="查看项目的提交历史"><a href="#查看项目的提交历史" class="headerlink" title="查看项目的提交历史"></a>查看项目的提交历史</h4><p><img src="/images/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/IDEA-%E6%9F%A5%E7%9C%8B%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2.png" alt="IDEA-查看项目的提交历史"></p>
+<h3 id="4-7-代码的回退"><a href="#4-7-代码的回退" class="headerlink" title="4.7 代码的回退"></a>4.7 代码的回退</h3><p><strong>不要回退代码，代码提交错误，请手动删除提交错误的代码，然后再次提交，不然会影响一些提交信息的记录，或其他分支的开发。</strong></p>
+<h3 id="4-8-分支反合及冲突的解决"><a href="#4-8-分支反合及冲突的解决" class="headerlink" title="4.8 分支反合及冲突的解决"></a>4.8 分支反合及冲突的解决</h3><p>虽然这部分大部分靠经验解决问题，但是仍然需要注意以下注意事项：</p>
+<p><strong>分支反合</strong>：即master分支或dev分支合并到开发分支,合并操作可以用命令行进行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature_dev_local</span><br><span class="line">git merge origin/dev</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout hotfix_fixbug_local</span><br><span class="line">git merge origin/master</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>IDEA中有比较好用的冲突解决工具，命令行执行玩合并之后，用IDEA解决冲突并提交</li>
+<li>不要用IDE进行分支反合，尤其不能用Eclipse</li>
+</ul>
+<h3 id="4-9-提交pull-request"><a href="#4-9-提交pull-request" class="headerlink" title="4.9 提交pull request"></a>4.9 提交pull request</h3><p>pull request在分支测试之后提交，在git的web端可以直接操作，一般这部分由QA完成。</p>
+<h4 id="新建合并请求"><a href="#新建合并请求" class="headerlink" title="新建合并请求"></a>新建合并请求</h4><p>在GitLab的项目页面中选择 <strong>合并请求</strong> 进入pull request面板页面，点击 <strong>新建合并请求</strong>，选择pull request的来源分支和目标分支，点击 <strong>比较分支后继续</strong>。</p>
+<p>填写标题、描述，指派审查员，可选该合并请求相关的里程碑和标记（与问题看板关联），之后点击 <strong>提交合并请求</strong> 即完成了合并请求的创建。勾选 <strong>接受合并请求后删除来源分支</strong>，合并请求完成之后会删除来源分支，一般从feature合并到dev、hotfix合并到master可以勾选，dev合并到master不勾选。</p>
+<h4 id="合并请求的审查"><a href="#合并请求的审查" class="headerlink" title="合并请求的审查"></a>合并请求的审查</h4><p>审查员在代码审查通过之后可以选择合并操作完成分支代码的合并。代码审查不通过时，审查员需要填写原因或建议并关闭合并请求，此时开发人员需要根据审查员的审查结果进行修改并在修改完成之后再次pull request。</p>
+<h3 id="4-10-gitignore文件的使用"><a href="#4-10-gitignore文件的使用" class="headerlink" title="4.10 .gitignore文件的使用"></a>4.10 .gitignore文件的使用</h3><h4 id="gitignore文件的编写原则"><a href="#gitignore文件的编写原则" class="headerlink" title=".gitignore文件的编写原则"></a>.gitignore文件的编写原则</h4><p><code>.gitignore</code> 文件过滤有两种模式：开放模式和保守模式。开放模式负责设置过滤哪些文件和文件夹，保守模式负责设置哪些文件不被过滤，也就是哪些文件要被跟踪。</p>
+<p>gitignore是从上到下逐行匹配的，因此.gitignore文件的编写原则就是：<strong>先编写开放模式，在编写保守模式</strong>。</p>
+<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><ul>
+<li>以斜杠“/”开头表目录</li>
+<li>以星号“*”通配多字符</li>
+<li>以问号“?”通配单字符</li>
+<li>以方括号“[]”包含单个字符的匹列表</li>
+<li>以叹号“!”对匹配结果反</li>
+</ul>
+<h2 id="5、任务"><a href="#5、任务" class="headerlink" title="5、任务"></a>5、任务</h2><h3 id="5-1-任务的创建与执行"><a href="#5-1-任务的创建与执行" class="headerlink" title="5.1 任务的创建与执行"></a>5.1 任务的创建与执行</h3><h4 id="任务的创建"><a href="#任务的创建" class="headerlink" title="任务的创建"></a>任务的创建</h4><p>在GitLab的项目页面中选择 <strong>问题</strong> -&gt; <strong>列表</strong> 进入问题列表页面，点击 <strong>新建问题</strong> 进入任务创建页面，填写问题标题、描述，指派任务的执行人员，勾选是否保密，选择截止日期，选择里程碑和标记，之后点击 <strong>提交问题</strong> 即可完成任务的创建。这里的任务标记跟问题面板中的面板标题一致。</p>
+<h4 id="任务的执行"><a href="#任务的执行" class="headerlink" title="任务的执行"></a>任务的执行</h4><p>在 <strong>问题</strong> -&gt; <strong>看板</strong> 页面可以对问题的执行情况进行跟踪。这部分跟大部分团队协作的工具比较类似，不做过多说明。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2017/01/24/GitLab%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">http://yupaits.com/2017/01/24/GitLab使用手册/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GitLab/">GitLab</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover7.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2017/11/05/Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86/"><img class="prev-cover" src="/img/cover/post-cover4.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Git分支管理</div></div></a></div><div class="next-post pull-right"><a href="/2017/01/20/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><img class="next-cover" src="/img/cover/post-cover4.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">阿里云服务器环境搭建</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/04/GitLab-CI环境搭建与SpringBoot项目CI配置总结/" title="GitLab-CI环境搭建与SpringBoot项目CI配置总结"><img class="cover" src="/img/cover/post-cover10.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">GitLab-CI环境搭建与SpringBoot项目CI配置总结</div></div></a></div><div><a href="/2020/02/05/工具整合/" title="工具整合"><img class="cover" src="/img/cover/post-cover11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-05</div><div class="title">工具整合</div></div></a></div><div><a href="/2018/05/01/搭建GitLab私有代码托管/" title="搭建GitLab私有代码托管"><img class="cover" src="/img/cover/post-cover11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-01</div><div class="title">搭建GitLab私有代码托管</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81GitLab%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">1、GitLab设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BD%BF%E7%94%A8SSH%E4%BB%A3%E6%9B%BF%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E8%BF%9B%E8%A1%8C%E8%AE%A4%E8%AF%81"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 使用SSH代替账号密码进行认证</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E6%88%90ssh-key"><span class="toc-number">1.1.1.</span> <span class="toc-text">生成ssh key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0ssh-key"><span class="toc-number">1.1.2.</span> <span class="toc-text">上传ssh key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ssh%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">使用ssh的好处</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%AE%BE%E7%BD%AE%E8%AF%AD%E8%A8%80%E5%81%8F%E5%A5%BD"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 设置语言偏好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">2、项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%A6%82%E4%BD%95%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 如何新建一个项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%A9%BA%E7%99%BD%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.1.</span> <span class="toc-text">新建一个空白项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E6%A8%A1%E6%9D%BF%E5%88%9B%E5%BB%BA"><span class="toc-number">2.1.2.</span> <span class="toc-text">从模板创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E5%85%B6%E5%AE%83%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93%E5%AF%BC%E5%85%A5%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.3.</span> <span class="toc-text">从其它代码仓库导入项目</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E6%88%90%E5%91%98"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 如何管理项目成员</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0-%E5%AF%BC%E5%85%A5%E9%A1%B9%E7%9B%AE%E6%88%90%E5%91%98"><span class="toc-number">2.2.1.</span> <span class="toc-text">添加&#x2F;导入项目成员</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%88%90%E5%91%98%E7%AE%A1%E7%90%86"><span class="toc-number">2.2.2.</span> <span class="toc-text">项目成员管理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%A6%82%E4%BD%95%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BE%A4%E7%BB%84%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 如何新建一个群组项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BE%A4%E7%BB%84"><span class="toc-number">2.3.1.</span> <span class="toc-text">创建一个群组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E7%BE%A4%E7%BB%84%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.3.2.</span> <span class="toc-text">新建群组项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E7%BE%A4%E7%BB%84"><span class="toc-number">2.3.3.</span> <span class="toc-text">子群组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">3、分支管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%88%86%E6%94%AF%E7%9A%84%E5%88%92%E5%88%86"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 分支的划分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">3.1.1.</span> <span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%88%86%E6%94%AF%E7%9A%84%E6%8F%90%E4%BA%A4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 分支的提交注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81IntelliJ-IDEA%E4%BD%BF%E7%94%A8GitLab"><span class="toc-number">4.</span> <span class="toc-text">4、IntelliJ IDEA使用GitLab</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%AE%89%E8%A3%85Git"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 安装Git</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDGit"><span class="toc-number">4.1.1.</span> <span class="toc-text">下载Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Git"><span class="toc-number">4.1.2.</span> <span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEGit"><span class="toc-number">4.1.3.</span> <span class="toc-text">配置Git</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%AE%89%E8%A3%85IDEA-Git%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 安装IDEA Git插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.1.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-number">4.2.2.</span> <span class="toc-text">配置插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E4%BB%8EGitLab%E5%AF%BC%E5%85%A5%E9%A1%B9%E7%9B%AE"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 从GitLab导入项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93clone%E4%BB%A3%E7%A0%81%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="toc-number">4.3.1.</span> <span class="toc-text">从远程仓库clone代码到本地</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E6%9C%AC%E5%9C%B0%E6%8B%89%E5%8F%96%E6%96%B0%E7%9A%84%E5%88%86%E6%94%AF%E5%B9%B6%E5%B0%86%E5%88%86%E6%94%AFpush%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 本地拉取新的分支并将分支push到远程仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C%E8%8F%9C%E5%8D%95"><span class="toc-number">4.4.1.</span> <span class="toc-text">分支操作菜单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">4.4.2.</span> <span class="toc-text">拉取分支操作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0dev%E5%88%86%E6%94%AF"><span class="toc-number">4.4.2.1.</span> <span class="toc-text">创建本地dev分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E6%9C%AC%E5%9C%B0dev%E5%88%86%E6%94%AF%EF%BC%8C%E6%9C%80%E5%A5%BD%E8%B7%9F%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E4%BF%9D%E6%8C%81%E4%B8%80%E8%87%B4"><span class="toc-number">4.4.2.2.</span> <span class="toc-text">命名本地dev分支，最好跟远程分支保持一致</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8Edev%E5%88%86%E6%94%AF%E6%8B%89%E5%8F%96feature%E5%88%86%E6%94%AF"><span class="toc-number">4.4.2.3.</span> <span class="toc-text">从dev分支拉取feature分支</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#push%E6%96%B0%E7%9A%84feature%E5%88%86%E6%94%AF%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">4.4.3.</span> <span class="toc-text">push新的feature分支到远程仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E4%BB%8E%E5%BC%80%E5%8F%91%E5%88%86%E6%94%AF%E4%B8%8A%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81"><span class="toc-number">4.5.</span> <span class="toc-text">4.5 从开发分支上提交代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-%E6%9F%A5%E7%9C%8B%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-number">4.6.</span> <span class="toc-text">4.6 查看代码提交历史</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-number">4.6.1.</span> <span class="toc-text">查看指定文件的提交历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-number">4.6.2.</span> <span class="toc-text">查看项目的提交历史</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-%E4%BB%A3%E7%A0%81%E7%9A%84%E5%9B%9E%E9%80%80"><span class="toc-number">4.7.</span> <span class="toc-text">4.7 代码的回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-%E5%88%86%E6%94%AF%E5%8F%8D%E5%90%88%E5%8F%8A%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3"><span class="toc-number">4.8.</span> <span class="toc-text">4.8 分支反合及冲突的解决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-%E6%8F%90%E4%BA%A4pull-request"><span class="toc-number">4.9.</span> <span class="toc-text">4.9 提交pull request</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%90%88%E5%B9%B6%E8%AF%B7%E6%B1%82"><span class="toc-number">4.9.1.</span> <span class="toc-text">新建合并请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E8%AF%B7%E6%B1%82%E7%9A%84%E5%AE%A1%E6%9F%A5"><span class="toc-number">4.9.2.</span> <span class="toc-text">合并请求的审查</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-10-gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.10.</span> <span class="toc-text">4.10 .gitignore文件的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gitignore%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99%E5%8E%9F%E5%88%99"><span class="toc-number">4.10.1.</span> <span class="toc-text">.gitignore文件的编写原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">4.10.2.</span> <span class="toc-text">基本语法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.</span> <span class="toc-text">5、任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%89%A7%E8%A1%8C"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 任务的创建与执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">5.1.1.</span> <span class="toc-text">任务的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%89%A7%E8%A1%8C"><span class="toc-number">5.1.2.</span> <span class="toc-text">任务的执行</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>开发实战总结 | yupaits的博客</title><meta name="keywords" content="Java,Git,Spring Boot,Linux,Vue.js,Maven,Docker,Redis"><meta name="author" content="yupaits"><meta name="copyright" content="yupaits"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="总结了一些实际开发过程中需要注意的一些细节。（持续更新…）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发实战总结">
+<meta property="og:url" content="http://yupaits.com/2020/02/20/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="yupaits的博客">
+<meta property="og:description" content="总结了一些实际开发过程中需要注意的一些细节。（持续更新…）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yupaits.com/img/cover/post-cover5.png">
+<meta property="article:published_time" content="2020-02-20T00:27:15.000Z">
+<meta property="article:modified_time" content="2021-08-16T22:02:26.481Z">
+<meta property="article:author" content="yupaits">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Vue.js">
+<meta property="article:tag" content="Maven">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yupaits.com/img/cover/post-cover5.png"><link rel="shortcut icon" href="/favicon.png"><link rel="canonical" href="http://yupaits.com/2020/02/20/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-8239100633886634',
+  enable_page_level_ads: 'true'
+});</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '开发实战总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-17 06:02:26'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/post-cover5.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yupaits的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 专题</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/%E6%96%87%E7%AB%A0%E6%94%B6%E5%BD%95/"><i class="fa-fw fas fa-newspaper"></i><span> 文章收录</span></a></li><li><a class="site-page child" href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"><i class="fa-fw fas fa-server"></i><span> 架构设计</span></a></li><li><a class="site-page child" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%AE%97%E6%B3%95/"><i class="fa-fw fas fa-database"></i><span> 数据结构-算法</span></a></li><li><a class="site-page child" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><i class="fa-fw fas fa-bezier-curve"></i><span> 设计模式</span></a></li><li><a class="site-page child" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/"><i class="fa-fw fas fa-network-wired"></i><span> 分布式系统原理</span></a></li><li><a class="site-page child" href="/categories/%E5%A4%A7%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E6%9E%B6%E6%9E%84/"><i class="fa-fw fas fa-network-wired"></i><span> 大型网络应用架构</span></a></li><li><a class="site-page child" href="/categories/Java%E5%9F%BA%E7%A1%80/"><i class="fa-fw fab fa-java"></i><span> Java基础</span></a></li><li><a class="site-page child" href="/categories/Java%E8%BF%9B%E9%98%B6/"><i class="fa-fw fab fa-java"></i><span> Java进阶</span></a></li><li><a class="site-page child" href="/categories/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/"><i class="fa-fw fab fa-java"></i><span> JVM虚拟机</span></a></li><li><a class="site-page child" href="/categories/Spring/"><i class="fa-fw fab fa-dev"></i><span> Spring</span></a></li><li><a class="site-page child" href="/categories/SpringCloud/"><i class="fa-fw fab fa-dev"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/categories/Golang/"><i class="fa-fw fab fa-dev"></i><span> Golang</span></a></li><li><a class="site-page child" href="/categories/Docker/"><i class="fa-fw fab fa-docker"></i><span> Docker</span></a></li><li><a class="site-page child" href="/categories/%E6%A0%91%E8%8E%93%E6%B4%BE/"><i class="fa-fw fab fa-raspberry-pi"></i><span> 树莓派</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-chart-bar"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></div><div class="menus_item"><a class="site-page" href="/sites/"><i class="fa-fw fas fa-sitemap"></i><span> 站点</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">开发实战总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-02-20T00:27:15.000Z" title="undefined 2020-02-20 08:27:15">2020-02-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/">代码调试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>26分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="开发实战总结"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>总结了一些实际开发过程中需要注意的一些细节。（持续更新…）</p>
+<span id="more"></span>
+
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><ol>
+<li><p><code>RandomUtils.nextInt()</code> 生成随机整数，<code>RandomStringUtils</code> 生成随机字符串。</p>
+</li>
+<li><p>实现随机抽取集合里面的部分元素 <code>Collections.shuffle(list)</code> 将 list 元素循序打乱 <code>list.subList(0, loreResource.getQuesNum()); // subList(fromIndex, toIndex)的实际范围是[fromIndex, toIndex)</code> 获取指定数量的元素。</p>
+</li>
+<li><p><code>ListUtils.select()</code> 方法，类似于 JQuery 数组的 filter 方法。</p>
+</li>
+<li><p><code>System.out.println(Arrays.toString(someList.toArray()));</code> 方法可以方便地打印List内容。</p>
+</li>
+<li><p><code>Arrays.asList(T... a)</code> 无法将基本类型转换为 List，原因是 <code>asList()</code> 方法接收的是泛型的可变长参数，而基本类型（如int，char等）是无法泛型化的。使用 <code>asList()</code> 对基本数据类型进行操作时需要使用基本数据类型的包装类。<code>asList()</code> 返回的 ArrayList 类型是 <code>Arrays</code> 的一个内部类，没有实现 <code>add()</code> 、 <code>remove()</code> 等用于操作 ArrayList 的方法，当我们需要对 <code>asList()</code> 返回的列表进行常用操作时需要对其进行转换，<code>List list = new ArrayList(Arrays.asList(testArray));</code></p>
+</li>
+<li><p>Java类启动顺序，<code>static</code> 静态代码先于构造方法。 </p>
+</li>
+</ol>
+<h2 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h2><ol>
+<li><p>如果项目启用了事务管理，Service 的实现类在增删改数据时需要加上 <code>@Transactional</code> 注解标明该类或方法加入了事务管理。</p>
+</li>
+<li><p>使用 shiro 权限框架时，需要检查需要权限控制的 Controller 类或方法是否加上了 <code>@RequiresRoles</code> 或 <code>@RequiresPermissions</code> 注解。</p>
+</li>
+<li><p>Controller 的方法传入 <code>@RequestBody</code> 参数时，method 只能是 POST 或 PUT。</p>
+</li>
+<li><p>Controller 通过 Model 对象实例通过 setAttribute 方法传值到前端 jsp 页面或是其他模板页面时，如果是在 js 里获取的话需要通过 var param = ‘${param}’ 方式获取，用’’引起来可以避免当 ${param} 为空时 js 代码报错的问题，但同时也将参数类型强制转换为 string 类型了；当参数类型是 List 集合时，需要使用 eval(‘${param}’) 方法。</p>
+</li>
+<li><p>后台在增删改数据时，记得更新和该数据相关的缓存；特别是在更改记录时要更新更改之前和之后会包含该记录的缓存。</p>
+</li>
+<li><p>跨域访问时，可以在全局 Interceptor 中使用 <code>httpServletResponse.setHeader(&quot;Access-Control-Allow-Origin&quot;, ACCESS_CONTROL_ALLOW_ORIGIN)</code> 限制可跨域访问的域名，类似的，使用 <code>httpServletResponse.setHeader(&quot;Access-Control-Allow-Methods&quot;, ACCESS_CONTROL_ALLOW_METHODS)</code> 限制请求方法，<code>httpServletResponse.setHeader(&quot;Access-Control-Max-Age&quot;, ACCESS_CONTROL_MAX_AGE)</code> 设置可跨域访问的时限， <code>httpServletResponse.setHeader(&quot;Access-Control-Allow-Headers&quot;, ACCESS_CONTROL_ALLOW_HEADERS)</code> 限制请求头参数。 </p>
+</li>
+<li><p>SpringBoot 中可以使用 <code>@EnableScheduling</code> 注解启用定时任务功能，在方法上使用 <code>@Scheduled</code> 注解设置任务启动的时间。</p>
+</li>
+<li><p>访问日志功能的实现：定义一个 LogInterceptor ，使用 <code>logger.info()</code> 等方法记录下 httpServletRequest 中相关属性。</p>
+</li>
+<li><p>shiro 的 reaml 中保存的 Principal 为 User 对象时，页面上想要获取 User 对象的 username 属性可以使用 <code>&lt;shiro:principal property=&quot;username&quot;/&gt;</code> 标签，注意这里的 property 即是对应的属性名。</p>
+</li>
+<li><p>Spring 框架自带的 <code>BeanUtils.copyProperties(Object source, Object target, String... ignoreProperties)</code> 方法可以方便的做类属性的拷贝。</p>
+</li>
+<li><p>SpringBoot security 在使用 <code>.antMatchers(&quot;/management/**&quot;).hasAnyRole(&quot;SuperAdmin&quot;, &quot;admin&quot;)</code> 要注意数据库里保存的角色名称必须要以 <code>&#39;ROLE_&#39;</code> 开头，这里的角色在数据库的名称应为 <code>&quot;ROLE_SuperAdmin&quot;</code> 和 <code>&quot;ROLE_admin&quot;</code>。</p>
+</li>
+<li><p>SpringBoot security 的注解 <code>@PreAuthorize</code> 可以用在类或方法上来进行权限控制，其中 <code>hasRole()</code> 和 <code>hasAuthority()</code> 的区别在于前者可以忽略角色信息的前缀（默认是 “ROLE_”），而后者则必须要包含前缀。例如当保存的角色信息为”ROLE_admin”时， <code>hasRole(&#39;admin&#39;)</code> 和 <code>hasAuthority(&#39;ROLE_admin&#39;)</code> 是等效的。</p>
+</li>
+<li><p>SpringBoot 在整合 shiro 时无法在使用 rememberMeCookie 实现”记住我”（即 rememberMe）功能的同时实现使用 sessionIdCookie 单独管理用户 session 信息。而使用 sessionIdCookie 可以解决出现404之后刷新页面直接跳转到登录页面的问题（问题详情：<a target="_blank" rel="noopener" href="http://jinnianshilongnian.iteye.com/blog/1999182">http://jinnianshilongnian.iteye.com/blog/1999182</a>）。</p>
+</li>
+<li><p>SpringBoot JPA 可以很简单的集成分页和排序功能，支持的 request 参数如下：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">page，第几页，从 0 开始，默认为第 0 页；  </span><br><span class="line">size，每一页的数量，默认为 10；  </span><br><span class="line">sort，排序相关的信息，以 `property,direction(,ASC|DESC)` 的方式组织，例如 `sort=firstname&amp;sort=lastname,desc` 表示在按 firstname 增序排列的基础上按 lastname 的降序排列。  </span><br></pre></td></tr></table></figure>
+<p> 例如请求链接为：<br> <code>http://host:port/blogs?page=0&amp;size=3&amp;sort=category,asc&amp;sort=description,desc</code></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Page&lt;Blog&gt; <span class="title">findAll</span><span class="params">(<span class="meta">@PageableDefault(size = 10, page = 0, sort = &quot;id&quot;, direction = Sort.Direction.DESC)</span> Pageable pageable)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">    Page&lt;Blog&gt; blogPage = (Page&lt;Blog&gt;) redisTemplate.opsForValue().get(blogCachePrefix + JSON.toJSONString(pageable));</span><br><span class="line">    <span class="keyword">if</span> (blogPage == <span class="keyword">null</span>) &#123;</span><br><span class="line">        blogPage = blogRepository.findAll(pageable);</span><br><span class="line">        redisTemplate.opsForValue().set(blogCachePrefix + JSON.toJSONString(pageable), blogPage, <span class="number">3</span>, TimeUnit.MINUTES);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">    logger.info(<span class="string">&quot;获取分页博客博客，pageable ：&#123;&#125;, 耗时：&#123;&#125;ms&quot;</span>, JSON.toJSONString(pageable), (endTime - startTime));</span><br><span class="line">    <span class="keyword">return</span> blogPage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 jackson 将实体对象转成 JSON ，在属性上加上 @JsonInclude(JsonInclude.Include.NON_NULL) 注解，当该属性NULL或者为空时将不参加序列化。JsonInclude 可选项有：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JsonInclude.Include.ALWAYS      //默认总是参加序列化</span><br><span class="line">JsonInclude.Include.NON_DEFAULT //属性为默认值不序列化</span><br><span class="line">JsonInclude.Include.NON_EMPTY   //属性为空或NULL都不序列化</span><br><span class="line">JsonInclude.Include.NON_NULL    //属性为NULL不序列化</span><br></pre></td></tr></table></figure></li>
+<li><p>实体类里的<strong>Enum</strong>类型的属性映射数据库字段的时候可以使用 <code>@Convert(converter = Status.class, attributeName = &quot;status&quot;)</code> 注解；jackson 在序列化<strong>Enum</strong>类型的时候可以在<strong>Enum</strong>类对应的<strong>getter</strong>方法使用 <code>@JsonValue</code> 注解来定义向前端输出的内容，而前端传过来的值同样可以通过 <code>@JsonCreator</code> 注解反序列化得到对应的<strong>Enum</strong>类型对象。</p>
+</li>
+<li><p><em>1.5.6.RELEASE</em> 版本的<strong>SpringBoot</strong>在使用 <code>ElasticsearchRespository</code> 类时会产生以下异常：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to write HTTP message: org.springframework.http.converter.HttpMessageNotWritableException:                 Could not write JSON document: (was java.lang.NullPointerException) (through reference chain: org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl[&quot;facets&quot;]); nested exception is com.fasterxml.jackson.databind.JsonMappingException: (was java.lang.NullPointerException) (through reference chain:     org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl[&quot;facets&quot;])</span><br></pre></td></tr></table></figure>
+<p> 推荐使用 <em>1.4.7.RELEASE</em> 版本。</p>
+</li>
+<li><p>Json 序列化的时候会将 Long 等类型强转成类似于 Javascript 中的 number 类型（内部实现<strong>可能</strong>是转成 Double 类型），这样会导致大数值丢失精度的问题。jackson 可以使用 <code>@JsonSerialize(using = ToStringSerializer.class)</code> 注解将 Long 类型转成String 再进行序列化，但这样会导致前端接收到的数据类型变成了 String 而不是 number。</p>
+</li>
+<li><p>在进行批量更新操作时，需要将待更新的数据进行排序之后再进行批量操作，这样可以避免并发场景下的死锁问题。</p>
+</li>
+<li><p>@RequestBody注解的实体对象如果需要将前端传过来的 array 转成实体中相应的 String 类型的属性时，可以在该属性的 setter 方法进行转换操作。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table(name = &quot;welcome_message&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WelcomeMessage</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column(name = &quot;articles&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String articles;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setArticles</span><span class="params">(List&lt;WxMpXmlOutNewsMessage.Item&gt; articles)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.articles = JSON.toJSONString(articles);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;WxMpXmlOutNewsMessage.Item&gt; getArticles() &#123;</span><br><span class="line">        <span class="keyword">return</span> JSON.parseArray(<span class="keyword">this</span>.articles, WxMpXmlOutNewsMessage.Item.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 相应的，如果需要将数据库中存储的 String 转成 List 传回前端或者应用于后台逻辑，可以在字段对应属性的 getter 方法进行转换。<br> 这里使用的是 fastjson 的 JSON 类。</p>
+</li>
+<li><p>过长的 Long 类型主键转 Json 传回前端会使用js处理会丢失精度，可以在实体的 @Id 上配置转成 Json 的序列化及反序列化处理类，在将 id 传回前端或者接收 前端传过来的 id 时使用 String 类型来进行转换保证精度，代码如下：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 解决Long类型的主键转json传回前端丢失精度的问题，将Long转成String</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> yupaits</span></span><br><span class="line"><span class="comment">* <span class="doctag">@date</span> 2017/12/18</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LongJsonSerializer</span> <span class="keyword">extends</span> <span class="title">JsonSerializer</span>&lt;<span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serialize</span><span class="params">(Long value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)</span> <span class="keyword">throws</span> IOException, JsonProcessingException </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</span><br><span class="line">            jsonGenerator.writeString(String.valueOf(value));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 将前端String类型的主键转成Long类型</span></span><br><span class="line"><span class="comment">* <span class="doctag">@author</span> yupaits</span></span><br><span class="line"><span class="comment">* <span class="doctag">@date</span> 2017/12/18</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LongJsonDeserializer</span> <span class="keyword">extends</span> <span class="title">JsonDeserializer</span>&lt;<span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">deserialize</span><span class="params">(JsonParser jsonParser, DeserializationContext deserializationContext)</span> <span class="keyword">throws</span> IOException, JsonProcessingException </span>&#123;</span><br><span class="line">        String value = jsonParser.getText();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> value == <span class="keyword">null</span> ? <span class="keyword">null</span> : Long.parseLong(value);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Id</span></span><br><span class="line"><span class="meta">@JsonSerialize(using = LongJsonSerializer.class)</span></span><br><span class="line"><span class="meta">@JsonDeserialize(using = LongJsonDeserializer.class)</span></span><br><span class="line"><span class="keyword">private</span> Long id;</span><br></pre></td></tr></table></figure></li>
+<li><p>SpringAop的Order顺序遵循先进后出的原则。如Aop1（order=1），Aop2（order=2），则切面的执行顺序为<code>Aop1.doAround.beforeProceed</code> -&gt;  <code>Aop1.doBefore</code> -&gt; <code>Aop2.doAround.beforeProcced</code> -&gt; <code>Aop2.doBefore</code> -&gt; <code>Aop2.doAround.afterProcced</code> -&gt; <code>Aop2.doAfter</code> -&gt; <code>Aop2.doAfterReturning</code> -&gt; <code>Aop1.doAround.afterProcced</code> -&gt; <code>Aop1.doAfter</code> -&gt; <code>Aop1.doAfterReturning</code>。</p>
+</li>
+<li><p>Spring Boot启动时指定环境。</p>
+<ul>
+<li>IDEA中进入 <code>Run/Debug Configurations</code> 设置 <code>Environment-&gt;VM options</code> 为 <code>-Dspring.profiles.active=test</code>，或者在 <code>Environment variables</code> 中添加参数 <code>spring.profiles.active</code> 并指定参数的值为 <code>test</code>。</li>
+<li>命令行使用 <code>java -jar *.jar</code> 启动时，在命令的后面增加 <code>--spring.profiles.active=test</code>。</li>
+<li>在 <code>application.yml</code> 中配置 <code>spring.profiles.active</code> 的值为 <code>test</code>。</li>
+</ul>
+</li>
+<li><p>通过zuul上传包含中文名的文件时，需要在上传文件url的path加上 <code>/zuul</code> 前缀即可。</p>
+<p> 例如：当上传url为 <code>http://localhost:10060/upload/image</code>，上传名为 <code>头像.jpg</code> 的文件，会出现报错 <code>java.io.FileNotFoundException: E:\upload\image\2018-5\??.jpg (文件名、目录名或卷标语法不正确。)</code>。如果将url直接改为<code>http://localhost:10060/zuul/upload/image</code> 则可以上传成功。</p>
+</li>
+<li><p>Spring Boot Jpa实现实体联合主键：实体类加上 <code>@IdClass(XxxKey.class)</code> 注解，实体类中多个联合注解的属性上都加上 <code>@Id</code> 注解。示例：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@IdClass(UserRoleKey.class)</span></span><br><span class="line"><span class="meta">@Table(name = &quot;shop_user_role&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRole</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column(nullable = false)</span></span><br><span class="line">    <span class="keyword">private</span> Long userId;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@Column(nullable = false)</span></span><br><span class="line">    <span class="keyword">private</span> Long roleId;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRoleKey</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long userId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long roleId;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用Spring Cloud Sleuth的日志中会包含链路追踪的信息，具体体现为:</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2017-04-08 23:56:50.459 INFO [bootstrap,38d6049ff0686023,d1b8b0352d3f6fa9,false] 8764 — [nio-8080-exec-1] demo.JpaSingleDatasourceApplication : Step 2: Handling print</span><br><span class="line">2017-04-08 23:56:50.459 INFO [bootstrap,38d6049ff0686023,d1b8b0352d3f6fa9,false] 8764 — [nio-8080-exec-1] demo.JpaSingleDatasourceApplication : Step 1: Handling home</span><br></pre></td></tr></table></figure>
+
+<p> 比一般的日志多出了 <code>[bootstrap,38d6049ff0686023,d1b8b0352d3f6fa9,false]</code> 这些内容，对应 <code>[appname,traceId,spanId,exportable]</code>。</p>
+<ul>
+<li>appname：服务名称</li>
+<li>traceId\spanId：链路追踪的两个术语</li>
+<li>exportable: 是否是发送给zipkin</li>
+</ul>
+</li>
+<li><p>SpringBoot中使用 <code>logback-spring.xml</code> 进行日志打印的配置。示例：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">scan</span>=<span class="string">&quot;true&quot;</span> <span class="attr">scanPeriod</span>=<span class="string">&quot;30 seconds&quot;</span> <span class="attr">debug</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;appName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;app-name&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;logPattern&quot;</span> <span class="attr">value</span>=<span class="string">&quot;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; - [$&#123;appName&#125;] - $&#123;LOG_LEVEL_PATTERN:-%5p&#125; $&#123;PID:- &#125; --- [%t] %c - %m%n&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;amqp&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.amqp.rabbit.logback.AmqpAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">host</span>&gt;</span>172.17.0.1<span class="tag">&lt;/<span class="name">host</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">port</span>&gt;</span>5672<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">username</span>&gt;</span>guest<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">password</span>&gt;</span>guest<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">applicationId</span>&gt;</span>okbuy<span class="tag">&lt;/<span class="name">applicationId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">routingKeyPattern</span>&gt;</span>logstash<span class="tag">&lt;/<span class="name">routingKeyPattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">declareExchange</span>&gt;</span>true<span class="tag">&lt;/<span class="name">declareExchange</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exchangeType</span>&gt;</span>direct<span class="tag">&lt;/<span class="name">exchangeType</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exchangeName</span>&gt;</span>okbuy.log<span class="tag">&lt;/<span class="name">exchangeName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">generateId</span>&gt;</span>true<span class="tag">&lt;/<span class="name">generateId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maxSenderRetries</span>&gt;</span>2<span class="tag">&lt;/<span class="name">maxSenderRetries</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">charset</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">charset</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">durable</span>&gt;</span>true<span class="tag">&lt;/<span class="name">durable</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">deliveryMode</span>&gt;</span>PERSISTENT<span class="tag">&lt;/<span class="name">deliveryMode</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">layout</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;logPattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;stdoutAppender&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.core.ConsoleAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">encoder</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">pattern</span>&gt;</span>$&#123;logPattern&#125;<span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">charset</span>&gt;</span>utf8<span class="tag">&lt;/<span class="name">charset</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">encoder</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">level</span>&gt;</span>WARN<span class="tag">&lt;/<span class="name">level</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">appender</span> <span class="attr">name</span>=<span class="string">&quot;asyncStdoutAppender&quot;</span> <span class="attr">class</span>=<span class="string">&quot;ch.qos.logback.classic.AsyncAppender&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">discardingThreshold</span>&gt;</span>0<span class="tag">&lt;/<span class="name">discardingThreshold</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">queueSize</span>&gt;</span>1024<span class="tag">&lt;/<span class="name">queueSize</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;stdoutAppender&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">includeCallerData</span>&gt;</span>true<span class="tag">&lt;/<span class="name">includeCallerData</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appender</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">level</span> <span class="attr">value</span>=<span class="string">&quot;WARN&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;amqp&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">&quot;asyncStdoutAppender&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Spring的事务控制和数据库的事务控制之间的关系：</p>
+<ul>
+<li>数据库开启事务、提交事务、回滚事务对应jdbc的三个api，Spring事务控制的本质是通过AOP把这三个方法增强在不同的地方调用，实现Spring的事务在方法之间的传播。</li>
+<li>数据库在开启事务到提交的过程中，数据库本身有异常都会回滚。 </li>
+<li>业务异常导致数据库回滚，是Spring通过调用 <code>jdbc rollback</code> 的api实现的。</li>
+</ul>
+</li>
+<li><p>Spring Security OAuth2 Client项目中@EnableOAuth2Sso注解修饰Application启动类时不起作用，需要放在@Configuration修饰的类上（通常是继承WebSecurityConfigurerAdapter的配置类）才能正常工作。</p>
+</li>
+<li><p>检查幂等（是否重复请求）伪代码：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tb_unique` (</span><br><span class="line">    `request_id` <span class="type">varchar</span>(<span class="number">64</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;request id&#x27;</span>,</span><br><span class="line">    `gmt_create` <span class="type">timestamp</span>(<span class="number">6</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span>(<span class="number">6</span>) COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">    `gmt_modified` <span class="type">timestamp</span>(<span class="number">6</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span>(<span class="number">6</span>) COMMENT <span class="string">&#x27;修改时间&#x27;</span>,</span><br><span class="line">    <span class="keyword">PRIMARY</span> KEY (`request_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8 COMMENT<span class="operator">=</span><span class="string">&#x27;幂等表&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">bool <span class="title">checkUnique</span><span class="params">(String requestId)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UniqueDO uniqueDO = buildUniqueDO(request);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//reqeustId唯一索引，重复则抛异常DataIntegrityViolationException</span></span><br><span class="line">        uniqueDao.insert(uniqueDO);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//插入成功说明之前没有数据，返回没有被幂等</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (DataIntegrityViolationException ex) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//出现异常不一定时由于db里面有数据，可能是事务隔离级别导致，</span></span><br><span class="line">        <span class="comment">//所以要再查一次，确认数据再db里面存在</span></span><br><span class="line">        UniqueDO uniqueDO = uniqueDao.selectByRequestId(requestId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (uniqueDO == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//不存在数据则抛异常让方法重试</span></span><br><span class="line">            <span class="keyword">throw</span> ex;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//存在返回被幂等</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> requestId一般由客户端sdk生成和具体业务相关联。</p>
+</li>
+<li><p>profile为default时会读取 <code>application.yml</code> 的配置，而当profile不是default时，会读取对应的 <code>applicaiton-&#123;profile&#125;.yml</code> 的配置。需要注意的是，如果 <code>application.yml</code> 和 <code>application-&#123;profile&#125;.yml</code> 中存在相同的配置项时，<code>application.yml</code> 的优先级更高，所以一般在 <code>application.yml</code> 中设置共用的配置项。</p>
+</li>
+<li><p>在SpringMVC中 <code>@RequestBody</code> 注解修饰的对象如果存在 <code>@DateTimeFormat</code> 注解修饰的属性，而且使用 jackson 进行反序列，那么 <code>@DateTimeFormat</code> 注解实际上是不起作用的，此时需要使用 <code>@JsonFormat</code> 注解进行代替。示例如下：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br><span class="line"><span class="meta">@JsonFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span></span><br><span class="line"><span class="keyword">private</span> LocalDateTime startTime;</span><br></pre></td></tr></table></figure></li>
+<li><p>Spring AOP 的切入点（PointCut）表达式使用规则：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-pattern(param-pattern) throws-pattern?)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>?</code> 的部分表示可省略</li>
+<li><code>*</code> 用来代表任意字符</li>
+<li><code>..</code> 用来表示任意个参数</li>
+<li><code>modifiers-pattern</code> 表示修饰符如 public、protected 等</li>
+<li><code>ret-type-pattern</code> 表示方法返回类型</li>
+<li><code>declaring-type-pattern</code> 表示特定的类</li>
+<li><code>name-pattern</code> 表示方法名称</li>
+<li><code>param-pattern</code> 表示参数</li>
+<li><code>throws-pattern</code> 表示抛出的异常</li>
+</ul>
+</li>
+</ol>
+<h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><ol>
+<li>页面的modal元素记得加上 <code>data-backdrop=&#39;static&#39;</code> 和 <code>data-keyboard=&#39;false&#39;</code>，禁用非 modal 内点击和点击键盘 ESC 键 取消 modal。</li>
+</ol>
+<h2 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h2><ol>
+<li><p>批量删除并返回批量删除的结果时，ajax 方法中 async 一定要配置成 false，否则页面无法正确响应批量删除的结果。</p>
+</li>
+<li><p>使用 qrcodejs 生成二维码图片之后直接使用 <code>$(&#39;img&#39;).attr(&#39;src&#39;)</code> 返回的值是undefined，这时需要使用 <code>setTimeout(function(), delay_time)</code> 来拿到图片的 src 。</p>
+</li>
+<li><p>js数组遍历删除元素的方法：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (...) &#123;</span><br><span class="line">        arr.splice(i, <span class="number">1</span>);</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><ol>
+<li><p>局部列表滚动查看css，height和max-height二选一。</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid-list</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">190px</span>; //固定高度的列表</span><br><span class="line">    <span class="attribute">max-height</span>: <span class="number">500px</span>; //列表最大高度</span><br><span class="line">    <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">    <span class="attribute">overflow-y</span>: scroll;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.grid-list</span>::-webkit-scrollbar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>一个基于网格的响应式布局简单示例：</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid-container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    grid-template-rows: <span class="number">1</span>fr;</span><br><span class="line">    grid-gap: <span class="number">1rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width</span>: <span class="number">719px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.grid-container</span> &#123;</span><br><span class="line">        grid-template-<span class="attribute">columns</span>: <span class="number">1</span>fr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">min-width</span>: <span class="number">719px</span>) &#123;</span><br><span class="line">    <span class="selector-class">.grid-container</span> &#123;</span><br><span class="line">        grid-template-<span class="attribute">columns</span>: <span class="number">1</span>fr <span class="number">1</span>fr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 浏览器窗口宽度大于719px时，元素呈2列排布，反之呈1列排布。</p>
+</li>
+</ol>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><ol>
+<li>使用原生HTML进行表单开发时，如果没有指定 <code>&lt;button&gt;</code> 的 <code>type</code> 属性，则默认 <code>type=&quot;submit&quot;</code>，最终导致点击之后 <code>window.location.href</code> 的路径中会自动多一个 <code>?</code>，这是因为原生的表单提交是以path后拼接form的参数进行请求的，所以在进行异步请求时需要指定提交的按钮为 <code>&lt;button type=&quot;button&quot;&gt;</code>。</li>
+</ol>
+<h2 id="Vue-js"><a href="#Vue-js" class="headerlink" title="Vue.js"></a>Vue.js</h2><ol>
+<li><p>使用局部的 filter 代替 methods 中的方法格式化数据显示。</p>
+</li>
+<li><p>vue 在绑定 date 类型的 input 输入框时，设置默认值要用 <code>:value=&quot;date | toDate&quot;</code>，toDate 为过滤器；当 date 的值是 timestamp 类型时，toDate 可以为以下方法：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dateTime</span>(<span class="params">date</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (date) &#123;</span><br><span class="line">        date = <span class="keyword">new</span> <span class="built_in">Date</span>(date);</span><br><span class="line">        <span class="keyword">var</span> month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">var</span> day = date.getDate();</span><br><span class="line">        <span class="keyword">var</span> hour = date.getHours();</span><br><span class="line">        <span class="keyword">var</span> minute = date.getMinutes();</span><br><span class="line">        <span class="keyword">var</span> second = date.getSeconds();</span><br><span class="line">        <span class="keyword">return</span> date.getFullYear() + <span class="string">&#x27;-&#x27;</span> + </span><br><span class="line">            (month &lt; <span class="number">10</span> ? <span class="string">&#x27;0&#x27;</span> + month : month) + <span class="string">&#x27;-&#x27;</span> + </span><br><span class="line">            (day &lt; <span class="number">10</span> ? <span class="string">&#x27;0&#x27;</span> + day : day) + <span class="string">&#x27; &#x27;</span> + </span><br><span class="line">            (hour &lt; <span class="number">10</span> ? <span class="string">&#x27;0&#x27;</span> + hour : hour) + <span class="string">&#x27;:&#x27;</span> + </span><br><span class="line">            (minute &lt; <span class="number">10</span> ? <span class="string">&#x27;0&#x27;</span> + minute : minute) + <span class="string">&#x27;:&#x27;</span> + </span><br><span class="line">            (second &lt; <span class="number">10</span> ? <span class="string">&#x27;0&#x27;</span> + second : second);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> date;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>vue.js 2.5.2版本在 v-for 循环中使用 v-model 绑定数组元素时会报如下错误：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You are binding v-model directly to a v-for iteration alias. This will not be able to modify the v-for source array because writing to the alias is like modifying a function local variable. Consider using an array of objects and use v-model on an object property instead.</span><br></pre></td></tr></table></figure>
+<p> 从提示信息可以看出 vue 建议使用 array 的某个元素的属性值作为 v-model 绑定的主体，如果元素并不是 Object 类型而是 String 类型时，需要通过 index 来实现元素绑定。具体代码如下：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;(el, index)  in array&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;array[index]&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将数组中位于 index1 的元素移动至 index2 的位置：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.splice(index2, <span class="number">0</span>, list.splice(index1, <span class="number">1</span>)[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<p> 交换数组中位于 index1 和 index2 的两个元素：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list[index1] = list.splice(index2, <span class="number">1</span>, list[index1])[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p> vue 组件中实时交换位于 index1 和 index2 的两个元素：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$set(list, index1, list.splice(index2, <span class="number">1</span>, list[index1])[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure></li>
+<li><p>Vue的 <code>filters</code> 块中的过滤器不能加载自身 <code>data()</code> 块中的变量，如果需要使用 <code>data()</code> 中的变量对数据进行转换时可以将过滤器的逻辑写在 <code>methods</code> 块中。</p>
+</li>
+<li><p>在使用基于Vue的前端框架进行开发时，有些框架组件无法对点击事件进行监听和处理（如 <code>ant-design-vue</code> 的 <code>popconfirm</code> 组件，详见 <a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design/issues/7233">Could you add a property in PopConfirm to stop click event propagation?</a>），而如果此时正好需要阻止某个组件的点击事件向上层元素传播时，可以使用如下方式：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> @<span class="attr">click</span>=<span class="string">&quot;e =&gt; e.stopPropagation()&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a-popconfirm</span>&gt;</span><span class="tag">&lt;/<span class="name">a-popconfirm</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Vue的 <code>style scoped</code> 中的样式不起作用时，可以新增一个无scoped修饰的 <code>style</code> 来定义css样式，例如：</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line"><span class="selector-class">.scoped-style</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: black;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line"><span class="selector-class">.global-style</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>在Vue中使用JSX语法时，需要注意以下方面：</p>
+<ul>
+<li>所有的运算赋值操作都需要在 <code>&#123;&#125;</code> 中，如获取变量值，调用方法等。</li>
+<li>不支持Vue的过滤器，需要使用方法来代替。</li>
+<li>事件监听 <code>@click=&quot;handleClick(param)&quot;</code> =&gt; <code>onClick=&#123;this.handleClick.bind(this, param)&#125;</code>，<code>@click.native=&quot;handleNativeClick(param)&quot;</code> =&gt; <code>nativeOnClick=&#123;this.handleNativeClick.bind(this, param)&#125;</code>，这里需要使用js原生的<code>bind</code>方法来进行方法调用。</li>
+<li>不支持Vue的指令，常用的指令的备选解决方案：<code>v-if=&quot;condition&quot;</code> =&gt; <code>v-show=&quot;condition&quot;</code> 或者 <code>&#123;condition ? &lt;div&gt;JSX&lt;/div&gt; : &#39;&#39;&#125;</code>；<code>&lt;li v-for=&quot;item in items&quot; :key=&quot;item&quot;&gt;&#123;item&#125;&lt;/li&gt;</code> =&gt; <code>&#123;items.map((item, index) =&gt; &#123;return &lt;li&gt;&#123;item&#125;&lt;/li&gt;&#125;)&#125;</code>。</li>
+</ul>
+</li>
+</ol>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><ol>
+<li>使用 redis-cli 进入 redis 的命令行模式时，可以使用 <code>keys **</code> 查看所有 key 值，使用 <code>get [key]</code> 查看 key 对应的 value 值。需要注意的是，使用 <code>keys **</code> 查看到的 key 值如果使用 “” 包括，那么 <code>get [key]</code> 的 key 也需要用 “” 包括起来。</li>
+</ol>
+<h2 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h2><ol>
+<li><p>使用 <strong><code>frontend-maven-plugin</code></strong> 整合前后端项目构建时，需要注意web模块需要放在server模块之前，保证web先构建，这样才能将web构建好的文件复制到server的 <code>resources/public</code> 目录下。</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>xxx-web<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>xxx-server<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 同时要注意后台不要对 <code>@RequestMapping(&quot;/&quot;)</code> 做处理，否则有可能会使得访问 <code>&quot;/&quot;</code> 无法显示前端构建好的index.html页面。</p>
+</li>
+<li><p>maven引用私服的jar包时，需要在 <code>pom.xml</code> 文件的 <code>&lt;repositories&gt;</code> 标签下中指定私服的 <code>&lt;id&gt;</code>、<code>&lt;name&gt;</code>、<code>&lt;url&gt;</code>。</p>
+</li>
+<li><p>gitlab-runner的 <code>config.toml</code> 在 <code>[runners.docker] </code>中配置 <code>extra_hosts = [&quot;xxx.xxx.com:172.17.0.1&quot;]</code>可实现runner容器的ip和host映射关系的配置。</p>
+</li>
+<li><p>设置maven的 <code>setting.xml</code> 中 mirror 节点的 <code>mirrorOf</code> 有以下配置策略：</p>
+<ul>
+<li>*：everything</li>
+<li>external:*：everything not on the localhost and not file based</li>
+<li>repo,repo1：repo or repo1</li>
+<li>*,!repo1：everything except repo1</li>
+</ul>
+</li>
+</ol>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><ol>
+<li><p>windows 下使用 Nginx 相关命令如下：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#启动</span><br><span class="line">点击 Nginx 目录下的 nginx.exe；cmd 运行 start nginx</span><br><span class="line"></span><br><span class="line">#关闭</span><br><span class="line">nginx -s stop #立即停止nginx，不保存相关信息</span><br><span class="line">nginx -s quit #正常退出nginx，并保存相关信息</span><br><span class="line"></span><br><span class="line">#重启（重新加载配置）</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure></li>
+<li><p>nginx 的配置文件 root 路径不识别 <code>\</code> 只识别 <code>/</code>。</p>
+</li>
+<li><p>Letsencrypt通配符证书的申请和在nginx配置：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://my.oschina.net/kimver/blog/1634575">申请Let’s Encrypt通配符HTTPS证书</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cyberciti.biz/faq/how-to-configure-nginx-with-free-lets-encrypt-ssl-certificate-on-debian-or-ubuntu-linux/">How to configure Nginx with Let’s Encrypt on Debian/Ubuntu Linux</a></li>
+</ul>
+</li>
+<li><p>使用 nginx 解决 CORS 问题</p>
+<p> 使用反向代理将服务端（接口提供方）与客户端（接口调用方）部署在同一个域下。</p>
+</li>
+<li><p>使用 nginx 解决 X-Frame-Options: deny 问题</p>
+<p> 使用<a target="_blank" rel="noopener" href="https://github.com/openresty/headers-more-nginx-module">headers-more</a>插件，推荐直接下载带headers-more模块的openresty，<a target="_blank" rel="noopener" href="https://openresty.org/en/download.html">下载地址</a>。</p>
+<p> 在 nginx.conf 中（一般是在server下）配置：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 删除 &quot;X-Frame-Options&quot; header</span><br><span class="line">more_clear_headers &#x27;X-Frame-Options&#x27;;</span><br><span class="line"># 设置 &quot;X-Frame-Options: SAMEORIGIN&quot; 同域可嵌入iframe</span><br><span class="line">more_set_headers &#x27;X-Frame-Options: SAMEORIGIN&#x27;;</span><br></pre></td></tr></table></figure></li>
+<li><p>指定MySQL时区，在mysqld.conf中增加 <code>default-time-zone=&#39;+8:00&#39;</code> 配置。</p>
+</li>
+<li><p>在做微信公众号开发时，需要在公网上调用开发机器的接口，除了使用花生壳等软件进行内网穿透之外，如果有富余的公网服务器资源，可以使用一些简单方便的内网穿透工具，推荐 <a target="_blank" rel="noopener" href="https://github.com/sosont/ichWebpass">ichWebpass</a>。</p>
+</li>
+<li><p>gitlab pg数据库配置</p>
+<p> 修改<code>/var/opt/gitlab/postgresql/data/pg_hba.conf</code>文件，增加下面的配置：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">host all all 192.168.1.10/22 trust</span><br></pre></td></tr></table></figure>
+
+<p> 上述的修改会在使用<code>gitlab-ctl reconfigure</code>命令之后失效，通过修改gitlab配置文件中pg数据库的entries可以避免这种情况。具体为：</p>
+<p> 在gitlab.rb中增加</p>
+ <figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">postgresql<span class="section">[&#x27;custom_pg_hba_entries&#x27;]</span> = &#123;</span><br><span class="line">  APPLICATION: <span class="section">[&#123; # APPLICATION should identify what the settings are used for</span></span><br><span class="line"><span class="section">    type: &#x27;host&#x27;,</span></span><br><span class="line"><span class="section">    database: &#x27;all&#x27;,</span></span><br><span class="line"><span class="section">    user: &#x27;all&#x27;,</span></span><br><span class="line"><span class="section">    cidr: &#x27;192.168.1.0/24&#x27;,</span></span><br><span class="line"><span class="section">    method: &#x27;trust&#x27;,</span></span><br><span class="line"><span class="section">    #option: 0</span></span><br><span class="line"><span class="section">  &#125;]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>注意：</strong> 这里的<code>APPLICATION</code>对象是一个数组，有些gitlab版本默认不是数组，需要手动修改。</p>
+</li>
+</ol>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><ol>
+<li>GitHub 现在支持创建私有代码仓库了，但使用时需要注意：将 GitHub 的 repository 从 <em><strong>public</strong></em> 切换成 <em><strong>private</strong></em> 再切回 <em><strong>public</strong></em> 之后，需要 <code>push</code> 代码到 <code>master</code> 分支才能让已经404的 <code>Github Pages</code> 页面恢复正常。</li>
+</ol>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><ol>
+<li>为了在windows系统上安装docker，需要将win10系统升级到专业版开启HyperV虚拟机才行。 win10专业版升级密钥：DR9VN-GF3CR-RCWT2-H7TR8-82QGT</li>
+</ol>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><ol>
+<li><p>Ubuntu/Debian开机启动脚本 <code>spider.sh</code> 示例：</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## BEGIN INIT INFO</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Provides: spider</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Start:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required-Stop:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default-Start: 2 3 4 5</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default-Stop: 0 1 6</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Short-Description: spider</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Description: spider service start</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## END INIT INFO</span></span></span><br><span class="line"></span><br><span class="line">[shell content]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开机启动：<code>update-rc.d spider.sh defaults</code></li>
+<li>移除开机启动：<code>update-rc.d spider.sh remove</code></li>
+</ul>
+</li>
+<li><p>使用netstat查看系统网络端口情况：<code>netstat -tunlp</code>；如果发现没有 <code>PID</code> (进程号)，需要使用 <code>sudo netstat -tunlp</code>。</p>
+</li>
+<li><p>对于新安装的官方Ubuntu-server等系统，可以通过指令 <code>sudo apt-get install build-essential</code> 安装gcc环境。</p>
+</li>
+<li><p>取消sudo密码：<code>sudo visudo</code> 进入编辑界面；添加行 <code>username ALL=(ALL) NOPASSWD:ALL</code>，username为登录用户名，如果想作用于某个用户组则使用 <code>%usergroup ALL=(ALL:ALL) NOPASSWD:ALL</code>。</p>
+</li>
+<li><p>linux系统添加ssh公钥的方式：</p>
+<ul>
+<li><p>本地</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 覆盖</span></span><br><span class="line">cat [ssh_pub_key] &gt; ~/.ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加</span></span><br><span class="line">cat [ssh_pub_key] &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure></li>
+<li><p>远程</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/id_rsa.pub root@[remote-server-ip]:/root/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>  <strong>注：</strong> 需要输入远程服务器的登录密码进行认证。</p>
+</li>
+</ul>
+</li>
+<li><p>ssh对目录的权限有要求，具体如下：</p>
+<table>
+<thead>
+<tr>
+<th>目录/文件</th>
+<th>权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>~/.ssh</td>
+<td>700</td>
+</tr>
+<tr>
+<td>~/.ssh/*</td>
+<td>600</td>
+</tr>
+<tr>
+<td>~/.ssh/config</td>
+<td>700</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><ol>
+<li><p>使用docker-compose的build参数构建docker镜像时，要注意指定的context目录下默认的Dockerfile文件名必须为 <code>Dockerfile</code>。如果想使用其他文件名，可以通过 <code>-f filename</code> 指定。 </p>
+</li>
+<li><p>docker环境为docker for windows，有效避免host为windows系统时 <code>docker run -v</code> 绑定的目录映射关系在系统重启之后失效的方法为：使用 <code>docker volume create path1</code> 创建volume，再使用 <code>-v path1:/container/path</code>。简单地说就是使用 “自定义数据卷” 代替 “容器自动创建的临时数据卷” 进行映射，完成docker容器的数据持久化。</p>
+</li>
+<li><p>指定docker的dns，防止网络环境变化时导致容器网络的不稳定。<br> 编辑docker的<code>daemon.json</code>:</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;dns&quot;</span>: [<span class="string">&quot;114.114.114.114&quot;</span>, <span class="string">&quot;8.8.8.8&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用docker-compose来部署redash时，注意需要先创建redash数据库才能启动：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker-compose run --rm server create_db</span><br><span class="line">sudo docker-compose up -d</span><br></pre></td></tr></table></figure></li>
+<li><p>使用docker方式部署consul时，由于consul在docker虚拟网络中无法正确识别注册服务的hostname，因此需要在注册服务中配置 spring.cloud.consul.discovery.hostname=192.168.1.xxx (注册服务的局域网ip，要注意的是必须是docker宿主机所在地局域网ip，使用172.17.0.1等docker内网ip也不行)，才能确保consul正确地进行健康检查。</p>
+</li>
+</ol>
+<Vssue title="开发实战总结"/></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">yupaits</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yupaits.com/2020/02/20/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98%E6%80%BB%E7%BB%93/">http://yupaits.com/2020/02/20/开发实战总结/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yupaits.com" target="_blank">yupaits的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/Git/">Git</a><a class="post-meta__tags" href="/tags/Spring-Boot/">Spring Boot</a><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/Vue-js/">Vue.js</a><a class="post-meta__tags" href="/tags/Maven/">Maven</a><a class="post-meta__tags" href="/tags/Docker/">Docker</a><a class="post-meta__tags" href="/tags/Redis/">Redis</a></div><div class="post_share"><div class="social-share" data-image="/img/cover/post-cover5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/28/WSL2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"><img class="prev-cover" src="/img/cover/post-cover4.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">WSL2使用指南</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/14/post/%E4%B8%89%E5%A4%A7%E6%8A%A5%E8%A1%A8%EF%BC%9A%E8%B4%A2%E5%8A%A1%E7%95%8C%E7%9A%84%E9%80%9A%E7%94%A8%E8%AF%AD%E8%A8%80/"><img class="next-cover" src="/img/cover/post-cover8.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">三大报表：财务界的通用语言</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/02/04/SpringBoot和Vue单页面前后端分离项目的整合与构建/" title="SpringBoot和Vue单页面前后端分离项目的整合与构建"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">SpringBoot和Vue单页面前后端分离项目的整合与构建</div></div></a></div><div><a href="/2020/02/04/Todo-Tomato技术解读/" title="Todo-Tomato技术解读"><img class="cover" src="/img/cover/post-cover2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Todo-Tomato技术解读</div></div></a></div><div><a href="/2021/04/28/常见异常解决方案总结/" title="常见异常解决方案总结"><img class="cover" src="/img/cover/post-cover1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-28</div><div class="title">常见异常解决方案总结</div></div></a></div><div><a href="/2020/02/04/从Ultimate-Spider全方位解析数据采集系统的基本知识/" title="从Ultimate-Spider全方位解析数据采集系统的基本知识"><img class="cover" src="/img/cover/post-cover5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">从Ultimate-Spider全方位解析数据采集系统的基本知识</div></div></a></div><div><a href="/2020/02/04/FullGC排查流程/" title="Full GC排查流程"><img class="cover" src="/img/cover/post-cover5.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Full GC排查流程</div></div></a></div><div><a href="/2020/02/04/Java枚举类实例/" title="Java枚举类实例"><img class="cover" src="/img/cover/post-cover9.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-04</div><div class="title">Java枚举类实例</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">yupaits</div><div class="author-info__description">俯仰一生，最惧无为</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">212</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">157</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yupaits"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yupaits" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:ts495606653@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">技术分享，欢迎讨论！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java"><span class="toc-number">1.</span> <span class="toc-text">Java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot"><span class="toc-number">2.</span> <span class="toc-text">SpringBoot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bootstrap"><span class="toc-number">3.</span> <span class="toc-text">Bootstrap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JQuery"><span class="toc-number">4.</span> <span class="toc-text">JQuery</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS"><span class="toc-number">5.</span> <span class="toc-text">CSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML"><span class="toc-number">6.</span> <span class="toc-text">HTML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue-js"><span class="toc-number">7.</span> <span class="toc-text">Vue.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98"><span class="toc-number">8.</span> <span class="toc-text">缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA"><span class="toc-number">9.</span> <span class="toc-text">构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-number">10.</span> <span class="toc-text">部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git"><span class="toc-number">11.</span> <span class="toc-text">Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">12.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux"><span class="toc-number">13.</span> <span class="toc-text">Linux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-number">14.</span> <span class="toc-text">Docker</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/08/11/web-architecture/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" title="消息中间件">消息中间件</a><time datetime="2021-08-11T15:42:08.000Z" title="发表于 2021-08-11 23:42:08">2021-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/07/01/architecture/%E9%80%9A%E7%94%A8%E5%8F%AF%E7%BC%96%E6%8E%92%E7%8A%B6%E6%80%81%E6%9C%BA%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1/" title="通用可编排状态机引擎设计">通用可编排状态机引擎设计</a><time datetime="2021-07-01T07:55:15.000Z" title="发表于 2021-07-01 15:55:15">2021-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/" title="常见异常解决方案总结">常见异常解决方案总结</a><time datetime="2021-04-28T09:23:36.000Z" title="发表于 2021-04-28 17:23:36">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" title="分布式锁">分布式锁</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/architecture/%E5%8E%86%E5%8F%B2%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86/" title="历史数据清理">历史数据清理</a><time datetime="2021-04-28T01:04:08.000Z" title="发表于 2021-04-28 09:04:08">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: #1f1f1f"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2021 By yupaits</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Daf7PjBeGob17A0xwU6E4YT6-gzGzoHsz',
+      appKey: 'O4QrwOFRkDaREqRjoMwG9fD8',
+      placeholder: '记得留下你的昵称和邮箱，可以快速收到回复',
+      avatar: 'retro',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'yupaits/yupaits-blog',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
