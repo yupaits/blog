@@ -26,6 +26,7 @@ menu:
     Golang: /categories/Golang/ || fab fa-dev
     Docker: /categories/Docker/ || fab fa-docker
     树莓派: /categories/树莓派/ || fab fa-raspberry-pi
+    yutool系列: /categories/yutool/ || fab fa-dev
   项目: /projects/ || fas fa-chart-bar
   书单: /books/ || fas fa-book
   站点: /sites/ || fas fa-sitemap
