@@ -19,13 +19,13 @@ yutool的模块主要分为两大部分：组件和插件。以下是其主要�
 
 ### 组件
 
-|组件|名称|主要特性|TODO|完成度|
-|---|---|---|---|---|
-|yutool-cache|缓存组件|支持二级缓存（本地缓存和分布式缓存），通过缓存注解控制缓存的刷新和过期|
-|yutool-file-server|文件服务|文件的上传下载，支持租户隔离、防盗链|
+|组件|名称|主要特性|完成度|
+|---|---|---|:---:|
+|yutool-cache|缓存组件|支持二级缓存（本地缓存和分布式缓存），通过缓存注解控制缓存的刷新和过期|√|
+|yutool-file-server|文件服务|文件的上传下载，支持租户隔离、防盗链|√|
 |yutool-ldap|LDAP组件|主流的LDAP服务接入|
-|yutool-mq|消息组件|消息队列，支持延迟队列、重试队列（目前仅支持RabbitMQ）|
-|yutool-orm|ORM组件|整合了Spirng生态主流的Mybatis Plus和JPA框架，并加入了实际场景中DO、DTO和VO等POJO对象的转换及处理逻辑|
+|yutool-mq|消息组件|消息队列，支持延迟队列、重试队列（目前仅支持RabbitMQ）|√|
+|yutool-orm|ORM组件|整合了Spirng生态主流的Mybatis Plus和JPA框架，并加入了实际场景中DO、DTO和VO等POJO对象的转换及处理逻辑|√|
 |yutool-push|推送组件|支持5种类型消息的推送：<br>● 移动APP通知<br>● Web网页消息<br>● sms短信<br>● Email电子邮件<br>● IM消息<br>通过同一的消息发送入口，按需路由到指定的消息渠道进行消息推送|
 |yutool-social|第三方登录组件|社交账号登录（第三方登录）组件，整合各大主流社交平台第三方登录功能并统一入口|
 |yutool-state|状态机引擎|抽象主要的状态机应用场景，将状态机状态迁移的整个过程的处理接口标准化|
@@ -33,19 +33,19 @@ yutool的模块主要分为两大部分：组件和插件。以下是其主要�
 
 ### 插件
 
-|插件|名称|主要特性|TODO|完成度|
-|---|---|---|---|---|
-|api-idempotent|接口幂等插件|接口幂等检查，基于MySQL数据库主键的幂等性校验|
-|api-logger|接口访问日志插件|接口请求日志，记录接口请求的各项信息|
-|audit-logger|审计日志插件|审计日志，字段维度的审计处理记录|
-|auth-filter|权限过滤插件|权限过滤，用户、角色、部门多维度权限过滤，扩展的自定义权限过滤接口|
-|distributed-lock|分布式锁插件|分布式锁（基于Redis和Zookeeper实现）|
-|history-data|历史数据处理插件|历史数据清理，通过配置项实现历史数据的清除或转移|
-|jwt-helper|JWT工具插件|JWT工具|
+|插件|名称|主要特性|完成度|
+|---|---|---|:---:|
+|api-idempotent|接口幂等插件|接口幂等检查，基于MySQL数据库主键的幂等性校验|√|
+|api-logger|接口访问日志插件|接口请求日志，记录接口请求的各项信息|√|
+|audit-logger|审计日志插件|审计日志，字段维度的审计处理记录|√|
+|auth-filter|权限过滤插件|权限过滤，用户、角色、部门多维度权限过滤，扩展的自定义权限过滤接口|√|
+|distributed-lock|分布式锁插件|分布式锁（基于Redis和Zookeeper实现）|√|
+|history-data|历史数据处理插件|历史数据清理，通过配置项实现历史数据的清除或转移|√|
+|jwt-helper|JWT工具插件|JWT工具|√|
 |native-mobile|本机号码登录插件|实现本机号码登录|
 |sms-reply-storage|短信回复内容存储插件|短信回复存储，用于向用户推送服务短信之后，接收并存储用户回复的短信内容|
 |sms-verify|短信验证码插件|短信验证码的发送及验证，不限制验证码的长度|
-|swagger-support|Swagger接口文档插件|swagger接口文档支持，使用配置代替硬编码实现swagger文档的接入和分组功能|
-|import-export|数据导入导出插件|数据导入导出插件，基于EasyExcel实现|
+|swagger-support|Swagger接口文档插件|swagger接口文档支持，使用配置代替硬编码实现swagger文档的接入和分组功能|√|
+|import-export|数据导入导出插件|数据导入导出插件，基于EasyExcel实现|√|
 |multi-ds-tx|多数据源事务插件|多数据源事务控制插件，抽取dynamic-datasource本地事务控制核心代码二次封装进行实现|
 |dynamic-thread-pool|动态线程池管理插件|动态线程池参数调优，监控线程池运行状态|
