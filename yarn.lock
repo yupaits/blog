@@ -850,10 +850,10 @@ hexo-server@^2.0.0:
     open "^7.0.0"
     serve-static "^1.14.1"
 
-hexo-theme-butterfly@^3.8.4:
-  version "3.8.4"
-  resolved "https://registry.yarnpkg.com/hexo-theme-butterfly/-/hexo-theme-butterfly-3.8.4.tgz#b4cfe313e77fafc0586b8f4e6985a7f69082846b"
-  integrity sha512-d7S3LVVxmpWhL0YEYhMUejLMHbbTTosB8yLDkAnbe04HA4IoYiZTlE5zYdmLEcxIiNzyjW5Va4tnn4CNggR0Vg==
+hexo-theme-butterfly@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/hexo-theme-butterfly/-/hexo-theme-butterfly-4.0.1.tgz#9d8b89ac2947a6e081117b5fa0c0b4406de4c7e0"
+  integrity sha512-9D+NOrQ+7P1LmUSF+EioyNb0KiJFBkKxSiXNwYCBzya7na6GTT6EOvTEmqigWxv4+8wCHC8OYfBzXmqFLwQjZQ==
   dependencies:
     hexo-renderer-pug "^2.0.0"
     hexo-renderer-stylus "^2.0.1"
