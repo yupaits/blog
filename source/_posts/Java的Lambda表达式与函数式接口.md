@@ -42,7 +42,7 @@ Java8的`::`运算符用于方法引用，是lambda表达式的一种简写方�
 
 |方法引用类型|语法|示例|
 |---|---|---|
-|静态方法引用|`${className}::${methodName}`|`Objects.nonNull`|
+|静态方法引用|`${className}::${methodName}`|`Objects::nonNull`|
 |对象的实例方法引用|`${instanceName}::${methodName}`|`System.out::println`|
 |对象的超类方法引用|`super::${methodName}`|`super::hashCode`|
 |类构造器引用|`${className}::new`|`ArrayList::new`|
