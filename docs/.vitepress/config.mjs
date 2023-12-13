@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import MarkdownItTaskLists from 'markdown-it-task-lists'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -11,29 +12,18 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '主页', link: '/' },
-      { text: 'Examples', link: '/examples/markdown-examples' },
       { text: '技术博客', link: '/技术博客/' },
       { text: '文章收录', link: '/文章收录' },
       { text: '软件开发', link: '/软件开发/实战总结/常见异常解决方案' },
-      { text: '个人项目', link: '/个人项目' },
+      { text: '个人项目', link: '/个人项目/yutool组件式框架/yutool模块划分' },
       { text: '项目文档', link: '/项目文档' },
       { text: '生活记录', link: '/生活记录' },
     ],
 
     sidebar: {
-      '/examples': [
-        {
-          text: 'Examples',
-          items: [
-            { text: 'Markdown Examples', link: '/examples/markdown-examples' },
-            { text: 'Runtime API Examples', link: '/examples/api-examples' }
-          ]
-        }
-      ],
       '/技术博客': [],
       '/文章收录': [],
       '/软件开发': [
-
         {
           text: '编程基础',
           collapsed: false,
@@ -76,7 +66,7 @@ export default defineConfig({
                     { text: '加密与安全', link: '/软件开发/编程基础/开发语言/Java教程/加密与安全' },
                     { text: '多线程', link: '/软件开发/编程基础/开发语言/Java教程/多线程' },
                     { text: 'Maven基础', link: '/软件开发/编程基础/开发语言/Java教程/Maven基础' },
-                    { text: 'XMl与JSON', link: '/软件开发/编程基础/开发语言/Java教程/XMl与JSON' },
+                    { text: 'XML与JSON', link: '/软件开发/编程基础/开发语言/Java教程/XML与JSON' },
                     { text: 'JDBC编程', link: '/软件开发/编程基础/开发语言/Java教程/JDBC编程' },
                     { text: '函数式编程', link: '/软件开发/编程基础/开发语言/Java教程/函数式编程' },
                     {
@@ -232,7 +222,115 @@ export default defineConfig({
           ]
         },
       ],
-      '/个人项目': [],
+      '/个人项目': [
+        {
+          text: 'yutool组件式框架',
+          collapsed: false,
+          items: [
+            { text: 'yutool模块划分', link: '/个人项目/yutool组件式框架/yutool模块划分' },
+            {
+              text: 'yutool-orm ORM组件',
+              collapsed: true,
+              items: [
+                { text: 'yutool-orm-core', link: '/个人项目/yutool组件式框架/yutool-orm ORM组件/yutool-orm-core' },
+                { text: 'yutool-orm-mybatis', link: '/个人项目/yutool组件式框架/yutool-orm ORM组件/yutool-orm-mybatis' },
+                { text: 'yutool-orm-jpa', link: '/个人项目/yutool组件式框架/yutool-orm ORM组件/yutool-orm-jpa' },
+              ]
+            },
+            { text: '[归档] yutool-cache缓存组件', link: '/个人项目/yutool组件式框架/[归档] yutool-cache缓存组件' },
+            { text: '[归档] yutool-mq消息组件', link: '/个人项目/yutool组件式框架/[归档] yutool-mq消息组件' },
+            {
+              text: 'yutool-mq消息组件',
+              collapsed: true,
+              items: [
+                { text: 'yutool-mq-core', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-core' },
+                { text: 'yutool-mq-kafka', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-kafka' },
+                { text: 'yutool-mq-rabbitmq', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-rabbitmq' },
+                { text: 'yutool-mq-rocketmq', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-rocketmq' },
+              ]
+            },
+            { text: '[归档] yutool-push推送组件', link: '/个人项目/yutool组件式框架/[归档] yutool-push推送组件' },
+            {
+              text: 'yutool-push推送组件',
+              collapsed: true,
+              items: [
+                { text: 'yutool-push-core', link: '/个人项目/yutool组件式框架/yutool-push推送组件/yutool-push-core' },
+                { text: 'yutool-push-provider', link: '/个人项目/yutool组件式框架/yutool-push推送组件/yutool-push-provider' },
+              ]
+            },
+            { text: 'yutool-file-server文件服务', link: '/个人项目/yutool组件式框架/yutool-file-server文件服务' },
+            { text: 'yutool-ldap LDAP组件', link: '/个人项目/yutool组件式框架/yutool-ldap LDAP组件' },
+            { text: 'yutool-social第三方登录组件', link: '/个人项目/yutool组件式框架/yutool-social第三方登录组件' },
+            { text: 'yutool-state状态机引擎', link: '/个人项目/yutool组件式框架/yutool-state状态机引擎' },
+            { text: 'yutool-search搜索引擎组件', link: '/个人项目/yutool组件式框架/yutool-search搜索引擎组件' },
+            {
+              text: 'yutool-plugins插件机制',
+              collapsed: true,
+              items: [
+                { text: 'api-idempotent接口幂等插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/api-idempotent接口幂等插件' },
+                { text: 'api-logger接口访问日志插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/api-logger接口访问日志插件' },
+                { text: 'audit-logger审计日志插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/audit-logger审计日志插件' },
+                { text: 'auth-filter权限过滤插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/auth-filter权限过滤插件' },
+                { text: 'distributed-lock分布式锁插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/distributed-lock分布式锁插件' },
+                { text: '[归档] dynamic-thread-pool动态线程池管理插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] dynamic-thread-pool动态线程池管理插件' },
+                { text: 'history-data历史数据处理插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/history-data历史数据处理插件' },
+                { text: 'import-export数据导入导出插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/import-export数据导入导出插件' },
+                { text: 'jwt-helper JWT工具插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/jwt-helper JWT工具插件' },
+                { text: '[归档] multi-ds-tx多数据源事务插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] multi-ds-tx多数据源事务插件' },
+                { text: 'native-mobile本地手机号登录插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/native-mobile本地手机号登录插件' },
+                { text: 'sms-reply-storage短信回复内容存储插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/sms-reply-storage短信回复内容存储插件' },
+                { text: 'sms-verify短信验证码插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/sms-verify短信验证码插件' },
+                { text: 'swagger-support Swagger接口文档插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/swagger-support Swagger接口文档插件' },
+                { text: 'trace-analysis链路追踪插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/trace-analysis链路追踪插件' },
+                { text: 'cache-adapter缓存适配插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/cache-adapter缓存适配插件' },
+              ]
+            },
+          ]
+        },
+        {
+          text: 'yutool-cli高效工作套件',
+          collapsed: false,
+          items: [
+            { text: 'yutool-cli功能清单', link: '/个人项目/yutool-cli高效工作套件/yutool-cli功能清单' },
+            { text: 'yutool-cli运营模式', link: '/个人项目/yutool-cli高效工作套件/yutool-cli运营模式' },
+
+          ]
+        },
+        {
+          text: 'yutool-metadata元数据',
+          collapsed: false,
+          items: [
+            { text: '元数据自定义对象管理设计', link: '/个人项目/yutool-metadata元数据/元数据自定义对象管理设计' },
+          ]
+        },
+        {
+          text: 'yutool-biz业务组件',
+          collapsed: false,
+          items: [
+            { text: 'yutool-biz 整体设计', link: '/个人项目/yutool-biz业务组件/yutool-biz 整体设计' },
+            { text: 'yutool-api API接口', link: '/个人项目/yutool-biz业务组件/yutool-api API接口' },
+            { text: 'yutool-auth 认证授权', link: '/个人项目/yutool-biz业务组件/yutool-auth 认证授权' },
+            { text: 'yutool-user 用户', link: '/个人项目/yutool-biz业务组件/yutool-user 用户' },
+            { text: 'yutool-org 组织架构', link: '/个人项目/yutool-biz业务组件/yutool-org 组织架构' },
+            { text: 'yutool-address 地址', link: '/个人项目/yutool-biz业务组件/yutool-address 地址' },
+            { text: 'yutool-dict 数据字典', link: '/个人项目/yutool-biz业务组件/yutool-dict 数据字典' },
+            { text: 'yutool-notify 通知消息', link: '/个人项目/yutool-biz业务组件/yutool-notify 通知消息' },
+            { text: 'yutool-exchange 数据中转', link: '/个人项目/yutool-biz业务组件/yutool-exchange 数据中转' },
+            { text: 'admin-ui 管理界面', link: '/个人项目/yutool-biz业务组件/admin-ui 管理界面' },
+          ]
+        },
+        {
+          text: 'yupan网盘',
+          collapsed: false,
+          items: [
+            { text: 'yupan架构', link: '/个人项目/yupan网盘/yupan架构' },
+            { text: '商城页面', link: '/个人项目/yupan网盘/商城页面' },
+            { text: 'shop商城', link: '/个人项目/yupan网盘/shop商城' },
+            { text: 'vip会员', link: '/个人项目/yupan网盘/vip会员' },
+
+          ]
+        },
+      ],
       '/项目文档': [],
       '/生活记录': [],
     },
@@ -242,13 +340,20 @@ export default defineConfig({
     ],
 
     outline: {
-      level: [2, 3],
+      level: [2, 4],
       label: '大纲'
     },
 
     footer: {
       message: '转载文章请注明来源，违者必究！',
       copyright: 'Copyright © 2016-present yupaits'
+    }
+  },
+  markdown: {
+    theme: { light: 'github-light', dark: 'github-dark' },
+    lineNumbers: true,
+    config: (md) => {
+      md.use(MarkdownItTaskLists)
     }
   }
 })

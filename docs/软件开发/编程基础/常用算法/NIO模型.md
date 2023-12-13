@@ -1,8 +1,11 @@
 # NIO模型
 
 ## 简介
+
 NIO时Java 1.4引入的新特性。是对原来的Standard IO的扩展。
+
 Standard IO时对字节流的读写，在进行IO之前，首先创建一个流对象，流对象进行读写操作都是按字节，一个字节一个字节的读或写。而NIO把IO抽象成块，类似磁盘的读写，每次IO操作的单位都是一个块，块被读入内存之后就是一个byte[]，NIO一次可以读或写多个字节。
+
 ## 组件
 ### Selector
 多路复用选择器，基于“事件驱动”，其核心就是通过Selector来轮询注册在其上的Channel，当发现某个或多个Channel处于就绪状态后，从阻塞状态返回就绪的Channel的SelectionKey集合，进行I/O操作。
@@ -82,9 +85,13 @@ Buffer有3个重要的属性
 
 0 <= position <= limit <= capacity
 初始状态：
+
 ![nio-buffer-1.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848624510-68f9dcf2-9aef-4120-bfe6-28548cfcd564.png#averageHue=%23fafafa&clientId=ue5590ed7-3f2e-4&from=drop&id=ua9b6d09e&originHeight=211&originWidth=657&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37049&status=done&style=none&taskId=uf86b28d5-581d-470e-a2b6-d9ad9288c0e&title=)
+
 从Channel中读入5个字到ByteBuffer：
+
 ![nio-buffer-2.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848628127-396acc72-85ae-4f59-8235-1ea125a811dc.png#averageHue=%23f5f5f5&clientId=ue5590ed7-3f2e-4&from=drop&id=uc427079b&originHeight=216&originWidth=649&originalType=binary&ratio=1&rotation=0&showTitle=false&size=39319&status=done&style=none&taskId=u060f7c4f-6c40-4378-826f-efa65c63782&title=)
+
 flip()，准备写入或输出：
 ```java
 public final Buffer flip() {
@@ -94,9 +101,13 @@ public final Buffer flip() {
     return this;
 }
 ```
+
 ![nio-buffer-3.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848633396-031377b7-6d58-4573-93ae-4a656bf89ca0.png#averageHue=%23f7f7f7&clientId=ue5590ed7-3f2e-4&from=drop&id=u4b2c2b32&originHeight=181&originWidth=686&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33739&status=done&style=none&taskId=u22916579-3c99-408a-85bd-435eb1f371d&title=)
+
 输出内容后，position就移动到跟limit相同的位置上：
+
 ![nio-buffer-4.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848636212-807732bd-de83-4d53-8bb0-549b0a8e426c.png#averageHue=%23f7f7f7&clientId=ue5590ed7-3f2e-4&from=drop&id=ua7b793bc&originHeight=231&originWidth=823&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42030&status=done&style=none&taskId=u768b199e-51ca-4699-a654-b7cd30bd96c&title=)
+
 ByteBuffer如果要重复利用，需要清理，position和limit回到初始状态时的位置，然后可以接着中这个Buffer来读写数据，不需要再new新的Buffer：
 ```java
 public final Buffer clear() {
@@ -106,7 +117,9 @@ public final Buffer clear() {
     return this;
 }
 ```
+
 ![nio-buffer-5.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848652678-b70ab1cc-a744-4f57-b307-30f444e82e90.png#averageHue=%23fafafa&clientId=ue5590ed7-3f2e-4&from=drop&id=ue1ca33c1&originHeight=198&originWidth=698&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33383&status=done&style=none&taskId=u177a3581-3c0e-4a88-812b-7529c1fa6dc&title=)
+
 ## Netty框架
 ### 优点
 

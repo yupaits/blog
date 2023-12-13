@@ -11,10 +11,15 @@ pw.write("</html>");
 pw.flush();
 ```
 只不过，用PrintWriter输出HTML比较痛苦，因为不但要正确编写HTML，还需要插入各种变量。如果想在Servlet中输出一个类似新浪首页的HTML，写对HTML基本上不太可能。
+
 那有没有更简单的输出HTML的办法？
+
 **有！**
+
 我们可以使用JSP。
+
 JSP是Java Server Pages的缩写，它的文件必须放到`/src/main/webapp`下，文件名必须以`.jsp`结尾，整个文件与HTML并无太大区别，但需要插入变量，或者动态输出的地方，使用特殊指令`<% ... %>`。
+
 我们来编写一个`hello.jsp`，内容如下：
 ```java
 <html>
@@ -48,6 +53,7 @@ JSP页面内置了几个变量：
 - request：表示HttpServletRequest对象。
 
 这几个变量可以直接使用。
+
 访问JSP页面时，直接指定完整路径。例如，`http://localhost:8080/hello.jsp`，浏览器显示如下：
 
 ![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1656259718052-5a19824b-50ba-4da2-81da-52bce20f323a.jpeg#clientId=u4fde7bd3-4905-4&from=paste&id=uc06dcab1&originHeight=205&originWidth=416&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u62f87da1-c34d-4bc9-9beb-56d8b750eca&title=)
@@ -77,13 +83,16 @@ public final class hello_jsp extends org.apache.jasper.runtime.HttpJspBase
 }
 ```
 可见JSP本质上就是一个Servlet，只不过无需配置映射路径，Web Server会根据路径查找对应的`.jsp`文件，如果找到了，就自动编译成Servlet再执行。在服务器运行过程中，如果修改了JSP的内容，那么服务器会自动重新编译。
+
 ### JSP高级功能
+
 JSP的指令非常复杂，除了`<% ... %>`外，JSP页面本身可以通过`page`指令引入Java类：
 ```java
 <%@ page import="java.io.*" %>
 <%@ page import="java.util.*" %>
 ```
 这样后续的Java代码才能引用简单类名而不是完整类名。
+
 使用`include`指令可以引入另一个JSP文件：
 ```java
 <html>
@@ -93,15 +102,23 @@ JSP的指令非常复杂，除了`<% ... %>`外，JSP页面本身可以通过`pa
     <%@ include file="footer.jsp"%>
 </body>
 ```
+
 ### JSP Tag
+
 JSP还允许自定义输出的tag，例如：
 ```xml
 <c:out value = "${sessionScope.user.name}"/>
 ```
 JSP Tag需要正确引入taglib的jar包，并且还需要正确声明，使用起来非常复杂，对于页面开发来说，_不推荐_使用JSP Tag，因为我们后续会介绍更简单的模板引擎，这里我们不再介绍如何使用taglib。
+
 ### 练习
+
 编写一个简单的JSP文件，输出当前日期和时间。
+
 ### 小结
+
 JSP是一种在HTML中嵌入动态输出的文件，它和Servlet正好相反，Servlet是在Java代码中嵌入输出HTML；
+
 JSP可以引入并使用JSP Tag，但由于其语法复杂，不推荐使用；
+
 JSP本身目前已经很少使用，我们只需要了解其基本用法即可。

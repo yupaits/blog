@@ -1,6 +1,7 @@
 # 集成Artemis
 
 ActiveMQ Artemis是一个JMS服务器，在[集成JMS](https://www.liaoxuefeng.com/wiki/1252599548343744/1304266721460258)一节中我们已经详细讨论了如何在Spring中集成Artemis，本节我们讨论如何在Spring Boot中集成Artemis。
+
 我们还是以实际工程为例，创建一个`springboot-jms`工程，引入的依赖除了`spring-boot-starter-web`，`spring-boot-starter-jdbc`等以外，新增`spring-boot-starter-artemis`：
 ```xml
 <dependency>
@@ -9,6 +10,7 @@ ActiveMQ Artemis是一个JMS服务器，在[集成JMS](https://www.liaoxuefeng.c
 </dependency>
 ```
 同样无需指定版本号。
+
 如何创建Artemis服务器我们已经在[集成JMS](https://www.liaoxuefeng.com/wiki/1252599548343744/1304266721460258)一节中详细讲述了，此处不再重复。创建Artemis服务器后，我们在`application.yml`中加入相关配置：
 ```yaml
 spring:
@@ -23,6 +25,7 @@ spring:
     password: password
 ```
 和Spring版本的JMS代码相比，使用Spring Boot集成JMS时，只要引入了`spring-boot-starter-artemis`，Spring Boot会自动创建JMS相关的`ConnectionFactory`、`JmsListenerContainerFactory`、`JmsTemplate`等，无需我们再手动配置了。
+
 发送消息时只需要引入`JmsTemplate`：
 ```java
 @Component
@@ -53,5 +56,7 @@ public class MailMessageListener {
 }
 ```
 可见，应用程序收发消息的逻辑和Spring中使用JMS完全相同，只是通过Spring Boot，我们把工程简化到只需要设定Artemis相关配置。
+
 ### 小结
+
 在Spring Boot中使用Artemis作为JMS服务时，只需引入`spring-boot-starter-artemis`依赖，即可直接使用JMS。

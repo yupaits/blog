@@ -6,13 +6,16 @@
 - RedisTemplate：一个类似于JdbcTemplate的接口，用于简化Redis的操作。
 
 因为Spring Data Redis引入的依赖项很多，如果只是为了使用Redis，完全可以只引入Lettuce，剩下的操作都自己来完成。
+
 本节我们稍微深入一下Redis的客户端，看看怎么一步一步把一个第三方组件引入到Spring Boot中。
+
 首先，我们添加必要的几个依赖项：
 
 - io.lettuce:lettuce-core
 - org.apache.commons:commons-pool2
 
 注意我们并未指定版本号，因为在`spring-boot-starter-parent`中已经把常用组件的版本号确定下来了。
+
 第一步是在配置文件`application.yml`中添加Redis的相关配置：
 ```yaml
 spring:
@@ -60,6 +63,7 @@ public class Application {
 }
 ```
 注意：如果在`RedisConfiguration`中标注`@Configuration`，则可通过Spring Boot的自动扫描机制自动加载，否则，使用`@Import`手动加载。
+
 紧接着，我们用一个`RedisService`来封装所有的Redis操作。基础代码如下：
 ```java
 @Component
@@ -87,7 +91,9 @@ public class RedisService {
 }
 ```
 注意到上述代码引入了Commons Pool的一个对象池，用于缓存Redis连接。因为Lettuce本身是基于Netty的异步驱动，在异步访问时并不需要创建连接池，但基于Servlet模型的同步访问时，连接池是有必要的。连接池在`@PostConstruct`方法中初始化，在`@PreDestroy`方法中关闭。
+
 下一步，是在`RedisService`中添加Redis访问方法。为了简化代码，我们仿照`JdbcTemplate.execute(ConnectionCallback)`方法，传入回调函数，可大幅减少样板代码。
+
 首先定义回调函数接口`SyncCommandCallback`：
 ```java
 @FunctionalInterface
@@ -134,6 +140,7 @@ public Map<String, String> hgetall(String key) {
 }
 ```
 常用命令可以提供方法接口，如果要执行任意复杂的操作，就可以通过`executeSync(SyncCommandCallback<T>)`来完成。
+
 完成了`RedisService`后，我们就可以使用Redis了。例如，在`UserController`中，我们在Session中只存放登录用户的ID，用户信息存放到Redis，提供两个方法用于读写：
 ```java
 @Controller
@@ -198,5 +205,7 @@ public <T> T set(String key, T value) {
     ...
 }
 ```
+
 ### 小结
+
 Spring Boot默认使用Lettuce作为Redis客户端，同步使用时，应通过连接池提高效率。

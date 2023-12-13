@@ -15,11 +15,11 @@ hero:
       link: /api-examples
 
 features:
-  - title: IDEA-灵感
+  - title: IDEA - 灵感
     details: 
-  - title: ACTION-行动
+  - title: ACTION - 行动
     details: 
-  - title: ACCUMULATION-积累
+  - title: ACCUMULATION - 积累
     details: 
 ---
 

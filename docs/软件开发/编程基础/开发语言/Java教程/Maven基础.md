@@ -1,17 +1,24 @@
 # Maven基础
 
 ## Maven介绍
+
 在了解Maven之前，我们先来看看一个Java项目需要的东西。首先，我们需要确定引入哪些依赖包。例如，如果我们需要用到[commons logging](https://commons.apache.org/proper/commons-logging/)，我们就必须把commons logging的jar包放入classpath。如果我们还需要[log4j](https://logging.apache.org/log4j/)，就需要把log4j相关的jar包都放到classpath中。这些就是依赖包的管理。
+
 其次，我们要确定项目的目录结构。例如，`src`目录存放Java源码，`resources`目录存放配置文件，`bin`目录存放编译生成的`.class`文件。
 此外，我们还需要配置环境，例如JDK的版本，编译打包的流程，当前代码的版本号。
+
 最后，除了使用Eclipse这样的IDE进行编译外，我们还必须能通过命令行工具进行编译，才能够让项目在一个独立的服务器上编译、测试、部署。
+
 这些工作难度不大，但是非常琐碎且耗时。如果每一个项目都自己搞一套配置，肯定会一团糟。我们需要的是一个标准化的Java项目管理和构建工具。
+
 Maven就是是专门为Java项目打造的管理和构建工具，它的主要功能有：
 
 - 提供了一套标准化的项目结构；
 - 提供了一套标准化的构建流程（编译，测试，打包，发布……）；
 - 提供了一套依赖管理机制。
+
 ### Maven项目结构
+
 一个使用Maven管理的普通的Java项目，它的目录结构默认如下：
 ```
 
@@ -27,7 +34,9 @@ a-maven-project
 └── target
 ```
 项目的根目录`a-maven-project`是项目名，它有一个项目描述文件`pom.xml`，存放Java源码的目录是`src/main/java`，存放资源文件的目录是`src/main/resources`，存放测试源码的目录是`src/test/java`，存放测试资源的目录是`src/test/resources`，最后，所有编译、打包生成的文件都放在`target`目录里。这些就是一个Maven项目的标准目录结构。
+
 所有的目录结构都是约定好的标准结构，我们千万不要随意修改目录结构。使用标准结构不需要做任何配置，Maven就可以正常使用。
+
 我们再来看最关键的一个项目描述文件`pom.xml`，它的内容长得像下面：
 ```xml
 <project ...>
@@ -57,13 +66,16 @@ a-maven-project
 </dependency>
 ```
 使用`<dependency>`声明一个依赖后，Maven就会自动下载这个依赖包并把它放到classpath中。
+
 ### 安装Maven
+
 要安装Maven，可以从[Maven官网](https://maven.apache.org/)下载最新的Maven 3.6.x，然后在本地解压，设置几个环境变量：
 ```bash
 M2_HOME=/path/to/maven-3.6.x
 PATH=$PATH:$M2_HOME/bin
 ```
 Windows可以把`%M2_HOME%\bin`添加到系统Path变量中。
+
 然后，打开命令行窗口，输入`mvn -version`，应该看到Maven的版本信息：
 ```
 
@@ -84,16 +96,22 @@ Windows可以把`%M2_HOME%\bin`添加到系统Path变量中。
 └────────────────────────────────────────────────────────┘
 ```
 如果提示命令未找到，说明系统PATH路径有误，需要修复后再运行。
+
 ### 小结
+
 Maven是一个Java项目的管理和构建工具：
 
 - Maven使用`pom.xml`定义项目内容，并使用预设的目录结构；
 - 在Maven中声明一个依赖项可以自动下载并导入classpath；
 - Maven使用`groupId`，`artifactId`和`version`唯一定位一个依赖。
+
 ## 依赖管理
 如果我们的项目依赖第三方的jar包，例如commons logging，那么问题来了：commons logging发布的jar包在哪下载？
+
 如果我们还希望依赖log4j，那么使用log4j需要哪些jar包？
+
 类似的依赖还包括：JUnit，JavaMail，MySQL驱动等等，一个可行的方法是通过搜索引擎搜索到项目的官网，然后手动下载zip包，解压，放入classpath。但是，这个过程非常繁琐。
+
 Maven解决了依赖管理问题。例如，我们的项目依赖`abc`这个jar包，而`abc`又依赖`xyz`这个jar包：
 ```
 
@@ -112,7 +130,9 @@ Maven解决了依赖管理问题。例如，我们的项目依赖`abc`这个jar�
 └──────────────┘
 ```
 当我们声明了`abc`的依赖时，Maven自动把`abc`和`xyz`都加入了我们的项目依赖，不需要我们自己去研究`abc`是否需要依赖`xyz`。
+
 因此，Maven的第一个作用就是解决依赖管理。我们声明了自己的项目需要`abc`，Maven会自动导入`abc`的jar包，再判断出`abc`需要`xyz`，又会自动导入`xyz`的jar包，这样，最终我们的项目会依赖`abc`和`xyz`两个jar包。
+
 我们来看一个复杂依赖示例：
 ```xml
 <dependency>
@@ -149,7 +169,9 @@ spring-boot-starter-web
   ...
 ```
 如果我们自己去手动管理这些依赖是非常费时费力的，而且出错的概率很大。
+
 ### 依赖关系
+
 Maven定义了几种依赖关系，分别是`compile`、`test`、`runtime`和`provided`：
 
 | **scope** | **说明** | **示例** |
@@ -160,6 +182,7 @@ Maven定义了几种依赖关系，分别是`compile`、`test`、`runtime`和`pr
 | provided | 编译时需要用到，但运行时由JDK或某个服务器提供 | servlet-api |
 
 其中，默认的`compile`是最常用的，Maven会把这种类型的依赖直接放入classpath。
+
 `test`依赖表示仅在测试时使用，正常运行时并不需要。最常用的`test`依赖就是JUnit：
 ```xml
 <dependency>
@@ -188,8 +211,11 @@ Maven定义了几种依赖关系，分别是`compile`、`test`、`runtime`和`pr
 </dependency>
 ```
 最后一个问题是，Maven如何知道从何处下载所需的依赖？也就是相关的jar包？答案是Maven维护了一个中央仓库（[repo1.maven.org](https://repo1.maven.org/)），所有第三方库将自身的jar以及相关信息上传至中央仓库，Maven就可以从中央仓库把所需依赖下载到本地。
+
 Maven并不会每次都从中央仓库下载jar包。一个jar包一旦被下载过，就会被Maven自动缓存在本地目录（用户主目录的`.m2`目录），所以，除了第一次编译时因为下载需要时间会比较慢，后续过程因为有本地缓存，并不会重复下载相同的jar包。
+
 ### 唯一ID
+
 对于某个依赖，Maven只需要3个变量即可唯一确定某个jar包：
 
 - groupId：属于组织的名称，类似Java的包名；
@@ -197,9 +223,13 @@ Maven并不会每次都从中央仓库下载jar包。一个jar包一旦被下载
 - version：该jar包的版本。
 
 通过上述3个变量，即可唯一确定某个jar包。Maven通过对jar包进行PGP签名确保任何一个jar包一经发布就无法修改。修改已发布jar包的唯一方法是发布一个新版本。
+
 因此，某个jar包一旦被Maven下载过，即可永久地安全缓存在本地。
+
 注：只有以`-SNAPSHOT`结尾的版本号会被Maven视为开发版本，开发版本每次都会重复下载，这种SNAPSHOT版本只能用于内部私有的Maven repo，公开发布的版本不允许出现SNAPSHOT。
+
 ### Maven镜像
+
 除了可以从Maven的中央仓库下载外，还可以从Maven的镜像仓库下载。如果访问Maven的中央仓库非常慢，我们可以选择一个速度较快的Maven的镜像仓库。Maven镜像仓库定期从中央仓库同步：
 ```
 
@@ -228,31 +258,45 @@ Maven并不会每次都从中央仓库下载jar包。一个jar包一旦被下载
 </settings>
 ```
 配置镜像仓库后，Maven的下载速度就会非常快。
+
 ### 搜索第三方组件
+
 最后一个问题：如果我们要引用一个第三方组件，比如`okhttp`，如何确切地获得它的`groupId`、`artifactId`和`version`？方法是通过[search.maven.org](https://search.maven.org/)搜索关键字，找到对应的组件后，直接复制：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655521970767-51703106-531e-448f-b517-a87a88d2d5f8.png#clientId=u2745ca3c-831d-4&from=paste&id=u0328d547&originHeight=228&originWidth=451&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u9776610d-e377-48e9-9371-a6b0a262c7f&title=)
 
 ### 命令行编译
+
 在命令中，进入到`pom.xml`所在目录，输入以下命令：
 ```bash
 $ mvn clean package
 ```
 如果一切顺利，即可在`target`目录下获得编译后自动打包的jar。
+
 ### 在IDE中使用Maven
+
 几乎所有的IDE都内置了对Maven的支持。在Eclipse中，可以直接创建或导入Maven项目。如果导入后的Maven项目有错误，可以尝试选择项目后点击右键，选择Maven - Update Project...更新：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655521970768-f59f2515-8c92-446e-a943-cccdc24c6944.png#clientId=u2745ca3c-831d-4&from=paste&id=uf324de14&originHeight=346&originWidth=618&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u7bf8f8e8-457d-4bce-8d44-4b2be49d428&title=)
 
 ### 小结
+
 Maven通过解析依赖关系确定项目所需的jar包，常用的4种`scope`有：`compile`（默认），`test`，`runtime`和`provided`；
+
 Maven从中央仓库下载所需的jar包并缓存在本地；
+
 可以通过镜像仓库加速下载。
+
 ## 构建流程
+
 ### 构建流程
+
 Maven不但有标准化的项目结构，而且还有一套标准化的构建流程，可以自动化实现编译，打包，发布，等等。
+
 ### Lifecycle和Phase
+
 使用Maven时，我们首先要了解什么是Maven的生命周期（lifecycle）。
+
 Maven的生命周期由一系列阶段（phase）构成，以内置的生命周期`default`为例，它包含以下phase：
 
 - validate
@@ -298,6 +342,7 @@ Maven另一个常用的生命周期是`clean`，它会执行3个phase：
 - post-clean
 
 所以，我们使用`mvn`这个命令时，后面的参数是phase，Maven自动根据生命周期运行到指定的phase。
+
 更复杂的例子是指定多个phase，例如，运行`mvn clean package`，Maven先执行`clean`生命周期并运行到`clean`这个phase，然后执行`default`生命周期并运行到`package`这个phase，实际执行的phase如下：
 
 - pre-clean
@@ -307,18 +352,26 @@ Maven另一个常用的生命周期是`clean`，它会执行3个phase：
 - package
 
 在实际开发过程中，经常使用的命令有：
+
 `mvn clean`：清理所有生成的class和jar；
+
 `mvn clean compile`：先清理，再执行到`compile`；
+
 `mvn clean test`：先清理，再执行到`test`，因为执行`test`前必须执行compile，所以这里不必指定compile；
+
 `mvn clean package`：先清理，再执行到`package`。
+
 大多数phase在执行过程中，因为我们通常没有在`pom.xml`中配置相关的设置，所以这些phase什么事情都不做。
+
 经常用到的phase其实只有几个：
 
 - clean：清理
 - compile：编译
 - test：运行测试
 - package：打包
+
 ### Goal
+
 执行一个phase又会触发一个或多个goal：
 
 | **执行的Phase** | **对应执行的Goal** |
@@ -328,6 +381,7 @@ Maven另一个常用的生命周期是`clean`，它会执行3个phase：
 surefire:test |
 
 goal的命名总是`abc:xyz`这种形式。
+
 看到这里，相信大家对lifecycle、phase和goal已经明白了吧？
 
 ![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655521981919-a45fd4d4-b1ed-440f-945f-ec5a644fda1e.jpeg#clientId=u2745ca3c-831d-4&from=paste&id=ue466fe6b&originHeight=160&originWidth=160&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u8754510a-c89d-44fc-a460-e0fefa90295&title=)
@@ -342,8 +396,11 @@ goal的命名总是`abc:xyz`这种形式。
 ```bash
 mvn tomcat:run
 ```
+
 ### 小结
+
 Maven通过lifecycle、phase和goal来提供标准的构建流程。
+
 最常用的构建命令是指定phase，然后让Maven执行到指定的phase：
 
 - mvn clean
@@ -352,15 +409,21 @@ Maven通过lifecycle、phase和goal来提供标准的构建流程。
 - mvn clean package
 
 通常情况，我们总是执行phase默认绑定的goal，因此不必指定goal。
+
 ## 使用插件
+
 我们在前面介绍了Maven的lifecycle，phase和goal：使用Maven构建项目就是执行lifecycle，执行到指定的phase为止。每个phase会执行自己默认的一个或多个goal。goal是最小任务单元。
+
 我们以`compile`这个phase为例，如果执行：
 ```bash
 mvn compile
 ```
 Maven将执行`compile`这个phase，这个phase会调用`compiler`插件执行关联的`compiler:compile`这个goal。
+
 实际上，执行每个phase，都是通过某个插件（plugin）来执行的，Maven本身其实并不知道如何执行`compile`，它只是负责找到对应的`compiler`插件，然后执行默认的`compiler:compile`这个goal来完成编译。
+
 所以，使用Maven，实际上就是配置好需要使用的插件，然后通过phase调用它们。
+
 Maven已经内置了一些常用的标准插件：
 
 | **插件名称** | **对应执行的phase** |
@@ -407,16 +470,23 @@ Maven已经内置了一些常用的标准插件：
 </configuration>
 ```
 注意，Maven自带的标准插件例如`compiler`是无需声明的，只有引入其它的插件才需要声明。
+
 下面列举了一些常用的插件：
 
 - maven-shade-plugin：打包所有依赖包并生成可执行jar；
 - cobertura-maven-plugin：生成单元测试覆盖率报告；
 - findbugs-maven-plugin：对Java源码进行静态分析以找出潜在问题。
+
 ### 小结
+
 Maven通过自定义插件可以执行项目构建时需要的额外功能，使用自定义插件必须在pom.xml中声明插件及配置；
+
 插件会在某个phase被执行时执行；
+
 插件的配置和用法需参考插件的官方文档。
+
 ## 模块管理
+
 在软件开发中，把一个大项目分拆为多个模块是降低软件复杂度的有效方法：
 ```
 
@@ -619,6 +689,7 @@ multiple-project
 </project>
 ```
 模块B、模块C都可以直接从`parent`继承，大幅简化了`pom.xml`的编写。
+
 如果模块A依赖模块B，则模块A需要模块B的jar包才能正常编译，我们需要在模块A中引入模块B：
 ```xml
     ...
@@ -652,22 +723,36 @@ multiple-project
 </project>
 ```
 这样，在根目录执行`mvn clean package`时，Maven根据根目录的`pom.xml`找到包括`parent`在内的共4个`<module>`，一次性全部编译。
+
 ### 中央仓库
+
 其实我们使用的大多数第三方模块都是这个用法，例如，我们使用commons logging、log4j这些第三方模块，就是第三方模块的开发者自己把编译好的jar包发布到Maven的中央仓库中。
+
 ### 私有仓库
+
 私有仓库是指公司内部如果不希望把源码和jar包放到公网上，那么可以搭建私有仓库。私有仓库总是在公司内部使用，它只需要在本地的`~/.m2/settings.xml`中配置好，使用方式和中央仓位没有任何区别。
+
 ### 本地仓库
+
 本地仓库是指把本地开发的项目“发布”在本地，这样其他项目可以通过本地仓库引用它。但是我们不推荐把自己的模块安装到Maven的本地仓库，因为每次修改某个模块的源码，都需要重新安装，非常容易出现版本不一致的情况。更好的方法是使用模块化编译，在编译的时候，告诉Maven几个模块之间存在依赖关系，需要一块编译，Maven就会自动按依赖顺序编译这些模块。
+
 ### 小结
+
 Maven支持模块化管理，可以把一个大项目拆成几个模块：
 
 - 可以通过继承在parent的`pom.xml`统一定义重复配置；
 - 可以通过`<modules>`编译多个模块。
+
 ## 使用mvnw
+
 我们使用Maven时，基本上只会用到`mvn`这一个命令。有些童鞋可能听说过`mvnw`，这个是啥？
+
 `mvnw`是Maven Wrapper的缩写。因为我们安装Maven时，默认情况下，系统所有项目都会使用全局安装的这个Maven版本。但是，对于某些项目来说，它可能必须使用某个特定的Maven版本，这个时候，就可以使用Maven Wrapper，它可以负责给这个特定的项目安装指定版本的Maven，而其他项目不受影响。
+
 简单地说，Maven Wrapper就是给一个项目提供一个独立的，指定版本的Maven给它使用。
+
 ### 安装Maven Wrapper
+
 安装Maven Wrapper最简单的方式是在项目的根目录（即`pom.xml`所在的目录）下运行安装命令：
 ```bash
 mvn -N io.takari:maven:0.7.6:wrapper
@@ -706,16 +791,27 @@ mvnw clean package
 ./mvnw clean package
 ```
 Maven Wrapper的另一个作用是把项目的`mvnw`、`mvnw.cmd`和`.mvn`提交到版本库中，可以使所有开发人员使用统一的Maven版本。
+
 ### 小结
+
 使用Maven Wrapper，可以为一个项目指定特定的Maven版本。
+
 ## 发布Artifact
+
 当我们使用`commons-logging`这些第三方开源库的时候，我们实际上是通过Maven自动下载它的jar包，并根据其`pom.xml`解析依赖，自动把相关依赖包都下载后加入到classpath。
+
 那么问题来了：当我们自己写了一个牛逼的开源库时，非常希望别人也能使用，总不能直接放个jar包的链接让别人下载吧？
+
 如果我们把自己的开源库放到Maven的repo中，那么，别人只需按标准引用`groupId:artifactId:version`，即可自动下载jar包以及相关依赖。因此，本节我们介绍如何发布一个库到Maven的repo中。
+
 把自己的库发布到Maven的repo中有好几种方法，我们介绍3种最常用的方法。
+
 ### 以静态文件发布
+
 如果我们观察一个中央仓库的Artifact结构，例如[Commons Math](https://commons.apache.org/proper/commons-math/)，它的groupId是`org.apache.commons`，artifactId是`commons-math3`，以版本`3.6.1`为例，发布在中央仓库的文件夹路径就是[https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/](https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/)，在此文件夹下，`commons-math3-3.6.1.jar`就是发布的jar包，`commons-math3-3.6.1.pom`就是它的`pom.xml`描述文件，`commons-math3-3.6.1-sources.jar`是源代码，`commons-math3-3.6.1-javadoc.jar`是文档。其它以`.asc`、`.md5`、`.sha1`结尾的文件分别是GPG签名、MD5摘要和SHA-1摘要。
+
 我们只要按照这种目录结构组织文件，它就是一个有效的Maven仓库。
+
 我们以广受好评的开源项目[how-to-become-rich](https://github.com/michaelliao/how-to-become-rich)为例，先创建Maven工程目录结构如下：
 ```
 
@@ -774,6 +870,7 @@ how-to-become-rich
 </project>
 ```
 注意到`<distributionManagement>`，它指示了发布的软件包的位置，这里的`<url>`是项目根目录下的`maven-repo`目录，在`<build>`中定义的两个插件`maven-source-plugin`和`maven-javadoc-plugin`分别用来创建源码和javadoc，如果不想发布源码，可以把对应的插件去掉。
+
 我们直接在项目根目录下运行Maven命令`mvn clean package deploy`，如果一切顺利，我们就可以在`maven-repo`目录下找到部署后的所有文件如下：
 ```
 
@@ -856,13 +953,21 @@ Millionaire millionaire = new Millionaire();
 System.out.println(millionaire.howToBecomeRich());
 ```
 有的童鞋会问，为什么使用`commons-logging`等第三方库时，并不需要声明repo地址？这是因为这些库都是发布到Maven中央仓库的，发布到中央仓库后，不需要告诉Maven仓库地址，因为它知道中央仓库的地址默认是[https://repo1.maven.org/maven2/](https://repo1.maven.org/maven2/)，也可以通过`~/.m2/settings.xml`指定一个代理仓库地址以替代中央仓库来提高速度（参考[依赖管理](https://www.liaoxuefeng.com/wiki/1252599548343744/1309301178105890)的Maven镜像）。
+
 因为GitHub Pages并不会把我们发布的Maven包同步到中央仓库，所以自然使用方必须手动添加一个我们提供的仓库地址。
+
 此外，通过GitHub Pages发布Maven repo时需要注意一点，即不要改动已发布的版本。因为Maven的仓库是不允许修改任何版本的，对一个库进行修改的唯一方法是发布一个新版本。但是通过静态文件的方式发布repo，实际上我们是可以修改jar文件的，但最好遵守规范，不要修改已发布版本。
+
 ### 通过Nexus发布到中央仓库
+
 有的童鞋会问，能不能把自己的开源库发布到Maven的中央仓库，这样用户就不需要声明repo地址，可以直接引用，显得更专业。
+
 当然可以，但我们不能直接发布到Maven中央仓库，而是通过曲线救国的方式，发布到[central.sonatype.org](https://central.sonatype.org/)，它会定期自动同步到Maven的中央仓库。[Nexus](https://www.sonatype.com/nexus-repository-oss)是一个支持Maven仓库的软件，由Sonatype开发，有免费版和专业版两个版本，很多大公司内部都使用Nexus作为自己的私有Maven仓库，而这个[central.sonatype.org](https://central.sonatype.org/)相当于面向开源的一个Nexus公共服务。
+
 所以，第一步是在[central.sonatype.org](https://central.sonatype.org/)上注册一个账号，注册链接非常隐蔽，可以自己先找找，找半小时没找到点这里查看攻略。
+
 如果注册顺利并审核通过，会得到一个登录账号，然后，通过[这个页面](https://central.sonatype.org/pages/apache-maven.html)一步一步操作就可以成功地将自己的Artifact发布到Nexus上，再耐心等待几个小时后，你的Artifact就会出现在Maven的中央仓库中。
+
 这里简单提一下发布重点与难点：
 
 - 必须正确创建GPG签名，Linux和Mac下推荐使用gnupg2；
@@ -980,15 +1085,21 @@ System.out.println(millionaire.howToBecomeRich());
 </project>
 ```
 最后执行命令`mvn clean package deploy`即可发布至[central.sonatype.org](https://central.sonatype.org/)。
+
 此方法前期需要复杂的申请账号和项目的流程，后期需要安装调试GPG，但只要跑通流程，后续发布都只需要一行命令。
+
 ### 发布到私有仓库
+
 通过`nexus-staging-maven-plugin`除了可以发布到[central.sonatype.org](https://central.sonatype.org/)外，也可以发布到私有仓库，例如，公司内部自己搭建的Nexus服务器。
+
 如果没有私有Nexus服务器，还可以发布到[GitHub Packages](https://github.com/features/packages)。GitHub Packages是GitHub提供的仓库服务，支持Maven、NPM、Docker等。使用GitHub Packages时，无论是发布Artifact，还是引用已发布的Artifact，都需要明确的授权Token，因此，GitHub Packages只能作为私有仓库使用。
+
 在发布前，我们必须首先登录后在用户的`Settings-Developer settings-Personal access tokens`中创建两个Token，一个用于发布，一个用于使用。发布Artifact的Token必须有`repo`、`write:packages`和`read:packages`权限：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522029381-48759b95-4f7e-47f4-a8bf-13fa9e174217.png#clientId=u2745ca3c-831d-4&from=paste&id=u03e306f0&originHeight=319&originWidth=400&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ucd4a5b8f-7a0f-4eef-a083-2febeb6315b&title=)
 
 使用Artifact的Token只需要`read:packages`权限。
+
 在发布端，把GitHub的用户名和发布Token写入`~/.m2/settings.xml`配置中：
 ```xml
 <settings ...>
@@ -1043,9 +1154,13 @@ System.out.println(millionaire.howToBecomeRich());
 </project>
 ```
 还需要把有读权限的Token配置到`~/.m2/settings.xml`文件中。
+
 ### 练习
+
 使用maven-deploy-plugin把Artifact发布到本地。
+
 ### 小结
+
 使用Maven发布一个Artifact时：
 
 - 可以发布到本地，然后推送到远程Git库，由静态服务器提供基于网页的repo服务，使用方必须声明repo地址；

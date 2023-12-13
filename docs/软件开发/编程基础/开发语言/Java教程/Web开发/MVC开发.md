@@ -1,13 +1,16 @@
 # MVC开发
 
 ## MVC开发
+
 我们通过前面的章节可以看到：
 
 - Servlet适合编写Java代码，实现各种复杂的业务逻辑，但不适合输出复杂的HTML；
 - JSP适合编写HTML，并在其中插入动态内容，但不适合编写复杂的Java代码。
 
 能否将两者结合起来，发挥各自的优点，避免各自的缺点？
+
 答案是肯定的。我们来看一个具体的例子。
+
 假设我们已经编写了几个JavaBean：
 ```java
 public class User {
@@ -88,10 +91,15 @@ public class UserServlet extends HttpServlet {
                    └───────────────────────┘
 ```
 使用MVC模式的好处是，Controller专注于业务处理，它的处理结果就是Model。Model可以是一个JavaBean，也可以是一个包含多个对象的Map，Controller只负责把Model传递给View，View只负责把Model给“渲染”出来，这样，三者职责明确，且开发更简单，因为开发Controller时无需关注页面，开发View时无需关心如何创建Model。
+
 MVC模式广泛地应用在Web页面和传统的桌面程序中，我们在这里通过Servlet和JSP实现了一个简单的MVC模型，但它还不够简洁和灵活，后续我们会介绍更简单的Spring MVC开发。
+
 ### 小结
+
 MVC模式是一种分离业务逻辑和显示逻辑的设计模式，广泛应用在Web和桌面应用程序。
+
 ## MVC高级开发
+
 通过结合Servlet和JSP的MVC模式，我们可以发挥二者各自的优点：
 
 - Servlet实现业务逻辑；
@@ -123,6 +131,7 @@ public class UserController {
 }
 ```
 上面的这个Java类每个方法都对应一个GET或POST请求，方法返回值是`ModelAndView`，它包含一个View的路径以及一个Model，这样，再由MVC框架处理后返回给浏览器。
+
 如果是GET请求，我们希望MVC框架能直接把URL参数按方法参数对应起来然后传入：
 ```java
 @GetMapping("/hello")
@@ -145,7 +154,9 @@ public ModelAndView signout(HttpSession session) {
 }
 ```
 以上就是我们在设计MVC框架时，上层代码所需要的一切信息。
+
 ### 设计MVC框架
+
 如何设计一个MVC框架？在上文中，我们已经定义了上层代码编写Controller的一切接口信息，并且并不要求实现特定接口，只需返回`ModelAndView`对象，该对象包含一个`View`和一个`Model`。实际上`View`就是模板的路径，而`Model`可以用一个`Map<String, Object>`表示，因此，`ModelAndView`定义非常简单：
 ```java
 public class ModelAndView {
@@ -154,6 +165,7 @@ public class ModelAndView {
 }
 ```
 比较复杂的是我们需要在MVC框架中创建一个接收所有请求的`Servlet`，通常我们把它命名为`DispatcherServlet`，它总是映射到`/`，然后，根据不同的Controller的方法定义的`@Get`或`@Post`的Path决定调用哪个方法，最后，获得方法返回的`ModelAndView`后，渲染模板，写入`HttpServletResponse`，即完成了整个MVC的处理。
+
 这个MVC的架构如下：
 ```java
 
@@ -174,6 +186,7 @@ public class ModelAndView {
                  └────────────────────┘
 ```
 其中，`DispatcherServlet`以及如何渲染均由MVC框架实现，在MVC框架之上只需要编写每一个Controller。
+
 我们来看看如何编写最复杂的`DispatcherServlet`。首先，我们需要存储请求路径到某个具体方法的映射：
 ```java
 @WebServlet(urlPatterns = "/")
@@ -228,6 +241,7 @@ class GetDispatcher {
 }
 ```
 上述代码比较繁琐，但逻辑非常简单，即通过构造某个方法需要的所有参数列表，使用反射调用该方法后返回结果。
+
 类似的，`PostDispatcher`需要如下信息：
 ```java
 class PostDispatcher {
@@ -334,8 +348,11 @@ public class DispatcherServlet extends HttpServlet {
 }
 ```
 如何扫描所有Controller以获取所有标记有`@GetMapping`和`@PostMapping`的方法？当然是使用反射了。虽然代码比较繁琐，但我们相信各位童鞋可以轻松实现。
+
 这样，整个MVC框架就搭建完毕。
+
 ### 实现渲染
+
 有的童鞋对如何使用模板引擎进行渲染有疑问，即如何实现上述的`ViewEngine`？其实`ViewEngine`非常简单，只需要实现一个简单的`render()`方法：
 ```java
 public class ViewEngine {
@@ -368,6 +385,7 @@ Java有很多开源的模板引擎，常用的有：
 </html>
 ```
 即变量用`{{ xxx }}`表示，控制语句用`{% xxx %}`表示。
+
 使用Pebble渲染只需要如下几行代码：
 ```java
 public class ViewEngine {
@@ -439,6 +457,7 @@ web-mvc
                     └── jquery.js
 ```
 其中，`framework`包是MVC的框架，完全可以单独编译后作为一个Maven依赖引入，`controller`包才是我们需要编写的业务逻辑。
+
 我们还硬性规定模板必须放在`webapp/WEB-INF/templates`目录下，静态文件必须放在`webapp/static`目录下，因此，为了便于开发，我们还顺带实现一个`FileServlet`来处理静态文件：
 ```java
 @WebServlet(urlPatterns = { "/favicon.ico", "/static/*" })
@@ -501,5 +520,7 @@ public class FileServlet extends HttpServlet {
 </project>
 ```
 有些用过Spring MVC的童鞋会发现，本节实现的这个MVC框架，上层代码使用的公共类如`GetMapping`、`PostMapping`和`ModelAndView`都和Spring MVC非常类似。实际上，我们这个MVC框架主要参考就是Spring MVC，通过实现一个“简化版”MVC，可以掌握Java Web MVC开发的核心思想与原理，对将来直接使用Spring MVC是非常有帮助的。
+
 ### 小结
+
 一个MVC框架是基于Servlet基础抽象出更高级的接口，使得上层基于MVC框架的开发可以不涉及Servlet相关的`HttpServletRequest`等接口，处理多个请求更加灵活，并且可以使用任意模板引擎，不必使用JSP。

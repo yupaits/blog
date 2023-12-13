@@ -33,6 +33,7 @@ springboot-exec-jar-1.0-SNAPSHOT.jar.original
 $ java -jar springboot-exec-jar-1.0-SNAPSHOT.jar
 ```
 这样，部署一个Spring Boot应用就非常简单，无需预装任何服务器，只需要上传jar包即可。
+
 在打包的时候，因为打包后的Spring Boot应用不会被修改，因此，默认情况下，`spring-boot-devtools`这个依赖不会被打包进去。但是要注意，使用早期的Spring Boot版本时，需要配置一下才能排除`spring-boot-devtools`这个依赖：
 ```xml
 <plugin>
@@ -54,5 +55,7 @@ $ java -jar springboot-exec-jar-1.0-SNAPSHOT.jar
 </project>
 ```
 这样打包后的文件名就是`awesome-app.jar`。
+
 ## 小结
+
 Spring Boot提供了一个Maven插件用于打包所有依赖到单一jar文件，此插件十分易用，无需配置。

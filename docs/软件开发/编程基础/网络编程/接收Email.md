@@ -1,10 +1,15 @@
 # 接收Email
 
 发送Email的过程我们在上一节已经讲过了，客户端总是通过SMTP协议把邮件发送给MTA。
+
 接收Email则相反，因为邮件最终到达收件人的MDA服务器，所以，接收邮件是收件人用自己的客户端把邮件从MDA服务器上抓取到本地的过程。
+
 接收邮件使用最广泛的协议是POP3：Post Office Protocol version 3，它也是一个建立在TCP连接之上的协议。POP3服务器的标准端口是110，如果整个会话需要加密，那么使用加密端口995。
+
 另一种接收邮件的协议是IMAP：Internet Mail Access Protocol，它使用标准端口143和加密端口993。IMAP和POP3的主要区别是，IMAP协议在本地的所有操作都会自动同步到服务器上，并且，IMAP可以允许用户在邮件服务器的收件箱中创建文件夹。
+
 JavaMail也提供了IMAP协议的支持。因为POP3和IMAP的使用方式非常类似，因此我们只介绍POP3的用法。
+
 使用POP3收取Email时，我们无需关心POP3协议底层，因为JavaMail提供了高层接口。首先需要连接到Store对象：
 ```java
 // 准备登录信息:
@@ -91,6 +96,9 @@ store.close();
 ```
 
 ## 小结
+
 使用Java接收Email时，可以用POP3协议或IMAP协议。
+
 使用POP3协议时，需要用Maven引入JavaMail依赖，并确定POP3服务器的域名／端口／是否使用SSL等，然后，调用相关API接收Email。
+
 设置debug模式可以查看通信详细内容，便于排查错误。

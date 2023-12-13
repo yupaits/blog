@@ -1,7 +1,9 @@
 # 发送Email
 
 Email就是电子邮件。电子邮件的应用已经有几十年的历史了，我们熟悉的邮箱地址比如`abc@example.com`，邮件软件比如Outlook都是用来收发邮件的。
+
 使用Java程序也可以收发电子邮件。我们先来看一下传统的邮件是如何发送的。
+
 传统的邮件是通过邮局投递，然后从一个邮局到另一个邮局，最终到达用户的邮箱：
 ```java
            ┌──────────┐    ┌──────────┐
@@ -23,10 +25,14 @@ Email就是电子邮件。电子邮件的应用已经有几十年的历史了，
    MUA           MTA            MTA            MDA           MUA
 ```
 我们把类似Outlook这样的邮件软件称为MUA：Mail User Agent，意思是给用户服务的邮件代理；邮件服务器则称为MTA：Mail Transfer Agent，意思是邮件中转的代理；最终到达的邮件服务器称为MDA：Mail Delivery Agent，意思是邮件到达的代理。电子邮件一旦到达MDA，就不再动了。实际上，电子邮件通常就存储在MDA服务器的硬盘上，然后等收件人通过软件或者登陆浏览器查看邮件。
+
 MTA和MDA这样的服务器软件通常是现成的，我们不关心这些服务器内部是如何运行的。要发送邮件，我们关心的是如何编写一个MUA的软件，把邮件发送到MTA上。
+
 MUA到MTA发送邮件的协议就是SMTP协议，它是Simple Mail Transport Protocol的缩写，使用标准端口25，也可以使用加密端口465或587。
 SMTP协议是一个建立在TCP之上的协议，任何程序发送邮件都必须遵守SMTP协议。使用Java程序发送邮件时，我们无需关心SMTP协议的底层原理，只需要使用JavaMail这个标准API就可以直接发送邮件。
+
 ## 准备SMTP登录信息
+
 假设我们准备使用自己的邮件地址`me@example.com`给小明发送邮件，已知小明的邮件地址是`xiaoming@somewhere.com`，发送邮件前，我们首先要确定作为MTA的邮件服务器地址和端口号。邮件服务器地址通常是`smtp.example.com`，端口号由邮件服务商确定使用25、465还是587。以下是一些常用邮件服务商的SMTP信息：
 
 - QQ邮箱：SMTP服务器是smtp.qq.com，端口是465/587；
@@ -34,7 +40,9 @@ SMTP协议是一个建立在TCP之上的协议，任何程序发送邮件都必�
 - Gmail邮箱：SMTP服务器是smtp.gmail.com，端口是465/587。
 
 有了SMTP服务器的域名和端口号，我们还需要SMTP服务器的登录信息，通常是使用自己的邮件地址作为用户名，登录口令是用户口令或者一个独立设置的SMTP口令。
+
 我们来看看如何使用JavaMail发送邮件。
+
 首先，我们需要创建一个Maven工程，并把JavaMail相关的两个依赖加入进来：
 
 - jakarta.mail:javax.mail-api:2.0.1
@@ -46,6 +54,7 @@ SMTP协议是一个建立在TCP之上的协议，任何程序发送邮件都必�
 - com.sun.mail:javax.mail:1.6.2
 
 并且代码引用的`jakarta.mail`需替换为`javax.mail`。
+
 然后，我们通过JavaMail API连接到SMTP服务器上：
 ```java
 // 服务器地址:
@@ -87,6 +96,7 @@ message.setText("Hi Xiaoming...", "UTF-8");
 Transport.send(message);
 ```
 绝大多数邮件服务器要求发送方地址和登录用户名必须一致，否则发送将失败。
+
 填入真实的地址，运行上述代码，我们可以在控制台看到JavaMail打印的调试信息：
 ```java
 这是JavaMail打印的调试信息:
@@ -157,6 +167,7 @@ QUIT
 221 2.0.0 Service closing transmission channel
 ```
 从上面的调试信息可以看出，SMTP协议是一个请求-响应协议，客户端总是发送命令，然后等待服务器响应。服务器响应总是以数字开头，后面的信息才是用于调试的文本。这些响应码已经被定义在[SMTP协议](https://www.iana.org/assignments/smtp-enhanced-status-codes/smtp-enhanced-status-codes.txt)中了，查看具体的响应码就可以知道出错原因。
+
 如果一切顺利，对方将收到一封文本格式的电子邮件：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522111952-4909deed-4ae0-421a-b54e-453a454d03df.png#averageHue=%23f0f0f0&clientId=ud99a8170-df32-4&from=paste&id=ud15acfc5&originHeight=128&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u7fcdabfd-56d5-4cfb-af90-6d7334b95d4&title=)
@@ -171,11 +182,13 @@ message.setText(body, "UTF-8");
 message.setText(body, "UTF-8", "html");
 ```
 传入的`body`是类似`<h1>Hello</h1><p>Hi, xxx</p>`这样的HTML字符串即可。
+
 HTML邮件可以在邮件客户端直接显示为网页格式：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522112894-9282c737-f1e5-4e72-9e21-d7b2cbce8d6b.png#averageHue=%23f3f3f3&clientId=ud99a8170-df32-4&from=paste&id=u1b04958b&originHeight=154&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=udff2c75d-2131-4747-b110-8b284983c92&title=)
 
 ## 发送附件
+
 要在电子邮件中携带附件，我们就不能直接调用`message.setText()`方法，而是要构造一个`Multipart`对象：
 ```java
 Multipart multipart = new MimeMultipart();
@@ -193,13 +206,17 @@ message.setContent(multipart);
 ```
 一个`Multipart`对象可以添加若干个`BodyPart`，其中第一个`BodyPart`是文本，即邮件正文，后面的BodyPart是附件。`BodyPart`依靠`setContent()`决定添加的内容，如果添加文本，用`setContent("...", "text/plain;charset=utf-8")`添加纯文本，或者用`setContent("...", "text/html;charset=utf-8")`添加HTML文本。如果添加附件，需要设置文件名（不一定和真实文件名一致），并且添加一个`DataHandler()`，传入文件的MIME类型。二进制文件可以用`application/octet-stream`，Word文档则是`application/msword`。
 最后，通过`setContent()`把`Multipart`添加到`Message`中，即可发送。
+
 带附件的邮件在客户端会被提示下载：
 
 ![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522111903-b4d44008-451e-426b-9457-73aa5a0e7874.png#averageHue=%23f5f5f5&clientId=ud99a8170-df32-4&from=paste&id=ua245f4ea&originHeight=254&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uee5d9fec-4209-44e6-a64a-9c0fe27bd3f&title=)
 
 ## 发送内嵌图片的HTML邮件
+
 有些童鞋可能注意到，HTML邮件中可以内嵌图片，这是怎么做到的？
+
 如果给一个`<img src="http://example.com/test.jpg">`，这样的外部图片链接通常会被邮件客户端过滤，并提示用户显示图片并不安全。只有内嵌的图片才能正常在邮件中显示。
+
 内嵌图片实际上也是一个附件，即邮件本身也是`Multipart`，但需要做一点额外的处理：
 ```java
 Multipart multipart = new MimeMultipart();
@@ -224,6 +241,7 @@ imagepart.setHeader("Content-ID", "<img01>");
 ![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522111942-bf18d2d4-9097-4dcf-b087-0f4d54aca607.png#averageHue=%23454d3a&clientId=ud99a8170-df32-4&from=paste&id=u527e9039&originHeight=566&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u0d5ad50d-059b-47fe-a4db-0d126d47b4d&title=)
 
 ## 常见问题
+
 如果用户名或口令错误，会导致`535`登录失败：
 ```java
 DEBUG SMTP: AUTH LOGIN failed
@@ -239,7 +257,11 @@ com.sun.mail.smtp.SMTPSendFailedException: 554 5.2.0 STOREDRV.Submission.Excepti
 DEBUG SMTP: MessagingException while sending, THROW: 
 com.sun.mail.smtp.SMTPSendFailedException: 554 DT:SPM
 ```
+
 ## 小结
+
 使用JavaMail API发送邮件本质上是一个MUA软件通过SMTP协议发送邮件至MTA服务器；
+
 打开调试模式可以看到详细的SMTP交互信息；
+
 某些邮件服务商需要开启SMTP，并需要独立的SMTP登录密码。

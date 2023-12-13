@@ -61,6 +61,7 @@ pebble:
   cache: true
 ```
 注意到分隔符`---`，最前面的配置是默认配置，不需要指定Profile，后面的每段配置都必须以`spring.profiles: xxx`开头，表示一个Profile。上述配置默认使用8080端口，但是在`test`环境下，使用`8000`端口，在`production`环境下，使用`80`端口，并且启用Pebble的缓存。
+
 如果我们不指定任何Profile，直接启动应用程序，那么Profile实际上就是`default`，可以从Spring Boot启动日志看出：
 ```java
 2020-06-13 11:20:58.141  INFO 73265 --- [  restartedMain] com.itranswarp.learnjava.Application     : Starting Application on ... with PID 73265 ...
@@ -85,7 +86,9 @@ $ java -Dspring.profiles.active=test -jar springboot-profiles-1.0-SNAPSHOT.jar
 ...
 ```
 从日志看到活动的Profile是`test`，Tomcat的监听端口是`8000`。
+
 通过Profile可以实现一套代码在不同环境启用不同的配置和功能。假设我们需要一个存储服务，在本地开发时，直接使用文件存储即可，但是，在测试和生产环境，需要存储到云端如S3上，如何通过Profile实现该功能？
+
 首先，我们要定义存储接口`StorageService`：
 ```java
 public interface StorageService {
@@ -168,6 +171,9 @@ public class CloudStorageService implements StorageService {
 }
 ```
 注意到`LocalStorageService`使用了条件装配`@Profile("default")`，即默认启用`LocalStorageService`，而`CloudStorageService`使用了条件装配`@Profile("!default")`，即非default环境时，自动启用`CloudStorageService`。这样，一套代码，就实现了不同环境启用不同的配置。
+
 ### 小结
+
 Spring Boot允许在一个配置文件中针对不同Profile进行配置；
+
 Spring Boot在未指定Profile时默认为`default`。

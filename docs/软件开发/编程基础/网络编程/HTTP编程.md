@@ -2,6 +2,7 @@
 
 什么是HTTP？HTTP就是目前使用最广泛的Web应用程序使用的基础协议，例如，浏览器访问网站，手机App访问后台服务器，都是通过HTTP协议实现的。
 HTTP是HyperText Transfer Protocol的缩写，翻译为超文本传输协议，它是基于TCP协议之上的一种请求-响应协议。
+
 我们来看一下浏览器请求访问某个网站时发送的HTTP请求-响应。当浏览器希望访问某个网站时，浏览器和网站服务器之间首先建立TCP连接，且服务器总是使用80端口和加密端口`443`，然后，浏览器向服务器发送一个HTTP请求，服务器收到后，返回一个HTTP响应，并且在响应中包含了HTML的网页内容，这样，浏览器解析HTML后就可以给用户显示网页了。一个完整的HTTP请求-响应如下：
 ```java
             GET / HTTP/1.1
@@ -20,6 +21,7 @@ HTTP是HyperText Transfer Protocol的缩写，翻译为超文本传输协议，�
             ...
 ```
 HTTP请求的格式是固定的，它由HTTP Header和HTTP Body两部分构成。第一行总是`请求方法 路径 HTTP版本`，例如，`GET / HTTP/1.1`表示使用`GET`请求，路径是`/`，版本是`HTTP/1.1`。
+
 后续的每一行都是固定的`Header: Value`格式，我们称为HTTP Header，服务器依靠某些特定的Header来识别客户端请求，例如：
 
 - Host：表示请求的域名，因为一台服务器上可能有多个网站，因此有必要依靠Host来识别请求是发给哪个网站的；
@@ -37,6 +39,7 @@ Content-Length: 30
 username=hello&password=123456
 ```
 `POST`请求通常要设置`Content-Type`表示Body的类型，`Content-Length`表示Body的长度，这样服务器就可以根据请求的Header和Body做出正确的响应。
+
 此外，`GET`请求的参数必须附加在URL上，并以URLEncode方式编码，例如：`http://www.example.com/?a=1&b=K%26R`，参数分别是`a=1`和`b=K&R`。因为URL的长度限制，`GET`请求的参数不能太多，而`POST`请求的参数就没有长度限制，因为`POST`请求的参数必须放到Body中。并且，`POST`请求的参数不一定是URL编码，可以按任意格式编码，只需要在`Content-Type`中正确设置即可。常见的发送JSON的`POST`请求如下：
 ```java
 POST /login HTTP/1.1
@@ -73,6 +76,7 @@ Content-Length: 18391
 ????JFIFHH??XExifMM?i&??X?...(二进制的JPEG图片)
 ```
 因此，服务器总是被动地接收客户端的一个HTTP请求，然后响应它。客户端则根据需要发送若干个HTTP请求。
+
 对于最早期的HTTP/1.0协议，每次发送一个HTTP请求，客户端都需要先创建一个新的TCP连接，然后，收到服务器响应后，关闭这个TCP连接。由于建立TCP连接就比较耗时，因此，为了提高效率，HTTP/1.1协议允许在一个TCP连接中反复发送-响应，这样就能大大提高效率：
 ```java
                        ┌─────────┐
@@ -97,6 +101,7 @@ Content-Length: 18391
      ▼                      ▼
 ```
 因为HTTP协议是一个请求-响应协议，客户端在发送了一个HTTP请求后，必须等待服务器响应后，才能发送下一个请求，这样一来，如果某个响应太慢，它就会堵住后面的请求。
+
 所以，为了进一步提速，HTTP/2.0允许客户端在没有收到响应的时候，发送多个HTTP请求，服务器返回响应的时候，不一定按顺序返回，只要双方能识别出哪个响应对应哪个请求，就可以做到并行发送和接收：
 ```java
                        ┌─────────┐
@@ -121,12 +126,19 @@ Content-Length: 18391
      ▼                      ▼
 ```
 可见，HTTP/2.0进一步提高了效率。
+
 ## HTTP编程
+
 既然HTTP涉及到客户端和服务器端，和TCP类似，我们也需要针对客户端编程和针对服务器端编程。
+
 本节我们不讨论服务器端的HTTP编程，因为服务器端的HTTP编程本质上就是编写Web服务器，这是一个非常复杂的体系，也是JavaEE开发的核心内容，我们在后面的章节再仔细研究。
+
 本节我们只讨论作为客户端的HTTP编程。
+
 因为浏览器也是一种HTTP客户端，所以，客户端的HTTP编程，它的行为本质上和浏览器是一样的，即发送一个HTTP请求，接收服务器响应后，获得响应内容。只不过浏览器进一步把响应内容解析后渲染并展示给了用户，而我们使用Java进行HTTP客户端编程仅限于获得响应内容。
+
 我们来看一下Java如何使用HTTP客户端编程。
+
 Java标准库提供了基于HTTP的包，但是要注意，早期的JDK版本是通过`HttpURLConnection`访问HTTP，典型代码如下：
 ```java
 URL url = new URL("http://www.example.com/path/to/target?a=1&b=2");
@@ -153,7 +165,9 @@ InputStream input = conn.getInputStream();
 ...
 ```
 上述代码编写比较繁琐，并且需要手动处理`InputStream`，所以用起来很麻烦。
+
 从Java 11开始，引入了新的`HttpClient`，它使用链式调用的API，能大大简化HTTP的处理。
+
 我们来看一下如何使用新版的`HttpClient`。首先需要创建一个全局`HttpClient`实例，因为`HttpClient`内部使用线程池优化多个HTTP连接，可以复用：
 ```java
 static HttpClient httpClient = HttpClient.newBuilder().build();
@@ -190,6 +204,7 @@ public class Main {
 }
 ```
 如果我们要获取图片这样的二进制内容，只需要把`HttpResponse.BodyHandlers.ofString()`换成`HttpResponse.BodyHandlers.ofByteArray()`，就可以获得一个`HttpResponse<byte[]>`对象。如果响应的内容很大，不希望一次性全部加载到内存，可以使用`HttpResponse.BodyHandlers.ofInputStream()`获取一个`InputStream`流。
+
 要使用`POST`请求，我们要准备好发送的Body数据并正确设置`Content-Type`：
 ```java
 String url = "http://www.example.com/login";
@@ -208,6 +223,9 @@ HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandle
 String s = response.body();
 ```
 可见发送`POST`数据也十分简单。
+
 ## 小结
+
 Java提供了`HttpClient`作为新的HTTP客户端编程接口用于取代老的`HttpURLConnection`接口；
+
 `HttpClient`使用链式调用并通过内置的`BodyPublishers`和`BodyHandlers`来更方便地处理数据。

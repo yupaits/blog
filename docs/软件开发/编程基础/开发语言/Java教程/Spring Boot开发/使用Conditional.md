@@ -1,6 +1,7 @@
 # 使用Conditional
 
 使用Profile能根据不同的Profile进行条件装配，但是Profile控制比较糙，如果想要精细控制，例如，配置本地存储，AWS存储和阿里云存储，将来很可能会增加Azure存储等，用Profile就很难实现。
+
 Spring本身提供了条件装配`@Conditional`，但是要自己编写比较复杂的`Condition`来做判断，比较麻烦。Spring Boot则为我们准备好了几个非常有用的条件：
 
 - @ConditionalOnProperty：如果有指定的配置，条件生效；
@@ -40,6 +41,9 @@ public class AliyunStorageService implements StorageService {
 }
 ```
 注意到`LocalStorageService`的注解，当指定配置为`local`，或者配置不存在，均启用`LocalStorageService`。
+
 可见，Spring Boot提供的条件装配使得应用程序更加具有灵活性。
+
 ### 小结
+
 Spring Boot提供了几个非常有用的条件装配注解，可实现灵活的条件装配。

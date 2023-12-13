@@ -1,14 +1,21 @@
 # 第一个Spring Boot应用
 
 我们已经在前面详细介绍了Spring框架，它的主要功能包括IoC容器、AOP支持、事务支持、MVC开发以及强大的第三方集成功能等。
+
 那么，Spring Boot又是什么？它和Spring是什么关系？
+
 Spring Boot是一个基于Spring的套件，它帮我们预组装了Spring的一系列组件，以便以尽可能少的代码和配置来开发基于Spring的Java应用程序。
+
 以汽车为例，如果我们想组装一辆汽车，我们需要发动机、传动、轮胎、底盘、外壳、座椅、内饰等各种部件，然后把它们装配起来。Spring就相当于提供了一系列这样的部件，但是要装好汽车上路，还需要我们自己动手。而Spring Boot则相当于已经帮我们预装好了一辆可以上路的汽车，如果有特殊的要求，例如把发动机从普通款换成涡轮增压款，可以通过修改配置或编写少量代码完成。
+
 因此，Spring Boot和Spring的关系就是整车和零部件的关系，它们不是取代关系，试图跳过Spring直接学习Spring Boot是不可能的。
+
 Spring Boot的目标就是提供一个开箱即用的应用程序架构，我们基于Spring Boot的预置结构继续开发，省时省力。
+
 本章我们将详细介绍如何使用Spring Boot。
 
 要了解Spring Boot，我们先来编写第一个Spring Boot应用程序，看看与前面我们编写的Spring应用程序有何异同。
+
 我们新建一个`springboot-hello`的工程，创建标准的Maven目录结构如下：
 ```
 springboot-hello
@@ -24,9 +31,13 @@ springboot-hello
 └── target
 ```
 其中，在`src/main/resources`目录下，注意到几个文件：
+
 ### application.yml
+
 这是Spring Boot默认的配置文件，它采用[YAML](https://yaml.org/)格式而不是`.properties`格式，文件名必须是`application.yml`而不是其他名称。
+
 YAML格式比`key=value`格式的`.properties`文件更易读。比较一下两者的写法：
+
 使用`.properties`格式：
 ```properties
 ## application.properties
@@ -66,8 +77,11 @@ spring:
       minimum-idle: 1
 ```
 可见，YAML是一种层级格式，它和`.properties`很容易互相转换，它的优点是去掉了大量重复的前缀，并且更加易读。
- 也可以使用application.properties作为配置文件，但不如YAML格式简单。
+
+> 也可以使用application.properties作为配置文件，但不如YAML格式简单。
+
 ### 使用环境变量
+
 在配置文件中，我们经常使用如下的格式对某个key进行配置：
 ```yaml
 app:
@@ -77,11 +91,14 @@ app:
     password: ${DB_PASSWORD:password}
 ```
 这种`${DB_HOST:localhost}`意思是，首先从环境变量查找`DB_HOST`，如果环境变量定义了，那么使用环境变量的值，否则，使用默认值`localhost`。
+
 这使得我们在开发和部署时更加方便，因为开发时无需设定任何环境变量，直接使用默认值即本地数据库，而实际线上运行的时候，只需要传入环境变量即可：
 ```bash
 $ DB_HOST=10.0.1.123 DB_USER=prod DB_PASSWORD=xxxx java -jar xxx.jar
 ```
+
 ### logback-spring.xml
+
 这是Spring Boot的logback配置文件名称（也可以使用`logback.xml`），一个标准的写法如下：
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -117,8 +134,11 @@ $ DB_HOST=10.0.1.123 DB_USER=prod DB_PASSWORD=xxxx java -jar xxx.jar
 </configuration>
 ```
 它主要通过`<include resource="..." />`引入了Spring Boot的一个缺省配置，这样我们就可以引用类似`${CONSOLE_LOG_PATTERN}`这样的变量。上述配置定义了一个控制台输出和文件输出，可根据需要修改。
+
 `static`是静态文件目录，`templates`是模板文件目录，注意它们不再存放在`src/main/webapp`下，而是直接放到`src/main/resources`这个classpath目录，因为在Spring Boot中已经不需要专门的webapp目录了。
+
 以上就是Spring Boot的标准目录结构，它完全是一个基于Java应用的普通Maven项目。
+
 我们再来看源码目录结构：
 ```
 src/main/java
@@ -151,6 +171,7 @@ public class Application {
 - @ComponentScan
 
 这样一个注解就相当于启动了自动配置和自动扫描。
+
 我们再观察`pom.xml`，它的内容如下：
 ```xml
 <project ...>
@@ -199,7 +220,9 @@ public class Application {
 </project>
 ```
 使用Spring Boot时，强烈推荐从`spring-boot-starter-parent`继承，因为这样就可以引入Spring Boot的预置配置。
+
 紧接着，我们引入了依赖`spring-boot-starter-web`和`spring-boot-starter-jdbc`，它们分别引入了Spring MVC相关依赖和Spring JDBC相关依赖，无需指定版本号，因为引入的`<parent>`内已经指定了，只有我们自己引入的某些第三方jar包需要指定版本号。这里我们引入`pebble-spring-boot-starter`作为View，以及`hsqldb`作为嵌入式数据库。`hsqldb`已在`spring-boot-starter-jdbc`中预置了版本号`2.5.0`，因此此处无需指定版本号。
+
 根据`pebble-spring-boot-starter`的[文档](https://pebbletemplates.io/wiki/guide/spring-boot-integration/)，加入如下配置到`application.yml`：
 ```yaml
 pebble:
@@ -258,9 +281,13 @@ public class Application {
 2020-06-08 08:47:25.138  INFO 32585 --- [           main] com.itranswarp.learnjava.Application     : Started Application in 2.68 seconds (JVM running for 3.097)
 ```
 Spring Boot自动启动了嵌入式Tomcat，当看到`Started Application in xxx seconds`时，Spring Boot应用启动成功。
+
 现在，我们在浏览器输入`localhost:8080`就可以直接访问页面。那么问题来了：
+
 前面我们定义的数据源、声明式事务、JdbcTemplate在哪创建的？怎么就可以直接注入到自己编写的`UserService`中呢？
+
 这些自动创建的Bean就是Spring Boot的特色：AutoConfiguration。
+
 当我们引入`spring-boot-starter-jdbc`时，启动时会自动扫描所有的`XxxAutoConfiguration`：
 
 - `DataSourceAutoConfiguration`：自动创建一个`DataSource`，其中配置项从`application.yml`的`spring.datasource`读取；
@@ -268,6 +295,7 @@ Spring Boot自动启动了嵌入式Tomcat，当看到`Started Application in xxx
 - `JdbcTemplateAutoConfiguration`：自动创建了一个`JdbcTemplate`。
 
 因此，我们自动得到了一个`DataSource`、一个`DataSourceTransactionManager`和一个`JdbcTemplate`。
+
 类似的，当我们引入spring-boot-starter-web时，自动创建了：
 
 - `ServletWebServerFactoryAutoConfiguration`：自动创建一个嵌入式Web服务器，默认是Tomcat；
@@ -316,6 +344,7 @@ class JdbcTemplateConfiguration {
 }
 ```
 创建`JdbcTemplate`之前，要满足`@ConditionalOnMissingBean(JdbcOperations.class)`，即不存在`JdbcOperations`的Bean。
+
 如果我们自己创建了一个`JdbcTemplate`，例如，在`Application`中自己写个方法：
 ```java
 @SpringBootApplication
@@ -328,7 +357,11 @@ public class Application {
 }
 ```
 那么根据条件`@ConditionalOnMissingBean(JdbcOperations.class)`，Spring Boot就不会再创建一个重复的`JdbcTemplate`（因为`JdbcOperations`是`JdbcTemplate`的父类）。
+
 可见，Spring Boot自动装配功能是通过自动扫描+条件装配实现的，这一套机制在默认情况下工作得很好，但是，如果我们要手动控制某个Bean的创建，就需要详细地了解Spring Boot自动创建的原理，很多时候还要跟踪`XxxAutoConfiguration`，以便设定条件使得某个Bean不会被自动创建。
+
 ### 小结
+
 Spring Boot是一个基于Spring提供了开箱即用的一组套件，它可以让我们基于很少的配置和代码快速搭建出一个完整的应用程序。
+
 Spring Boot有非常强大的AutoConfiguration功能，它是通过自动扫描+条件装配实现的。
