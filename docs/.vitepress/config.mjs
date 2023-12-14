@@ -494,7 +494,9 @@ export default defineConfig({
 
     search: {
       provider: 'local'
-    }
+    },
+
+    lastUpdated: true
   },
   markdown: {
     theme: { light: 'github-light', dark: 'github-dark' },

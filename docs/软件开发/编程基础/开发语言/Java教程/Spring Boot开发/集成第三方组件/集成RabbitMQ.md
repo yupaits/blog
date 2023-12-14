@@ -6,7 +6,7 @@ AMQP是一种使用广泛的独立于语言的消息协议，它的全称是Adva
 
 ### 安装RabbitMQ
 
-我们先从RabbitMQ的官网[下载](https://www.rabbitmq.com/download.html)并安装RabbitMQ，安装和启动RabbitMQ请参考官方文档。要验证启动是否成功，可以访问RabbitMQ的管理后台[http://localhost:15672](http://localhost:15672/)，如能看到登录界面表示RabbitMQ启动成功：
+我们先从RabbitMQ的官网[下载](https://www.rabbitmq.com/download.html)并安装RabbitMQ，安装和启动RabbitMQ请参考官方文档。要验证启动是否成功，可以访问RabbitMQ的管理后台`http://localhost:15672`，如能看到登录界面表示RabbitMQ启动成功：
 
 ![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655533904021-9070d11a-b65f-4f9f-9ac8-14e5a67173fa.jpeg#clientId=u60d9760e-bee6-4&from=paste&id=u6eba6e74&originHeight=225&originWidth=506&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u62ad58b0-4af6-4f78-b31c-fbb2a1d53f5&title=)
 
