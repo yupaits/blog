@@ -1,7 +1,8 @@
 {
   "devDependencies": {
     "markdown-it-task-lists": "^2.1.1",
-    "vitepress": "^1.0.0-rc.31"
+    "vitepress": "^1.0.0-rc.31",
+    "vue-github-button": "^3.1.0"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",

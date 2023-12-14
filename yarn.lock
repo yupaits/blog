@@ -626,6 +626,11 @@ fsevents@~2.3.2, fsevents@~2.3.3:
   resolved "https://registry.npmmirror.com/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
   integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
+github-buttons@^2.22.0:
+  version "2.27.0"
+  resolved "https://registry.npmmirror.com/github-buttons/-/github-buttons-2.27.0.tgz#bbebea3d1c4f8c302b7d8432fd25a679242597e2"
+  integrity sha512-PmfRMI2Rttg/2jDfKBeSl621sEznrsKF019SuoLdoNlO7qRUZaOyEI5Li4uW+79pVqnDtKfIEVuHTIJ5lgy64w==
+
 hast-util-from-parse5@^8.0.0:
   version "8.0.1"
   resolved "https://registry.npmmirror.com/hast-util-from-parse5/-/hast-util-from-parse5-8.0.1.tgz#654a5676a41211e14ee80d1b1758c399a0327651"
@@ -990,6 +995,13 @@ vue-demi@>=0.14.6:
   version "0.14.6"
   resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.6.tgz#dc706582851dc1cdc17a0054f4fec2eb6df74c92"
   integrity sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==
+
+vue-github-button@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmmirror.com/vue-github-button/-/vue-github-button-3.1.0.tgz#a95751c43db68cb3ba790af1f63df7e3a2be6dae"
+  integrity sha512-S69NFalucetUW4AjMkLlHY/fgTWu6LEGEtehMewXRNLnjODhDvJj4lwt0u0BSPXLTDB+PLk1tWlwx3pw+ItLgQ==
+  dependencies:
+    github-buttons "^2.22.0"
 
 vue@^3.3.8:
   version "3.3.11"

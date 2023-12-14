@@ -1,0 +1,179 @@
+# GitLab使用手册
+
+GitLab 是一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务。随着Git的流行和DevOps的逐步落地，GitLab越来越成为日常工作中不可或缺的工具，本文是在实际开发过程中正确高效地使用GitLab方法的总结。
+## 1、GitLab设置
+### 1.1 使用SSH代替账号密码进行认证
+Git提供了账号密码、SSH、GPG三种方式访问代码，其中使用最多最为方便的是SSH。
+#### 生成ssh key
+生成ssh key需要[安装Git](http://dev.posun.co:600/root/GitLab-Manual/wikis/%E5%AE%89%E8%A3%85git)，在 Git Bash 中依次进行以下操作。
+
+- 设置Git的全局user的name和email
+```
+git config --global user.name "xxx"
+```
+```
+git config --global user.email "xxx@posun.cn"
+```
+
+- 生成ssh key
+```
+ssh-keygen -t rsa -C “xxx@posun.cn”
+```
+之后会看到提示输入保存ssh key的文件名和加密串，建议直接回车跳过。
+
+- 查看ssh key
+
+完成上述操作之后，可以在当前用户的 `home` 目录下的 `.ssh` 文件夹中看到生成的 key，**id_rsa** 是私钥，**id_rsa.pub** 是公钥。
+#### 上传ssh key
+点击GitLab导航栏的用户头像下拉选择 **设置**，在左侧菜单栏选择 **SSH密钥** 进入 SSH 密钥添加页面，使用文本编辑器打开 **id_rsa.pub** 文件并全选复制粘贴至密钥添加页面的相应位置，填写密钥标题，点击 **增加密钥** 按钮即可完成ssh key的上传。
+#### 使用ssh的好处
+使用ssh之后，使用git方式（不是http/https方式）pull和push代码时不用每次都填写账号密码，方便快捷，并且更加安全，但是请妥善保管ssh key，谨防泄漏。
+### 1.2 设置语言偏好
+在GitLab导航栏点击个人头像下拉选择 **设置**，在左侧菜单栏选择 **Profile** 进入个人配置页面，在 **主要设置** -> **Preferred language** 中选择 “简体中文”。
+## 2、项目
+### 2.1 如何新建一个项目
+点击GitLab导航条上的 `+` 下拉选择 **新建项目** 进入项目创建页面，GitLab提供了以下三种方式创建项目。
+#### 新建一个空白项目
+填写项目路径、名称、描述，选择项目可见等级之后，点击 **创建项目** 按钮即可创建一个空白项目。新项目一般采用此方式进行创建。
+#### 从模板创建
+GitLab提供了三种项目模板：Ruby on Rails、Spring、NodeJS Express，可按需使用。
+#### 从其它代码仓库导入项目
+从GitHub等其它代码仓库导入项目。
+### 2.2 如何管理项目成员
+#### 添加/导入项目成员
+进入项目页面，在左侧菜单栏选择 **设置** -> **成员**，在 **添加成员** 里依次选择 要邀请的成员（可多选）、角色权限和访问到期日期，点击 **添加到项目** 完成项目成员的添加。除了手动添加之外，还可以点击 **导入** 按钮进入导入成员页面，选择目标项目一键导入目标项目的成员。
+#### 项目成员管理
+项目成员页面还提供了成员管理的功能，可以修改成员的角色权限和访问到期日期，还可以踢出成员。
+### 2.3 如何新建一个群组项目
+#### 创建一个群组
+在导航栏里点击 `+` 下拉选择 **新建群组** 进入新建群组页面，填写群组路径、群组名称、描述，上传群组图表，选择群组可见等级之后，点击 **创建群组** 按钮即可创建一个新的群组。
+#### 新建群组项目
+在群组主页点击 **新项目** 按钮进入新建群组项目页面，填写必要信息之后并提交即可创建一个群组项目，群组项目默认的可见等级为 **私有**，即只允许群组成员访问。<br />个人项目在 **设置** -> **成员** -> **与群组共享** 里可以将项目共享给指定群组的成员。
+#### 子群组
+在群组主页下拉选择并点击 **新子群组** 进入资群组创建页面，子群组可以对父群组的成员进一步细分，子群组成员可以访问父群组项目，非子群组的父群组成员无法访问子群组项目。
+## 3、分支管理
+### 3.1 分支的划分
+工程的分支主要分为 **master**、**dev**、**hotfix**、**feature** 四类。
+
+- **master**：线上代码主分支，该代码和线上代码一致
+- **dev**: 开发分支，包含即将上线的新功能，由各个新功能开发分支经测试后合入，属于分支测试后的产物
+- **feature**: 功能开发分支，当有新开发任务时，开发需要从dev分支拉取feature分支，开发完毕经过分支测试后，可以进行pull request请求，申请将分支合入dev分支，该分支是开发过程中最常使用的分支
+- **hotfix**: bug修复分支，或紧急需求开发分支（一般不要在hotfix分支上进行新需求的开发）。该分支从master分支拉出，经开发测试完成之后，可以进行pull requets，申请将分支合入master
+#### 注意事项
+
+- feature只能从dev分支拉出，hotfix分支只能从master拉出
+- 在进行pull request请求之前必须对当前的开发分支进行反合，即dev分支反合feature分支，master分支反合hotfix分支
+- dev分支会在稳定之后合入master分支
+- 不能将master分支与feature反合，dev分支与hotfix反合
+- 开发只能将代码提交至对应的开发分支，不能直接提交到master分支或dev分支
+### 3.2 分支的提交注意事项
+分支提交的几点注意如下：
+
+- 在拉取新分支之前一定要确保本地的master分支和dev分支代码是最新的（在拉分支之前进行pull操作）
+- 分支的拉取和push请用git命令或16版本及以上idea完成，不要使用eclipse
+- 本地代码提交时需要确保本地分支对应的远程分支代码最新，具体在进行提交操作之前请进行pull操作
+- 代码提交时要进行相关注释，说明修改的代码内容；建议提高代码提交的频率，这样在出现问题时方便问题的定位与代码的回滚
+- 代码提交时要在本地解决冲突，冲突解决完成，并且代码在本地可以编译通过之后才能提交代码
+- 在windows下进行开发一定要注意git有关换行符的问题（crlf与lf的问题），具体请在git中设置相关的配置（git config --global core.autocrlf true ），并在开发工具中将默认的环境设置为linux，避免提交的代码出现大量的冲突。如果出现这种情况的冲突，请不要提交代码到远程仓库，本地解决之后再提交。
+## 4、IntelliJ IDEA使用GitLab
+### 4.1 安装Git
+#### 下载Git
+进入[Git下载页面](https://git-scm.com/download)，选择合适的版本下载。
+#### 安装Git
+Windows下双击下载好的 `Git-x.xx.x-64-bit.exe` 安装包执行安装，不建议更改 Git 默认勾选的配置。Git GUI按需使用，实际使用的频率一般比较低。
+#### 配置Git
+如果在安装时没有勾选 **Checkout Windows-style, commit Unix-style line endings** 项，可以在命令行中执行 `git config --global core.autocrlf true` 开启 **提交代码时自动转换换行符**。
+### 4.2 安装IDEA Git插件
+#### 安装插件
+在IDEA中搜索 `Git Integration` 和 `.ignore` 插件并安装，安装完成之后重启IDEA。
+#### 配置插件
+
+- IDEA Git插件的配置
+
+![IDEA-Git插件配置.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765476852-81715fbf-3d47-4b97-b4d3-aa0ce6d31d33.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=ucf8ec6a6&originHeight=698&originWidth=1023&originalType=binary&ratio=1&rotation=0&showTitle=false&size=65953&status=done&style=none&taskId=ucecab3b8-ff0a-478a-884c-5675158322e&title=)
+
+- .ignore插件
+
+**.ignore** 插件支持Git推送代码时自动忽略自定义配置的文件或者目录，防止将一些与开发无关的项目配置文件、构建文件推送到代码库，也减少了手动推送的风险。
+### 4.3 从GitLab导入项目
+#### 从远程仓库clone代码到本地
+在配置好了ssh之后则可进行代码的clone，用http/https的方式不在本文的考虑范围内。clone远程代码到本地请使用git bash操作，不要使用ide，尤其是不要使用eclipse（本项目约定使用命令行进行）。<br />![复制Git代码仓库路径.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765482109-a50492de-f868-45d8-93af-b973a1909462.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u5997ca98&originHeight=466&originWidth=1059&originalType=binary&ratio=1&rotation=0&showTitle=false&size=45740&status=done&style=none&taskId=u64670a43-eea6-4848-8e23-14f15891fe1&title=)<br />使用复制好的链接clone代码
+```
+git clone git@dev.posun.co:root/GitLab-Manual.git
+```
+![Git-SSH-Clone代码.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765488614-b561913d-6da6-48d7-a943-67e985dca2a3.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=OgBjQ&originHeight=354&originWidth=984&originalType=binary&ratio=1&rotation=0&showTitle=false&size=147803&status=done&style=none&taskId=udcfb5d92-ad85-4549-915f-beb3994f0c9&title=)<br />使用IDEA打开Git项目<br />![IDEA打开Git项目.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765502341-ee4f86a9-6790-4a80-931f-609c6288a50d.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u90168d05&originHeight=484&originWidth=475&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17741&status=done&style=none&taskId=ua41391a2-d968-4ac9-9ab9-542bb8f5653&title=)<br />选择项目**目录**，点击“OK”<br />![选择Git项目目录.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765506997-b786bf71-e323-414b-9f26-349f9fbd0a38.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=ub4c45131&originHeight=504&originWidth=424&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17803&status=done&style=none&taskId=uc5097bdb-2a77-4911-9e19-9b462e502a3&title=)<br />成功导入Git项目<br />![IDEA-Git项目.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765510691-48edbca0-7a09-4e0c-974c-6be5725811af.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u0c9624b0&originHeight=577&originWidth=1047&originalType=binary&ratio=1&rotation=0&showTitle=false&size=43318&status=done&style=none&taskId=ucccee463-9cbf-4d72-b258-2c2dac9bd73&title=)
+### 4.4 本地拉取新的分支并将分支push到远程仓库
+#### 分支操作菜单
+IDEA中Git的操作菜单可以在以下两个地方找到。<br />![IDEA-Git操作菜单.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765517621-9fd79f2b-1129-4ff1-8d05-fd80d6ed9242.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u4449bb49&originHeight=878&originWidth=1029&originalType=binary&ratio=1&rotation=0&showTitle=false&size=101019&status=done&style=none&taskId=ubf7b7aca-f9a2-426d-8597-8e4eb803a24&title=)<br />![IDEA-Git操作菜单-菜单栏.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765524577-8482914e-fe78-42a0-8353-9e2d57742f30.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u72f814a6&originHeight=755&originWidth=1051&originalType=binary&ratio=1&rotation=0&showTitle=false&size=86505&status=done&style=none&taskId=uc3212026-0fe2-4de0-aedb-e4d04ddf128&title=)<br />分支操作菜单在IDEA界面的右下方有一个快捷入口。<br />![IDEA-Git分支菜单.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765529410-da177193-76cb-460e-922e-497e85348cdd.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u6f5c3207&originHeight=341&originWidth=581&originalType=binary&ratio=1&rotation=0&showTitle=false&size=26264&status=done&style=none&taskId=u74b272ce-37a7-4b40-b8c9-4ee373049a5&title=)
+#### 拉取分支操作流程
+##### 创建本地dev分支
+![IDEA-创建本地dev分支.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765533706-ab3dfd93-f3b7-4493-b7a6-c8c9c1149b70.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=ua62b0e5e&originHeight=300&originWidth=512&originalType=binary&ratio=1&rotation=0&showTitle=false&size=20689&status=done&style=none&taskId=u0ef063e9-90a8-4ccb-9e78-39dbc0c043a&title=)
+##### 命名本地dev分支，最好跟远程分支保持一致
+![IDEA-命名本地分支.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765538580-f3f2efb9-4c4f-4230-8a2c-c76a3665df22.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u3ef55c4f&originHeight=256&originWidth=474&originalType=binary&ratio=1&rotation=0&showTitle=false&size=11111&status=done&style=none&taskId=u35a686b3-d65e-4e4e-bd18-b989b87c7f3&title=)
+##### 从dev分支拉取feature分支
+拉取分支前需要确认当前本地分支在master或者dev分支，并且分支代码是最新的（拉取feature分支则当前分支需要是dev分支，拉取hotfix分支则要在master分支）
+
+1.  切换到dev分支<br />![IDEA-切换到dev分支.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765544325-de3a7504-79c9-4acb-bb4b-9ae092328dcb.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u09a335e3&originHeight=406&originWidth=549&originalType=binary&ratio=1&rotation=0&showTitle=false&size=23880&status=done&style=none&taskId=u428090b5-d9f5-4594-ba09-e6589c8de45&title=)
+2.  pull dev分支代码，使代码最新<br />![IDEA-pull分支代码.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765548654-040bd3b8-7678-4f67-868a-0918755f345d.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u27b67485&originHeight=843&originWidth=980&originalType=binary&ratio=1&rotation=0&showTitle=false&size=93015&status=done&style=none&taskId=u50ee9f17-4081-47a5-8cff-97dad2aff36&title=)<br />![IDEA-pull代码.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765553643-e73b374c-193c-4a8f-b135-e361d7cc98ae.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u41b8a4ed&originHeight=440&originWidth=535&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21295&status=done&style=none&taskId=u944748a3-834d-4356-addd-57266d2edac&title=)
+3.  创建新的feature分支<br />![IDEA-创建新的本地分支.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765558389-6cf515b9-1a5c-4998-a3fa-cfef310c282c.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u29db9d59&originHeight=227&originWidth=430&originalType=binary&ratio=1&rotation=0&showTitle=false&size=15623&status=done&style=none&taskId=ud9228f4b-d0a7-4f06-a1db-02ace3fc689&title=)<br />注意feature分支的命名，**feature_任务编号_任务描述_分支创建日期**。任务编号对应GitLab中项目的问题编号。<br />![IDEA-创建feature分支.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765564806-3df0960c-c598-4f68-bf02-e1532c6d7422.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=ufa085de6&originHeight=265&originWidth=468&originalType=binary&ratio=1&rotation=0&showTitle=false&size=12134&status=done&style=none&taskId=u525266a2-f322-42de-8992-f0df3be98a2&title=)
+#### push新的feature分支到远程仓库
+![IDEA-push feature分支到远程仓库.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765568253-ad18eead-db75-4531-b7e4-ebb452481b39.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u076059e8&originHeight=561&originWidth=602&originalType=binary&ratio=1&rotation=0&showTitle=false&size=14285&status=done&style=none&taskId=u7895c76c-78b3-4cf9-a32b-b7f5343e032&title=)<br />push feature分支成功<br />![push feature分支到远程仓库成功.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765573084-856118bf-467c-444d-bc3a-e0528e90710e.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=ubaa92c14&originHeight=561&originWidth=1051&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42960&status=done&style=none&taskId=u094426b8-dbf4-4c2a-9ae5-c36ed7cf32b&title=)
+### 4.5 从开发分支上提交代码
+
+- 如果有新创建的文件，则在commit之前要进行add
+
+![IDEA-git add新文件.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765577069-55ee4b97-d561-482f-9b7f-fac7fe218367.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u7715ef60&originHeight=462&originWidth=962&originalType=binary&ratio=1&rotation=0&showTitle=false&size=70060&status=done&style=none&taskId=u66a1b030-abee-47ea-ace9-57f299bbcc9&title=)
+
+- commit代码之前要检查代码更改的地方，不要提交一些非智力因素导致的合并错误。IDEA中有两种提交代码的方式。
+
+![IDEA-提交代码.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765583222-92d8eed0-8238-43fe-8108-9f7adb2ef790.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u3c95fc8d&originHeight=785&originWidth=717&originalType=binary&ratio=1&rotation=0&showTitle=false&size=69907&status=done&style=none&taskId=u550c166d-3b77-48fc-bc19-e66b18b460d&title=)<br />![IDEA-提交代码-菜单栏.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765591523-9f5025e9-3e0d-43e4-9ab2-33baba87be91.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u1277a01d&originHeight=126&originWidth=410&originalType=binary&ratio=1&rotation=0&showTitle=false&size=6341&status=done&style=none&taskId=u445ec6af-da19-4b4c-a6ee-c801758d83e&title=)
+
+- 该面板可以查看有哪些文件进行了修改以及修改详情
+
+![IDEA-查看代码文件变动信息.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765598362-0d25c93c-08ee-42b1-9f45-f6be9db470e7.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=ud87b2ffc&originHeight=792&originWidth=1234&originalType=binary&ratio=1&rotation=0&showTitle=false&size=93139&status=done&style=none&taskId=u19cab731-72ac-47ff-8408-780c304aa94&title=)
+
+- 确认无误，添加注释，提交代码
+
+commit: 提交代码<br />commit and push：提交代码并推送至远程仓库<br />**可以一次推送多次提交**，一般一个功能点的修改提交一次代码，一个开发周期（半天、一天）推送一次代码。注意提交注释的格式 `tasknum#taskdesc:commit message`。<br />![IDEA-填写提交说明.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765602662-bd61f82b-246b-4e3a-af10-fe5948165954.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u73d4c296&originHeight=792&originWidth=1234&originalType=binary&ratio=1&rotation=0&showTitle=false&size=82026&status=done&style=none&taskId=u69d7b29f-8d60-4d4b-9346-7cf2c0404ca&title=)<br />![IDEA-提交完成推送代码.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765606970-4013c4c0-681f-4fd3-bd42-8e3f1ae781f9.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=ue13dd15e&originHeight=561&originWidth=602&originalType=binary&ratio=1&rotation=0&showTitle=false&size=19745&status=done&style=none&taskId=u2c1aada7-5b15-44fc-88b2-1cd80061b88&title=)
+### 4.6 查看代码提交历史
+#### 查看指定文件的提交历史
+![IDEA-查看文件的提交历史.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765612376-493aeeb0-f33d-4bb3-b78f-c6a2ee712664.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u8746a000&originHeight=580&originWidth=744&originalType=binary&ratio=1&rotation=0&showTitle=false&size=106947&status=done&style=none&taskId=u1abffeca-4549-4c96-a977-c3157bfc441&title=)
+#### 查看项目的提交历史
+![IDEA-查看项目的提交历史.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658765618248-ca7fadbd-63ed-44a4-b7f7-89da5c60f142.png#clientId=u0b3fc8ea-b94f-4&from=drop&id=u8a4a63cc&originHeight=321&originWidth=1902&originalType=binary&ratio=1&rotation=0&showTitle=false&size=70979&status=done&style=none&taskId=uf82fd576-84e2-4b04-8a1b-6b0a2ea83bb&title=)
+### 4.7 代码的回退
+**不要回退代码，代码提交错误，请手动删除提交错误的代码，然后再次提交，不然会影响一些提交信息的记录，或其他分支的开发。**
+### 4.8 分支反合及冲突的解决
+虽然这部分大部分靠经验解决问题，但是仍然需要注意以下注意事项：<br />**分支反合**：即master分支或dev分支合并到开发分支,合并操作可以用命令行进行
+```
+git checkout feature_dev_local
+git merge origin/dev
+```
+```
+git checkout hotfix_fixbug_local
+git merge origin/master
+```
+
+- IDEA中有比较好用的冲突解决工具，命令行执行玩合并之后，用IDEA解决冲突并提交
+- 不要用IDE进行分支反合，尤其不能用Eclipse
+### 4.9 提交pull request
+pull request在分支测试之后提交，在git的web端可以直接操作，一般这部分由QA完成。
+#### 新建合并请求
+在GitLab的项目页面中选择 **合并请求** 进入pull request面板页面，点击 **新建合并请求**，选择pull request的来源分支和目标分支，点击 **比较分支后继续**。<br />填写标题、描述，指派审查员，可选该合并请求相关的里程碑和标记（与问题看板关联），之后点击 **提交合并请求** 即完成了合并请求的创建。勾选 **接受合并请求后删除来源分支**，合并请求完成之后会删除来源分支，一般从feature合并到dev、hotfix合并到master可以勾选，dev合并到master不勾选。
+#### 合并请求的审查
+审查员在代码审查通过之后可以选择合并操作完成分支代码的合并。代码审查不通过时，审查员需要填写原因或建议并关闭合并请求，此时开发人员需要根据审查员的审查结果进行修改并在修改完成之后再次pull request。
+### 4.10 .gitignore文件的使用
+#### .gitignore文件的编写原则
+`.gitignore` 文件过滤有两种模式：开放模式和保守模式。开放模式负责设置过滤哪些文件和文件夹，保守模式负责设置哪些文件不被过滤，也就是哪些文件要被跟踪。<br />gitignore是从上到下逐行匹配的，因此.gitignore文件的编写原则就是：**先编写开放模式，在编写保守模式**。
+#### 基本语法
+
+- 以斜杠“/”开头表目录
+- 以星号“*”通配多字符
+- 以问号“?”通配单字符
+- 以方括号“[]”包含单个字符的匹列表
+- 以叹号“!”对匹配结果反
+## 5、任务
+### 5.1 任务的创建与执行
+#### 任务的创建
+在GitLab的项目页面中选择 **问题** -> **列表** 进入问题列表页面，点击 **新建问题** 进入任务创建页面，填写问题标题、描述，指派任务的执行人员，勾选是否保密，选择截止日期，选择里程碑和标记，之后点击 **提交问题** 即可完成任务的创建。这里的任务标记跟问题面板中的面板标题一致。
+#### 任务的执行
+在 **问题** -> **看板** 页面可以对问题的执行情况进行跟踪。这部分跟大部分团队协作的工具比较类似，不做过多说明。

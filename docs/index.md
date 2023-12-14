@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: 技术博客
-      link: /markdown-examples
+      link: /技术博客/
     - theme: alt
       text: 文章收录
-      link: /api-examples
+      link: /文章收录/
 
 features:
   - title: IDEA - 灵感
