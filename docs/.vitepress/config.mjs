@@ -29,7 +29,9 @@ export default defineConfig({
         s.parentNode.insertBefore(hm, s);
       })();
       `
-    ]
+    ],
+    // 解决图片403问题
+    ['meta', { name: 'referrer', content: 'never' }]
   ],
   cleanUrls: true,
   ignoreDeadLinks: true,
