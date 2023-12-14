@@ -16,8 +16,8 @@ export default defineConfig({
       { text: '文章收录', link: '/文章收录' },
       { text: '软件开发', link: '/软件开发/实战总结/常见异常解决方案' },
       { text: '个人项目', link: '/个人项目/yutool组件式框架/yutool模块划分' },
-      { text: '项目文档', link: '/项目文档' },
       { text: '生活记录', link: '/生活记录' },
+      { text: '站点收录', link: '/站点收录/技术博客' },
     ],
 
     sidebar: {
@@ -327,12 +327,37 @@ export default defineConfig({
             { text: '商城页面', link: '/个人项目/yupan网盘/商城页面' },
             { text: 'shop商城', link: '/个人项目/yupan网盘/shop商城' },
             { text: 'vip会员', link: '/个人项目/yupan网盘/vip会员' },
-
           ]
         },
       ],
-      '/项目文档': [],
-      '/生活记录': [],
+      '/生活记录': [
+        {
+          text: '山水游记',
+          collapsed: false,
+          items: [
+
+          ]
+        },
+        {
+          text: '酷玩数码',
+          collapsed: false,
+          items: [
+
+          ]
+        },
+        {
+          text: '阅读书单',
+          collapsed: false,
+          items: [
+
+          ]
+        }
+      ],
+      '/站点收录': [
+        { text: '技术博客', link: '/站点收录/技术博客' },
+        { text: '在线工具', link: '/站点收录/在线工具' },
+        { text: '免费素材', link: '/站点收录/免费素材' },
+      ]
     },
 
     socialLinks: [
