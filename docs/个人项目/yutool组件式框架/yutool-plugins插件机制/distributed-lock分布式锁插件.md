@@ -1,0 +1,65 @@
+# distributed-lock分布式锁插件
+
+## 背景
+在实际的开发工作中，有一些场景会使用到分布式锁，用于控制分布式系统多个节点同一时间只能有一个节点执行目标方法，解决了多节点同时执行导致的数据不一致，数据重复等问题。
+## 实现方式
+使用Spring Boot Starter技术开发基于Redis的可插拔式分布式锁组件，采用注解+切面的方式将分布式锁自身的控制逻辑与业务代码接口，侵入性小，使用起来更加简便。
+## 分布式锁的设计
+
+1. 多个节点执行同一个目标方法时，方法想要获取分布式锁Redis Key相同的多个节点才会受同一个分布式锁的控制。
+2. 为了避免某个节点拿到锁执行代码逻辑时宕掉，锁无法释放导致其他节点一直拿不到锁，需要设置锁的过期时间，过期后自动释放掉。
+3. 由于网络连接不稳定导致节点获取不到锁时，需要通过重试机制来进行获取。
+4. 特殊情况下，有多个方法使用同一个锁，例如方法A和方法B都是比较耗时的计算任务，并且受同一个分布式锁控制，其中方法A自身是需要支持多节点并发计算用于提高处理效率，此时可以通过设计分布式锁的排他性并结合重试之后是否执行方法内的代码逻辑，以满足此种场景的要求。
+## 分布式锁配置参数说明
+分布式锁相关的配置参数说明如下：
+
+| 参数 | 说明 | 默认值 | 备注 |
+| --- | --- | --- | --- |
+| exclusive | 是否为排他锁 | true | 指定注解修饰的目标方法同一时间是否只能由一个节点或实例执行。当一个节点拿到锁开始执行目标方法时，其他节点获取不到锁则等待重试，一次或多次重试之后仍然获取不到锁，需要根据是否为排他锁分别进行处理。如果是排他锁(exclusive=true)，其他节点不执行目标方法内的代码逻辑；如果不是排他锁(exclusive=false)，其他节点则直接执行目标方法的代码逻辑。 |
+| timeout | 超时时长 | 5 | 执行目标方法的超时时长，超过该时长后，锁会被释放掉。 |
+| unit | 时间单位 | TimeUnit.MILLISECONDS毫秒 | 超时时长和重试等待时长使用的都是该时间单位 |
+| retries | 重试次数 | 0 | 重新尝试获取锁的次数 |
+| waitingTime | 重试等待时长，数值 | 0 | 获取锁失败到下一次尝试获取锁之间的时间间隔 |
+| prefix | Key前缀 | 空字符串 | 分布式锁的Redis Key前缀 |
+| argNames | 构建Key的参数 | 空数组 | 指定哪些方法参数参与Redis Key的构建。为空时默认使用全部的方法参数。 |
+| argsAssociated | 是否使用参数构建Key | true | 是否使用方法参数构建Redis Key。设为false，则无论argNames中有哪些方法参数，都不会使用方法参数构建Key。 |
+| throwEx | 获取锁失败时是否抛出异常 | false | 重试之后仍然获取不到锁，设为true: 不执行目标方法代码并抛出onFailure参数对应的异常，设为false: 不执行目标方法代码逻辑且不抛出异常。 |
+| onFailure | 获取锁失败时抛出的异常类型 | DistributedLockException.class |  |
+
+## 快速上手
+### 1. Maven依赖
+在项目的`pom.xml`文件添加以下依赖：
+```xml
+<parent>
+    <groupId>com.yupaits</groupId>
+    <artifactId>yutool-parent</artifactId>
+    <version>${yutool.version}</version>
+    <relativePath/>
+</parent>
+
+<dependencies>
+    <dependency>
+        <groupId>com.yupaits</groupId>
+        <artifactId>distributed-lock</artifactId>
+    </dependency>
+</dependencies>
+```
+### 2. 配置类
+在项目的配置类使用`@EnableDistributedLock`注解启用分布式锁组件：
+```java
+@EnableDistributedLock
+public RedisCondig {
+
+}
+```
+### 3. 使用示例
+在需要分布式锁的方法上使用`@DistributedLockable`注解：
+```java
+public class ServiceA {
+    
+    @DistributedLockable(timeout = 2000L, retries = 5, waitingTime = 200)
+    public void handleBusiness() {
+        ...
+    }
+}
+```
