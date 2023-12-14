@@ -16,7 +16,7 @@ export default defineConfig({
       { text: '文章收录', link: '/文章收录' },
       { text: '软件开发', link: '/软件开发/实战总结/常见异常解决方案' },
       { text: '个人项目', link: '/个人项目/yutool组件式框架/yutool模块划分' },
-      { text: '生活记录', link: '/生活记录' },
+      { text: '生活记录', link: '/生活记录/阅读书单/阅读计划' },
       { text: '站点收录', link: '/站点收录/技术博客' },
     ],
 
@@ -26,7 +26,6 @@ export default defineConfig({
       '/软件开发': [
         {
           text: '编程基础',
-          collapsed: false,
           items: [
             {
               text: '开发语言',
@@ -178,14 +177,12 @@ export default defineConfig({
         },
         {
           text: '架构设计',
-          collapsed: false,
           items: [
             { text: '架构五要素', link: '/软件开发/架构设计/架构五要素' },
           ]
         },
         {
           text: '软件架构',
-          collapsed: false,
           items: [
             { text: '基础组件设计核心思路', link: '/软件开发/软件架构/基础组件设计核心思路' },
             { text: '通用可编排状态机引擎设计', link: '/软件开发/软件架构/通用可编排状态机引擎设计' },
@@ -194,7 +191,6 @@ export default defineConfig({
         },
         {
           text: '中间件',
-          collapsed: false,
           items: [
             { text: '消息队列', link: '/软件开发/中间件/消息队列' },
             { text: '缓存', link: '/软件开发/中间件/缓存' },
@@ -206,12 +202,10 @@ export default defineConfig({
         },
         {
           text: '微服务',
-          collapsed: true,
           items: []
         },
         {
           text: '实战总结',
-          collapsed: false,
           items: [
             { text: '常见异常解决方案', link: '/软件开发/实战总结/常见异常解决方案' },
             { text: 'Java', link: '/软件开发/实战总结/Java' },
@@ -225,7 +219,6 @@ export default defineConfig({
       '/个人项目': [
         {
           text: 'yutool组件式框架',
-          collapsed: false,
           items: [
             { text: 'yutool模块划分', link: '/个人项目/yutool组件式框架/yutool模块划分' },
             {
@@ -289,7 +282,6 @@ export default defineConfig({
         },
         {
           text: 'yutool-cli高效工作套件',
-          collapsed: false,
           items: [
             { text: 'yutool-cli功能清单', link: '/个人项目/yutool-cli高效工作套件/yutool-cli功能清单' },
             { text: 'yutool-cli运营模式', link: '/个人项目/yutool-cli高效工作套件/yutool-cli运营模式' },
@@ -298,14 +290,12 @@ export default defineConfig({
         },
         {
           text: 'yutool-metadata元数据',
-          collapsed: false,
           items: [
             { text: '元数据自定义对象管理设计', link: '/个人项目/yutool-metadata元数据/元数据自定义对象管理设计' },
           ]
         },
         {
           text: 'yutool-biz业务组件',
-          collapsed: false,
           items: [
             { text: 'yutool-biz 整体设计', link: '/个人项目/yutool-biz业务组件/yutool-biz 整体设计' },
             { text: 'yutool-api API接口', link: '/个人项目/yutool-biz业务组件/yutool-api API接口' },
@@ -321,7 +311,6 @@ export default defineConfig({
         },
         {
           text: 'yupan网盘',
-          collapsed: false,
           items: [
             { text: 'yupan架构', link: '/个人项目/yupan网盘/yupan架构' },
             { text: '商城页面', link: '/个人项目/yupan网盘/商城页面' },
@@ -333,23 +322,68 @@ export default defineConfig({
       '/生活记录': [
         {
           text: '山水游记',
-          collapsed: false,
           items: [
-
+            {
+              text: '中国 China',
+              collapsed: true,
+              items: [
+                {
+                  text: '广东',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: '深圳',
+                      collapsed: true,
+                      items: [
+                        { text: '深圳十锋', link: '/生活记录/山水游记/中国 China/广东/深圳/深圳十锋' }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              text: '泰国 Thailand',
+              collapsed: true,
+              items: [
+              ]
+            }
           ]
         },
         {
           text: '酷玩数码',
-          collapsed: false,
           items: [
-
+            {
+              text: '极空间',
+              collapsed: true,
+              items: [
+                { text: '极空间Docker使用攻略', link: '/生活记录/酷玩数码/极空间/极空间Docker使用攻略' }
+              ]
+            },
+            {
+              text: '树莓派',
+              collapsed: true,
+              items: [
+                { text: '树莓派系统安装及配置', link: '/生活记录/酷玩数码/树莓派/树莓派系统安装及配置' },
+                { text: '运行情况监控', link: '/生活记录/酷玩数码/树莓派/运行情况监控' },
+                { text: '基于Aria2的下载机', link: '/生活记录/酷玩数码/树莓派/基于Aria2的下载机' },
+                { text: '搭建v2rayA', link: '/生活记录/酷玩数码/树莓派/搭建v2rayA' },
+                { text: 'web控制台cockpit', link: '/生活记录/酷玩数码/树莓派/web控制台cockpit' },
+                { text: '使用rclone同步onedrive', link: '/生活记录/酷玩数码/树莓派/使用rclone同步onedrive' },
+                { text: 'yutool-cli高效工作套件', link: '/生活记录/酷玩数码/树莓派/yutool-cli高效工作套件' },
+              ]
+            },
           ]
         },
         {
           text: '阅读书单',
-          collapsed: false,
           items: [
-
+            { text: '阅读计划', link: '/生活记录/阅读书单/阅读计划' },
+            {
+              text: '阅读笔记',
+              collapsed: true,
+              items: []
+            },
           ]
         }
       ],
