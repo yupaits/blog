@@ -1,3 +1,7 @@
+---
+layout: draft
+---
+
 # yupan架构
 
 ## 1. 整体设计
