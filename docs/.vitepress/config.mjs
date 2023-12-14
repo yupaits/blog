@@ -6,8 +6,33 @@ export default defineConfig({
   title: "yupaits notes",
   description: "yupaits notes",
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    // Google adsense
+    [
+      'script',
+      {
+        async: '',
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8239100633886634',
+        crossorigin: 'anonymous'
+      }
+    ],
+    // 百度统计
+    [
+      'script',
+      {},
+      `
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+      `
+    ]
   ],
+  cleanUrls: true,
+  ignoreDeadLinks: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -484,19 +509,29 @@ export default defineConfig({
 
     outline: {
       level: [2, 4],
-      label: '大纲'
+      label: '大纲',
     },
 
     footer: {
-      message: '转载文章请注明来源，违者必究！',
-      copyright: 'Copyright © 2016-present yupaits'
+      message: '在 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可下发布',
+      copyright: 'Copyright © 2016-present <a href="https://github.com/yupaits">yupaits</a>'
     },
 
     search: {
       provider: 'local'
     },
 
-    lastUpdated: true
+    lastUpdated: true,
+
+    editLink: {
+      pattern: 'http://gitea.yupaits.com/yupaits/blog-md/src/branch/main/docs/:path',
+      text: '编辑页面'
+    },
+
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
+    }
   },
   markdown: {
     theme: { light: 'github-light', dark: 'github-dark' },
