@@ -144,7 +144,7 @@ PageTable.addition是对表格组件的扩展，有以下扩展内容：
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | btnSize | 选择器按钮大小，可选值：`large`、`default`、`small` | string | default |
-| popPosition | 表单提交事件回调 | () => void |  |
+| popPosition | 弹出方向，可选值：`top`、`topLeft`、`topRight`、`left`、`leftTop`、`leftBottom`、`right`、`rightTop`、`rightBottom`、`bottom`、`bottomLeft`、`bottomRight` | () => void |  |
 | iconType | 图标类型，可选值：semi design内置图标类型 | string |  |
 | onChange | 选择图标变化事件回调 | () => void |  |
 
