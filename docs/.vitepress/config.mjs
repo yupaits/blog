@@ -31,7 +31,11 @@ export default defineConfig({
       `
     ],
     // 解决图片403问题
-    ['meta', { name: 'referrer', content: 'never' }]
+    ['meta', { name: 'referrer', content: 'never' }],
+    // Google Fonts
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet' }],
   ],
   cleanUrls: true,
   ignoreDeadLinks: true,
@@ -45,6 +49,7 @@ export default defineConfig({
       { text: '个人项目', link: '/个人项目/' },
       { text: '生活记录', link: '/生活记录/' },
       { text: '站点收录', link: '/站点收录/' },
+      { text: '旧版博客', link: 'https://yupaits.com/' },
     ],
 
     sidebar: {
@@ -515,8 +520,8 @@ export default defineConfig({
     },
 
     footer: {
-      message: '在 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可下发布',
-      copyright: 'Copyright © 2016-present <a href="https://github.com/yupaits">yupaits</a>'
+      message: '版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.yupaits.com">yupaits notes</a>',
+      copyright: 'Copyright © 2016-present <a href="mailto:ts495606653@hotmail.com">yupaits</a>'
     },
 
     search: {
@@ -533,7 +538,12 @@ export default defineConfig({
     docFooter: {
       prev: '上一页',
       next: '下一页'
-    }
+    },
+
+    darkModeSwitchLabel: '暗黑模式',
+    sidebarMenuLabel: '文章列表',
+    returnToTopLabel: '回到顶部',
+    externalLinkIcon: true,
   },
   markdown: {
     theme: { light: 'github-light', dark: 'github-dark' },
