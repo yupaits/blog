@@ -11,7 +11,7 @@
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| routes | 导航页面路由 | string[] &#124; ReactNode[] |  |
+| routes | 导航页面路由 | string[] \| ReactNode[] |  |
 | title | 页面标题 | string |  |
 | subtitle | 页面副标题 | string |  |
 | optProps | 页面顶部操作区配置 | OptProps |  |
@@ -63,7 +63,7 @@
 | 属性 | 说明 | 类型/示例 | 默认值 |
 | --- | --- | --- | --- |
 | visible | 是否展示聚合 | boolean | false |
-| aggregates | 聚合项 | array <br> `[{title: string, dataIndex: string, type: 'SUM'&#124;'COUNT'&#124;'MIN'&#124;'MAX'&#124;'AVERAGE'}]` |  |
+| aggregates | 聚合项 | array <br> `[{title: string, dataIndex: string, type: 'SUM'\|'COUNT'\|'MIN'\|'MAX'\|'AVERAGE'}]` |  |
 | onAggregatesChange | 聚合项变更事件回调 | (aggregates) => void |  |
 | onAggregatesSubmit | 聚合项应用事件回调 | () => void |  |
 
@@ -78,15 +78,15 @@
 #### DataTable 页面表格
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| columns | 表格列配置： <br> - groupable 可用于分组 <br> - sortable 可用于排序 <br> - aggregatable 可用于聚合 <br> - optional 可选列 <br>  | array <br> `[{title: string, dataIndex: string, fixed: boolean, width: number, render: (text: any, record: RecordType, index: number, { expandIcon?: ReactNode, selection?: ReactNode, indentText?: ReactNode }) => object&#124;ReactNode, sortable: boolean, aggregatable: boolean, groupable: boolean, optional: boolean}]` | [] <br> 序号列可使用`@/components/page/PageTable/addition`中提供的`indexColumn` |
-| rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string &#124; (record: RecordType) => string | 'id' |
+| columns | 表格列配置： <br> - groupable 可用于分组 <br> - sortable 可用于排序 <br> - aggregatable 可用于聚合 <br> - optional 可选列 <br>  | array <br> `[{title: string, dataIndex: string, fixed: boolean, width: number, render: (text: any, record: RecordType, index: number, { expandIcon?: ReactNode, selection?: ReactNode, indentText?: ReactNode }) => object\|ReactNode, sortable: boolean, aggregatable: boolean, groupable: boolean, optional: boolean}]` | [] <br> 序号列可使用`@/components/page/PageTable/addition`中提供的`indexColumn` |
+| rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string \| (record: RecordType) => string | 'id' |
 | bordered | 是否展示外边框和列边框 | boolean | false |
 | expanedRowRender | 额外的展开行 | (record: object, index: number, expanded: boolean) => ReactNode |  |
 | resizable | 是否开启伸缩列功能 | boolean | false |
 | dataSource | 数据 | array | [] |
 | expandAllRows | 是否展开所有行 | boolean | false |
-| expandIcon | 自定义展开按钮，传 false 关闭默认的渲染 | boolean &#124; ReactNode <br> &#124; (expanded: boolean) => ReactNode |  |
-| aggregateData | 聚合查询结果 | array <br> `[{field: string, type: 'SUM'&#124;'COUNT'&#124;'MIN'&#124;'MAX'&#124;'AVERAGE', value: object}]` |  |
+| expandIcon | 自定义展开按钮，传 false 关闭默认的渲染 | boolean \| ReactNode <br> \| (expanded: boolean) => ReactNode |  |
+| aggregateData | 聚合查询结果 | array <br> `[{field: string, type: 'SUM'\|'COUNT'\|'MIN'\|'MAX'\|'AVERAGE', value: object}]` |  |
 | paignation | 分页参数，传null时不显示分页器 | object <br> `{currentPage: number, pageSize: number}` | null |
 | onPageChange | 分页事件回调 | (currentPage: number, pageSize: number) => void |  |
 | selectEnabled | 是否启用行选择 | boolean | false |
