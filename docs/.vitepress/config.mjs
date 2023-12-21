@@ -549,10 +549,11 @@ export default defineConfig({
     },
 
     lastUpdated: true,
+    lastUpdatedText: '上次编辑于',
 
     editLink: {
       pattern: 'http://gitea.yupaits.com/yupaits/blog-md/src/branch/main/docs/:path',
-      text: '编辑页面'
+      text: '编辑此页'
     },
 
     docFooter: {
