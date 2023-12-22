@@ -391,7 +391,7 @@ export default defineConfig({
             { text: 'yutool-file-server文件服务', link: '/个人项目/yutool组件式框架/yutool-file-server文件服务' },
             { text: 'yutool-ldap LDAP组件', link: '/个人项目/yutool组件式框架/yutool-ldap LDAP组件' },
             { text: 'yutool-social第三方登录组件', link: '/个人项目/yutool组件式框架/yutool-social第三方登录组件' },
-            { text: 'yutool-state状态机引擎', link: '/个人项目/yutool组件式框架/yutool-state状态机引擎' },
+            { text: 'yutool-state状态机组件', link: '/个人项目/yutool组件式框架/yutool-state状态机组件' },
             { text: 'yutool-search搜索引擎组件', link: '/个人项目/yutool组件式框架/yutool-search搜索引擎组件' },
             {
               text: 'yutool-plugins插件机制',
