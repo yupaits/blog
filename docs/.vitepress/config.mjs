@@ -567,7 +567,7 @@ export default defineConfig({
     externalLinkIcon: true,
   },
   markdown: {
-    theme: { light: 'github-light', dark: 'github-dark' },
+    theme: { light: 'slack-ochin', dark: 'monokai' },
     lineNumbers: true,
     config: (md) => {
       md.use(MarkdownItTaskLists)
