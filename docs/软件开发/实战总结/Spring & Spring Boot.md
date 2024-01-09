@@ -14,7 +14,7 @@
 14. SpringBoot JPA 可以很简单的集成分页和排序功能，支持的 request 参数如下：
    - page，第几页，从 0 开始，默认为第 0 页
    - size，每一页的数量，默认为 10
-   - sort，排序相关的信息，以`property,direction(,ASC|DESC)`的方式组织，例如`sort=firstname&sort=lastname,desc`表示在按`firstname`增序排列的基础上按`lastname`的降序排列
+   - sort，排序相关的信息，以`property,direction(ASC|DESC)`的方式组织，例如`sort=firstname&sort=lastname,desc`表示在按`firstname`增序排列的基础上按`lastname`的降序排列
 
 例如请求链接为：`http://host:port/blogs?page=0&size=3&sort=category,asc&sort=description,desc`
 ```java
