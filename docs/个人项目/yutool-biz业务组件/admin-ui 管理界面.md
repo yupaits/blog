@@ -1,3 +1,7 @@
+---
+layout: hidden
+---
+
 # admin-ui 管理界面
 
 为了方便使用，yutool-biz还集成了一套默认的管理页面，结合yutool-api可快速实现基础业务组件的可视化管理。
