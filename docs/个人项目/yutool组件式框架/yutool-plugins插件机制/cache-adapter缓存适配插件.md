@@ -22,8 +22,8 @@
 在`application.yml`配置文件中添加如下配置：
 ```yaml
 spring:
-	cache:
-        redis:
+  cache:
+    redis:
       province:
         expiration: 2d
       city:
