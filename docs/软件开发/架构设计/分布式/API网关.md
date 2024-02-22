@@ -54,7 +54,7 @@
 ### OpenRestry
 
 - Github 地址： [https://github.com/openresty/openresty](https://github.com/openresty/openresty)
-官网地址： [https://openresty.org/](https://openresty.org/)
+- 官网地址： [https://openresty.org/](https://openresty.org/)
 
 ### Kong
 
