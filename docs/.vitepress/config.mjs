@@ -304,19 +304,6 @@ export default defineConfig({
                 { text: 'RPC', link: '/软件开发/架构设计/分布式/RPC' },
                 { text: 'ZooKeeper', link: '/软件开发/架构设计/分布式/ZooKeeper' },
                 { text: 'API网关', link: '/软件开发/架构设计/分布式/API网关' },
-                { text: '分布式ID', link: '/软件开发/架构设计/分布式/分布式ID' },
-                { text: '分布式锁', link: '/软件开发/架构设计/分布式/分布式锁' },
-              ]
-            },
-            {
-              text: '高可用',
-              collapsed: true,
-              items: [
-                { text: '冗余设计', link: '/软件开发/架构设计/高可用/冗余设计' },
-                { text: '负载均衡', link: '/软件开发/架构设计/高可用/负载均衡' },
-                { text: '限流', link: '/软件开发/架构设计/高可用/限流' },
-                { text: '降级&熔断', link: '/软件开发/架构设计/高可用/降级&熔断' },
-                { text: '超时&重试', link: '/软件开发/架构设计/高可用/超时&重试' },
               ]
             }
           ]
