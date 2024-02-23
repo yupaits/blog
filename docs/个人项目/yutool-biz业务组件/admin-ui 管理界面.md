@@ -1,7 +1,3 @@
----
-layout: hidden
----
-
 # admin-ui 管理界面
 
 为了方便使用，yutool-biz还集成了一套默认的管理页面，结合yutool-api可快速实现基础业务组件的可视化管理。
@@ -9,7 +5,7 @@ layout: hidden
 基于通用的交互场景开发了相应的前端组件，大大提高了开发效率。这里对各个前端组件的配置进行详细说明。
 ### ManagePage 管理页面组件
 
-![ManagePage组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1682515265709-8f172ab7-57dc-40a2-a444-cd14ceba7178.png#averageHue=%23fefefd&clientId=u7830080a-df2b-4&from=paste&height=330&id=uaed764fb&originHeight=330&originWidth=1556&originalType=binary&ratio=1&rotation=0&showTitle=true&size=38494&status=done&style=stroke&taskId=u076f4454-3337-4c16-95eb-389ae362fb1&title=ManagePage%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=1556 "ManagePage组件示例")
+![ManagePage组件示例](./admin-ui%20管理界面/ManagePage组件示例.png)
 
 组件配置：
 
@@ -116,7 +112,7 @@ layout: hidden
 
 ### OptionalColumns 表格可选列组件
 
-![OptioanlColumns组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1695434971941-cd20b816-2081-4ab6-9d58-1e87b11d3cc6.png#averageHue=%23fcfbfa&clientId=ued9da8d8-adaf-4&from=paste&height=459&id=uf454bd42&originHeight=459&originWidth=1020&originalType=binary&ratio=1&rotation=0&showTitle=true&size=36488&status=done&style=stroke&taskId=uc102f104-909c-4823-869f-5c6f3c05d0e&title=OptioanlColumns%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=1020 "OptioanlColumns组件示例")
+![OptioanlColumns组件示例](./admin-ui%20管理界面/OptionalColumns组件示例.png)
 
 ### PageTable 数据表格组件
 数据表格组件属性即ManagePage组件DataTable的相关属性。
@@ -161,7 +157,7 @@ PageTable.addition是对表格组件的扩展，有以下扩展内容：
 
 ### Address 地址展示组件
 
-![Address组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1695436570414-1831a6b3-cd8e-4c46-b9d5-96450d0b6bcb.png#averageHue=%23fbf9f8&clientId=ued9da8d8-adaf-4&from=paste&height=103&id=u1712afff&originHeight=111&originWidth=423&originalType=binary&ratio=1&rotation=0&showTitle=true&size=7472&status=done&style=stroke&taskId=ubc18e5b5-593f-42f0-ae8b-7fbb892ae5d&title=Address%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=391 "Address组件示例")
+![Address组件示例](./admin-ui%20管理界面/Address地址展示组件.png)
 
 组件配置：
 
@@ -190,11 +186,11 @@ Address地址对象：
 
 ### AddressSelect 地址选择器组件
 
-![AddressSelect组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1695436840013-c0cc9f53-9706-405f-8751-88b56f3b2d89.png#averageHue=%23f9f8f8&clientId=ued9da8d8-adaf-4&from=paste&height=396&id=ue9920ad4&originHeight=396&originWidth=438&originalType=binary&ratio=1&rotation=0&showTitle=true&size=12336&status=done&style=stroke&taskId=uc25b0ca2-1bba-4d01-a5ea-d2e8d6781bd&title=AddressSelect%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=438 "AddressSelect组件示例")
+![AddressSelect组件示例](./admin-ui%20管理界面/AddressSelect地址选择器组件.png)
 
-![省市区街道选择器-级联模式](https://cdn.nlark.com/yuque/0/2023/png/763022/1695436644013-1c94aa38-7232-4518-836a-e0803bf9d95d.png#averageHue=%23d4c7ba&clientId=ued9da8d8-adaf-4&from=paste&height=277&id=u65d0d0c3&originHeight=277&originWidth=798&originalType=binary&ratio=1&rotation=0&showTitle=true&size=26369&status=done&style=stroke&taskId=u9cf801cd-3245-4a3a-a9e5-4abf39e1ae8&title=%E7%9C%81%E5%B8%82%E5%8C%BA%E8%A1%97%E9%81%93%E9%80%89%E6%8B%A9%E5%99%A8-%E7%BA%A7%E8%81%94%E6%A8%A1%E5%BC%8F&width=798 "省市区街道选择器-级联模式")
+![省市区街道选择器-级联模式](./admin-ui%20管理界面/省市区街道选择器-级联模式.png)
 
-![省市区街道选择器-非级联模式](https://cdn.nlark.com/yuque/0/2023/png/763022/1695436959886-9962a6cf-714b-483c-bb15-2c341dae348c.png#averageHue=%23f9f9f8&clientId=ued9da8d8-adaf-4&from=paste&height=616&id=u09f22487&originHeight=616&originWidth=435&originalType=binary&ratio=1&rotation=0&showTitle=true&size=16019&status=done&style=stroke&taskId=ubf470223-1b2c-49aa-869d-dcdfe974b19&title=%E7%9C%81%E5%B8%82%E5%8C%BA%E8%A1%97%E9%81%93%E9%80%89%E6%8B%A9%E5%99%A8-%E9%9D%9E%E7%BA%A7%E8%81%94%E6%A8%A1%E5%BC%8F&width=435 "省市区街道选择器-非级联模式")
+![省市区街道选择器-非级联模式](./admin-ui%20管理界面/省市区街道选择器-非级联模式.png)
 
 组件配置：
 
