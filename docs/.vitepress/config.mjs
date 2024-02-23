@@ -236,7 +236,31 @@ export default defineConfig({
                         },
                       ]
                     },
-                    { text: 'Spring Cloud开发', link: '/软件开发/编程基础/开发语言/Java教程' },
+                    {
+                      text: 'Spring Cloud开发',
+                      collapsed: true,
+                      items: [
+                        { text: '项目架构设计', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/项目架构设计' },
+                        { text: '搭建项目框架', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/搭建项目框架' },
+                        {
+                          text: '设计交易引擎',
+                          collapsed: true,
+                          items: [
+                            { text: '设计资产系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计资产系统' },
+                            { text: '设计订单系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计订单系统' },
+                            { text: '设计撮合系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计撮合系统' },
+                            { text: '设计清算系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计清算系统' },
+                            { text: '完成交易引擎', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/完成交易引擎' },
+                          ]
+                        },
+                        { text: '设计定序系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计定序系统' },
+                        { text: '设计API系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计API系统' },
+                        { text: '设计行情系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计行情系统' },
+                        { text: '设计推送系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计推送系统' },
+                        { text: '编写UI', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/编写UI' },
+                        { text: '项目总结', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/项目总结' },
+                      ]
+                    },
                   ]
                 }
               ]
