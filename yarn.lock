@@ -721,6 +721,13 @@ vite@^5.1.3:
   optionalDependencies:
     fsevents "~2.3.3"
 
+vitepress-plugin-back-to-top@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/vitepress-plugin-back-to-top/-/vitepress-plugin-back-to-top-1.0.1.tgz#9e27d70ce1083c1ecffc23f2f6f11226ac823b5a"
+  integrity sha512-fQUzhkV6SGEmYcO56fv6Jbz5ifseAZuoi+lPDGg0c8gpMVHgqs/D1GbfX4tbvUAtuFNv4kz88wuQRK024iZ2sQ==
+  dependencies:
+    vue "^3.2.45"
+
 vitepress@1.0.0-rc.44:
   version "1.0.0-rc.44"
   resolved "https://registry.npmmirror.com/vitepress/-/vitepress-1.0.0-rc.44.tgz#01bce883761c22de42b9869a95f04bd02cbb8cdb"
@@ -754,7 +761,7 @@ vue-github-button@^3.1.0:
   dependencies:
     github-buttons "^2.22.0"
 
-vue@^3.4.19:
+vue@^3.2.45, vue@^3.4.19:
   version "3.4.19"
   resolved "https://registry.npmmirror.com/vue/-/vue-3.4.19.tgz#f9ae0a44db86628548736ff04152830726a97263"
   integrity sha512-W/7Fc9KUkajFU8dBeDluM4sRGc/aa4YJnOYck8dkjgZoXtVsn3OeTGni66FV1l3+nvPA7VBFYtPioaGKUmEADw==
