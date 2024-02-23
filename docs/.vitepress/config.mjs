@@ -305,6 +305,7 @@ export default defineConfig({
                 { text: 'ZooKeeper', link: '/软件开发/架构设计/分布式/ZooKeeper' },
                 { text: 'API网关', link: '/软件开发/架构设计/分布式/API网关' },
                 { text: '分布式ID', link: '/软件开发/架构设计/分布式/分布式ID' },
+                { text: '分布式锁', link: '/软件开发/架构设计/分布式/分布式锁' },
               ]
             }
           ]
