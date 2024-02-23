@@ -352,8 +352,6 @@ export default defineConfig({
                 { text: 'yutool-orm-jpa', link: '/个人项目/yutool组件式框架/yutool-orm ORM组件/yutool-orm-jpa' },
               ]
             },
-            { text: '[归档] yutool-cache缓存组件', link: '/个人项目/yutool组件式框架/[归档] yutool-cache缓存组件' },
-            { text: '[归档] yutool-mq消息组件', link: '/个人项目/yutool组件式框架/[归档] yutool-mq消息组件' },
             {
               text: 'yutool-mq消息组件',
               collapsed: true,
@@ -364,7 +362,6 @@ export default defineConfig({
                 { text: 'yutool-mq-rocketmq', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-rocketmq' },
               ]
             },
-            { text: '[归档] yutool-push推送组件', link: '/个人项目/yutool组件式框架/[归档] yutool-push推送组件' },
             {
               text: 'yutool-push推送组件',
               collapsed: true,
@@ -387,19 +384,22 @@ export default defineConfig({
                 { text: 'audit-logger审计日志插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/audit-logger审计日志插件' },
                 { text: 'auth-filter权限过滤插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/auth-filter权限过滤插件' },
                 { text: 'distributed-lock分布式锁插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/distributed-lock分布式锁插件' },
-                { text: '[归档] dynamic-thread-pool动态线程池管理插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] dynamic-thread-pool动态线程池管理插件' },
                 { text: 'history-data历史数据处理插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/history-data历史数据处理插件' },
                 { text: 'import-export数据导入导出插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/import-export数据导入导出插件' },
                 { text: 'jwt-helper JWT工具插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/jwt-helper JWT工具插件' },
-                { text: '[归档] multi-ds-tx多数据源事务插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] multi-ds-tx多数据源事务插件' },
                 { text: 'native-mobile本地手机号登录插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/native-mobile本地手机号登录插件' },
                 { text: 'sms-reply-storage短信回复内容存储插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/sms-reply-storage短信回复内容存储插件' },
                 { text: 'sms-verify短信验证码插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/sms-verify短信验证码插件' },
-                { text: 'swagger-support Swagger接口文档插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/swagger-support Swagger接口文档插件' },
                 { text: 'trace-analysis链路追踪插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/trace-analysis链路追踪插件' },
                 { text: 'cache-adapter缓存适配插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/cache-adapter缓存适配插件' },
+                { text: '[归档] dynamic-thread-pool动态线程池管理插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] dynamic-thread-pool动态线程池管理插件' },
+                { text: '[归档] multi-ds-tx多数据源事务插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] multi-ds-tx多数据源事务插件' },
+                { text: '[归档] swagger-support Swagger接口文档插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] swagger-support Swagger接口文档插件' },
               ]
             },
+            { text: '[归档] yutool-cache缓存组件', link: '/个人项目/yutool组件式框架/[归档] yutool-cache缓存组件' },
+            { text: '[归档] yutool-mq消息组件', link: '/个人项目/yutool组件式框架/[归档] yutool-mq消息组件' },
+            { text: '[归档] yutool-push推送组件', link: '/个人项目/yutool组件式框架/[归档] yutool-push推送组件' },
           ]
         },
         {
