@@ -5,10 +5,14 @@
 
 - ImportTemplate模版方法：
 ```java
-public <ID extends Serializable, T extends BaseEntity<ID, T>, D extends BaseDto<ID>> ImportResult importData(MultipartFile file, @NonNull ImportProps<ID, T, D> importProps) throws BusinessException;
+// 导入数据
+public <ID extends Serializable, T extends BaseEntity<ID, T>, D extends BaseDto<ID>> ImportResult importData(MultipartFile file, @NonNull ImportProps<ID, T, D> importProps);
+
+// 导入数据,失败回写校验信息
+public <ID extends Serializable, T extends BaseEntity<ID, T>, D extends BaseDto<ID>> void importDataOrWriteBack(MultipartFile file, @NonNull ImportWriteBackProps<ID, T, D> importWriteBackProps, HttpServletResponse response);
 ```
 
-   - ImportProps配置项
+  - ImportProps配置项
       - clazz 导入数据类型
       - readListener 读监听器
       - dataService 导入数据类型对应的Service
@@ -17,16 +21,27 @@ public <ID extends Serializable, T extends BaseEntity<ID, T>, D extends BaseDto<
       - sheetNo sheet序号，优先级高于sheetName
       - sheetName sheet名称
       - headRowNumber 指定表格头行数，默认1
+
+  - ImportWriteBackProps配置项
+      - clazz 导入数据类型
+      - readListener 读监听器
+      - dataService 导入数据类型对应的Service
+      - batchSize 单次批量导入数据条数
+      - excelType Excel文件类型
+      - sheetNo sheet序号，优先级高于sheetName
+      - sheetName sheet名称
+      - headRowNumber 指定表格头行数，默认1
+      - onlyFailData 是否仅返回校验失败的数据,默认包含全部数据（当仅返回校验失败的数据时，校验成功的数据会正常保存;反之如果有一条数据校验不通过则所有数据都不会保存）
 - ExportTemplate模版方法：
 ```java
 // 根据导出数据类结构导出数据
-public <V extends BaseVo> void exportData(List<V> list, @NonNull ExportProps<V> exportProps, OutputStream outputStream) throws BusinessException;
+public <V extends BaseVo> void exportData(List<V> list, @NonNull ExportProps<V> exportProps, OutputStream outputStream);
 
 // 根据Excel导出模版填充字段导出数据
-public <V extends BaseVo> void fillData(List<V> list, @NonNull ExportProps<V> exportProps, OutputStream outputStream) throws BusinessException;
+public <V extends BaseVo> void fillData(List<V> list, @NonNull ExportProps<V> exportProps, OutputStream outputStream);
 
 // Web导出数据
-public <V extends BaseVo> void export(List<V> list, @NonNull ExportProps<V> exportProps, HttpServletResponse response) throws IOException, BusinessException;
+public <V extends BaseVo> void export(List<V> list, @NonNull ExportProps<V> exportProps, HttpServletResponse response);
 ```
 
    - ExportProps配置项
@@ -71,12 +86,12 @@ public class DataServiceImpl extends MybatisServiceImpl<Long, Data, DataMapper> 
  	
     @Override
 	@Transactional(rollbackFor = {Exception.class})
-	public Result<ImportResult> importData(MultipartFile file) throws BusinessException {
+	public Result<ImportResult> importData(MultipartFile file) {
 		return ResultWrapper.success(importTemplate.importData(file, ImportProps.<Long, Data, DataDto>builder().clazz(DataDto.class).dataService(this).build()));
 	}
 
 	@Override
-	public void exportData(HttpServletResponse response, DataQuery query) throws BusinessException, IOException {
+	public void exportData(HttpServletResponse response, DataQuery query) throws IOException {
 		exportTemplate.export(listVo(query.buildNewLambdaQuery()), ExportProps.<DataVo>builder().clazz(DataVo.class)
 				.filename(String.format("导出数据_%s.xlsx", LocalDate.now(DateTimeConstants.ZONE_ID).toString())).build(), response);
 	}
