@@ -268,7 +268,13 @@ export default defineConfig({
             {
               text: '数据结构',
               collapsed: true,
-              items: []
+              items: [
+                { text: '线性数据结构', link: '/软件开发/编程基础/数据结构/线性数据结构' },
+                { text: '图', link: '/软件开发/编程基础/数据结构/图' },
+                { text: '堆', link: '/软件开发/编程基础/数据结构/堆' },
+                { text: '树', link: '/软件开发/编程基础/数据结构/树' },
+                { text: '红黑树', link: '/软件开发/编程基础/数据结构/红黑树' },
+              ]
             },
             {
               text: '常用算法',
