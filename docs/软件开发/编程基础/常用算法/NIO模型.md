@@ -86,11 +86,11 @@ Buffer有3个重要的属性
 0 <= position <= limit <= capacity
 初始状态：
 
-![nio-buffer-1.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848624510-68f9dcf2-9aef-4120-bfe6-28548cfcd564.png#averageHue=%23fafafa&clientId=ue5590ed7-3f2e-4&from=drop&id=ua9b6d09e&originHeight=211&originWidth=657&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37049&status=done&style=none&taskId=uf86b28d5-581d-470e-a2b6-d9ad9288c0e&title=)
+![nio-buffer-1.png](./NIO模型/1658848624510-68f9dcf2-9aef-4120-bfe6-28548cfcd564.png)
 
 从Channel中读入5个字到ByteBuffer：
 
-![nio-buffer-2.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848628127-396acc72-85ae-4f59-8235-1ea125a811dc.png#averageHue=%23f5f5f5&clientId=ue5590ed7-3f2e-4&from=drop&id=uc427079b&originHeight=216&originWidth=649&originalType=binary&ratio=1&rotation=0&showTitle=false&size=39319&status=done&style=none&taskId=u060f7c4f-6c40-4378-826f-efa65c63782&title=)
+![nio-buffer-2.png](./NIO模型/1658848628127-396acc72-85ae-4f59-8235-1ea125a811dc.png)
 
 flip()，准备写入或输出：
 ```java
@@ -102,11 +102,11 @@ public final Buffer flip() {
 }
 ```
 
-![nio-buffer-3.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848633396-031377b7-6d58-4573-93ae-4a656bf89ca0.png#averageHue=%23f7f7f7&clientId=ue5590ed7-3f2e-4&from=drop&id=u4b2c2b32&originHeight=181&originWidth=686&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33739&status=done&style=none&taskId=u22916579-3c99-408a-85bd-435eb1f371d&title=)
+![nio-buffer-3.png](./NIO模型/1658848633396-031377b7-6d58-4573-93ae-4a656bf89ca0.png)
 
 输出内容后，position就移动到跟limit相同的位置上：
 
-![nio-buffer-4.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848636212-807732bd-de83-4d53-8bb0-549b0a8e426c.png#averageHue=%23f7f7f7&clientId=ue5590ed7-3f2e-4&from=drop&id=ua7b793bc&originHeight=231&originWidth=823&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42030&status=done&style=none&taskId=u768b199e-51ca-4699-a654-b7cd30bd96c&title=)
+![nio-buffer-4.png](./NIO模型/1658848636212-807732bd-de83-4d53-8bb0-549b0a8e426c.png)
 
 ByteBuffer如果要重复利用，需要清理，position和limit回到初始状态时的位置，然后可以接着中这个Buffer来读写数据，不需要再new新的Buffer：
 ```java
@@ -118,7 +118,7 @@ public final Buffer clear() {
 }
 ```
 
-![nio-buffer-5.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658848652678-b70ab1cc-a744-4f57-b307-30f444e82e90.png#averageHue=%23fafafa&clientId=ue5590ed7-3f2e-4&from=drop&id=ue1ca33c1&originHeight=198&originWidth=698&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33383&status=done&style=none&taskId=u177a3581-3c0e-4a88-812b-7529c1fa6dc&title=)
+![nio-buffer-5.png](./NIO模型/1658848652678-b70ab1cc-a744-4f57-b307-30f444e82e90.png)
 
 ## Netty框架
 ### 优点

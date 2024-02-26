@@ -1,6 +1,6 @@
 # Todo-Tomato技术解读
 
-Todo-Tomato 是一款融合待办事项管理和番茄工作法，用于高效处理工作事务的工作利器，本文对 Todo-Tomato 使用的技术进行简要解读。<br />话不多说，先放上Todo-Tomato的界面截图。<br />![Todo-Tomato界面.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658762570277-e04dbaac-c53a-4da2-9669-f662e2ff6c76.png#clientId=ub088e117-29cb-4&from=drop&id=ud7ec15bd&originHeight=811&originWidth=1421&originalType=binary&ratio=1&rotation=0&showTitle=false&size=61276&status=done&style=none&taskId=u6ada4502-3778-4ae0-ba15-d9109d7a8ab&title=)<br />本文的技术解读基于[Todo-Tomato v1.0.0版本](https://gitee.com/yupaits/todo-tomato/tree/v1.0.0/)。
+Todo-Tomato 是一款融合待办事项管理和番茄工作法，用于高效处理工作事务的工作利器，本文对 Todo-Tomato 使用的技术进行简要解读。<br />话不多说，先放上Todo-Tomato的界面截图。<br />![Todo-Tomato界面.png](./Todo-Tomato技术解读/1658762570277-e04dbaac-c53a-4da2-9669-f662e2ff6c76.png)<br />本文的技术解读基于[Todo-Tomato v1.0.0版本](https://gitee.com/yupaits/todo-tomato/tree/v1.0.0/)。
 ## 技术选型
 使用目前比较流行的前后端分离进行开发：
 

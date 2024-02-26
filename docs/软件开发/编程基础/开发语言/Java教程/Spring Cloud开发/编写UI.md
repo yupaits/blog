@@ -108,6 +108,6 @@ public class ProxyFilter {
 - signup.html：注册页；
 - index.html：交易页。
 
-页面功能主要由JavaScript实现，我们选择Vue前端框架，最终实现效果如下：<br />![](https://cdn.nlark.com/yuque/0/2024/png/763022/1708686566226-93fde314-3b87-49b7-95ba-772a169b7dd6.png#averageHue=%23fdfdfd&clientId=u22f28c45-fb06-4&from=paste&id=u25e2162d&originHeight=653&originWidth=800&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u0acc2e52-5249-497a-91b8-e92b1c226e6&title=)<br />最后，在后台注册时，如果检测到本地开发环境，就自动调用内部API给用户添加一些资产，否则新注册用户无法交易。
+页面功能主要由JavaScript实现，我们选择Vue前端框架，最终实现效果如下：<br />![](./编写UI/1708686566226-93fde314-3b87-49b7-95ba-772a169b7dd6.png)<br />最后，在后台注册时，如果检测到本地开发环境，就自动调用内部API给用户添加一些资产，否则新注册用户无法交易。
 ### 小结
 UI系统是标准的Web系统，除了注册、登录外，主要交易功能均由页面JavaScript实现。UI系统本身不是交易入口，它通过转发JavaScript请求至真正的API入口。

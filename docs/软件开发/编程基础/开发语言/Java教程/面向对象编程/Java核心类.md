@@ -757,7 +757,7 @@ public void setXyz(Type value)
 ```
 那么这种`class`被称为`JavaBean`：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1654531711163-f7f5ebcb-f35d-444f-9b37-d657967e4416.jpeg#clientId=u99bc2590-fae8-4&from=paste&id=u84771140&originHeight=200&originWidth=220&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u73cb6c80-70f4-4b08-9f0c-8b02142fa39&title=)
+![](./Java核心类/1654531711163-f7f5ebcb-f35d-444f-9b37-d657967e4416.jpeg)
 
 上面的字段是`xyz`，那么读写方法名分别以`get`和`set`开头，并且后接大写字母开头的字段名`Xyz`，因此两个读写方法名分别是`getXyz()`和`setXyz()`。
 

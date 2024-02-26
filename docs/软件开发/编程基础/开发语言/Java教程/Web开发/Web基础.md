@@ -59,11 +59,11 @@ Web页面具有极强的交互性。由于Web页面是用HTML编写的，而HTML
 
 HTTP协议是一个基于TCP协议之上的请求-响应协议，它非常简单，我们先使用Chrome浏览器查看新浪首页，然后选择View - Developer - Inspect Elements就可以看到HTML：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1656259423257-87c42b98-524c-4f1a-970c-3c7b008d160d.jpeg#clientId=uf17a7c49-a4b3-4&from=paste&id=u43f96737&originHeight=630&originWidth=640&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u3e324c47-2f07-44a3-a8a5-fbb7c1eef56&title=)
+![](./Web基础/1656259423257-87c42b98-524c-4f1a-970c-3c7b008d160d.jpeg)
 
 切换到Network，重新加载页面，可以看到浏览器发出的每一个请求和响应：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1656259423258-a4465de3-9a70-43f7-8a2f-740d1160149b.jpeg#clientId=uf17a7c49-a4b3-4&from=paste&id=u93d6bc17&originHeight=630&originWidth=640&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u628c9b1b-ad24-44bb-a7c5-93a811d834d&title=)
+![](./Web基础/1656259423258-a4465de3-9a70-43f7-8a2f-740d1160149b.jpeg)
 
 > 使用Chrome浏览器可以方便地调试Web应用程序。
 
@@ -214,7 +214,7 @@ private void handle(InputStream input, OutputStream output) throws IOException {
 ```
 这里的核心代码是，先读取HTTP请求，这里我们只处理`GET /`的请求。当读取到空行时，表示已读到连续两个`\r\n`，说明请求结束，可以发送响应。发送响应的时候，首先发送响应代码`HTTP/1.0 200 OK`表示一个成功的200响应，使用`HTTP/1.0`协议，然后，依次发送Header，发送完Header后，再发送一个空行标识Header结束，紧接着发送HTTP Body，在浏览器输入`http://local.liaoxuefeng.com:8080/`就可以看到响应页面：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1656259423146-89893c83-6386-4246-9ac8-6066e666b0aa.jpeg#clientId=uf17a7c49-a4b3-4&from=paste&id=u2a10cf66&originHeight=203&originWidth=490&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uc9fb2eda-1118-428b-91b6-7257f012fa9&title=)
+![](./Web基础/1656259423146-89893c83-6386-4246-9ac8-6066e666b0aa.jpeg)
 
 HTTP目前有多个版本，`1.0`是早期版本，浏览器每次建立TCP连接后，只发送一个HTTP请求并接收一个HTTP响应，然后就关闭TCP连接。由于创建TCP连接本身就需要消耗一定的时间，因此，HTTP 1.1允许浏览器和服务器在同一个TCP连接上反复发送、接收多个HTTP请求和响应，这样就大大提高了传输效率。
 

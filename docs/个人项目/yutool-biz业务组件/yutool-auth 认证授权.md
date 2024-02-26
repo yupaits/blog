@@ -4,7 +4,7 @@
 yutool-auth认证授权使用spring-security作为基础框架，通过spring-boot-starter-security接入认证授权及鉴权能力。
 ## 认证授权流程
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1661267975176-a4e18a30-dbe5-4fe9-9bfa-fc3b5d522047.jpeg)
+![](./yutool-auth 认证授权/1661267975176-a4e18a30-dbe5-4fe9-9bfa-fc3b5d522047.jpeg)
 
 ## 定制认证鉴权逻辑
 编写WebSecurityConfigurerAdapter的子类WebSecurityAutoConfigure定制JWT的认证鉴权流程。
@@ -148,4 +148,4 @@ public class WebSecurityAutoConfigure extends WebSecurityConfigurerAdapter {
 ## 动态加载鉴权配置
 除了使用spring security注解，还可以通过动态加载鉴权配置的方式来鉴权。上文的`ObjectPostProcessor<FilterSecurityInterceptor>`就实现了动态加载鉴权配置。重写并设置`FilterSecurityInterceptor`的`securityMetadataSource`和`accessDecisionManager`，实现自定义的动态加载鉴权配置和鉴权逻辑。
 动态加载鉴权配置流程如下：
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1659355360477-dcdedb5b-342f-456e-a6f7-09401d025667.jpeg)
+![](./yutool-auth 认证授权/1659355360477-dcdedb5b-342f-456e-a6f7-09401d025667.jpeg)

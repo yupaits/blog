@@ -10,7 +10,7 @@ org.springdoc:springdoc-openapi-ui:1.4.0
 ```
 然后呢？没有然后了，直接启动应用，打开浏览器输入`http://localhost:8080/swagger-ui.html`：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655533874451-bc7e124b-6b9a-4203-a808-88091874f317.png#clientId=u50a8a721-93db-4&from=paste&id=u7f8eae25&originHeight=452&originWidth=400&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ude9af8d8-2ee0-4761-8663-7770304e6ae&title=)
+![](./集成Open API/1655533874451-bc7e124b-6b9a-4203-a808-88091874f317.png)
 
 立刻可以看到自动生成的API文档，这里列出了3个API，来自`api-controller`（因为定义在`ApiController`这个类中），点击某个API还可以交互，即输入API参数，点“Try it out”按钮，获得运行结果。
 
@@ -32,7 +32,7 @@ public class ApiController {
 ```
 `@Operation`可以对API进行描述，`@Parameter`可以对参数进行描述，它们的目的是用于生成API文档的描述信息。添加了描述的API文档如下：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655533874047-9f8830af-2c73-42e4-97fb-a86c3b52b970.png#clientId=u50a8a721-93db-4&from=paste&id=uf2d9caff&originHeight=222&originWidth=400&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ue514c83b-b1a0-4360-8c8f-e0228d3f7bd&title=)
+![](./集成Open API/1655533874047-9f8830af-2c73-42e4-97fb-a86c3b52b970.png)
 
 大多数情况下，不需要任何配置，我们就直接得到了一个运行时动态生成的可交互的API文档，该API文档总是和代码保持同步，大大简化了文档的编写工作。
 

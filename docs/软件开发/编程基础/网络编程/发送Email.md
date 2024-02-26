@@ -170,7 +170,7 @@ QUIT
 
 如果一切顺利，对方将收到一封文本格式的电子邮件：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522111952-4909deed-4ae0-421a-b54e-453a454d03df.png#averageHue=%23f0f0f0&clientId=ud99a8170-df32-4&from=paste&id=ud15acfc5&originHeight=128&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u7fcdabfd-56d5-4cfb-af90-6d7334b95d4&title=)
+![](./发送Email/1655522111952-4909deed-4ae0-421a-b54e-453a454d03df.png)
 
 ## 发送HTML邮件
 发送HTML邮件和文本邮件是类似的，只需要把：
@@ -185,7 +185,7 @@ message.setText(body, "UTF-8", "html");
 
 HTML邮件可以在邮件客户端直接显示为网页格式：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522112894-9282c737-f1e5-4e72-9e21-d7b2cbce8d6b.png#averageHue=%23f3f3f3&clientId=ud99a8170-df32-4&from=paste&id=u1b04958b&originHeight=154&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=udff2c75d-2131-4747-b110-8b284983c92&title=)
+![](./发送Email/1655522112894-9282c737-f1e5-4e72-9e21-d7b2cbce8d6b.png)
 
 ## 发送附件
 
@@ -209,7 +209,7 @@ message.setContent(multipart);
 
 带附件的邮件在客户端会被提示下载：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522111903-b4d44008-451e-426b-9457-73aa5a0e7874.png#averageHue=%23f5f5f5&clientId=ud99a8170-df32-4&from=paste&id=ua245f4ea&originHeight=254&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uee5d9fec-4209-44e6-a64a-9c0fe27bd3f&title=)
+![](./发送Email/1655522111903-b4d44008-451e-426b-9457-73aa5a0e7874.png)
 
 ## 发送内嵌图片的HTML邮件
 
@@ -238,7 +238,7 @@ imagepart.setHeader("Content-ID", "<img01>");
 ```
 这个ID和HTML中引用的ID对应起来，邮件客户端就可以正常显示内嵌图片：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522111942-bf18d2d4-9097-4dcf-b087-0f4d54aca607.png#averageHue=%23454d3a&clientId=ud99a8170-df32-4&from=paste&id=u527e9039&originHeight=566&originWidth=460&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u0d5ad50d-059b-47fe-a4db-0d126d47b4d&title=)
+![](./发送Email/1655522111942-bf18d2d4-9097-4dcf-b087-0f4d54aca607.png)
 
 ## 常见问题
 

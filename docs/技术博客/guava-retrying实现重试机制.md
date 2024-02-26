@@ -72,7 +72,7 @@ try {
 2. 更直观，改动方便
 3. 可复用重试器至多个任务（代码段）
 ### RetryerBuilder 方法介绍
-RetryerBuilder 用于构造重试器，是整个 guava-retrying 库的核心，决定了重试的行为，下面详细介绍 RetryerBuilder 的方法。<br />![image.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1669083898826-f172cdde-aadc-49a2-a637-31159a743400.png#averageHue=%23484d52&clientId=ue9ce49c6-1acb-4&from=paste&id=ue9a25ac2&originHeight=618&originWidth=1080&originalType=url&ratio=1&rotation=0&showTitle=false&size=330935&status=done&style=none&taskId=uf4e6a500-9932-43cc-8a12-b14b7d4d29b&title=)<br />通过 newBuilder 方法获取 RetryerBuilder 实例，通过 build 方法构造 Retryer：
+RetryerBuilder 用于构造重试器，是整个 guava-retrying 库的核心，决定了重试的行为，下面详细介绍 RetryerBuilder 的方法。<br />![image.png](./guava-retrying实现重试机制/1669083898826-f172cdde-aadc-49a2-a637-31159a743400.png)<br />通过 newBuilder 方法获取 RetryerBuilder 实例，通过 build 方法构造 Retryer：
 ```java
 RetryerBuilder<V> newBuilder();
 Retryer<V> build();

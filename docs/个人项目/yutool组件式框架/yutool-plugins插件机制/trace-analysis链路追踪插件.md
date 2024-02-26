@@ -40,6 +40,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 ```
 ## 设计思路
 参考开源日志框架[TLog](https://tlog.yomahub.com/)的设计实现，在一条调用链上，前置节点生成并传递`TraceId`和`SpanId`到后置节点，通过在日志中打印`TraceId`和`SpanId`标识一条完整的调用链信息。
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1656647724640-168d40f7-88eb-4a3f-9669-afeace2d4047.jpeg)
+![](./trace-analysis链路追踪插件/1656647724640-168d40f7-88eb-4a3f-9669-afeace2d4047.jpeg)
 附：`SpanId`生成规则
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1656647406697-bdcc4ad9-d8e5-4f85-8943-cf3949b39164.jpeg)
+![](./trace-analysis链路追踪插件/1656647406697-bdcc4ad9-d8e5-4f85-8943-cf3949b39164.jpeg)

@@ -8,7 +8,7 @@ AMQP是一种使用广泛的独立于语言的消息协议，它的全称是Adva
 
 我们先从RabbitMQ的官网[下载](https://www.rabbitmq.com/download.html)并安装RabbitMQ，安装和启动RabbitMQ请参考官方文档。要验证启动是否成功，可以访问RabbitMQ的管理后台`http://localhost:15672`，如能看到登录界面表示RabbitMQ启动成功：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655533904021-9070d11a-b65f-4f9f-9ac8-14e5a67173fa.jpeg#clientId=u60d9760e-bee6-4&from=paste&id=u6eba6e74&originHeight=225&originWidth=506&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u62ad58b0-4af6-4f78-b31c-fbb2a1d53f5&title=)
+![](./集成RabbitMQ/1655533904021-9070d11a-b65f-4f9f-9ac8-14e5a67173fa.jpeg)
 
 RabbitMQ后台管理的默认用户名和口令均为`guest`。
 
@@ -38,19 +38,19 @@ AMQP协议和前面我们介绍的JMS协议有所不同。在JMS中，有两种�
 
 我们以具体的业务为例子，在RabbitMQ中，首先创建3个Queue，分别用于发送邮件、短信和App通知：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655533904035-02beeaf6-ad9e-41be-a6f5-98aa7c155f3d.jpeg#clientId=u60d9760e-bee6-4&from=paste&id=u0e48d46d&originHeight=325&originWidth=640&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u6132b6d4-95ad-4c70-a6c6-d0961d08eda&title=)
+![](./集成RabbitMQ/1655533904035-02beeaf6-ad9e-41be-a6f5-98aa7c155f3d.jpeg)
 
 创建Queue时注意到可配置为持久化（Durable）和非持久化（Transient），当Consumer不在线时，持久化的Queue会暂存消息，非持久化的Queue会丢弃消息。
 
 紧接着，我们在Exchanges中创建一个Direct类型的Exchange，命名为`registration`，并添加如下两个Binding：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655533903994-e1503bfe-31b7-4a9d-8aa5-0ca32e191c29.png#clientId=u60d9760e-bee6-4&from=paste&id=ufe844c07&originHeight=304&originWidth=335&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uee2f3083-38b3-4553-b0c7-664345f71bb&title=)
+![](./集成RabbitMQ/1655533903994-e1503bfe-31b7-4a9d-8aa5-0ca32e191c29.png)
 
 上述Binding的规则就是：凡是发送到`registration`这个Exchange的消息，均被发送到`q_mail`和`q_sms`这两个Queue。
 
 我们再创建一个Direct类型的Exchange，命名为`login`，并添加如下Binding：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655533904018-d7741cc6-b81c-405d-9fbb-26bbdf18a404.png#clientId=u60d9760e-bee6-4&from=paste&id=u0c6a7823&originHeight=345&originWidth=313&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ud6f0e684-1452-4d24-b2e6-8689bfe68cc&title=)
+![](./集成RabbitMQ/1655533904018-d7741cc6-b81c-405d-9fbb-26bbdf18a404.png)
 
 上述Binding的规则稍微复杂一点，当发送消息给login这个Exchange时，如果消息没有指定Routing Key，则被投递到`q_app`和`q_mail`，如果消息指定了Routing Key="login_failed"，那么消息被投递到`q_sms`。
 

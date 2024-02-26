@@ -44,15 +44,15 @@ Lisa,87
 
 假设某个XX省YY市ZZ县第一实验小学有3个年级，要表示出这3个年级，可以在Excel中用一个表格画出来：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655522556735-178cc878-b096-4569-9edb-116c0d333e31.jpeg#clientId=u2db47dd4-34ab-4&from=paste&id=u0db38565&originHeight=98&originWidth=106&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ueb3d0c5d-c192-42bb-beea-02dc880860b&title=)
+![](./JDBC编程/1655522556735-178cc878-b096-4569-9edb-116c0d333e31.jpeg)
 
 每个年级又有若干个班级，要把所有班级表示出来，可以在Excel中再画一个表格：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655522556881-9e7fa9af-7fe9-4ae6-9ee0-982b1c0045ae.jpeg#clientId=u2db47dd4-34ab-4&from=paste&id=u9fde46a2&originHeight=230&originWidth=190&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u28266ffc-5c4a-4613-b390-dfbf8cba452&title=)
+![](./JDBC编程/1655522556881-9e7fa9af-7fe9-4ae6-9ee0-982b1c0045ae.jpeg)
 
 这两个表格有个映射关系，就是根据Grade_ID可以在班级表中查找到对应的所有班级：
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655522557179-24918ca5-9572-4147-ba8b-1609c23411e3.jpeg#clientId=u2db47dd4-34ab-4&from=paste&id=ua0b4765e&originHeight=230&originWidth=401&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=uaca7477a-ae56-4f79-8035-f662551ccba&title=)
+![](./JDBC编程/1655522557179-24918ca5-9572-4147-ba8b-1609c23411e3.jpeg)
 
 也就是Grade表的每一行对应Class表的多行，在关系数据库中，这种基于表（Table）的一对多的关系就是关系数据库的基础。
 
@@ -74,7 +74,7 @@ grade_id | class_id | name
 ```
 类似的，Class表的一行记录又可以关联到Student表的多行记录：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522556854-290c3b7b-bb47-4707-a795-3de8d7ee9d2c.png#clientId=u2db47dd4-34ab-4&from=paste&id=u67bd8214&originHeight=226&originWidth=490&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ud75dcb65-a465-4738-9584-181e83a8bea&title=)
+![](./JDBC编程/1655522556854-290c3b7b-bb47-4707-a795-3de8d7ee9d2c.png)
 
 由于本教程不涉及到关系数据库的详细内容，如果你想从零学习关系数据库和基本的SQL语句，请参考[SQL课程](https://www.liaoxuefeng.com/wiki/1177760294764384)。
 

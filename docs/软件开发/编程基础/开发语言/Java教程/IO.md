@@ -13,7 +13,7 @@ IO是指Input/Output，即输入和输出。以内存为中心：
 
 IO流是一种顺序读写数据的模式，它的特点是单向流动。数据类似自来水一样在水管中流动，所以我们把它称为IO流。
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655393179181-f40b7487-13c1-4832-8b2e-6d0899d1acf3.jpeg#clientId=udcfaad5a-dbc6-4&from=paste&id=u019d8d65&originHeight=264&originWidth=402&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u72888c74-f0da-43f8-99ab-7c8738aaa95&title=)
+![](./IO/1655393179181-f40b7487-13c1-4832-8b2e-6d0899d1acf3.jpeg)
 
 ### InputStream / OutputStream
 IO流以`byte`（字节）为最小单位，因此也称为_字节流_。例如，我们要从磁盘读入一个文件，包含6个字节，就相当于读入了6个字节的数据：

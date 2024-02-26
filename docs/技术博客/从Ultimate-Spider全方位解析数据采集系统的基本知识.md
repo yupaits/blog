@@ -1,6 +1,6 @@
 # 从Ultimate-Spider全方位解析数据采集系统的基本知识
 
-Ultimate Spider【终极蜘蛛王】，一款用于网络数据采集的工具。本文对Ultimate Spider的整体架构和一些技术亮点作说明。<br />Ultimate Spider主要页面有：1、用来展示概览信息的仪表盘页；2、爬虫配置页。<br />![仪表盘页.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658767202716-c7d3f2d4-743e-434c-a523-64d9ba64f0ca.png#clientId=u6f2e60ee-229a-4&from=drop&id=uc0675c9e&originHeight=903&originWidth=1495&originalType=binary&ratio=1&rotation=0&showTitle=false&size=43082&status=done&style=none&taskId=u99344f2e-9b1b-4397-9dee-6fa10d949fb&title=)<br />![爬虫配置页.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658767206239-115bbc71-68c5-4475-a84d-a2515170f811.png#clientId=u6f2e60ee-229a-4&from=drop&id=u87c65c7f&originHeight=904&originWidth=1493&originalType=binary&ratio=1&rotation=0&showTitle=false&size=80552&status=done&style=none&taskId=uc5683a49-6a6d-4807-a176-42ed085f857&title=)<br />整体架构如下图所示：<br />![整体架构.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658767210945-552821ce-e38e-49c6-84d9-3a3e94d382ae.png#clientId=u6f2e60ee-229a-4&from=drop&id=u2d3b5a2a&originHeight=622&originWidth=1267&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25706&status=done&style=none&taskId=ucbaf1f7d-ddb4-4407-a411-cd18673d898&title=)
+Ultimate Spider【终极蜘蛛王】，一款用于网络数据采集的工具。本文对Ultimate Spider的整体架构和一些技术亮点作说明。<br />Ultimate Spider主要页面有：1、用来展示概览信息的仪表盘页；2、爬虫配置页。<br />![仪表盘页.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767202716-c7d3f2d4-743e-434c-a523-64d9ba64f0ca.png)<br />![爬虫配置页.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767206239-115bbc71-68c5-4475-a84d-a2515170f811.png)<br />整体架构如下图所示：<br />![整体架构.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767210945-552821ce-e38e-49c6-84d9-3a3e94d382ae.png)
 ## 爬虫配置
 在WebMagic爬虫框架的基础上对初始Url和爬取内容进行可视化配置，爬取规则的制定更加灵活多变，适应范围更广。
 
@@ -338,4 +338,4 @@ public class Receiver {
 }
 ```
 ## 数据可视化
-使用较为成熟的Metabase进行采集数据的可视化。<br />![Metabase采集数据可视化.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658767228703-379f96f0-820e-48e8-86a1-54cf84e5982d.png#clientId=u6f2e60ee-229a-4&from=drop&id=u40174767&originHeight=793&originWidth=1695&originalType=binary&ratio=1&rotation=0&showTitle=false&size=57053&status=done&style=none&taskId=uba52cb3d-6fd4-4978-a987-b3a2bb9caeb&title=)
+使用较为成熟的Metabase进行采集数据的可视化。<br />![Metabase采集数据可视化.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767228703-379f96f0-820e-48e8-86a1-54cf84e5982d.png)

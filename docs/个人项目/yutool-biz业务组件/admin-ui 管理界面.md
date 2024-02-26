@@ -96,19 +96,19 @@
 
 ### Sorts 排序组件
 
-![Sorts组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1682515192701-f2651952-a97e-43eb-8d31-8063cd724992.png#averageHue=%23fdfdfc&clientId=u7830080a-df2b-4&from=paste&height=209&id=u176c899a&originHeight=209&originWidth=459&originalType=binary&ratio=1&rotation=0&showTitle=true&size=12033&status=done&style=stroke&taskId=u282b8621-a938-4f11-9f12-ccb4d3535a6&title=Sorts%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=459 "Sorts组件示例")
+![Sorts组件示例](./admin-ui 管理界面/1682515192701-f2651952-a97e-43eb-8d31-8063cd724992.png)
 
 ### Query 筛选组件
 
-![Query组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1682515213453-75334a8d-9775-492b-83a2-01a97be2239a.png#averageHue=%23fdfcfc&clientId=u7830080a-df2b-4&from=paste&height=379&id=u57fe0ee5&originHeight=379&originWidth=289&originalType=binary&ratio=1&rotation=0&showTitle=true&size=13744&status=done&style=stroke&taskId=u4d8b96d5-5e88-4cee-8278-28abf156473&title=Query%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=289 "Query组件示例")
+![Query组件示例](./admin-ui 管理界面/1682515213453-75334a8d-9775-492b-83a2-01a97be2239a.png)
 
 ### Group 分组组件
 
-![Group组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1682515239289-40bfac5b-e566-4ec5-b065-09bc58265877.png#averageHue=%23fcfcfb&clientId=u7830080a-df2b-4&from=paste&height=301&id=u3dd0a730&originHeight=301&originWidth=887&originalType=binary&ratio=1&rotation=0&showTitle=true&size=27965&status=done&style=stroke&taskId=u6bc81925-2aa0-4044-beae-86b14de45ad&title=Group%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=887 "Group组件示例")
+![Group组件示例](./admin-ui 管理界面/1682515239289-40bfac5b-e566-4ec5-b065-09bc58265877.png)
 
 ### Aggregates 聚合组件
 
-![Aggregates组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1682515959989-a8e86f3d-a108-4c15-8a79-38a4f2d8edae.png#averageHue=%23e4c38b&clientId=u7830080a-df2b-4&from=paste&height=292&id=u58eec9c7&originHeight=292&originWidth=1058&originalType=binary&ratio=1&rotation=0&showTitle=true&size=28753&status=done&style=stroke&taskId=u2e84f562-7630-4cfd-9b84-195517c8b37&title=Aggregates%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=1058 "Aggregates组件示例")
+![Aggregates组件示例](./admin-ui 管理界面/1682515959989-a8e86f3d-a108-4c15-8a79-38a4f2d8edae.png)
 
 ### OptionalColumns 表格可选列组件
 
@@ -125,7 +125,7 @@ PageTable.addition是对表格组件的扩展，有以下扩展内容：
 ### FormFooter 表单页脚组件
 表单页脚组件常用于Modal、SideSheet的页脚操作区，用于表单关闭或者表单提交操作。
 
-![FormFooter组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1695435401827-51418b60-9297-42b1-b365-4520de5b04a9.png#averageHue=%23fbf8f5&clientId=ued9da8d8-adaf-4&from=paste&height=149&id=u42e57f2a&originHeight=152&originWidth=448&originalType=binary&ratio=1&rotation=0&showTitle=true&size=6422&status=done&style=stroke&taskId=uf92308a3-7c8f-45da-a5c8-8951432c8d6&title=FormFooter%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=438 "FormFooter组件示例")
+![FormFooter组件示例](./admin-ui 管理界面/1695435401827-51418b60-9297-42b1-b365-4520de5b04a9.png)
 
 组件配置：
 
@@ -137,7 +137,7 @@ PageTable.addition是对表格组件的扩展，有以下扩展内容：
 
 ### IconPicker 图标选择器组件
 
-![IconPicker组件示例](https://cdn.nlark.com/yuque/0/2023/png/763022/1695436083735-d3701ec5-91d6-4128-816c-11087db25f1e.png#averageHue=%23fbfbfa&clientId=ued9da8d8-adaf-4&from=paste&height=467&id=ufb82e3ce&originHeight=467&originWidth=508&originalType=binary&ratio=1&rotation=0&showTitle=true&size=17287&status=done&style=stroke&taskId=ud6e27587-3321-482d-a213-b45ec109d59&title=IconPicker%E7%BB%84%E4%BB%B6%E7%A4%BA%E4%BE%8B&width=508 "IconPicker组件示例")
+![IconPicker组件示例](./admin-ui 管理界面/1695436083735-d3701ec5-91d6-4128-816c-11087db25f1e.png)
 
 组件配置：
 

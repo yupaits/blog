@@ -76,7 +76,7 @@ git apply /tmp/8.5.diff
 # 启动gitlab
 sudo gitlab-ctl start
 ```
- <br />完成汉化之后可以看到中文版的 GitLab。<br />![image.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658805956654-049e9d06-528f-426b-9d6e-0b0bbb3a7cbf.png#clientId=uad62db26-9b7b-4&id=kFLf7&originHeight=824&originWidth=1240&originalType=binary&ratio=1&rotation=0&showTitle=false&size=270672&status=done&style=none&taskId=u89f2a207-639a-464a-9fbb-5bdf9f3a4d4&title=)
+ <br />完成汉化之后可以看到中文版的 GitLab。<br />![image.png](./搭建GitLab私有代码托管/1658805956654-049e9d06-528f-426b-9d6e-0b0bbb3a7cbf.png)
 ## 备份
 生产环境下，备份是必需的。需要备份的文件有：配置文件和数据文件。
 
@@ -139,7 +139,7 @@ apt-get install gitlab-ci-multi-runner
 yum install gitlab-ci-multi-runner
 ```
 
-3.  注册**Runner**<br />获取Token：以管理员身份登录GitLab，进入管理区域，点击侧边栏的Runner，如下图，“注册授权码”后的字符串便是Token。<br />![image.png](https://cdn.nlark.com/yuque/0/2022/png/763022/1658806052966-07ec7967-496b-46af-911c-44a0667c327b.png#clientId=uad62db26-9b7b-4&id=fn30q&originHeight=448&originWidth=800&originalType=binary&ratio=1&rotation=0&showTitle=false&size=230402&status=done&style=none&taskId=u94ca515c-1aa4-4eaa-a05e-4c6650a937b&title=)
+3.  注册**Runner**<br />获取Token：以管理员身份登录GitLab，进入管理区域，点击侧边栏的Runner，如下图，“注册授权码”后的字符串便是Token。<br />![image.png](./搭建GitLab私有代码托管/1658806052966-07ec7967-496b-46af-911c-44a0667c327b.png)
 ```bash
 sudo gitlab-ci-multi-runner register
 

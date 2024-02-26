@@ -263,7 +263,7 @@ Maven并不会每次都从中央仓库下载jar包。一个jar包一旦被下载
 
 最后一个问题：如果我们要引用一个第三方组件，比如`okhttp`，如何确切地获得它的`groupId`、`artifactId`和`version`？方法是通过[search.maven.org](https://search.maven.org/)搜索关键字，找到对应的组件后，直接复制：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655521970767-51703106-531e-448f-b517-a87a88d2d5f8.png#clientId=u2745ca3c-831d-4&from=paste&id=u0328d547&originHeight=228&originWidth=451&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u9776610d-e377-48e9-9371-a6b0a262c7f&title=)
+![](./Maven基础/1655521970767-51703106-531e-448f-b517-a87a88d2d5f8.png)
 
 ### 命令行编译
 
@@ -277,7 +277,7 @@ $ mvn clean package
 
 几乎所有的IDE都内置了对Maven的支持。在Eclipse中，可以直接创建或导入Maven项目。如果导入后的Maven项目有错误，可以尝试选择项目后点击右键，选择Maven - Update Project...更新：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655521970768-f59f2515-8c92-446e-a943-cccdc24c6944.png#clientId=u2745ca3c-831d-4&from=paste&id=uf324de14&originHeight=346&originWidth=618&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u7bf8f8e8-457d-4bce-8d44-4b2be49d428&title=)
+![](./Maven基础/1655521970768-f59f2515-8c92-446e-a943-cccdc24c6944.png)
 
 ### 小结
 
@@ -384,7 +384,7 @@ goal的命名总是`abc:xyz`这种形式。
 
 看到这里，相信大家对lifecycle、phase和goal已经明白了吧？
 
-![](https://cdn.nlark.com/yuque/0/2022/jpeg/763022/1655521981919-a45fd4d4-b1ed-440f-945f-ec5a644fda1e.jpeg#clientId=u2745ca3c-831d-4&from=paste&id=ue466fe6b&originHeight=160&originWidth=160&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u8754510a-c89d-44fc-a460-e0fefa90295&title=)
+![](./Maven基础/1655521981919-a45fd4d4-b1ed-440f-945f-ec5a644fda1e.jpeg)
 
 其实我们类比一下就明白了：
 
@@ -898,7 +898,7 @@ maven-repo
 ```
 最后一步，是把这个工程推到GitHub上，并选择`Settings-GitHub Pages`，选择`master branch`启用Pages服务：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522029391-a3e25feb-5a5b-45ef-ab54-4773355153e3.png#clientId=u2745ca3c-831d-4&from=paste&id=ue36ffbf5&originHeight=320&originWidth=420&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u66280c07-3d0d-4b4a-b594-2b9171cdb2b&title=)
+![](./Maven基础/1655522029391-a3e25feb-5a5b-45ef-ab54-4773355153e3.png)
 
 这样，把全部内容推送至GitHub后，即可作为静态网站访问Maven的repo，它的地址是[https://michaelliao.github.io/how-to-become-rich/maven-repo/](https://michaelliao.github.io/how-to-become-rich/maven-repo/)。版本`1.0.0`对应的jar包地址是：
 ```
@@ -1096,7 +1096,7 @@ System.out.println(millionaire.howToBecomeRich());
 
 在发布前，我们必须首先登录后在用户的`Settings-Developer settings-Personal access tokens`中创建两个Token，一个用于发布，一个用于使用。发布Artifact的Token必须有`repo`、`write:packages`和`read:packages`权限：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522029381-48759b95-4f7e-47f4-a8bf-13fa9e174217.png#clientId=u2745ca3c-831d-4&from=paste&id=u03e306f0&originHeight=319&originWidth=400&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=ucd4a5b8f-7a0f-4eef-a083-2febeb6315b&title=)
+![](./Maven基础/1655522029381-48759b95-4f7e-47f4-a8bf-13fa9e174217.png)
 
 使用Artifact的Token只需要`read:packages`权限。
 
@@ -1128,7 +1128,7 @@ System.out.println(millionaire.howToBecomeRich());
 ```
 注意到`<id>`和`~/.m2/settings.xml`配置中的`<id>`要保持一致，因为发布时Maven根据id找到用于登录的用户名和Token，才能成功上传文件到GitHub。我们直接通过命令`mvn clean package deploy`部署，成功后，在GitHub用户页面可以看到该Artifact：
 
-![](https://cdn.nlark.com/yuque/0/2022/png/763022/1655522029515-3c5cbacb-55e9-46b0-805c-4b59d9396744.png#clientId=u2745ca3c-831d-4&from=paste&id=u3a542c06&originHeight=179&originWidth=400&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u2ca9982f-afc4-4b56-83b3-630d066a598&title=)
+![](./Maven基础/1655522029515-3c5cbacb-55e9-46b0-805c-4b59d9396744.png)
 
 完整的配置请参考[complex](https://github.com/michaelliao/complex/)项目，这是一个非常简单的支持复数运算的库。
 使用该Artifact时，因为GitHub的Package只能作为私有仓库使用，所以除了在使用方的`pom.xml`中声明`<repository>`外：
