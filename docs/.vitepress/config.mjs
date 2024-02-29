@@ -534,6 +534,7 @@ export default defineConfig({
                 { text: 'web控制台cockpit', link: '/生活记录/酷玩数码/树莓派/web控制台cockpit' },
                 { text: '使用rclone同步onedrive', link: '/生活记录/酷玩数码/树莓派/使用rclone同步onedrive' },
                 { text: 'yutool-cli高效工作套件', link: '/生活记录/酷玩数码/树莓派/yutool-cli高效工作套件' },
+                { text: 'OpenWrt系统安装及配置', link: '/生活记录/酷玩数码/树莓派/OpenWrt系统安装及配置' },
               ]
             },
           ]
