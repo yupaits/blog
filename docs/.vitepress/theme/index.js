@@ -12,7 +12,7 @@ export default {
   setup() {
     const route = useRoute()
     const initZoom = () => {
-      mediumZoom('.main img', { background: 'var(--c-bg)' })
+      mediumZoom('.main img', { background: 'rgba(0, 0, 0, 0.5)' })
     }
     onMounted(() => {
       initZoom()
