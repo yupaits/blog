@@ -96,19 +96,19 @@
 
 ### Sorts 排序组件
 
-![Sorts组件示例](./admin-ui 管理界面/1682515192701-f2651952-a97e-43eb-8d31-8063cd724992.png)
+![Sorts组件示例](./admin-ui%20管理界面/1682515192701-f2651952-a97e-43eb-8d31-8063cd724992.png)
 
 ### Query 筛选组件
 
-![Query组件示例](./admin-ui 管理界面/1682515213453-75334a8d-9775-492b-83a2-01a97be2239a.png)
+![Query组件示例](./admin-ui%20管理界面/1682515213453-75334a8d-9775-492b-83a2-01a97be2239a.png)
 
 ### Group 分组组件
 
-![Group组件示例](./admin-ui 管理界面/1682515239289-40bfac5b-e566-4ec5-b065-09bc58265877.png)
+![Group组件示例](./admin-ui%20管理界面/1682515239289-40bfac5b-e566-4ec5-b065-09bc58265877.png)
 
 ### Aggregates 聚合组件
 
-![Aggregates组件示例](./admin-ui 管理界面/1682515959989-a8e86f3d-a108-4c15-8a79-38a4f2d8edae.png)
+![Aggregates组件示例](./admin-ui%20管理界面/1682515959989-a8e86f3d-a108-4c15-8a79-38a4f2d8edae.png)
 
 ### OptionalColumns 表格可选列组件
 
@@ -125,7 +125,7 @@ PageTable.addition是对表格组件的扩展，有以下扩展内容：
 ### FormFooter 表单页脚组件
 表单页脚组件常用于Modal、SideSheet的页脚操作区，用于表单关闭或者表单提交操作。
 
-![FormFooter组件示例](./admin-ui 管理界面/1695435401827-51418b60-9297-42b1-b365-4520de5b04a9.png)
+![FormFooter组件示例](./admin-ui%20管理界面/1695435401827-51418b60-9297-42b1-b365-4520de5b04a9.png)
 
 组件配置：
 
@@ -137,7 +137,7 @@ PageTable.addition是对表格组件的扩展，有以下扩展内容：
 
 ### IconPicker 图标选择器组件
 
-![IconPicker组件示例](./admin-ui 管理界面/1695436083735-d3701ec5-91d6-4128-816c-11087db25f1e.png)
+![IconPicker组件示例](./admin-ui%20管理界面/1695436083735-d3701ec5-91d6-4128-816c-11087db25f1e.png)
 
 组件配置：
 
