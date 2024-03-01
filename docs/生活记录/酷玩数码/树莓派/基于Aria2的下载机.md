@@ -165,11 +165,11 @@ server {
 ```
 使新增的 nginx 配置生效：`sudo nginx -s reload`。<br />设置 nginx 开机启动：`sudo systemctl enable nginx`。
 ### 客户端
-修改客户端`hosts`文件以便使用`aria2.pi.com`域名访问AriaNg管理界面。<br />例如：`192.168.1.1 aria2.pi.com`<br />[![image.png](./基于Aria2的下载机/1658662923860-33c5cbc8-de31-4b98-8fc8-f57f7e2599e2.png)](http://yupaits.com/images/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EAria2%E7%9A%84%E4%B8%8B%E8%BD%BD%E6%9C%BA/AriaNg%E4%B8%8B%E8%BD%BD%E9%A1%B5%E9%9D%A2.png)<br />首次浏览时需要进入 AriaNg设置 -> RPC，填写服务端配置信息，特别是 Aria2 RPC 地址和Aria2 RPC 密钥。正确填写之后即可连接使用树莓派上的 Aria2 服务。<br />[![image.png](./基于Aria2的下载机/1658662919982-88a61d63-6d33-42f9-80f8-5b060fe2b534.png)](http://yupaits.com/images/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EAria2%E7%9A%84%E4%B8%8B%E8%BD%BD%E6%9C%BA/AriaNg-RPC%E8%AE%BE%E7%BD%AE.png)
+修改客户端`hosts`文件以便使用`aria2.pi.com`域名访问AriaNg管理界面。<br />例如：`192.168.1.1 aria2.pi.com`<br />![image.png](./基于Aria2的下载机/1658662923860-33c5cbc8-de31-4b98-8fc8-f57f7e2599e2.png)<br />首次浏览时需要进入 AriaNg设置 -> RPC，填写服务端配置信息，特别是 Aria2 RPC 地址和Aria2 RPC 密钥。正确填写之后即可连接使用树莓派上的 Aria2 服务。<br />![image.png](./基于Aria2的下载机/1658662919982-88a61d63-6d33-42f9-80f8-5b060fe2b534.png)
 ## 设置BT trackers 提升下载速度
 trackers 清单地址：[trackerslist](https://github.com/ngosang/trackerslist)，推荐使用 **tracker_best.txt**。<br />有两种设置 trackers 的方式：
 
-1. 客户端进入 AriaNg -> Aria2 设置 -> BitTorrent 设置 -> BT 服务器地址（bt-tracker），填写 trackers 列表地址，多个地址以逗号 , 分隔。[![image.png](./基于Aria2的下载机/1658662922438-f867b01f-8588-45e0-8008-647c43b11288.png)](http://yupaits.com/images/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8EAria2%E7%9A%84%E4%B8%8B%E8%BD%BD%E6%9C%BA/trackers%E8%AE%BE%E7%BD%AE.png)
+1. 客户端进入 AriaNg -> Aria2 设置 -> BitTorrent 设置 -> BT 服务器地址（bt-tracker），填写 trackers 列表地址，多个地址以逗号 , 分隔。![image.png](./基于Aria2的下载机/1658662922438-f867b01f-8588-45e0-8008-647c43b11288.png)
 2. 服务端编辑`~/.config/aria2/aria2.config`配置文件中的`bt-trakcer=udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.opentrackr.org:1337/announce`项，多个地址用逗号 , 分隔。
 ## 自动更新BT trackers
 编辑脚本`/home/pi/app/aria2/trackers-list-aria2.sh`并写入内容：
