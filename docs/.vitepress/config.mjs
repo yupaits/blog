@@ -520,7 +520,8 @@ export default defineConfig({
               text: '极空间',
               collapsed: true,
               items: [
-                { text: '极空间Docker使用攻略', link: '/生活记录/酷玩数码/极空间/极空间Docker使用攻略' }
+                { text: '极空间Docker使用攻略', link: '/生活记录/酷玩数码/极空间/极空间Docker使用攻略' },
+                { text: '多个路由器组网实践', link: '/生活记录/酷玩数码/极空间/多个路由器组网实践' },
               ]
             },
             {
