@@ -1,3 +1,10 @@
+/* 图片居中显示 */
+img {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* 图片点击缩放 */
 .medium-zoom-overlay {
   z-index: 30;
 }
