@@ -49,7 +49,7 @@ export default defineConfig({
       { text: '个人项目', link: '/个人项目/' },
       { text: '生活记录', link: '/生活记录/' },
       { text: '站点收录', link: '/站点收录/' },
-      { text: '旧版博客', link: 'https://yupaits.com/' },
+      { text: '旧版博客', link: 'https://blog.yupaits.com/' },
     ],
 
     sidebar: {
