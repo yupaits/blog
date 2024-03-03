@@ -3,7 +3,6 @@ import { onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
-import Valine from 'valine'
 import MyLayout from './MyLayout.vue'
 
 import 'vitepress-plugin-back-to-top/dist/style.css'
