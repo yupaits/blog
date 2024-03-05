@@ -1,3 +1,7 @@
+---
+comment: false
+---
+
 <script setup>
 import GithubButton from 'vue-github-button'
 
