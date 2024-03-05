@@ -95,7 +95,8 @@ export default defineConfig({
         ]
       },
       '/文章收录/': {
-        base: '/文章收录/', items: [
+        base: '/文章收录/',
+        items: [
           { text: '谈谈我工作中的23个设计模式', link: '谈谈我工作中的23个设计模式' },
           { text: '我的京东管理生涯随想', link: '我的京东管理生涯随想' },
           { text: '优秀工程师必备的一项技能，你解锁了吗？', link: '优秀工程师必备的一项技能，你解锁了吗？' },
@@ -141,461 +142,510 @@ export default defineConfig({
           { text: '互联网黑产：那些职业羊毛党到底如何月赚几十万？', link: '互联网黑产：那些职业羊毛党到底如何月赚几十万？' },
         ]
       },
-      '/软件开发': [
-        {
-          text: '编程基础',
-          items: [
-            {
-              text: '开发语言',
-              collapsed: true,
-              items: [
-                {
-                  text: 'Java教程',
-                  collapsed: true,
-                  items: [
-                    {
-                      text: 'Java快速入门',
-                      collapsed: true,
-                      items: [
-                        { text: 'Java简介', link: '/软件开发/编程基础/开发语言/Java教程/Java快速入门/Java简介' },
-                        { text: 'Java程序基础', link: '/软件开发/编程基础/开发语言/Java教程/Java快速入门/Java程序基础' },
-                        { text: '流程控制', link: '/软件开发/编程基础/开发语言/Java教程/Java快速入门/流程控制' },
-                        { text: '数组操作', link: '/软件开发/编程基础/开发语言/Java教程/Java快速入门/数组操作' },
-                      ]
-                    },
-                    {
-                      text: '面向对象编程',
-                      collapsed: true,
-                      items: [
-                        { text: '面向对象基础', link: '/软件开发/编程基础/开发语言/Java教程/面向对象编程/面向对象基础' },
-                        { text: 'Java核心类', link: '/软件开发/编程基础/开发语言/Java教程/面向对象编程/Java核心类' },
-                      ]
-                    },
-                    { text: '异常处理', link: '/软件开发/编程基础/开发语言/Java教程/异常处理' },
-                    { text: '反射', link: '/软件开发/编程基础/开发语言/Java教程/反射' },
-                    { text: '注解', link: '/软件开发/编程基础/开发语言/Java教程/注解' },
-                    { text: '泛型', link: '/软件开发/编程基础/开发语言/Java教程/泛型' },
-                    { text: '集合', link: '/软件开发/编程基础/开发语言/Java教程/集合' },
-                    { text: 'IO', link: '/软件开发/编程基础/开发语言/Java教程/IO' },
-                    { text: '日期与时间', link: '/软件开发/编程基础/开发语言/Java教程/日期与时间' },
-                    { text: '单元测试', link: '/软件开发/编程基础/开发语言/Java教程/单元测试' },
-                    { text: '正则表达式', link: '/软件开发/编程基础/开发语言/Java教程/正则表达式' },
-                    { text: '加密与安全', link: '/软件开发/编程基础/开发语言/Java教程/加密与安全' },
-                    { text: '多线程', link: '/软件开发/编程基础/开发语言/Java教程/多线程' },
-                    { text: 'Maven基础', link: '/软件开发/编程基础/开发语言/Java教程/Maven基础' },
-                    { text: 'XML与JSON', link: '/软件开发/编程基础/开发语言/Java教程/XML与JSON' },
-                    { text: 'JDBC编程', link: '/软件开发/编程基础/开发语言/Java教程/JDBC编程' },
-                    { text: '函数式编程', link: '/软件开发/编程基础/开发语言/Java教程/函数式编程' },
-                    {
-                      text: 'Web开发',
-                      collapsed: true,
-                      items: [
-                        { text: 'Web基础', link: '/软件开发/编程基础/开发语言/Java教程/Web开发/Web基础' },
-                        { text: 'Servlet开发', link: '/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发' },
-                        { text: 'JSP开发', link: '/软件开发/编程基础/开发语言/Java教程/Web开发/JSP开发' },
-                        { text: 'MVC开发', link: '/软件开发/编程基础/开发语言/Java教程/Web开发/MVC开发' },
-                        { text: '使用Filter', link: '/软件开发/编程基础/开发语言/Java教程/Web开发/使用Filter' },
-                        { text: '使用Listener', link: '/软件开发/编程基础/开发语言/Java教程/Web开发/使用Listener' },
-                        { text: '部署', link: '/软件开发/编程基础/开发语言/Java教程/Web开发/部署' },
-                      ]
-                    },
-                    {
-                      text: 'Spring开发',
-                      collapsed: true,
-                      items: [
-                        { text: 'IoC容器', link: '/软件开发/编程基础/开发语言/Java教程/Spring开发/IoC容器' },
-                        { text: '使用AOP', link: '/软件开发/编程基础/开发语言/Java教程/Spring开发/使用AOP' },
-                        { text: '访问数据库', link: '/软件开发/编程基础/开发语言/Java教程/Spring开发/访问数据库' },
-                        { text: '开发Web应用', link: '/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用' },
-                        { text: '集成第三方组件', link: '/软件开发/编程基础/开发语言/Java教程/Spring开发/集成第三方组件' },
-                      ]
-                    },
-                    {
-                      text: 'Spring Boot开发',
-                      collapsed: true,
-                      items: [
-                        { text: '第一个Spring Boot应用', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/第一个Spring Boot应用' },
-                        { text: '使用开发者工具', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/使用开发者工具' },
-                        { text: '打包Spring Boot应用', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/打包Spring Boot应用' },
-                        { text: '瘦身Spring Boot应用', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/瘦身Spring Boot应用' },
-                        { text: '使用Actuator', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/使用Actuator' },
-                        { text: '使用Profiles', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/使用Profiles' },
-                        { text: '使用Conditional', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/使用Conditional' },
-                        { text: '加载配置文件', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/加载配置文件' },
-                        { text: '禁用自动配置', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/禁用自动配置' },
-                        { text: '添加Filter', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/添加Filter' },
-                        {
-                          text: '集成第三方组件',
-                          collapsed: true,
-                          items: [
-                            { text: '集成Open API', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/集成第三方组件/集成Open API' },
-                            { text: '访问Redis', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/集成第三方组件/访问Redis' },
-                            { text: '集成Artemis', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/集成第三方组件/集成Artemis' },
-                            { text: '集成RabbitMQ', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/集成第三方组件/集成RabbitMQ' },
-                            { text: '集成Kafka', link: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/集成第三方组件/集成Kafka' },
-                          ]
-                        },
-                      ]
-                    },
-                    {
-                      text: 'Spring Cloud开发',
-                      collapsed: true,
-                      items: [
-                        { text: '项目架构设计', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/项目架构设计' },
-                        { text: '搭建项目框架', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/搭建项目框架' },
-                        {
-                          text: '设计交易引擎',
-                          collapsed: true,
-                          items: [
-                            { text: '设计资产系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计资产系统' },
-                            { text: '设计订单系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计订单系统' },
-                            { text: '设计撮合系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计撮合系统' },
-                            { text: '设计清算系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/设计清算系统' },
-                            { text: '完成交易引擎', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/完成交易引擎' },
-                          ]
-                        },
-                        { text: '设计定序系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计定序系统' },
-                        { text: '设计API系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计API系统' },
-                        { text: '设计行情系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计行情系统' },
-                        { text: '设计推送系统', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计推送系统' },
-                        { text: '编写UI', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/编写UI' },
-                        { text: '项目总结', link: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/项目总结' },
-                      ]
-                    },
-                  ]
-                }
-              ]
-            },
-            {
-              text: '数据结构',
-              collapsed: true,
-              items: [
-                { text: '线性数据结构', link: '/软件开发/编程基础/数据结构/线性数据结构' },
-                { text: '图', link: '/软件开发/编程基础/数据结构/图' },
-                { text: '堆', link: '/软件开发/编程基础/数据结构/堆' },
-                { text: '树', link: '/软件开发/编程基础/数据结构/树' },
-                { text: '红黑树', link: '/软件开发/编程基础/数据结构/红黑树' },
-              ]
-            },
-            {
-              text: '常用算法',
-              collapsed: true,
-              items: [
-                { text: 'NIO模型', link: '/软件开发/编程基础/常用算法/NIO模型' },
-                { text: '一致性哈希算法', link: '/软件开发/编程基础/常用算法/一致性哈希算法' },
-              ]
-            },
-            {
-              text: '设计模式',
-              collapsed: true,
-              items: [
-                { text: '设计模式简介', link: '/软件开发/编程基础/设计模式/设计模式简介' },
-                { text: '创建型模式', link: '/软件开发/编程基础/设计模式/创建型模式' },
-                { text: '结构型模式', link: '/软件开发/编程基础/设计模式/结构型模式' },
-                { text: '行为型模式', link: '/软件开发/编程基础/设计模式/行为型模式' },
-              ]
-            },
-            {
-              text: '网络编程',
-              collapsed: true,
-              items: [
-                { text: '网络编程基础', link: '/软件开发/编程基础/网络编程/网络编程基础' },
-                { text: 'TCP编程', link: '/软件开发/编程基础/网络编程/TCP编程' },
-                { text: 'UDP编程', link: '/软件开发/编程基础/网络编程/UDP编程' },
-                { text: '发送Email', link: '/软件开发/编程基础/网络编程/发送Email' },
-                { text: '接收Email', link: '/软件开发/编程基础/网络编程/接收Email' },
-                { text: 'HTTP编程', link: '/软件开发/编程基础/网络编程/HTTP编程' },
-                { text: 'RMI远程调用', link: '/软件开发/编程基础/网络编程/RMI远程调用' },
-              ]
-            },
-            {
-              text: 'SQL教程',
-              collapsed: true,
-              items: [
-                { text: '关系数据库概述', link: '/软件开发/编程基础/SQL教程/关系数据库概述' },
-                { text: '安装MySQL', link: '/软件开发/编程基础/SQL教程/安装MySQL' },
-                { text: '关系模型', link: '/软件开发/编程基础/SQL教程/关系模型' },
-                { text: '查询数据', link: '/软件开发/编程基础/SQL教程/查询数据' },
-                { text: '修改数据', link: '/软件开发/编程基础/SQL教程/修改数据' },
-                { text: 'MySQL', link: '/软件开发/编程基础/SQL教程/MySQL' },
-                { text: '事务', link: '/软件开发/编程基础/SQL教程/事务' },
-              ]
-            },
-          ]
-        },
-        {
-          text: '架构设计',
-          items: [
-            { text: '架构五要素', link: '/软件开发/架构设计/架构五要素' },
-            {
-              text: '分布式',
-              collapsed: true,
-              items: [
-                { text: '理论&算法&协议', link: '/软件开发/架构设计/分布式/理论&算法&协议' },
-                { text: 'RPC', link: '/软件开发/架构设计/分布式/RPC' },
-                { text: 'ZooKeeper', link: '/软件开发/架构设计/分布式/ZooKeeper' },
-                { text: 'API网关', link: '/软件开发/架构设计/分布式/API网关' },
-                { text: '分布式ID', link: '/软件开发/架构设计/分布式/分布式ID' },
-                { text: '分布式锁', link: '/软件开发/架构设计/分布式/分布式锁' },
-              ]
-            },
-            {
-              text: '高可用',
-              collapsed: true,
-              items: [
-                { text: '冗余设计', link: '/软件开发/架构设计/高可用/冗余设计' },
-                { text: '服务限流', link: '/软件开发/架构设计/高可用/服务限流' },
-                { text: '超时&重试', link: '/软件开发/架构设计/高可用/超时&重试' },
-                { text: '性能测试入门', link: '/软件开发/架构设计/高可用/性能测试入门' },
-              ]
-            }
-          ]
-        },
-        {
-          text: '软件架构',
-          items: [
-            { text: '基础组件设计核心思路', link: '/软件开发/软件架构/基础组件设计核心思路' },
-            { text: '通用可编排状态机引擎设计', link: '/软件开发/软件架构/通用可编排状态机引擎设计' },
-            { text: '支付系统', link: '/软件开发/软件架构/支付系统' },
-          ]
-        },
-        {
-          text: '中间件',
-          items: [
-            { text: '消息队列', link: '/软件开发/中间件/消息队列' },
-            { text: '缓存', link: '/软件开发/中间件/缓存' },
-            { text: '数据库读写分离&分库分表', link: '/软件开发/中间件/数据库读写分离&分库分表' },
-            { text: '数据同步', link: '/软件开发/中间件/数据同步' },
-            { text: '分布式任务调度', link: '/软件开发/中间件/分布式任务调度' },
-          ]
-        },
-        {
-          text: '实战总结',
-          items: [
-            { text: '常见异常解决方案', link: '/软件开发/实战总结/常见异常解决方案' },
-            { text: 'Java', link: '/软件开发/实战总结/Java' },
-            { text: 'Spring & Spring Boot', link: '/软件开发/实战总结/Spring & Spring Boot' },
-            { text: 'MySQL', link: '/软件开发/实战总结/MySQL' },
-            { text: 'Vue.js', link: '/软件开发/实战总结/Vue.js' },
-            { text: '其他', link: '/软件开发/实战总结/其他' },
-          ]
-        },
-      ],
-      '/个人项目': [
-        {
-          text: 'yutool组件式框架',
-          items: [
-            { text: 'yutool模块划分', link: '/个人项目/yutool组件式框架/yutool模块划分' },
-            {
-              text: 'yutool-orm ORM组件',
-              collapsed: true,
-              items: [
-                { text: 'yutool-orm-core', link: '/个人项目/yutool组件式框架/yutool-orm ORM组件/yutool-orm-core' },
-                { text: 'yutool-orm-mybatis', link: '/个人项目/yutool组件式框架/yutool-orm ORM组件/yutool-orm-mybatis' },
-                { text: 'yutool-orm-jpa', link: '/个人项目/yutool组件式框架/yutool-orm ORM组件/yutool-orm-jpa' },
-              ]
-            },
-            {
-              text: 'yutool-mq消息组件',
-              collapsed: true,
-              items: [
-                { text: 'yutool-mq-core', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-core' },
-                { text: 'yutool-mq-kafka', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-kafka' },
-                { text: 'yutool-mq-rabbitmq', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-rabbitmq' },
-                { text: 'yutool-mq-rocketmq', link: '/个人项目/yutool组件式框架/yutool-mq消息组件/yutool-mq-rocketmq' },
-              ]
-            },
-            {
-              text: 'yutool-push推送组件',
-              collapsed: true,
-              items: [
-                { text: 'yutool-push-core', link: '/个人项目/yutool组件式框架/yutool-push推送组件/yutool-push-core' },
-                { text: 'yutool-push-provider', link: '/个人项目/yutool组件式框架/yutool-push推送组件/yutool-push-provider' },
-              ]
-            },
-            { text: 'yutool-file-server文件服务', link: '/个人项目/yutool组件式框架/yutool-file-server文件服务' },
-            { text: 'yutool-ldap LDAP组件', link: '/个人项目/yutool组件式框架/yutool-ldap LDAP组件' },
-            { text: 'yutool-social第三方登录组件', link: '/个人项目/yutool组件式框架/yutool-social第三方登录组件' },
-            { text: 'yutool-state状态机组件', link: '/个人项目/yutool组件式框架/yutool-state状态机组件' },
-            { text: 'yutool-search搜索引擎组件', link: '/个人项目/yutool组件式框架/yutool-search搜索引擎组件' },
-            {
-              text: 'yutool-plugins插件机制',
-              collapsed: true,
-              items: [
-                { text: 'api-idempotent接口幂等插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/api-idempotent接口幂等插件' },
-                { text: 'api-logger接口访问日志插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/api-logger接口访问日志插件' },
-                { text: 'audit-logger审计日志插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/audit-logger审计日志插件' },
-                { text: 'auth-filter权限过滤插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/auth-filter权限过滤插件' },
-                { text: 'distributed-lock分布式锁插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/distributed-lock分布式锁插件' },
-                { text: 'history-data历史数据处理插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/history-data历史数据处理插件' },
-                { text: 'import-export数据导入导出插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/import-export数据导入导出插件' },
-                { text: 'jwt-helper JWT工具插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/jwt-helper JWT工具插件' },
-                { text: 'native-mobile本地手机号登录插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/native-mobile本地手机号登录插件' },
-                { text: 'sms-reply-storage短信回复内容存储插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/sms-reply-storage短信回复内容存储插件' },
-                { text: 'sms-verify短信验证码插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/sms-verify短信验证码插件' },
-                { text: 'trace-analysis链路追踪插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/trace-analysis链路追踪插件' },
-                { text: 'cache-adapter缓存适配插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/cache-adapter缓存适配插件' },
-                { text: '[归档] dynamic-thread-pool动态线程池管理插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] dynamic-thread-pool动态线程池管理插件' },
-                { text: '[归档] multi-ds-tx多数据源事务插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] multi-ds-tx多数据源事务插件' },
-                { text: '[归档] swagger-support Swagger接口文档插件', link: '/个人项目/yutool组件式框架/yutool-plugins插件机制/[归档] swagger-support Swagger接口文档插件' },
-              ]
-            },
-            { text: '[归档] yutool-cache缓存组件', link: '/个人项目/yutool组件式框架/[归档] yutool-cache缓存组件' },
-            { text: '[归档] yutool-mq消息组件', link: '/个人项目/yutool组件式框架/[归档] yutool-mq消息组件' },
-            { text: '[归档] yutool-push推送组件', link: '/个人项目/yutool组件式框架/[归档] yutool-push推送组件' },
-          ]
-        },
-        {
-          text: 'yutool-cli高效工作套件',
-          items: [
-            { text: 'yutool-cli功能清单', link: '/个人项目/yutool-cli高效工作套件/yutool-cli功能清单' },
-            { text: 'yutool-cli运营模式', link: '/个人项目/yutool-cli高效工作套件/yutool-cli运营模式' },
+      '/软件开发/': {
+        base: '/软件开发/',
+        items: [
+          {
+            text: '编程基础',
+            base: '/软件开发/编程基础/',
+            items: [
+              {
+                text: '开发语言',
+                base: '/软件开发/编程基础/开发语言/',
+                collapsed: true,
+                items: [
+                  {
+                    text: 'Java教程',
+                    base: '/软件开发/编程基础/开发语言/Java教程/',
+                    collapsed: true,
+                    items: [
+                      {
+                        text: 'Java快速入门',
+                        base: '/软件开发/编程基础/开发语言/Java教程/Java快速入门/',
+                        collapsed: true,
+                        items: [
+                          { text: 'Java简介', link: 'Java简介' },
+                          { text: 'Java程序基础', link: 'Java程序基础' },
+                          { text: '流程控制', link: '流程控制' },
+                          { text: '数组操作', link: '数组操作' },
+                        ]
+                      },
+                      {
+                        text: '面向对象编程',
+                        base: '/软件开发/编程基础/开发语言/Java教程/面向对象编程/',
+                        collapsed: true,
+                        items: [
+                          { text: '面向对象基础', link: '面向对象基础' },
+                          { text: 'Java核心类', link: 'Java核心类' },
+                        ]
+                      },
+                      { text: '异常处理', link: '异常处理' },
+                      { text: '反射', link: '反射' },
+                      { text: '注解', link: '注解' },
+                      { text: '泛型', link: '泛型' },
+                      { text: '集合', link: '集合' },
+                      { text: 'IO', link: 'IO' },
+                      { text: '日期与时间', link: '日期与时间' },
+                      { text: '单元测试', link: '单元测试' },
+                      { text: '正则表达式', link: '正则表达式' },
+                      { text: '加密与安全', link: '加密与安全' },
+                      { text: '多线程', link: '多线程' },
+                      { text: 'Maven基础', link: 'Maven基础' },
+                      { text: 'XML与JSON', link: 'XML与JSON' },
+                      { text: 'JDBC编程', link: 'JDBC编程' },
+                      { text: '函数式编程', link: '函数式编程' },
+                      {
+                        text: 'Web开发',
+                        base: '/软件开发/编程基础/开发语言/Java教程/Web开发/',
+                        collapsed: true,
+                        items: [
+                          { text: 'Web基础', link: 'Web基础' },
+                          { text: 'Servlet开发', link: 'Servlet开发' },
+                          { text: 'JSP开发', link: 'JSP开发' },
+                          { text: 'MVC开发', link: 'MVC开发' },
+                          { text: '使用Filter', link: '使用Filter' },
+                          { text: '使用Listener', link: '使用Listener' },
+                          { text: '部署', link: '部署' },
+                        ]
+                      },
+                      {
+                        text: 'Spring开发',
+                        base: '/软件开发/编程基础/开发语言/Java教程/Spring开发/',
+                        collapsed: true,
+                        items: [
+                          { text: 'IoC容器', link: 'IoC容器' },
+                          { text: '使用AOP', link: '使用AOP' },
+                          { text: '访问数据库', link: '访问数据库' },
+                          { text: '开发Web应用', link: '开发Web应用' },
+                          { text: '集成第三方组件', link: '集成第三方组件' },
+                        ]
+                      },
+                      {
+                        text: 'Spring Boot开发',
+                        base: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/',
+                        collapsed: true,
+                        items: [
+                          { text: '第一个Spring Boot应用', link: '第一个Spring Boot应用' },
+                          { text: '使用开发者工具', link: '使用开发者工具' },
+                          { text: '打包Spring Boot应用', link: '打包Spring Boot应用' },
+                          { text: '瘦身Spring Boot应用', link: '瘦身Spring Boot应用' },
+                          { text: '使用Actuator', link: '使用Actuator' },
+                          { text: '使用Profiles', link: '使用Profiles' },
+                          { text: '使用Conditional', link: '使用Conditional' },
+                          { text: '加载配置文件', link: '加载配置文件' },
+                          { text: '禁用自动配置', link: '禁用自动配置' },
+                          { text: '添加Filter', link: '添加Filter' },
+                          {
+                            text: '集成第三方组件',
+                            base: '/软件开发/编程基础/开发语言/Java教程/Spring Boot开发/集成第三方组件/',
+                            collapsed: true,
+                            items: [
+                              { text: '集成Open API', link: '集成Open API' },
+                              { text: '访问Redis', link: '访问Redis' },
+                              { text: '集成Artemis', link: '集成Artemis' },
+                              { text: '集成RabbitMQ', link: '集成RabbitMQ' },
+                              { text: '集成Kafka', link: '集成Kafka' },
+                            ]
+                          },
+                        ]
+                      },
+                      {
+                        text: 'Spring Cloud开发',
+                        base: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/',
+                        collapsed: true,
+                        items: [
+                          { text: '项目架构设计', link: '项目架构设计' },
+                          { text: '搭建项目框架', link: '搭建项目框架' },
+                          {
+                            text: '设计交易引擎',
+                            base: '/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/设计交易引擎/',
+                            collapsed: true,
+                            items: [
+                              { text: '设计资产系统', link: '设计资产系统' },
+                              { text: '设计订单系统', link: '设计订单系统' },
+                              { text: '设计撮合系统', link: '设计撮合系统' },
+                              { text: '设计清算系统', link: '设计清算系统' },
+                              { text: '完成交易引擎', link: '完成交易引擎' },
+                            ]
+                          },
+                          { text: '设计定序系统', link: '设计定序系统' },
+                          { text: '设计API系统', link: '设计API系统' },
+                          { text: '设计行情系统', link: '设计行情系统' },
+                          { text: '设计推送系统', link: '设计推送系统' },
+                          { text: '编写UI', link: '编写UI' },
+                          { text: '项目总结', link: '项目总结' },
+                        ]
+                      },
+                    ]
+                  }
+                ]
+              },
+              {
+                text: '数据结构',
+                base: '/软件开发/编程基础/数据结构/',
+                collapsed: true,
+                items: [
+                  { text: '线性数据结构', link: '线性数据结构' },
+                  { text: '图', link: '图' },
+                  { text: '堆', link: '堆' },
+                  { text: '树', link: '树' },
+                  { text: '红黑树', link: '红黑树' },
+                ]
+              },
+              {
+                text: '常用算法',
+                base: '/软件开发/编程基础/常用算法/',
+                collapsed: true,
+                items: [
+                  { text: 'NIO模型', link: 'NIO模型' },
+                  { text: '一致性哈希算法', link: '一致性哈希算法' },
+                ]
+              },
+              {
+                text: '设计模式',
+                base: '/软件开发/编程基础/设计模式/',
+                collapsed: true,
+                items: [
+                  { text: '设计模式简介', link: '设计模式简介' },
+                  { text: '创建型模式', link: '创建型模式' },
+                  { text: '结构型模式', link: '结构型模式' },
+                  { text: '行为型模式', link: '行为型模式' },
+                ]
+              },
+              {
+                text: '网络编程',
+                base: '/软件开发/编程基础/网络编程/',
+                collapsed: true,
+                items: [
+                  { text: '网络编程基础', link: '网络编程基础' },
+                  { text: 'TCP编程', link: 'TCP编程' },
+                  { text: 'UDP编程', link: 'UDP编程' },
+                  { text: '发送Email', link: '发送Email' },
+                  { text: '接收Email', link: '接收Email' },
+                  { text: 'HTTP编程', link: 'HTTP编程' },
+                  { text: 'RMI远程调用', link: 'RMI远程调用' },
+                ]
+              },
+              {
+                text: 'SQL教程',
+                base: '/软件开发/编程基础/SQL教程/',
+                collapsed: true,
+                items: [
+                  { text: '关系数据库概述', link: '关系数据库概述' },
+                  { text: '安装MySQL', link: '安装MySQL' },
+                  { text: '关系模型', link: '关系模型' },
+                  { text: '查询数据', link: '查询数据' },
+                  { text: '修改数据', link: '修改数据' },
+                  { text: 'MySQL', link: 'MySQL' },
+                  { text: '事务', link: '事务' },
+                ]
+              },
+            ]
+          },
+          {
+            text: '架构设计',
+            base: '/软件开发/架构设计/',
+            items: [
+              { text: '架构五要素', link: '架构五要素' },
+              {
+                text: '分布式',
+                base: '/软件开发/架构设计/分布式/',
+                collapsed: true,
+                items: [
+                  { text: '理论&算法&协议', link: '理论&算法&协议' },
+                  { text: 'RPC', link: 'RPC' },
+                  { text: 'ZooKeeper', link: 'ZooKeeper' },
+                  { text: 'API网关', link: 'API网关' },
+                  { text: '分布式ID', link: '分布式ID' },
+                  { text: '分布式锁', link: '分布式锁' },
+                ]
+              },
+              {
+                text: '高可用',
+                base: '/软件开发/架构设计/高可用/',
+                collapsed: true,
+                items: [
+                  { text: '冗余设计', link: '冗余设计' },
+                  { text: '服务限流', link: '服务限流' },
+                  { text: '超时&重试', link: '超时&重试' },
+                  { text: '性能测试入门', link: '性能测试入门' },
+                ]
+              }
+            ]
+          },
+          {
+            text: '软件架构',
+            base: '/软件开发/软件架构/',
+            items: [
+              { text: '基础组件设计核心思路', link: '基础组件设计核心思路' },
+              { text: '通用可编排状态机引擎设计', link: '通用可编排状态机引擎设计' },
+              { text: '支付系统', link: '支付系统' },
+            ]
+          },
+          {
+            text: '中间件',
+            base: '/软件开发/中间件/',
+            items: [
+              { text: '消息队列', link: '消息队列' },
+              { text: '缓存', link: '缓存' },
+              { text: '数据库读写分离&分库分表', link: '数据库读写分离&分库分表' },
+              { text: '数据同步', link: '数据同步' },
+              { text: '分布式任务调度', link: '分布式任务调度' },
+            ]
+          },
+          {
+            text: '实战总结',
+            base: '/软件开发/实战总结/',
+            items: [
+              { text: '常见异常解决方案', link: '常见异常解决方案' },
+              { text: 'Java', link: 'Java' },
+              { text: 'Spring & Spring Boot', link: 'Spring & Spring Boot' },
+              { text: 'MySQL', link: 'MySQL' },
+              { text: 'Vue.js', link: 'Vue.js' },
+              { text: '其他', link: '其他' },
+            ]
+          },
+        ]
+      },
+      '/个人项目/': {
+        base: '/个人项目/',
+        items: [
+          {
+            text: 'yutool组件式框架',
+            base: '/个人项目/yutool组件式框架/',
+            items: [
+              { text: 'yutool模块划分', link: 'yutool模块划分' },
+              {
+                text: 'yutool-orm ORM组件',
+                base: '/个人项目/yutool组件式框架/yutool-orm ORM组件/',
+                collapsed: true,
+                items: [
+                  { text: 'yutool-orm-core', link: 'yutool-orm-core' },
+                  { text: 'yutool-orm-mybatis', link: 'yutool-orm-mybatis' },
+                  { text: 'yutool-orm-jpa', link: 'yutool-orm-jpa' },
+                ]
+              },
+              {
+                text: 'yutool-mq消息组件',
+                base: '/个人项目/yutool组件式框架/yutool-mq消息组件/',
+                collapsed: true,
+                items: [
+                  { text: 'yutool-mq-core', link: 'yutool-mq-core' },
+                  { text: 'yutool-mq-kafka', link: 'yutool-mq-kafka' },
+                  { text: 'yutool-mq-rabbitmq', link: 'yutool-mq-rabbitmq' },
+                  { text: 'yutool-mq-rocketmq', link: 'yutool-mq-rocketmq' },
+                ]
+              },
+              {
+                text: 'yutool-push推送组件',
+                base: '/个人项目/yutool组件式框架/yutool-push推送组件/',
+                collapsed: true,
+                items: [
+                  { text: 'yutool-push-core', link: 'yutool-push-core' },
+                  { text: 'yutool-push-provider', link: 'yutool-push-provider' },
+                ]
+              },
+              { text: 'yutool-file-server文件服务', link: 'yutool-file-server文件服务' },
+              { text: 'yutool-ldap LDAP组件', link: 'yutool-ldap LDAP组件' },
+              { text: 'yutool-social第三方登录组件', link: 'yutool-social第三方登录组件' },
+              { text: 'yutool-state状态机组件', link: 'yutool-state状态机组件' },
+              { text: 'yutool-search搜索引擎组件', link: 'yutool-search搜索引擎组件' },
+              {
+                text: 'yutool-plugins插件机制',
+                base: '/个人项目/yutool组件式框架/yutool-plugins插件机制/',
+                collapsed: true,
+                items: [
+                  { text: 'api-idempotent接口幂等插件', link: 'api-idempotent接口幂等插件' },
+                  { text: 'api-logger接口访问日志插件', link: 'api-logger接口访问日志插件' },
+                  { text: 'audit-logger审计日志插件', link: 'audit-logger审计日志插件' },
+                  { text: 'auth-filter权限过滤插件', link: 'auth-filter权限过滤插件' },
+                  { text: 'distributed-lock分布式锁插件', link: 'distributed-lock分布式锁插件' },
+                  { text: 'history-data历史数据处理插件', link: 'history-data历史数据处理插件' },
+                  { text: 'import-export数据导入导出插件', link: 'import-export数据导入导出插件' },
+                  { text: 'jwt-helper JWT工具插件', link: 'jwt-helper JWT工具插件' },
+                  { text: 'native-mobile本地手机号登录插件', link: 'native-mobile本地手机号登录插件' },
+                  { text: 'sms-reply-storage短信回复内容存储插件', link: 'sms-reply-storage短信回复内容存储插件' },
+                  { text: 'sms-verify短信验证码插件', link: 'sms-verify短信验证码插件' },
+                  { text: 'trace-analysis链路追踪插件', link: 'trace-analysis链路追踪插件' },
+                  { text: 'cache-adapter缓存适配插件', link: 'cache-adapter缓存适配插件' },
+                  { text: '[归档] dynamic-thread-pool动态线程池管理插件', link: '[归档] dynamic-thread-pool动态线程池管理插件' },
+                  { text: '[归档] multi-ds-tx多数据源事务插件', link: '[归档] multi-ds-tx多数据源事务插件' },
+                  { text: '[归档] swagger-support Swagger接口文档插件', link: '[归档] swagger-support Swagger接口文档插件' },
+                ]
+              },
+              { text: '[归档] yutool-cache缓存组件', link: '[归档] yutool-cache缓存组件' },
+              { text: '[归档] yutool-mq消息组件', link: '[归档] yutool-mq消息组件' },
+              { text: '[归档] yutool-push推送组件', link: '[归档] yutool-push推送组件' },
+            ]
+          },
+          {
+            text: 'yutool-cli高效工作套件',
+            base: '/个人项目/yutool-cli高效工作套件/',
+            items: [
+              { text: 'yutool-cli功能清单', link: 'yutool-cli功能清单' },
+              { text: 'yutool-cli运营模式', link: 'yutool-cli运营模式' },
 
-          ]
-        },
-        {
-          text: 'yutool-metadata元数据',
-          items: [
-            { text: '元数据自定义对象管理设计', link: '/个人项目/yutool-metadata元数据/元数据自定义对象管理设计' },
-          ]
-        },
-        {
-          text: 'yutool-biz业务组件',
-          items: [
-            { text: 'yutool-biz 整体设计', link: '/个人项目/yutool-biz业务组件/yutool-biz 整体设计' },
-            { text: 'yutool-api API接口', link: '/个人项目/yutool-biz业务组件/yutool-api API接口' },
-            { text: 'yutool-auth 认证授权', link: '/个人项目/yutool-biz业务组件/yutool-auth 认证授权' },
-            { text: 'yutool-user 用户', link: '/个人项目/yutool-biz业务组件/yutool-user 用户' },
-            { text: 'yutool-org 组织架构', link: '/个人项目/yutool-biz业务组件/yutool-org 组织架构' },
-            { text: 'yutool-address 地址', link: '/个人项目/yutool-biz业务组件/yutool-address 地址' },
-            { text: 'yutool-dict 数据字典', link: '/个人项目/yutool-biz业务组件/yutool-dict 数据字典' },
-            { text: 'yutool-notify 通知消息', link: '/个人项目/yutool-biz业务组件/yutool-notify 通知消息' },
-            { text: 'yutool-exchange 数据中转', link: '/个人项目/yutool-biz业务组件/yutool-exchange 数据中转' },
-            { text: 'admin-ui 管理界面', link: '/个人项目/yutool-biz业务组件/admin-ui 管理界面' },
-          ]
-        },
-        {
-          text: 'yupan网盘',
-          items: [
-            { text: 'yupan架构', link: '/个人项目/yupan网盘/yupan架构' },
-            { text: '商城页面', link: '/个人项目/yupan网盘/商城页面' },
-            { text: 'shop商城', link: '/个人项目/yupan网盘/shop商城' },
-            { text: 'vip会员', link: '/个人项目/yupan网盘/vip会员' },
-          ]
-        },
-      ],
-      '/生活记录': [
-        {
-          text: '山水游记',
-          items: [
-            {
-              text: '中国 China',
-              collapsed: true,
-              items: [
-                {
-                  text: '广东',
-                  collapsed: true,
-                  items: [
-                    {
-                      text: '深圳',
-                      collapsed: true,
-                      items: [
-                        { text: '深圳十峰', link: '/生活记录/山水游记/中国 China/广东/深圳/深圳十峰' }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              text: '泰国 Thailand',
-              collapsed: true,
-              items: []
-            }
-          ]
-        },
-        {
-          text: '酷玩数码',
-          items: [
-            {
-              text: '极空间',
-              collapsed: true,
-              items: [
-                { text: '极空间Docker使用攻略', link: '/生活记录/酷玩数码/极空间/极空间Docker使用攻略' },
-                { text: '多个路由器组网实践', link: '/生活记录/酷玩数码/极空间/多个路由器组网实践' },
-              ]
-            },
-            {
-              text: '树莓派',
-              collapsed: true,
-              items: [
-                { text: '树莓派系统安装及配置', link: '/生活记录/酷玩数码/树莓派/树莓派系统安装及配置' },
-                { text: '运行情况监控', link: '/生活记录/酷玩数码/树莓派/运行情况监控' },
-                { text: '基于Aria2的下载机', link: '/生活记录/酷玩数码/树莓派/基于Aria2的下载机' },
-                { text: '搭建v2rayA', link: '/生活记录/酷玩数码/树莓派/搭建v2rayA' },
-                { text: 'web控制台cockpit', link: '/生活记录/酷玩数码/树莓派/web控制台cockpit' },
-                { text: '使用rclone同步onedrive', link: '/生活记录/酷玩数码/树莓派/使用rclone同步onedrive' },
-                { text: 'yutool-cli高效工作套件', link: '/生活记录/酷玩数码/树莓派/yutool-cli高效工作套件' },
-                { text: 'OpenWrt系统安装及配置', link: '/生活记录/酷玩数码/树莓派/OpenWrt系统安装及配置' },
-              ]
-            },
-          ]
-        },
-        {
-          text: '阅读书单',
-          items: [
-            { text: '阅读计划', link: '/生活记录/阅读书单/阅读计划' },
-            {
-              text: '小说',
-              collapsed: true,
-              items: [
-                {
-                  text: '科幻',
-                  collapsed: true,
-                  items: [
-                    { text: '《三体全集》', link: '/生活记录/阅读书单/小说/科幻/三体全集' },
-                  ]
-                },
-                {
-                  text: '推理悬疑',
-                  collapsed: true,
-                  items: [
-                    {
-                      text: '阿加莎克里斯蒂',
-                      collapsed: true,
-                      items: [
-                        {
-                          text: '波洛侦探系列',
-                          collapsed: true,
-                          items: [
-                            { text: '《ABC谋杀案》', link: '/生活记录/阅读书单/小说/推理悬疑/阿加莎克里斯蒂/波洛侦探系列/ABC谋杀案' }
-                          ]
-                        },
-                        {
-                          text: '业余侦探系列',
-                          collapsed: true,
-                          items: [
-                            { text: '《无人生还》', link: '/生活记录/阅读书单/小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/无人生还' },
-                            { text: '《悬崖上的谋杀》', link: '/生活记录/阅读书单/小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/悬崖上的谋杀' },
-                            { text: '《奉命谋杀》', link: '/生活记录/阅读书单/小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/奉命谋杀' },
-                            { text: '《长夜》', link: '/生活记录/阅读书单/小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/长夜' },
-                          ]
-                        },
-                      ]
-                    },
-                    {
-                      text: '东野圭吾',
-                      collapsed: true,
-                      items: []
-                    }
-                  ]
-                },
-              ]
-            },
-          ]
-        }
-      ],
-      '/站点收录': [
+            ]
+          },
+          {
+            text: 'yutool-metadata元数据',
+            base: '/个人项目/yutool-metadata元数据/',
+            items: [
+              { text: '元数据自定义对象管理设计', link: '元数据自定义对象管理设计' },
+            ]
+          },
+          {
+            text: 'yutool-biz业务组件',
+            base: '/个人项目/yutool-biz业务组件/',
+            items: [
+              { text: 'yutool-biz 整体设计', link: 'yutool-biz 整体设计' },
+              { text: 'yutool-api API接口', link: 'yutool-api API接口' },
+              { text: 'yutool-auth 认证授权', link: 'yutool-auth 认证授权' },
+              { text: 'yutool-user 用户', link: 'yutool-user 用户' },
+              { text: 'yutool-org 组织架构', link: 'yutool-org 组织架构' },
+              { text: 'yutool-address 地址', link: 'yutool-address 地址' },
+              { text: 'yutool-dict 数据字典', link: 'yutool-dict 数据字典' },
+              { text: 'yutool-notify 通知消息', link: 'yutool-notify 通知消息' },
+              { text: 'yutool-exchange 数据中转', link: 'yutool-exchange 数据中转' },
+              { text: 'admin-ui 管理界面', link: 'admin-ui 管理界面' },
+            ]
+          },
+          {
+            text: 'yupan网盘',
+            base: '/个人项目/yupan网盘/',
+            items: [
+              { text: 'yupan架构', link: 'yupan架构' },
+              { text: '商城页面', link: '商城页面' },
+              { text: 'shop商城', link: 'shop商城' },
+              { text: 'vip会员', link: 'vip会员' },
+            ]
+          },
+        ]
+      },
+      '/生活记录/': {
+        base: '/生活记录/',
+        items: [
+          {
+            text: '山水游记',
+            base: '/生活记录/山水游记/',
+            items: [
+              {
+                text: '中国 China',
+                base: '/生活记录/山水游记/中国 China/',
+                collapsed: true,
+                items: [
+                  {
+                    text: '广东',
+                    base: '/生活记录/山水游记/中国 China/广东/',
+                    collapsed: true,
+                    items: [
+                      {
+                        text: '深圳',
+                        base: '/生活记录/山水游记/中国 China/广东/深圳/',
+                        collapsed: true,
+                        items: [
+                          { text: '深圳十峰', link: '深圳十峰' }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                text: '泰国 Thailand',
+                base: '/生活记录/山水游记/泰国 Thailand/',
+                collapsed: true,
+                items: []
+              }
+            ]
+          },
+          {
+            text: '酷玩数码',
+            base: '/生活记录/酷玩数码/',
+            items: [
+              {
+                text: '极空间',
+                base: '/生活记录/酷玩数码/极空间/',
+                collapsed: true,
+                items: [
+                  { text: '极空间Docker使用攻略', link: '极空间Docker使用攻略' },
+                  { text: '多个路由器组网实践', link: '多个路由器组网实践' },
+                ]
+              },
+              {
+                text: '树莓派',
+                base: '/生活记录/酷玩数码/树莓派/',
+                collapsed: true,
+                items: [
+                  { text: '树莓派系统安装及配置', link: '树莓派系统安装及配置' },
+                  { text: '运行情况监控', link: '运行情况监控' },
+                  { text: '基于Aria2的下载机', link: '基于Aria2的下载机' },
+                  { text: '搭建v2rayA', link: '搭建v2rayA' },
+                  { text: 'web控制台cockpit', link: 'web控制台cockpit' },
+                  { text: '使用rclone同步onedrive', link: '使用rclone同步onedrive' },
+                  { text: 'yutool-cli高效工作套件', link: 'yutool-cli高效工作套件' },
+                  { text: 'OpenWrt系统安装及配置', link: 'OpenWrt系统安装及配置' },
+                ]
+              },
+            ]
+          },
+          {
+            text: '阅读书单',
+            base: '/生活记录/阅读书单/',
+            items: [
+              { text: '阅读计划', link: '阅读计划' },
+              {
+                text: '小说',
+                collapsed: true,
+                items: [
+                  {
+                    text: '科幻',
+                    collapsed: true,
+                    items: [
+                      { text: '《三体全集》', link: '小说/科幻/三体全集' },
+                    ]
+                  },
+                  {
+                    text: '推理悬疑',
+                    collapsed: true,
+                    items: [
+                      {
+                        text: '阿加莎克里斯蒂',
+                        collapsed: true,
+                        items: [
+                          {
+                            text: '波洛侦探系列',
+                            collapsed: true,
+                            items: [
+                              { text: '《ABC谋杀案》', link: '小说/推理悬疑/阿加莎克里斯蒂/波洛侦探系列/ABC谋杀案' }
+                            ]
+                          },
+                          {
+                            text: '业余侦探系列',
+                            collapsed: true,
+                            items: [
+                              { text: '《无人生还》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/无人生还' },
+                              { text: '《悬崖上的谋杀》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/悬崖上的谋杀' },
+                              { text: '《奉命谋杀》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/奉命谋杀' },
+                              { text: '《长夜》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/长夜' },
+                            ]
+                          },
+                        ]
+                      },
+                      {
+                        text: '东野圭吾',
+                        collapsed: true,
+                        items: []
+                      }
+                    ]
+                  },
+                ]
+              },
+            ]
+          }
+        ]
+      },
+      '/站点收录/': [
         { text: '站点收录', link: '/站点收录/' },
       ]
     },
