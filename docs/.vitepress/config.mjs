@@ -531,32 +531,20 @@ export default defineConfig({
             items: [
               {
                 text: '中国 China',
-                base: '/生活记录/山水游记/中国 China/',
+                base: '/生活记录/山水游记/中国/',
                 collapsed: true,
                 items: [
-                  {
-                    text: '广东',
-                    base: '/生活记录/山水游记/中国 China/广东/',
-                    collapsed: true,
-                    items: [
-                      {
-                        text: '深圳',
-                        base: '/生活记录/山水游记/中国 China/广东/深圳/',
-                        collapsed: true,
-                        items: [
-                          { text: '深圳十峰', link: '深圳十峰' }
-                        ]
-                      }
-                    ]
-                  }
+                  { text: '深圳十峰', link: '深圳十峰' },
                 ]
               },
               {
                 text: '泰国 Thailand',
-                base: '/生活记录/山水游记/泰国 Thailand/',
+                base: '/生活记录/山水游记/泰国/',
                 collapsed: true,
-                items: []
-              }
+                items: [
+                  { text: '普吉岛', link: '普吉岛' },
+                ]
+              },
             ]
           },
           {
