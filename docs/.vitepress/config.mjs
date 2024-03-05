@@ -594,53 +594,6 @@ export default defineConfig({
             base: '/生活记录/阅读书单/',
             items: [
               { text: '阅读计划', link: '阅读计划' },
-              {
-                text: '小说',
-                collapsed: true,
-                items: [
-                  {
-                    text: '科幻',
-                    collapsed: true,
-                    items: [
-                      { text: '《三体全集》', link: '小说/科幻/三体全集' },
-                    ]
-                  },
-                  {
-                    text: '推理悬疑',
-                    collapsed: true,
-                    items: [
-                      {
-                        text: '阿加莎克里斯蒂',
-                        collapsed: true,
-                        items: [
-                          {
-                            text: '波洛侦探系列',
-                            collapsed: true,
-                            items: [
-                              { text: '《ABC谋杀案》', link: '小说/推理悬疑/阿加莎克里斯蒂/波洛侦探系列/ABC谋杀案' }
-                            ]
-                          },
-                          {
-                            text: '业余侦探系列',
-                            collapsed: true,
-                            items: [
-                              { text: '《无人生还》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/无人生还' },
-                              { text: '《悬崖上的谋杀》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/悬崖上的谋杀' },
-                              { text: '《奉命谋杀》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/奉命谋杀' },
-                              { text: '《长夜》', link: '小说/推理悬疑/阿加莎克里斯蒂/业余侦探系列/长夜' },
-                            ]
-                          },
-                        ]
-                      },
-                      {
-                        text: '东野圭吾',
-                        collapsed: true,
-                        items: []
-                      }
-                    ]
-                  },
-                ]
-              },
             ]
           }
         ]

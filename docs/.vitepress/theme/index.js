@@ -17,7 +17,7 @@ export default {
     // 初始化Valine
     const initValine = () => {
       const path = location.origin + location.pathname
-      const vistiorsEle = document.querySelector('leancloud-visitors')
+      const vistiorsEle = document.querySelector('.leancloud-visitors')
       if (vistiorsEle) {
         vistiorsEle.id = path
       }

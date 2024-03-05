@@ -8,6 +8,6 @@
 
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import ValineComment from './ValineComment.vue'
+import ValineComment from './component/ValineComment.vue'
 const { Layout } = DefaultTheme
 </script>
