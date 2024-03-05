@@ -17,7 +17,10 @@ export default {
     // 初始化Valine
     const initValine = () => {
       const path = location.origin + location.pathname
-      document.getElementsByClassName('leancloud-visitors')[0].id = path
+      const vistiorsEle = document.querySelector('leancloud-visitors')
+      if (vistiorsEle) {
+        vistiorsEle.id = path
+      }
       new Valine({
         el: '#vcomments',
         appId: '1bm9HBoZJKiYc9SaRKBlDfJy-gzGzoHsz',
