@@ -1,7 +1,9 @@
 # yutool-cli高效工作套件
 
 ## 部署应用
-将构建好的`yutool-cli-v2.1.0.jar`、sqlite数据库文件`yutool-cli.db`和启动脚本`start.sh`拷贝到`~/app/yutool-cli/`目录下。<br />执行`start.sh`脚本启动应用：
+将构建好的`yutool-cli-v2.1.0.jar`、sqlite数据库文件`yutool-cli.db`和启动脚本`start.sh`拷贝到`~/app/yutool-cli/`目录下。
+
+执行`start.sh`脚本启动应用：
 ```bash
 sudo bash start.sh
 ```
@@ -23,7 +25,11 @@ server {
     }
 }
 ```
-使新增的 nginx 配置生效：`sudo nginx -s reload`。<br />编辑客户端的hosts文件，将`yutool-cli.pi.com`域名解析到树莓派的ip。<br />在浏览器访问`http://yutool-cli.pi.com/`可进入yutool-cli的朱页面。
+使新增的 nginx 配置生效：`sudo nginx -s reload`。
+
+编辑客户端的hosts文件，将`yutool-cli.pi.com`域名解析到树莓派的ip。
+
+在浏览器访问`http://yutool-cli.pi.com/`可进入yutool-cli的朱页面。
 ## 开机自启
 编辑`sudo nano /etc/systemd/system/yutool-cli.service`并写入以下内容：
 ```nginx

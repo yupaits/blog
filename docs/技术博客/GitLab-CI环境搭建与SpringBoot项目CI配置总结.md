@@ -14,10 +14,16 @@ docker run -d --name gitlab-runner --restart always \
 ### 注册GitLab Runner
 > 参考[Registering Runners](https://docs.gitlab.com/runner/register/index.html#gnu-linux)
 
-使用 `docker exec -it gitlab-runner /bin/bash` 命令进入 gitlab-runner 容器命令行环境。<br />执行 `gitlab-runner register` 命令开始注册一个 runner。<br />注册时只有输入共享Runner的注册令牌（token）才能注册为共享Runner。关于Runner executor的介绍可以查看 [Executors](https://docs.gitlab.com/runner/executors/README.html)。Runner executor选择Docker时会要求填写要使用的默认docker镜像。
+使用 `docker exec -it gitlab-runner /bin/bash` 命令进入 gitlab-runner 容器命令行环境。
+
+执行 `gitlab-runner register` 命令开始注册一个 runner。
+
+注册时只有输入共享Runner的注册令牌（token）才能注册为共享Runner。关于Runner executor的介绍可以查看 [Executors](https://docs.gitlab.com/runner/executors/README.html)。Runner executor选择Docker时会要求填写要使用的默认docker镜像。
 ## SpringBoot项目的CI配置
 ### 安全变量
-GitLab CI/CD的安全变量有两种，群组安全变量和项目安全变量，群组安全变量可作用于当前群组下所有项目以及子群组项目，递归继承；项目安全变量只作用当前项目。<br />实际项目配置的群组变量有：CI_REGISTRY（本地Docker Registry的地址），项目变量有：CI_REGISTRY_IMAGE（项目构建的docker镜像名称）
+GitLab CI/CD的安全变量有两种，群组安全变量和项目安全变量，群组安全变量可作用于当前群组下所有项目以及子群组项目，递归继承；项目安全变量只作用当前项目。
+
+实际项目配置的群组变量有：CI_REGISTRY（本地Docker Registry的地址），项目变量有：CI_REGISTRY_IMAGE（项目构建的docker镜像名称）
 ### Dockerfile
 ```dockerfile
 FROM java:8-jre
@@ -31,7 +37,9 @@ EXPOSE 10030
 ENTRYPOINT ["java", "-Djava.security.edg=file:/dev/./urandom", "-Duser.timezone=Asia/Shanghai", "-Xmx128m", "-Xms64m", "-jar", "/app.jar"]
 ```
 ### .gitlab-ci.yml
-.gitlab-ci.yml文件可以使用的变量除了手动配置的安全变量外，默认还可以使用预定义变量（详情见[GitLab CI/CD Variables](https://docs.gitlab.com/ee/ci/variables/)）。<br />示例：
+.gitlab-ci.yml文件可以使用的变量除了手动配置的安全变量外，默认还可以使用预定义变量（详情见[GitLab CI/CD Variables](https://docs.gitlab.com/ee/ci/variables/)）。
+
+示例：
 ```yaml
 image: docker:latest
 
@@ -76,7 +84,9 @@ build:
     - master
 ```
 ## Runner容器的配置
-将maven构建runner容器使用的maven仓库使用数据卷方式进行共享，解决容器每次构建时都要重新下载依赖的问题。具体方法为使用 `docker exec -it gitlab-runner /bin/bash` 进入gitlab-runner容器，编辑 `/etc/gitlab-runner/config.toml` 文件，在maven构建runner下的volumes加上 `/root/.m2` 本地仓库的数据卷映射关系。<br />docker构建runner的privileged设置为true，以root用户身份进入容器进行构建任务，避免了由于权限不足无法访问/var/run/docker.sock的问题。
+将maven构建runner容器使用的maven仓库使用数据卷方式进行共享，解决容器每次构建时都要重新下载依赖的问题。具体方法为使用 `docker exec -it gitlab-runner /bin/bash` 进入gitlab-runner容器，编辑 `/etc/gitlab-runner/config.toml` 文件，在maven构建runner下的volumes加上 `/root/.m2` 本地仓库的数据卷映射关系。
+
+docker构建runner的privileged设置为true，以root用户身份进入容器进行构建任务，避免了由于权限不足无法访问/var/run/docker.sock的问题。
 ```nginx
 concurrent = 6
 check_interval = 0

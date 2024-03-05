@@ -1,6 +1,8 @@
 # Linux常用指令
 
-引用自：[【Linux】Linux中常用操作命令](http://www.cnblogs.com/laov/p/3541414.html#Linux)<br />本文列举了一些Linux下比较常用的操作命令，方便日常查看和使用。
+引用自：[【Linux】Linux中常用操作命令](http://www.cnblogs.com/laov/p/3541414.html#Linux)
+
+本文列举了一些Linux下比较常用的操作命令，方便日常查看和使用。
 ## 常用指令
 ```bash
 ls        显示文件或目录  
@@ -76,20 +78,26 @@ halt        关机
 reboot      重启
 ```
 ## Linux管道
-将一个命令的标准输出作为另一个命令的标准输入。也就是把几个命令组合起来使用，后一个命令除以前一个命令的结果。<br />例：
+将一个命令的标准输出作为另一个命令的标准输入。也就是把几个命令组合起来使用，后一个命令除以前一个命令的结果。
+
+例：
 ```bash
 grep -r "close" /home/* | more       在home目录下所有文件中查找，包括close的文件，并分页输出。
 ```
 ## Linux软件包管理
 
--  **dpkg** (Debian Package)管理工具，软件包名以.deb后缀。这种方法适合系统不能联网的情况下。<br />比如安装tree命令的安装包，先将tree.deb传到Linux系统中。再使用如下命令安装。 
+-  **dpkg** (Debian Package)管理工具，软件包名以.deb后缀。这种方法适合系统不能联网的情况下。
+
+比如安装tree命令的安装包，先将tree.deb传到Linux系统中。再使用如下命令安装。 
 ```
 sudo dpkg -i tree_1.5.3-l_i386.deb  安装软件
 sudo dpkg -r tree                   卸载软件
 ```
 注：将tree.deb传到Linux系统中，有多种方式。VMwareTool，使用挂载方式；使用winSCP工具等； 
 
--  **APT**（Advanced Packaging Tool）高级软件工具。这种方法适合系统能够连接互联网的情况。<br />依然以tree为例 
+-  **APT**（Advanced Packaging Tool）高级软件工具。这种方法适合系统能够连接互联网的情况。
+
+依然以tree为例 
 ```bash
 sudo apt-get install tree           安装tree
 sudo apt-get remove tree            卸载tree
@@ -97,12 +105,16 @@ sudo apt-get update                 更新软件
 sudo apt-get upgrade
 ```
 
--  将.rpm文件转为.deb文件<br />.rpm为RedHat使用的软件格式。在Ubuntu下不能直接使用，所以需要转换一下。 
+-  将.rpm文件转为.deb文件
+
+.rpm为RedHat使用的软件格式。在Ubuntu下不能直接使用，所以需要转换一下。 
 ```bash
 sudo alien abc.rpm
 ```
 ## vim使用
-vim三种模式：命令模式、插入模式、编辑模式。使用ESC或i或：来切换模式。<br />命令模式下：
+vim三种模式：命令模式、插入模式、编辑模式。使用ESC或i或：来切换模式。
+
+命令模式下：
 ```bash
 :q                      退出
 :q!                     强制退出
@@ -138,7 +150,9 @@ su - user       切换用户，加载配置文件/etc/profile ，加载bash_prof
 ```bash
 sudo chown [-R] owner[:group] {File|Directory}
 ```
-例如：还以jdk-7u21-linux-i586.tar.gz为例，属于用户hadoop，组hadoop<br />要想切换此文件所属的用户及组。可以使用命令。
+例如：还以jdk-7u21-linux-i586.tar.gz为例，属于用户hadoop，组hadoop
+
+要想切换此文件所属的用户及组。可以使用命令。
 ```bash
 sudo chown root:root jdk-7u21-linux-i586.tar.gz
 ```
@@ -149,7 +163,21 @@ R   读       数值表示为4
 W   写       数值表示为2
 X   可执行     数值表示为1
 ```
-![](http://images.cnitblog.com/blog/352072/201402/091549405142313.png#id=uzvK6&originHeight=167&originWidth=652&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=)<br />如图所示，jdk-7u21-linux-i586.tar.gz文件的权限为-rw-rw-r--<br />-rw-rw-r--一共十个字符，分成四段。<br />第一个字符“-”表示普通文件；这个位置还可能会出现“l”链接；“d”表示目录<br />第二三四个字符“rw-”表示当前所属用户的权限。   所以用数值表示为4+2=6<br />第五六七个字符“rw-”表示当前所属组的权限。      所以用数值表示为4+2=6<br />第八九十个字符“r--”表示其他用户权限。              所以用数值表示为2<br />所以操作此文件的权限用数值表示为662
+![](http://images.cnitblog.com/blog/352072/201402/091549405142313.png#id=uzvK6&originHeight=167&originWidth=652&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=)
+
+如图所示，jdk-7u21-linux-i586.tar.gz文件的权限为-rw-rw-r--
+
+-rw-rw-r--一共十个字符，分成四段。
+
+第一个字符“-”表示普通文件；这个位置还可能会出现“l”链接；“d”表示目录
+
+第二三四个字符“rw-”表示当前所属用户的权限。   所以用数值表示为4+2=6
+
+第五六七个字符“rw-”表示当前所属组的权限。      所以用数值表示为4+2=6
+
+第八九十个字符“r--”表示其他用户权限。              所以用数值表示为2
+
+所以操作此文件的权限用数值表示为662
 
 - 更改权限
 ```

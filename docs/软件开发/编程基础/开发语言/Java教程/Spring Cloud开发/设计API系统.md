@@ -1,6 +1,12 @@
 # 设计API系统
 
-有了交易引擎和定序系统，我们还需要一个API系统，用于接收所有交易员的订单请求。<br />相比事件驱动的交易引擎，API系统就比较简单，因为它就是一个标准的Web应用。<br />在编写API之前，我们需要对请求进行认证，即识别出是哪个用户发出的请求。用户认证放在Filter中是最合适的。认证方式可以是简单粗暴的用户名+口令，也可以是Token，也可以是API Key+API Secret等模式。<br />我们先实现一个最简单的用户名+口令的认证方式。需要注意的是，API和Web页面不同，Web页面可以给用户一个登录页，登录成功后设置Session或Cookie，后续请求检查的是Session或Cookie。API不能使用Session，因为Session很难做无状态集群，API也不建议使用Cookie，因为API域名很可能与Web UI的域名不一致，拿不到Cookie。要在API中使用用户名+口令的认证方式，可以用标准的HTTP头[Authorization](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Authorization)的Basic模式：
+有了交易引擎和定序系统，我们还需要一个API系统，用于接收所有交易员的订单请求。
+
+相比事件驱动的交易引擎，API系统就比较简单，因为它就是一个标准的Web应用。
+
+在编写API之前，我们需要对请求进行认证，即识别出是哪个用户发出的请求。用户认证放在Filter中是最合适的。认证方式可以是简单粗暴的用户名+口令，也可以是Token，也可以是API Key+API Secret等模式。
+
+我们先实现一个最简单的用户名+口令的认证方式。需要注意的是，API和Web页面不同，Web页面可以给用户一个登录页，登录成功后设置Session或Cookie，后续请求检查的是Session或Cookie。API不能使用Session，因为Session很难做无状态集群，API也不建议使用Cookie，因为API域名很可能与Web UI的域名不一致，拿不到Cookie。要在API中使用用户名+口令的认证方式，可以用标准的HTTP头[Authorization](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Authorization)的Basic模式：
 ```
 Authorization: Basic 用户名:口令
 ```
@@ -42,7 +48,9 @@ public class ApiFilter  {
     }
 }
 ```
-Basic模式很简单，需要注意的是用户名:口令使用:分隔，然后整个串用Base64编码，因此，读取的时候需要先用Base64解码。<br />虽然Basic模式并不安全，但是有了一种基本的认证模式，我们就可以把API-定序-交易串起来了。后续我们再继续添加其他认证模式。
+Basic模式很简单，需要注意的是用户名:口令使用:分隔，然后整个串用Base64编码，因此，读取的时候需要先用Base64解码。
+
+虽然Basic模式并不安全，但是有了一种基本的认证模式，我们就可以把API-定序-交易串起来了。后续我们再继续添加其他认证模式。
 ### 编写API Controller
 对于认证用户的操作，例如，查询资产余额，可通过UserContext获取当前用户，然后通过交易引擎查询并返回用户资产余额：
 ```java
@@ -53,7 +61,9 @@ public String getAssets() throws IOException {
     return tradingEngineApiProxyService.get("/internal/" + userId + "/assets");
 }
 ```
-因为交易引擎返回的结果就是JSON字符串，没必要先反序列化再序列化，可以以String的方式直接返回给客户端，需要标注@ResponseBody表示不要对String再进行序列化处理。<br />对于无需认证的操作，例如，查询公开市场的订单簿，可以直接返回Redis缓存结果：
+因为交易引擎返回的结果就是JSON字符串，没必要先反序列化再序列化，可以以String的方式直接返回给客户端，需要标注@ResponseBody表示不要对String再进行序列化处理。
+
+对于无需认证的操作，例如，查询公开市场的订单簿，可以直接返回Redis缓存结果：
 ```java
 @ResponseBody
 @GetMapping(value = "/orderBook", produces = "application/json")
@@ -151,7 +161,9 @@ public class TradingApiController {
 | 100 | c47snXI | 7b6da12c... |
 | 101 | djEqC2I | f7b68248... |
 
-并不是每个用户都必须有口令，没有口令的用户仅仅表示该用户不能通过口令来认证身份，但完全可以通过其他方式认证。<br />使用API Key认证同理，通过添加一个api_auths表，存储API Key、API Secret并关联至某个用户ID：
+并不是每个用户都必须有口令，没有口令的用户仅仅表示该用户不能通过口令来认证身份，但完全可以通过其他方式认证。
+
+使用API Key认证同理，通过添加一个api_auths表，存储API Key、API Secret并关联至某个用户ID：
 
 | userId | apiKey | apiSecret |
 | --- | --- | --- |
@@ -159,13 +171,17 @@ public class TradingApiController {
 | 102 | 13a867e8da13c7f6 | 92e41573e833ae13 |
 | 102 | 341a8e60baf5b824 | 302c9e195826267f |
 
-用户使用API Key认证时，提供API Key，以及用API Secret计算的Hmac哈希，服务器验证Hmac哈希后，就可以确认用户身份，因为其他人不知道该用户的API Secret，无法计算出正确的Hmac。<br />发送API Key认证时，可以定义如下的HTTP头：
+用户使用API Key认证时，提供API Key，以及用API Secret计算的Hmac哈希，服务器验证Hmac哈希后，就可以确认用户身份，因为其他人不知道该用户的API Secret，无法计算出正确的Hmac。
+
+发送API Key认证时，可以定义如下的HTTP头：
 ```
 API-Key: 5b503947f4f5d34a
 API-Timestamp: 20220726T092137Z <- 防止重放攻击的时间戳
 API-Signature: d7a567b6cab85bcd
 ```
-计算签名的原始输入可以包括HTTP Method、Path、Timestamp、Body等关键信息，具体格式可参考[AWS API签名方式](https://docs.aws.amazon.com/zh_cn/general/latest/gr/signature-version-4.html)。<br />一个用户可以关联多个API Key认证，还可以给每个API Key附加特定权限，例如只读权限，这样用API Key认证就更加安全。
+计算签名的原始输入可以包括HTTP Method、Path、Timestamp、Body等关键信息，具体格式可参考[AWS API签名方式](https://docs.aws.amazon.com/zh_cn/general/latest/gr/signature-version-4.html)。
+
+一个用户可以关联多个API Key认证，还可以给每个API Key附加特定权限，例如只读权限，这样用API Key认证就更加安全。
 ### 内部系统调用API如何实现用户认证
 很多时候，内部系统也需要调用API，并且需要以特定用户的身份调用API。让内部系统去读用户的口令或者API Key都是不合理的，更好的方式是使用一次性Token，还是利用Authorization头的Bearer模式：
 ```

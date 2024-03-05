@@ -1,6 +1,10 @@
 # 使用hexo快速搭建个人博客
 
-摘要：本文主要介绍使用 **hexo博客框架** + **GitHub托管代码** + **GitHub Pages** 搭建个人博客网站。<br />由于各种原因，博主一直都有搭建个人博客的想法。在使用hexo之前，博主曾尝试过使用SpringBoot + JQuery编写了一个包含博客功能的[网站](https://github.com/YupaiTS/footprints)，由于这种运行于Java环境的项目正式部署到线上比较麻烦，所以就舍弃了。<br />偶然间发现了hexo搭配GitHub Pages可以快速搭建一个博客网站，心中甚是欢喜，立马就动手搭建了起来。在这里分享下使用这种方式搭建博客网站的过程。
+摘要：本文主要介绍使用 **hexo博客框架** + **GitHub托管代码** + **GitHub Pages** 搭建个人博客网站。
+
+由于各种原因，博主一直都有搭建个人博客的想法。在使用hexo之前，博主曾尝试过使用SpringBoot + JQuery编写了一个包含博客功能的[网站](https://github.com/YupaiTS/footprints)，由于这种运行于Java环境的项目正式部署到线上比较麻烦，所以就舍弃了。
+
+偶然间发现了hexo搭配GitHub Pages可以快速搭建一个博客网站，心中甚是欢喜，立马就动手搭建了起来。在这里分享下使用这种方式搭建博客网站的过程。
 ## 环境搭建
 ### 安装git
 进入[git官网](https://git-scm.com/)，下载安装git工具即可。
@@ -161,12 +165,18 @@ cd ~/.ssh
 ssh-keygen -t rsa -C "Email地址"
 ```
 之后会看到如下信息：
-> Generating public/private rsa key pair.<br />Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):<回车就好>
+> Generating public/private rsa key pair.
+
+Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):<回车就好>
 
 回车之后会要求输入密码。
-> Enter passphrase (empty for no passphrase):<输入加密串><br />Enter same passphrase again:<再次输入加密串>
+> Enter passphrase (empty for no passphrase):<输入加密串>
 
-如果输入的密码为空，在提交代码时系统不会弹出要求输入密码的弹框。<br />进入[GitHub](https://github.com/)， 点击头像进入`settings SSH and GPG keys New SSH key`选项，将公钥文件`~/.ssh/id_rsa.pub`的内容复制到Key里，点击`Add SSH key`按钮即可向GitHub添加SSH key。
+Enter same passphrase again:<再次输入加密串>
+
+如果输入的密码为空，在提交代码时系统不会弹出要求输入密码的弹框。
+
+进入[GitHub](https://github.com/)， 点击头像进入`settings SSH and GPG keys New SSH key`选项，将公钥文件`~/.ssh/id_rsa.pub`的内容复制到Key里，点击`Add SSH key`按钮即可向GitHub添加SSH key。
 ## 部署hexo到GitHub Pages
 ### 配置代码仓库
 打开 **_config.yml**文件，配置代码仓库。

@@ -15,7 +15,9 @@ sudo bash install-release.sh
 v2rayA的代码仓库地址是：[https://github.com/v2rayA/v2rayA](https://github.com/v2rayA/v2rayA)，从项目文档里可以找到[安装步骤](https://v2raya.org/docs/prologue/installation/debian/#%E6%96%B9%E6%B3%95%E4%B8%80%E9%80%9A%E8%BF%87%E8%BD%AF%E4%BB%B6%E6%BA%90%E5%AE%89%E8%A3%85)，安装完成后还需要[设置为开机启动](https://v2raya.org/docs/prologue/installation/debian/#%E5%90%AF%E5%8A%A8-v2raya--%E8%AE%BE%E7%BD%AE-v2raya-%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8)。
 ## 配置
 ### Nginx转发
-安装nginx。<br />创建并编辑 nginx 配置文件`/etc/nginx/sites-enabled/v2rayA`，输入以下内容并保存：
+安装nginx。
+
+创建并编辑 nginx 配置文件`/etc/nginx/sites-enabled/v2rayA`，输入以下内容并保存：
 ```nginx
 server {
     listen 80;
@@ -35,11 +37,19 @@ server {
     }
 }
 ```
-使新增的 nginx 配置生效：`sudo nginx -s reload`。<br />设置 nginx 开机启动：`sudo systemctl enable nginx`。
+使新增的 nginx 配置生效：`sudo nginx -s reload`。
+
+设置 nginx 开机启动：`sudo systemctl enable nginx`。
 ### 节点配置
-点击创建或者导入节点配置，支持多种协议。<br />![image.png](./搭建v2rayA/1667388175619-d161f292-f8a0-4046-8dd5-c056953aee70.png)<br />![image.png](./搭建v2rayA/1667388160959-4ce5ceb2-07c3-4a0c-a133-6e0773999d32.png)
+点击创建或者导入节点配置，支持多种协议。
+
+![image.png](./搭建v2rayA/1667388175619-d161f292-f8a0-4046-8dd5-c056953aee70.png)
+
+![image.png](./搭建v2rayA/1667388160959-4ce5ceb2-07c3-4a0c-a133-6e0773999d32.png)
 ### 启用节点
-完成配置后，点击`PING`和`HTTP`对节点进行测速。点击左上角`就绪`按钮启动代理服务。代理服务正常启动后，即可访问Google或者GitHub等网站。<br />![image.png](./搭建v2rayA/1667388251739-f17e1ab8-7b8d-422b-8c82-bfb133f1f4f0.png)
+完成配置后，点击`PING`和`HTTP`对节点进行测速。点击左上角`就绪`按钮启动代理服务。代理服务正常启动后，即可访问Google或者GitHub等网站。
+
+![image.png](./搭建v2rayA/1667388251739-f17e1ab8-7b8d-422b-8c82-bfb133f1f4f0.png)
 ## 常见问题
 
 1. 在进入v2rayA页面时，如果显示“检测到 geosite.dat, geoip.dat 文件或 v2ray-core 可能未正确安装，请检查”，说明v2rayA与v2ray版本不适配，此时需要将v2ray降级到v4.45.2版本。降级命令如下：

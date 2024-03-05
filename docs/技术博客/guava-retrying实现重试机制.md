@@ -4,11 +4,17 @@
 
 我们的后端业务系统可能会出现接口调用失败、网络拥塞超时、任务执行失败、系统错误等异常情况，需要进行重试操作。但某些场景下我们对重试有特殊要求，比如延迟重试、降频重试等，此时自己编写重试代码会很繁琐，在 Java 中，可以使用 guava-retrying 帮我们实现灵活的重试机制。
 ## guava-retrying 简介
-guava-retrying 是一个线程安全的 Java 重试类库，提供了一种通用方法去处理任意需要重试的代码，可以方便灵活地控制重试次数、重试时机、重试频率、停止时机等，并具有异常处理功能。<br />GitHub地址：https://github.com/rholder/guava-retrying 
+guava-retrying 是一个线程安全的 Java 重试类库，提供了一种通用方法去处理任意需要重试的代码，可以方便灵活地控制重试次数、重试时机、重试频率、停止时机等，并具有异常处理功能。
+
+GitHub地址：https://github.com/rholder/guava-retrying 
 > 有意思的是，这个项目最初源于 Jean-Baptiste Nizet 在 guava 仓库下的评论。
 
 ## guava-retrying 入门
-下面通过一个场景帮助大家快速入门 guava-retrying，再具体讲解其更多用法。<br />作者在 GitHub 提供了入门代码，先通过 maven 或 gradle 引入：<br />maven引入代码: 
+下面通过一个场景帮助大家快速入门 guava-retrying，再具体讲解其更多用法。
+
+作者在 GitHub 提供了入门代码，先通过 maven 或 gradle 引入：
+
+maven引入代码: 
 ```xml
 <dependency>
   <groupId>com.github.rholder</groupId>
@@ -20,7 +26,9 @@ gradle引入代码:
 ```groovy
 compile "com.github.rholder:guava-retrying:2.0.0"
 ```
-假定我们需要调用一个qps限制很低的第三方接口，如果调用失败，需要依次在失败后的第10s、30s、60s进行降频重试。<br />如果不使用框架，实现逻辑大致如下： 
+假定我们需要调用一个qps限制很低的第三方接口，如果调用失败，需要依次在失败后的第10s、30s、60s进行降频重试。
+
+如果不使用框架，实现逻辑大致如下： 
 ```java
 // 调用接口
 boolean result;
@@ -34,7 +42,9 @@ while(!result && atomicInteger.get() < 4) {
     sleepNum += sleepNum * atomicInteger.get();
 }
 ```
-虽然看起来代码行数并不多，只需要自己定义计数器、计算休眠时间等，但是再考虑到异常处理、异步等情况，重试逻辑的代码占整体代码的比重太大了（真正的业务逻辑只有 thirdApi.invoke 对么？）。如果业务中多处需要重试，还要反复编写类似的代码，而这不应该是开发者关心的。 <br />guava-retrying 为我们封装了一套很好的通用重试方法，来试下用它实现上述逻辑： 
+虽然看起来代码行数并不多，只需要自己定义计数器、计算休眠时间等，但是再考虑到异常处理、异步等情况，重试逻辑的代码占整体代码的比重太大了（真正的业务逻辑只有 thirdApi.invoke 对么？）。如果业务中多处需要重试，还要反复编写类似的代码，而这不应该是开发者关心的。 
+
+guava-retrying 为我们封装了一套很好的通用重试方法，来试下用它实现上述逻辑： 
 ```java
 Callable<Boolean> callable = () -> {
     return thirdApi.invoke(); // 业务逻辑
@@ -72,7 +82,11 @@ try {
 2. 更直观，改动方便
 3. 可复用重试器至多个任务（代码段）
 ### RetryerBuilder 方法介绍
-RetryerBuilder 用于构造重试器，是整个 guava-retrying 库的核心，决定了重试的行为，下面详细介绍 RetryerBuilder 的方法。<br />![image.png](./guava-retrying实现重试机制/1669083898826-f172cdde-aadc-49a2-a637-31159a743400.png)<br />通过 newBuilder 方法获取 RetryerBuilder 实例，通过 build 方法构造 Retryer：
+RetryerBuilder 用于构造重试器，是整个 guava-retrying 库的核心，决定了重试的行为，下面详细介绍 RetryerBuilder 的方法。
+
+![image.png](./guava-retrying实现重试机制/1669083898826-f172cdde-aadc-49a2-a637-31159a743400.png)
+
+通过 newBuilder 方法获取 RetryerBuilder 实例，通过 build 方法构造 Retryer：
 ```java
 RetryerBuilder<V> newBuilder();
 Retryer<V> build();
@@ -198,7 +212,9 @@ RetryerBuilder<V> withAttemptTimeLimiter(@Nonnull AttemptTimeLimiter<V> attemptT
 - NoAttemptTimeLimit：不限制执行时间
 - FixedAttemptTimeLimit：限制执行时间为固定值
 ### 监听器
-可以通过 withRetryListener 方法为重试器注册监听器，每次重试结束后，会按注册顺序依次回调 Listener 的 onRetry 方法，可在其中获取到当前执行的信息，比如重试次数等。<br />示例代码如下：
+可以通过 withRetryListener 方法为重试器注册监听器，每次重试结束后，会按注册顺序依次回调 Listener 的 onRetry 方法，可在其中获取到当前执行的信息，比如重试次数等。
+
+示例代码如下：
 ```java
 import com.github.rholder.retry.Attempt;
 import com.github.rholder.retry.RetryListener;
@@ -228,7 +244,11 @@ public class MyRetryListener<T> implements RetryListener {
 }
 ```
 ### 看下原理
-顾名思义，guava-retrying 依赖 guava 库，如作者所说，源码中大量依赖 guava 的 Predicates（断言）来判断是否继续重试。<br />通过方法、对象名也可以看出，该库主要使用了**策略模式、构造器模式和观察者模式**（Listener），对调用方非常友好。<br />从哪儿开始执行任务就从哪儿开始看，直接打开 Retryer 类的 call 方法：
+顾名思义，guava-retrying 依赖 guava 库，如作者所说，源码中大量依赖 guava 的 Predicates（断言）来判断是否继续重试。
+
+通过方法、对象名也可以看出，该库主要使用了**策略模式、构造器模式和观察者模式**（Listener），对调用方非常友好。
+
+从哪儿开始执行任务就从哪儿开始看，直接打开 Retryer 类的 call 方法：
 ```java
 public V call(Callable<V> callable) throws ExecutionException, RetryException {
     long startTime = System.nanoTime(); // 1. 记录开始时间，用于后续的时间计算

@@ -5,7 +5,21 @@ Java 中的 instanceof 运算符用来在运行时指出对象是否是特定类
 ```java
 result = object instanceof class
 ```
-参数：<br />result - boolean 类型<br />object - 必选项，任意对象实例<br />class - 任意已定义的对象类<br />说明：<br />如果 object 是 class 的一个实例，则 instanceof 运算符返回 true，反之若 object 不是指定 class 的一个实例或 object 为 null，则返回 false。<br />例子：<br />以下示例展示了实现、继承关系的类实例使用 instanceof 运算符的结果。
+参数：
+
+result - boolean 类型
+
+object - 必选项，任意对象实例
+
+class - 任意已定义的对象类
+
+说明：
+
+如果 object 是 class 的一个实例，则 instanceof 运算符返回 true，反之若 object 不是指定 class 的一个实例或 object 为 null，则返回 false。
+
+例子：
+
+以下示例展示了实现、继承关系的类实例使用 instanceof 运算符的结果。
 ```java
 interface A {
     

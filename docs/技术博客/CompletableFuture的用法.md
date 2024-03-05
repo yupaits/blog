@@ -1,6 +1,14 @@
 # CompletableFuture的用法
 
-当我们异步执行一个任务时，一般使用线程池`Executor`去创建。如果不需要返回值，使用实现`Runnable`接口的任务；如果需要返回值，使用实现`Callable`接口的任务，调用`Executor`的`submit`方法，再使用`Future`获取返回值即可。如果多个线程存在依赖组合的化，则可以使用同步组件`CountDownLatch`、`CyclicBarrier`等。<br />`CompletableFuture`是jdk8的新特性，用于异步编程，`CompletableFuture`提供了一种观察者模式类似的机制，可以让任务执行完成后通知监听方任务的进度，成功或者失败。使用这种方式，主线程不会被阻塞，不需要一直等待子线程完成，从而大大提高程序的性能。<br />`CompletableFuture`实现了`CompletionStage`接口和`Future`接口。<br />`Future`表示异步计算结果。提供了检查计算是否完成、等待计算完成以及获取计算结果的方法。<br />`CompletionStage`接口定义了异步计算的某个阶段，它描述了在另一个`ComletionStage`完成时执行的操作或者是计算值。
+当我们异步执行一个任务时，一般使用线程池`Executor`去创建。如果不需要返回值，使用实现`Runnable`接口的任务；如果需要返回值，使用实现`Callable`接口的任务，调用`Executor`的`submit`方法，再使用`Future`获取返回值即可。如果多个线程存在依赖组合的化，则可以使用同步组件`CountDownLatch`、`CyclicBarrier`等。
+
+`CompletableFuture`是jdk8的新特性，用于异步编程，`CompletableFuture`提供了一种观察者模式类似的机制，可以让任务执行完成后通知监听方任务的进度，成功或者失败。使用这种方式，主线程不会被阻塞，不需要一直等待子线程完成，从而大大提高程序的性能。
+
+`CompletableFuture`实现了`CompletionStage`接口和`Future`接口。
+
+`Future`表示异步计算结果。提供了检查计算是否完成、等待计算完成以及获取计算结果的方法。
+
+`CompletionStage`接口定义了异步计算的某个阶段，它描述了在另一个`ComletionStage`完成时执行的操作或者是计算值。
 ## 使用场景
 `CompletableFuture`提供了包括创建异步任务、任务异步回调、多个任务组合处理等方法，来辅助实现异步任务的处理。
 ### 基本用法说明

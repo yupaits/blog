@@ -1,6 +1,12 @@
 # Todo-Tomato技术解读
 
-Todo-Tomato 是一款融合待办事项管理和番茄工作法，用于高效处理工作事务的工作利器，本文对 Todo-Tomato 使用的技术进行简要解读。<br />话不多说，先放上Todo-Tomato的界面截图。<br />![Todo-Tomato界面.png](./Todo-Tomato技术解读/1658762570277-e04dbaac-c53a-4da2-9669-f662e2ff6c76.png)<br />本文的技术解读基于[Todo-Tomato v1.0.0版本](https://gitee.com/yupaits/todo-tomato/tree/v1.0.0/)。
+Todo-Tomato 是一款融合待办事项管理和番茄工作法，用于高效处理工作事务的工作利器，本文对 Todo-Tomato 使用的技术进行简要解读。
+
+话不多说，先放上Todo-Tomato的界面截图。
+
+![Todo-Tomato界面.png](./Todo-Tomato技术解读/1658762570277-e04dbaac-c53a-4da2-9669-f662e2ff6c76.png)
+
+本文的技术解读基于[Todo-Tomato v1.0.0版本](https://gitee.com/yupaits/todo-tomato/tree/v1.0.0/)。
 ## 技术选型
 使用目前比较流行的前后端分离进行开发：
 
@@ -247,7 +253,9 @@ Vue.prototype.Api = Api
 ```
 ## 部署技术点
 ### 申请免费SSL证书用于站点HTTPS化
-[Let's Encrypt](https://letsencrypt.org/getting-started/) 提供了免费SSL证书的申请服务。推荐使用With Shell Access方式，使用命令行工具 [Certbot](https://certbot.eff.org/) 申请证书。<br />完成证书申请之后，使用 `certbot renew --dry-run` 测试更新证书，可以正常更新的话，添加如下的 **cron** 任务定期更新证书。
+[Let's Encrypt](https://letsencrypt.org/getting-started/) 提供了免费SSL证书的申请服务。推荐使用With Shell Access方式，使用命令行工具 [Certbot](https://certbot.eff.org/) 申请证书。
+
+完成证书申请之后，使用 `certbot renew --dry-run` 测试更新证书，可以正常更新的话，添加如下的 **cron** 任务定期更新证书。
 ```
 # 每天3:00更新证书
 0 3 * * * certbot renew >> ~/cron/cert.log --renew-hook "/usr/sbin/nginx -s reload"

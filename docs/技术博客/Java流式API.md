@@ -6,9 +6,17 @@ Java8中新增了Stream接口定义了支持顺序和并行操作元素序列操
 
 集合和流虽然有一些表面上的相似之处，但有不同的目标。 集合主要涉及对其元素的有效管理和访问。 相比之下，流不提供直接访问或操作其元素的方法，而是关注声明性地描述它们的源以及将在该源上聚合执行的计算操作。 但是，如果提供的流操作没有提供所需的功能，则可以使用`iterator()`和`spliterator()`操作来执行受控遍历。
 
-流管道，可以看作是对流源的查询。 除非源明确设计用于并发修改（例如`ConcurrentHashMap` ），否则在查询流源时修改流源可能会导致不可预测或错误的行为。<br />大多数流操作都接受描述用户指定行为的参数，例如上面示例中传递给mapToInt的 lambda 表达式`w -> w.getWeight() `。 为了保持正确的行为，这些行为参数：
+流管道，可以看作是对流源的查询。 除非源明确设计用于并发修改（例如`ConcurrentHashMap` ），否则在查询流源时修改流源可能会导致不可预测或错误的行为。
 
-必须是无干扰的（它们不修改流源）；<br />在大多数情况下必须是无状态的（它们的结果不应依赖于在流管道执行期间可能发生变化的任何状态）。<br />此类参数始终是函数式接口（例如`Function`实例，并且通常是 lambda 表达式或方法引用。 除非另有说明，否则这些参数必须为非 null 。<br />一个流应该只被操作一次（调用一个中间或终端流操作）。 例如，这排除了“分叉”流，其中相同的源提供两个或多个管道，或者同一流的多次遍历。 如果流实现检测到流正在被重用，它可能会抛出`IllegalStateException` 。 但是，由于某些流操作可能会返回其接收器而不是新的流对象，因此可能无法在所有情况下检测到重用。
+大多数流操作都接受描述用户指定行为的参数，例如上面示例中传递给mapToInt的 lambda 表达式`w -> w.getWeight() `。 为了保持正确的行为，这些行为参数：
+
+必须是无干扰的（它们不修改流源）；
+
+在大多数情况下必须是无状态的（它们的结果不应依赖于在流管道执行期间可能发生变化的任何状态）。
+
+此类参数始终是函数式接口（例如`Function`实例，并且通常是 lambda 表达式或方法引用。 除非另有说明，否则这些参数必须为非 null 。
+
+一个流应该只被操作一次（调用一个中间或终端流操作）。 例如，这排除了“分叉”流，其中相同的源提供两个或多个管道，或者同一流的多次遍历。 如果流实现检测到流正在被重用，它可能会抛出`IllegalStateException` 。 但是，由于某些流操作可能会返回其接收器而不是新的流对象，因此可能无法在所有情况下检测到重用。
 
 流具有`close()`方法并实现`AutoCloseable` ，但几乎所有流实例实际上都不需要在使用后关闭。 通常，只有源是 IO 通道的流（例如`Files.lines(Path, Charset)`返回的`Files.lines(Path, Charset)` ）才需要关闭。 大多数流由集合、数组或生成函数支持，不需要特殊的资源管理。 （如果流确实需要关闭，则可以在try -with-resources 语句中将其声明为资源。）
 
@@ -80,7 +88,9 @@ Stream words = lines.flatMap(line -> Stream.of(line.split(" +")));
 ### distinct
 
 - 方法定义：`Stream<T> distinct();`
-- 说明：返回由该流的不同元素（根据`Object.equals(Object)` ）组成的流。对于有序流，不同元素的选择是稳定的（对于重复元素，保留遇到顺序中最先出现的元素。）对于无序流，没有稳定性保证。<br />有状态
+- 说明：返回由该流的不同元素（根据`Object.equals(Object)` ）组成的流。对于有序流，不同元素的选择是稳定的（对于重复元素，保留遇到顺序中最先出现的元素。）对于无序流，没有稳定性保证。
+
+有状态
 - API注意事项：在并行管道中为distinct()保持稳定性相对昂贵（要求操作充当完全屏障，具有大量缓冲开销），并且通常不需要稳定性。 如果您的情况的语义允许，使用无序流源（例如`generate(Supplier)` ）或使用`unordered()`删除排序约束可能会显着提高并行管道中`distinct()`执行效率。 如果需要与遭遇顺序保持一致，并且您在并行管道中使用distinct()遇到性能或内存利用率低的问题，则切换到使用`sequential()`顺序执行可能会提高性能。
 ### sorted
 
@@ -165,7 +175,9 @@ for (T element : this stream)
     result = accumulator.apply(result, element);
 return result;
 ```
-但不限于顺序执行。<br />	identity值必须是累加器函数的标识。 这意味着对于所有t ， accumulator.apply(identity, t)等于t 。accumulator函数必须是关联函数。
+但不限于顺序执行。
+
+	identity值必须是累加器函数的标识。 这意味着对于所有t ， accumulator.apply(identity, t)等于t 。accumulator函数必须是关联函数。
 
 - 参数：identity - 累积函数的身份值
 
@@ -199,7 +211,9 @@ for (T element : this stream) {
 }
 return foundAny ? Optional.of(result) : Optional.empty();
 ```
-但不限于顺序执行。<br />	accumulator函数必须是关联函数。
+但不限于顺序执行。
+
+	accumulator函数必须是关联函数。
 
 - 参数：accumulator – 一个关联的、无干扰的、无状态的函数，用于组合两个值
 - 返回：一个Optional描述减少的结果
@@ -215,12 +229,18 @@ for (T element : this stream)
     result = accumulator.apply(result, element)
         return result;
 ```
-但不限于顺序执行。<br />	identity值必须是组合器功能的标识。 这意味着对于所有u ， combiner(identity, u)等于u 。 此外， combiner功能必须与accumulator功能兼容； 对于所有u和t ，以下必须成立：
+但不限于顺序执行。
+
+	identity值必须是组合器功能的标识。 这意味着对于所有u ， combiner(identity, u)等于u 。 此外， combiner功能必须与accumulator功能兼容； 对于所有u和t ，以下必须成立：
 ```java
 combiner.apply(u, accumulator.apply(identity, t)) == accumulator.apply(u, t)
 ```
 
-- 参数：identity - 组合器功能的身份值<br />accumulator – 一种关联的、无干扰的、无状态的函数，用于将附加元素合并到结果中<br />combiner - 一个关联的、无干扰的、无状态的函数，用于组合两个值，它必须与累加器函数兼容
+- 参数：identity - 组合器功能的身份值
+
+accumulator – 一种关联的、无干扰的、无状态的函数，用于将附加元素合并到结果中
+
+combiner - 一个关联的、无干扰的、无状态的函数，用于组合两个值，它必须与累加器函数兼容
 - 类型参数: U - 结果的类型
 - 返回：减少的结果
 - API注意事项：许多使用这种形式的归约可以通过map和reduce操作的显式组合更简单地表示。 accumulator函数充当融合的映射器和累加器，有时比单独的映射和归约更有效，例如当知道先前减少的值可以避免某些计算时。
@@ -236,7 +256,11 @@ return result;
 ```
 与reduce(Object, BinaryOperator)相比 ， collect操作可以并行化而无需额外的同步。
 
-- 参数：supplier - 个创建新结果容器的函数。 对于并行执行，此函数可能会被多次调用，并且每次都必须返回一个新值。<br />accumulator – 一种关联的、无干扰的、无状态的函数，用于将附加元素合并到结果中<br />combiner - 一个关联的、无干扰的、无状态的函数，用于组合两个值，它必须与累加器函数兼容
+- 参数：supplier - 个创建新结果容器的函数。 对于并行执行，此函数可能会被多次调用，并且每次都必须返回一个新值。
+
+accumulator – 一种关联的、无干扰的、无状态的函数，用于将附加元素合并到结果中
+
+combiner - 一个关联的、无干扰的、无状态的函数，用于组合两个值，它必须与累加器函数兼容
 - 类型参数: R - 结果的类型
 - 返回：减少的结果
 - API注意事项：JDK 中有许多现有类，它们的签名非常适合与方法引用一起用作collect()参数。 例如，以下将把字符串累积到一个ArrayList ：
@@ -254,9 +278,15 @@ String concat = stringStream.collect(StringBuilder::new, StringBuilder::append,
 ---
 
 -  方法定义：`<R, A> R collect(Collector<? super T, A, R> collector);` 
--  说明：使用Collector对此流的元素执行可变归约操作。 Collector封装了用作collect(Supplier, BiConsumer, BiConsumer)参数的函数，允许重用收集策略和组合收集操作，例如多级分组或分区。<br />如果流是并行的，并且Collector是concurrent ，并且流是无序的或收集器是unordered ，那么将执行并发减少（有关并发减少的详细信息，请参阅Collector 。）<br />当并行执行时，可以实例化、填充和合并多个中间结果，以保持可变数据结构的隔离。 因此，即使与非线程安全的数据结构（例如ArrayList ）并行执行，也不需要额外的同步来进行并行缩减。 
+-  说明：使用Collector对此流的元素执行可变归约操作。 Collector封装了用作collect(Supplier, BiConsumer, BiConsumer)参数的函数，允许重用收集策略和组合收集操作，例如多级分组或分区。
+
+如果流是并行的，并且Collector是concurrent ，并且流是无序的或收集器是unordered ，那么将执行并发减少（有关并发减少的详细信息，请参阅Collector 。）
+
+当并行执行时，可以实例化、填充和合并多个中间结果，以保持可变数据结构的隔离。 因此，即使与非线程安全的数据结构（例如ArrayList ）并行执行，也不需要额外的同步来进行并行缩减。 
 -  参数：collector - 描述减少的Collector 
--  类型参数：R - 结果的类型<br />A - Collector的中间累积类型 
+-  类型参数：R - 结果的类型
+
+A - Collector的中间累积类型 
 -  返回：减少的结果 
 -  API注意事项：以下将把字符串累积到一个 ArrayList 中： 
 ```java
@@ -413,8 +443,12 @@ public static Stream iterate(final T seed, final UnaryOperator f) {
 }
 ```
 
-- 说明：返回通过将函数f迭代应用到初始元素seed产生的无限顺序有序Stream ，产生由seed 、 f(seed) 、 f(f(seed))等组成的Stream 。<br />Stream的第一个元素（位置0 ）将是提供的seed 。 对于n > 0 ，位置n处的元素将是将函数f应用于位置n - 1处的元素的结果。
-- 参数：seed - 初始元素<br />f – 应用于前一个元素以产生新元素的函数
+- 说明：返回通过将函数f迭代应用到初始元素seed产生的无限顺序有序Stream ，产生由seed 、 f(seed) 、 f(f(seed))等组成的Stream 。
+
+Stream的第一个元素（位置0 ）将是提供的seed 。 对于n > 0 ，位置n处的元素将是将函数f应用于位置n - 1处的元素的结果。
+- 参数：seed - 初始元素
+
+f – 应用于前一个元素以产生新元素的函数
 - 类型参数：T – 流元素的类型
 - 返回：一个新的顺序Stream
 ### generate
@@ -448,7 +482,9 @@ public static  Stream concat(Stream<? extends T> a, Stream<? extends T> b) {
 ```
 
 - 说明：创建一个延迟连接的流，其元素是第一个流的所有元素，后跟第二个流的所有元素。 如果两个输入流都是有序的，则结果流是有序的，如果任一输入流是并行的，则结果流是并行的。 当结果流关闭时，将调用两个输入流的关闭处理程序。
-- 参数：a – 第一个流<br />b – 第二个流
+- 参数：a – 第一个流
+
+b – 第二个流
 - 类型参数：T - 流元素的类型
 - 返回：两个输入流的串联
 - 实施注意事项：从重复串联构造流时要小心。 访问深度级联流的元素可能会导致深度调用链，甚至StackOverflowException 。

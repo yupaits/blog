@@ -10,7 +10,9 @@
 ## MP_js_api
 > [MP_js_api](https://github.com/Wechat-Group/weixin-java-tools/wiki/MP_js_api)
 
-微信企业号服务获取JS-SDK需要的证书信息可以调用 `wxCpService.createJsapiSignature(url)`，其中 url 必须是调用 JS-SDK 页面的全路径（包括?后的 queryString）中第一个#之前的字符串。例如当前的页面全路径是 `http://www.yupaits.com/hello?text=world&next=config#wechat`，则 url 应该是 `http://www.yupaits.com/hello?text=world&next=config`。<br />页面上可以[通过config接口注入权限验证配置](http://qydev.weixin.qq.com/wiki/index.php?title=%E5%BE%AE%E4%BF%A1JS-SDK%E6%8E%A5%E5%8F%A3#.E6.AD.A5.E9.AA.A4.E4.BA.8C.EF.BC.9A.E9.80.9A.E8.BF.87config.E6.8E.A5.E5.8F.A3.E6.B3.A8.E5.85.A5.E6.9D.83.E9.99.90.E9.AA.8C.E8.AF.81.E9.85.8D.E7.BD.AE)。
+微信企业号服务获取JS-SDK需要的证书信息可以调用 `wxCpService.createJsapiSignature(url)`，其中 url 必须是调用 JS-SDK 页面的全路径（包括?后的 queryString）中第一个#之前的字符串。例如当前的页面全路径是 `http://www.yupaits.com/hello?text=world&next=config#wechat`，则 url 应该是 `http://www.yupaits.com/hello?text=world&next=config`。
+
+页面上可以[通过config接口注入权限验证配置](http://qydev.weixin.qq.com/wiki/index.php?title=%E5%BE%AE%E4%BF%A1JS-SDK%E6%8E%A5%E5%8F%A3#.E6.AD.A5.E9.AA.A4.E4.BA.8C.EF.BC.9A.E9.80.9A.E8.BF.87config.E6.8E.A5.E5.8F.A3.E6.B3.A8.E5.85.A5.E6.9D.83.E9.99.90.E9.AA.8C.E8.AF.81.E9.85.8D.E7.BD.AE)。
 ```javascript
 wx.config({
     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。

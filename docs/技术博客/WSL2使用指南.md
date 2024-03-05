@@ -71,4 +71,6 @@ LC_MEASUREMENT=zh_CN
 LC_IDENTIFICATION=zh_CN
 LC_ALL=zh_CN.UTF-8
 ```
-重启 WSL2 服务：<br />打开 `任务管理器 -> 服务 -> LxssManager`，右键菜单选择 `重新启动`。
+重启 WSL2 服务：
+
+打开 `任务管理器 -> 服务 -> LxssManager`，右键菜单选择 `重新启动`。

@@ -46,7 +46,9 @@ ou: People
 description: People
 objectClass: organizationalUnit
 ```
-使用指令`ldapadd -H ldapi:/// -D "cn=admin,dc=example,dc=com" -x -w ${password} -f org.ldif`。注意将`${password}`替换为实际的密码。<br />以下三个文件以同样方式执行命令。
+使用指令`ldapadd -H ldapi:/// -D "cn=admin,dc=example,dc=com" -x -w ${password} -f org.ldif`。注意将`${password}`替换为实际的密码。
+
+以下三个文件以同样方式执行命令。
 ### memberof_config.ldif
 ```
 dn: cn=module,cn=config

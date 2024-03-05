@@ -3,7 +3,11 @@
 引用自：[GitLab官方安装教程](https://about.gitlab.com/installation/#centos-7)，[快速安装 GitLab 并汉化](http://www.jianshu.com/p/7a0d6917e009)
 ## CentOS 7安装 GitLab
 
-1.  安装并配置必要的依赖关系<br />如果您安装了**Postfix**用于发送电子邮件，请在安装过程中选择“Internet站点”。你也可以使用**SendMail**或配置自定义 SMTP 服务器，并将其设置为 SMTP 服务器。<br />在 CentOS 上，下述命令将在系统防火墙中打开 HTTP 和 SSH 访问。 
+1.  安装并配置必要的依赖关系
+
+如果您安装了**Postfix**用于发送电子邮件，请在安装过程中选择“Internet站点”。你也可以使用**SendMail**或配置自定义 SMTP 服务器，并将其设置为 SMTP 服务器。
+
+在 CentOS 上，下述命令将在系统防火墙中打开 HTTP 和 SSH 访问。 
 ```bash
 sudo yum install curl policycoreutils openssh-server openssh-clients -y
 sudo systemctl enable sshd
@@ -27,7 +31,11 @@ sudo yum install gitlab-ce -y
 sudo gitlab-ctl reconfigure
 ```
 
-4.  浏览到主机名并登录<br />在您第一次访问时，您将被重定向到密码重置屏幕，以提供初始管理员帐户的密码。设置完密码之后您将被重定向回登录屏幕。<br />默认帐户的用户名是**root**。提供您之前创建的密码并登录。登录后，您可以更改用户名。 
+4.  浏览到主机名并登录
+
+在您第一次访问时，您将被重定向到密码重置屏幕，以提供初始管理员帐户的密码。设置完密码之后您将被重定向回登录屏幕。
+
+默认帐户的用户名是**root**。提供您之前创建的密码并登录。登录后，您可以更改用户名。 
 ## 修改 host
 
 1.  在 GitLab 中添加访问的 host，修改 `/etc/gitlab/gitlab.rb` 的 `external_url` 
@@ -76,21 +84,31 @@ git apply /tmp/8.5.diff
 # 启动gitlab
 sudo gitlab-ctl start
 ```
- <br />完成汉化之后可以看到中文版的 GitLab。<br />![image.png](./搭建GitLab私有代码托管/1658805956654-049e9d06-528f-426b-9d6e-0b0bbb3a7cbf.png)
+ 
+
+完成汉化之后可以看到中文版的 GitLab。
+
+![image.png](./搭建GitLab私有代码托管/1658805956654-049e9d06-528f-426b-9d6e-0b0bbb3a7cbf.png)
 ## 备份
 生产环境下，备份是必需的。需要备份的文件有：配置文件和数据文件。
 
--  备份配置文件<br />配置文件包含密码等敏感信息，不要和数据文件放在一起。 
+-  备份配置文件
+
+配置文件包含密码等敏感信息，不要和数据文件放在一起。 
 ```bash
 sh -c 'umask 0077; tar -cf $(data "+etc-gitlab-%s.tar") -C /etc/gitlab'
 ```
 
--  备份数据文件<br />默认数据备份目录是 `/var/opt/gitlab/backups`，手动创建备份文件： 
+-  备份数据文件
+
+默认数据备份目录是 `/var/opt/gitlab/backups`，手动创建备份文件： 
 ```bash
 # Omnibus 方式安装使用以下命令备份
 sudo gitlab-rake gitlab:backup:create
 ```
-日常备份，添加 **crontab**，运行 `crontab -e` <br />如要修改备份周期和目录，在/etc/gitlab/gitlab.rb中修改以下两个选项  
+日常备份，添加 **crontab**，运行 `crontab -e` 
+
+如要修改备份周期和目录，在/etc/gitlab/gitlab.rb中修改以下两个选项  
 ## 恢复
 恢复之前，确保备份文件所安装 GitLab 和当前要恢复的 GitLab 版本一致。
 
@@ -139,7 +157,11 @@ apt-get install gitlab-ci-multi-runner
 yum install gitlab-ci-multi-runner
 ```
 
-3.  注册**Runner**<br />获取Token：以管理员身份登录GitLab，进入管理区域，点击侧边栏的Runner，如下图，“注册授权码”后的字符串便是Token。<br />![image.png](./搭建GitLab私有代码托管/1658806052966-07ec7967-496b-46af-911c-44a0667c327b.png)
+3.  注册**Runner**
+
+获取Token：以管理员身份登录GitLab，进入管理区域，点击侧边栏的Runner，如下图，“注册授权码”后的字符串便是Token。
+
+![image.png](./搭建GitLab私有代码托管/1658806052966-07ec7967-496b-46af-911c-44a0667c327b.png)
 ```bash
 sudo gitlab-ci-multi-runner register
 

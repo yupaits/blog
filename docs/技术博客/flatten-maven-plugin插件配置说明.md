@@ -2,7 +2,13 @@
 
 > 引用自：[使用flatten-maven-plugin对发布的POM进行精简](https://my.oschina.net/liyuj/blog/874929)
 
-使用maven开发的模块化应用，可以发布出去供他人使用，比如各种开源库，使用时，要么是继承，要么是以依赖的形式引入。但我们看各种库的pom.xml文件，通常都比较简单，一般只有一些必要的依赖信息，作为开发者，通常认为使用者也就需要这些信息。但是真正开发时，对应模块的pom可能比较复杂，可能要使用各种插件，引用各种依赖，组件间有继承关系，甚至根据不同的参数走不同的分支，即使用profile机制等，maven默认在部署时，会保留对应模块中的pom的所有信息，不会做改动。这样就给模块的发布带来了一定的麻烦，如果直接发布这样的pom.xml，是可能给使用者造成干扰的，出了问题又很难进行定位。<br />解决这个问题有很多的做法，比如构建两个工程，一个用于开发，一个用于版本发布，两个工程的pom是不同的，这样看上去也更符合软件开发的常规流程，另外，也可以考虑禁用maven默认的deloy过程，然后直接调用 `deploy:deploy-file` 单独部署某个文件。总之，不管怎样，办法肯定是有的。<br />而本文的目的，是想介绍一种新的方式，来优雅地解决这个问题，也许实际开发中并不需要这样做。<br />具体做法是，使用社区专门针对这个问题开发的插件，即Maven Flatten Plugin，这个插件使用起来非常简单，如下：
+使用maven开发的模块化应用，可以发布出去供他人使用，比如各种开源库，使用时，要么是继承，要么是以依赖的形式引入。但我们看各种库的pom.xml文件，通常都比较简单，一般只有一些必要的依赖信息，作为开发者，通常认为使用者也就需要这些信息。但是真正开发时，对应模块的pom可能比较复杂，可能要使用各种插件，引用各种依赖，组件间有继承关系，甚至根据不同的参数走不同的分支，即使用profile机制等，maven默认在部署时，会保留对应模块中的pom的所有信息，不会做改动。这样就给模块的发布带来了一定的麻烦，如果直接发布这样的pom.xml，是可能给使用者造成干扰的，出了问题又很难进行定位。
+
+解决这个问题有很多的做法，比如构建两个工程，一个用于开发，一个用于版本发布，两个工程的pom是不同的，这样看上去也更符合软件开发的常规流程，另外，也可以考虑禁用maven默认的deloy过程，然后直接调用 `deploy:deploy-file` 单独部署某个文件。总之，不管怎样，办法肯定是有的。
+
+而本文的目的，是想介绍一种新的方式，来优雅地解决这个问题，也许实际开发中并不需要这样做。
+
+具体做法是，使用社区专门针对这个问题开发的插件，即Maven Flatten Plugin，这个插件使用起来非常简单，如下：
 ```xml
 <plugins>
   <plugin>
@@ -50,7 +56,9 @@
 | --- | --- |
 | minimum | 不推荐使用，会展开`pluginRepositories`。 |
 | bom | 会保留`dependencyManagement`，展开`properties`。 |
-| oss | 推荐开源项目使用，会展开`ciManagement`、`contributors`、`distributionManagement`、`inceptionYear`、`issueManagement`<br />、`mailingLists`、`organization`、`prerequisites` |
+| oss | 推荐开源项目使用，会展开`ciManagement`、`contributors`、`distributionManagement`、`inceptionYear`、`issueManagement`
+
+、`mailingLists`、`organization`、`prerequisites` |
 | ossrh | 会展开`name`、`description`、`url`、`scm`、`developers` |
 | defaults | 会展开`repositories` |
 | clean | 删除全部可选元素 |

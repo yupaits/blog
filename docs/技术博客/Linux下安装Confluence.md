@@ -1,10 +1,16 @@
 # Linux下安装Confluence
 
 ## Confluence简介
-Confluence是一个专业的企业知识管理与协同软件，也可以用于构建**企业wiki** 。通过它可以实现团队成员之间的协作和知识共享。<br />Confluence为团队提供一个协作环境。在这里，团队成员齐心协力，各擅其能，协同地编写文档和管理项目。从此打破不同团队、不同部门以及个人之间信息孤岛的僵局，Confluence真正实现了组织资源共享。<br />Confluence使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。
+Confluence是一个专业的企业知识管理与协同软件，也可以用于构建**企业wiki** 。通过它可以实现团队成员之间的协作和知识共享。
+
+Confluence为团队提供一个协作环境。在这里，团队成员齐心协力，各擅其能，协同地编写文档和管理项目。从此打破不同团队、不同部门以及个人之间信息孤岛的僵局，Confluence真正实现了组织资源共享。
+
+Confluence使用简单，但它强大的编辑和站点管理特征能够帮助团队成员之间共享信息、文档协作、集体讨论，信息推送。
 ## 安装步骤
 
-1.  进入Confluence官网<br />浏览[Confluence官网](https://www.atlassian.com/software/confluence)，进入[下载页面](https://www.atlassian.com/software/confluence/download)，选择 **Linux 64Bit** 版本进行下载，复制[下载地址](https://downloads.atlassian.com/software/confluence/downloads/atlassian-confluence-6.3.2-x64.bin)。 
+1.  进入Confluence官网
+
+浏览[Confluence官网](https://www.atlassian.com/software/confluence)，进入[下载页面](https://www.atlassian.com/software/confluence/download)，选择 **Linux 64Bit** 版本进行下载，复制[下载地址](https://downloads.atlassian.com/software/confluence/downloads/atlassian-confluence-6.3.2-x64.bin)。 
 2.  远程连接阿里云服务器实例。 
 3.  下载Confluence 
 ```bash

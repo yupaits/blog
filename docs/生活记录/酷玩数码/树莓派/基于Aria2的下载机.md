@@ -8,7 +8,9 @@
 sudo apt install aria2
 ```
 ## 编辑 Aria2 配置文件
-创建文件夹`mkdir -p ~/.config/aria2`。<br />添加一个 Aria2 配置文件`vim ~/.config/aria2/aria2.config`。
+创建文件夹`mkdir -p ~/.config/aria2`。
+
+添加一个 Aria2 配置文件`vim ~/.config/aria2/aria2.config`。
 ```toml
 #后台运行
 daemon=true
@@ -77,7 +79,9 @@ log-level=warn
 # BitTorrent trackers
 bt-tracker=udp://tracker.opentrackr.org:1337/announce,udp://open.tracker.cl:1337/announce,udp://tracker.torrent.eu.org:451/announce,udp://opentracker.i2p.rocks:6969/announce,udp://open.stealth.si:80/announce,udp://9.rarbg.com:2810/announce,https://opentracker.i2p.rocks:443/announce,http://tracker.openbittorrent.com:80/announce,udp://tracker.tiny-vps.com:6969/announce,udp://tracker.moeking.me:6969/announce,udp://p4p.arenabg.com:1337/announce,udp://open.demonii.com:1337/announce,udp://movies.zsw.ca:6969/announce,udp://ipv4.tracker.harry.lu:80/announce,udp://explodie.org:6969/announce,udp://exodus.desync.com:6969/announce,https://tracker.nanoha.org:443/announce,https://tracker.lilithraws.org:443/announce,https://tracker.cyber-hub.net:443/announce,https://tr.burnabyhighstar.com:443/announce
 ```
-设置好配置之后，还要创建该会话空白文件`touch ~/.config/aria2/aria2.session`。<br />测试下 Aria2 是否启动成功`aria2c --conf-path=/home/pi/.config/aria2/aria2.config`。用`ps aux|grep aria2`看是否有进程启动，若有说明启动成功了。
+设置好配置之后，还要创建该会话空白文件`touch ~/.config/aria2/aria2.session`。
+
+测试下 Aria2 是否启动成功`aria2c --conf-path=/home/pi/.config/aria2/aria2.config`。用`ps aux|grep aria2`看是否有进程启动，若有说明启动成功了。
 ## 设置 Aria2 开机启动
 在`/etc/init.d`目录下增加启动脚本
 ```bash
@@ -136,7 +140,9 @@ sudo service aria2c stop
 # 重启服务
 sudo service aria2c restart
 ```
-**常见问题**<br />如果aria2c服务开机没有自动启动，则可以通过以下方式修复：
+**常见问题**
+
+如果aria2c服务开机没有自动启动，则可以通过以下方式修复：
 ```bash
 # runlevel
 N 3
@@ -151,7 +157,11 @@ S40aria2c
 参考：[https://unix.stackexchange.com/questions/102918/service-to-start-on-boot-doesnt-work-with-update-rc-d-command](https://unix.stackexchange.com/questions/102918/service-to-start-on-boot-doesnt-work-with-update-rc-d-command)
 ## 部署 AriaNg Web下载管理页面
 ### 服务端
-安装 nginx：`sudo apt install nginx`。<br />在 [AriaNg下载页面](https://github.com/mayswind/AriaNg/releases) 下载最新的`AraiNg-x.x.x-AllInOne.zip`压缩包。将压缩包内的`index.html`解压到`/var/www/html/aria-ng/`目录下。<br />创建并编辑 nginx 配置文件`/etc/nginx/sites-enabled/aria`，输入以下内容并保存：
+安装 nginx：`sudo apt install nginx`。
+
+在 [AriaNg下载页面](https://github.com/mayswind/AriaNg/releases) 下载最新的`AraiNg-x.x.x-AllInOne.zip`压缩包。将压缩包内的`index.html`解压到`/var/www/html/aria-ng/`目录下。
+
+创建并编辑 nginx 配置文件`/etc/nginx/sites-enabled/aria`，输入以下内容并保存：
 ```nginx
 server {
     listen 80;
@@ -163,11 +173,23 @@ server {
     }
 }
 ```
-使新增的 nginx 配置生效：`sudo nginx -s reload`。<br />设置 nginx 开机启动：`sudo systemctl enable nginx`。
+使新增的 nginx 配置生效：`sudo nginx -s reload`。
+
+设置 nginx 开机启动：`sudo systemctl enable nginx`。
 ### 客户端
-修改客户端`hosts`文件以便使用`aria2.pi.com`域名访问AriaNg管理界面。<br />例如：`192.168.1.1 aria2.pi.com`<br />![image.png](./基于Aria2的下载机/1658662923860-33c5cbc8-de31-4b98-8fc8-f57f7e2599e2.png)<br />首次浏览时需要进入 AriaNg设置 -> RPC，填写服务端配置信息，特别是 Aria2 RPC 地址和Aria2 RPC 密钥。正确填写之后即可连接使用树莓派上的 Aria2 服务。<br />![image.png](./基于Aria2的下载机/1658662919982-88a61d63-6d33-42f9-80f8-5b060fe2b534.png)
+修改客户端`hosts`文件以便使用`aria2.pi.com`域名访问AriaNg管理界面。
+
+例如：`192.168.1.1 aria2.pi.com`
+
+![image.png](./基于Aria2的下载机/1658662923860-33c5cbc8-de31-4b98-8fc8-f57f7e2599e2.png)
+
+首次浏览时需要进入 AriaNg设置 -> RPC，填写服务端配置信息，特别是 Aria2 RPC 地址和Aria2 RPC 密钥。正确填写之后即可连接使用树莓派上的 Aria2 服务。
+
+![image.png](./基于Aria2的下载机/1658662919982-88a61d63-6d33-42f9-80f8-5b060fe2b534.png)
 ## 设置BT trackers 提升下载速度
-trackers 清单地址：[trackerslist](https://github.com/ngosang/trackerslist)，推荐使用 **tracker_best.txt**。<br />有两种设置 trackers 的方式：
+trackers 清单地址：[trackerslist](https://github.com/ngosang/trackerslist)，推荐使用 **tracker_best.txt**。
+
+有两种设置 trackers 的方式：
 
 1. 客户端进入 AriaNg -> Aria2 设置 -> BitTorrent 设置 -> BT 服务器地址（bt-tracker），填写 trackers 列表地址，多个地址以逗号 , 分隔。![image.png](./基于Aria2的下载机/1658662922438-f867b01f-8588-45e0-8008-647c43b11288.png)
 2. 服务端编辑`~/.config/aria2/aria2.config`配置文件中的`bt-trakcer=udp://tracker.coppersurfer.tk:6969/announce,udp://tracker.opentrackr.org:1337/announce`项，多个地址用逗号 , 分隔。
@@ -206,7 +228,9 @@ crontab -e
 ## 配置内网穿透
 使用老牌内网穿透软件[frp](https://github.com/fatedier/frp)进行内网穿透配置。
 ### 服务端
-首先需要准备一台拥有公网IP（`a.a.a.a`）的云服务器作为服务端。<br />在服务端下载并解压frp：
+首先需要准备一台拥有公网IP（`a.a.a.a`）的云服务器作为服务端。
+
+在服务端下载并解压frp：
 ```bash
 # 下载最新版本的frp(当前最新版本是0.46.1)
 wget https://github.com/fatedier/frp/releases/download/v0.46.1/frp_0.46.1_linux_amd64.tar.gz
@@ -243,7 +267,9 @@ sudo systemctl enable frps
 sudo service frps start|stop|restart|status
 ```
 ### 客户端
-客户端即是我们的树莓派了。<br />首先在aria2的nginx配置中添加自己的域名(这里添加的是aria2.yupaits.com)到server_name中：
+客户端即是我们的树莓派了。
+
+首先在aria2的nginx配置中添加自己的域名(这里添加的是aria2.yupaits.com)到server_name中：
 ```nginx
 server {
     listen 80;
@@ -255,7 +281,9 @@ server {
     }
 }
 ```
-使新增的 nginx 配置生效：`sudo nginx -s reload`。<br />下载并解压frp：
+使新增的 nginx 配置生效：`sudo nginx -s reload`。
+
+下载并解压frp：
 ```bash
 cd /home/pi/app
 mkdir frp
@@ -305,4 +333,8 @@ sudo systemctl enable frpc
 sudo service frpc start|stop|restart|status
 ```
 ### 外网访问树莓派部署的AriaNg页面
-将以上域名`aria2.yupaits.com`和`aria2rpc.yupaits.com`解析到云服务器IP（`a.a.a.a`）。<br />访问`http://aria2.yupaits.com:8000/`并进入设置页面，设置Aria2 RPC地址为`http://aria2rpc.yupaits.com:8000/jsonrpc`，输入密钥并刷新页面即可成功连接，具体如下：<br />![image.png](./基于Aria2的下载机/1675955952514-b34c53f0-18a2-48c5-b264-ed4473131817.png)
+将以上域名`aria2.yupaits.com`和`aria2rpc.yupaits.com`解析到云服务器IP（`a.a.a.a`）。
+
+访问`http://aria2.yupaits.com:8000/`并进入设置页面，设置Aria2 RPC地址为`http://aria2rpc.yupaits.com:8000/jsonrpc`，输入密钥并刷新页面即可成功连接，具体如下：
+
+![image.png](./基于Aria2的下载机/1675955952514-b34c53f0-18a2-48c5-b264-ed4473131817.png)

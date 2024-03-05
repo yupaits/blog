@@ -1,6 +1,16 @@
 # 从Ultimate-Spider全方位解析数据采集系统的基本知识
 
-Ultimate Spider【终极蜘蛛王】，一款用于网络数据采集的工具。本文对Ultimate Spider的整体架构和一些技术亮点作说明。<br />Ultimate Spider主要页面有：1、用来展示概览信息的仪表盘页；2、爬虫配置页。<br />![仪表盘页.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767202716-c7d3f2d4-743e-434c-a523-64d9ba64f0ca.png)<br />![爬虫配置页.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767206239-115bbc71-68c5-4475-a84d-a2515170f811.png)<br />整体架构如下图所示：<br />![整体架构.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767210945-552821ce-e38e-49c6-84d9-3a3e94d382ae.png)
+Ultimate Spider【终极蜘蛛王】，一款用于网络数据采集的工具。本文对Ultimate Spider的整体架构和一些技术亮点作说明。
+
+Ultimate Spider主要页面有：1、用来展示概览信息的仪表盘页；2、爬虫配置页。
+
+![仪表盘页.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767202716-c7d3f2d4-743e-434c-a523-64d9ba64f0ca.png)
+
+![爬虫配置页.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767206239-115bbc71-68c5-4475-a84d-a2515170f811.png)
+
+整体架构如下图所示：
+
+![整体架构.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767210945-552821ce-e38e-49c6-84d9-3a3e94d382ae.png)
 ## 爬虫配置
 在WebMagic爬虫框架的基础上对初始Url和爬取内容进行可视化配置，爬取规则的制定更加灵活多变，适应范围更广。
 
@@ -338,4 +348,6 @@ public class Receiver {
 }
 ```
 ## 数据可视化
-使用较为成熟的Metabase进行采集数据的可视化。<br />![Metabase采集数据可视化.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767228703-379f96f0-820e-48e8-86a1-54cf84e5982d.png)
+使用较为成熟的Metabase进行采集数据的可视化。
+
+![Metabase采集数据可视化.png](./从Ultimate-Spider全方位解析数据采集系统的基本知识/1658767228703-379f96f0-820e-48e8-86a1-54cf84e5982d.png)

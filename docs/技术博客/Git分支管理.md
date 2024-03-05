@@ -10,7 +10,15 @@
 - hotfix：bug修复分支，或紧急需求开发分支（一般不要在hotfix分支上进行新需求的开发）。该分支从master分支拉出，经开发测试完成之后，可以进行pull requets，申请将分支合入master
 > 特别注意：
 
-> feature只能从dev分支拉出，hotfix分支只能从master拉出<br />在进行pull request请求之前必须对当前的开发分支进行反合，即dev分支反合feature分支，master分支反合hotfix分支<br />dev分支会在稳定之后合入master分支<br />不能将master分支与feature反合，dev分支与hotfix反合<br />开发只能将代码提交至对应的开发分支，不能直接提交到master分支或dev分支
+> feature只能从dev分支拉出，hotfix分支只能从master拉出
+
+在进行pull request请求之前必须对当前的开发分支进行反合，即dev分支反合feature分支，master分支反合hotfix分支
+
+dev分支会在稳定之后合入master分支
+
+不能将master分支与feature反合，dev分支与hotfix反合
+
+开发只能将代码提交至对应的开发分支，不能直接提交到master分支或dev分支
 
 ## 分支的提交注意事项
 分支提交的几点注意如下：

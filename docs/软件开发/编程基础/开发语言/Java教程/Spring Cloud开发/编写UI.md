@@ -1,6 +1,8 @@
 # 编写UI
 
-我们已经实现了API系统、交易系统、定序系统、行情系统和推送系统，最后就差一个UI系统，让用户可以登录并通过浏览器下订单。UI系统就是一个标准的Web系统，相对比较简单。<br />UI系统本质上是一个MVC模型的Web系统，我们先引入一个视图的第三方依赖：
+我们已经实现了API系统、交易系统、定序系统、行情系统和推送系统，最后就差一个UI系统，让用户可以登录并通过浏览器下订单。UI系统就是一个标准的Web系统，相对比较简单。
+
+UI系统本质上是一个MVC模型的Web系统，我们先引入一个视图的第三方依赖：
 ```xml
 <dependency>
     <groupId>io.pebbletemplates</groupId>
@@ -47,7 +49,9 @@ public class MvcController extends LoggerSupport {
     }
 }
 ```
-登录成功后，设置一个Cookie代表用户身份，以userId:expiresAt:hash表示。由于计算哈希引入了HmacKey，因此，客户端无法伪造Cookie。<br />继续编写UIFilter，用于验证Cookie并把特定用户的身份绑定到UserContext中：
+登录成功后，设置一个Cookie代表用户身份，以userId:expiresAt:hash表示。由于计算哈希引入了HmacKey，因此，客户端无法伪造Cookie。
+
+继续编写UIFilter，用于验证Cookie并把特定用户的身份绑定到UserContext中：
 ```java
 public class UIFilter {
     @Override
@@ -102,12 +106,18 @@ public class ProxyFilter {
     }
 }
 ```
-把ProxyFilter挂载到/api/*，通过UI转发请求的目的是简化页面JavaScript调用API，一是不再需要跨域，二是UI已经经过了登录认证，转发过程中自动生成一次性Token来调用API，这样JavaScript不再关心如何生成Authorization头。<br />下面我们就可以开始编写页面了：
+把ProxyFilter挂载到/api/*，通过UI转发请求的目的是简化页面JavaScript调用API，一是不再需要跨域，二是UI已经经过了登录认证，转发过程中自动生成一次性Token来调用API，这样JavaScript不再关心如何生成Authorization头。
+
+下面我们就可以开始编写页面了：
 
 - signin.html：登录页；
 - signup.html：注册页；
 - index.html：交易页。
 
-页面功能主要由JavaScript实现，我们选择Vue前端框架，最终实现效果如下：<br />![](./编写UI/1708686566226-93fde314-3b87-49b7-95ba-772a169b7dd6.png)<br />最后，在后台注册时，如果检测到本地开发环境，就自动调用内部API给用户添加一些资产，否则新注册用户无法交易。
+页面功能主要由JavaScript实现，我们选择Vue前端框架，最终实现效果如下：
+
+![](./编写UI/1708686566226-93fde314-3b87-49b7-95ba-772a169b7dd6.png)
+
+最后，在后台注册时，如果检测到本地开发环境，就自动调用内部API给用户添加一些资产，否则新注册用户无法交易。
 ### 小结
 UI系统是标准的Web系统，除了注册、登录外，主要交易功能均由页面JavaScript实现。UI系统本身不是交易入口，它通过转发JavaScript请求至真正的API入口。

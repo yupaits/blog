@@ -7,7 +7,11 @@ rclone.exe authorize "onedrive"
 ```
 之后会进入onedrive授权网页，授权完成后，控制台会输出**token**信息。
 
-在树莓派中使用官网推荐脚本安装rclone。<br />`curl https://rclone.org/install.sh | bash`<br />安装完成后，开始rclone的onedrive配置。
+在树莓派中使用官网推荐脚本安装rclone。
+
+`curl https://rclone.org/install.sh | bash`
+
+安装完成后，开始rclone的onedrive配置。
 ```bash
 pi@raspberrypi:~/app/rclone $ sudo rclone config
 2022/11/06 13:43:39 NOTICE: Config file "/root/.config/rclone/rclone.conf" not found - using defaults
@@ -370,7 +374,13 @@ rclone copy s3-overseas:bucket-name/target-path/ <LOCAL_PATH>
 
 rclone copy --max-age 24h --progress --no-traverse <LOCAL_PATH> s3-overseas:bucket-name/target-path/
 ```
-**copy操作，不会删除目标端的任何文件**<br />--max-age 24h: 过滤出来最近24小时变更过的文件<br />--progress: 显示进度 等同于 -P<br />--no-traverse: 从源拷贝少量文件到目的中大量目的文件时，速度会更快
+**copy操作，不会删除目标端的任何文件**
+
+--max-age 24h: 过滤出来最近24小时变更过的文件
+
+--progress: 显示进度 等同于 -P
+
+--no-traverse: 从源拷贝少量文件到目的中大量目的文件时，速度会更快
 #### mkdir
 ```bash
 ### 创建新的bucket 需要AKSK有权限

@@ -1,6 +1,10 @@
 # SpringBoot和Vue单页面前后端分离项目的整合与构建
 
-日常开发前后端分离应用时，通常会使用到Spring Boot开发后台服务，Vue.js开发前端SPA，而在部署时通常将后台服务和前端应用分开部署，使用nginx反向代理或者后台配置cors解决前后端的跨域问题。这样的方式在部署环节时稍显繁琐，本文介绍一种在构建环节直接将前端SPA直接打包进后台服务的jar包，只用部署jar包即可访问前端页面的方法。<br />以[ultimate-spider](https://gitee.com/yupaits/ultimate-spider)为例说明该方法是如何实现将SPA打进后台服务jar包的。<br />**ultimate-spider**是采用IDEA的project + modules的方式进行开发的，该项目有两个module：spider-server，后台服务；spider-web，前端SPA。以下是相关的pom.xml文件的内容。
+日常开发前后端分离应用时，通常会使用到Spring Boot开发后台服务，Vue.js开发前端SPA，而在部署时通常将后台服务和前端应用分开部署，使用nginx反向代理或者后台配置cors解决前后端的跨域问题。这样的方式在部署环节时稍显繁琐，本文介绍一种在构建环节直接将前端SPA直接打包进后台服务的jar包，只用部署jar包即可访问前端页面的方法。
+
+以[ultimate-spider](https://gitee.com/yupaits/ultimate-spider)为例说明该方法是如何实现将SPA打进后台服务jar包的。
+
+**ultimate-spider**是采用IDEA的project + modules的方式进行开发的，该项目有两个module：spider-server，后台服务；spider-web，前端SPA。以下是相关的pom.xml文件的内容。
 
 - ultimate-spider的pom.xml
 ```xml
@@ -290,7 +294,19 @@
     </build>
 </project>
 ```
-该方法的大致流程如下：<br />1）在ultimate-spider下执行`mvn clean install`；<br />2）spider-web使用`frontend-maven-plugin`插件进行构建并生成`target/dist`目录；<br />3）spider-server使用`spring-boot-maven-plugin`插件构建基于Spring Boot的可执行jar文件；<br />4）spider-server使用`maven-resources-plugin`插件将spider-web下的`target/dist`复制到`resources/public`，`resources/public`作为资源文件会被打进Spring Boot的可执行jar文件中；<br />5）执行基于Spring Boot的可执行jar之后，访问`/`会默认跳转到`public`目录下的`index.html`。<br />该方法的核心就在于基于maven构建的配置文件pom.xml，这里对pom.xml里的几个关键配置项进行说明。
+该方法的大致流程如下：
+
+1）在ultimate-spider下执行`mvn clean install`；
+
+2）spider-web使用`frontend-maven-plugin`插件进行构建并生成`target/dist`目录；
+
+3）spider-server使用`spring-boot-maven-plugin`插件构建基于Spring Boot的可执行jar文件；
+
+4）spider-server使用`maven-resources-plugin`插件将spider-web下的`target/dist`复制到`resources/public`，`resources/public`作为资源文件会被打进Spring Boot的可执行jar文件中；
+
+5）执行基于Spring Boot的可执行jar之后，访问`/`会默认跳转到`public`目录下的`index.html`。
+
+该方法的核心就在于基于maven构建的配置文件pom.xml，这里对pom.xml里的几个关键配置项进行说明。
 
 1.  spider-web采用了maven的前端应用构建插件`frontend-maven-plugin`实现了基于npm的SPA项目的构建，这里是该插件的[GitHub地址](https://github.com/eirslett/frontend-maven-plugin)。 
 2.  ultimate-spider中`<modules>`标签中必须是前端SPA模块spider-web在前，后台服务模块spider-server在后。 
