@@ -4,9 +4,11 @@ import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import MyLayout from './MyLayout.vue'
+import SiteLayout from './layout/SiteLayout.vue'
 
 import 'vitepress-plugin-back-to-top/dist/style.css'
-import './index.css'
+import './style/index.css'
+import './style/var.css'
 
 export default {
   extends: DefaultTheme,
@@ -65,6 +67,7 @@ export default {
     )
   },
   enhanceApp({ app }) {
+    app.component('SiteLayout', SiteLayout)
     vitepressBackToTop({
       threshold: 300
     })
