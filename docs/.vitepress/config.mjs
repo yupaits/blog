@@ -33,14 +33,12 @@ export default defineConfig({
     // Google Fonts
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    ['link', { href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap', rel: 'stylesheet' }],
   ],
   cleanUrls: true,
   ignoreDeadLinks: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '主页', link: '/' },
       { text: '技术博客', link: '/技术博客/' },
       { text: '文章收录', link: '/文章收录/' },
       { text: '软件开发', link: '/软件开发/' },
@@ -614,7 +612,26 @@ export default defineConfig({
     },
 
     search: {
-      provider: 'local'
+      provider: 'local',
+      options: {
+        detailedView: true,
+        translations: {
+          button: {
+            buttonText: '搜索文档',
+            buttonAriaLabel: '搜索文档'
+          },
+          modal: {
+            displayDetails: '展示详情',
+            resetButtonTitle: '清除查询条件',
+            noResultsText: '无法找到相关结果',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭',
+            }
+          }
+        }
+      }
     },
 
     lastUpdated: true,
