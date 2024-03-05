@@ -1,9 +1,11 @@
 <template>
   <div class="comment">
     <div class="visitors">
-      <span class="page-title">{{page.title ? `《${page.title}》` : null}}</span>
-      <span class="leancloud-visitors">
-        <span class="count-text">阅读量：</span>
+      <span class="page-title">
+        <span v-if="page?.title">《{{ page.title }}》</span>
+      </span>
+      <span id="" class="leancloud-visitors">
+        <span class="count-text">访问量：</span>
         <i class="leancloud-visitors-count"></i>
       </span>
     </div>
@@ -19,7 +21,6 @@
 
 <script setup>
 import { useData } from 'vitepress'
-
 const { page } = useData()
 </script>
 

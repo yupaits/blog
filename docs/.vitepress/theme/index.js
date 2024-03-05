@@ -16,8 +16,8 @@ export default {
 
     // 初始化Valine
     const initValine = () => {
-      let path = location.origin + location.pathname
-      document.getElementsByClassName("leancloud-visitors")[0].id = path
+      const path = location.origin + location.pathname
+      document.getElementsByClassName('leancloud-visitors')[0].id = path
       new Valine({
         el: '#vcomments',
         appId: '1bm9HBoZJKiYc9SaRKBlDfJy-gzGzoHsz',
@@ -31,7 +31,7 @@ export default {
       })
     }
 
-    const remoteImport = (url) => {
+    const lazyLoad = (url) => {
       return new Promise((resolve) => {
         var head = document.getElementsByTagName('head')[0]
         var script = document.createElement('script')
@@ -50,7 +50,7 @@ export default {
 
     onMounted(() => {
       initZoom()
-      remoteImport('//unpkg.com/valine/dist/Valine.min.js').then(() => initValine())
+      lazyLoad('//unpkg.com/valine/dist/Valine.min.js').then(() => initValine())
     })
 
     watch(
