@@ -7,7 +7,7 @@
           <a :href="item.link" target="_blank" v-for="item in group.items" :class="item.type ?? group.type ?? 'info'"
             class="no-icon custom-block">
             <img :ref="getImgRefName(group.text, item.text)" referrer="no-referrer|origin|unsafe-url"
-              class="link-img no-zoom VPImage">
+              :style="{ background: item.iconBackground }" class="link-img no-zoom VPImage">
             <p class="title">{{ item.text }}</p>
           </a>
         </div>
@@ -84,6 +84,7 @@ onMounted(() => {
 .card-container .card-group .custom-block {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   gap: 8px;
   margin: 0;
   width: calc(100% / 3 - 6px);
