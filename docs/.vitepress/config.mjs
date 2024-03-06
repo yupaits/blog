@@ -42,10 +42,28 @@ export default defineConfig({
       { text: '技术博客', link: '/技术博客/', activeMatch: '/技术博客/' },
       { text: '文章收录', link: '/文章收录/', activeMatch: '/文章收录/' },
       { text: '软件开发', link: '/软件开发/', activeMatch: '/软件开发/' },
-      { text: '个人项目', link: '/个人项目/', activeMatch: '/个人项目/' },
-      { text: '生活记录', link: '/生活记录/', activeMatch: '/生活记录/' },
-      { text: '站点收录', link: '/站点收录/' },
-      { text: '旧版博客', link: 'https://blog.yupaits.com/' },
+      {
+        text: '更多',
+        items: [
+          {
+            text: '个人中心',
+            items: [
+              { text: '个人项目', link: '/个人项目/', activeMatch: '/个人项目/' },
+              { text: '生活记录', link: '/生活记录/', activeMatch: '/生活记录/' },
+            ]
+          },
+          {
+            text: '站点收录',
+            items: [
+              { text: '技术博客', link: '/站点收录/技术博客' },
+              { text: '在线工具', link: '/站点收录/在线工具' },
+              { text: '免费素材', link: '/站点收录/免费素材' },
+              { text: 'AI生产力', link: '/站点收录/AI生产力' },
+              { text: 'yupaits的博客（旧版）', link: 'https://blog.yupaits.com/' },
+            ]
+          }
+        ]
+      },
     ],
 
     sidebar: {
@@ -143,7 +161,6 @@ export default defineConfig({
         ]
       },
       '/软件开发/': {
-        base: '/软件开发/',
         items: [
           {
             text: '编程基础',
@@ -408,7 +425,6 @@ export default defineConfig({
         ]
       },
       '/个人项目/': {
-        base: '/个人项目/',
         items: [
           {
             text: 'yutool组件式框架',
@@ -523,7 +539,6 @@ export default defineConfig({
         ]
       },
       '/生活记录/': {
-        base: '/生活记录/',
         items: [
           {
             text: '山水游记',
@@ -586,9 +601,20 @@ export default defineConfig({
           }
         ]
       },
-      '/站点收录/': [
-        { text: '站点收录', link: '/站点收录/' },
-      ]
+      '/站点收录/': {
+        items: [
+          {
+            text: '站点收录',
+            base: '/站点收录/',
+            items: [
+              { text: '技术博客', link: '技术博客' },
+              { text: '在线工具', link: '在线工具' },
+              { text: '免费素材', link: '免费素材' },
+              { text: 'AI生产力', link: 'AI生产力' },
+            ]
+          }
+        ]
+      },
     },
 
     socialLinks: [
@@ -601,7 +627,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="/">yupaits notes</a>',
+      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/">yupaits notes</a>',
       copyright: `版权所有 © 2016-${new Date().getFullYear()} <a href="mailto:ts495606653@hotmail.com">yupaits</a>`
     },
 
