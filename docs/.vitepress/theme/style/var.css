@@ -1,4 +1,4 @@
-.vp-doc a {
+.vp-doc a:not(.card-container >>>) {
   text-decoration: none;
   padding: 0 4px;
 }

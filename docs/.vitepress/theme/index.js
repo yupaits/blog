@@ -5,7 +5,7 @@ import mediumZoom from 'medium-zoom'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import MyLayout from './MyLayout.vue'
 import DraftLayout from './layout/DraftLayout.vue'
-import LinkCard from './components/LinkCard.vue'
+import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
 
 import 'vitepress-plugin-back-to-top/dist/style.css'
@@ -52,7 +52,7 @@ export default {
 
     // 图片缩放
     const initZoom = () => {
-      mediumZoom('.main img', { background: 'rgba(0, 0, 0, 0.5)' })
+      mediumZoom('.main img:not(.no-zoom)', { background: 'rgba(0, 0, 0, 0.5)' })
     }
 
     onMounted(() => {
@@ -70,7 +70,7 @@ export default {
   },
   enhanceApp({ app }) {
     app.component('DraftLayout', DraftLayout)
-    app.component('LinkCard', LinkCard)
+    app.component('LinkCardGroup', LinkCardGroup)
     app.component('Progress', Progress)
     vitepressBackToTop({
       threshold: 300
