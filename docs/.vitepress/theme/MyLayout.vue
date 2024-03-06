@@ -9,7 +9,7 @@
 <script setup>
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import ValineComment from './component/ValineComment.vue'
+import ValineComment from './components/ValineComment.vue'
 const { Layout } = DefaultTheme
 const { page } = useData()
 </script>

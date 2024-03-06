@@ -4,7 +4,9 @@ import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import MyLayout from './MyLayout.vue'
-import SiteLayout from './layout/SiteLayout.vue'
+import DraftLayout from './layout/DraftLayout.vue'
+import LinkCard from './components/LinkCard.vue'
+import Progress from './components/Progress.vue'
 
 import 'vitepress-plugin-back-to-top/dist/style.css'
 import './style/index.css'
@@ -67,7 +69,9 @@ export default {
     )
   },
   enhanceApp({ app }) {
-    app.component('SiteLayout', SiteLayout)
+    app.component('DraftLayout', DraftLayout)
+    app.component('LinkCard', LinkCard)
+    app.component('Progress', Progress)
     vitepressBackToTop({
       threshold: 300
     })
