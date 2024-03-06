@@ -3,8 +3,15 @@
   padding: 0 4px;
 }
 
-.VPNavBarMenuLink.active {
+.VPNavBarMenuLink.active,
+.VPNavBarMenuGroup.active .text,
+.VPMenuLink .active {
   font-weight: bolder;
+}
+
+.VPMenuGroup .title {
+  font-size: 11px;
+  color: var(--vp-c-text-3);
 }
 
 /* 主题色 */
