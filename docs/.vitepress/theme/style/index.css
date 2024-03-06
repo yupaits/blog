@@ -1,5 +1,5 @@
 /* 图片居中显示 */
-img {
+img:not(.VPImage) {
   text-align: center;
   margin: 0 auto;
 }

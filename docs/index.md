@@ -19,11 +19,17 @@ hero:
       link: /软件开发/
 
 features:
-  - title: IDEA - 灵感
+  - icon:
+      src: /home/idea.png
+    title: IDEA - 灵感
     details: 
-  - title: ACTION - 行动
+  - icon: 
+      src: /home/action.png
+    title: ACTION - 行动
     details: 
-  - title: ACCUMULATION - 积累
+  - icon: 
+      src: /home/accumulation.png
+    title: ACCUMULATION - 积累
     details: 
 ---
 
