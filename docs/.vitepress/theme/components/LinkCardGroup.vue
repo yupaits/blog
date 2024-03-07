@@ -87,12 +87,28 @@ onMounted(() => {
   align-items: center;
   gap: 8px;
   margin: 0;
-  width: calc(100% / 3 - 6px);
-  max-width: 300px;
+}
+
+@media screen and (min-width: 768px) {
+  .card-container .card-group .custom-block {
+    width: calc(100% / 3 - 6px);
+  }
+}
+
+@media screen and (min-width: 540px) and (max-width: 768px) {
+  .card-container .card-group .custom-block {
+    width: calc(100% / 2 - 5px);
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .card-container .card-group .custom-block {
+    width: 100%;
+  }
 }
 
 .card-container .card-group .title {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .link-img {
