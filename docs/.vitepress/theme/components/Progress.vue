@@ -40,7 +40,7 @@ const { label, width, labelWidth, percent } = defineProps(['label', 'width', 'la
   width: 100%;
   max-width: 100%;
   height: 8px;
-  background-color: var(--vp-c-divider);
+  background-color: var(--vp-c-gray-soft);
   border-radius: 4px;
   position: relative;
   overflow: hidden;

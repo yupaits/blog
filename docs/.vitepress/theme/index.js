@@ -4,7 +4,7 @@ import { useRoute } from 'vitepress'
 import mediumZoom from 'medium-zoom'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import MyLayout from './MyLayout.vue'
-import DraftLayout from './layout/DraftLayout.vue'
+import DraftAnnounce from './components/DraftAnnounce.vue'
 import LinkCard from './components/LinkCard.vue'
 import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
@@ -70,7 +70,7 @@ export default {
     )
   },
   enhanceApp({ app }) {
-    app.component('DraftLayout', DraftLayout)
+    app.component('DraftAnnounce', DraftAnnounce)
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
     app.component('Progress', Progress)

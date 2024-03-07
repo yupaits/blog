@@ -1,5 +1,6 @@
 ---
 draft: true
+draftPercent: 25
 ---
 
 # shop商城

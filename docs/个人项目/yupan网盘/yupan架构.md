@@ -1,6 +1,7 @@
 ---
 draft: true
-showDraft: true
+draftPreview: true
+draftPercent: 75
 ---
 
 # yupan架构
