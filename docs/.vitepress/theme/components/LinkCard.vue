@@ -2,7 +2,7 @@
   <a :href="option?.link" target="_blank" :class="option?.type ?? group?.type ?? 'info'"
     class="link-card no-icon custom-block" :title="option?.description">
     <img :ref="getImgRefName(group?.label, option?.text)" referrer="no-referrer|origin|unsafe-url"
-      :style="{ background: option?.iconBackground, height: option.imgHeight ?? '48px', width: option.imgWidth ?? '48px' }"
+      :style="{ background: option?.iconBackground, height: option.imgHeight ?? group.imgHeight ?? '48px', width: option.imgWidth ?? group.imgWidth ?? '48px' }"
       class="link-img no-zoom VPImage">
     <div>
       <div class="link-card-title">{{ option?.text }}</div>

@@ -20,7 +20,9 @@ const { data } = defineProps(['data'])
 const linkGroup = (groupItem) => {
   return {
     label: groupItem.text,
-    type: groupItem.type
+    type: groupItem.type,
+    imgWidth: groupItem.imgWidth,
+    imgHeight: groupItem.imgHeight
   }
 }
 </script>
