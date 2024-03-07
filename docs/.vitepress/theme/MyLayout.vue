@@ -39,8 +39,8 @@ const handlePreviewDraft = () => {
 
 const showComment = () => {
   const enabledComment = frontmatter.value?.comment
-  return (!isDraft() && (enabledComment === undefined || enabledComment)) ||
-    (isDraft() && isPreviewDraft())
+  return (enabledComment === undefined || enabledComment) &&
+    (!isDraft() || (isDraft() && isPreviewDraft()))
 }
 
 onMounted(() => {
