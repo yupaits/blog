@@ -1,6 +1,9 @@
 ---
 comment: false
 ---
+<script setup>
+import {data} from './data/技能.data.js'
+</script>
 
 ::: warning 版权声明：转载文章请注明来源，违者必究！
 :::
@@ -13,17 +16,8 @@ comment: false
 
 同时，由于个人思想深度、技术水平的局限性，恳请读者能多多包容并提出宝贵建议。
 
-|技能 |	掌握程度 |
-|:---:|---:|
-| Java | ⭐⭐⭐⭐⭐⭐⭐⭐⚪⚪ |
-| Spring Boot |	⭐⭐⭐⭐⭐⭐⭐⚪⚪⚪ |
-| Spring Cloud | ⭐⭐⭐⭐⭐⭐⭐⚪⚪⚪ |
-| MySQL |	⭐⭐⭐⭐⭐⭐⭐⚪⚪⚪ |
-| Maven |	⭐⭐⭐⭐⭐⭐⚪⚪⚪⚪ |
-| Vue.js | ⭐⭐⭐⭐⭐⭐⚪⚪⚪⚪ |
-| React | ⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪ |
-| Git | ⭐⭐⭐⭐⭐⭐⚪⚪⚪⚪ |
-| Docker | ⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪ |
-| CI/CD |	⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪ |
-| Golang | ⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪ |
-| Javascript | ⭐⭐⭐⭐⭐⚪⚪⚪⚪⚪ |
+各项技术目前掌握的程度如下：
+
+<div v-for="item in data">
+  <Progress :label="item.text" :percent="item.percent" />
+</div>
