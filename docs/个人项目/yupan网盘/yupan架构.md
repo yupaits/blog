@@ -49,7 +49,7 @@ iText(pdf) |
 
 模块依赖关系：
 
-[yupan模块依赖关系.xmind](https://www.yuque.com/attachments/yuque/0/2020/xmind/763022/1594656272428-ee2ef787-7e1b-47bc-a02a-fc394017d6c9.xmind)
+![yupan模块依赖关系](./yupan架构/yupan模块依赖关系.png)
 
 ## 4. 资源站点
 | 站点名 | 资源类别 | 运营注意事项 |
