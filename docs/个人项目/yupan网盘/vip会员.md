@@ -1,5 +1,5 @@
 ---
-layout: draft
+draft: true
 ---
 
 # vip会员

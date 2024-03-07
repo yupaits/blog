@@ -1,5 +1,6 @@
 ---
-layout: draft
+draft: true
+showDraft: true
 ---
 
 # yupan架构
