@@ -95,8 +95,8 @@
 ## Java递归的实现
 ### 递归得到树形结构
 
-- Model类
-```java
+::: code-group
+```java [Model类]
 public class Item {
     private Integer id;
     private Integer parentId;
@@ -137,8 +137,7 @@ public class Item {
 }
 ```
 
-- Mapper类
-```java
+```java [Mapper类]
 @Mapper
 public interface ItemMapper {
     @Select("select * from table where parentId = #{parentId:INTEGER}")
@@ -152,8 +151,7 @@ public interface ItemMapper {
 }
 ```
 
-- Service类
-```java
+```java [Service类]
 public interface ItemService {
     Item getItemTree();
     
@@ -162,7 +160,7 @@ public interface ItemService {
     List<Integer> getParentItemIds(Integer itemId);
 }
 ```
-```java
+```java [Service实现]
 @Service("itemService")
 public class ItemServiceImpl implements ItemService {
     @Autowired
@@ -186,6 +184,8 @@ public class ItemServiceImpl implements ItemService {
     }
 }
 ```
+:::
+
 ### 递归获取指定item所有父item ID的集合
 ```java
 @Service("itemService")

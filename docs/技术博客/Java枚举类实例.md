@@ -89,7 +89,8 @@ public enum NewsRSSFeedEnum {
 -  定义 enum 类型的时候，如果是简单类型，那么最后一个枚举值就不用跟任何一个符号；但如果有定制方法，那么最后一个枚举值与后面代码要用分号 ; 隔开，不能用逗号或空格。 
 -  由于 enum 类型的值实际上是通过运行期构造处对象来表示，所以在 cluster(集群) 环境下，每个虚拟机都会构造出一个同义的枚举对象。因而在做比较操作时需要注意，如果直接用等号（==）操作符，这些看似一样的枚举值一定不相等，因为这不是同一个对象实例。 
 ### 避免错误使用 Enum 示例
-```java
+::: code-group
+```java [WeedDayEnum.java]
  // 定义一个一周七天的枚举类型
  package example.enumeration.codes; 
 
@@ -105,8 +106,10 @@ public enum NewsRSSFeedEnum {
     public int getIndex() { 
         return index; 
     } 
- } 
+ }
+```
 
+```java [EnumerationClient.java]
  // 客户端程序，将一个枚举值通过网络传递给服务器端
  package example.enumeration.codes; 
 
@@ -132,8 +135,10 @@ public enum NewsRSSFeedEnum {
         os.close(); 
         socket.close(); 
     } 
- } 
+ }
+``` 
 
+```java [EnumerationServer.java]
  // 服务器端程序，将从客户端收到的枚举值应用到逻辑处理中
  package example.enumeration.codes; 
 
@@ -195,6 +200,7 @@ public enum NewsRSSFeedEnum {
     } 
  }
 ```
+:::
 结果如下：
 ```
 client Friday enum value is same as server's 
