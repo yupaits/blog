@@ -1,15 +1,12 @@
 <template>
   <div>
     <div v-for="group in data">
-      <h3>{{ group.text }}</h3>
+      <p class="card-group-title" v-if="group.text">{{ group.text }}</p>
       <div class="card-container">
         <div class="card-group">
-          <a :href="item.link" target="_blank" v-for="item in group.items" :class="item.type ?? group.type ?? 'info'"
-            class="no-icon custom-block">
-            <img :ref="getImgRefName(group.text, item.text)" referrer="no-referrer|origin|unsafe-url"
-              :style="{ background: item.iconBackground }" class="link-img no-zoom VPImage">
-            <p class="title">{{ item.text }}</p>
-          </a>
+          <template v-for="item in group.items">
+            <LinkCard :group="linkGroup(group)" :option="item" />
+          </template>
         </div>
       </div>
     </div>
@@ -17,51 +14,29 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance } from 'vue'
+import LinkCard from './LinkCard.vue'
 const { data } = defineProps(['data'])
-const defaultIconUrl = '/icon/url.png'
 
-const isValidImageUrl = (url) => {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onerror = () => resolve(false)
-    img.onload = () => resolve(true)
-    img.src = url
-  })
-}
-
-const correctIconUrl = async (item) => {
-  if (item?.icon) {
-    return item.icon
+const linkGroup = (groupItem) => {
+  return {
+    label: groupItem.text,
+    type: groupItem.type
   }
-  const urlObj = new URL(item.link)
-  const iconLink = `${urlObj.protocol}//${urlObj.hostname}${urlObj.port ? ':' + urlObj.port : ''}/favicon.ico`
-  const isValid = await isValidImageUrl(iconLink)
-  return isValid ? iconLink : defaultIconUrl
 }
-
-const getImgRefName = (groupCate, siteName) => {
-  return `iconImg_${groupCate}_${siteName}`
-}
-
-onMounted(() => {
-  const instance = getCurrentInstance()
-  data.forEach(group => {
-    if (Array.isArray(group.items)) {
-      group.items.forEach(item => {
-        correctIconUrl(item).then(iconUrl => {
-          const iconImgEle = instance.refs[getImgRefName(group.text, item.text)][0]
-          if (iconImgEle) {
-            iconImgEle.src = iconUrl
-          }
-        })
-      })
-    }
-  })
-})
 </script>
 
 <style scoped>
+.card-group-title {
+  font-size: 16px;
+  color: var(--vp-c-brand-1);
+}
+
+.card-group-title:before {
+  content: '◤';
+  color: var(--vp-c-brand-1);
+  margin-right: 8px;
+}
+
 .card-container {
   margin: 16px auto;
   max-width: 1152px;
@@ -73,50 +48,21 @@ onMounted(() => {
   gap: 9px;
 }
 
-.card-container a {
-  text-decoration: none;
-}
-
-.card-container a::after {
-  content: none;
-}
-
-.card-container .card-group .custom-block {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-}
-
 @media screen and (min-width: 768px) {
-  .card-container .card-group .custom-block {
+  .link-card {
     width: calc(100% / 3 - 6px);
   }
 }
 
 @media screen and (min-width: 540px) and (max-width: 768px) {
-  .card-container .card-group .custom-block {
+  .link-card {
     width: calc(100% / 2 - 5px);
   }
 }
 
 @media screen and (max-width: 540px) {
-  .card-container .card-group .custom-block {
+  .link-card {
     width: 100%;
   }
-}
-
-.card-container .card-group .title {
-  font-size: 15px;
-}
-
-.link-img {
-  height: 36px;
-  width: 36px;
-  background: #fff;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  padding: 4px
 }
 </style>
