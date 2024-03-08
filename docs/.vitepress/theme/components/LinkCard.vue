@@ -6,7 +6,7 @@
       class="link-img no-zoom VPImage">
     <div>
       <div class="link-card-title">{{ option?.text }}</div>
-      <p class="link-card-description" v-html="option?.description"></p>
+      <p class="link-card-description" v-html="option?.description" v-if="option?.description"></p>
     </div>
   </a>
 </template>
