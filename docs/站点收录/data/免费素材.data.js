@@ -22,12 +22,10 @@ export default {
         text: '免费音乐',
         items: [
           { text: 'Bensound', link: 'https://www.bensound.com/', icon: 'https://www.bensound.com/favicon.png' },
-          { text: 'filmmusic', link: 'https://incompetech.filmmusic.io/search/' },
           { text: 'Free Music Archive', link: 'http://freemusicarchive.org/', icon: 'https://freemusicarchive.org/img/favicon.svg' },
           { text: 'Jamendo Music', link: 'https://www.jamendo.com/' },
           { text: 'Free Loops', link: 'http://free-loops.com/', icon: 'https://free-loops.com/favicon-32x32.png' },
           { text: 'Freesound', link: 'https://freesound.org/' },
-          { text: 'Jukedeck', link: 'https://www.jukedeck.com/' },
           { text: 'Sound Image', link: 'http://soundimage.org/' },
           { text: 'Sound Bible', link: 'http://soundbible.com/' },
         ]
