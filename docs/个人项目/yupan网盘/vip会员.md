@@ -1,5 +1,6 @@
 ---
 draft: true
+draftPercent: 20
 ---
 
 # vip会员
