@@ -1,12 +1,12 @@
 <template>
   <a :href="option?.link" target="_blank" :class="option?.type ?? group?.type ?? 'info'"
-    class="link-card no-icon custom-block" :title="option?.description">
+    class="link-card no-icon custom-block">
     <img :ref="getImgRefName(group?.label, option?.text)" referrer="no-referrer|origin|unsafe-url"
-      :style="{ background: option?.iconBackground, height: option.imgHeight ?? group.imgHeight ?? '48px', width: option.imgWidth ?? group.imgWidth ?? '48px' }"
+      :style="{ background: option?.iconBackground, height: option.imgHeight ?? group.imgHeight ?? '48px', minWidth: option.imgWidth ?? group.imgWidth ?? '48px' }"
       class="link-img no-zoom VPImage">
     <div>
       <div class="link-card-title">{{ option?.text }}</div>
-      <div class="link-card-description">{{ option?.description }}</div>
+      <p class="link-card-description" v-html="option?.description"></p>
     </div>
   </a>
 </template>
@@ -57,7 +57,7 @@ onMounted(() => {
 .link-card {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   margin: 0;
 }
@@ -73,7 +73,6 @@ a::after.link-card {
 .link-img {
   background: #fff;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
   padding: 4px
 }
 

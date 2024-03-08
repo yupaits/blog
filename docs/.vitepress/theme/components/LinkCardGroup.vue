@@ -5,7 +5,7 @@
       <div class="card-container">
         <div class="card-group">
           <template v-for="item in group.items">
-            <LinkCard :group="linkGroup(group)" :option="item" />
+            <LinkCard :group="linkGroup(group)" :option="item" :class="{ 'block': isBlock() }" />
           </template>
         </div>
       </div>
@@ -15,14 +15,18 @@
 
 <script setup>
 import LinkCard from './LinkCard.vue'
-const { data } = defineProps(['data'])
+const { data, block, imgHeight, imgWidth } = defineProps(['data', 'block', 'imgHeight', 'imgWidth'])
+
+const isBlock = () => {
+  return block === '' || (typeof block === 'boolean' && block)
+}
 
 const linkGroup = (groupItem) => {
   return {
     label: groupItem.text,
     type: groupItem.type,
-    imgWidth: groupItem.imgWidth,
-    imgHeight: groupItem.imgHeight
+    imgWidth: groupItem.imgWidth ?? imgWidth,
+    imgHeight: groupItem.imgHeight ?? imgHeight
   }
 }
 </script>
@@ -50,20 +54,24 @@ const linkGroup = (groupItem) => {
   gap: 9px;
 }
 
+.link-card.block {
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) {
-  .link-card {
+  .link-card:not(.block) {
     width: calc(100% / 3 - 6px);
   }
 }
 
 @media screen and (min-width: 540px) and (max-width: 768px) {
-  .link-card {
+  .link-card:not(.block) {
     width: calc(100% / 2 - 5px);
   }
 }
 
 @media screen and (max-width: 540px) {
-  .link-card {
+  .link-card:not(.block) {
     width: 100%;
   }
 }
