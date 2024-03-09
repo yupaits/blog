@@ -38,7 +38,7 @@ const linkGroup = (groupItem) => {
 }
 
 .card-group-title:before {
-  content: '◤';
+  content: '▞';
   color: var(--vp-c-brand-1);
   margin-right: 8px;
 }
