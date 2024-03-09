@@ -35,12 +35,9 @@ const linkGroup = (groupItem) => {
 .card-group-title {
   font-size: 16px;
   color: var(--vp-c-brand-1);
-}
-
-.card-group-title:before {
-  content: '▞';
-  color: var(--vp-c-brand-1);
-  margin-right: 8px;
+  border-left: 4px solid var(--vp-c-brand-1);
+  padding-left: 8px;
+  line-height: 24px;
 }
 
 .card-container {
