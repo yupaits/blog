@@ -20,10 +20,8 @@ draftPercent: 75
 | 图片加水印 |  | Hutool ImgUtil |
 | 视频去广告 |  | JavaCV |
 | 视频插入广告 |  | JavaCV |
-| 电子书排版优化 |  | epublib(epub)
-iText(pdf) |
-| 电子书植入广告 |  | epublib(epub)
-iText(pdf) |
+| 电子书排版优化 |  | epublib(epub)<br>iText(pdf) |
+| 电子书植入广告 |  | epublib(epub)<br>iText(pdf) |
 | 支付 |  | IJPay |
 
 文件存储服务：minio
@@ -71,9 +69,8 @@ iText(pdf) |
 ![](./yupan架构/1624457590363-6de39467-c5d6-4c2d-b48f-cc36700b778e.jpeg)
 
 图片资源站点收集：
+- 暂无
 
-- [https://www.meizitu.com](https://www.meizitu.com/)
-- [https://www.ugirls.fm](https://www.ugirls.fm/)
 ### 5.2 小说
 ### 5.3 电影
 ### 5.4 动漫
