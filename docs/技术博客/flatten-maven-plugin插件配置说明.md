@@ -56,9 +56,7 @@
 | --- | --- |
 | minimum | 不推荐使用，会展开`pluginRepositories`。 |
 | bom | 会保留`dependencyManagement`，展开`properties`。 |
-| oss | 推荐开源项目使用，会展开`ciManagement`、`contributors`、`distributionManagement`、`inceptionYear`、`issueManagement`
-
-、`mailingLists`、`organization`、`prerequisites` |
+| oss | 推荐开源项目使用，会展开`ciManagement`、`contributors`、`distributionManagement`、`inceptionYear`、`issueManagement`、`mailingLists`、`organization`、`prerequisites` |
 | ossrh | 会展开`name`、`description`、`url`、`scm`、`developers` |
 | defaults | 会展开`repositories` |
 | clean | 删除全部可选元素 |
