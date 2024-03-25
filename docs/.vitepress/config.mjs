@@ -38,6 +38,7 @@ export default defineConfig({
   ignoreDeadLinks: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: '/favicon.ico',
     nav: [
       { text: '技术博客', link: '/技术博客/', activeMatch: '/技术博客/' },
       { text: '文章收录', link: '/文章收录/', activeMatch: '/文章收录/' },
