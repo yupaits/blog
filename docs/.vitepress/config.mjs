@@ -532,9 +532,6 @@ export default defineConfig({
             base: '/个人项目/yupan网盘/',
             items: [
               { text: 'yupan架构', link: 'yupan架构' },
-              { text: '商城页面', link: '商城页面' },
-              { text: 'shop商城', link: 'shop商城' },
-              { text: 'vip会员', link: 'vip会员' },
             ]
           },
         ]
