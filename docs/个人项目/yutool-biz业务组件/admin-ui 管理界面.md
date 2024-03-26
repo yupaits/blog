@@ -11,7 +11,6 @@
 
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| routes | 导航页面路由 | string[] \| ReactNode[] |  |
 | title | 页面标题 | string |  |
 | subtitle | 页面副标题 | string |  |
 | optProps | 页面顶部操作区配置 | OptProps |  |
