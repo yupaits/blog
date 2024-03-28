@@ -71,3 +71,23 @@ delete t1 from tt_data t1 inner join (
   ) s2 on s1.a = s2.a and s1.b = s2.b and s1.c != s2.max_c
 ) t2 on t1.id = t2.id;
 ```
+
+### 11. 备份数据库
+
+- 创建备份库
+- 使用`mysqldump`工具导出包含数据库对象和数据的sql文件
+- 使用sql文件将数据导入备份库
+
+::: code-group
+```sql [创建备份库]
+create database db_bak;
+```
+
+```bash [导出sql]
+mysqldump -u root -p db > /tmp/db.sql
+```
+
+```bash [数据导入备份库]
+mysql -u root -p db_bak < /tmp/db.sql
+```
+:::
