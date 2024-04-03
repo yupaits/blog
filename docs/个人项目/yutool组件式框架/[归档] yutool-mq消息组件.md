@@ -1,4 +1,4 @@
-# [归档] yutool-mq消息组件
+# yutool-mq消息组件
 
 ## 快速上手
 

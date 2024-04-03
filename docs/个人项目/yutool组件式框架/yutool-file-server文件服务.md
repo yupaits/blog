@@ -29,19 +29,12 @@
 ```yml
 # 文件服务配置
 file-server:
-  # type可选项有: fastdfs、minio
-  type: fastdfs
+  # type可选项有: minio
+  type: minio
   minio:
     endpoint:
     accessKey:
     secretKey:
-
-# FastDFS配置
-fdfs:
-  so-timeout: 1501
-  connect-timeout: 601
-  tracker-list:
-    - localhost:22122
 ```
 
 ### 3. 编写文件上传下载Controller【参考】
@@ -49,139 +42,107 @@ fdfs:
 在项目中编写文件上传下载Controller：
 
 ```java
+/**
+ * 文件接口
+ * @author yupaits
+ * @since 2019/8/2
+ */
 @RestController
 @RequestMapping("/upload/{storeGroup}")
-@Api(tags = "文件接口")
+@RequiredArgsConstructor
+@ConditionalOnBean(annotation = EnableFileServer.class)
 public class FileController {
     private static final String UPLOAD_PATH_PREFIX = "/upload/";
-    private static final String PATH_SEPARATOR = "/";
 
     private final UploadTemplate uploadTemplate;
     private final DownloadTemplate downloadTemplate;
     private final DeleteTemplate deleteTemplate;
 
-    @Autowired
-    public FileController(UploadTemplate uploadTemplate, DownloadTemplate downloadTemplate, DeleteTemplate deleteTemplate) {
-        this.uploadTemplate = uploadTemplate;
-        this.downloadTemplate = downloadTemplate;
-        this.deleteTemplate = deleteTemplate;
-    }
-
-    @ApiOperation("上传文件并返回访问路径")
+    /**
+     * 上传文件并返回访问路径
+     * @param file 上传的文件
+     * @param storeGroup 文件存储分组
+     * @return 文件的访问链接
+     */
+    @ActionLog(value = "上传文件", level = ActionLog.ActionLogLevel.MIDDLE)
     @PostMapping("")
-    public Result<String> upload(@RequestParam("file") MultipartFile file,
-                                 @ApiParam(value = "文件存储分组", required = true) @PathVariable String storeGroup) throws UploadException {
+    public Result<String> upload(@RequestParam("file") MultipartFile file, @PathVariable String storeGroup) {
         UploadProps uploadProps = new UploadProps();
         uploadProps.setStoreGroup(storeGroup);
-        return uploadTemplate.resultUpload(file, uploadProps);
+        return Result.ok(uploadTemplate.upload(file, uploadProps));
     }
 
-    @ApiOperation("批量上传文件并返回访问路径")
+    /**
+     * 批量上传文件并返回访问路径
+     * @param files 上传的文件
+     * @param storeGroup 文件存储分组
+     * @return 文件的访问链接
+     */
+    @ActionLog(value = "批量上传文件", level = ActionLog.ActionLogLevel.MIDDLE)
     @PostMapping("/batch")
-    public Result<Map<String, String>> uploadBatch(@RequestParam("files")List<MultipartFile> files,
-                                                   @ApiParam(value = "文件存储分组", required = true) @PathVariable String storeGroup) throws UploadException {
+    public Result<Map<String, String>> uploadBatch(@RequestParam("files")List<MultipartFile> files, @PathVariable String storeGroup){
         UploadProps uploadProps = new UploadProps();
         uploadProps.setStoreGroup(storeGroup);
-        return uploadTemplate.resultUploadBatch(files, uploadProps);
+        return Result.ok(uploadTemplate.uploadBatch(files, uploadProps));
     }
 
-    @ApiOperation("上传图片并返回访问路径")
+    /**
+     * 上传图片并返回访问路径
+     * @param image 上传的图片
+     * @param storeGroup 文件存储分组
+     * @param uploadProps 文件上传配置参数
+     * @return 图片的访问链接
+     */
+    @ActionLog(value = "上传图片", level = ActionLog.ActionLogLevel.MIDDLE)
     @PostMapping("/image")
     public Result<String> uploadImage(@RequestParam("image") MultipartFile image,
-                                      @ApiParam(value = "文件存储分组", required = true) @PathVariable String storeGroup,
-                                      @ApiParam("是否保存缩略图") @RequestParam(required = false, defaultValue = "false") boolean thumb,
-                                      @ApiParam("缩略图宽度") @RequestParam(required = false, defaultValue = "0") int width,
-                                      @ApiParam("缩略图高度") @RequestParam(required = false, defaultValue = "0") int height,
-                                      @ApiParam("图片缩放比例") @RequestParam(required = false, defaultValue = "1.0") double scale,
-                                      @ApiParam("是否附带水印") @RequestParam(required = false, defaultValue = "false") boolean withWatermark,
-                                      @ApiParam("水印类型") @RequestParam(required = false) WatermarkType watermarkType,
-                                      @ApiParam("水印文件路径") @RequestParam(required = false) String watermarkPic,
-                                      @ApiParam("水印文字") @RequestParam(required = false) String watermarkText,
-                                      @ApiParam("水印透明度（取值范围0-1，0表示完全透明）") @RequestParam(required = false, defaultValue = "1.0") float watermarkOpacity,
-                                      @ApiParam("水印位置") @RequestParam(required = false) Positions watermarkPos) throws UploadException {
-        UploadProps uploadProps = UploadProps.builder()
-                .storeGroup(storeGroup)
-                .thumb(thumb)
-                .width(width)
-                .height(height)
-                .scale(scale)
-                .withWatermark(withWatermark)
-                .watermarkType(watermarkType)
-                .watermarkPic(watermarkPic)
-                .watermarkText(watermarkText)
-                .watermarkOpacity(watermarkOpacity)
-                .watermarkPos(watermarkPos)
-                .build();
-        return uploadTemplate.resultUploadImage(image, uploadProps);
+                                      @PathVariable String storeGroup,
+                                      UploadProps uploadProps){
+        uploadProps.setStoreGroup(storeGroup);
+        return Result.ok(uploadTemplate.uploadImage(image, uploadProps));
     }
 
-    @ApiOperation("批量上传图片并返回访问路径")
+    /**
+     * 批量上传图片并返回访问路径
+     * @param images 上传的图片文件列表
+     * @param storeGroup 文件存储分组
+     * @param uploadProps 文件上传配置参数
+     * @return 图片访问链接列表
+     */
+    @ActionLog(value = "批量上传图片", level = ActionLog.ActionLogLevel.MIDDLE)
     @PostMapping("/image/batch")
     public Result<Map<String, String>> uploadBatchImage(@RequestParam("images")List<MultipartFile> images,
-                                                        @ApiParam(value = "文件存储分组", required = true) @PathVariable String storeGroup,
-                                                        @ApiParam("是否保存缩略图") @RequestParam(required = false, defaultValue = "false") boolean thumb,
-                                                        @ApiParam("缩略图宽度") @RequestParam(required = false, defaultValue = "0") int width,
-                                                        @ApiParam("缩略图高度") @RequestParam(required = false, defaultValue = "0") int height,
-                                                        @ApiParam("图片缩放比例") @RequestParam(required = false, defaultValue = "1.0") double scale,
-                                                        @ApiParam("是否附带水印") @RequestParam(required = false, defaultValue = "false") boolean withWatermark,
-                                                        @ApiParam("水印类型") @RequestParam(required = false) WatermarkType watermarkType,
-                                                        @ApiParam("水印文件路径") @RequestParam(required = false) String watermarkPic,
-                                                        @ApiParam("水印文字") @RequestParam(required = false) String watermarkText,
-                                                        @ApiParam("水印透明度（取值范围0-1，0表示完全透明）") @RequestParam(required = false, defaultValue = "1.0") float watermarkOpacity,
-                                                        @ApiParam("水印位置") @RequestParam(required = false) Positions watermarkPos) throws UploadException {
-        UploadProps uploadProps = UploadProps.builder()
-                .storeGroup(storeGroup)
-                .thumb(thumb)
-                .width(width)
-                .height(height)
-                .scale(scale)
-                .withWatermark(withWatermark)
-                .watermarkType(watermarkType)
-                .watermarkPic(watermarkPic)
-                .watermarkText(watermarkText)
-                .watermarkOpacity(watermarkOpacity)
-                .watermarkPos(watermarkPos)
-                .build();
-        return uploadTemplate.resultUploadBatchImage(images, uploadProps);
+                                                        @PathVariable String storeGroup,
+                                                        UploadProps uploadProps){
+        uploadProps.setStoreGroup(storeGroup);
+        return Result.ok(uploadTemplate.uploadBatchImage(images, uploadProps));
     }
 
-    @ApiOperation("下载文件")
+    /**
+     * 下载文件
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @param downloadProps 文件下载配置参数
+     * @throws IOException 抛出IOException
+     */
+    @ActionLog(value = "下载文件", level = ActionLog.ActionLogLevel.MIDDLE)
     @GetMapping("/**")
-    public void download(HttpServletRequest request, HttpServletResponse response,
-                         @ApiParam("是否下载缩略图") @RequestParam(required = false, defaultValue = "false") boolean thumb,
-                         @ApiParam("缩略图宽度") @RequestParam(required = false, defaultValue = "0") int width,
-                         @ApiParam("缩略图高度") @RequestParam(required = false, defaultValue = "0") int height,
-                         @ApiParam("图片质量（压缩比，如0.8表示压缩比为80%）") @RequestParam(required = false, defaultValue = "1.0") float quality,
-                         @ApiParam("图片缩放比例") @RequestParam(required = false, defaultValue = "1.0") double scale,
-                         @ApiParam("是否附带水印") @RequestParam(required = false, defaultValue = "false") boolean withWatermark,
-                         @ApiParam("水印类型") @RequestParam(required = false) WatermarkType watermarkType,
-                         @ApiParam("水印文件路径") @RequestParam(required = false) String watermarkPic,
-                         @ApiParam("水印文字") @RequestParam(required = false) String watermarkText,
-                         @ApiParam("水印透明度（取值范围0-1，0表示完全透明）") @RequestParam(required = false, defaultValue = "1.0") float watermarkOpacity,
-                         @ApiParam("水印位置") @RequestParam(required = false) Positions watermarkPos) throws IOException, DownloadException {
-        DownloadProps downloadProps = DownloadProps.builder()
-                .thumb(thumb)
-                .width(width)
-                .height(height)
-                .quality(quality)
-                .scale(scale)
-                .withWatermark(withWatermark)
-                .watermarkType(watermarkType)
-                .watermarkPic(watermarkPic)
-                .watermarkText(watermarkText)
-                .watermarkOpacity(watermarkOpacity)
-                .watermarkPos(watermarkPos)
-                .build();
-        String fullPath = StringUtils.substringAfter(StringUtils.substringAfter(request.getRequestURI(), UPLOAD_PATH_PREFIX), PATH_SEPARATOR);
+    public void download(HttpServletRequest request, HttpServletResponse response, DownloadProps downloadProps) throws IOException {
+        String fullPath = StringUtils.substringAfter(request.getRequestURI(), UPLOAD_PATH_PREFIX);
         downloadTemplate.downloadFile(response, fullPath, downloadProps);
     }
 
-    @ApiOperation("删除文件")
+    /**
+     * 删除文件
+     * @param request HttpServletRequest
+     * @return 处理结果
+     */
+    @ActionLog(value = "删除文件", level = ActionLog.ActionLogLevel.HIGH)
     @DeleteMapping("/**")
-    public Result delete(HttpServletRequest request) throws DeleteException {
-        String fullPath = StringUtils.substringAfter(StringUtils.substringAfter(request.getRequestURI(), UPLOAD_PATH_PREFIX), PATH_SEPARATOR);
+    public Result delete(HttpServletRequest request) {
+        String fullPath = StringUtils.substringAfter(request.getRequestURI(), UPLOAD_PATH_PREFIX);
         deleteTemplate.deleteFile(fullPath);
-        return ResultWrapper.success();
+        return Result.ok();
     }
 }
 ```

@@ -1,4 +1,4 @@
-# [归档] yutool-push推送组件
+# yutool-push推送组件
 
 ## 快速上手
 

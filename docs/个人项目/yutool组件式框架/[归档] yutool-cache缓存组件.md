@@ -1,4 +1,4 @@
-# [归档] yutool-cache缓存组件
+# yutool-cache缓存组件
 
 ## 快速上手
 
