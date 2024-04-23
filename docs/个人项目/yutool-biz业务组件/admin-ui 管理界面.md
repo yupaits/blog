@@ -86,7 +86,7 @@
 | dataSource | 数据 | array | [] |
 | expandAllRows | 是否展开所有行 | boolean | false |
 | expandIcon | 自定义展开按钮，传 false 关闭默认的渲染 | boolean \| ReactNode <br> \| (expanded: boolean) => ReactNode |  |
-| expandedRowKeys | 展开的行，传入此参数时行展开功能将受控 | (string | number)[] |  |
+| expandedRowKeys | 展开的行，传入此参数时行展开功能将受控 | (string \| number)[] |  |
 | onExpand | 点击行展开图标时进行触发 | (expanded: boolean, record: RecordType, DOMEvent: MouseEvent) => void |  |
 | aggregateData | 聚合查询结果 | array <br> `[{field: string, type: 'SUM'\|'COUNT'\|'MIN'\|'MAX'\|'AVERAGE', value: object}]` |  |
 | paignation | 分页参数，传null时不显示分页器 | object <br> `{currentPage: number, pageSize: number}` | null |
