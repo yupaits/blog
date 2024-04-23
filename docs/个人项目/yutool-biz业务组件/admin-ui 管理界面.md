@@ -82,12 +82,16 @@
 | bordered | 是否展示外边框和列边框 | boolean | false |
 | expanedRowRender | 额外的展开行 | (record: object, index: number, expanded: boolean) => ReactNode |  |
 | resizable | 是否开启伸缩列功能 | boolean | false |
+| draggable | 是否开启行拖拽功能 | boolean | false |
 | dataSource | 数据 | array | [] |
 | expandAllRows | 是否展开所有行 | boolean | false |
 | expandIcon | 自定义展开按钮，传 false 关闭默认的渲染 | boolean \| ReactNode <br> \| (expanded: boolean) => ReactNode |  |
+| expandedRowKeys | 展开的行，传入此参数时行展开功能将受控 | (string | number)[] |  |
+| onExpand | 点击行展开图标时进行触发 | (expanded: boolean, record: RecordType, DOMEvent: MouseEvent) => void |  |
 | aggregateData | 聚合查询结果 | array <br> `[{field: string, type: 'SUM'\|'COUNT'\|'MIN'\|'MAX'\|'AVERAGE', value: object}]` |  |
 | paignation | 分页参数，传null时不显示分页器 | object <br> `{currentPage: number, pageSize: number}` | null |
 | onPageChange | 分页事件回调 | (currentPage: number, pageSize: number) => void |  |
+| onMoveRow | 开启行拖拽时，拖拽事件的回调 | (fromIndex: number, toIndex: number) => void |  |
 | selectEnabled | 是否启用行选择 | boolean | false |
 | selectColumnWidth | 设置行选择列宽度 | number |  |
 | selectedKeys | 指定选中项的key数组 | string[] |  |
