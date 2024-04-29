@@ -3,7 +3,7 @@
     "markdown-it-task-lists": "^2.1.1",
     "medium-zoom": "^1.1.0",
     "valine": "^1.5.1",
-    "vitepress": "1.0.1",
+    "vitepress": "1.1.4",
     "vitepress-plugin-back-to-top": "^1.0.1",
     "vue-github-button": "^3.1.0"
   },

@@ -673,6 +673,11 @@ export default defineConfig({
     lightModeSwitchTitle: '切换到浅色模式',
     darkModeSwitchTitle: '切换到深色模式',
     externalLinkIcon: true,
+
+    notFound: {
+      quote: '众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。',
+      linkText: '返回主页'
+    }
   },
   markdown: {
     theme: { light: 'slack-ochin', dark: 'monokai' },
