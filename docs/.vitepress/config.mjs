@@ -71,6 +71,7 @@ export default defineConfig({
       '/技术博客/': {
         base: '/技术博客/',
         items: [
+          { text: '益智游戏开发-扫雷', link: '益智游戏开发-扫雷' },
           { text: 'CompletableFuture的用法', link: 'CompletableFuture的用法' },
           { text: 'Java流式API', link: 'Java流式API' },
           { text: 'guava-retrying实现重试机制', link: 'guava-retrying实现重试机制' },
