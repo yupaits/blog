@@ -71,6 +71,7 @@ export default defineConfig({
       '/技术博客/': {
         base: '/技术博客/',
         items: [
+          { text: '益智游戏开发-推箱子', link: '益智游戏开发-推箱子' },
           { text: '益智游戏开发-扫雷', link: '益智游戏开发-扫雷' },
           { text: '益智游戏开发-数独', link: '益智游戏开发-数独' },
           { text: 'CompletableFuture的用法', link: 'CompletableFuture的用法' },
