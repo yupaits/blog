@@ -12,7 +12,7 @@
   - Jetty 12.0
   - Undertow 2.3
 
-- GraalVM原生镜像
+- GraalVM原生镜像 (可选)
   - GraalVM Community 22.3
   - Native Build Tools 0.9.28
 
@@ -61,7 +61,7 @@ com.yupaits.yutool.push.core.config.WebSocketConfig
   - `javax.servlet:jakarta.servlet-api`修改为`jakarta.servlet:jakarta.servlet-api`
   - 使用了`javax.annotation.*`注解的模块需要引用`jakarta.annotation:jakarta.annotation-api`，其他javax相关的引用也是类似方式处理
   - 未通过`spring-boot-stater`管理指定Hibernate的模块，需要单独指定`hibernate-core`版本（当前最新为`6.4.8.Final`）
-  - `com.alibaba.cloud:spring-cloud-alibaba-dependencies`需更新到`2023.x`版本，对应的
+  - `com.alibaba.cloud:spring-cloud-alibaba-dependencies`需更新到`2023.x`版本，对应的`nacos-server`也最好更新至v2.3.2版本
 
 - import包路径调整
   - `javax.persistence.*`修改为`jakarta.persistence.*`
@@ -77,4 +77,4 @@ com.yupaits.yutool.push.core.config.WebSocketConfig
   - `cn.hutool.extra.servlet.ServletUtil`改为`cn.hutool.extra.servlet.JakartaServletUtil`
   - `Class.newInstance()`方法（Java 9弃用）替换为`Class.getDeclaredConstructor().newInstance()`
   - `org.springframework.http.HttpMethod`由`enum`类改为`final class`，`HttpMethod#resolve`改为`HttpMethod#valueOf`
-  - 使用`RestClient`替换`RestTemplate`作为Http客户端
+  - 使用`RestClient`替换`RestTemplate`作为默认的Http客户端
