@@ -575,6 +575,7 @@ export default defineConfig({
                 items: [
                   { text: '极空间Docker使用攻略', link: '极空间Docker使用攻略' },
                   { text: '多个路由器组网实践', link: '多个路由器组网实践' },
+                  { text: '安装Jellyfin实现IPTV播放及自建家庭影视系统', link: '安装Jellyfin实现IPTV播放及自建家庭影视系统' },
                 ]
               },
               {
