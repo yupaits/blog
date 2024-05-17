@@ -160,11 +160,11 @@ public class UserRoleKey implements Serializable {
 2017-04-08 23:56:50.459 INFO [bootstrap,38d6049ff0686023,d1b8b0352d3f6fa9,false] 8764 — [nio-8080-exec-1] demo.JpaSingleDatasourceApplication : Step 2: Handling print
 2017-04-08 23:56:50.459 INFO [bootstrap,38d6049ff0686023,d1b8b0352d3f6fa9,false] 8764 — [nio-8080-exec-1] demo.JpaSingleDatasourceApplication : Step 1: Handling home
 ```
-	比一般的日志多出了 `[bootstrap,38d6049ff0686023,d1b8b0352d3f6fa9,false]` 这些内容，对应 `[appname,traceId,spanId,exportable]`。
+比一般的日志多出了 `[bootstrap,38d6049ff0686023,d1b8b0352d3f6fa9,false]` 这些内容，对应 `[appname,traceId,spanId,exportable]`。
 
-   - appname：服务名称
-   - traceId\spanId：链路追踪的两个术语
-   - exportable: 是否是发送给zipkin
+  - appname：服务名称
+  - traceId\spanId：链路追踪的两个术语
+  - exportable: 是否是发送给zipkin
 27. SpringBoot中使用 `logback-spring.xml` 进行日志打印的配置。示例：
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -258,7 +258,7 @@ bool checkUnique(String requestId) {
     }
 }
 ```
-	requestId一般由客户端sdk生成和具体业务相关联。
+  requestId一般由客户端sdk生成和具体业务相关联。
 
 31. profile为default时会读取 `application.yml` 的配置，而当profile不是default时，会读取对应的 `applicaiton-{profile}.yml` 的配置。需要注意的是，如果 `application.yml` 和 `application-{profile}.yml` 中存在相同的配置项时，`application.yml` 的优先级更高，所以一般在 `application.yml` 中设置共用的配置项。
 32. 在SpringMVC中 `@RequestBody` 注解修饰的对象如果存在 `@DateTimeFormat` 注解修饰的属性，而且使用 jackson 进行反序列，那么 `@DateTimeFormat` 注解实际上是不起作用的，此时需要使用 `@JsonFormat` 注解进行代替。示例如下：
@@ -283,8 +283,8 @@ execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-patter
 - `param-pattern` 表示参数
 - `throws-pattern` 表示抛出的异常
 34. fastjson序列化之后如果出现`$ref`说明启用了“重复应用/循环引用”特性，可以通过以下两种方式处理：
-   1. 通过全局或局部序列化配置`SerializerFeature.DisableCircularReferenceDetect`来展示实际内容
-   2. 将存在重复引用的对象使用该对象的副本（new一个同类型对象并复制属性值）而不是原对象
+    1. 通过全局或局部序列化配置`SerializerFeature.DisableCircularReferenceDetect`来展示实际内容
+    2. 将存在重复引用的对象使用该对象的副本（new一个同类型对象并复制属性值）而不是原对象
 35. Mybatis的if标签中判断字符串相等要使用如下格式:
 ```xml
 <if test='field == "value"'>
@@ -293,65 +293,113 @@ execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-patter
 	注意外层用单引号，字符串的值使用双引号。
 
 36. Spring/Spring Boot中可以通过可以通过如下方式控制bean的加载顺序：
-   1. 通过构造方法依赖的方式，来控制有依赖关系的bean之间的初始化顺序，需要注意循环依赖的问题
-   2. 使用`@DependsOn`注解来控制bean之间的实例化（调用构造方法）顺序，但是bean的初始化方法（如`@PostConstruct`注解修饰的初始化方法）调用顺序无法保证
-   3. 通过`BeanPostProcessor`的方式手动控制bean的加载顺序
+    1. 通过构造方法依赖的方式，来控制有依赖关系的bean之间的初始化顺序，需要注意循环依赖的问题
+    2. 使用`@DependsOn`注解来控制bean之间的实例化（调用构造方法）顺序，但是bean的初始化方法（如`@PostConstruct`注解修饰的初始化方法）调用顺序无法保证
+    3. 通过`BeanPostProcessor`的方式手动控制bean的加载顺序
 37. `@Order`和`@AutoConfigureOrder`的正确使用方式：
-   1. `@Order`注解不能指定bean的加载顺序，它适用于AOP的优先级，以及将多个bean注入到集合时，这些bean在集合中的顺序
-   2. `@AutoConfigureOrder`指定外部依赖的自动装配配置的加载顺序（即定义在/META-INF/spring.factories文件中的配置bean优先级），在当前工程中使用这个注解不会起作用
-   3. 同样的，`@AutoConfigureBefore`和`@AutoConfigureAfter`注解的使用范围和`@AutoConfigureOrder`一样
+    1. `@Order`注解不能指定bean的加载顺序，它适用于AOP的优先级，以及将多个bean注入到集合时，这些bean在集合中的顺序
+    2. `@AutoConfigureOrder`指定外部依赖的自动装配配置的加载顺序（即定义在/META-INF/spring.factories文件中的配置bean优先级），在当前工程中使用这个注解不会起作用
+    3. 同样的，`@AutoConfigureBefore`和`@AutoConfigureAfter`注解的使用范围和`@AutoConfigureOrder`一样
 38. 当使用Mybatis定义多个同名Mapper类时，在项目启用时会报注入了同名Bean的错误，可以通过在其中一个Mapper类上添加`@Repository("anotherMapperName")`注解的方式手动命名Bean来规避。
 39. Spring Cloud OpenFeign使用总结：
-   1. @FeignClient注解修饰的接口不支持多继承和多层继承
-   2. 当多个@FeignClient注解使用了相同的name时，必须指定contextId，否则使用默认的`name+contextId`生成的FeignClient标识会重复
-   3. @FeignClient的注解跟大部分注解一样，支持`${}`方式读取配置文件内容
-   4. @FeignClient接口返回数据类型如果使用泛型，泛型类型要避免使用接口类型，会导致反序列化的结果为null
-   5. @FeignClient接口在mybatis-plus的ServiceImpl的继承类（IService的实现类）中如果通过`@RequiredArgsConstructor`结合`private final XxxClient xxxClient;`的方式进行注入（本质上是通过构造方法注入）的话，在编译阶段会出现"java: 可能尚未初始化变量xxxClient"的报错。只能使用`@Autowired`私有属性的方式进行注入：`@Autowired private XxxClient xxxClient;`
-   6. 在Feign的RequestInterceptor中不要使用RequestContextHolder获取当前的HttpServletRequest对象，会导致使用FeignClient调用其他服务接口返回404的错误
-   7. 当使用Apache HttpClient作为Feign的Http请求客户端时（配置了`feign.httpclient.enabled=true`），可使用`feign.httpclient.max-connections=100`设置连接池最大连接数为100，使用`feign.httpclient.max-connections-per-route=50`设置连接池每个路径最大连接数为50
-   8. 使用`feign.client.config.default.connectionTimeout`和`feign.client.config.default.connectionTimeout`设置FeignClient调用接口默认的连接超时时间和请求处理超时时间；当需要对某个FeignClient单独设置超时时间，可使用`feign.client.config.[contextId].connectionTimeout`（这里的contextId对应@FeignClient注解上的contextId）
-   9. 使用@FeignClient传输文件时，需要指定请求的consumes类型为`MediaType.MULTIPART_FORM_DATA_VALUE`并在文件参数前添加`@RequestPart("file")`注解（file是参数名），示例如下：
-```java
-@FeignClient
-public interface UploadClient {
+    1. @FeignClient注解修饰的接口不支持多继承和多层继承
+    2. 当多个@FeignClient注解使用了相同的name时，必须指定contextId，否则使用默认的`name+contextId`生成的FeignClient标识会重复
+    3. @FeignClient的注解跟大部分注解一样，支持`${}`方式读取配置文件内容
+    4. @FeignClient接口返回数据类型如果使用泛型，泛型类型要避免使用接口类型，会导致反序列化的结果为null
+    5. @FeignClient接口在mybatis-plus的ServiceImpl的继承类（IService的实现类）中如果通过`@RequiredArgsConstructor`结合`private final XxxClient xxxClient;`的方式进行注入（本质上是通过构造方法注入）的话，在编译阶段会出现"java: 可能尚未初始化变量xxxClient"的报错。只能使用`@Autowired`私有属性的方式进行注入：`@Autowired private XxxClient xxxClient;`
+    6. 在Feign的RequestInterceptor中不要使用RequestContextHolder获取当前的HttpServletRequest对象，会导致使用FeignClient调用其他服务接口返回404的错误
+    7. 当使用Apache HttpClient作为Feign的Http请求客户端时（配置了`feign.httpclient.enabled=true`），可使用`feign.httpclient.max-connections=100`设置连接池最大连接数为100，使用`feign.httpclient.max-connections-per-route=50`设置连接池每个路径最大连接数为50
+    8. 使用`feign.client.config.default.connectionTimeout`和`feign.client.config.default.connectionTimeout`设置FeignClient调用接口默认的连接超时时间和请求处理超时时间；当需要对某个FeignClient单独设置超时时间，可使用`feign.client.config.[contextId].connectionTimeout`（这里的contextId对应@FeignClient注解上的contextId）
+    9. 使用@FeignClient传输文件时，需要指定请求的consumes类型为`MediaType.MULTIPART_FORM_DATA_VALUE`并在文件参数前添加`@RequestPart("file")`注解（file是参数名），示例如下：
+    ```java
+    @FeignClient
+    public interface UploadClient {
 
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    Result upload(@RequestPart("file") MultipartFile file);
+        @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+        Result upload(@RequestPart("file") MultipartFile file);
 
-}
-```
-同时需要注入`Encoder`Bean以支持`MultipartFile`使用表单数据类型传输，具体为：
-```java
-@Configuration
-@RequiredArgsConstructor
-public class FeignConfig {
-	private final ObjectFactory<HttpMessageConverters> messageConverters;
-    
-    @Bean
-    public Encoder multipartFormEncoder() {
-        return new SpringFormEncoder(new SpringEncoder(messageConverters));
     }
-}
-```
+    ```
+    同时需要注入`Encoder`Bean以支持`MultipartFile`使用表单数据类型传输，具体为：
+    ```java
+    @Configuration
+    @RequiredArgsConstructor
+    public class FeignConfig {
+      private final ObjectFactory<HttpMessageConverters> messageConverters;
+        
+        @Bean
+        public Encoder multipartFormEncoder() {
+            return new SpringFormEncoder(new SpringEncoder(messageConverters));
+        }
+    }
+    ```
 
 40. 启用Java远程JVM调试，在服务端启动的时候添加启动参数：
 ```java
 -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
 ```
-	其中5005是自定义的调试端口。
+  其中5005是自定义的调试端口。
 
 41. sqlite数据库使用注意事项：
-   1. 当sqlite的连接url使用`jdbc:sqlite::resource:[filepath]`时(resource模式)，使用IntelliJ IDEA等IDE启动项目，由于位于resources下的db文件会编译到target目录下，此时对db文件进行读写操作时，很大概率会出现“The database disk image is malformed”的错误提示。推荐使用项目目录外部的db文件路径作为连接url。	
-   2. 使用MyBatis进行数据库操作时，Java的LocalDate、LocalDateTime类型的转换会报错，此时需要自行实现LocalDate、LocalDateTime类型的TypeHandler。
-   3. 枚举类型可以使用Mybaits提供的EnumTypeHandler和EnumOrdinalTypeHandler来进行类型转换，如果项目中还使用了Mybatis Plus，还可以使用MybatisEnumTypeHandler。
+    1. 当sqlite的连接url使用`jdbc:sqlite::resource:[filepath]`时(resource模式)，使用IntelliJ IDEA等IDE启动项目，由于位于resources下的db文件会编译到target目录下，此时对db文件进行读写操作时，很大概率会出现“The database disk image is malformed”的错误提示。推荐使用项目目录外部的db文件路径作为连接url。	
+    2. 使用MyBatis进行数据库操作时，Java的LocalDate、LocalDateTime类型的转换会报错，此时需要自行实现LocalDate、LocalDateTime类型的TypeHandler。
+    3. 枚举类型可以使用Mybaits提供的EnumTypeHandler和EnumOrdinalTypeHandler来进行类型转换，如果项目中还使用了Mybatis Plus，还可以使用MybatisEnumTypeHandler。
 42. Spring Cahce缓存注解使用时需要注意：
-- 接口方法定义为：`Result<AirportInfo> getByAirportCode(@RequestParam("airportCode") String airportCode);`，使用`@Cacheable(key = "#root.methodName + ':' + #airportCode")`注解时，会报错：Null key returned for cache operation。原因是接口方法在编译之后方法形参`airportCode`命名会被修改为`arg0`、`arg1`、`var1`这种格式，使用`#airportCode`获取不到参数值。将`#airportCode`替换为`a0`或者`p0`这种按序号取参数值的形式，可以解决。
-- @Cacheable的condition和unless控制方法结果是否缓存的机制如下：
-   - condition为false，不缓存
-   - condition为true，unless为false，缓存
-   - condition为true，unless为true，不缓存
-   - condition为空，默认true
-   - unless为空，默认false
+- 接口方法定义为：`Result<AirportInfo> getByAirportCode(@RequestParam("airportCode") String airportCode);`，使用`@Cacheable(key = "#root.methodName + ':' + #airportCode")`注解时，会报错：Null key returned for cache operation。原因是接口方法在编译之后方法形参`airportCode`命名会被修改为`arg0`、`arg1`、`var1`这种格式，使用`#airportCode`获取不到参数值。
+
+    解决方法：
+    1. 将`#airportCode`替换为`a0`或者`p0`这种按序号取参数值的形式。
+    2. 在使用`org.apache.maven.plugins:maven-compiler-plugin`插件编译项目时，添加`-parameters`参数，使得编译后的方法形参保持原来的命名，具体配置如下。
+
+    ```xml
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <compilerArgs>
+                <arg>-parameters</arg>
+            </compilerArgs>
+        </configuration>
+    </plugin>
+    ```
+- 缓存操作注解
+  | 名称 | 说明 |
+  |---|---|
+  | @Cacheable | 主要针对方法配置，能够根据方法的请求参数对其结果进行缓存，查询和更新都可以使用 |
+  | @CachePut | 保证方法被调用，有希望结果被缓存，与@Cacheable区别在于每次都会调用方法，常用于更新 |
+  | @CacheEvict | 清空缓存 |
+  | @Caching | 使用该注解可以同时指定多个缓存或者清除缓存的策略 |
+
+- `@Cacheable`/`@CachePut`/`@CacheEvict`注解主要参数
+  | 名称 | 说明 |
+  |---|---|
+  | value | 缓存的名称，在Spring配置文件中定义，必须指定至少一个 |
+  | key | 缓存的key，可以为空。如果指定要按照SpEL表达式编写；如果不指定，则默认按照方法的所有参数进行组合 |
+  | condition | 缓存的条件，可以为空，使用SpEL编写，返回true或者false，只有为true才进行缓存/清除缓存 |
+  | unless | 否定缓存，当条件结果为true时，就不会缓存 |
+  | allEntries(@CacheEvict) | 是否清空所有缓存内容，默认为false，如果指定为true，则方法调用后将立即清空所有缓存 |
+  | beforeInvocation(@CacheEvict) | 是否在方法执行前就清空，默认为false，如果指定为true，则在方法还没有执行的时候就清空缓存，默认情况下，如果方法执行抛出异常，就不会清空缓存 |
+
+- `@Cacheable`/`@CachePut`的condition和unless控制方法结果是否缓存的机制如下：
+  | 条件 | unless: true | unless: false（为空默认false） |
+  |---|---|---|
+  |condition: true（为空默认true） | 不缓存 | 缓存 |
+  |condition: false | 不缓存 | 不缓存 |
+
+- SpEL上下文数据
+  | 名称 | 位置 | 描述 | 表达式 |
+  |---|---|---|---|
+  | methodName | root对象 | 当前被调用的方法名 | `#root.methodName` |
+  | method | root对象 | 当前被调用的方法 | `#root.method` |
+  | target | root对象 | 当前被调用的目标对象实例 | `#root.target` |
+  | targetClass | root对象 | 当前被调用的目标对象的类 | `#root.targetClass`|
+  | args | root对象 | 当前被调用的方法的参数列表 | `#root.args` |
+  | caches | root对象 | 当前方法调用使用的缓存列表 | `#root.caches` |
+  | ArgumentName | 执行上下文 | 当前被调用的方法的参数，如上文的`#airportCode` | `#airportCode` |
+  | result | 执行上下文 | 方法执行后的返回值（仅当方法执行后的判断有效，如 unless=false cacheEvict的beforeInvocation=false）| `#result` |
 43. SpringAOP搭配注解进行切面开发时，同一个Spring Bean内部方法互相调用时（例如：`bizService.a()`和`bizService.b()`方法都被注解修饰，`bizService.a()`方法中调用了`bizService.b()`方法），只有最外层的方法（`bizService.a()`方法）会执行切面的代码，而被嵌套调用的方法（`bizService.b()`方法）不会执行切面中的代码。
 ```java
 @Service
