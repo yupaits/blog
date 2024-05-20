@@ -10,7 +10,7 @@
 
 ### 前期准备
 
-- 有效直播源：[IPTV](https://github.com/hiyoi/IPTV)
+- 直播源：[m3u直播源](https://github.com/search?q=m3u&type=repositories)
 - Jellyfin Docker镜像：https://hub.docker.com/r/jellyfin/jellyfin
 
 ### 运行Jellyfin容器
