@@ -77,6 +77,7 @@
 #### DataTable 页面表格
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| visible | 是否展示表格 | boolean | true |
 | columns | 表格列配置： <br> - groupable 可用于分组 <br> - sortable 可用于排序 <br> - aggregatable 可用于聚合 <br> - optional 可选列 <br>  | array <br> `[{title: string, dataIndex: string, fixed: boolean, width: number, render: (text: any, record: RecordType, index: number, { expandIcon?: ReactNode, selection?: ReactNode, indentText?: ReactNode }) => object\|ReactNode, sortable: boolean, aggregatable: boolean, groupable: boolean, optional: boolean}]` | [] <br> 序号列可使用`@/components/page/PageTable/addition`中提供的`indexColumn` |
 | rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string \| (record: RecordType) => string | 'id' |
 | bordered | 是否展示外边框和列边框 | boolean | false |
