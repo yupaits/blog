@@ -70,6 +70,7 @@
 | 属性 | 说明 | 类型/示例 | 默认值 |
 | --- | --- | --- | --- |
 | dataLoading | 数据加载状态 | boolean |  |
+| addBtnLoading | 新增数据加载状态 | boolean |  |
 | sortsBtnLoading | 排序项应用加载状态 | boolean |  |
 | queryBtnLoading | 查询条件应用加载状态 | boolean |  |
 | aggregatesBtnLoading | 聚合项应用加载状态 | boolean |  |
