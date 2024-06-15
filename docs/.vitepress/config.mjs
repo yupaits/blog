@@ -506,7 +506,6 @@ export default defineConfig({
             items: [
               { text: 'yutool-cli功能清单', link: 'yutool-cli功能清单' },
               { text: 'yutool-cli运营模式', link: 'yutool-cli运营模式' },
-
             ]
           },
           {
@@ -514,6 +513,8 @@ export default defineConfig({
             base: '/个人项目/yutool-metadata元数据/',
             items: [
               { text: '元数据自定义对象管理设计', link: '元数据自定义对象管理设计' },
+              { text: '自定义对象核心功能设计及实现', link: '自定义对象核心功能设计及实现' },
+              { text: '业务对象管理', link: '业务对象管理' },
             ]
           },
           {
