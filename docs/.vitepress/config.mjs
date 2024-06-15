@@ -514,7 +514,6 @@ export default defineConfig({
             items: [
               { text: '元数据自定义对象管理设计', link: '元数据自定义对象管理设计' },
               { text: '自定义对象核心功能设计及实现', link: '自定义对象核心功能设计及实现' },
-              { text: '业务对象管理', link: '业务对象管理' },
             ]
           },
           {
