@@ -22,7 +22,6 @@ export default {
           { text: '爱站网', link: 'https://www.aizhan.com/' },
           { text: '科研学术搜索', link: 'https://www.sciencesoft.cn/so/' },
           { text: '稿定设计', link: 'https://www.gaoding.com/koutu' },
-          { text: '智图', link: 'https://zhitu.isux.us/', icon: 'https://zhitu.isux.us/assets/img/logo-s.ico' },
           { text: 'ACONVERT.COM', link: 'https://www.aconvert.com/cn/' },
           { text: '草料二维码', link: 'https://cli.im/url' },
           { text: '二维码梦工厂', link: 'https://www.qrdream.com/', icon: 'https://www.qrdream.com/img/favicon.ico' },
@@ -32,7 +31,6 @@ export default {
         text: '设计',
         items: [
           { text: '即时原型', link: 'https://www.xiaopiu.com/' },
-          { text: '鹿班 - 让设计更美好', link: 'https://luban.aliyun.com/', icon: 'https://g.alicdn.com/acca/resource/luban/image/favicon.png' },
           { text: 'DesignEvo', link: 'https://www.designevo.com/', icon: '/icon/url.png' },
           { text: 'Material Design Dark', link: 'https://material.io/design/color/dark-theme.html', icon: 'https://m2.material.io/static/assets/favicon.ico' },
           { text: 'Tokens 设计变量 - Semi Design', link: 'https://semi.design/zh-CN/basic/tokens', icon: 'https://lf9-static.semi.design/obj/semi-tos/images/a5768a90-324e-11ec-b393-ab4adc2e449f.svg', iconBackground: 'rgba(46, 50, 56)' },
@@ -52,6 +50,9 @@ export default {
       {
         text: '图标',
         items: [
+          { text: 'ByteDance IconPark', link: 'https://iconpark.oceanengine.com/home', icon: 'https://lf1-cdn2-tos.bytegoofy.com/bydesign/iconparksite/logo.svg' },
+          { text: 'REMIX ICON', link: 'https://remixicon.com/' },
+          { text: 'Simple Icons', link: 'https://simpleicons.org/', icon: 'https://simpleicons.org/images/favicon.ico' },
           { text: 'Font Awesome', link: 'https://fontawesome.com/' },
           { text: 'Free Icons', link: 'https://icons8.com/', icon: 'https://maxst.icons8.com/vue-static/landings/primary-landings/favs/icons8_fav_32×32.png' },
           { text: 'iconfont-阿里巴巴矢量图标库', link: 'https://www.iconfont.cn/' },
