@@ -29,6 +29,8 @@
 | onSearch | 查询按钮点击事件回调 | () => void |  |
 | saveEnabled | 是否显示新增按钮 | boolean | true |
 | onAdd | 新增按钮点击事件回调 | () => void |  |
+| exportEnabled | 是否显示导出按钮 | boolean | false |
+| onExport | 导出按钮点击事件回调 | () => void |  |
 | extOptComponent | 操作区扩展组件 | ReactNode |  |
 
 #### SortProps 排序配置
@@ -71,6 +73,7 @@
 | --- | --- | --- | --- |
 | dataLoading | 数据加载状态 | boolean |  |
 | addBtnLoading | 新增数据加载状态 | boolean |  |
+| exportBtnLoading | 导出数据处理状态 | boolean |  |
 | sortsBtnLoading | 排序项应用加载状态 | boolean |  |
 | queryBtnLoading | 查询条件应用加载状态 | boolean |  |
 | aggregatesBtnLoading | 聚合项应用加载状态 | boolean |  |
