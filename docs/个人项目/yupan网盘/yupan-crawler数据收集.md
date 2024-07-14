@@ -30,7 +30,9 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 - `void onSuccess(Result<T> result)`: 数据爬取成功回调方法
 - `void onFailure(Exception ex)`: 数据爬取失败回调方法
 
-这样设计的好处在于：与任务调度平台整合时，无需从任务调度平台获取任何任务执行所必需的信息，只需要开发相关任务调度平台的执行器并触发采集处理器的`crawl()`方法执行即可。如果有切换任务调度平台的需要，只需修改少量适配代码即可完成。
+这样设计的好处在于：
+1. 与任务调度平台整合时，无需从任务调度平台获取任务执行的必需信息，只需要实现相关任务调度平台的执行器（例如：xxl-job的`IJobHandler`，PowerJob的`BasicProcessor`）触发采集处理器的`AbstractCrawlerHandler.crawl()`方法执行即可。
+2. 如果有切换任务调度平台的需要，只需修改少量适配代码即可完成。
 
 ### 任务执行方式灵活
 
