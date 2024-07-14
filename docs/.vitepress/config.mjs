@@ -537,6 +537,7 @@ export default defineConfig({
             base: '/个人项目/yupan网盘/',
             items: [
               { text: 'yupan架构', link: 'yupan架构' },
+              { text: 'yupan-crawler数据收集', link: 'yupan-crawler数据收集' },
             ]
           },
         ]
