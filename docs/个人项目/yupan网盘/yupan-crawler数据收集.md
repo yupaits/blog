@@ -20,15 +20,18 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 
 系统默认使用MySQL数据库存储配置信息，可以在采集任务的管理页面上对以上信息进行维护。
 
-可以实现`CrawlerJobHolder`接口类的`CrawlerJob getCrawlerJob(String jobName)`方法通过任务名称获取配置信息，默认实现是通过查询数据库获取。
+可以实现`CrawlerJobHolder`接口类的`CrawlerJob getCrawlerJob(String jobName);`方法通过任务名称获取配置信息，默认实现是通过查询数据库获取。
 
 ### 任务执行与任务调度解耦
 
 将数据采集过程模板化，设计为`AbstractCrawlerHandler`抽象类，任务执行过程封装成`crawl()`方法，并暴露出以下方法：
 - `String getName()`: 获取采集任务名称（唯一标识，用于关联对应的采集任务配置信息）
-- `Result<T> handle()`: 数据爬取过程
-- `void onSuccess(Result<T> result)`: 数据爬取成功回调方法
-- `void onFailure(Exception ex)`: 数据爬取失败回调方法
+- `CrawlerContext<T> getContext()`: 获取资源采集任务上下文
+- `void preHandle(CrawlerContext<T> crawlerContext)`: 爬取前的预处理
+- `void postHandle(CrawlerContext<T> crawlerContext)`: 爬取后的处理
+- `Result<T> handle(CrawlerContext<T> crawlerContext)`: 数据爬取过程
+- `void onSuccess(CrawlerContext<T> crawlerContext)`: 数据爬取成功回调方法
+- `void onFailure(CrawlerContext<T> crawlerContext)`: 数据爬取失败回调方法
 
 这样设计的好处在于：
 1. 与任务调度平台整合时，无需从任务调度平台获取任务执行的必需信息，只需要实现相关任务调度平台的执行器（例如：xxl-job的`IJobHandler`，PowerJob的`BasicProcessor`）触发采集处理器的`AbstractCrawlerHandler.crawl()`方法执行即可。
