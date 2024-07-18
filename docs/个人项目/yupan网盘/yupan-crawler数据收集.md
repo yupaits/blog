@@ -32,7 +32,7 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 - `void onSuccess(CrawlerContext crawlerContext)`: 数据爬取成功回调方法
 - `void onFailure(CrawlerContext crawlerContext)`: 数据爬取失败回调方法
 
-`CrawlerContext`上下文对象包含一下信息：
+`CrawlerContext`上下文对象包含以下信息：
 - `crawlerJob`: 采集任务配置
 - `crawlerJobLog`: 采集日志
 - `success`: 爬取是否成功
