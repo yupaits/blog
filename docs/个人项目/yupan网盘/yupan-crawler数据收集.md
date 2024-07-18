@@ -28,9 +28,18 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 - `String getName()`: 获取采集任务名称（唯一标识，用于关联对应的采集任务配置信息）
 - `void preHandle(CrawlerContext crawlerContext)`: 爬取前的预处理
 - `void postHandle(CrawlerContext crawlerContext)`: 爬取后的处理
-- `Result<T> handle(CrawlerContext crawlerContext)`: 数据爬取过程
+- `void handle(CrawlerContext crawlerContext)`: 数据爬取过程
 - `void onSuccess(CrawlerContext crawlerContext)`: 数据爬取成功回调方法
 - `void onFailure(CrawlerContext crawlerContext)`: 数据爬取失败回调方法
+
+`CrawlerContext`上下文对象包含一下信息：
+- `crawlerJob`: 采集任务配置
+- `crawlerJobLog`: 采集日志
+- `success`: 爬取是否成功
+- `payload`: 爬取内容载体
+- `ex`: 爬取失败抛出的异常
+
+如果想使用默认的上下文加载`CrawlerJob`配置信息、初始化及存储`CrawlerJobLog`日志信息的方式，则只需要继承`DefaultCrawlerHandler`抽象类。
 
 这样设计的好处在于：
 1. 与任务调度平台整合时，无需从任务调度平台获取任务执行的必需信息，只需要实现相关任务调度平台的执行器（例如：xxl-job的`IJobHandler`，PowerJob的`BasicProcessor`）触发采集处理器的`AbstractCrawlerHandler.crawl()`方法执行即可。
