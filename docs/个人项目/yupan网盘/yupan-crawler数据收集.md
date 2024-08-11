@@ -15,7 +15,7 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 - `siteUrl`: 资源站点地址
 - `storePath`: 资源文件存储路径
 - `remoteWebDriverUrl`: 远程WebDriver地址
-- `timeout`: 超时时长
+- `timeout`: 页面加载超时时长
 - `jobProps`: 任务定制化配置信息，针对具体任务的个性化配置
 
 系统默认使用MySQL数据库存储配置信息，可以在采集任务的管理页面上对以上信息进行维护。
