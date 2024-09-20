@@ -601,9 +601,17 @@ export default defineConfig({
           },
           {
             text: '阅读空间',
-            base: '/生活记录/阅读书单/',
+            base: '/生活记录/阅读空间/',
             items: [
               { text: '阅读计划', link: '阅读计划' },
+              {
+                text: '时间线叙事系列',
+                base: '/生活记录/阅读空间/时间线叙事系列/',
+                collapsed: true,
+                items: [
+                  { text: '无人生还', link: '无人生还' },
+                ]
+              },
             ]
           }
         ]
