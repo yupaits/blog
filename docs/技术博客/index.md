@@ -1,5 +1,6 @@
 ---
 comment: false
+watermark: hidden
 ---
 <script setup>
 import {data} from './data/技能.data.js'

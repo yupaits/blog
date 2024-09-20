@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import MarkdownItTaskLists from 'markdown-it-task-lists'
+import ElementPlus from 'unplugin-element-plus/vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -705,5 +706,8 @@ export default defineConfig({
     config: (md) => {
       md.use(MarkdownItTaskLists)
     }
+  },
+  vite: {
+    plugins: [ElementPlus()]
   }
 })

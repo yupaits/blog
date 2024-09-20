@@ -8,8 +8,11 @@ import DraftAnnounce from './components/DraftAnnounce.vue'
 import LinkCard from './components/LinkCard.vue'
 import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
+import { ElTimeline, ElWatermark } from 'element-plus'
 
 import 'vitepress-plugin-back-to-top/dist/style.css'
+import 'element-plus/es/components/timeline/style/css'
+import 'element-plus/es/components/watermark/style/css'
 import './style/index.css'
 import './style/var.css'
 
@@ -74,6 +77,8 @@ export default {
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
     app.component('Progress', Progress)
+    app.component('Timeline', ElTimeline)
+    app.component('Watermark', ElWatermark)
     vitepressBackToTop({
       threshold: 300
     })

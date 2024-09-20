@@ -1,4 +1,4 @@
-# [归档] dynamic-thread-pool动态线程池管理插件
+# dynamic-thread-pool动态线程池管理插件
 
 ## 说明*
 开源的[DynamicTp](https://dynamictp.cn/)动态线程池实现功能更强大完善，此插件停止维护。

@@ -1,5 +1,6 @@
 ---
 comment: false
+watermark: hidden
 ---
 
 ::: tip 人生不止眼前的苟且，还有诗和远方！

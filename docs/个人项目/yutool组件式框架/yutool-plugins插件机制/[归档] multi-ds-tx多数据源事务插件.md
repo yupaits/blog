@@ -1,4 +1,4 @@
-# [归档] multi-ds-tx多数据源事务插件
+# multi-ds-tx多数据源事务插件
 
 ## 说明*
 Dynamic-Datasource 4.0.0+版本支持本地多数据源事务，此插件停止维护。

@@ -1,7 +1,9 @@
 {
   "devDependencies": {
+    "element-plus": "^2.8.3",
     "markdown-it-task-lists": "^2.1.1",
     "medium-zoom": "^1.1.0",
+    "unplugin-element-plus": "^0.8.0",
     "valine": "^1.5.1",
     "vitepress": "1.1.4",
     "vitepress-plugin-back-to-top": "^1.0.1",
@@ -12,6 +14,5 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
-  "dependencies": {},
   "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
 }

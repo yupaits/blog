@@ -1,3 +1,7 @@
+---
+watermark: hidden
+---
+
 <script setup>
 import GithubButton from 'vue-github-button'
 </script>
