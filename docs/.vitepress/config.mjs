@@ -600,7 +600,7 @@ export default defineConfig({
             ]
           },
           {
-            text: '阅读书单',
+            text: '阅读空间',
             base: '/生活记录/阅读书单/',
             items: [
               { text: '阅读计划', link: '阅读计划' },
