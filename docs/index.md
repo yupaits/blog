@@ -12,11 +12,11 @@ hero:
       text: 技术博客
       link: /技术博客/
     - theme: alt
-      text: 文章收录
-      link: /文章收录/
-    - theme: alt
       text: 软件开发
       link: /软件开发/
+    - theme: alt
+      text: 时间线叙事
+      link: /生活记录/阅读空间/时间线叙事/
 
 features:
   - icon:
