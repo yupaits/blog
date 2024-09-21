@@ -12,6 +12,7 @@ import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
 
 import 'vitepress-plugin-back-to-top/dist/style.css'
 import 'element-plus/es/components/timeline/style/css'
+import 'element-plus/es/components/timeline-item/style/css'
 import 'element-plus/es/components/watermark/style/css'
 import './style/index.css'
 import './style/var.css'
