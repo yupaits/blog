@@ -33,4 +33,18 @@ watch(
     immediate: true,
   }
 )
+
+//监听copy事件，向剪切板内容添加版权信息
+const copyright = `------\n著作权归 yupaits notes(yupaits.com) 所有\n采用CC BY-NC-SA 4.0许可协议\n原文链接: `
+document.addEventListener('copy', event => {
+  const clipboardData = event?.clipboardData || window?.clipboardData
+  if (!clipboardData) {
+    return
+  }
+  const text = window?.getSelection()?.toString()
+  if (text) {
+    event.preventDefault()
+    clipboardData.setData('text/plain', `${text}\n${copyright}${decodeURI(window.location.href)}`)
+  }
+})
 </script>
