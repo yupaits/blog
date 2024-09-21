@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
 import MarkdownItTaskLists from 'markdown-it-task-lists'
-import ElementPlus from 'unplugin-element-plus/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -708,6 +710,13 @@ export default defineConfig({
     }
   },
   vite: {
-    plugins: [ElementPlus()]
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
+    ]
   }
 })
