@@ -14,7 +14,7 @@ import BlogPage from './components/BlogPage.vue'
 const { frontmatter, site, isDark } = useData()
 
 const font = reactive({
-  color: 'rgba(0, 0, 0, .15)'
+  color: 'rgba(0, 0, 0, .08)'
 })
 
 const watermarkHidden = () => {
@@ -26,8 +26,8 @@ watch(
   isDark,
   () => {
     font.color = isDark.value
-      ? 'rgba(255, 255, 255, .15)'
-      : 'rgba(0, 0, 0, .15)'
+      ? 'rgba(255, 255, 255, .08)'
+      : 'rgba(0, 0, 0, .08)'
   },
   {
     immediate: true,
