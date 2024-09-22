@@ -55,8 +55,11 @@
 }
 
 /* 时间线元素去除li前面的圆点 */
-.timeline {
-  li {
-    list-style: none;
+.vp-doc {
+  .timeline {
+    li {
+      list-style: none;
+      margin-top: 0;
+    }
   }
 }
