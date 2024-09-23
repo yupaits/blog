@@ -58,3 +58,58 @@ OpenWrt是一个功能齐全、易于修改、高度可定制的路由器操作�
 通过在OpenWrt中配置并启用各种服务之后，就可以让连接上OpenWrt的设备享受服务提供的各种实用功能（如广告过滤、科学上网等）。
 
 ![连接google](./OpenWrt系统安装及配置/连接google.png)
+
+## 进阶技巧
+
+### 广告过滤
+
+进入`服务-AdGuardHome`页面，进行如下配置后，勾选启用。
+
+![OpenWrt的AdGuardHome配置](./OpenWrt系统安装及配置/OpenWrt的AdGuardHome配置.png)
+
+打开AdGuardHome的控制台地址，登录之后通过对DNS服务器和过滤器进行配置，可实现优化网络连接速度、广告过滤等功能。
+
+![AdGuardHome界面](./OpenWrt系统安装及配置/AdGuardHome界面.png)
+
+### 优化上网环境
+
+进入`服务-ShadowSocksR Plus+`页面，选择`服务器节点`选项卡，添加一个拥有优质网络环境的服务器节点配置并保存之后。回到`客户端`选项卡，主服务器选择刚添加的服务器节点，保存并应用。完成配置之后，同一个局域网中的其它连接OpenWrt旁路由的设备就可以优化上网环境。
+
+![ssr服务器节点](./OpenWrt系统安装及配置/ssr服务器节点.png)
+
+![ssr客户端设置](./OpenWrt系统安装及配置/ssr客户端设置.png)
+
+### 搭建代理服务
+
+- 安装`privoxy`插件
+
+  进入`系统-软件包`页面，安装`luci-app-privoxy`、`luci-i18n-privoxy-zh-cn`、`privoxy`软件包完成之后，刷新页面在`服务`下会新增`Privoxy 网络代理`菜单项。
+
+  ![安装privoxy](./OpenWrt系统安装及配置/安装privoxy.png)
+
+- 启用`ShadowSocksR Plus+`的`SOCKS5 代理服务端（全局）`
+
+  进入`服务-ShadowSocksR Plus+`页面，选择`高级设置`选项卡，启用SOCKS 5代理。
+
+  ![启用Socks5代理](./OpenWrt系统安装及配置/启用Socks5代理.png)
+
+  **局域网内的设备可使用SOCKS5代理: `192.168.1.100:1080`**
+
+- 启用HTTP/HTTPS代理服务
+
+  使用ssh连接打开OpenWrt控制台，打开privoxy配置文件（路径：`/etc/config/privoxy`）并覆写为以下内容:
+
+  ```conf
+  config  privoxy 'privoxy'
+        option  confdir         '/etc/privoxy'
+        option  logdir          '/var/log'
+        option  logfile         'privoxy.log'
+        list    listen_address  '192.168.1.100:8118'
+        option  forward_socks5  '/ 192.168.1.100:1080 .'
+  ```
+
+  通过将HTTP/HTTPS转发至SOCKS5代理，实现HTTP/HTTPS代理。进入`服务-Privoxy 网络代理`页面，启动privoxy服务。
+
+  ![启动privoxy服务](./OpenWrt系统安装及配置/启动privoxy服务.png)
+
+  **局域网内的设备可使用HTTP/HTTPS代理: `192.168.1.100:8118`**
