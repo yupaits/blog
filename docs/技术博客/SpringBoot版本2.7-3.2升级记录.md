@@ -58,7 +58,7 @@ com.yupaits.yutool.push.core.config.WebSocketConfig
 ## 代码调整
 
 - `pom.xml`文件中的依赖项：
-  - `javax.servlet:jakarta.servlet-api`修改为`jakarta.servlet:jakarta.servlet-api`
+  - `javax.servlet:javax.servlet-api`修改为`jakarta.servlet:jakarta.servlet-api`
   - 使用了`javax.annotation.*`注解的模块需要引用`jakarta.annotation:jakarta.annotation-api`，其他javax相关的引用也是类似方式处理
   - 未通过`spring-boot-stater`管理指定Hibernate的模块，需要单独指定`hibernate-core`版本（当前最新为`6.4.8.Final`）
   - `com.alibaba.cloud:spring-cloud-alibaba-dependencies`需更新到`2023.x`版本，对应的`nacos-server`也最好更新至v2.3.2版本
