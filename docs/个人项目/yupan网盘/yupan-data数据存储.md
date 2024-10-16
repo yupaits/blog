@@ -24,7 +24,7 @@ yupan-data会按照资源类别将资源相关数据存储在不同的表中，�
 - `originMainPic`: 主图原图地址
 - `previewPics`: 预览套图地址（仅适用于套图）
 - `originPics`: 原图套图地址（仅适用于套图）
-- `downloadUrl`: 打包下载地址（仅适用于套图）
+- `downloadUrl`: 打包下载地址
 
 ### 小说
 
@@ -32,7 +32,17 @@ yupan-data会按照资源类别将资源相关数据存储在不同的表中，�
 
 ### 电影
 
-待补充...
+- `name`: 电影名称
+- `description`: 电影简介
+- `cate`: 电影分类
+- `tags`: 标签
+- `rarity`: 资源稀有度
+- `poster`: 电影海报
+- `magnet`: 磁力链
+- `bittorrent`: BT种子
+- `movieOrigin`: 电影产地
+- `year`: 电影年份
+- `downloadUrl`: 打包下载地址
 
 ### 动漫
 
