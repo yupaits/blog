@@ -13,7 +13,6 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 - `jobDesc`: 任务说明，采集任务的介绍和说明信息
 - `resCate`: 资源类别，包括：图片、小说、电影、动漫、音乐、有声读物、视频等
 - `siteUrl`: 资源站点地址
-- `storePath`: 资源文件存储路径
 - `timeout`: 页面加载超时时长
 - `jobProps`: 任务定制化配置信息，针对具体任务的个性化配置
 

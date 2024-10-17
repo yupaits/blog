@@ -12,6 +12,7 @@ yupan-cleaner数据清洗以任务的方式执行，清洗任务绑定在采集�
 - `resSizeLimit`: 单次处理资源数量限制
 - `enableRetry`: 是否启用失败重试
 - `retryMaxTimes`: 最大失败重试次数
+- `storePath`: 资源文件存储路径
 - `jobProps`: 任务定制化配置信息
 
 系统默认使用MySQL数据库存储配置信息，可以在清洗任务的管理页面上对以上信息进行维护。
