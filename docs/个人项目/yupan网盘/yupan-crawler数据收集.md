@@ -18,7 +18,7 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 
 系统默认使用MySQL数据库存储配置信息，可以在采集任务的管理页面上对以上信息进行维护。
 
-可以实现`CrawlerJobHolder`接口类的`CrawlerJob getCrawlerJob(String jobName);`方法通过任务名称获取配置信息，默认实现是通过查询数据库获取。
+可以实现`CrawlerJobHolder`接口类的`CrawlerJob getCrawlerJob(String jobName)`方法通过任务名称获取配置信息，默认实现是通过查询数据库获取。
 
 ### 任务执行与任务调度解耦
 
@@ -42,6 +42,30 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 这样设计的好处在于：
 1. 与任务调度平台整合时，无需从任务调度平台获取任务执行的必需信息，只需要实现相关任务调度平台的执行器（例如：xxl-job的`IJobHandler`，PowerJob的`BasicProcessor`）触发采集处理器的`AbstractCrawlerHandler.crawl()`方法执行即可。
 2. 如果有切换任务调度平台的需要，只需修改少量适配代码即可完成。
+
+### 日志处理
+
+`TaskLogger`接口提供了用于对接任务调度平台日志的方法，需要在执行器中实现该接口。同时在采集器中打印日志时，必须使用`HandlerLogHelper`辅助类中的日志打印方法才能完成日志对接。
+
+例如：在xxl-job的执行器中注入`TaskLogger`的Bean实现xxl-job的任务执行日志的对接，代码示例如下：
+
+```java
+@Bean
+public TaskLogger taskLogger() {
+    return new TaskLogger() {
+        @Override
+        public void log(String msg) {
+            XxlJobHelper.log(msg);
+        }
+
+        @Override
+        public void log(String msg, Throwable ex) {
+            XxlJobHelper.log(msg);
+            XxlJobHelper.log(ex);
+        }
+    };
+}
+```
 
 ### 任务执行方式灵活
 
