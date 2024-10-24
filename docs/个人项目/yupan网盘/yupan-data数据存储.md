@@ -37,7 +37,23 @@ yupan-data会按照资源类别将资源相关数据存储在不同的表中，�
 
 ### 小说
 
-待补充...
+|名称|说明|
+|---|---|
+| `id` | 资源ID |
+| `name` | 小说名称 |
+| `description` | 内容简介 |
+| `cate` | 分类 |
+| `tags` | 标签 |
+| `rarity` | 资源稀有度 |
+| `cover` | 封面图 |
+| `author` | 作者 |
+| `serialStatus` | 连载状态 |
+| `originBook` | 原书下载地址 |
+| `downloadUrl` | 打包下载地址 |
+| `status` | 资源状态 |
+| `crawlerJobId` | 采集任务ID |
+| `cleanerJobId` | 清洗任务ID |
+| `cleanTimes` | 清洗次数 |
 
 ### 电影
 
@@ -59,10 +75,6 @@ yupan-data会按照资源类别将资源相关数据存储在不同的表中，�
 | `crawlerJobId` | 采集任务ID |
 | `cleanerJobId` | 清洗任务ID |
 | `cleanTimes` | 清洗次数 |
-
-### 动漫
-
-待补充...
 
 ### 音乐
 
@@ -105,6 +117,6 @@ yupan-data会按照资源类别将资源相关数据存储在不同的表中，�
 | `cleanerJobId` | 清洗任务ID |
 | `cleanTimes` | 清洗次数 |
 
-### 视频
+### 视频系列
 
 待补充...
