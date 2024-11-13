@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { defineConfig } from 'vitepress'
 import MarkdownItTaskLists from 'markdown-it-task-lists'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -598,6 +599,7 @@ export default defineConfig({
                   { text: '使用rclone同步onedrive', link: '使用rclone同步onedrive' },
                   { text: 'yutool-cli高效工作套件', link: 'yutool-cli高效工作套件' },
                   { text: 'OpenWrt系统安装及配置', link: 'OpenWrt系统安装及配置' },
+                  { text: '树莓派变身高性能复古游戏机', link: '树莓派变身高性能复古游戏机' },
                 ]
               },
             ]
