@@ -16,8 +16,8 @@ hero:
       text: 软件开发
       link: /软件开发/
     - theme: alt
-      text: 时间线叙事
-      link: /生活记录/阅读空间/时间线叙事/
+      text: 生活记录
+      link: /生活记录/
 
 features:
   - icon:
