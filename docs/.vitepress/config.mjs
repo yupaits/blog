@@ -66,6 +66,7 @@ export default defineConfig({
               { text: 'AI生产力', link: '/站点收录/AI生产力' },
             ]
           },
+          { text: 'Yupan BBS', link: 'https://bbs.yupaits.com/' },
           { text: 'yupaits的博客', link: 'https://blog.yupaits.com/' },
         ]
       },
@@ -602,6 +603,18 @@ export default defineConfig({
                   { text: '树莓派变身高性能复古游戏机', link: '树莓派变身高性能复古游戏机' },
                 ]
               },
+              {
+                text: 'mini主机',
+                base: '/生活记录/酷玩数码/mini主机/',
+                collapsed: true,
+                items: [
+                  { text: '安装PVE虚拟机系统', link: '安装PVE虚拟机系统' },
+                  { text: '爱快软路由', link: '爱快软路由' },
+                  { text: 'iStoreOS旁路由', link: 'iStoreOS旁路由' },
+                  { text: '基于LXC的Docker环境', link: '基于LXC的Docker环境' },
+                  { text: '安装Windows10开启核显直通', link: '安装Windows10开启核显直通' },
+                ]
+              }
             ]
           },
           {
