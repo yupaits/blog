@@ -608,7 +608,7 @@ export default defineConfig({
                 base: '/生活记录/酷玩数码/mini主机/',
                 collapsed: true,
                 items: [
-                  { text: '安装pve虚拟机系统', link: '安装pve虚拟机系统' },
+                  // { text: '安装pve虚拟机系统', link: '安装pve虚拟机系统' },
                   { text: '爱快软路由', link: '爱快软路由' },
                   { text: 'iStoreOS旁路由', link: 'iStoreOS旁路由' },
                   { text: '基于LXC的Docker环境', link: '基于LXC的Docker环境' },
