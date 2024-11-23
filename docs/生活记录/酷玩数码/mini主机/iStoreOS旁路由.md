@@ -40,7 +40,7 @@ iStore列表中找不到的软件可以通过下载`.ipk包`或`.run自解压格
 
 还有一些OpenWRT的插件可以通过`系统 -> 软件包`中搜索下载并安装。
 
-这里推荐几款常用好用的插件：
+这里推荐几款常用的插件：
 - iKoolProxy滤广告
 - AdGuard Home
 - ShadowSocksR Plus+
