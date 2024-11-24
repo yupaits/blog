@@ -9,10 +9,15 @@ Alpine Linux是一个面向安全，轻量级的基于musl libc与busybox项目�
 下载alpine的CT模板之后，创建CT容器。
 
 ![创建LXC容器-1](./基于LXC的Docker环境/创建LXC容器-1.png)
+
 ![创建LXC容器-2](./基于LXC的Docker环境/创建LXC容器-2.png)
+
 ![创建LXC容器-3](./基于LXC的Docker环境/创建LXC容器-3.png)
+
 ![创建LXC容器-4](./基于LXC的Docker环境/创建LXC容器-4.png)
+
 ![创建LXC容器-5](./基于LXC的Docker环境/创建LXC容器-5.png)
+
 ![创建LXC容器-6](./基于LXC的Docker环境/创建LXC容器-6.png)
 
 创建完成后，进入`选项`，双击`功能`，启用嵌套、NFS、SMB/CIFS和FUSE。

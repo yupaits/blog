@@ -25,9 +25,13 @@ iStoreOS提供了在pve下安装的[官方教程](https://doc.linkease.com/zh/gu
 由于爱快系统中IPv6使用了中继模式，因此需要在iStoreOS中配置DHCPv6的客户端用于IPv6的动态分配。具体方式为：在`网络 -> 接口`中`添加新接口`，添加一个名为"lan_v6"的DHCPv6客户端。DHCPv6客户端详细配置如下：
 
 ![DHCPv6客户端配置-1](./iStoreOS旁路由/DHCPv6客户端-1.png)
+
 ![DHCPv6客户端配置-2](./iStoreOS旁路由/DHCPv6客户端-2.png)
+
 ![DHCPv6客户端配置-3](./iStoreOS旁路由/DHCPv6客户端-3.png)
+
 ![DHCPv6客户端配置-4](./iStoreOS旁路由/DHCPv6客户端-4.png)
+
 ![DHCPv6客户端配置-5](./iStoreOS旁路由/DHCPv6客户端-5.png)
 
 ### iStore安装软件
