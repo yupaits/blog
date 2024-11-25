@@ -99,7 +99,7 @@ OpenWrt是一个功能齐全、易于修改、高度可定制的路由器操作�
 
   使用ssh连接打开OpenWrt控制台，打开privoxy配置文件（路径：`/etc/config/privoxy`）并覆写为以下内容:
 
-  ```conf
+  ```
   config  privoxy 'privoxy'
         option  confdir         '/etc/privoxy'
         option  logdir          '/var/log'

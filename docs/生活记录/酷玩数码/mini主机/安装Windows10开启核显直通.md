@@ -33,7 +33,7 @@
 
 编辑`/etc/modprobe.d/pve-blacklist.conf`文件，添加以下内容以屏蔽核显驱动和HDMI声卡驱动：
 
-```conf
+```
 options vfio_iommu_type1 allow_unsafe_interrupts=1
 blacklist i915
 blacklist snd_hda_intel
@@ -50,7 +50,7 @@ blacklist nvidiafb
 
   - 编辑`/etc/pve/qemu-server/103.conf`（103是win10虚拟机的编号，按需替换成实际编号），在文件头部添加以下内容：
 
-    ```conf
+    ```
     args: -set device.hostpci0.addr=02.0 -set device.hostpci0.x-igd-gms=0x8 -set device.hostpci0.x-igd-opregion=on
     ```
 

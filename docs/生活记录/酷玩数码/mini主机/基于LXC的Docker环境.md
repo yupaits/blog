@@ -26,7 +26,7 @@ Alpine Linux是一个面向安全，轻量级的基于musl libc与busybox项目�
 
 进入`pve -> Shell`，输入`nano /etc/pve/lxc/102.conf`（102为alpine容器编号，按需替换成实际编号）设置apline LXC的权限，在文件底部追加以下两行配置信息并保存文件：
 
-```conf
+```
 lxc.apparmor.profile: unconfined
 lxc.cap.drop:
 ```
