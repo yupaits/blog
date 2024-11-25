@@ -1,7 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch, nextTick } from 'vue'
 import { useRoute } from 'vitepress'
-import mediumZoom from 'medium-zoom'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import MyLayout from './MyLayout.vue'
 import DraftAnnounce from './components/DraftAnnounce.vue'
@@ -53,13 +52,7 @@ export default {
       })
     }
 
-    // 图片缩放
-    const initZoom = () => {
-      mediumZoom('.main img:not(.no-zoom)', { background: 'rgba(0, 0, 0, 0.5)' })
-    }
-
     onMounted(() => {
-      initZoom()
       lazyLoad('//unpkg.com/valine/dist/Valine.min.js').then(() => initValine())
     })
 
@@ -67,7 +60,6 @@ export default {
       () => route.path,
       () => {
         initValine()
-        nextTick(() => initZoom())
       }
     )
   },

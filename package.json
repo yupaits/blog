@@ -1,8 +1,8 @@
 {
   "devDependencies": {
     "element-plus": "^2.8.3",
+    "markdown-it-custom-attrs": "^1.0.2",
     "markdown-it-task-lists": "^2.1.1",
-    "medium-zoom": "^1.1.0",
     "unplugin-auto-import": "^0.18.3",
     "unplugin-vue-components": "^0.27.4",
     "valine": "^1.5.1",

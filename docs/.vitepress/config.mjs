@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { defineConfig } from 'vitepress'
 import MarkdownItTaskLists from 'markdown-it-task-lists'
+import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -37,6 +38,9 @@ export default defineConfig({
     // Google Fonts
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    // fancybox
+    ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css' }],
+    ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js' }],
   ],
   cleanUrls: true,
   ignoreDeadLinks: true,
@@ -722,6 +726,9 @@ export default defineConfig({
     },
     config: (md) => {
       md.use(MarkdownItTaskLists)
+      md.use(mdItCustomAttrs, 'image', {
+        'data-fancybox': 'gallery'
+      })
     }
   },
   vite: {
