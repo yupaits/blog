@@ -32,15 +32,15 @@ const isPreviewDraft = () => {
 
 const handlePreviewDraft = () => {
   const mainDoc = document.querySelector('main')
-  if (mainDoc) {
-    mainDoc.style.display = !isDraft() || isPreviewDraft() ? '' : 'none'
+  if (isDraft() && !isPreviewDraft()) {
+    mainDoc?.remove()
   }
 }
 
 const showComment = () => {
   const enabledComment = frontmatter.value?.comment
   return (enabledComment === undefined || enabledComment) &&
-    (!isDraft() || (isDraft() && isPreviewDraft()))
+    (!isDraft() || isPreviewDraft())
 }
 
 onMounted(() => {
