@@ -11,7 +11,7 @@ steps:
     commands:
       - corepack enable
       - corepack prepare pnpm@latest-9
-      - pnpm config set store-dir .pnpm-store
+      - pnpm config set store-dir /.pnpm-store
       - pnpm config set registry https://registry.npmmirror.com
       - pnpm install
       - pnpm run docs:build
