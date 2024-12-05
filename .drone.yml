@@ -4,7 +4,7 @@ name: 构建站点文件
 
 steps:
   - name: pnpm构建
-    image: node:18
+    image: node:18-alpine
     volumes:
       - name: cache
         path: .pnpm-store
