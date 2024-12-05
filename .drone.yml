@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: 构建站点文件
+
+steps:
+  - name: pnpm构建
+    image: node:18
+    volumes:
+      - name: cache
+        path: .pnpm-store
+    commands:
+      - corepack enable
+      - corepack prepare pnpm@latest-9
+      - pnpm config set store-dir .pnpm-store
+      - pnpm config set registry https://registry.npmmirror.com
+      - pnpm install
+      - pnpm run docs:build
+
+volumes:
+  - name: cache
+    host:
+      path: ~/drone/pnpm/cache
