@@ -17,7 +17,7 @@ steps:
       - corepack prepare pnpm@latest-9
       - pnpm config set store-dir /.pnpm-store
       - pnpm config set registry https://registry.npmmirror.com
-      - pnpm install
+      - pnpm install --shamefully-hoist
       - pnpm run docs:build
 
 volumes:
