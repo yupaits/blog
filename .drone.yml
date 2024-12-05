@@ -7,7 +7,7 @@ steps:
     image: node:18-alpine
     volumes:
       - name: cache
-        path: .pnpm-store
+        path: /.pnpm-store
     commands:
       - corepack enable
       - corepack prepare pnpm@latest-9
