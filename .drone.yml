@@ -19,4 +19,4 @@ steps:
 volumes:
   - name: cache
     host:
-      path: ~/drone/pnpm/cache
+      path: /root/drone/pnpm/cache
