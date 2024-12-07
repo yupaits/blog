@@ -8,26 +8,32 @@ steps:
     volumes:
       - name: cache
         path: /.pnpm-store
+      - name: dist
+        path: /drone/src/docs/.vitepress/dist
     commands:
       - cat /etc/apk/repositories
       - echo -e 'http://mirrors.jcut.edu.cn/alpine/v3.20/main\nhttp://mirrors.jcut.edu.cn/alpine/v3.20/community' > /etc/apk/repositories
       - apk update && apk add git
       - git version
       - corepack enable
-      - corepack prepare pnpm@latest-9
-      - pnpm config set store-dir /.pnpm-store
-      - pnpm config set registry https://registry.npmmirror.com
-      - pnpm install --shamefully-hoist
-      - pnpm run docs:build
+      - npx pnpm config set store-dir /.pnpm-store
+      - npx pnpm config set registry https://registry.npmmirror.com
+      - npx pnpm install --shamefully-hoist
+      - npx pnpm run docs:build
   - name: 部署到Netlify
     image: lucap/drone-netlify
+    volumes:
+      - name: dist
+        path: /drone/src/docs/.vitepress/dist
     settings:
       token:
         from_secret: netlify_token
       site_id: 83590c05-4e7e-411b-ba3c-9cf4b0f91245
-      path: ./docs/.vitepress/dist
+      path: /drone/src/docs/.vitepress/dist
 
 volumes:
   - name: cache
     host:
       path: /root/drone/pnpm/cache
+  - name: dist
+    temp: { }
