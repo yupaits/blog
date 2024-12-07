@@ -19,6 +19,13 @@ steps:
       - pnpm config set registry https://registry.npmmirror.com
       - pnpm install --shamefully-hoist
       - pnpm run docs:build
+  - name: 部署到Netlify
+    image: lucap/drone-netlify
+    settings:
+      token:
+        from_secret: netlify_token
+      site_id: 83590c05-4e7e-411b-ba3c-9cf4b0f91245
+      path: ./docs/.vitepress/dist
 
 volumes:
   - name: cache
