@@ -14,16 +14,18 @@ yutool的模块主要分为两大部分：组件和插件。部分设计思路�
 - yutool-cache：缓存组件，支持二级缓存（本地缓存和分布式缓存），通过缓存注解控制缓存的刷新和过期
   > v1.2.6 组件移除，使用JetCache替换  
   > v1.2.7 新增cache-adapter插件
-- [x] yutool-file-server：文件服务，文件的上传下载，支持租户隔离、防盗链
-  > v1.2.8 移除Fastdfs实现
+- yutool-file-server：文件服务，文件的上传下载，支持租户隔离、防盗链
+  > v1.2.8 移除Fastdfs实现  
+  > v1.4.0 组件移除，使用Casdoor的存储提供商替换
 - yutool-ldap：LDAP组件，接入主流的LDAP服务
-  > v1.2.8 组件移除
+  > v1.2.8 组件移除  
+  > v1.4.0 使用Casdoor的LDAP服务
 - [ ] yutool-mq：消息队列，支持延迟队列，支持以下消息中间件：
     - RabbitMQ
     - RocketMQ
     - Kafka
 - [x] yutool-orm：ORM组件，整合了Spirng生态主流的Mybatis Plus和JPA框架，并加入了实际场景中DTO和VO对象的处理逻辑
-- [ ] yutool-push：消息推送服务，支持5种消息类型的推送：
+- yutool-push：消息推送服务，支持5种消息类型的推送：
     - 移动APP通知
     - Web网页消息
     - sms短信
@@ -31,7 +33,10 @@ yutool的模块主要分为两大部分：组件和插件。部分设计思路�
     - IM消息
     
     通过统一的消息发送入口，按需路由到指定的消息渠道进行消息推送
-- [ ] yutool-social：社交账号登录（第三方登录）组件，整合各大主流社交平台第三方登录功能并统一入口 
+
+  > v1.4.0 组件移除，使用Casdoor的提供商电子邮箱、短信、通知替换
+- yutool-social：社交账号登录（第三方登录）组件，整合各大主流社交平台第三方登录功能并统一入口
+  > v1.4.0 组件移除，使用Casdoor的提供商OAuth替换
 - [ ] yutool-state：状态机引擎，抽象主要的状态机应用场景，将状态机状态迁移的整个过程的处理接口标准化
 - [ ] yutool-search：搜索引擎组件，基于redisearch开发的轻量级搜索引擎组件，支持中文分词
 
@@ -48,9 +53,12 @@ yutool的模块主要分为两大部分：组件和插件。部分设计思路�
 - [x] history-data：历史数据清理，通过配置项实现历史数据的清除或转移
 - jwt-helper：JWT工具
   > v1.2.8 插件移除，使用hutool-jwt替换
-- [ ] native-mobile：本机号码登录
-- [ ] sms-reply-storage：短信回复存储，用于向用户推送服务短信之后，接收并存储用户回复的短信内容
-- [ ] sms-verify：短信验证码
+- native-mobile：本机号码登录
+  > v1.4.0 插件移除
+- sms-reply-storage：短信回复存储，用于向用户推送服务短信之后，接收并存储用户回复的短信内容
+  > v1.4.0 插件移除，使用Casdoor的提供商短信实现
+- sms-verify：短信验证码
+  > v1.4.0 插件移除，使用Casdoor的提供商短信实现
 - swagger-support：swagger接口文档支持
   > v1.2.6 插件移除，使用smart-doc替换
 - [x] import-export：数据导入导出插件，基于EasyExcel实现
