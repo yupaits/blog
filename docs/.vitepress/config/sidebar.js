@@ -453,14 +453,14 @@ export default {
         items: [
           { text: 'yutool-biz 整体设计', link: 'yutool-biz 整体设计' },
           { text: 'yutool-api API接口', link: 'yutool-api API接口' },
-          { text: 'yutool-user 用户', link: 'yutool-user 用户' },
-          { text: 'yutool-org 组织架构', link: 'yutool-org 组织架构' },
-          { text: 'yutool-address 地址', link: 'yutool-address 地址' },
           { text: 'yutool-dict 数据字典', link: 'yutool-dict 数据字典' },
-          { text: 'yutool-notify 通知消息', link: 'yutool-notify 通知消息' },
           { text: 'yutool-exchange 数据中转', link: 'yutool-exchange 数据中转' },
           { text: 'admin-ui 管理界面', link: 'admin-ui 管理界面' },
+          { text: '[归档] yutool-user 用户', link: '[归档] yutool-user 用户' },
+          { text: '[归档] yutool-org 组织架构', link: '[归档] yutool-org 组织架构' },
+          { text: '[归档] yutool-address 地址', link: '[归档] yutool-address 地址' },
           { text: '[归档] yutool-auth 认证授权', link: '[归档] yutool-auth 认证授权' },
+          { text: '[归档] yutool-notify 通知消息', link: '[归档] yutool-notify 通知消息' },
         ]
       },
       {
