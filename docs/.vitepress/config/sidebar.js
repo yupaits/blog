@@ -455,6 +455,8 @@ export default {
           { text: 'yutool-api API接口', link: 'yutool-api API接口' },
           { text: 'yutool-dict 数据字典', link: 'yutool-dict 数据字典' },
           { text: 'yutool-exchange 数据中转', link: 'yutool-exchange 数据中转' },
+          { text: 'yutool-menu 系统菜单', link: 'yutool-menu 系统菜单' },
+          { text: 'yutool-casdoor 对接Casdoor', link: 'yutool-casdoor 对接Casdoor' },
           { text: 'admin-ui 管理界面', link: 'admin-ui 管理界面' },
           { text: '[归档] yutool-user 用户', link: '[归档] yutool-user 用户' },
           { text: '[归档] yutool-org 组织架构', link: '[归档] yutool-org 组织架构' },

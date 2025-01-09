@@ -11,6 +11,8 @@
 | yutool-notify | 通知消息 |  |  | • v1.4.0移除 |
 | yutool-exchange | 数据中转 |  |  |  |
 | yutool-personal | 个性化配置 |  |  |  |
+| yutool-menu | 系统菜单 |  | • cache-adapter |  |
+| yutool-casdoor | Casdoor接入 | • yutool-menu | • cache-adapter |  |
 | yutool-api | API接口 | • yutool-dict <br>• yutool-exchange <br>• yutool-personal | • yutool-metadata <br>• audit-logger |  |
 
 
