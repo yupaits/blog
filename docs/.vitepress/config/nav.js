@@ -21,7 +21,6 @@ export default [
           { text: 'AI生产力', link: '/站点收录/AI生产力' },
         ]
       },
-      { text: 'Yupan BBS', link: 'https://bbs.yupaits.com/' },
       { text: 'yupaits的博客', link: 'https://blog.yupaits.com/' },
     ]
   },
