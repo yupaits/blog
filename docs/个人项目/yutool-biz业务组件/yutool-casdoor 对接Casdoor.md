@@ -52,7 +52,7 @@ spring:
         provider:
           casdoor:
             authorization-uri: https://<Casdoor Hostname>/login/oauth/authorize
-            token-uri: https://<Casdoor Hostname>/login/oauth/access_token
+            token-uri: https://<Casdoor Hostname>/api/login/oauth/access_token
             user-info-uri: https://<Casdoor Hostname>/api/userinfo
             jwk-set-uri: https://<Casdoor Hostname>/.well-known/jwks
             user-name-attribute: name
@@ -92,5 +92,7 @@ login-page:
 ```
 
 **注意：** 带`<>`的配置值需要替换为实际内容。配置了Casdoor应用信息（`casdoor`下的配置）和MinIO存储服务配置（`minio`下的配置）在不启用OAuth2登录（`spring.security.oauth2.client.enabled=false`）的情况下，可以正常使用文件服务。
+
+`spring.security.oauth2.client.provider`下的各uri地址可能会随着`casdoor`版本更新发生变化，可通过访问`https://<Casdoor Hostname>/.well-known/openid-configuration`接口进行确认。
 
 `yutool-casdoor`使用Casdoor中用户的角色信息，通过匹配`yutool-menu`中菜单项的授权角色信息实现了动态授予用户菜单权限。
