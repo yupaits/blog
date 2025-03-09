@@ -29,9 +29,3 @@ volumes:
   - name: dist
     host:
       path: /root/drone/yupaits-notes
-  - name: dockersock
-    host:
-      path: /var/run
-  - name: docker-images
-    host:
-      path: /root/drone/docker/images
