@@ -32,6 +32,7 @@ steps:
       - name: docker-images
         path: /docker/images
     commands:
+      - ls /app
       # - docker stop yupaits-notes
       # - docker rm yupaits-notes
       # - docker rmi yupaits-notes:latest
