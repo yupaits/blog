@@ -21,7 +21,7 @@ steps:
       - npx pnpm config set registry https://registry.npmmirror.com
       - npx pnpm install --shamefully-hoist
       - npx pnpm run docs:build
-      - mv -f docs/.vitepress/dist /app/
+      - mv -f docs/.vitepress/dist /app
   - name: 构建Docker镜像
     image: docker:dind
     volumes:
