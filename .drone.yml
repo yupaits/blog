@@ -9,7 +9,7 @@ steps:
       - name: cache
         path: /.pnpm-store
       - name: dist
-        path: /tmp/dist
+        path: /drone/src/docs/.vitepress/dist
     commands:
       - cat /etc/apk/repositories
       - echo -e 'http://mirrors.jcut.edu.cn/alpine/v3.20/main\nhttp://mirrors.jcut.edu.cn/alpine/v3.20/community' > /etc/apk/repositories
@@ -21,31 +21,14 @@ steps:
       - npx pnpm config set registry https://registry.npmmirror.com
       - npx pnpm install --shamefully-hoist
       - npx pnpm run docs:build
-      - mv -f /drone/src/docs/.vitepress/dist /tmp/dist
-  - name: 构建Docker镜像
-    image: docker:dind
-    volumes:
-      - name: dockersock
-        path: /var/run
-      - name: dist
-        path: /tmp/dist
-      - name: docker-images
-        path: /docker/images
-    commands:
-      - cp -rf /tmp/dist /drone/src/docs/.vitepress/dist
-      # - docker stop yupaits-notes
-      # - docker rm yupaits-notes
-      # - docker rmi yupaits-notes:latest
-      - docker build -f Dockerfile . -t yupaits-notes:1.0.0 -t yupaits-notes:latest
-      - docker save -o /docker/images/yupaits-notes-1.0.0.tar yupaits-notes:1.0.0
-      - docker run -d --restart=always --name yupaits-notes -p 8888:80 yupaits-notes:latest
 
 volumes:
   - name: cache
     host:
       path: /root/drone/pnpm/cache
   - name: dist
-    temp: { }
+    host:
+      path: /root/drone/yupaits-notes
   - name: dockersock
     host:
       path: /var/run
