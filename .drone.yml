@@ -9,7 +9,7 @@ steps:
       - name: cache
         path: /.pnpm-store
       - name: dist
-        path: /app
+        path: /drone/src/docs/.vitepress/dist
     commands:
       - cat /etc/apk/repositories
       - echo -e 'http://mirrors.jcut.edu.cn/alpine/v3.20/main\nhttp://mirrors.jcut.edu.cn/alpine/v3.20/community' > /etc/apk/repositories
@@ -21,18 +21,16 @@ steps:
       - npx pnpm config set registry https://registry.npmmirror.com
       - npx pnpm install --shamefully-hoist
       - npx pnpm run docs:build
-      - mv -f docs/.vitepress/dist /app
   - name: 构建Docker镜像
     image: docker:dind
     volumes:
       - name: dockersock
         path: /var/run
       - name: dist
-        path: /app
+        path: /drone/src/docs/.vitepress/dist
       - name: docker-images
         path: /docker/images
     commands:
-      - ls /app
       # - docker stop yupaits-notes
       # - docker rm yupaits-notes
       # - docker rmi yupaits-notes:latest

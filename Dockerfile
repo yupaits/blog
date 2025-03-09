@@ -1,7 +1,8 @@
 FROM nginx:alpine
 
-RUN ls /app
-COPY /app /usr/share/nginx/html
+WORKDIR /drone/src
+
+COPY /drone/src/docs/.vitepress/dist /usr/share/nginx/html
 
 EXPOSE 80
 
