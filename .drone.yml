@@ -32,7 +32,7 @@ steps:
       - name: docker-images
         path: /docker/images
     commands:
-      - mv -f /tmp/dist /drone/src/docs/.vitepress/dist
+      - cp -rf /tmp/dist /drone/src/docs/.vitepress/dist
       # - docker stop yupaits-notes
       # - docker rm yupaits-notes
       # - docker rmi yupaits-notes:latest
