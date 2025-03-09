@@ -31,7 +31,6 @@ steps:
       - name: docker-images
         path: /docker/images
     commands:
-      - ls /drone/src/docs/.vitepress/dist
       # - docker stop yupaits-notes
       # - docker rm yupaits-notes
       # - docker rmi yupaits-notes:latest
@@ -43,7 +42,7 @@ volumes:
   - name: cache
     host:
       path: /root/drone/pnpm/cache
-  - name: ui-dist
+  - name: dist
     temp: { }
   - name: dockersock
     host:
