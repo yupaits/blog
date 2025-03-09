@@ -31,6 +31,7 @@ steps:
       - name: docker-images
         path: /docker/images
     commands:
+      - ls /drone/src/docs/.vitepress/dist
       # - docker stop yupaits-notes
       # - docker rm yupaits-notes
       # - docker rmi yupaits-notes:latest
