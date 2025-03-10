@@ -355,7 +355,7 @@ export default {
           { text: 'Java', link: 'Java' },
           { text: 'Spring & Spring Boot', link: 'Spring & Spring Boot' },
           { text: 'MySQL', link: 'MySQL' },
-          { text: 'Vue.js', link: 'Vue.js' },
+          { text: 'Vue', link: 'Vue' },
           { text: '其他', link: '其他' },
         ]
       },
