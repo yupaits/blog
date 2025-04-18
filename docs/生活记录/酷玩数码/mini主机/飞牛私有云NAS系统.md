@@ -312,6 +312,7 @@ services:
     ports:
       - 80:80
     volumes:
+      - /root/nginx/conf/conf.d:/etc/nginx/conf.d
       - /root/nginx/log:/var/log/nginx
       - /root/drone/yupaits-notes:/usr/share/nginx/html
     restart: always
