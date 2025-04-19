@@ -421,8 +421,8 @@ daovoice:
 # gitter
 # https://gitter.im/
 gitter:
-  enable: true
-  room: yupaits/yupaits-blog
+  enable: false
+  room:
 
 # crisp
 # https://crisp.chat/en/
