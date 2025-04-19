@@ -67,7 +67,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/">yupaits notes</a><br><span>本站总访问量 <i id="busuanzi_value_site_pv"></i> 次</span><span style="margin-left: 2rem">访客数 <i id="busuanzi_value_site_uv"></i> 人</span>',
+      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/">yupaits notes</a><br><span>本站总访问量 <i id="busuanzi_value_site_pv"></i> 次</span><span style="margin-left: 1rem">访客数 <i id="busuanzi_value_site_uv"></i> 人</span>',
       copyright: `版权所有 © 2016-${new Date().getFullYear()} <a href="mailto:ts495606653@hotmail.com">yupaits</a>`
     },
 
