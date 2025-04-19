@@ -7,6 +7,7 @@
 #   name: link || icon
 
 menu:
+  新版博客: https://yupaits.com || fas fa-blog
   首页: / || fas fa-home
   归档: /archives/ || fas fa-archive
   分类: /categories/ || fas fa-folder-open
