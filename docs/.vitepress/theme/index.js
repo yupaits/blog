@@ -68,7 +68,7 @@ export default {
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
     vitepressBackToTop({
-      threshold: 300
+      threshold: 200
     })
   }
 }

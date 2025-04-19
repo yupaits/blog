@@ -76,3 +76,14 @@
     }
   }
 }
+
+/* 回到页面顶部按钮填充背景 */
+:root {
+  .go-to-top {
+    background-color: var(--vp-c-bg-alt)
+  }
+
+  .go-to-top:hover {
+    background-color: var(--vp-c-bg-elv)
+  }
+}
