@@ -74,7 +74,7 @@ watch(
   position: fixed;
   width: 100%;
   height: 100vh;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--vp-c-bg);
   z-index: 100;
   pointer-events: none;
   opacity: 0;
