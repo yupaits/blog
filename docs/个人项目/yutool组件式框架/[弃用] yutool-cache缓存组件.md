@@ -195,7 +195,7 @@ public class PersonController {
 ```
 ## 分布式缓存和本地缓存如何保证一致性
 ### 缓存读取
-![](./[归档]%20yutool-cache缓存组件/1655004125887-85e5f1b0-69f9-42a7-af24-5e4365db7f54.jpeg)
+![](./[弃用]%20yutool-cache缓存组件/1655004125887-85e5f1b0-69f9-42a7-af24-5e4365db7f54.jpeg)
 ### 缓存更新/失效
 
-![](./[归档]%20yutool-cache缓存组件/1655004785402-856305e8-acf2-4187-ab97-34fca8de931d.jpeg)
+![](./[弃用]%20yutool-cache缓存组件/1655004785402-856305e8-acf2-4187-ab97-34fca8de931d.jpeg)
