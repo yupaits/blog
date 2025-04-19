@@ -363,7 +363,7 @@ rclone sync s3-overseas:bucket-name oss-hwpf:bucket-name
 rclone sync <LOCAL_PATH> s3-overseas:bucket-name --backup-dir s3-overseas:backup-bucket-name/backup-dir
 
 ```
-**sync操作，会删除目标端的目录或文件。**执行前可以加 --dry-run参数查看将要删除的文件或目录。
+**sync操作，会删除目标端的目录或文件。** 执行前可以加 --dry-run参数查看将要删除的文件或目录。
 #### copy
 ```bash
 ### 拷贝本地文件到远端
