@@ -6,9 +6,24 @@
 
 飞牛私有云fnOS系统的使用教程在官方的[帮助中心](https://help.fnnas.com/)网站上可以轻松获取到，这里就不做过多陈述。
 
+fnOS应用中心有大量针对NAS设备的软件应用，所有应用均可一键安装配置，小白都能轻松上手。除官方应用外，通过社区的力量，第三方应用也在不断地丰富和壮大。
+
 笔者手中已经有了一台专业NAS设备，但由于CPU是arm架构，不支持虚拟机也无法畅玩Docker应用，而fnOS中的Docker和虚拟机功能，正好填补了这一空白。
 
-以下内容简单介绍了个人飞牛NAS设备中Docker和虚拟机功能的一些使用场景和相关应用。
+以下内容简单介绍了个人飞牛NAS设备中使用的应用，一些Docker和虚拟机功能的使用场景。
+
+## 应用中心
+
+![fnOS应用中心](./飞牛私有云NAS系统/fnos-app.png)
+
+|应用|介绍|
+|---|---|
+| **影视** | `官方` 飞牛官方出品。打造私人影院和完美海报墙，从未如此简单。 |
+| **相册** | `官方` 飞牛官方出品，相册存储美好时光。 |
+| **文件快照** | `官方` 快照将记录存储数据在某一时刻的状态并支持快速还原，从而降低因误删、病毒等意外而丢失数据的风险。 |
+| **Lucky** | `社区` 支持IPv6/IPv4端口转发、反向代理、动态域名、语音助手网络唤醒、IPv4内网穿透、计划任务和自动证书等多项功能。 |
+| **Sun-Panel** | `社区` 一个服务器、NAS导航面板、Homepage、浏览器首页。 |
+| **EasyNVR** | `社区` EasyNVR不仅能汇聚和管理多个NVR，进行实时视频和录像视频的查看，还能够对NVR设备状态和工作状态进行实时的监测和预警，监测内容包括摄像机离线、录像缺失、画面遮挡、信号丢失等。 |
 
 ## Docker
 
@@ -16,13 +31,31 @@ fnOS的Docker整合了Docker Compose容器编排工具，可以通过编写`dock
 
 ![fnOS Docker环境](./飞牛私有云NAS系统/fnos-docker.png)
 
+|容器|介绍|
+|---|---|
+| **mariadb** | mariadb数据库 |
+| **dnsmasq** | 无公网域名或者无公网IP时，通过dnsmasq将域名解析到内网IP，实现在局域网内使用域名访问服务 |
+| **gitea** | Git服务 代码托管 |
+| **drone** | drone-ci 整合Gitea实现CI/CD |
+| **minio** | minio对象存储，文件存储服务 |
+| **redis** | Redis分布式缓存 |
+| **casdoor** | Casdoor单点登录服务 |
+| **jackett** | Jackett磁力种子搜索 |
+| **drawio** | Drawio绘图应用 |
+| **nacos-server** | Nacos配置中心 |
+| **excalidraw** | Excalidraw手绘风格绘图应用 |
+| **xxl-job-admin** | xxl-job定时任务平台 |
+| **hbbs** | RustDesk ID服务 |
+| **hbbr** | RustDesk 中继服务 |
+| **memos** | Memos备忘录 |
+| **howtocook** | How To Cook程序员做饭指南 |
+
 `docker-compose.yml`内容如下：
 
 > 注意：`192.168.2.3`是fnOS的本地IP地址，按需替换；使用`[]`标记的值需修改为实际值。
 
 ```yml
 services:
-  # mariadb数据库
   mariadb:
     image: mariadb:10
     container_name: mariadb
@@ -35,7 +68,6 @@ services:
       - /vol1/1000/docker/mariadb/data:/var/lib/mysql
     restart: always
 
-  # dnsmasq 无公网域名或者无公网IP时，通过dnsmasq将域名解析到内网IP，实现在局域网内使用域名访问服务
   dnsmasq:
     image: dockurr/dnsmasq:latest
     container_name: dnsmasq
@@ -52,7 +84,6 @@ services:
       - NET_ADMIN
     restart: always
 
-  # Git服务 代码托管
   gitea:
     image: gitea/gitea:1.23
     container_name: gitea
@@ -76,7 +107,6 @@ services:
       - dnsmasq
     restart: always
 
-  # drone-ci 整合Gitea实现CI/CD
   drone:
     image: drone/drone:2
     container_name: drone
@@ -100,7 +130,6 @@ services:
       - dnsmasq
     restart: always
 
-  # minio对象存储，文件存储服务
   minio:
     image: minio/minio:latest
     container_name: minio
@@ -118,7 +147,6 @@ services:
       - /vol1/1000/docker/minio/data:/data
     restart: always
 
-  # Redis分布式缓存
   redis:
     image: redis/redis-stack:6.2.6-v19
     container_name: redis
@@ -130,7 +158,6 @@ services:
       - /vol1/1000/docker/redis-stack/data:/data
     restart: always
 
-  # Casdoor单点登录服务
   casdoor:
     image: casbin/casdoor:latest
     container_name: casdoor
@@ -146,7 +173,6 @@ services:
       - mariadb
     restart: always
 
-  # Jackett磁力种子搜索
   jackett:
     image: linuxserver/jackett:latest
     container_name: jackett
@@ -161,7 +187,6 @@ services:
       - /vol1/1000/docker/jackett/config:/config
     restart: always
 
-  # Drawio绘图应用
   drawio:
     image: jgraph/drawio:latest
     container_name: drawio
@@ -170,7 +195,6 @@ services:
       - 8080:8080
     restart: always
 
-  # Nacos配置中心
   nacos-server:
     image: nacos/nacos-server:v2.4.3
     container_name: nacos-server
@@ -190,7 +214,6 @@ services:
       - mariadb
     restart: always
 
-  # Excalidraw手绘风格绘图应用
   excalidraw:
     image: excalidraw/excalidraw:latest
     container_name: excalidraw
@@ -199,7 +222,6 @@ services:
       - 5000:80
     restart: always
 
-  # xxl-job定时任务平台
   xxl-job-admin:
     image: xuxueli/xxl-job-admin:2.4.1
     container_name: xxl-job-admin
@@ -212,7 +234,6 @@ services:
       - mariadb
     restart: always
 
-  # RustDesk ID服务
   hbbs:
     image: rustdesk/rustdesk-server:latest
     container_name: hbbs
@@ -224,7 +245,6 @@ services:
       - hbbr
     restart: always
 
-  # RustDesk 中继服务
   hbbr:
     image: rustdesk/rustdesk-server:latest
     container_name: hbbr
@@ -234,7 +254,6 @@ services:
       - /vol1/1000/docker/rustdesk:/root
     restart: always
 
-  # Memos备忘录
   memos:
     image: neosmemo/memos:stable
     container_name: memos
@@ -253,7 +272,6 @@ services:
       - dnsmasq
     restart: always
 
-  # How To Cook程序员做饭指南
   howtocook:
     image: ghcr.io/anduin2017/how-to-cook:latest
     container_name: howtocook
@@ -265,7 +283,15 @@ services:
 
 ## 虚拟机
 
-在虚拟机中安装了Alpine系统，并在Alpine系统中安装了Docker环境，用于个人项目的自动构建和部署，实现了push代码到Gitea后触发drone-runner构建项目的Docker并部署为Docker容器。
+在虚拟机中安装了Alpine系统，并在Alpine系统中安装了Docker环境，实现了个人项目的自动构建和部署。提交并push代码到Gitea后可触发drone-runner构建项目Docker镜像，并使用构建好的镜像部署Docker容器。
+
+![fnOS虚拟机](./飞牛私有云NAS系统/fnos-vm.png)
+
+|容器|介绍|
+|---|---|
+| **dpanel** | Docker管理面板 |
+| **drone-runner** | drone-ci 运行服务，用于执行构建部署任务 |
+| **nginx** | 内网部署个人博客静态页面 |
 
 ![fnOS虚拟机Alpine系统Docker环境](./飞牛私有云NAS系统/fnos-alpine-docker.png)
 
@@ -273,7 +299,6 @@ Alpine系统中的`docker-compose.yml`内容如下：
 
 ```yml
 services:
-  # Docker管理面板
   dpanel:
     image: dpanel/dpanel:lite
     container_name: dpanel
@@ -285,7 +310,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 
-  # drone-ci 运行服务，用于执行构建部署任务
   drone-runner:
     image: drone/drone-runner-docker:1
     container_name: drone-runner
@@ -304,7 +328,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
 
-  # Nginx用于内网部署个人博客静态页面
   nginx:
     image: nginx:latest
     container_name: nginx
