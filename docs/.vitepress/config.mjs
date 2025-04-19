@@ -37,9 +37,14 @@ export default defineConfig({
       })();
       `
     ],
-    // Google Fonts
-    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    // 不蒜子访问量统计
+    [
+      'script',
+      {
+        async: '',
+        src: '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+      }
+    ],
     // fancybox
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css' }],
     ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js' }],
@@ -63,7 +68,10 @@ export default defineConfig({
 
     footer: {
       message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/">yupaits notes</a>',
-      copyright: `版权所有 © 2016-${new Date().getFullYear()} <a href="mailto:ts495606653@hotmail.com">yupaits</a>`
+      copyright: `版权所有 © 2016-${new Date().getFullYear()} <a href="mailto:ts495606653@hotmail.com">yupaits</a><br>
+      <div style="margin-top: 1rem">
+        <span>本站总访问量 <i id="busuanzi_value_site_pv"></i> 次</span><span style="margin-left: 2rem">访客数 <i id="busuanzi_value_site_uv"></i> 人</span>
+      </div>`
     },
 
     search: {
