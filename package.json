@@ -8,6 +8,7 @@
     "valine": "^1.5.1",
     "vitepress": "1.5.0",
     "vitepress-plugin-back-to-top": "^1.0.1",
+    "vitepress-plugin-nprogress": "^0.0.4",
     "vue-github-button": "^3.1.0"
   },
   "scripts": {

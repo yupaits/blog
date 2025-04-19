@@ -1,6 +1,7 @@
 import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
 import { useRoute } from 'vitepress'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
+import vitepressNprogress from 'vitepress-plugin-nprogress'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch } from 'vue'
 import MyLayout from './MyLayout.vue'
@@ -11,6 +12,7 @@ import Progress from './components/Progress.vue'
 
 import 'element-plus/dist/index.css'
 import 'vitepress-plugin-back-to-top/dist/style.css'
+import 'vitepress-plugin-nprogress/lib/css/index.css'
 import './style/index.css'
 import './style/var.css'
 
@@ -59,7 +61,8 @@ export default {
       }
     )
   },
-  enhanceApp({ app }) {
+  enhanceApp(ctx) {
+    const { app } = ctx
     app.component('DraftAnnounce', DraftAnnounce)
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
@@ -68,8 +71,9 @@ export default {
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
     vitepressBackToTop({
-      threshold: 200
+      threshold: 300
     })
+    vitepressNprogress(ctx)
   }
 }
 

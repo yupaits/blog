@@ -10,7 +10,7 @@ importers:
     devDependencies:
       element-plus:
         specifier: ^2.8.3
-        version: 2.8.3(vue@3.4.27)
+        version: 2.8.3(vue@3.5.13)
       markdown-it-custom-attrs:
         specifier: ^1.0.2
         version: 1.0.2(chokidar@3.6.0)
@@ -19,19 +19,22 @@ importers:
         version: 2.1.1
       unplugin-auto-import:
         specifier: ^0.18.3
-        version: 0.18.3(@vueuse/core@11.1.0(vue@3.4.27))(rollup@4.22.4)
+        version: 0.18.3(@vueuse/core@11.1.0(vue@3.5.13))(rollup@4.22.4)
       unplugin-vue-components:
         specifier: ^0.27.4
-        version: 0.27.4(@babel/parser@7.25.6)(rollup@4.22.4)(vue@3.4.27)
+        version: 0.27.4(@babel/parser@7.25.6)(rollup@4.22.4)(vue@3.5.13)
       valine:
         specifier: ^1.5.1
         version: 1.5.1
       vitepress:
         specifier: 1.5.0
-        version: 1.5.0(@algolia/client-search@5.15.0)(@types/node@20.14.2)(async-validator@4.2.5)(postcss@8.4.49)(sass@1.77.4)(search-insights@2.14.0)
+        version: 1.5.0(@algolia/client-search@5.15.0)(@types/node@20.14.2)(async-validator@4.2.5)(nprogress@0.2.0)(postcss@8.4.49)(sass@1.77.4)(search-insights@2.14.0)
       vitepress-plugin-back-to-top:
         specifier: ^1.0.1
         version: 1.0.1
+      vitepress-plugin-nprogress:
+        specifier: ^0.0.4
+        version: 0.0.4
       vue-github-button:
         specifier: ^3.1.0
         version: 3.1.0
@@ -1253,6 +1256,9 @@ packages:
   normalize-wheel-es@1.2.0:
     resolution: {integrity: sha512-Wj7+EJQ8mSuXr2iWfnujrimU35R2W4FAErEyTmJoJ7ucwTn2hOUSsRehMb5RSYkxXGTM7Y9QpvPmp++w5ftoJw==}
 
+  nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+
   number-is-nan@1.0.1:
     resolution: {integrity: sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==}
     engines: {node: '>=0.10.0'}
@@ -1603,6 +1609,9 @@ packages:
   vitepress-plugin-back-to-top@1.0.1:
     resolution: {integrity: sha512-fQUzhkV6SGEmYcO56fv6Jbz5ifseAZuoi+lPDGg0c8gpMVHgqs/D1GbfX4tbvUAtuFNv4kz88wuQRK024iZ2sQ==}
 
+  vitepress-plugin-nprogress@0.0.4:
+    resolution: {integrity: sha512-YzW36kBnjuFH91DOFIA5snyBf4WpF/cYfhAiyNefhqif8QQIKGsbpzvI8VN0M8RHLGr9iQyHhF7dQsm//Xf5Hw==}
+
   vitepress@1.5.0:
     resolution: {integrity: sha512-q4Q/G2zjvynvizdB3/bupdYkCJe2umSAMv9Ju4d92E6/NXJ59z70xB0q5p/4lpRyAwflDsbwy1mLV9Q5+nlB+g==}
     hasBin: true
@@ -1861,9 +1870,9 @@ snapshots:
     transitivePeerDependencies:
       - '@algolia/client-search'
 
-  '@element-plus/icons-vue@2.3.1(vue@3.4.27)':
+  '@element-plus/icons-vue@2.3.1(vue@3.5.13)':
     dependencies:
-      vue: 3.4.27
+      vue: 3.5.13
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
@@ -2276,17 +2285,6 @@ snapshots:
 
   '@vue/shared@3.5.13': {}
 
-  '@vueuse/core@11.1.0(vue@3.4.27)':
-    dependencies:
-      '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 11.1.0
-      '@vueuse/shared': 11.1.0(vue@3.4.27)
-      vue-demi: 0.14.10(vue@3.4.27)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-    optional: true
-
   '@vueuse/core@11.1.0(vue@3.5.13)':
     dependencies:
       '@types/web-bluetooth': 0.0.20
@@ -2297,17 +2295,17 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/core@9.13.0(vue@3.4.27)':
+  '@vueuse/core@9.13.0(vue@3.5.13)':
     dependencies:
       '@types/web-bluetooth': 0.0.16
       '@vueuse/metadata': 9.13.0
-      '@vueuse/shared': 9.13.0(vue@3.4.27)
-      vue-demi: 0.14.8(vue@3.4.27)
+      '@vueuse/shared': 9.13.0(vue@3.5.13)
+      vue-demi: 0.14.8(vue@3.5.13)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/integrations@11.1.0(async-validator@4.2.5)(focus-trap@7.6.2)(vue@3.5.13)':
+  '@vueuse/integrations@11.1.0(async-validator@4.2.5)(focus-trap@7.6.2)(nprogress@0.2.0)(vue@3.5.13)':
     dependencies:
       '@vueuse/core': 11.1.0(vue@3.5.13)
       '@vueuse/shared': 11.1.0(vue@3.5.13)
@@ -2315,6 +2313,7 @@ snapshots:
     optionalDependencies:
       async-validator: 4.2.5
       focus-trap: 7.6.2
+      nprogress: 0.2.0
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -2323,14 +2322,6 @@ snapshots:
 
   '@vueuse/metadata@9.13.0': {}
 
-  '@vueuse/shared@11.1.0(vue@3.4.27)':
-    dependencies:
-      vue-demi: 0.14.10(vue@3.4.27)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-    optional: true
-
   '@vueuse/shared@11.1.0(vue@3.5.13)':
     dependencies:
       vue-demi: 0.14.10(vue@3.5.13)
@@ -2338,9 +2329,9 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/shared@9.13.0(vue@3.4.27)':
+  '@vueuse/shared@9.13.0(vue@3.5.13)':
     dependencies:
-      vue-demi: 0.14.8(vue@3.4.27)
+      vue-demi: 0.14.8(vue@3.5.13)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -2529,15 +2520,15 @@ snapshots:
 
   element-closest@3.0.2: {}
 
-  element-plus@2.8.3(vue@3.4.27):
+  element-plus@2.8.3(vue@3.5.13):
     dependencies:
       '@ctrl/tinycolor': 3.6.1
-      '@element-plus/icons-vue': 2.3.1(vue@3.4.27)
+      '@element-plus/icons-vue': 2.3.1(vue@3.5.13)
       '@floating-ui/dom': 1.6.11
       '@popperjs/core': '@sxzz/popperjs-es@2.11.7'
       '@types/lodash': 4.17.7
       '@types/lodash-es': 4.17.12
-      '@vueuse/core': 9.13.0(vue@3.4.27)
+      '@vueuse/core': 9.13.0(vue@3.5.13)
       async-validator: 4.2.5
       dayjs: 1.11.13
       escape-html: 1.0.3
@@ -2546,7 +2537,7 @@ snapshots:
       lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
-      vue: 3.4.27
+      vue: 3.5.13
     transitivePeerDependencies:
       - '@vue/composition-api'
 
@@ -2952,6 +2943,8 @@ snapshots:
 
   normalize-wheel-es@1.2.0: {}
 
+  nprogress@0.2.0: {}
+
   number-is-nan@1.0.1: {}
 
   nunjucks@3.2.4(chokidar@3.6.0):
@@ -3289,7 +3282,7 @@ snapshots:
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
 
-  unplugin-auto-import@0.18.3(@vueuse/core@11.1.0(vue@3.4.27))(rollup@4.22.4):
+  unplugin-auto-import@0.18.3(@vueuse/core@11.1.0(vue@3.5.13))(rollup@4.22.4):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.22.4)
@@ -3300,12 +3293,12 @@ snapshots:
       unimport: 3.12.0(rollup@4.22.4)
       unplugin: 1.14.1
     optionalDependencies:
-      '@vueuse/core': 11.1.0(vue@3.4.27)
+      '@vueuse/core': 11.1.0(vue@3.5.13)
     transitivePeerDependencies:
       - rollup
       - webpack-sources
 
-  unplugin-vue-components@0.27.4(@babel/parser@7.25.6)(rollup@4.22.4)(vue@3.4.27):
+  unplugin-vue-components@0.27.4(@babel/parser@7.25.6)(rollup@4.22.4)(vue@3.5.13):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.22.4)
@@ -3317,7 +3310,7 @@ snapshots:
       minimatch: 9.0.5
       mlly: 1.7.1
       unplugin: 1.14.1
-      vue: 3.4.27
+      vue: 3.5.13
     optionalDependencies:
       '@babel/parser': 7.25.6
     transitivePeerDependencies:
@@ -3379,7 +3372,11 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  vitepress@1.5.0(@algolia/client-search@5.15.0)(@types/node@20.14.2)(async-validator@4.2.5)(postcss@8.4.49)(sass@1.77.4)(search-insights@2.14.0):
+  vitepress-plugin-nprogress@0.0.4:
+    dependencies:
+      nprogress: 0.2.0
+
+  vitepress@1.5.0(@algolia/client-search@5.15.0)(@types/node@20.14.2)(async-validator@4.2.5)(nprogress@0.2.0)(postcss@8.4.49)(sass@1.77.4)(search-insights@2.14.0):
     dependencies:
       '@docsearch/css': 3.8.0
       '@docsearch/js': 3.8.0(@algolia/client-search@5.15.0)(search-insights@2.14.0)
@@ -3392,7 +3389,7 @@ snapshots:
       '@vue/devtools-api': 7.6.4
       '@vue/shared': 3.5.13
       '@vueuse/core': 11.1.0(vue@3.5.13)
-      '@vueuse/integrations': 11.1.0(async-validator@4.2.5)(focus-trap@7.6.2)(vue@3.5.13)
+      '@vueuse/integrations': 11.1.0(async-validator@4.2.5)(focus-trap@7.6.2)(nprogress@0.2.0)(vue@3.5.13)
       focus-trap: 7.6.2
       mark.js: 8.11.1
       minisearch: 7.1.0
@@ -3429,18 +3426,13 @@ snapshots:
       - typescript
       - universal-cookie
 
-  vue-demi@0.14.10(vue@3.4.27):
-    dependencies:
-      vue: 3.4.27
-    optional: true
-
   vue-demi@0.14.10(vue@3.5.13):
     dependencies:
       vue: 3.5.13
 
-  vue-demi@0.14.8(vue@3.4.27):
+  vue-demi@0.14.8(vue@3.5.13):
     dependencies:
-      vue: 3.4.27
+      vue: 3.5.13
 
   vue-github-button@3.1.0:
     dependencies:
