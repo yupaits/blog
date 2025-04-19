@@ -7,9 +7,6 @@
       <p>3. 请勿轻信各类招聘征婚、代练代抽、私下交易、购买礼包码、游戏币等广告信息，谨防网络诈骗。</p>
     </div>
     <div id="vcomments"></div>
-    <div class="visitors">
-      <span>本文总阅读量 <i id="busuanzi_value_page_pv"></i> 次</span>
-    </div>
   </div>
 </template>
 
@@ -31,13 +28,6 @@
   line-height: 24px;
   font-size: 14px;
   transition: color 0.25s;
-}
-
-.visitors {
-  margin-top: 1rem;
-  text-align: right;
-  color: var(--vp-c-text-2);
-  font-size: 14px;
 }
 
 #vcomments {
