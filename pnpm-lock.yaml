@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      canvas-confetti:
+        specifier: ^1.9.3
+        version: 1.9.3
       element-plus:
         specifier: ^2.8.3
         version: 2.8.3(vue@3.5.13)
@@ -761,6 +764,9 @@ packages:
   camelcase@2.1.1:
     resolution: {integrity: sha512-DLIsRzJVBQu72meAKPkWQOLcujdXT32hwdfnkI1frSiSRMK1MofjKHf+MEx0SB6fjEFXL8fBDv1dKymBlOp4Qw==}
     engines: {node: '>=0.10.0'}
+
+  canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -2420,6 +2426,8 @@ snapshots:
       set-function-length: 1.2.2
 
   camelcase@2.1.1: {}
+
+  canvas-confetti@1.9.3: {}
 
   ccount@2.0.1: {}
 

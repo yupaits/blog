@@ -2,6 +2,7 @@ import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
 import { useRoute } from 'vitepress'
 import vitepressBackToTop from 'vitepress-plugin-back-to-top'
 import vitepressNprogress from 'vitepress-plugin-nprogress'
+import confetti from 'canvas-confetti'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch } from 'vue'
 import MyLayout from './MyLayout.vue'
@@ -50,8 +51,17 @@ export default {
       })
     }
 
+    const initConfetti = () => {
+      confetti({
+        particleCount: 100,
+        spread: 170,
+        origin: { y: 0.6 }
+      })
+    }
+
     onMounted(() => {
       lazyLoad('//unpkg.com/valine/dist/Valine.min.js').then(() => initValine())
+      initConfetti()
     })
 
     watch(
