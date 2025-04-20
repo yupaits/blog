@@ -16,12 +16,12 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 import './style/index.css'
 import './style/var.css'
 
-// busuanzi统计
-const initBusuanzi = () => {
+// 站点访问统计
+const useVercount = () => {
   const script = document.createElement('script')
   script.defer = true
   script.async = true
-  script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+  script.src = 'https://events.vercount.one/js'
   document.head.appendChild(script)
 }
 
@@ -69,7 +69,7 @@ export default {
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
     router.onAfterPageLoad = () => {
-      // initBusuanzi()
+      useVercount()
     }
     vitepressNprogress(ctx)
   }
