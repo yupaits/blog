@@ -1,29 +1,38 @@
 <template>
   <Layout>
-    <template #doc-top>
-      <div class="shade" :class="{'shade-active': isTransitioning}"></div>
-    </template>
-
     <template #doc-before>
       <DraftAnnounce :preview="isPreviewDraft()" :percent="frontmatter?.draftPercent" v-if="isDraft()" />
     </template>
 
     <template #doc-after>
-      <ValineComment v-show="showComment()" />
+      <CommentRule v-show="showComment()" />
+    </template>
+
+    <template #doc-footer-before>
+      <BackToTop />
+    </template>
+
+    <template #layout-bottom>
+      <Busuanzi v-show="isHome()" />
     </template>
   </Layout>
 </template>
 
 <script setup>
-import { onMounted, watch, ref } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import DraftAnnounce from './DraftAnnounce.vue'
-import ValineComment from './ValineComment.vue'
+import CommentRule from './CommentRule.vue'
+import Busuanzi from './Busuanzi.vue'
+import BackToTop from './BackToTop.vue'
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 const route = useRoute()
-const isTransitioning = ref(false)
+
+const isHome = () => {
+  return frontmatter.value?.layout === 'home'
+}
 
 const isDraft = () => {
   const isDraftStatus = frontmatter.value?.draft
@@ -44,59 +53,17 @@ const handlePreviewDraft = () => {
 
 const showComment = () => {
   const enabledComment = frontmatter.value?.comment
-  return (enabledComment === undefined || enabledComment) &&
-    (!isDraft() || isPreviewDraft())
-}
-
-const transition = () => {
-  isTransitioning.value = true
-  setTimeout(() => {
-    isTransitioning.value = false
-  }, 300)
+  return enabledComment === undefined || enabledComment
 }
 
 onMounted(() => {
-  transition()
   handlePreviewDraft()
 })
 
 watch(
   () => route.path,
   () => {
-    transition()
     handlePreviewDraft()
   }
 )
 </script>
-
-<style>
-.shade {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--vp-c-bg);
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0;
-  transition: transform 0.3s ease-in-out;
-}
-
-.shade-active {
-  opacity: 0;
-  animation: shadeAnimation 0.3s ease-in-out;
-}
-
-@keyframes shadeAnimation {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(100vh);
-  }
-}
-</style>

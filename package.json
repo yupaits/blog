@@ -1,15 +1,15 @@
 {
   "devDependencies": {
+    "busuanzi.pure.js": "^1.0.3",
     "canvas-confetti": "^1.9.3",
     "element-plus": "^2.8.3",
     "markdown-it-custom-attrs": "^1.0.2",
-    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-task-checkbox": "^1.0.6",
+    "nprogress-v2": "^1.1.10",
     "unplugin-auto-import": "^0.18.3",
     "unplugin-vue-components": "^0.27.4",
-    "valine": "^1.5.1",
     "vitepress": "1.5.0",
-    "vitepress-plugin-back-to-top": "^1.0.1",
-    "vitepress-plugin-nprogress": "^0.0.4",
+    "vitepress-plugin-comment-with-giscus": "^1.1.15",
     "vue-github-button": "^3.1.0"
   },
   "scripts": {

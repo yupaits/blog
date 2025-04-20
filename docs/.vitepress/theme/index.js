@@ -1,8 +1,9 @@
-import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
-import { useRoute } from 'vitepress'
-import vitepressBackToTop from 'vitepress-plugin-back-to-top'
-import vitepressNprogress from 'vitepress-plugin-nprogress'
+import busuanzi from 'busuanzi.pure.js'
 import confetti from 'canvas-confetti'
+import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
+import { NProgress } from 'nprogress-v2'
+import giscusTalk from 'vitepress-plugin-comment-with-giscus'
+import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch } from 'vue'
 import MyLayout from './MyLayout.vue'
@@ -12,8 +13,7 @@ import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
 
 import 'element-plus/dist/index.css'
-import 'vitepress-plugin-back-to-top/dist/style.css'
-import 'vitepress-plugin-nprogress/lib/css/index.css'
+import 'nprogress-v2/dist/index.css'
 import './style/index.css'
 import './style/var.css'
 
@@ -21,35 +21,23 @@ export default {
   extends: DefaultTheme,
   Layout: MyLayout,
   setup() {
+    const { frontmatter } = useData()
     const route = useRoute()
 
-    // 初始化Valine
-    const initValine = () => {
-      const path = location.origin + location.pathname
-      new Valine({
-        el: '#vcomments',
-        appId: '1bm9HBoZJKiYc9SaRKBlDfJy-gzGzoHsz',
-        appKey: 'EIF8JdXxwwF5PoT8mgeeHzqH',
-        path: path,
-        visitor: false,
-        lang: 'zh-CN',
-        enableQQ: true,
-        requiredFields: ['nick', 'mail'],
-        placeholder: '在上面填写完昵称和邮箱之后，请在这里写下您的留言\n昵称填写为QQ号时会自动获取QQ头像',
-      })
-    }
-
-    const lazyLoad = (url) => {
-      return new Promise((resolve) => {
-        var head = document.getElementsByTagName('head')[0]
-        var script = document.createElement('script')
-        script.setAttribute('type', 'text/javascript')
-        script.setAttribute('src', url)
-        head.append(script)
-
-        script.onload = () => resolve()
-      })
-    }
+    // Giscus评论
+    giscusTalk({
+      repo: 'yupaits/giscus',
+      repoId: 'R_kgDOOciJmA',
+      category: 'General',
+      categoryId: 'DIC_kwDOOciJmM4CpRt2',
+      mapping: 'pathname',
+      reactionsEnabled: '1',
+      inputPosition: 'bottom',
+      lang: 'zh-CN',
+      loading: 'lazy'
+    }, {
+      frontmatter, route
+    }, true)
 
     const initConfetti = () => {
       confetti({
@@ -60,19 +48,10 @@ export default {
     }
 
     onMounted(() => {
-      lazyLoad('//unpkg.com/valine/dist/Valine.min.js').then(() => initValine())
       initConfetti()
     })
-
-    watch(
-      () => route.path,
-      () => {
-        initValine()
-      }
-    )
   },
-  enhanceApp(ctx) {
-    const { app } = ctx
+  enhanceApp({ app, router }) {
     app.component('DraftAnnounce', DraftAnnounce)
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
@@ -80,10 +59,13 @@ export default {
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
-    vitepressBackToTop({
-      threshold: 300
-    })
-    vitepressNprogress(ctx)
+    router.onBeforeRouteChange = () => {
+      NProgress.start()
+    }
+    router.onAfterRouteChanged = () => {
+      busuanzi.fetch()
+      NProgress.done()
+    }
   }
 }
 

@@ -36,8 +36,10 @@ const linkGroup = (groupItem) => {
   font-size: 16px;
   color: var(--vp-c-brand-1);
   border-left: 4px solid var(--vp-c-brand-1);
+  border-radius: 6px;
   padding-left: 8px;
-  line-height: 24px;
+  line-height: 40px;
+  background-color: var(--vp-c-bg-elv);
 }
 
 .card-container {
@@ -48,27 +50,27 @@ const linkGroup = (groupItem) => {
 .card-container .card-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 12px;
 }
 
-.link-card.block {
+.linkcard.block {
   width: 100%;
 }
 
 @media screen and (min-width: 768px) {
-  .link-card:not(.block) {
-    width: calc(100% / 3 - 6px);
+  .linkcard:not(.block) {
+    width: calc(100% / 3 - 8px);
   }
 }
 
 @media screen and (min-width: 540px) and (max-width: 768px) {
-  .link-card:not(.block) {
-    width: calc(100% / 2 - 5px);
+  .linkcard:not(.block) {
+    width: calc(100% / 2 - 6px);
   }
 }
 
 @media screen and (max-width: 540px) {
-  .link-card:not(.block) {
+  .linkcard:not(.block) {
     width: 100%;
   }
 }

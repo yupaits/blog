@@ -1,13 +1,8 @@
 <template>
-  <a :href="option?.link" target="_blank" :class="option?.type ?? group?.type ?? 'info'"
-    class="link-card no-icon custom-block">
-    <img :ref="getImgRefName(group?.label, option?.text)" referrer="no-referrer|origin|unsafe-url"
-      :style="{ background: option?.iconBackground, height: option.imgHeight ?? group.imgHeight ?? '48px', minWidth: option.imgWidth ?? group.imgWidth ?? '48px' }"
-      class="link-img no-zoom VPImage">
-    <div>
-      <div class="link-card-title">{{ option?.text }}</div>
-      <p class="link-card-description" v-html="option?.description" v-if="option?.description"></p>
-    </div>
+  <a class="linkcard no-icon" :href="option?.link" target="_blank">
+    <img :ref="getImgRefName(group?.label, option?.text)"
+      :style="{ height: option.imgHeight ?? group.imgHeight ?? '48px', minWidth: option.imgWidth ?? group.imgWidth ?? '48px' }" />
+    <p class="description"><span class="title" v-if="option?.text">{{ option?.text }}<br></span><span class="subtitle" v-html="option?.description" v-if="option?.description"></span></p>
   </a>
 </template>
 
@@ -54,34 +49,56 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.link-card {
+/* 卡片背景 */
+.linkcard {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 8px;
-  margin: 0;
-}
-
-a.link-card {
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  transition: color 0.5s, background-color 0.5s;
   text-decoration: none;
 }
 
-a::after.link-card {
+/* 卡片鼠标悬停 */
+.linkcard:hover {
+  background-color: var(--vp-c-yellow-soft);
+}
+
+a::after.linkcard {
   content: none;
 }
 
-.link-img {
-  background: #fff;
-  border: 1px solid var(--vp-c-divider);
-  padding: 4px
-}
-
-.link-card-title {
+/* 描述链接文字 */
+.linkcard .description {
+  flex: 1;
+  line-height: 25px;
   color: var(--vp-c-text-1);
+  margin: 0 0 0 16px;
+  transition: color 0.5s;
 }
 
-.link-card-description {
-  font-size: 12px;
-  color: var(--vp-c-text-2);
+/* 描述链接标题 */
+.linkcard .description .title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* 描述链接副标题 */
+.linkcard .description .subtitle {
+  font-size: 14px;
+}
+
+/* 图片 */
+.linkcard img {
+  object-fit: contain;
+  background: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.vp-doc a:not(.link-card) {
+  padding: 16px;
 }
 </style>

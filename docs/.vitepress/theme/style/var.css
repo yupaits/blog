@@ -1,14 +1,18 @@
+/* 链接文本去除下划线 */
 .vp-doc a:not(.link-card) {
   text-decoration: none;
   padding: 0 4px;
 }
 
+/* 导航栏、侧边栏选项选中时字体加粗 */
 .VPNavBarMenuLink.active,
 .VPNavBarMenuGroup.active .text,
-.VPMenuLink .active {
-  font-weight: bolder;
+.VPMenuLink .active,
+.VPSidebarItem.is-link.is-active .VPLink .text {
+  font-weight: bold;
 }
 
+/* 导航栏下拉菜单分组标题 */
 .VPMenuGroup .title {
   font-size: 11px;
   color: var(--vp-c-text-3);
@@ -49,15 +53,10 @@
   border-color: var(--vp-c-red-2);
 }
 
+/* 首页主题文字渐变色 */
 :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
-}
-
-/* 搜索框居右 */
-.VPNavBarSearch.search {
-  justify-content: flex-end;
-  padding-right: 3rem;
 }
 
 /* 时间线元素去除li前面的圆点 */
@@ -83,13 +82,141 @@
   }
 }
 
-/* 回到页面顶部按钮填充背景 */
+/* 导航栏毛玻璃 */
 :root {
-  .go-to-top {
-    background-color: var(--vp-c-bg-alt)
+
+  /* 首页下滑后导航透明 */
+  .VPNavBar:not(.has-sidebar):not(.home.top) {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
   }
 
-  .go-to-top:hover {
-    background-color: var(--vp-c-bg-elv)
+  /* Feature透明 */
+  .VPFeature {
+    border: none;
+    box-shadow: 0 10px 30px 0 rgb(0 0 0 / 15%);
+    background-color: transparent;
   }
+
+  /* 文档页侧边栏顶部透明 */
+  .curtain {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+  }
+
+  @media (min-width: 960px) {
+
+    /* 文档页导航中间透明 */
+    .VPNavBar:not(.home.top) .content-body {
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(10px);
+    }
+  }
+
+  /* 移动端大纲栏透明 */
+  .VPLocalNav {
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* 代码块：增加留空边距 增加阴影 */
+.vp-doc div[class*=language-] {
+  box-shadow: 0 10px 30px 0 var(--vp-c-border);
+  padding-top: 20px;
+}
+
+/* 代码块：添加macOS风格的小圆点 */
+.vp-doc div[class*=language-]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 12px;
+  height: 12px;
+  background-color: #ff5f56;
+  border-radius: 50%;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+  z-index: 1;
+}
+
+/* 代码块：下移行号 隐藏右侧竖线 */
+.vp-doc .line-numbers-wrapper {
+  padding-top: 40px;
+  border-right: none;
+}
+
+/* 代码块：重建行号右侧竖线 */
+.vp-doc .line-numbers-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 40px;
+  right: 0;
+  border-right: 1px solid var(--vp-code-block-divider-color);
+  height: calc(100% - 60px);
+}
+
+.vp-doc div[class*='language-'].line-numbers-mode {
+  margin-bottom: 20px;
+}
+
+/* 代码组：tab间距 */
+.vp-code-group .tabs {
+  padding-top: 20px;
+}
+
+/* 代码组：添加样式及阴影 */
+.vp-code-group {
+  color: var(--vp-c-black-soft);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px 0 var(--vp-c-border);
+}
+
+/* 代码组：添加macOS风格的小圆点 */
+.vp-code-group .tabs::before {
+  content: ' ';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 12px;
+  width: 12px;
+  background: #fc625d;
+  border-radius: 50%;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+}
+
+/* 代码组：修正倒角、阴影、边距 */
+.vp-code-group div[class*="language-"].vp-adaptive-theme.line-numbers-mode {
+  border-radius: 8px;
+  box-shadow: none;
+  padding-top: 0px;
+}
+
+/* 代码组：隐藏小圆点 */
+.vp-code-group div[class*="language-"].vp-adaptive-theme.line-numbers-mode::before {
+  display: none;
+}
+
+/* 代码组：修正行号位置 */
+.vp-code-group .line-numbers-mode .line-numbers-wrapper {
+  padding-top: 20px;
+}
+
+/* 代码组：修正行号右侧竖线位置 */
+.vp-code-group .line-numbers-mode .line-numbers-wrapper::after {
+  top: 24px;
+  height: calc(100% - 45px);
+}
+
+/* 代码组（无行号）：修正倒角、阴影、边距 */
+.vp-code-group div[class*="language-"].vp-adaptive-theme {
+  border-radius: 8px;
+  box-shadow: none;
+  padding-top: 0px;
+}
+
+/* 代码组（无行号）：隐藏小圆点 */
+.vp-code-group div[class*="language-"].vp-adaptive-theme::before {
+  display: none;
 }

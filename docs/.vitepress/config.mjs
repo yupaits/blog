@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { defineConfig } from 'vitepress'
-import MarkdownItTaskLists from 'markdown-it-task-lists'
+import taskList from 'markdown-it-task-checkbox'
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -37,14 +37,6 @@ export default defineConfig({
       })();
       `
     ],
-    // 不蒜子访问量统计
-    [
-      'script',
-      {
-        async: '',
-        src: '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
-      }
-    ],
     // fancybox
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css' }],
     ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js' }],
@@ -67,27 +59,53 @@ export default defineConfig({
     },
 
     footer: {
-      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/">yupaits notes</a><br><span>本站总访问量 <i id="busuanzi_value_site_pv"></i> 次</span><span style="margin-left: 1rem">访客数 <i id="busuanzi_value_site_uv"></i> 人</span>',
+      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/">yupaits notes</a>',
       copyright: `版权所有 © 2016-${new Date().getFullYear()} <a href="mailto:ts495606653@hotmail.com">yupaits</a>`
     },
 
     search: {
-      provider: 'local',
+      provider: 'algolia',
       options: {
+        appId: 'ENTO5D6H6Z',
+        apiKey: '186be67636dc32cf9bc035415c0c762d',
+        indexName: 'yupaits-notes',
         detailedView: true,
+        placeholder: '搜索文档',
         translations: {
           button: {
             buttonText: '搜索文档',
             buttonAriaLabel: '搜索文档'
           },
           modal: {
-            displayDetails: '展示详情',
-            resetButtonTitle: '清除查询条件',
-            noResultsText: '无法找到相关结果',
+            searchBox: {
+              resetButtonTitle: '清除查询条件',
+              resetButtonAriaLabel: '清除查询条件',
+              cancelButtonText: '取消',
+              cancelButtonAriaLabel: '取消'
+            },
+            startScreen: {
+              recentSearchesTitle: '搜索历史',
+              noRecentSearchesText: '没有搜索历史',
+              saveRecentSearchButtonTitle: '保存至搜索历史',
+              removeRecentSearchButtonTitle: '从搜索历史中移除',
+              favoriteSearchesTitle: '收藏',
+              removeFavoriteSearchButtonTitle: '从收藏中移除'
+            },
+            errorScreen: {
+              titleText: '无法获取结果',
+              helpText: '你可能需要检查你的网络连接'
+            },
             footer: {
               selectText: '选择',
               navigateText: '切换',
               closeText: '关闭',
+              searchByText: '搜索提供者'
+            },
+            noResultsScreen: {
+              noResultsText: '无法找到相关结果',
+              suggestedQueryText: '你可以尝试查询',
+              reportMissingResultsText: '你认为该查询应该有结果？',
+              reportMissingResultsLinkText: '点击反馈'
             }
           }
         }
@@ -128,7 +146,7 @@ export default defineConfig({
       lazyLoading: true
     },
     config: (md) => {
-      md.use(MarkdownItTaskLists)
+      md.use(taskList)
       md.use(mdItCustomAttrs, 'image', {
         'data-fancybox': 'gallery'
       })
