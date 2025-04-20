@@ -10,20 +10,12 @@ import DraftAnnounce from './components/DraftAnnounce.vue'
 import LinkCard from './components/LinkCard.vue'
 import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
+import { initBusuanzi } from './util/visitCount'
 
 import 'element-plus/dist/index.css'
 import 'vitepress-plugin-nprogress/lib/css/index.css'
 import './style/index.css'
 import './style/var.css'
-
-// busuanzi统计
-const initBusuanzi = () => {
-  const script = document.createElement('script')
-  script.defer = true
-  script.async = true
-  script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
-  document.head.appendChild(script)
-}
 
 export default {
   extends: DefaultTheme,
@@ -69,7 +61,7 @@ export default {
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
     router.onAfterPageLoad = () => {
-      // initBusuanzi()
+      initBusuanzi()
     }
     vitepressNprogress(ctx)
   }
