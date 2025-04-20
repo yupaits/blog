@@ -4,13 +4,12 @@ import { useData, useRoute } from 'vitepress'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import vitepressNprogress from 'vitepress-plugin-nprogress'
 import DefaultTheme from 'vitepress/theme'
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import MyLayout from './MyLayout.vue'
 import DraftAnnounce from './components/DraftAnnounce.vue'
 import LinkCard from './components/LinkCard.vue'
 import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
-import { initBusuanzi } from './util/visitCount'
 
 import 'element-plus/dist/index.css'
 import 'vitepress-plugin-nprogress/lib/css/index.css'
@@ -47,12 +46,29 @@ export default {
       })
     }
 
+    // busuanzi统计
+    const useBusuanzi = () => {
+      const script = document.createElement('script')
+      script.defer = true
+      script.async = true
+      script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+      document.head.appendChild(script)
+    }
+
     onMounted(() => {
       initConfetti()
+      useBusuanzi()
     })
+
+    watch(
+      () => route.path,
+      () => {
+        useBusuanzi()
+      }
+    )
   },
   async enhanceApp(ctx) {
-    const { app, router } = ctx
+    const { app } = ctx
     app.component('DraftAnnounce', DraftAnnounce)
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
@@ -60,9 +76,6 @@ export default {
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
-    router.onAfterPageLoad = () => {
-      initBusuanzi()
-    }
     vitepressNprogress(ctx)
   }
 }
