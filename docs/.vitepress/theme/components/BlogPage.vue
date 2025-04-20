@@ -13,7 +13,7 @@
     </template>
 
     <template #layout-bottom>
-      <Vercount v-show="isHome()" />
+      <Busuanzi v-show="isHome()" />
     </template>
   </Layout>
 </template>
@@ -24,7 +24,7 @@ import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import DraftAnnounce from './DraftAnnounce.vue'
 import CommentRule from './CommentRule.vue'
-import Vercount from './Vercount.vue'
+import Busuanzi from './Busuanzi.vue'
 import BackToTop from './BackToTop.vue'
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
