@@ -69,7 +69,7 @@ export default {
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
     router.onAfterPageLoad = () => {
-      initBusuanzi()
+      // initBusuanzi()
     }
     vitepressNprogress(ctx)
   }
