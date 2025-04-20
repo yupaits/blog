@@ -14,8 +14,6 @@ export default defineConfig({
   description: "yupaits notes, Just do & record",
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    // Algolia
-    ['meta', { name: 'algolia-site-verification', content: '723EB8FE39F133F4' }],
     // Google adsense
     [
       'script',
@@ -66,11 +64,11 @@ export default defineConfig({
     },
 
     search: {
-      provider: 'algolia',
+      provider: 'local',
       options: {
-        appId: 'ENTO5D6H6Z',
-        apiKey: '22390b1ea5cdb529532d3a76f2e37c45',
-        indexName: 'yupaits_com_ento5d6h6z_pages',
+        appId: '',
+        apiKey: '',
+        indexName: '',
         detailedView: true,
         placeholder: '搜索文档',
         translations: {
