@@ -16,6 +16,7 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 import './style/index.css'
 import './style/var.css'
 
+// busuanzi统计
 const initBusuanzi = () => {
   const script = document.createElement('script')
   script.defer = true
