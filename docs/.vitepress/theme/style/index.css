@@ -12,3 +12,8 @@ img:not(.VPImage) {
 .medium-zoom-image {
   z-index: 31;
 }
+
+/* giscus评论区宽度优化 */
+#giscus {
+  width: calc(100% - 8px);
+}
