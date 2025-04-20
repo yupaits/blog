@@ -51,7 +51,7 @@ export default {
     })
   },
   async enhanceApp(ctx) {
-    const { app, router } = ctx
+    const { app } = ctx
     app.component('DraftAnnounce', DraftAnnounce)
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
@@ -59,10 +59,6 @@ export default {
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
-    const busuanzi = await import('busuanzi.pure.js')
-    router.onAfterRouteChanged = () => {
-      busuanzi?.fetch()
-    }
     vitepressNprogress(ctx)
   }
 }
