@@ -23,9 +23,6 @@ importers:
       markdown-it-task-checkbox:
         specifier: ^1.0.6
         version: 1.0.6
-      nprogress-v2:
-        specifier: ^1.1.10
-        version: 1.1.10
       unplugin-auto-import:
         specifier: ^0.18.3
         version: 0.18.3(@vueuse/core@11.1.0(vue@3.5.13))(rollup@4.22.4)
@@ -38,6 +35,9 @@ importers:
       vitepress-plugin-comment-with-giscus:
         specifier: ^1.1.15
         version: 1.1.15(vue@3.5.13)
+      vitepress-plugin-nprogress:
+        specifier: ^0.0.4
+        version: 0.0.4
       vue-github-button:
         specifier: ^3.1.0
         version: 3.1.0
@@ -904,9 +904,6 @@ packages:
   normalize-wheel-es@1.2.0:
     resolution: {integrity: sha512-Wj7+EJQ8mSuXr2iWfnujrimU35R2W4FAErEyTmJoJ7ucwTn2hOUSsRehMb5RSYkxXGTM7Y9QpvPmp++w5ftoJw==}
 
-  nprogress-v2@1.1.10:
-    resolution: {integrity: sha512-MypWLNIPIM07SS0bAc/oac0vhVFz9vAHm7d1sj//Pnf3J03LQ3CuWrlDteIu6exq0fIvkDJ6tUDRWLaifsIt5w==}
-
   nprogress@0.2.0:
     resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
 
@@ -1137,6 +1134,9 @@ packages:
 
   vitepress-plugin-comment-with-giscus@1.1.15:
     resolution: {integrity: sha512-1DJjgN+7SYvn5ZkjuSXPmz7nlqfcrh4qCGGviiZghA2ELXnaO2m9WY7m+RisPSaqCn90xqe0JbO2T4NMq8iUBg==}
+
+  vitepress-plugin-nprogress@0.0.4:
+    resolution: {integrity: sha512-YzW36kBnjuFH91DOFIA5snyBf4WpF/cYfhAiyNefhqif8QQIKGsbpzvI8VN0M8RHLGr9iQyHhF7dQsm//Xf5Hw==}
 
   vitepress@1.5.0:
     resolution: {integrity: sha512-q4Q/G2zjvynvizdB3/bupdYkCJe2umSAMv9Ju4d92E6/NXJ59z70xB0q5p/4lpRyAwflDsbwy1mLV9Q5+nlB+g==}
@@ -2048,10 +2048,7 @@ snapshots:
 
   normalize-wheel-es@1.2.0: {}
 
-  nprogress-v2@1.1.10: {}
-
-  nprogress@0.2.0:
-    optional: true
+  nprogress@0.2.0: {}
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -2309,6 +2306,10 @@ snapshots:
       '@giscus/vue': 2.4.0(vue@3.5.13)
     transitivePeerDependencies:
       - vue
+
+  vitepress-plugin-nprogress@0.0.4:
+    dependencies:
+      nprogress: 0.2.0
 
   vitepress@1.5.0(@algolia/client-search@5.15.0)(@types/node@20.14.2)(async-validator@4.2.5)(nprogress@0.2.0)(postcss@8.4.49)(sass@1.77.4)(search-insights@2.14.0):
     dependencies:

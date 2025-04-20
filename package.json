@@ -5,11 +5,11 @@
     "element-plus": "^2.8.3",
     "markdown-it-custom-attrs": "^1.0.2",
     "markdown-it-task-checkbox": "^1.0.6",
-    "nprogress-v2": "^1.1.10",
     "unplugin-auto-import": "^0.18.3",
     "unplugin-vue-components": "^0.27.4",
     "vitepress": "1.5.0",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
+    "vitepress-plugin-nprogress": "^0.0.4",
     "vue-github-button": "^3.1.0"
   },
   "scripts": {
