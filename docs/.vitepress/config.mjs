@@ -69,8 +69,8 @@ export default defineConfig({
       provider: 'algolia',
       options: {
         appId: 'ENTO5D6H6Z',
-        apiKey: '186be67636dc32cf9bc035415c0c762d',
-        indexName: 'yupaits-notes',
+        apiKey: '22390b1ea5cdb529532d3a76f2e37c45',
+        indexName: 'yupaits_com_ento5d6h6z_pages',
         detailedView: true,
         placeholder: '搜索文档',
         translations: {
