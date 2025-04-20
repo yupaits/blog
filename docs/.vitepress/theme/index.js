@@ -16,6 +16,14 @@ import 'vitepress-plugin-nprogress/lib/css/index.css'
 import './style/index.css'
 import './style/var.css'
 
+const initBusuanzi = () => {
+  const script = document.createElement('script')
+  script.defer = true
+  script.async = true
+  script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+  document.head.appendChild(script)
+}
+
 export default {
   extends: DefaultTheme,
   Layout: MyLayout,
@@ -51,7 +59,7 @@ export default {
     })
   },
   async enhanceApp(ctx) {
-    const { app } = ctx
+    const { app, router } = ctx
     app.component('DraftAnnounce', DraftAnnounce)
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
@@ -59,6 +67,9 @@ export default {
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
+    router.onAfterPageLoad = () => {
+      initBusuanzi()
+    }
     vitepressNprogress(ctx)
   }
 }

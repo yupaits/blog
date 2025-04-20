@@ -37,14 +37,6 @@ export default defineConfig({
       })();
       `
     ],
-    // 不蒜子统计
-    [
-      'script',
-      {
-        async: '',
-        src: '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
-      }
-    ],
     // fancybox
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css' }],
     ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js' }],
