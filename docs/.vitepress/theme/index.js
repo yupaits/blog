@@ -1,9 +1,8 @@
-import busuanzi from 'busuanzi.pure.js'
 import confetti from 'canvas-confetti'
 import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
-import vitepressNprogress from 'vitepress-plugin-nprogress'
-import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import { useData, useRoute } from 'vitepress'
+import giscusTalk from 'vitepress-plugin-comment-with-giscus'
+import vitepressNprogress from 'vitepress-plugin-nprogress'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted } from 'vue'
 import MyLayout from './MyLayout.vue'
@@ -51,7 +50,7 @@ export default {
       initConfetti()
     })
   },
-  enhanceApp(ctx) {
+  async enhanceApp(ctx) {
     const { app, router } = ctx
     app.component('DraftAnnounce', DraftAnnounce)
     app.component('LinkCard', LinkCard)
@@ -60,8 +59,9 @@ export default {
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
+    const busuanzi = await import('busuanzi.pure.js')
     router.onAfterRouteChanged = () => {
-      busuanzi.fetch()
+      busuanzi?.fetch()
     }
     vitepressNprogress(ctx)
   }
