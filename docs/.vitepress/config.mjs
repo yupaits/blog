@@ -14,6 +14,8 @@ export default defineConfig({
   description: "yupaits notes, Just do & record",
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
+    // Algolia
+    ['meta', { name: 'algolia-site-verification', content: '723EB8FE39F133F4' }],
     // Google adsense
     [
       'script',
