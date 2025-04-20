@@ -64,11 +64,8 @@ export default defineConfig({
     },
 
     search: {
-      provider: 'algolia',
+      provider: 'local',
       options: {
-        appId: '3JE3FDTUMO',
-        apiKey: 'd0c5ee0dc5e725b04ddf529e07539be0',
-        indexName: 'doc',
         detailedView: true,
         placeholder: '搜索文档',
         translations: {
