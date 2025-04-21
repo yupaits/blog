@@ -1,8 +1,8 @@
+import { BProgress } from '@bprogress/core'
 import confetti from 'canvas-confetti'
 import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
 import { useData, useRoute } from 'vitepress'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
-import { BProgress } from '@bprogress/core'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch } from 'vue'
 import MyLayout from './MyLayout.vue'
@@ -10,8 +10,8 @@ import LinkCard from './components/LinkCard.vue'
 import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
 
-import 'element-plus/dist/index.css'
 import '@bprogress/core/css'
+import 'element-plus/dist/index.css'
 import './style/index.css'
 import './style/var.css'
 
@@ -66,7 +66,7 @@ export default {
       }
     )
   },
-  async enhanceApp({ app, router }) {
+  enhanceApp({ app, router }) {
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
     app.component('Progress', Progress)
@@ -74,12 +74,14 @@ export default {
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
 
-    router.onBeforeRouteChange = () => {
-      BProgress.start()
-    }
-    router.onAfterRouteChanged = () => {
-      BProgress.done()
-    }
+    setTimeout(() => {
+      router.onBeforeRouteChange = () => {
+        BProgress.start()
+      }
+      router.onAfterRouteChanged = () => {
+        BProgress.done()
+      }
+    })
   }
 }
 
