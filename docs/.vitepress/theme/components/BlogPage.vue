@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <template #doc-before>
-      <DraftAnnounce :preview="isPreviewDraft()" :percent="frontmatter?.draftPercent" v-if="isDraft()" />
+      <DraftAnnounce v-if="isDraft()" />
     </template>
 
     <template #doc-after>
@@ -9,7 +9,12 @@
     </template>
 
     <template #doc-footer-before>
+      <PageCopyRight v-show="showComment()" />
       <BackToTop />
+    </template>
+
+    <template #aside-top>
+      <PageMetadata />
     </template>
 
     <template #layout-bottom>
@@ -19,13 +24,15 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import DraftAnnounce from './DraftAnnounce.vue'
-import CommentRule from './CommentRule.vue'
-import Busuanzi from './Busuanzi.vue'
+import { onMounted, watch } from 'vue'
 import BackToTop from './BackToTop.vue'
+import Busuanzi from './Busuanzi.vue'
+import CommentRule from './CommentRule.vue'
+import DraftAnnounce from './DraftAnnounce.vue'
+import PageCopyRight from './PageCopyright.vue'
+import PageMetadata from './PageMetadata.vue'
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 const route = useRoute()

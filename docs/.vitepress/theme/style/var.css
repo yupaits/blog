@@ -220,3 +220,8 @@
 .vp-code-group div[class*="language-"].vp-adaptive-theme::before {
   display: none;
 }
+
+/* 页面加载进度条 */
+:root {
+  --bprogress-color: var(--vp-c-brand-1);
+}

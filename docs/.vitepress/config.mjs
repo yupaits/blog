@@ -37,6 +37,9 @@ export default defineConfig({
       })();
       `
     ],
+    // Google字体
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.cn' }],
+    ['link', { href: 'https://fonts.googleapis.cn/css2?family=Roboto&display=swap', rel: 'stylesheet' }],
     // fancybox
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css' }],
     ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js' }],
@@ -59,7 +62,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/">yupaits notes</a>',
+      message: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/" target="_blank">yupaits notes</a>',
       copyright: `版权所有 © 2016-${new Date().getFullYear()} <a href="mailto:ts495606653@hotmail.com">yupaits</a>`
     },
 
