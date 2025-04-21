@@ -1,7 +1,7 @@
 <template>
   <div class="page-copyright">
     <p><span class="label">文章作者：</span><a href="mailto:ts495606653@hotmail.com">yupaits</a></p>
-    <p><span class="label">文章链接：</span><a href="link" target="_blank">{{ decodeURI(link) }}</a></p>
+    <p><span class="label">文章链接：</span><a :href="link" target="_blank">{{ decodeURI(link) }}</a></p>
     <p>
       <span class="label">版权声明：</span>
       <span>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA
@@ -11,12 +11,25 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-const link = ref('/')
+import { useRoute } from 'vitepress'
+import { onMounted, ref, watch } from 'vue'
+const link = ref('')
+const route = useRoute()
+
+const usePageUrl = () => {
+  link.value = window.location.origin + window.location.pathname
+}
 
 onMounted(() => {
-  link.value = window.location.origin + window.location.pathname
+  usePageUrl()
 })
+
+watch(
+  () => route.path,
+  () => {
+    usePageUrl()
+  }
+)
 </script>
 
 <style>
@@ -55,6 +68,7 @@ onMounted(() => {
 }
 
 .page-copyright a:hover {
-  color: var(--vp-c-text-1);
+  text-decoration: none;
+  color: var(--vp-c-brand-1);
 }
 </style>
