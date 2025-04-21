@@ -1,9 +1,9 @@
 <template>
   <div v-if="watermarkHidden()">
-    <BlogPage/>
+    <BlogPage :showMeta="false" />
   </div>
   <watermark :font="font" :content="site.title" v-else>
-    <BlogPage/>
+    <BlogPage :showMeta="true" />
   </watermark>
 </template>
 

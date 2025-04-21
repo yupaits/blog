@@ -1,5 +1,5 @@
 <template>
-  <div class="draft-announce-container" :class="{ 'has-content': preview }">
+  <section class="draft-announce-container" :class="{ 'has-content': preview }">
     <div class="draft-box">
       <div>
         <span class="badge">草稿</span>
@@ -11,7 +11,7 @@
         <Progress label="编写进度" labelWidth="100px" :percent="frontmatter?.draftPercent" />
       </p>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

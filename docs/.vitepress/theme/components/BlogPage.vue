@@ -5,20 +5,20 @@
     </template>
 
     <template #doc-after>
-      <CommentRule v-show="showComment()" />
+      <CommentRule v-if="showComment()" />
     </template>
 
     <template #doc-footer-before>
-      <PageCopyRight v-show="showComment()" />
+      <PageCopyRight v-if="showComment()" />
       <BackToTop />
     </template>
 
     <template #aside-top>
-      <PageMetadata />
+      <PageMetadata v-if="showMeta" />
     </template>
 
     <template #layout-bottom>
-      <Busuanzi v-show="isHome()" />
+      <Busuanzi v-if="isHome()" />
     </template>
   </Layout>
 </template>
@@ -33,6 +33,7 @@ import CommentRule from './CommentRule.vue'
 import DraftAnnounce from './DraftAnnounce.vue'
 import PageCopyRight from './PageCopyright.vue'
 import PageMetadata from './PageMetadata.vue'
+const { showMeta } = defineProps(['showMeta'])
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 const route = useRoute()
