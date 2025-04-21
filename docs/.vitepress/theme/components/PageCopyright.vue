@@ -1,7 +1,7 @@
 <template>
   <div class="page-copyright">
     <p><span class="label">文章作者：</span><a href="mailto:ts495606653@hotmail.com">yupaits</a></p>
-    <p><span class="label">文章链接：</span><a :href="pageLink" target="_blank">{{ decodeURI(pageLink) }}</a></p>
+    <p><span class="label">文章链接：</span><a href="link" target="_blank">{{ decodeURI(link) }}</a></p>
     <p>
       <span class="label">版权声明：</span>
       <span>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA
@@ -11,7 +11,12 @@
 </template>
 
 <script setup>
-const { pageLink } = defineProps(['pageLink'])
+import { onMounted, ref } from 'vue'
+const link = ref('/')
+
+onMounted(() => {
+  link.value = window.location.origin + window.location.pathname
+})
 </script>
 
 <style>
@@ -50,6 +55,6 @@ const { pageLink } = defineProps(['pageLink'])
 }
 
 .page-copyright a:hover {
-  color: var(--vp-c-brand-1);
+  color: var(--vp-c-text-1);
 }
 </style>
