@@ -396,40 +396,40 @@
         </plugin>
         ```
     - 缓存操作注解
-      | 名称 | 说明 |
-      |---|---|
-      | @Cacheable | 主要针对方法配置，能够根据方法的请求参数对其结果进行缓存，查询和更新都可以使用 |
-      | @CachePut | 保证方法被调用，有希望结果被缓存，与@Cacheable区别在于每次都会调用方法，常用于更新 |
-      | @CacheEvict | 清空缓存 |
-      | @Caching | 使用该注解可以同时指定多个缓存或者清除缓存的策略 |
+      | 名称        | 说明                                                                            |
+      |-------------|-------------------------------------------------------------------------------|
+      | @Cacheable  | 主要针对方法配置，能够根据方法的请求参数对其结果进行缓存，查询和更新都可以使用    |
+      | @CachePut   | 保证方法被调用，有希望结果被缓存，与@Cacheable区别在于每次都会调用方法，常用于更新 |
+      | @CacheEvict | 清空缓存                                                                        |
+      | @Caching    | 使用该注解可以同时指定多个缓存或者清除缓存的策略                                |
 
     - `@Cacheable`/`@CachePut`/`@CacheEvict`注解主要参数
-      | 名称 | 说明 |
-      |---|---|
-      | value | 缓存的名称，在Spring配置文件中定义，必须指定至少一个 |
-      | key | 缓存的key，可以为空。如果指定要按照SpEL表达式编写；如果不指定，则默认按照方法的所有参数进行组合 |
-      | condition | 缓存的条件，可以为空，使用SpEL编写，返回true或者false，只有为true才进行缓存/清除缓存 |
-      | unless | 否定缓存，当条件结果为true时，就不会缓存 |
-      | allEntries(@CacheEvict) | 是否清空所有缓存内容，默认为false，如果指定为true，则方法调用后将立即清空所有缓存 |
+      | 名称                          | 说明                                                                                                                                |
+      |-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+      | value                         | 缓存的名称，在Spring配置文件中定义，必须指定至少一个                                                                                  |
+      | key                           | 缓存的key，可以为空。如果指定要按照SpEL表达式编写；如果不指定，则默认按照方法的所有参数进行组合                                         |
+      | condition                     | 缓存的条件，可以为空，使用SpEL编写，返回true或者false，只有为true才进行缓存/清除缓存                                                    |
+      | unless                        | 否定缓存，当条件结果为true时，就不会缓存                                                                                              |
+      | allEntries(@CacheEvict)       | 是否清空所有缓存内容，默认为false，如果指定为true，则方法调用后将立即清空所有缓存                                                      |
       | beforeInvocation(@CacheEvict) | 是否在方法执行前就清空，默认为false，如果指定为true，则在方法还没有执行的时候就清空缓存，默认情况下，如果方法执行抛出异常，就不会清空缓存 |
 
     - `@Cacheable`/`@CachePut`的condition和unless控制方法结果是否缓存的机制如下：
-      | 条件 | unless: true | unless: false（为空默认false） |
-      |---|---|---|
-      |condition: true（为空默认true） | 不缓存 | 缓存 |
-      |condition: false | 不缓存 | 不缓存 |
+      | 条件                          | unless: true | unless: false（为空默认false） |
+      |-------------------------------|--------------|----------------------------|
+      | condition: true（为空默认true） | 不缓存       | 缓存                         |
+      | condition: false              | 不缓存       | 不缓存                       |
 
     - SpEL上下文数据
-      | 名称 | 位置 | 描述 | 表达式 |
-      |---|---|---|---|
-      | methodName | root对象 | 当前被调用的方法名 | `#root.methodName` |
-      | method | root对象 | 当前被调用的方法 | `#root.method` |
-      | target | root对象 | 当前被调用的目标对象实例 | `#root.target` |
-      | targetClass | root对象 | 当前被调用的目标对象的类 | `#root.targetClass`|
-      | args | root对象 | 当前被调用的方法的参数列表 | `#root.args` |
-      | caches | root对象 | 当前方法调用使用的缓存列表 | `#root.caches` |
-      | ArgumentName | 执行上下文 | 当前被调用的方法的参数，如上文的`#airportCode` | `#airportCode` |
-      | result | 执行上下文 | 方法执行后的返回值（仅当方法执行后的判断有效，如 unless=false cacheEvict的beforeInvocation=false）| `#result` |
+      | 名称         | 位置       | 描述                                                                                            | 表达式              |
+      |--------------|----------|-----------------------------------------------------------------------------------------------|---------------------|
+      | methodName   | root对象   | 当前被调用的方法名                                                                              | `#root.methodName`  |
+      | method       | root对象   | 当前被调用的方法                                                                                | `#root.method`      |
+      | target       | root对象   | 当前被调用的目标对象实例                                                                        | `#root.target`      |
+      | targetClass  | root对象   | 当前被调用的目标对象的类                                                                        | `#root.targetClass` |
+      | args         | root对象   | 当前被调用的方法的参数列表                                                                      | `#root.args`        |
+      | caches       | root对象   | 当前方法调用使用的缓存列表                                                                      | `#root.caches`      |
+      | ArgumentName | 执行上下文 | 当前被调用的方法的参数，如上文的`#airportCode`                                                   | `#airportCode`      |
+      | result       | 执行上下文 | 方法执行后的返回值（仅当方法执行后的判断有效，如 unless=false cacheEvict的beforeInvocation=false） | `#result`           |
 
 43. SpringAOP搭配注解进行切面开发时，同一个Spring Bean内部方法互相调用时（例如：`bizService.a()`和`bizService.b()`方法都被注解修饰，`bizService.a()`方法中调用了`bizService.b()`方法），只有最外层的方法（`bizService.a()`方法）会执行切面的代码，而被嵌套调用的方法（`bizService.b()`方法）不会执行切面中的代码。
     ```java

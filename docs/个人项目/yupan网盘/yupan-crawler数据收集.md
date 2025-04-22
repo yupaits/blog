@@ -10,13 +10,13 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 
 采集任务的配置信息有以下内容：
 
-|名称|说明|
-|---|---|
-| `jobName` | 任务名称，采集任务的唯一标识 |
-| `jobDesc` | 任务说明，采集任务的介绍和说明信息 |
-| `resCate` | 资源类别，包括：图片、小说、电影等 |
-| `siteUrl` | 资源站点地址 |
-| `timeout` | 页面加载超时时长 |
+| 名称       | 说明                                        |
+|------------|-------------------------------------------|
+| `jobName`  | 任务名称，采集任务的唯一标识                 |
+| `jobDesc`  | 任务说明，采集任务的介绍和说明信息           |
+| `resCate`  | 资源类别，包括：图片、小说、电影等              |
+| `siteUrl`  | 资源站点地址                                |
+| `timeout`  | 页面加载超时时长                            |
 | `jobProps` | 任务定制化配置信息，针对具体任务的个性化配置 |
 
 系统默认使用MySQL数据库存储配置信息，可以在采集任务的管理页面上对以上信息进行维护。
@@ -27,24 +27,24 @@ yupan-crawler采用主流`Selenium`框架进行采集，下载文件采用`hutoo
 
 将数据采集过程模板化，设计为`AbstractCrawlerHandler`抽象类，任务执行过程封装成`crawl()`方法，并暴露出以下方法：
 
-|方法定义|说明|
-|---|---|
-| `String getName()` | 获取采集任务名称（唯一标识，用于关联对应的采集任务配置信息） |
-| `void preHandle(CrawlerContext crawlerContext)` | 爬取前的预处理 |
-| `void postHandle(CrawlerContext crawlerContext)` | 爬取后的处理 |
-| `void handle(CrawlerContext crawlerContext)` | 数据爬取过程 |
-| `void onSuccess(CrawlerContext crawlerContext)` | 数据爬取成功回调方法 |
-| `void onFailure(CrawlerContext crawlerContext)` | 数据爬取失败回调方法 |
+| 方法定义                                         | 说明                                                      |
+|--------------------------------------------------|---------------------------------------------------------|
+| `String getName()`                               | 获取采集任务名称（唯一标识，用于关联对应的采集任务配置信息） |
+| `void preHandle(CrawlerContext crawlerContext)`  | 爬取前的预处理                                            |
+| `void postHandle(CrawlerContext crawlerContext)` | 爬取后的处理                                              |
+| `void handle(CrawlerContext crawlerContext)`     | 数据爬取过程                                              |
+| `void onSuccess(CrawlerContext crawlerContext)`  | 数据爬取成功回调方法                                      |
+| `void onFailure(CrawlerContext crawlerContext)`  | 数据爬取失败回调方法                                      |
 
 `CrawlerContext`上下文对象包含以下信息：
 
-|名称|说明|
-|---|---|
-| `crawlerJob` | 采集任务配置 |
-| `crawlerJobLog` | 采集日志 |
-| `success` | 爬取是否成功 |
-| `payload` | 爬取内容载体 |
-| `ex` | 爬取失败抛出的异常 |
+| 名称            | 说明               |
+|-----------------|------------------|
+| `crawlerJob`    | 采集任务配置       |
+| `crawlerJobLog` | 采集日志           |
+| `success`       | 爬取是否成功       |
+| `payload`       | 爬取内容载体       |
+| `ex`            | 爬取失败抛出的异常 |
 
 如果想使用默认的上下文加载`CrawlerJob`配置信息、初始化及存储`CrawlerJobLog`日志信息的方式，则只需要继承`DefaultCrawlerHandler`抽象类。
 
