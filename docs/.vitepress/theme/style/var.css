@@ -59,9 +59,10 @@
   --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
 }
 
-/* 时间线元素去除li前面的圆点 */
 .vp-doc {
   .timeline {
+
+    /* 时间线元素去除li前面的圆点 */
     li {
       list-style: none;
       margin-top: 0;
@@ -79,6 +80,23 @@
     .content {
       color: var(--vp-c-text-1)
     }
+  }
+
+  a.el-button {
+    background-color: var(--vp-c-bg);
+    margin: 4px 0;
+  }
+
+  a.el-button:hover {
+    background-color: var(--vp-c-bg-soft);
+  }
+
+  /* 移除外链小箭头图标 */
+  a[target='_blank'].el-button::after {
+    width: 0;
+    height: 0;
+    margin: 0;
+    mask-image: none;
   }
 }
 

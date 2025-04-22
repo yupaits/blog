@@ -1,6 +1,6 @@
 import { BProgress } from '@bprogress/core'
 import confetti from 'canvas-confetti'
-import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
+import { ElButton, ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
 import { useData, useRoute } from 'vitepress'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import DefaultTheme from 'vitepress/theme'
@@ -70,6 +70,7 @@ export default {
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
     app.component('Progress', Progress)
+    app.component('ElButton', ElButton)
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
