@@ -13,7 +13,7 @@
       <BackToTop />
     </template>
 
-    <template #aside-top>
+    <template #aside-outline-before>
       <PageMetadata v-if="showMeta" />
     </template>
 

@@ -39,7 +39,7 @@ onMounted(() => {
 }
 
 .draft-announce-container.has-content {
-  border-bottom: 2px dashed var(--vp-c-text-3);
+  border-bottom: 2px dashed var(--vp-c-divider);
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   padding-bottom: 1rem;
