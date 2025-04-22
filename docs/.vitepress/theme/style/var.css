@@ -59,6 +59,7 @@
   --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
 }
 
+/* Element Plus组件样式优化 */
 .vp-doc {
   .timeline {
 
@@ -242,4 +243,18 @@
 /* 页面加载进度条 */
 :root {
   --bprogress-color: var(--vp-c-brand-1);
+}
+
+/* 表格美化 */
+.vp-doc table {
+  th {
+    white-space: nowrap;
+    min-width: 120px;
+    max-width: 300px;
+  }
+}
+
+/* 页面大纲 */
+.VPDocAsideOutline.has-outline .content {
+  padding-top: 8px;
 }
