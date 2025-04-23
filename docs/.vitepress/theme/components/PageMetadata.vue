@@ -1,5 +1,5 @@
 <template>
-  <section class="meta-info" :class="{ 'has-outline': hasOutline }">
+  <section class="meta-info">
     <p>更新日期：<i class="updated-date">{{ new Date(page.lastUpdated).toLocaleDateString() }}</i></p>
     <p>字数总计：<i>{{ wordcount }}</i></p>
     <p>阅读时长：<i>{{ readTime }}</i>分钟</p>
@@ -12,18 +12,10 @@ import { onMounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 const { page } = useData()
 const route = useRoute()
-const hasOutline = ref(false)
 const wordcount = ref(0)
 const readTime = ref(0)
 
 const pattern = /[a-zA-Z0-9_\u0392-\u03C9\u00C0-\u00FF\u0600-\u06FF\u0400-\u04FF]+|[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF]+/g
-
-// 检测DOM中是否存在大纲相关元素
-const headingSelector = [
-  'h2', 'h3', 'h4',
-  'h5', 'h6',
-  'div[class^="heading"]'
-].join(',')
 
 const calcWords = (content) => {
   let words = 0
@@ -69,7 +61,6 @@ const analyse = () => {
   const wordTime = calcWordTime(wordCount)
   const imageTime = calcImageTime(imageCount)
   readTime.value = Math.ceil((wordTime + imageTime) / 60)
-  hasOutline.value = !!container.querySelector(headingSelector)
 }
 
 onMounted(() => {
@@ -90,9 +81,5 @@ watch(
   border-left: 1px solid var(--vp-c-divider);
   font-size: 14px;
   padding: 12px 16px;
-}
-
-.meta-info.has-outline {
-  border-bottom: 2px dashed var(--vp-c-divider);
 }
 </style>

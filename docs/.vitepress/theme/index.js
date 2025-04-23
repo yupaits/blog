@@ -1,7 +1,7 @@
 import { BProgress } from '@bprogress/core'
 import confetti from 'canvas-confetti'
 import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
-import { useData, useRoute } from 'vitepress'
+import { useData, useRoute, useRouter } from 'vitepress'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import DefaultTheme from 'vitepress/theme'
 import { onMounted, watch } from 'vue'
@@ -22,6 +22,15 @@ export default {
   setup() {
     const { frontmatter } = useData()
     const route = useRoute()
+    const router = useRouter()
+
+    // 页面加载进度条
+    router.onBeforePageLoad = () => {
+      BProgress.start()
+    }
+    router.onAfterPageLoad = () => {
+      BProgress.done()
+    }
 
     // Giscus评论
     giscusTalk({
@@ -38,6 +47,7 @@ export default {
       frontmatter, route
     }, true)
 
+    // 五彩纸屑动画
     const initConfetti = () => {
       confetti({
         particleCount: 100,
@@ -67,7 +77,7 @@ export default {
       }
     )
   },
-  enhanceApp({ app, router }) {
+  enhanceApp({ app }) {
     app.component('LinkButton', LinkButton)
     app.component('LinkCard', LinkCard)
     app.component('LinkCardGroup', LinkCardGroup)
@@ -75,15 +85,6 @@ export default {
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
     app.component('Watermark', ElWatermark)
-
-    setTimeout(() => {
-      router.onBeforeRouteChange = () => {
-        BProgress.start()
-      }
-      router.onAfterRouteChanged = () => {
-        BProgress.done()
-      }
-    })
   }
 }
 
