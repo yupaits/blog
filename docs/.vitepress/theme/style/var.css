@@ -4,6 +4,12 @@
   padding: 0 4px;
 }
 
+/* 图片居中显示 */
+img:not(.VPImage) {
+  text-align: center;
+  margin: 0 auto;
+}
+
 /* 导航栏、侧边栏选项选中时字体加粗 */
 .VPNavBarMenuLink.active,
 .VPNavBarMenuGroup.active .text,
@@ -43,13 +49,11 @@
 
 /* 警告框 */
 .custom-block.warning {
-  /* border-color: #d97706; */
   border-color: var(--vp-c-yellow-2);
 }
 
 /* 危险框 */
 .custom-block.danger {
-  /* border-color: #f43f5e; */
   border-color: var(--vp-c-red-2);
 }
 
@@ -232,7 +236,12 @@
   display: none;
 }
 
-/* 页面加载进度条 */
+/* 页面加载进度条适配主题色 */
 :root {
   --bprogress-color: var(--vp-c-brand-1);
+}
+
+/* giscus评论区宽度优化 */
+#giscus {
+  width: calc(100% - 8px);
 }

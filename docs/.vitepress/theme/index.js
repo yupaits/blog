@@ -1,6 +1,6 @@
 import { BProgress } from '@bprogress/core'
 import confetti from 'canvas-confetti'
-import { ElTimeline, ElTimelineItem, ElWatermark } from 'element-plus'
+import { ElTimeline, ElTimelineItem } from 'element-plus'
 import { useData, useRoute, useRouter } from 'vitepress'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import DefaultTheme from 'vitepress/theme'
@@ -13,7 +13,6 @@ import Progress from './components/Progress.vue'
 
 import '@bprogress/core/css'
 import 'element-plus/dist/index.css'
-import './style/index.css'
 import './style/var.css'
 
 export default {
@@ -84,7 +83,6 @@ export default {
     app.component('Progress', Progress)
     app.component('Timeline', ElTimeline)
     app.component('TimelineItem', ElTimelineItem)
-    app.component('Watermark', ElWatermark)
   }
 }
 

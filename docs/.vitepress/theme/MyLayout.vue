@@ -2,14 +2,15 @@
   <div v-if="watermarkHidden()">
     <BlogPage :showMeta="false" />
   </div>
-  <watermark :font="font" :content="site.title" v-else>
+  <el-watermark :font="font" :content="site.title" v-else>
     <BlogPage :showMeta="true" />
-  </watermark>
+  </el-watermark>
 </template>
 
 <script setup>
-import { nextTick, provide, reactive, watch } from 'vue'
+import { ElWatermark } from 'element-plus'
 import { useData } from 'vitepress'
+import { nextTick, provide, reactive, watch } from 'vue'
 import BlogPage from './components/BlogPage.vue'
 const { frontmatter, site, isDark } = useData()
 
@@ -80,7 +81,7 @@ if (!import.meta.env.SSR) {
     const text = window?.getSelection()?.toString()
     if (text) {
       event.preventDefault()
-      clipboardData.setData('text/plain', `${text}\n${copyright}${decodeURI(window.location.href)}`)
+      clipboardData.setData('text/plain', `${text}\n${copyright}${decodeURI(window.location.origin + window.location.pathname)}`)
     }
   })
 }

@@ -2,6 +2,7 @@ export default {
   '/技术博客/': {
     base: '/技术博客/',
     items: [
+      { text: 'VitePress个人站点交互优化', link: 'VitePress个人站点交互优化' },
       { text: 'VSCode搭建SpringBoot项目开发运行环境', link: 'VSCode搭建SpringBoot项目开发运行环境' },
       { text: 'SpringBoot版本2.7-3.2升级记录', link: 'SpringBoot版本2.7-3.2升级记录' },
       { text: '益智游戏开发-推箱子', link: '益智游戏开发-推箱子' },
