@@ -1,5 +1,5 @@
 /* 链接文本去除下划线 */
-.vp-doc a:not(.link-card) {
+.vp-doc a {
   text-decoration: none;
   padding: 0 4px;
 }
@@ -81,23 +81,6 @@
     .content {
       color: var(--vp-c-text-1)
     }
-  }
-
-  a.el-button {
-    background-color: var(--vp-c-bg);
-    margin: 4px 0;
-  }
-
-  a.el-button:hover {
-    background-color: var(--vp-c-bg-soft);
-  }
-
-  /* 移除外链小箭头图标 */
-  a[target='_blank'].el-button::after {
-    width: 0;
-    height: 0;
-    margin: 0;
-    mask-image: none;
   }
 }
 

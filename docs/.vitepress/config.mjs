@@ -12,6 +12,7 @@ import sidebar from './config/sidebar'
 export default defineConfig({
   title: "yupaits notes",
   description: "yupaits notes, Just do & record",
+  lang: 'zh-CN',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     // Algolia
@@ -69,8 +70,12 @@ export default defineConfig({
     },
 
     search: {
+      // 已接入algolia，目前本地搜索引擎结果更准确
       provider: 'local',
       options: {
+        appId: 'SBFHH164J9',
+        apiKey: '244a6a5082f48c51e9ac7afe0468bf02',
+        indexName: 'vitepress_pages',
         detailedView: true,
         placeholder: '搜索文档',
         translations: {
