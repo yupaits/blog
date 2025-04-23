@@ -4,9 +4,9 @@ VitePress是一个[静态站点生成器](https://en.wikipedia.org/wiki/Static_s
 
 VitePress附带一个专为技术文档设计的默认主题，使用默认主题搭建博客网站确实会缺失常见的分类、标签、归档等功能，但由于VitePress支持[完全的自定义主题](https://vitepress.dev/zh/guide/custom-theme)，弥补了这方面的缺陷。
 
-目前有很多适配VitePress的第三方开源主题，各位站长可根据自己站点的用途和特点，按需搜索使用即可。由于笔者搭建的站点主要用于记录和总结，使用VitePress的默认主题搭配上一些交互优化的手段就可以得到不错的浏览体验。
+目前有很多适配VitePress的第三方开源主题，各位站长可根据自己站点的用途和特点，按需搜索使用即可。由于笔者搭建的站点主要用于记录和总结，使用VitePress的默认主题搭配上一些交互优化手段就可以得到不错的浏览体验。
 
-本文就从样式美化、组件开发和第三方插件的使用三个方面对交互优化的具体方式进行说明。文中给出的代码示例是实现功能的最精简代码，如需多个功能一起使用请自行拼装代码块。
+本文从样式美化、组件开发和第三方插件的使用三个方面对交互优化的具体方式进行说明。文中给出的代码示例是实现功能的最精简代码，如需多个功能一起使用请自行拼装代码块。
 
 ## 准备工作
 
@@ -45,7 +45,7 @@ export default {
 安装依赖：
 
 ```shell
-pnpm add -D element-plus unplugin-auto-import/vite unplugin-vue-components/vite
+pnpm add -D element-plus unplugin-auto-import unplugin-vue-components
 ```
 
 ::: code-group
@@ -369,6 +369,8 @@ provide('toggle-appearance', async ({ x, y }) => {
 
 ### BackToTop 回到顶部
 
+![backtotop](./VitePress个人站点交互优化/backtotop.png)
+
 ::: code-group
 ```vue [.vitepress/theme/components/CommentRule.vue]
 <template>
@@ -592,6 +594,8 @@ const showComment = () => {
 :::
 
 ### PageMetadata 文章信息
+
+![pagemetadata](./VitePress个人站点交互优化/pagemetadata.png)
 
 ::: code-group
 ```vue [.vitepress/theme/components/CommentRule.vue]
@@ -1302,3 +1306,73 @@ watch(
 </script>
 ```
 :::
+
+### Fancybox 图片预览
+
+不少文章都推荐参考[vitepress issue#854](https://github.com/vuejs/vitepress/issues/854)的方案使用medium-zoom来实现图片缩放，但其实有更优雅的方式，那就是使用Fancybox。
+
+![fancybox](./VitePress个人站点交互优化/fancybox.png)
+
+安装依赖：
+
+```shell
+pnpm add -D markdown-it-custom-attrs
+```
+
+::: code-group
+```js [.vitepress/config.mjs]
+import { defineConfig } from 'vitepress'
+import mdItCustomAttrs from 'markdown-it-custom-attrs'
+
+export default defineConfig({
+  markdown: {
+    head: [
+      // fancybox
+      ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css' }],
+      ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js' }],
+    ],
+    image: {
+      lazyLoading: true
+    },
+    config: (md) => {
+      md.use(mdItCustomAttrs, 'image', {
+        'data-fancybox': 'gallery'
+      })
+    }
+  },
+})
+```
+:::
+
+### Todo清单
+
+安装依赖：
+
+```shell
+pnpm add -D markdown-it-task-checkbox
+```
+
+::: code-group
+```js [.vitepress/config.mjs]
+import { defineConfig } from 'vitepress'
+import taskList from 'markdown-it-task-checkbox'
+
+export default defineConfig({
+  markdown: {
+    config: (md) => {
+      md.use(taskList)
+    }
+  },
+})
+```
+
+```md [示例]
+- [ ] 待办项
+- [x] 已完成
+```
+:::
+
+效果如下：
+
+- [ ] 待办项
+- [x] 已完成
