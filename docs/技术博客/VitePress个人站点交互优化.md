@@ -1131,7 +1131,7 @@ const isHome = () => {
 
 ### BProgress加载进度条
 
-[BProgress](https://bprogress.vercel.app/)是NProgress的升级版，提供了更现代的设计和增强的功能，以获得更流畅的体验。直观的体验就是更流畅，在页面右上角多了一个转圈的加载动画。
+[BProgress](https://bprogress.vercel.app/)是NProgress的升级版，提供了更现代的设计和增强的功能，以获得更流畅的体验。直观感受就是更流畅，页面右上角多了一个转圈的加载动画。
 
 安装依赖：
 
