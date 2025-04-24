@@ -4,6 +4,7 @@ export default {
       {
         text: '研发',
         items: [
+          { text: '阿里云开发者', link: 'https://developer.aliyun.com/profile/6ibaby6qg4ku4' },
           { text: '美团技术团队', link: 'https://tech.meituan.com/', icon: 'https://awps-assets.meituan.net/mit/blog/v20190629/asset/icon/android-icon-192x192.png?v=Whistle&t=20181017-1r' },
           { text: '阮一峰的个人网站', link: 'http://www.ruanyifeng.com/' },
           { text: '廖雪峰的官方网站', link: 'https://www.liaoxuefeng.com/', icon: 'https://liaoxuefeng.com/static/logo.svg' },

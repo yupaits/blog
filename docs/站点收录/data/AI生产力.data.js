@@ -23,8 +23,8 @@ export default {
       {
         text: '周边相关',
         items: [
-          { text: 'Generative AI for Beginners', description: '面向初学者的生成式人工智能课程', link: 'https://microsoft.github.io/generative-ai-for-beginners/#/translations/cn/', icon: 'https://microsoft.github.io/generative-ai-for-beginners/images/favicon-32x32.png' },
-          { text: 'Hugging Face', description: '机器学习社区模型、数据和应用协作平台', link: 'https://huggingface.co/', icon: 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg' },
+          { text: 'Generative AI for Beginners', description: '面向初学者的生成式人工智能课程', link: 'https://microsoft.github.io/generative-ai-for-beginners/#/translations/cn/', icon: 'https://ts1.tc.mm.bing.net/th/id/ODLS.4c2b67b4-9126-43ec-bee7-40a42dfd5e7f' },
+          { text: 'Hugging Face', description: '机器学习社区模型、数据和应用协作平台', link: 'https://huggingface.co/', icon: 'https://ts4.tc.mm.bing.net/th/id/ODLS.82923b4f-438a-47d1-a5b3-b91a7889f6f9' },
         ]
       }
     ]

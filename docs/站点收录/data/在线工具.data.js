@@ -26,7 +26,7 @@ export default {
         text: '设计',
         items: [
           { text: '即时原型', link: 'https://www.xiaopiu.com/' },
-          { text: 'DesignEvo', link: 'https://www.designevo.com/', icon: 'https://ts4.tc.mm.bing.net/th/id/ODLS.9f1aa950-d585-478f-b0e6-651f9939c604?w=32&h=32&o=6&pid=1.2' },
+          { text: 'DesignEvo', link: 'https://www.designevo.com/', icon: 'https://ts4.tc.mm.bing.net/th/id/ODLS.9f1aa950-d585-478f-b0e6-651f9939c604' },
           { text: 'Semi Design - Tokens', link: 'https://semi.design/zh-CN/basic/tokens', icon: 'https://lf9-static.semi.design/obj/semi-tos/images/favicon.ico' },
           { text: 'TDesign', link: 'https://tdesign.tencent.com/design/values', icon: 'https://static.tdesign.tencent.com/vue/favicon.ico' },
           { text: 'Ant Design', link: 'https://ant-design.antgroup.com/docs/spec/introduce-cn', icon: 'https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png' },
