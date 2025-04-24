@@ -15,6 +15,7 @@ a.link-btn {
   height: 16px;
   line-height: 16px;
   font-size: 12px;
+  white-space: nowrap;
 }
 
 a.link-btn:hover {
