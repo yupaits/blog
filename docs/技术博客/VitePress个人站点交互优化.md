@@ -4,9 +4,9 @@ VitePress是一个[静态站点生成器](https://en.wikipedia.org/wiki/Static_s
 
 VitePress附带一个专为技术文档设计的默认主题，使用默认主题搭建博客网站确实会缺失常见的分类、标签、归档等功能，但由于VitePress支持[完全的自定义主题](https://vitepress.dev/zh/guide/custom-theme)，弥补了这方面的缺陷。
 
-目前有很多适配VitePress的第三方开源主题，各位站长可根据自己站点的用途和特点，按需搜索使用即可。由于笔者搭建的站点主要用于记录和总结，使用VitePress的默认主题搭配上一些交互优化手段就可以得到不错的浏览体验。
+目前已经有很多适配了VitePress的第三方开源主题，各位站长可根据网站的用途和特点，按需搜索使用。笔者搭建的站点主要用于记录和总结，使用VitePress默认主题搭配一些优化交互体验的方法也能获得较好的阅读感受。
 
-本文从样式美化、组件开发和第三方插件的使用三个方面对交互优化的具体方式进行说明。文中给出的代码示例是实现功能的最精简代码，如需多个功能一起使用请自行拼装代码块。
+本文从样式美化、组件开发和第三方插件的使用，三个方面对交互优化的具体方式进行说明。文中给出的代码示例是满足功能实现的最精简代码，多个功能一起使用需要进行代码拼装。
 
 ## 准备工作
 
@@ -40,7 +40,7 @@ export default {
 
 ### 引入Element Plus组件
 
-[Element Plus](https://element-plus.org/zh-CN/)是一款基于Vue3的组件库，包含的组件设计优秀，稳定可靠。通过以下方式引入Element Plus组件。
+[Element Plus](https://element-plus.org/zh-CN/)是一款基于Vue3的组件库，库中包含的组件设计优秀，稳定可靠。通过以下方式可引入Element Plus。
 
 安装依赖：
 
@@ -372,7 +372,7 @@ provide('toggle-appearance', async ({ x, y }) => {
 ![backtotop](./VitePress个人站点交互优化/backtotop.png)
 
 ::: code-group
-```vue [.vitepress/theme/components/CommentRule.vue]
+```vue [.vitepress/theme/components/BackToTop.vue]
 <template>
   <Transition name="fade">
     <div v-show="showBackTop" class="vitepress-backTop-main" title="返回顶部" @click="scrollToTop()">
@@ -598,7 +598,7 @@ const showComment = () => {
 ![pagemetadata](./VitePress个人站点交互优化/pagemetadata.png)
 
 ::: code-group
-```vue [.vitepress/theme/components/CommentRule.vue]
+```vue [.vitepress/theme/components/PageMetadata.vue]
 <template>
   <section class="meta-info">
     <p>更新日期：<i class="updated-date">{{ new Date(page.lastUpdated).toLocaleDateString() }}</i></p>
@@ -865,7 +865,7 @@ export default {
 
 ![draftannounce](./VitePress个人站点交互优化/draftannounce.png)
 
-在文档的`frontmatter`中可以声明草稿、是否弃用预览，以及设置文章撰写进度。
+在文档的`frontmatter`中可以声明草稿、是否启用预览，以及设置文章撰写进度。
 
 ::: code-group
 ```vue [.vitepress/theme/components/DraftAnnounce.vue]
@@ -1011,6 +1011,8 @@ draftPercent: 25    # 文章撰写完成进度百分比，取值范围：大于0
 ## 插件使用
 
 ### 五彩纸屑
+
+![canfetti](./VitePress个人站点交互优化/canfetti.png)
 
 安装依赖：
 

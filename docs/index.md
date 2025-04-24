@@ -7,7 +7,7 @@ hero:
   name: "yupaits notes"
   text: "Just do & record"
   tagline: 俯仰一生 最惧无为
-  image: /home/hero.png
+  image: /home/hero.webp
   actions:
     - theme: brand
       text: 技术博客
