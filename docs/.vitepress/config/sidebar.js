@@ -376,7 +376,7 @@ export default {
             items: [
               { text: 'yutool-orm-core', link: 'yutool-orm-core' },
               { text: 'yutool-orm-mybatis', link: 'yutool-orm-mybatis' },
-              { text: 'yutool-orm-jpa', link: 'yutool-orm-jpa' },
+              { text: '[弃用] yutool-orm-jpa', link: '[弃用] yutool-orm-jpa' },
             ]
           },
           {
