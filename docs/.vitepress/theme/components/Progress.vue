@@ -5,7 +5,7 @@
       <div class="progress-value" :style="{ width: `${percent}%` }"></div>
     </div>
     <div class="percentage-label" v-if="percent">
-      <span v-if="percent >= 100">✅</span>
+      <span v-if="percent >= 100">✔</span>
       <span style="font-style: italic;" v-else>{{ percent }}%</span>
     </div>
   </div>

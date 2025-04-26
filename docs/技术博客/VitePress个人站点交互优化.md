@@ -542,7 +542,7 @@ watch(
   position: absolute;
   top: 8px;
   right: 12px;
-  content: 'Ⓒ';
+  content: '©';
   color: var(--vp-c-brand-1);
   font-size: 1.3rem;
 }
@@ -796,7 +796,7 @@ Progress进度条组件在文章正文中也有使用到，因此需要在`.vite
       <div class="progress-value" :style="{ width: `${percent}%` }"></div>
     </div>
     <div class="percentage-label" v-if="percent">
-      <span v-if="percent >= 100">✅</span>
+      <span v-if="percent >= 100">✔</span>
       <span style="font-style: italic;" v-else>{{ percent }}%</span>
     </div>
   </div>
