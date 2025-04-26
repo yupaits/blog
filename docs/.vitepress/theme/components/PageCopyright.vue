@@ -47,7 +47,7 @@ watch(
   position: absolute;
   top: 8px;
   right: 12px;
-  content: 'Ⓒ';
+  content: '©';
   color: var(--vp-c-brand-1);
   font-size: 1.3rem;
 }

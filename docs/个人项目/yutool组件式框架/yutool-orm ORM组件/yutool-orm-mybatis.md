@@ -1,24 +1,23 @@
 # yutool-orm-mybatis
 
-## 1. 基类
-- BaseMybaitQuery
-```java
-useLambda() 是否使用LambdaQueryWrapper
-buildNewQuery() 创建新的QueryWrapper并构建查询条件
-buildNewLambdaQuery() 创建新的LambdaQueryWrapper并构建查询条件
-buildQuery(QueryWrapper<E>) 构建QueryWrapper的查询条件
-buildLambdaQuery(LambdaQueryWrapper<E>) 构建LambdaQueryWrapper的查询条件
-```
+## 1. 核心类
+
+| 类名               | 说明                                                       | 核心属性及方法                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|--------------------|----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| BaseMybatisEntity  | Mybatis实体对象基类                                        | • `ID id;` ID <br>• `LocalDateTime createdTime;` 创建时间 <br>• `String createdBy;` 创建人 <br>• `LocalDateTime lastModifiedTime;` 更新时间 <br>• `String lastModifiedBy;` 更新人                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| BaseMybatisQuery   | Mybatis查询对象基类                                        | • `boolean useLambda();` 是否使用LambdaQueryWrapper <br>• `QueryWrapper<E> buildNewQuery();` 创建新的QueryWrapper并构建查询条件 <br>• `LambdaQueryWrapper<E> buildNewLambdaQuery();` 创建新的LambdaQueryWrapper并构建查询条件 <br>• `void buildQuery(QueryWrapper<E> queryWrapper);` 构建QueryWrapper的查询条件 <br>• `void buildLambdaQuery(LambdaQueryWrapper<E> queryWrapper);` 构建LambdaQueryWrapper的查询条件 <br>• `void checkValid();` 查询条件参数校验                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| MybatisServiceImpl | 基于Mybatis-Plus的BaseService实现基类（继承BaseServiceImpl） | • `E getOne(Wrapper<E> queryWrapper);` 根据QueryWrapper查询一条数据 <br>• `Map<String, Object> getMap(Wrapper<E> queryWrapper);` 根据QueryWrapper查询一条数据，返回Map <br>• `List<E> list(Wrapper<E> queryWrapper);` 根据QueryWrapper查询列表 <br>• `P page(P page);` 分页查询 <br>• `P page(P page, Wrapper<E> queryWrapper);` 根据QueryWrapper进行分页查询 <br>• `boolean delete(Wrapper<E> queryWrapper);` 根据QueryWrapper删除记录 <br>• `long count(Wrapper<E> queryWrapper);` 根据QueryWrapper进行计数 <br>• `Vo getVo(Wrapper<E> queryWrapper);` 根据QueryWrapper获取VO对象 <br>• `List<Vo> listVo(Wrapper<E> queryWrapper);` 根据QueryWrapper获取Vo列表 <br>• `IPage<Vo> pageVo(IPage<E> page);` 根据IPage分页查询对象获取Vo分页数据 <br>• `IPage<Vo> pageVo(IPage<E> page, Wrapper<E> queryWrapper);` 根据IPage分页查询对象和QueryWrapper获取Vo分页数据 <br>• `IPage<Vo> pageVo(IPage<E> page, Aggregates aggregates);` 根据IPage分页查询对象和AggregateProps获取包含聚合信息的分页数据 <br>• `IPage<Vo> pageVo(IPage<E> page, Wrapper<E> queryWrapper, Aggregates aggregates);` 根据IPage分页查询对象、QueryWrapper和AggregateProps获取包含聚合信息的分页数据 <br>• `IPage<Vo> pageVo(PageQuery<Q> pageQuery);` 根据PageQuery获取分页数据 <br>• `IAggregatePage<Vo> pageVoAggregate(IPage<Vo> page, Wrapper<E> queryWrapper, Aggregates aggregates);` 根据IPage分页查询结果和AggregateProps获取携带聚合数据的分页信息 |
+
 ## 2. 全局配置
 
 - 分页查询参数
-   - @PageQueryDefault 注解
-   - PageQuery 分页查询参数
-   - AggregatePage 携带聚合信息的分页数据对象
+   - `@PageQueryDefault` 注解
+   - `PageQuery` 分页查询参数
+   - `AggregatePage` 携带聚合信息的分页数据对象
    - 分页参数处理器
 - 排序参数
-   - @SortDefault 注解
-   - Sorts 排序参数
+   - `@SortDefault` 注解
+   - `Sorts` 排序参数
    - 排序参数处理器
-- MetaObjectOptService接口
-   - getOperatorId() 获取操作人接口
+- `MetaObjectOptService`接口
+   - `getOperatorId()` 获取操作人接口
