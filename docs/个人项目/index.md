@@ -22,3 +22,5 @@ import GithubButton from 'vue-github-button'
 | go-pi-monitor   | 使用Golang开发的树莓派监控服务，可以对树莓派的CPU、内存、网络、磁盘等指标进行实时监控。                      | <github-button href="https://github.com/yupaits/go-pi-monitor" data-size="large" data-show-count="true" aria-label="Star yupaits/go-pi-monitor on GitHub">Star</github-button>                                                                                                             |
 
 如果您对任何项目感兴趣或有合作意向，请随时通过 GitHub 平台向我发起 Issue 或 Pull Request。同时，我也热衷于接受各类技术问题咨询和交流，让我们共同成长，共享知识的力量。再次欢迎您参与到项目的共建中来，共同推动技术和社区的发展！
+
+使用🆑标注的功能或者组件表示已经移除或是废弃，不会再进行维护及开发。

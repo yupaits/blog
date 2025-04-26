@@ -40,6 +40,7 @@ export default {
           { text: 'Font Awesome', link: 'https://fontawesome.com/' },
           { text: 'Free Icons', link: 'https://icons8.com/', icon: 'https://maxst.icons8.com/vue-static/landings/primary-landings/favs/icons8_fav_32×32.png' },
           { text: 'iconfont', link: 'https://www.iconfont.cn/' },
+          { text: 'EMOJI大全', link: 'https://www.emojiall.com/zh-hans' },
         ]
       }
     ]

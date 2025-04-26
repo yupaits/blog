@@ -376,7 +376,7 @@ export default {
             items: [
               { text: 'yutool-orm-core', link: 'yutool-orm-core' },
               { text: 'yutool-orm-mybatis', link: 'yutool-orm-mybatis' },
-              { text: '[弃用] yutool-orm-jpa', link: '[弃用] yutool-orm-jpa' },
+              { text: 'yutool-orm-jpa🆑', link: 'yutool-orm-jpa' },
             ]
           },
           {
@@ -406,30 +406,30 @@ export default {
               { text: 'import-export数据导入导出插件', link: 'import-export数据导入导出插件' },
               { text: 'trace-analysis链路追踪插件', link: 'trace-analysis链路追踪插件' },
               { text: 'cache-adapter缓存适配插件', link: 'cache-adapter缓存适配插件' },
-              { text: '[弃用] native-mobile本地手机号登录插件', link: '[弃用] native-mobile本地手机号登录插件' },
-              { text: '[弃用] sms-reply-storage短信回复内容存储插件', link: '[弃用] sms-reply-storage短信回复内容存储插件' },
-              { text: '[弃用] sms-verify短信验证码插件', link: '[弃用] sms-verify短信验证码插件' },
-              { text: '[弃用] dynamic-thread-pool动态线程池管理插件', link: '[弃用] dynamic-thread-pool动态线程池管理插件' },
-              { text: '[弃用] multi-ds-tx多数据源事务插件', link: '[弃用] multi-ds-tx多数据源事务插件' },
-              { text: '[弃用] swagger-support Swagger接口文档插件', link: '[弃用] swagger-support Swagger接口文档插件' },
-              { text: '[弃用] jwt-helper JWT工具插件', link: '[弃用] jwt-helper JWT工具插件' },
+              { text: 'native-mobile本地手机号登录插件🆑', link: 'native-mobile本地手机号登录插件' },
+              { text: 'sms-reply-storage短信回复内容存储插件🆑', link: 'sms-reply-storage短信回复内容存储插件' },
+              { text: 'sms-verify短信验证码插件🆑', link: 'sms-verify短信验证码插件' },
+              { text: 'dynamic-thread-pool动态线程池管理插件🆑', link: 'dynamic-thread-pool动态线程池管理插件' },
+              { text: 'multi-ds-tx多数据源事务插件🆑', link: 'multi-ds-tx多数据源事务插件' },
+              { text: 'swagger-support Swagger接口文档插件🆑', link: 'swagger-support Swagger接口文档插件' },
+              { text: 'jwt-helper JWT工具插件🆑', link: 'jwt-helper JWT工具插件' },
             ]
           },
           {
-            text: '[弃用] yutool-push推送组件',
-            base: '/个人项目/yutool组件式框架/[弃用] yutool-push推送组件/',
+            text: 'yutool-push推送组件🆑',
+            base: '/个人项目/yutool组件式框架/yutool-push推送组件/',
             collapsed: true,
             items: [
-              { text: 'yutool-push-core', link: 'yutool-push-core' },
-              { text: 'yutool-push-provider', link: 'yutool-push-provider' },
+              { text: 'yutool-push-core🆑', link: 'yutool-push-core' },
+              { text: 'yutool-push-provider🆑', link: 'yutool-push-provider' },
             ]
           },
-          { text: '[弃用] yutool-file-server文件服务', link: '[弃用] yutool-file-server文件服务' },
-          { text: '[弃用] yutool-social第三方登录组件', link: '[弃用] yutool-social第三方登录组件' },
-          { text: '[弃用] yutool-cache缓存组件', link: '[弃用] yutool-cache缓存组件' },
-          { text: '[弃用] yutool-mq消息组件', link: '[弃用] yutool-mq消息组件' },
-          { text: '[弃用] yutool-push推送组件', link: '[弃用] yutool-push推送组件' },
-          { text: '[弃用] yutool-ldap LDAP组件', link: '[弃用] yutool-ldap LDAP组件' },
+          { text: 'yutool-file-server文件服务🆑', link: 'yutool-file-server文件服务' },
+          { text: 'yutool-social第三方登录组件🆑', link: 'yutool-social第三方登录组件' },
+          { text: 'yutool-cache缓存组件🆑', link: 'yutool-cache缓存组件' },
+          { text: 'yutool-mq消息组件🆑', link: 'yutool-mq消息组件' },
+          { text: 'yutool-push推送组件🆑', link: 'yutool-push推送组件' },
+          { text: 'yutool-ldap LDAP组件🆑', link: 'yutool-ldap LDAP组件' },
         ]
       },
       {
@@ -459,11 +459,11 @@ export default {
           { text: 'yutool-menu 系统菜单', link: 'yutool-menu 系统菜单' },
           { text: 'yutool-casdoor 对接Casdoor', link: 'yutool-casdoor 对接Casdoor' },
           { text: 'admin-ui 管理界面', link: 'admin-ui 管理界面' },
-          { text: '[弃用] yutool-user 用户', link: '[弃用] yutool-user 用户' },
-          { text: '[弃用] yutool-org 组织架构', link: '[弃用] yutool-org 组织架构' },
-          { text: '[弃用] yutool-address 地址', link: '[弃用] yutool-address 地址' },
-          { text: '[弃用] yutool-auth 认证授权', link: '[弃用] yutool-auth 认证授权' },
-          { text: '[弃用] yutool-notify 通知消息', link: '[弃用] yutool-notify 通知消息' },
+          { text: 'yutool-user 用户🆑', link: 'yutool-user 用户' },
+          { text: 'yutool-org 组织架构🆑', link: 'yutool-org 组织架构' },
+          { text: 'yutool-address 地址🆑', link: 'yutool-address 地址' },
+          { text: 'yutool-auth 认证授权🆑', link: 'yutool-auth 认证授权' },
+          { text: 'yutool-notify 通知消息🆑', link: 'yutool-notify 通知消息' },
         ]
       },
       {
