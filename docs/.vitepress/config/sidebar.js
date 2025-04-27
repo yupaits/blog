@@ -369,6 +369,7 @@ export default {
         base: '/个人项目/yutool组件式框架/',
         items: [
           { text: 'yutool模块划分', link: 'yutool模块划分' },
+          { text: 'yutool-commons公共模块', link: 'yutool-commons公共模块' },
           {
             text: 'yutool-orm ORM组件',
             base: '/个人项目/yutool组件式框架/yutool-orm ORM组件/',
