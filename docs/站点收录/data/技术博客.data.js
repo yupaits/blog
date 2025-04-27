@@ -17,7 +17,7 @@ export default {
         items: [
           { text: '看雪学苑', link: 'https://www.kanxue.com/', icon: 'https://th.bing.com/th/id/ODLS.3e0bb7bf-f736-46d5-a74b-cb66d4c94b40' },
           { text: '知道创宇Paper', link: 'https://paper.seebug.org/', icon: 'https://th.bing.com/th/id/ODLS.7aa3a5a5-7a94-4f88-a538-1ba9f9d312bb' },
-          { text: '微慑信息网', link: 'https://vulsee.com/' },
+          { text: '微慑信息网', link: 'https://vulsee.com/', icon: 'https://ts4.tc.mm.bing.net/th/id/ODLS.9d0ce593-357b-4826-a673-efbeb97152ed' },
           { text: '微步在线x情报社区', link: 'https://x.threatbook.com/' },
         ]
       }

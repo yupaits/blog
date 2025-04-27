@@ -8,7 +8,7 @@ export default {
           { text: 'IT-Tools', link: 'https://it-tools.tech/' },
           { text: 'npmmirror', link: 'https://npmmirror.com/' },
           { text: 'Maven Search Engine', link: 'https://search.maven.org/?eh=' },
-          { text: 'Docker Hub', link: 'https://hub.docker.com/' },
+          { text: 'Docker Hub', link: 'https://hub.docker.com/', icon: 'https://ts1.tc.mm.bing.net/th/id/ODLS.8cf8576f-d6d0-4679-92f0-fefb22428366' },
         ]
       },
       {
