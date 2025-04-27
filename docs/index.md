@@ -6,7 +6,7 @@ watermark: hidden
 hero:
   name: "yupaits notes"
   text: "Just do & record"
-  tagline: 俯仰一生 最惧无为
+  tagline: 但行心所向，回首自清风
   image: /home/hero.webp
   actions:
     - theme: brand
@@ -23,14 +23,14 @@ features:
   - icon:
       src: /home/idea.png
     title: IDEA - 灵感
-    details: 
+    details: 一念星河，点亮未知
   - icon: 
       src: /home/action.png
     title: ACTION - 行动
-    details: 
+    details: 步履所至，山海可平
   - icon: 
       src: /home/accumulation.png
     title: ACCUMULATION - 积累
-    details: 
+    details: 滴水穿石，时光成诗
 ---
 
