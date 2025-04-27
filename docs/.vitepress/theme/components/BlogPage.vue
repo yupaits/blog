@@ -2,6 +2,7 @@
   <Layout>
     <template #doc-before>
       <DraftAnnounce v-if="isDraft()" />
+      <PageMetadata v-if="showMeta" />
     </template>
 
     <template #doc-after>
@@ -11,10 +12,6 @@
     <template #doc-footer-before>
       <PageCopyRight v-if="showComment()" />
       <BackToTop />
-    </template>
-
-    <template #aside-outline-before>
-      <PageMetadata v-if="showMeta" />
     </template>
 
     <template #layout-bottom>

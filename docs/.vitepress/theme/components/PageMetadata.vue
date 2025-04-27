@@ -1,15 +1,16 @@
 <template>
   <section class="meta-info">
-    <p>更新日期：<i class="updated-date">{{ new Date(page.lastUpdated).toLocaleDateString() }}</i></p>
-    <p>字数总计：<i>{{ wordcount }}</i></p>
-    <p>阅读时长：<i>{{ readTime }}</i>分钟</p>
-    <p>阅读量：<i id="busuanzi_value_page_pv"></i></p>
+    <span class="meta-item">📆更新于 <i>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</i></span>
+    <span class="meta-item">✍字数总计：<i>{{ wordcount }}</i></span>
+    <span class="meta-item">⌛阅读时长：<i>{{ readTime }}</i> 分钟</span>
+    <span class="meta-item">📖阅读量：<i id="busuanzi_value_page_pv"></i></span>
   </section>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
+import dayjs from 'dayjs'
 const { page } = useData()
 const route = useRoute()
 const wordcount = ref(0)
@@ -78,8 +79,13 @@ watch(
 <style>
 .meta-info {
   color: var(--vp-c-text-2);
-  border-left: 1px solid var(--vp-c-divider);
   font-size: 14px;
-  padding: 12px 16px;
+  margin-bottom: 1rem;
+}
+
+.meta-item {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 1rem;
 }
 </style>

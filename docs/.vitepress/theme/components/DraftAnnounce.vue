@@ -35,7 +35,7 @@ onMounted(() => {
 <style scoped>
 .draft-announce-container {
   border-radius: 8px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .draft-announce-container.has-content {
