@@ -957,45 +957,41 @@ const { preview } = defineProps(['preview'])
 <template>
   <Layout>
     <template #doc-before>
-      <DraftAnnounce v-if="isDraft()" />
+      <DraftAnnounce v-if="isDraft" :preview="previewDraft" />
     </template>
   </Layout>
 </template>
 
 <script setup>
 import { useData, useRoute } from 'vitepress'
-import { onMounted, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import DraftAnnounce from './DraftAnnounce.vue'
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 const route = useRoute()
 
-const isDraft = () => {
-  const isDraftStatus = frontmatter.value?.draft
-  return typeof isDraftStatus === 'boolean' && isDraftStatus
-}
+const isDraft = computed(() => {
+  return frontmatter.value.draft === true
+})
 
-const isPreviewDraft = () => {
-  const previewDraft = frontmatter.value?.draftPreview
-  return typeof previewDraft === 'boolean' && previewDraft
-}
+const previewDraft = computed(() => {
+  return frontmatter.value.draftPreview === true
+})
 
-const handlePreviewDraft = () => {
-  const mainDoc = document.querySelector('main')
-  if (isDraft() && !isPreviewDraft()) {
-    mainDoc?.remove()
-  }
+const handleDoc = () => {
+  const hideDoc = frontmatter.value.draft === true && frontmatter.value.draftPreview !== true
+  document.querySelector('main .vp-doc')?.setAttribute('style', hideDoc ? 'display: none' : undefined)
 }
 
 onMounted(() => {
-  handlePreviewDraft()
+  handleDoc()
 })
 
 watch(
   () => route.path,
   () => {
-    handlePreviewDraft()
+    handleDoc()
   }
 )
 </script>
