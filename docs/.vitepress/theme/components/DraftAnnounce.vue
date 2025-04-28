@@ -15,21 +15,10 @@
 </template>
 
 <script setup>
-import Progress from './Progress.vue'
-import { onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
-
+import Progress from './Progress.vue'
 const { frontmatter } = useData()
-const preview = ref(false)
-
-const isPreviewDraft = () => {
-  const previewDraft = frontmatter.value?.draftPreview
-  return typeof previewDraft === 'boolean' && previewDraft
-}
-
-onMounted(() => {
-  preview.value = isPreviewDraft()
-})
+const { preview } = defineProps(['preview'])
 </script>
 
 <style scoped>

@@ -1,21 +1,21 @@
 <template>
   <Layout>
     <template #doc-before>
-      <DraftAnnounce v-if="isDraft()" />
+      <DraftAnnounce v-if="isDraft" :preview="previewDraft" />
       <PageMetadata v-if="showMeta" />
     </template>
 
     <template #doc-after>
-      <CommentRule v-if="showComment()" />
+      <CommentRule v-if="hasComment" />
     </template>
 
     <template #doc-footer-before>
-      <PageCopyRight v-if="showComment()" />
+      <PageCopyRight v-if="hasComment" />
       <BackToTop />
     </template>
 
     <template #layout-bottom>
-      <Busuanzi v-if="isHome()" />
+      <Busuanzi v-if="isHome" />
     </template>
   </Layout>
 </template>
@@ -23,52 +23,51 @@
 <script setup>
 import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { onMounted, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import BackToTop from './BackToTop.vue'
 import Busuanzi from './Busuanzi.vue'
 import CommentRule from './CommentRule.vue'
 import DraftAnnounce from './DraftAnnounce.vue'
 import PageCopyRight from './PageCopyright.vue'
 import PageMetadata from './PageMetadata.vue'
-const { showMeta } = defineProps(['showMeta'])
+const { hasMeta } = defineProps(['hasMeta'])
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 const route = useRoute()
 
-const isHome = () => {
-  return frontmatter.value?.layout === 'home'
-}
+const isHome = computed(() => {
+  return !!(frontmatter.value.isHome ?? frontmatter.value.layout === 'home')
+})
 
-const isDraft = () => {
-  const isDraftStatus = frontmatter.value?.draft
-  return typeof isDraftStatus === 'boolean' && isDraftStatus
-}
+const showMeta = computed(() => {
+  return hasMeta && (frontmatter.value.draft !== true || frontmatter.value.draftPreview === true)
+})
 
-const isPreviewDraft = () => {
-  const previewDraft = frontmatter.value?.draftPreview
-  return typeof previewDraft === 'boolean' && previewDraft
-}
+const isDraft = computed(() => {
+  return frontmatter.value.draft === true
+})
 
-const handlePreviewDraft = () => {
-  const mainDoc = document.querySelector('main')
-  if (isDraft() && !isPreviewDraft()) {
-    mainDoc?.remove()
-  }
-}
+const previewDraft = computed(() => {
+  return frontmatter.value.draftPreview === true
+})
 
-const showComment = () => {
-  const enabledComment = frontmatter.value?.comment
-  return enabledComment === undefined || enabledComment
+const hasComment = computed(() => {
+  return frontmatter.value.comment !== false
+})
+
+const handleDoc = () => {
+  const hideDoc = frontmatter.value.draft === true && frontmatter.value.draftPreview !== true
+  document.querySelector('main .vp-doc')?.setAttribute('style', hideDoc ? 'display: none' : undefined)
 }
 
 onMounted(() => {
-  handlePreviewDraft()
+  handleDoc()
 })
 
 watch(
   () => route.path,
   () => {
-    handlePreviewDraft()
+    handleDoc()
   }
 )
 </script>

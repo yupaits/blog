@@ -1,16 +1,14 @@
 <template>
-  <div v-if="watermarkHidden()">
-    <BlogPage :showMeta="false" />
-  </div>
+  <BlogPage :hasMeta="false" v-if="hideWm" />
   <el-watermark :font="font" :content="site.title" v-else>
-    <BlogPage :showMeta="true" />
+    <BlogPage :hasMeta="true" />
   </el-watermark>
 </template>
 
 <script setup>
 import { ElWatermark } from 'element-plus'
 import { useData } from 'vitepress'
-import { nextTick, provide, reactive, watch } from 'vue'
+import { computed, nextTick, provide, reactive, watch } from 'vue'
 import BlogPage from './components/BlogPage.vue'
 const { frontmatter, site, isDark } = useData()
 
@@ -18,10 +16,9 @@ const font = reactive({
   color: 'rgba(0, 0, 0, .08)'
 })
 
-const watermarkHidden = () => {
-  const watermarkHidden = frontmatter.value?.watermark
-  return watermarkHidden === 'hidden'
-}
+const hideWm = computed(() => {
+  return frontmatter.value.watermark === 'hidden'
+})
 
 // 启用深色/浅色主题切换动画
 const enableTransitions = () =>
