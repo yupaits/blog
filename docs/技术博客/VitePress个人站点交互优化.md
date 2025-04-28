@@ -573,7 +573,7 @@ watch(
 <template>
   <Layout>
     <template #doc-footer-before>
-      <PageCopyRight v-if="showComment()" />
+      <PageCopyRight v-if="hasComment" />
     </template>
   </Layout>
 </template>
@@ -585,10 +585,9 @@ import PageCopyRight from './PageCopyright.vue'
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 
-const showComment = () => {
-  const enabledComment = frontmatter.value?.comment
-  return enabledComment === undefined || enabledComment
-}
+const hasComment = computed(() => {
+  return frontmatter.value.comment !== false
+})
 </script>
 ```
 :::
@@ -597,20 +596,27 @@ const showComment = () => {
 
 ![pagemetadata](./VitePress个人站点交互优化/pagemetadata.png)
 
+安装dayjs依赖：
+
+```shell
+pnpm add -D dayjs
+```
+
 ::: code-group
 ```vue [.vitepress/theme/components/PageMetadata.vue]
 <template>
   <section class="meta-info">
-    <p>更新日期：<i class="updated-date">{{ new Date(page.lastUpdated).toLocaleDateString() }}</i></p>
-    <p>字数总计：<i>{{ wordcount }}</i></p>
-    <p>阅读时长：<i>{{ readTime }}</i>分钟</p>
-    <p>阅读量：<i id="busuanzi_value_page_pv"></i></p>
+    <span class="meta-item">📆更新于 <i>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</i></span>
+    <span class="meta-item">✍字数总计：<i>{{ wordcount }}</i></span>
+    <span class="meta-item">⌛阅读时长：<i>{{ readTime }}</i> 分钟</span>
+    <span class="meta-item">📖阅读量：<i id="busuanzi_value_page_pv"></i></span>
   </section>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
+import dayjs from 'dayjs'
 const { page } = useData()
 const route = useRoute()
 const wordcount = ref(0)
@@ -679,9 +685,14 @@ watch(
 <style>
 .meta-info {
   color: var(--vp-c-text-2);
-  border-left: 1px solid var(--vp-c-divider);
   font-size: 14px;
-  padding: 12px 16px;
+  margin-bottom: 1rem;
+}
+
+.meta-item {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 1rem;
 }
 </style>
 ```
@@ -698,31 +709,33 @@ watch(
 <script setup>
 import DefaultTheme from 'vitepress/theme'
 import PageCopyRight from './PageCopyright.vue'
-const { showMeta } = defineProps(['showMeta'])
+const { hasMeta } = defineProps(['hasMeta'])
 const { Layout } = DefaultTheme
+
+const showMeta = computed(() => {
+  return hasMeta && (frontmatter.value.draft !== true || frontmatter.value.draftPreview === true)
+})
 </script>
 ```
 
 ```vue{3,6} [.vitepress/theme/MyLayout.vue]
 <template>
-  <div v-if="watermarkHidden()">
-    <BlogPage :showMeta="false" />
-  </div>
+  <BlogPage :hasMeta="false" v-if="hideWm" />
   <el-watermark :font="font" :content="site.title" v-else>
-    <BlogPage :showMeta="true" />
+    <BlogPage :hasMeta="true" />
   </el-watermark>
 </template>
 
 <script setup>
 import { ElWatermark } from 'element-plus'
 import { useData } from 'vitepress'
+import { computed } from 'vue'
 import BlogPage from './components/BlogPage.vue'
 const { frontmatter } = useData()
 
-const watermarkHidden = () => {
-  const watermarkHidden = frontmatter.value?.watermark
-  return watermarkHidden === 'hidden'
-}
+const hideWm = computed(() => {
+  return frontmatter.value.watermark === 'hidden'
+})
 </script>
 ```
 :::
@@ -761,7 +774,7 @@ const watermarkHidden = () => {
 <template>
   <Layout>
     <template #doc-after>
-      <CommentRule v-if="showComment()" />
+      <CommentRule v-if="hasComment" />
     </template>
   </Layout>
 </template>
@@ -769,14 +782,14 @@ const watermarkHidden = () => {
 <script setup>
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import { computed } from 'vue'
 import CommentRule from './CommentRule.vue'
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 
-const showComment = () => {
-  const enabledComment = frontmatter.value?.comment
-  return enabledComment === undefined || enabledComment
-}
+const hasComment = computed(() => {
+  return frontmatter.value.comment !== false
+})
 </script>
 ```
 :::
@@ -886,27 +899,16 @@ export default {
 </template>
 
 <script setup>
-import Progress from './Progress.vue'
-import { onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
-
+import Progress from './Progress.vue'
 const { frontmatter } = useData()
-const preview = ref(false)
-
-const isPreviewDraft = () => {
-  const previewDraft = frontmatter.value?.draftPreview
-  return typeof previewDraft === 'boolean' && previewDraft
-}
-
-onMounted(() => {
-  preview.value = isPreviewDraft()
-})
+const { preview } = defineProps(['preview'])
 </script>
 
 <style scoped>
 .draft-announce-container {
   border-radius: 8px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .draft-announce-container.has-content {
