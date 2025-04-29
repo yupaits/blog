@@ -606,10 +606,10 @@ pnpm add -D dayjs
 ```vue [.vitepress/theme/components/PageMetadata.vue]
 <template>
   <section class="meta-info">
-    <span class="meta-item">📆更新于 <i>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</i></span>
-    <span class="meta-item">✍字数总计：<i>{{ wordcount }}</i></span>
-    <span class="meta-item">⌛阅读时长：<i>{{ readTime }}</i> 分钟</span>
-    <span class="meta-item">📖阅读量：<i id="vercount_value_page_pv"></i></span>
+    <span class="meta-item">📆更新于 <span>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</span></span>
+    <span class="meta-item">✍字数总计：<span>{{ wordcount }}</span></span>
+    <span class="meta-item">⌛阅读时长：<span>{{ readTime }}</span> 分钟</span>
+    <span class="meta-item">📖阅读量：<span id="vercount_value_page_pv">◯</span></span>
   </section>
 </template>
 
@@ -1086,7 +1086,7 @@ export default {
 <template>
   <div class="visitor">
     <span>本站总访问量 <i id="vercount_value_site_pv"></i> 次</span>
-    <span style="margin-left: 1rem">访客数 <i id="vercount_value_site_uv"></i> 人</span>
+    <span style="margin-left: 1rem">访客数 <span id="vercount_value_site_uv">◯</span> 人</span>
   </div>
 </template>
 

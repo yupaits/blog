@@ -1,9 +1,9 @@
 <template>
   <section class="meta-info">
-    <span class="meta-item">📆更新于 <i>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</i></span>
-    <span class="meta-item">✍字数总计：<i>{{ wordcount }}</i></span>
-    <span class="meta-item">⌛阅读时长：<i>{{ readTime }}</i> 分钟</span>
-    <span class="meta-item">📖阅读量：<i id="vercount_value_page_pv"></i></span>
+    <span class="meta-item">📆更新于 <span>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</span></span>
+    <span class="meta-item">✍字数总计：<span>{{ wordcount }}</span></span>
+    <span class="meta-item">⌛阅读时长：<span>{{ readTime }}</span> 分钟</span>
+    <span class="meta-item">📖阅读量：<span id="vercount_value_page_pv">◯</span></span>
   </section>
 </template>
 
