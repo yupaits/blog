@@ -3,7 +3,7 @@
     <span class="meta-item">📆更新于 <i>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</i></span>
     <span class="meta-item">✍字数总计：<i>{{ wordcount }}</i></span>
     <span class="meta-item">⌛阅读时长：<i>{{ readTime }}</i> 分钟</span>
-    <span class="meta-item">📖阅读量：<i id="busuanzi_value_page_pv"></i></span>
+    <span class="meta-item">📖阅读量：<i id="vercount_value_page_pv"></i></span>
   </section>
 </template>
 

@@ -55,24 +55,24 @@ export default {
       })
     }
 
-    // busuanzi统计
-    const useBusuanzi = () => {
+    // 访客统计
+    const useVisitor = () => {
       const script = document.createElement('script')
       script.defer = true
       script.async = true
-      script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+      script.src = 'https://events.vercount.one/js'
       document.head.appendChild(script)
     }
 
     onMounted(() => {
       initConfetti()
-      useBusuanzi()
+      useVisitor()
     })
 
     watch(
       () => route.path,
       () => {
-        useBusuanzi()
+        useVisitor()
       }
     )
   },

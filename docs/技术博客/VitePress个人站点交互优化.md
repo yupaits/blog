@@ -609,7 +609,7 @@ pnpm add -D dayjs
     <span class="meta-item">📆更新于 <i>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</i></span>
     <span class="meta-item">✍字数总计：<i>{{ wordcount }}</i></span>
     <span class="meta-item">⌛阅读时长：<i>{{ readTime }}</i> 分钟</span>
-    <span class="meta-item">📖阅读量：<i id="busuanzi_value_page_pv"></i></span>
+    <span class="meta-item">📖阅读量：<i id="vercount_value_page_pv"></i></span>
   </section>
 </template>
 
@@ -1045,9 +1045,9 @@ export default {
 ```
 :::
 
-### 不蒜子统计
+### 访客统计
 
-通过[不蒜子](https://busuanzi.ibruce.info/)可以对整个站点的访问量和访客数、单个页面的阅读量进行统计。
+通过[Vercount](https://cn.vercount.one/)可以对整个站点的访问量和访客数、单个页面的阅读量进行统计。
 
 ::: code-group
 ```js [.vitepress/theme/index.js]
@@ -1059,38 +1059,39 @@ export default {
   extends: DefaultTheme,
   Layout: MyLayout,
   setup() {
-    // busuanzi统计
-    const useBusuanzi = () => {
+    // 访客统计
+    const useVisitor = () => {
       const script = document.createElement('script')
       script.defer = true
       script.async = true
-      script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+      script.src = 'https://events.vercount.one/js'
       document.head.appendChild(script)
     }
 
     onMounted(() => {
-      useBusuanzi()
+      useVisitor()
     })
 
     watch(
       () => route.path,
       () => {
-        useBusuanzi()
+        useVisitor()
       }
     )
   }
 }
 ```
 
-```vue [.vitepress/theme/components/Busuanzi.vue]
+```vue [.vitepress/theme/components/Visitor.vue]
 <template>
-  <div class="busuanzi">
-    <span>本站总访问量 <i id="busuanzi_value_site_pv"></i> 次</span><span style="margin-left: 1rem">访客数 <i id="busuanzi_value_site_uv"></i> 人</span>
+  <div class="visitor">
+    <span>本站总访问量 <i id="vercount_value_site_pv"></i> 次</span>
+    <span style="margin-left: 1rem">访客数 <i id="vercount_value_site_uv"></i> 人</span>
   </div>
 </template>
 
 <style>
-.busuanzi {
+.visitor {
   text-align: center;
   font-size: 14px;
   color: var(--vp-c-text-2);
@@ -1102,7 +1103,7 @@ export default {
 <template>
   <Layout>
     <template #layout-bottom>
-      <Busuanzi v-if="isHome()" />
+      <Visitor v-if="isHome" />
     </template>
   </Layout>
 </template>
@@ -1110,22 +1111,21 @@ export default {
 <script setup>
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import Busuanzi from './Busuanzi.vue'
+import { computed } from 'vue'
+import Visitor from './Visitor.vue'
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 
-const isHome = () => {
-  return frontmatter.value?.layout === 'home'
-}
+const isHome = computed(() => {
+  return !!(frontmatter.value.isHome ?? frontmatter.value.layout === 'home')
+})
 </script>
 ```
 :::
 
 完成之后的效果如下：
 
-![busuanzi](./VitePress个人站点交互优化/busuanzi.png)
-
-也可以试试不蒜子计数器完美替代方案的[Vercount](https://cn.vercount.one/)。
+![visitor](./VitePress个人站点交互优化/visitor.png)
 
 ### BProgress加载进度条
 
