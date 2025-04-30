@@ -3,26 +3,20 @@
 当前项目开发过程中，项目版本一般使用git进行管理，在进行git相关操作约定之前先对分支管理的细则进行说明。
 ## 分支的划分
 工程的分支主要分为master、dev、hotfix、feature四类
-
 - master：线上app代码主分支，该代码和线上代码一致
 - dev:开发分支，包含即将上线的新功能，由各个新功能开发分支经测试后合入，属于分支测试后的产物
 - feature：功能开发分支，当有新开发任务时，开发需要从dev分支拉取feature分支，开发完毕经过分支测试后，可以进行pull request请求，申请将分支合入dev分支，该分支是开发过程中最常使用的分支
 - hotfix：bug修复分支，或紧急需求开发分支（一般不要在hotfix分支上进行新需求的开发）。该分支从master分支拉出，经开发测试完成之后，可以进行pull requets，申请将分支合入master
-> 特别注意：
 
-> feature只能从dev分支拉出，hotfix分支只能从master拉出
-
-在进行pull request请求之前必须对当前的开发分支进行反合，即dev分支反合feature分支，master分支反合hotfix分支
-
-dev分支会在稳定之后合入master分支
-
-不能将master分支与feature反合，dev分支与hotfix反合
-
-开发只能将代码提交至对应的开发分支，不能直接提交到master分支或dev分支
+特别注意：
+- feature只能从dev分支拉出，hotfix分支只能从master拉出
+- 在进行pull request请求之前必须对当前的开发分支进行反合，即dev分支反合feature分支，master分支反合hotfix分支
+- dev分支会在稳定之后合入master分支
+- 不能将master分支与feature反合，dev分支与hotfix反合
+- 开发只能将代码提交至对应的开发分支，不能直接提交到master分支或dev分支
 
 ## 分支的提交注意事项
 分支提交的几点注意如下：
-
 - 在拉取新分支之前一定要确保本地的master分支和dev分支代码是最新的（在拉分支之前进行pull操作）
 - 分支的拉取和push请用git命令或16版本及以上idea完成，不要使用eclipse
 - 本地代码提交时需要确保本地分支对应的远程分支代码最新，具体在进行提交操作之前请进行pull操作
