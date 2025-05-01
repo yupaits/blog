@@ -10,7 +10,7 @@
 
 ### 前期准备
 
-- 直播源：[m3u直播源](https://github.com/search?q=m3u&type=repositories)
+- 直播源：[📺m3u直播源](https://github.com/search?q=m3u&type=repositories) [📺iptv直播源](https://github.com/search?q=iptv&type=repositories)
 - Jellyfin Docker镜像：https://hub.docker.com/r/jellyfin/jellyfin
 
 ### 运行Jellyfin容器
