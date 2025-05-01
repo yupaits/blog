@@ -20,8 +20,8 @@ docker run -d \
  --name jellyfin \
  --user uid:gid \
  --net=host \
- --volume /path/to/config:/config \ # 或者 --volume jellyfin-config:/config
- --volume /path/to/cache:/cache \ # 或者 --volume jellyfin-cache:/cache
+ --volume /path/to/config:/config \ # 或使用 --volume jellyfin-config:/config
+ --volume /path/to/cache:/cache \ # 或使用 --volume jellyfin-cache:/cache
  --mount type=bind,source=/path/to/media,target=/media \ # 挂载媒体库目录
  --restart=unless-stopped \
  jellyfin/jellyfin
