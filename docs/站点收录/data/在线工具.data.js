@@ -14,7 +14,7 @@ export default {
       {
         text: '生产力',
         items: [
-          { text: 'SlideShare', link: 'https://www.slideshare.net/' },
+          { text: 'SlideShare', link: 'https://www.slideshare.net/', icon: 'https://ts4.tc.mm.bing.net/th/id/ODLS.c4981159-66db-42d4-b733-2b410cc4092f' },
           { text: '爱站网', link: 'https://www.aizhan.com/', icon: 'https://statics.aizhan.com/images/img/favicon.ico' },
           { text: '稿定设计', link: 'https://www.gaoding.com/koutu' },
           { text: 'ACONVERT.COM', link: 'https://www.aconvert.com/cn/' },
