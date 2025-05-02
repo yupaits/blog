@@ -48,3 +48,10 @@ docker run -d \
 进入`控制台 -> 媒体库`设置界面，将视频资源所在目录添加到媒体库，系统会自动进行刮削并生成电影海报。
 
 ![媒体库-电影](./安装Jellyfin实现IPTV播放及自建家庭影视系统/媒体库-电影.webp)
+
+## 看电视不折腾方案
+
+完全不用自己折腾，有网就能看，央视国家品牌背书，确保可用。
+
+- CCTV直播：[📺CCTV官方直播](https://tv.cctv.com/live/index.shtml)
+- 卫视直播：[📺央视频](https://www.yangshipin.cn/tv/home)
