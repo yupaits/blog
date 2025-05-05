@@ -232,7 +232,28 @@ export default {
                     ]
                   },
                 ]
-              }
+              },
+              {
+                text: 'Java新特性',
+                base: '/软件开发/编程基础/开发语言/Java新特性/',
+                collapsed: true,
+                items: [
+                  { text: 'Java8 新特性🚀', link: 'Java8新特性' },
+                  { text: 'Java9 新特性', link: 'Java9新特性' },
+                  { text: 'Java10 新特性', link: 'Java10新特性' },
+                  { text: 'Java11 新特性', link: 'Java11新特性' },
+                  { text: 'Java12&13 新特性', link: 'Java12&13新特性' },
+                  { text: 'Java14&15 新特性', link: 'Java14&15新特性' },
+                  { text: 'Java16 新特性', link: 'Java16新特性' },
+                  { text: 'Java17 新特性🚀', link: 'Java17新特性' },
+                  { text: 'Java18 新特性', link: 'Java18新特性' },
+                  { text: 'Java19 新特性', link: 'Java19新特性' },
+                  { text: 'Java20 新特性', link: 'Java20新特性' },
+                  { text: 'Java21 新特性🚀', link: 'Java21新特性' },
+                  { text: 'Java22&23 新特性', link: 'Java22&23新特性' },
+                  { text: 'Java24 新特性', link: 'Java24新特性' },
+                ],
+              },
             ]
           },
           {
