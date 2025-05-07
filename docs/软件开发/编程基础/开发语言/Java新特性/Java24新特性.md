@@ -1,6 +1,6 @@
 # Java24 新特性
 
-[JDK 24](https://openjdk.org/projects/jdk/24/) 是自 JDK 21 以来的第三个非长期支持版本，和 [JDK 22](https://javaguide.cn/java/new-features/java22-23.html)、[JDK 23](https://javaguide.cn/java/new-features/java22-23.html)一样。下一个长期支持版是 JDK 25，预计今年 9 月份发布。
+[JDK 24](https://openjdk.org/projects/jdk/24/) 是自 JDK 21 以来的第三个非长期支持版本，和 [JDK 22](./Java22&23新特性)、[JDK 23](./Java22&23新特性)一样。下一个长期支持版是 JDK 25，预计今年 9 月份发布。
 
 ## JEP 478: 密钥派生函数API（预览）
 
