@@ -1268,18 +1268,16 @@ if (!import.meta.env.SSR) {
 ::: code-group
 ```vue [MyLayout.vue]
 <template>
-  <div v-if="watermarkHidden()">
-    <BlogPage />
-  </div>
+  <BlogPage :hasMeta="false" v-if="hideWm" />
   <el-watermark :font="font" :content="site.title" v-else>
-    <BlogPage />
+    <BlogPage :hasMeta="true" />
   </el-watermark>
 </template>
 
 <script setup>
 import { ElWatermark } from 'element-plus'
 import { useData } from 'vitepress'
-import { reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import BlogPage from './components/BlogPage.vue'
 const { frontmatter, site, isDark } = useData()
 
@@ -1287,10 +1285,9 @@ const font = reactive({
   color: 'rgba(0, 0, 0, .08)'
 })
 
-const watermarkHidden = () => {
-  const watermarkHidden = frontmatter.value?.watermark
-  return watermarkHidden === 'hidden'
-}
+const hideWm = computed(() => {
+  return frontmatter.value.watermark === 'hidden'
+})
 
 watch(
   isDark,
