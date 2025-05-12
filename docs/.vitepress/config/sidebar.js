@@ -591,6 +591,7 @@ export default {
               { text: 'ABC谋杀案', link: 'ABC谋杀案' },
               { text: '罗杰疑案', link: '罗杰疑案' },
               { text: '斯泰尔斯庄园奇案', link: '斯泰尔斯庄园奇案' },
+              { text: '东方快车谋杀案', link: '东方快车谋杀案' },
             ]
           },
         ]
