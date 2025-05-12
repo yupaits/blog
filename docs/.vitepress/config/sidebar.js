@@ -587,6 +587,10 @@ export default {
             collapsed: true,
             items: [
               { text: '无人生还', link: '无人生还' },
+              { text: '阳光下的罪恶', link: '阳光下的罪恶' },
+              { text: 'ABC谋杀案', link: 'ABC谋杀案' },
+              { text: '罗杰疑案', link: '罗杰疑案' },
+              { text: '斯泰尔斯庄园奇案', link: '斯泰尔斯庄园奇案' },
             ]
           },
         ]
