@@ -27,7 +27,6 @@ img:not(.VPImage) {
 .VPNavBarMenuGroup.active .text,
 .VPMenuLink .active,
 .VPSidebarItem.is-link.is-active .VPLink .text {
-  font-weight: bold;
   text-shadow: 0.5px 0 0 currentColor;
 }
 

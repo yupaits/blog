@@ -1,9 +1,9 @@
 <template>
   <div class="page-copyright">
-    <p><span class="label">文章作者：</span><a href="mailto:ts495606653@hotmail.com">yupaits</a></p>
-    <p><span class="label">文章链接：</span><a :href="link" target="_blank">{{ decodeURI(link) }}</a></p>
+    <p><strong class="label">文章作者：</strong><a href="mailto:ts495606653@hotmail.com">yupaits</a></p>
+    <p><strong class="label">文章链接：</strong><a :href="link" target="_blank">{{ decodeURI(link) }}</a></p>
     <p>
-      <span class="label">版权声明：</span>
+      <strong class="label">版权声明：</strong>
       <span>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA
           4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/" target="_blank">yupaits notes</a></span>
     </p>
@@ -59,7 +59,6 @@ watch(
 
 .page-copyright .label {
   color: var(--vp-c-brand-1);
-  font-weight: bold;
 }
 
 .page-copyright a {

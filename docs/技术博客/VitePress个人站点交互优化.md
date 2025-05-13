@@ -495,10 +495,10 @@ const { Layout } = DefaultTheme
 ```vue [.vitepress/theme/components/PageCopyright.vue]
 <template>
   <div class="page-copyright">
-    <p><span class="label">文章作者：</span><a href="mailto:ts495606653@hotmail.com">yupaits</a></p>
-    <p><span class="label">文章链接：</span><a :href="link" target="_blank">{{ decodeURI(link) }}</a></p>
+    <p><strong class="label">文章作者：</strong><a href="mailto:ts495606653@hotmail.com">yupaits</a></p>
+    <p><strong class="label">文章链接：</strong><a :href="link" target="_blank">{{ decodeURI(link) }}</a></p>
     <p>
-      <span class="label">版权声明：</span>
+      <strong class="label">版权声明：</strong>
       <span>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA
           4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/" target="_blank">yupaits notes</a></span>
     </p>
@@ -554,7 +554,6 @@ watch(
 
 .page-copyright .label {
   color: var(--vp-c-brand-1);
-  font-weight: bold;
 }
 
 .page-copyright a {
@@ -886,8 +885,8 @@ export default {
   <section class="draft-announce-container" :class="{ 'has-content': preview }">
     <div class="draft-box">
       <div>
-        <span class="badge">草稿</span>
-        <span class="badge badge-preview" v-if="preview">预览模式</span>
+        <strong class="badge">草稿</strong>
+        <strong class="badge badge-preview" v-if="preview">预览模式</strong>
       </div>
       <div class="draft-tip" v-if="preview">当前文章尚未完成，预览模式下可以提前查看文章内容。</div>
       <div class="draft-tip" v-else>当前文章尚未完成，敬请期待...</div>
@@ -934,7 +933,6 @@ const { preview } = defineProps(['preview'])
   cursor: default;
   color: var(--vp-c-text-2);
   font-size: 16px;
-  font-weight: bold;
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
   background-color: var(--vp-c-brand-soft);

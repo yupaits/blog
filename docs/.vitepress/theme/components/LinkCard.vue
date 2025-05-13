@@ -2,7 +2,10 @@
   <a class="linkcard no-icon" :href="option?.link" target="_blank">
     <img :ref="getImgRefName(group?.label, option?.text)"
       :style="{ height: option.imgHeight ?? group.imgHeight ?? '48px', minWidth: option.imgWidth ?? group.imgWidth ?? '48px' }" />
-    <p class="description"><span class="title" v-if="option?.text">{{ option?.text }}<br></span><span class="subtitle" v-html="option?.description" v-if="option?.description"></span></p>
+    <p class="description">
+      <strong class="title" v-if="option?.text">{{ option?.text }}<br></strong>
+      <span class="subtitle" v-html="option?.description" v-if="option?.description"></span>
+    </p>
   </a>
 </template>
 
@@ -81,7 +84,6 @@ a::after.linkcard {
 /* 描述链接标题 */
 .linkcard .description .title {
   font-size: 15px;
-  font-weight: bold;
 }
 
 /* 描述链接副标题 */

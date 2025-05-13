@@ -2,8 +2,8 @@
   <section class="draft-announce-container" :class="{ 'has-content': preview }">
     <div class="draft-box">
       <div>
-        <span class="badge">草稿</span>
-        <span class="badge badge-preview" v-if="preview">预览模式</span>
+        <strong class="badge">草稿</strong>
+        <strong class="badge badge-preview" v-if="preview">预览模式</strong>
       </div>
       <div class="draft-tip" v-if="preview">当前文章尚未完成，预览模式下可以提前查看文章内容。</div>
       <div class="draft-tip" v-else>当前文章尚未完成，敬请期待...</div>
@@ -50,7 +50,6 @@ const { preview } = defineProps(['preview'])
   cursor: default;
   color: var(--vp-c-text-2);
   font-size: 16px;
-  font-weight: bold;
   border: 1px solid var(--vp-c-divider);
   border-radius: 6px;
   background-color: var(--vp-c-brand-soft);
