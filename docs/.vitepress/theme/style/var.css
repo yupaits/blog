@@ -1,3 +1,15 @@
+/* 全局使用霞鹜文楷字体 */
+body,
+code,
+input {
+  font-family: "LXGW WenKai Screen R", var(--vp-font-family-base);
+}
+
+/* 横向描边伪加粗，解决霞鹜文楷字体无法加粗的问题 */
+strong {
+  text-shadow: 0.5px 0 0 currentColor;
+}
+
 /* 链接文本去除下划线 */
 .vp-doc a {
   text-decoration: none;
@@ -16,6 +28,7 @@ img:not(.VPImage) {
 .VPMenuLink .active,
 .VPSidebarItem.is-link.is-active .VPLink .text {
   font-weight: bold;
+  text-shadow: 0.5px 0 0 currentColor;
 }
 
 /* 导航栏下拉菜单分组标题 */
