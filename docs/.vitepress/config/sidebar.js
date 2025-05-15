@@ -594,6 +594,7 @@ export default {
               { text: '东方快车谋杀案', link: '东方快车谋杀案' },
               { text: '尼罗河上的惨案', link: '尼罗河上的惨案' },
               { text: '捕鼠器', link: '捕鼠器' },
+              { text: '长夜', link: '长夜' },
             ]
           },
         ]
