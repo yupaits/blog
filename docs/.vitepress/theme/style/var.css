@@ -1,6 +1,6 @@
 /* 全局使用霞鹜文楷字体 */
 body,
-code,
+p code,
 input {
   font-family: "LXGW WenKai Screen R", var(--vp-font-family-base);
 }
