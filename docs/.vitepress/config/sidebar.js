@@ -595,6 +595,7 @@ export default {
               { text: '尼罗河上的惨案', link: '尼罗河上的惨案' },
               { text: '捕鼠器', link: '捕鼠器' },
               { text: '长夜', link: '长夜' },
+              { text: '悬崖上的谋杀', link: '悬崖上的谋杀' },
             ]
           },
         ]
