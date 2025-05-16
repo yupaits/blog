@@ -2,6 +2,7 @@
 body,
 p code,
 td code,
+li code,
 input {
   font-family: "LXGW WenKai Screen R", var(--vp-font-family-base);
 }
