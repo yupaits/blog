@@ -1017,13 +1017,16 @@ draftPercent: 25    # 文章撰写完成进度百分比，取值范围：大于0
 </template>
 
 <script setup>
+import { useData } from 'vitepress'
+const { page } = useData()
+
 const nativeShare = async () => {
   // 检测浏览器是否支持原生分享API
   if (navigator.share) {
     try {
       await navigator.share({
         title: document.title,
-        text: '分享这个有趣的内容',
+        text: page.value?.title,
         url: window.location.origin + window.location.pathname
       })
     } catch (err) {
