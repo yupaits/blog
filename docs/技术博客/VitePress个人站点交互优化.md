@@ -1012,7 +1012,7 @@ draftPercent: 25    # 文章撰写完成进度百分比，取值范围：大于0
 ```vue [.vitepress/theme/components/PageShare.vue]
 <template>
   <div class="share-box">
-    <a class="share-btn" @click="nativeShare()">📤分享页面</a>
+    <a class="share-btn" @click="nativeShare()">📤分享此页</a>
   </div>
 </template>
 
@@ -1039,7 +1039,7 @@ const nativeShare = async () => {
 <style>
 .share-box {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 }

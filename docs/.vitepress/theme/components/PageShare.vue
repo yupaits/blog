@@ -1,6 +1,6 @@
 <template>
   <div class="share-box">
-    <a class="share-btn" @click="nativeShare()">📤分享页面</a>
+    <a class="share-btn" @click="nativeShare()">📤分享此页</a>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ const nativeShare = async () => {
 <style>
 .share-box {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 }
