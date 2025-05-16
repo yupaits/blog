@@ -11,6 +11,7 @@
 
     <template #doc-footer-before>
       <PageCopyRight v-if="hasComment" />
+      <PageShare v-if="hasComment" />
       <BackToTop />
     </template>
 
@@ -30,6 +31,7 @@ import CommentRule from './CommentRule.vue'
 import DraftAnnounce from './DraftAnnounce.vue'
 import PageCopyRight from './PageCopyright.vue'
 import PageMetadata from './PageMetadata.vue'
+import PageShare from './PageShare.vue'
 const { hasMeta } = defineProps(['hasMeta'])
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()

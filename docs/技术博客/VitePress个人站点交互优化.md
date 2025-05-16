@@ -535,7 +535,7 @@ watch(
   border-radius: 8px;
   font-size: 15px;
   padding: 12px 16px;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .page-copyright:before {
@@ -1001,6 +1001,82 @@ draft: true         # 是否声明为草稿，可选项：true/false，默认fal
 draftPreview: true  # 草稿是否可预览，可选项：true/false，默认false
 draftPercent: 25    # 文章撰写完成进度百分比，取值范围：大于0的数字
 ---
+```
+:::
+
+### PageShare 页面分享
+
+通过调用浏览器原生分享功能实现。
+
+::: code-group
+```vue [.vitepress/theme/components/PageShare.vue]
+<template>
+  <div class="share-box">
+    <a class="share-btn" @click="nativeShare()">📤分享页面</a>
+  </div>
+</template>
+
+<script setup>
+const nativeShare = async () => {
+  // 检测浏览器是否支持原生分享API
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: document.title,
+        text: '分享这个有趣的内容',
+        url: window.location.origin + window.location.pathname
+      })
+    } catch (err) {
+      console.log('用户取消了分享')
+    }
+  }
+}
+</script>
+
+<style>
+.share-box {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.share-btn {
+  padding: 4px 8px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 4px;
+  color: var(--vp-c-brand-1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.share-btn:hover {
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
+  transition: box-shadow 0.3s ease-in-out;
+}
+</style>
+```
+
+```vue [.vitepress/theme/components/BlogPage.vue]
+<template>
+  <Layout>
+    <template #doc-footer-before>
+      <PageShare v-if="hasComment" />
+    </template>
+  </Layout>
+</template>
+
+<script setup>
+import { useData } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import PageShare from './PageCopyright.vue'
+const { Layout } = DefaultTheme
+const { frontmatter } = useData()
+
+const hasComment = computed(() => {
+  return frontmatter.value.comment !== false
+})
+</script>
 ```
 :::
 

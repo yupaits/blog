@@ -40,7 +40,7 @@ watch(
   border-radius: 8px;
   font-size: 15px;
   padding: 12px 16px;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .page-copyright:before {
