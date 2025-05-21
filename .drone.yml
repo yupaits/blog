@@ -2,14 +2,6 @@ kind: pipeline
 type: docker
 name: 构建站点文件
 
-clone:
-  git:
-    image: alpine/git
-    commands:
-      - git config --global credential.helper "store --file=/tmp/git-credentials"
-      - echo "https://yupaits:ts7649389@gitea.yupaits.com" > /tmp/git-credentials
-      - git clone https://gitea.yupaits.com/yupaits/blog-md.git .
-
 steps:
   - name: pnpm构建
     image: node:18-alpine
