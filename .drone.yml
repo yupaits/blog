@@ -9,6 +9,7 @@ steps:
   - name: 测试网络
     image: alpine/git
     commands:
+      - cat /etc/resolv.conf
       - ping gitea.yupaits.com
   - name: pnpm构建
     image: node:18-alpine
