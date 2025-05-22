@@ -2,15 +2,7 @@ kind: pipeline
 type: docker
 name: 构建站点文件
 
-clone: 
-  disable: true
-
 steps:
-  - name: 测试网络
-    image: alpine/git
-    commands:
-      - cat /etc/resolv.conf
-      - ping gitea.yupaits.com
   - name: pnpm构建
     image: node:18-alpine
     volumes:
