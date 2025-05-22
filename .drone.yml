@@ -7,7 +7,7 @@ clone:
 
 steps:
   - name: 测试网络
-    image: drone/git
+    image: alpine/git
     commands:
       - ping gitea.yupaits.com
   - name: pnpm构建
