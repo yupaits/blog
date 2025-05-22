@@ -3,6 +3,10 @@ type: docker
 name: 构建站点文件
 
 steps:
+  - name: 测试网络
+    image: drone/git
+    commands:
+      - ping gitea.yupaits.com
   - name: pnpm构建
     image: node:18-alpine
     volumes:
