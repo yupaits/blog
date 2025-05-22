@@ -6,14 +6,6 @@ clone:
   disable: true
 
 steps:
-  - name: 拉取代码
-    image: alpine/git:latest
-    volumes:
-      - name: resolv
-        path: /etc/resolv.conf
-    commands:
-      - cat /etc/resolv.conf
-      - ping gitea.yupaits.com
   - name: pnpm构建
     image: node:18-alpine
     volumes:
@@ -35,12 +27,9 @@ steps:
       - npx pnpm run docs:build
 
 volumes:
-  - name: resolv
-    host:
-      path: /etc/resolv.conf
   - name: cache
     host:
-      path: /volume1/docker/drone/pnpm/cache
+      path: /root/docker/drone/pnpm/cache
   - name: dist
     host:
-      path: /volume1/docker/drone/yupaits-notes
+      path: /root/docker/drone/yupaits-notes
