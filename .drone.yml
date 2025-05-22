@@ -2,9 +2,6 @@ kind: pipeline
 type: docker
 name: 构建站点文件
 
-clone:
-  disable: true
-
 steps:
   - name: pnpm构建
     image: node:18-alpine
