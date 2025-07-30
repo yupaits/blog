@@ -15,7 +15,8 @@ export default {
       {
         text: '专业领域',
         items: [
-          { text: 'Trae（字节跳动）', description: '致力于成为真正的AI工程师', link: 'https://www.trae.com.cn/', icon: 'https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.ico' },
+          { text: 'Trae（字节跳动）', description: '一个能理解需求、调动工具、独立完成各类开发任务的超级AI开发工程师', link: 'https://www.trae.com.cn/', icon: 'https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png' },
+          { text: 'Codebuddy IDE', description: '首款三端一体AI开发平台：自然语言驱动产品设计到研发全流程', link: 'https://copilot.tencent.com/ide/', icon: 'https://acc-1258344699.cos.accelerate.myqcloud.com/web/website/6d697892636c9f2ba1651a7bf0596cbbdb7fa04f/assets/favicon.ico' },
           { text: 'Effidit（腾讯）', description: '用AI技术提升写作者的写作效率和创作体验', link: 'https://effidit.qq.com/', icon: 'https://effidit.qq.com/favicon.png' },
           { text: 'ARC（腾讯）', description: '探索挑战智能媒体相关前沿技术', link: 'https://arc.tencent.com/zh/index', icon: 'https://arc.tencent.com/logo.ico' },
         ]
