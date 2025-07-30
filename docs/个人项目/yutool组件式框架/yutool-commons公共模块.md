@@ -32,14 +32,15 @@ yutool-commons是yutool组件式框架的基础模块，为yutool的各个组件
 
 ## JSON序列化/反序列化
 
-| 类名                | 说明                                                            |
-|---------------------|---------------------------------------------------------------|
-| JavaTimeModule      | Java8时间默认序列化模块，适配jackson                             |
-| LongParamModule     | Long类型默认序列化模块，适配jackson                              |
-| IdSerializer        | 解决Long类型的主键转json传回前端丢失精度的问题，将Long转成String |
-| SensitiveSerializer | 信息脱敏                                                        |
-| LongDeserializer    | SQL注入过滤                                                     |
-| XssDeserializer     | XSS过滤                                                         |
+| 类名                  | 说明                                                            |
+|-----------------------|---------------------------------------------------------------|
+| JavaTimeModule        | Java8时间默认序列化模块，适配jackson                             |
+| LongParamModule       | Long类型默认序列化模块，适配jackson                              |
+| IdSerializer          | 解决Long类型的主键转json传回前端丢失精度的问题，将Long转成String |
+| SensitiveSerializer   | 信息脱敏                                                        |
+| LongDeserializer      | 将前端String类型的主键转成Long类型，搭配IdSerializer使用         |
+| SqlInjectDeserializer | SQL注入过滤                                                     |
+| XssDeserializer       | XSS过滤                                                         |
 
 ## 特定场景编程范式
 
