@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="group in data">
-      <p class="card-group-title" v-if="group.text">{{ group.text }}</p>
+      <h2 :id="group.text" class="card-group-title" v-if="group.text">{{ group.text }}</h2>
       <div class="card-container">
         <div class="card-group">
           <template v-for="item in group.items">
@@ -33,11 +33,14 @@ const linkGroup = (groupItem) => {
 
 <style scoped>
 .card-group-title {
+  margin: 0px;
   font-size: 16px;
   color: var(--vp-c-brand-1);
+  border-top: 0px;
   border-left: 4px solid var(--vp-c-brand-1);
   border-radius: 6px;
   padding-left: 8px;
+  padding-top: 0px;
   line-height: 40px;
   background-color: var(--vp-c-bg-elv);
 }
