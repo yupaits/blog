@@ -16,6 +16,7 @@ export default {
         text: '专业领域',
         items: [
           { text: 'Trae（字节跳动）', description: '一个能理解需求、调动工具、独立完成各类开发任务的超级AI开发工程师', link: 'https://www.trae.com.cn/', icon: 'https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png' },
+          { text: 'CodeBuddyIDE（腾讯）', description: 'AI 一站式工作台：从此用自然语言实现产品、设计、研发全流程', link: 'https://copilot.tencent.com/ide', icon: 'https://codebuddy-1328495429.cos.accelerate.myqcloud.com/web/ide/icon.png' },
           { text: 'Effidit（腾讯）', description: '用AI技术提升写作者的写作效率和创作体验', link: 'https://effidit.qq.com/', icon: 'https://effidit.qq.com/favicon.png' },
           { text: 'ARC（腾讯）', description: '探索挑战智能媒体相关前沿技术', link: 'https://arc.tencent.com/zh/index', icon: 'https://arc.tencent.com/logo.ico' },
         ]
