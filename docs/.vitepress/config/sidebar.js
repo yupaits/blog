@@ -253,6 +253,7 @@ export default {
                   { text: 'Java21 新特性🚀', link: 'Java21新特性' },
                   { text: 'Java22&23 新特性', link: 'Java22&23新特性' },
                   { text: 'Java24 新特性', link: 'Java24新特性' },
+                  { text: 'Java25 新特性🚀', link: 'Java25新特性' },
                 ],
               },
             ]
