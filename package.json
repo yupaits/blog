@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@bprogress/core": "^1.3.4",
+    "@vrcd-community/markdown-it-video": "^1.1.1",
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
     "element-plus": "^2.8.3",

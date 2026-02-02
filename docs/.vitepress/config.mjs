@@ -2,6 +2,7 @@
 import { defineConfig } from 'vitepress'
 import taskList from 'markdown-it-task-checkbox'
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
+import markdownItVideo from '@vrcd-community/markdown-it-video'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -171,6 +172,9 @@ export default defineConfig({
       md.use(taskList)
       md.use(mdItCustomAttrs, 'image', {
         'data-fancybox': 'gallery'
+      })
+      md.use(markdownItVideo, {
+        bilibili: { width: '100%', height: '387px' }
       })
     }
   },
