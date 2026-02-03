@@ -1,4 +1,4 @@
-export default {
+const sidebar = {
   '/技术博客/': {
     base: '/技术博客/',
     items: [
@@ -626,3 +626,19 @@ export default {
     ]
   },
 }
+
+for (const key in sidebar) {
+  if (!Object.hasOwn(sidebar, key)) continue;
+  const cate = sidebar[key];
+  if (cate.base === '/技术博客/') {
+    cate.items.forEach(item => {
+      item.text = `📝${item.text}`
+    })
+  } else if (cate.base === '/文章收录/') {
+    cate.items.forEach(item => {
+      item.text = `📑${item.text}`
+    })
+  }
+}
+
+export default sidebar
