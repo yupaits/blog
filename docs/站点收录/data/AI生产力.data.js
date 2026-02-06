@@ -4,7 +4,7 @@ export default {
       {
         text: 'AI助手',
         items: [
-          { text: 'DeepSeek', link: 'https://chat.deepseek.com/', icon: 'https://chat.deepseek.com/favicon.svg' },
+          { text: 'DeepSeek', link: 'https://chat.deepseek.com/', icon: 'https://cdn.deepseek.com/chat/icon.png' },
           { text: '豆包（字节跳动）', link: 'https://www.doubao.com/chat/', icon: 'https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/doubao/web/logo-icon.png' },
           { text: '通义（阿里巴巴）', link: 'https://www.tongyi.com/', icon: 'https://img.alicdn.com/imgextra/i4/O1CN01EfJVFQ1uZPd7W4W6i_!!6000000006051-2-tps-112-112.png' },
           { text: '腾讯元宝', link: 'https://yuanbao.tencent.com/chat', icon: 'https://cdn-bot.hunyuan.tencent.com/logo-v2.png' },
@@ -17,7 +17,7 @@ export default {
         items: [
           { text: 'Trae（字节跳动）', description: '一个能理解需求、调动工具、独立完成各类开发任务的超级AI开发工程师', link: 'https://www.trae.com.cn/', icon: 'https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png' },
           { text: 'CodeBuddyIDE（腾讯）', description: 'AI 一站式工作台：从此用自然语言实现产品、设计、研发全流程', link: 'https://copilot.tencent.com/ide', icon: 'https://codebuddy-1328495429.cos.accelerate.myqcloud.com/web/ide/icon.png' },
-          { text: 'Effidit（腾讯）', description: '用AI技术提升写作者的写作效率和创作体验', link: 'https://effidit.qq.com/', icon: 'https://effidit.qq.com/favicon.png' },
+          // { text: 'Effidit（腾讯）', description: '用AI技术提升写作者的写作效率和创作体验', link: 'https://effidit.qq.com/', icon: 'https://effidit.qq.com/favicon.png' },
           { text: 'ARC（腾讯）', description: '探索挑战智能媒体相关前沿技术', link: 'https://arc.tencent.com/zh/index', icon: 'https://arc.tencent.com/logo.ico' },
         ]
       },
