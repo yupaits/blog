@@ -8,7 +8,6 @@ export default {
           { text: 'Pexels', link: 'https://www.pexels.com/' },
           { text: 'Pixabay', link: 'https://pixabay.com/zh/' },
           { text: 'Canva', link: 'https://www.canva.com/photos/free/', icon: 'https://static.canva.cn/domain-assets/canva/static/images/favicon-1.ico' },
-          { text: 'Reshot', link: 'https://www.reshot.com/' },
           { text: 'rawpixel', link: 'https://www.rawpixel.com/' },
           { text: 'Morguefile', link: 'https://morguefile.com/' },
           { text: 'pxhere', link: 'https://pxhere.com/', icon: 'https://s.pxhere.com/media/favicon-32x32.png?v=66' },
