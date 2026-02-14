@@ -16,6 +16,7 @@ export default {
       {
         text: '专业领域',
         items: [
+          { text: 'Seedance 2.0', description: 'Seedance 2.0 采用统一的多模态音视频联合生成架构，支持文字、图片、音频、视频四种模态输入，集成了目前业界最全面的多模态内容参考和编辑能力', link: 'https://seed.bytedance.com/zh/seedance2_0', icon: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/favicon_1/favicon.ico' },
           { text: 'Trae', description: '一个能理解需求、调动工具、独立完成各类开发任务的超级AI开发工程师', link: 'https://www.trae.com.cn/', icon: 'https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png' },
           { text: 'CodeBuddyIDE', description: 'AI 一站式工作台：从此用自然语言实现产品、设计、研发全流程', link: 'https://copilot.tencent.com/ide', icon: 'https://codebuddy-1328495429.cos.accelerate.myqcloud.com/web/ide/icon.png' },
           { text: 'ARC', description: '探索挑战智能媒体相关前沿技术', link: 'https://arc.tencent.com/zh/index', icon: 'https://arc.tencent.com/logo.ico' },
