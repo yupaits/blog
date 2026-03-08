@@ -10,6 +10,7 @@ export default {
           { text: '廖雪峰的官方网站', link: 'https://www.liaoxuefeng.com/', icon: 'https://liaoxuefeng.com/static/logo.svg' },
           { text: 'JavaGuide', link: 'https://javaguide.cn/' },
           { text: '萌叔', link: 'http://vearne.cc/' },
+          { text: 'OI Wiki', link: 'https://oi-wiki.org/' },
         ]
       },
       {

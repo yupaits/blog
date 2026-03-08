@@ -242,7 +242,7 @@ const sidebar = {
                   { text: 'Java8 新特性🚀', link: 'Java8新特性' },
                   { text: 'Java9 新特性', link: 'Java9新特性' },
                   { text: 'Java10 新特性', link: 'Java10新特性' },
-                  { text: 'Java11 新特性', link: 'Java11新特性' },
+                  { text: 'Java11 新特性🚀', link: 'Java11新特性' },
                   { text: 'Java12&13 新特性', link: 'Java12&13新特性' },
                   { text: 'Java14&15 新特性', link: 'Java14&15新特性' },
                   { text: 'Java16 新特性', link: 'Java16新特性' },
