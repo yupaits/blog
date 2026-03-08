@@ -514,6 +514,7 @@ const sidebar = {
             collapsed: true,
             items: [
               { text: '深圳十峰', link: '深圳十峰' },
+              { text: '黔灵山公园', link: '黔灵山公园' },
             ]
           },
           {
