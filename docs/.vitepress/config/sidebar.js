@@ -583,7 +583,8 @@ const sidebar = {
         text: '游戏攻略',
         base: '/生活记录/游戏攻略/',
         items: [
-          { text: '推箱子', link: '推箱子' }
+          { text: '推箱子', link: '推箱子' },
+          { text: '推箱子求解器', link: '推箱子求解器' },
         ]
       },
       {
