@@ -16,6 +16,7 @@ export default {
       {
         text: '专业领域',
         items: [
+          { text: 'QClaw', description: '从日常提醒到自动化开发，QClaw 帮你解锁无限可能', link: 'https://qclaw.qq.com/', icon: 'https://cdn.qclaw.qq.com/qclaw/website/image/favicon.png' },
           { text: 'Seedance 2.0', description: '拟真视听效果和导演级操控，让音视频生成“所想即所见”', link: 'https://seed.bytedance.com/zh/seedance2_0', icon: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/favicon_1/favicon.ico' },
           { text: 'Trae', description: '一个能理解需求、调动工具、独立完成各类开发任务的超级AI开发工程师', link: 'https://www.trae.com.cn/', icon: 'https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png' },
           { text: 'CodeBuddyIDE', description: 'AI 一站式工作台：从此用自然语言实现产品、设计、研发全流程', link: 'https://copilot.tencent.com/ide', icon: 'https://codebuddy-1328495429.cos.accelerate.myqcloud.com/web/ide/icon.png' },
