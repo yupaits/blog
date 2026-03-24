@@ -2,7 +2,16 @@ kind: pipeline
 type: docker
 name: 构建站点文件
 
+clone:
+  disable: true
+
 steps:
+  - name: 拉取代码
+    image: alpine/git:latest
+    extra_hosts:
+      - "gitea.yupaits.com:192.168.2.3"
+    commands:
+      - git clone https://gitea.yupaits.com/yupaits/blog-md.git .
   - name: pnpm构建
     image: node:18-alpine
     volumes:
@@ -26,7 +35,7 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /root/docker/drone/pnpm/cache
+      path: /volume1/docker/dev/drone/pnpm/cache
   - name: dist
     host:
-      path: /root/docker/drone/yupaits-notes
+      path: /volume1/docker/dev/drone/yupaits-notes
