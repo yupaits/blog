@@ -1,3 +1,29 @@
+/* 字体 */
+@font-face {
+  font-family: "ZSFT-443";
+  src: url("https://fontsapi.zeoseven.com/443/italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ZSFT-443";
+  src: url("https://fontsapi.zeoseven.com/443/main.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --vp-font-family-base: "ZSFT-443", "LXGW ZhenKai GB";
+  --vp-font-family-mono: "ZSFT-443", "LXGW ZhenKai GB";
+}
+
+.vp-doc strong {
+  text-shadow: 0.5px 0 0 currentColor;
+}
+
 /* 链接文本去除下划线 */
 .vp-doc a {
   text-decoration: none;

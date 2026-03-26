@@ -41,6 +41,8 @@ export default defineConfig({
       })();
       `
     ],
+    // 字体
+    ['link', { rel: 'stylesheet', href: 'https://fontsapi.zeoseven.com/2/main/result.css' }],
     // fancybox
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css' }],
     ['script', { src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js' }],
