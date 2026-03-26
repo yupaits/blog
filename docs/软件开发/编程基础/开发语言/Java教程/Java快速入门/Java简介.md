@@ -21,7 +21,7 @@ Oracle License                   Documentation Download
 
 在Mac下，它在`~/.bash_profile`或`~/.zprofile`里，它是：
 
-`export JAVA_HOME=`/usr/libexec/java_home -v 18``
+``export JAVA_HOME=`/usr/libexec/java_home -v 18` ``
 
 然后，把JAVA_HOME的bin目录附加到系统环境变量PATH上。在Windows下，它长这样：
 
