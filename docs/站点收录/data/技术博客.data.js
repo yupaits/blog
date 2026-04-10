@@ -11,6 +11,7 @@ export default {
           { text: 'JavaGuide', link: 'https://javaguide.cn/' },
           { text: '萌叔', link: 'http://vearne.cc/' },
           { text: 'OI Wiki', link: 'https://oi-wiki.org/' },
+          { text: 'Golang 中文学习文档', link: 'https://golang.halfiisland.com/' },
         ]
       },
       {
