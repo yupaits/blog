@@ -8,10 +8,9 @@ import {data} from './data/AI生产力.data.js'
 
 可用于本地环境的大语言模型或AI相关应用。
 
-| 名称                                                                                       | 说明                                                                                                                             | Windows | Linux | macOS | Docker |
-|--------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|:-------:|:-----:|:-----:|:------:|
-| <LinkButton :link="{href: 'https://openclaw.ai/', target: '_blank'}" value="OpenClaw"/>    | 完全开源免费的私人 AI 助手，通过 WhatsApp、Telegram、微信等聊天应用控制，支持 DeepSeek、豆包等国产 AI 模型，提供详细中文文档和活跃社区 |    ✔    |   ✔   |   ✔   |        |
-| <LinkButton :link="{href: 'https://ollama.com/', target: '_blank'}" value="Ollama"/>       | 本地环境启动运行大语言模型                                                                                                       |    ✔    |   ✔   |   ✔   |   ✔    |
-| <LinkButton :link="{href: 'https://chatboxai.app/zh', target: '_blank'}" value="Chatbox"/> | Chatbox AI是一款AI客户端应用和智能助手，支持众多先进的AI模型和API，可在Windows、MacOS、Android、iOS、Linux和网页版上使用               |    ✔    |   ✔   |   ✔   |        |
+| 名称                                                                                     | 说明                                                                                                                             | Windows | Linux | macOS | Docker |
+|------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|:-------:|:-----:|:-----:|:------:|
+| <LinkButton :link="{href: 'https://openclaw.ai/', target: '_blank'}" value="OpenClaw"/>  | 完全开源免费的私人 AI 助手，通过 WhatsApp、Telegram、微信等聊天应用控制，支持 DeepSeek、豆包等国产 AI 模型，提供详细中文文档和活跃社区 |    ✔    |   ✔   |   ✔   |        |
+| <LinkButton :link="{href: 'https://lmstudio.ai/', target: '_blank'}" value="LM Studio"/> | 使用本地 LLM，例如 gpt-oss, Qwen3, Gemma3, DeepSeek以及更多模型，在您自己的硬件上本地运行                                          |    ✔    |   ✔   |   ✔   |        |
 
 <LinkCardGroup :data="data" />
