@@ -7,17 +7,14 @@ export default {
           { text: '在线工具', link: 'https://tool.lu/' },
           { text: 'IT-Tools', link: 'https://it-tools.tech/' },
           { text: 'npmmirror', link: 'https://npmmirror.com/' },
-          { text: 'Maven Search Engine', link: 'https://search.maven.org/?eh=' },
-          { text: 'Docker Hub', link: 'https://hub.docker.com/', icon: 'https://ts1.tc.mm.bing.net/th/id/ODLS.8cf8576f-d6d0-4679-92f0-fefb22428366' },
+          { text: 'Maven Search Engine', link: 'https://central.sonatype.com/search' },
         ]
       },
       {
         text: '生产力',
         items: [
-          { text: 'SlideShare', link: 'https://www.slideshare.net/', icon: 'https://ts4.tc.mm.bing.net/th/id/ODLS.c4981159-66db-42d4-b733-2b410cc4092f' },
           { text: '爱站网', link: 'https://www.aizhan.com/', icon: 'https://statics.aizhan.com/images/img/favicon.ico' },
           { text: '稿定设计', link: 'https://www.gaoding.com/koutu' },
-          { text: 'ACONVERT.COM', link: 'https://www.aconvert.com/cn/' },
           { text: '草料二维码', link: 'https://cli.im/url' },
           { text: '二维码梦工厂', link: 'https://www.qrdream.com/', icon: 'https://www.qrdream.com/img/favicon.ico' },
         ]
@@ -26,7 +23,6 @@ export default {
         text: '设计',
         items: [
           { text: '即时原型', link: 'https://www.xiaopiu.com/' },
-          { text: 'DesignEvo', link: 'https://www.designevo.com/', icon: 'https://ts4.tc.mm.bing.net/th/id/ODLS.9f1aa950-d585-478f-b0e6-651f9939c604' },
           { text: 'Semi Design - Tokens', link: 'https://semi.design/zh-CN/basic/tokens', icon: 'https://lf9-static.semi.design/obj/semi-tos/images/favicon.ico' },
           { text: 'TDesign', link: 'https://tdesign.tencent.com/design/values', icon: 'https://static.tdesign.tencent.com/vue/favicon.ico' },
           { text: 'Ant Design', link: 'https://ant-design.antgroup.com/docs/spec/introduce-cn', icon: 'https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png' },
