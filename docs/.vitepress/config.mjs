@@ -18,15 +18,6 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     // Algolia
     ['meta', { name: 'algolia-site-verification', content: '61973CBB63FA493B' }],
-    // Google adsense
-    [
-      'script',
-      {
-        async: '',
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8239100633886634',
-        crossorigin: 'anonymous'
-      }
-    ],
     // 百度统计
     [
       'script',
@@ -35,7 +26,7 @@ export default defineConfig({
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?f4c5dd32b8bff25dd776c28eb5bf436d";
+        hm.src = "https://hm.baidu.com/hm.js?323b19e5eb3d913ab6600badb878e7a3";
         var s = document.getElementsByTagName("script")[0]; 
         s.parentNode.insertBefore(hm, s);
       })();
