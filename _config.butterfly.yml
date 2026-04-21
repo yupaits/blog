@@ -7,7 +7,7 @@
 #   name: link || icon
 
 menu:
-  新版博客: https://yupaits.com || fas fa-blog
+  新版博客: https://yupaits.top || fas fa-blog
   首页: / || fas fa-home
   归档: /archives/ || fas fa-archive
   分类: /categories/ || fas fa-folder-open
@@ -705,9 +705,9 @@ aside:
 # busuanzi count for PV / UV in site
 # 訪問人數
 busuanzi:
-  site_uv: true
-  site_pv: true
-  page_pv: true
+  site_uv: false
+  site_pv: false
+  page_pv: false
 
 # Time difference between publish date and now (網頁運行時間)
 # Formal: Month/Day/Year Time or Year/Month/Day Time
