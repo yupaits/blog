@@ -21,7 +21,7 @@ export default [
           { text: 'AI生产力', link: '/站点收录/AI生产力' },
         ]
       },
-      { text: 'yupaits的博客', link: 'https://blog.yupaits.com/' },
+      { text: 'yupaits的博客', link: 'https://blog.yupaits.top/' },
     ]
   },
 ]

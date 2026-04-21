@@ -142,7 +142,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'http://gitea.yupaits.com/yupaits/blog-md/src/branch/main/docs/:path',
+      pattern: 'http://gitea.yupaits.top/yupaits/blog-md/src/branch/main/docs/:path',
       text: '编辑此页'
     },
 

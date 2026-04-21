@@ -9,9 +9,9 @@ steps:
   - name: 拉取代码
     image: alpine/git:latest
     extra_hosts:
-      - "gitea.yupaits.com:192.168.2.3"
+      - "gitea.yupaits.top:192.168.2.3"
     commands:
-      - git clone https://gitea.yupaits.com/yupaits/blog-md.git .
+      - git clone https://gitea.yupaits.top/yupaits/blog-md.git .
   - name: pnpm构建
     image: node:18-alpine
     volumes:
