@@ -14,10 +14,6 @@
       <PageShare v-if="hasComment" />
       <BackToTop />
     </template>
-
-    <template #layout-bottom>
-      <Visitor v-if="isHome" />
-    </template>
   </Layout>
 </template>
 
@@ -26,7 +22,6 @@ import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { computed, onMounted, watch } from 'vue'
 import BackToTop from './BackToTop.vue'
-import Visitor from './Visitor.vue'
 import CommentRule from './CommentRule.vue'
 import DraftAnnounce from './DraftAnnounce.vue'
 import PageCopyRight from './PageCopyright.vue'
@@ -36,10 +31,6 @@ const { hasMeta } = defineProps(['hasMeta'])
 const { Layout } = DefaultTheme
 const { frontmatter } = useData()
 const route = useRoute()
-
-const isHome = computed(() => {
-  return !!(frontmatter.value.isHome ?? frontmatter.value.layout === 'home')
-})
 
 const showMeta = computed(() => {
   return hasMeta && (frontmatter.value.draft !== true || frontmatter.value.draftPreview === true)

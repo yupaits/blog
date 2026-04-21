@@ -3,7 +3,6 @@
     <span class="meta-item">📆更新于 <span>{{ dayjs(page.lastUpdated).format('YYYY-MM-DD') }}</span></span>
     <span class="meta-item">✍字数总计：<span>{{ wordcount }}</span></span>
     <span class="meta-item">⌛阅读时长：<span>{{ readTime }}</span> 分钟</span>
-    <span class="meta-item">📖阅读量：<span id="vercount_value_page_pv">◯</span></span>
   </section>
 </template>
 

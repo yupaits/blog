@@ -55,26 +55,9 @@ export default {
       })
     }
 
-    // 访客统计
-    const useVisitor = () => {
-      const script = document.createElement('script')
-      script.defer = true
-      script.async = true
-      script.src = 'https://events.vercount.one/js'
-      document.head.appendChild(script)
-    }
-
     onMounted(() => {
       initConfetti()
-      useVisitor()
     })
-
-    watch(
-      () => route.path,
-      () => {
-        useVisitor()
-      }
-    )
   },
   enhanceApp({ app }) {
     app.component('LinkButton', LinkButton)
