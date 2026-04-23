@@ -13,7 +13,7 @@ steps:
     commands:
       - git clone https://gitea.yupaits.top/yupaits/blog-md.git .
   - name: pnpm构建
-    image: node:18-alpine
+    image: node:24-alpine
     volumes:
       - name: cache
         path: /.pnpm-store
