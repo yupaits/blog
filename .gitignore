@@ -1,6 +1,8 @@
 .DS_Store
 Thumbs.db
 db.json
+.idea/
+docs/
 *.log
 node_modules/
 public/

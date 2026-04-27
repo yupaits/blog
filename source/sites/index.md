@@ -123,9 +123,9 @@ date: 2021-07-25 15:21:42
 - [Command Document](https://golang.org/doc/cmd)
 - [Language Specification](https://golang.org/ref/spec)
 - [The Go Memory Model](https://golang.org/ref/mem)
-- [gin](https://blog.yupaits.com/dev/golang/gin-doc.html)
-- [gorm](https://blog.yupaits.com/dev/golang/gorm.html)
-- [go_spider](https://blog.yupaits.com/dev/golang/go-spider.html)
+- [gin](/dev/golang/gin-doc.html)
+- [gorm](/dev/golang/gorm.html)
+- [go_spider](/dev/golang/go-spider.html)
 
 ## Docker
 
