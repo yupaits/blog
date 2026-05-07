@@ -482,13 +482,14 @@ const sidebar = {
           { text: 'yutool-dict 数据字典', link: 'yutool-dict 数据字典' },
           { text: 'yutool-exchange 数据中转', link: 'yutool-exchange 数据中转' },
           { text: 'yutool-menu 系统菜单', link: 'yutool-menu 系统菜单' },
-          { text: 'yutool-casdoor 对接Casdoor', link: 'yutool-casdoor 对接Casdoor' },
+          { text: 'yutool-oauth 认证平台接入', link: 'yutool-oauth 认证平台接入' },
           { text: 'admin-ui 管理界面', link: 'admin-ui 管理界面' },
           { text: 'yutool-user 用户🪦', link: 'yutool-user 用户' },
           { text: 'yutool-org 组织架构🪦', link: 'yutool-org 组织架构' },
           { text: 'yutool-address 地址🪦', link: 'yutool-address 地址' },
           { text: 'yutool-auth 认证授权🪦', link: 'yutool-auth 认证授权' },
           { text: 'yutool-notify 通知消息🪦', link: 'yutool-notify 通知消息' },
+          { text: 'yutool-casdoor 对接Casdoor🪦', link: 'yutool-casdoor 对接Casdoor' },
         ]
       },
       {
