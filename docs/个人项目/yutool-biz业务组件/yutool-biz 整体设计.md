@@ -14,6 +14,7 @@
 | yutool-menu        | 系统菜单     |                                                           | • cache-adapter                      |              |
 | ~~yutool-casdoor~~ | Casdoor接入  | • yutool-menu                                             | • cache-adapter                      | • v1.4.3移除 |
 | yutool-oauth       | 认证平台接入 | • yutool-menu                                             | • cache-adapter                      |              |
+| yutool-oss         | 文件存储     |                                                           |                                      |              |
 | yutool-api         | API接口      | • yutool-dict <br>• yutool-exchange <br>• yutool-personal | • yutool-metadata <br>• audit-logger |              |
 
 

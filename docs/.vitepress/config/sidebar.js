@@ -483,6 +483,7 @@ const sidebar = {
           { text: 'yutool-exchange 数据中转', link: 'yutool-exchange 数据中转' },
           { text: 'yutool-menu 系统菜单', link: 'yutool-menu 系统菜单' },
           { text: 'yutool-oauth 认证平台接入', link: 'yutool-oauth 认证平台接入' },
+          { text: 'yutool-oss 文件存储', link: 'yutool-oss 文件存储' },
           { text: 'admin-ui 管理界面', link: 'admin-ui 管理界面' },
           { text: 'yutool-user 用户🪦', link: 'yutool-user 用户' },
           { text: 'yutool-org 组织架构🪦', link: 'yutool-org 组织架构' },
