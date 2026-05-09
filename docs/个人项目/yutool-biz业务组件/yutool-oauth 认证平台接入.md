@@ -138,7 +138,7 @@ draftPreview: true
                 client-name: Logto单点登录
                 client-id: <ClientId>
                 client-secret: <ClientSecret>
-                scope: openid,profile,email,offline_access
+                scope: openid,profile,email,offline_access,roles,urn:logto:scope:organizations
                 authorization-grant-type: authorization_code
                 redirect-uri: https://<Application Hostname>/login/oauth2/code/logto
             # Logto OAuth2端口
