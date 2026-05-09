@@ -87,6 +87,8 @@ draftPreview: true
 
     # 登录页配置
     login-page:
+      # 网站标题
+      title: <site title>
       # favicon图片链接
       favicon-url: <favicon url>
       # 应用Logo图片链接
@@ -168,6 +170,8 @@ draftPreview: true
 
     # 登录页配置
     login-page:
+      # 网站标题
+      title: <site title>
       # favicon图片链接
       favicon-url: <favicon url>
       # 应用Logo图片链接
