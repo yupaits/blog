@@ -146,6 +146,7 @@ draftPreview: true
             # Logto OAuth2端口
             provider:
               logto:
+                issuer-uri: https://<Logto Hostname>/oidc
                 authorization-uri: https://<Logto Hostname>/oidc/auth
                 token-uri: https://<Logto Hostname>/oidc/token
                 user-info-uri: https://<Logto Hostname>/oidc/me
