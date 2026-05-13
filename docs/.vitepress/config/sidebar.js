@@ -416,7 +416,6 @@ const sidebar = {
             ]
           },
           { text: 'yutool-state状态机组件', link: 'yutool-state状态机组件' },
-          { text: 'yutool-search搜索引擎组件', link: 'yutool-search搜索引擎组件' },
           {
             text: 'yutool-plugins插件机制',
             base: '/个人项目/yutool组件式框架/yutool-plugins插件机制/',
@@ -455,6 +454,7 @@ const sidebar = {
           { text: 'yutool-mq消息组件🪦', link: 'yutool-mq消息组件' },
           { text: 'yutool-push推送组件🪦', link: 'yutool-push推送组件' },
           { text: 'yutool-ldap LDAP组件🪦', link: 'yutool-ldap LDAP组件' },
+          { text: 'yutool-search搜索引擎组件🪦', link: 'yutool-search搜索引擎组件' },
         ]
       },
       {
