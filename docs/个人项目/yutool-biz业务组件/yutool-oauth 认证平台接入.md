@@ -1,7 +1,3 @@
----
-draft: true
-draftPreview: true
----
 # yutool-oauth 认证平台接入
 
 ## oauth-core 认证平台对接层
