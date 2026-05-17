@@ -35,7 +35,7 @@ steps:
 volumes:
   - name: cache
     host:
-      path: /volume1/docker/dev/drone/pnpm/cache
+      path: /volume3/docker/dev/drone/pnpm/cache
   - name: dist
     host:
-      path: /volume1/docker/dev/drone/yupaits-notes
+      path: /volume3/docker/dev/drone/yupaits-notes
