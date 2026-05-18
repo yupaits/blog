@@ -39,7 +39,7 @@
 |----------------|---------------------------------------------------------------|-----------------------------------------------------------------|------------------------------------------------------------------|
 | visible        | 是否展示排序                                                  | boolean                                                         | false                                                            |
 | sorts          | 排序项                                                        | array <br> `[{title: string, dataIndex: string, asc: boolean}]` |                                                                  |
-| extSortColumns | 额外排序列（不包含再表格展示列dataTable.columns中的其它数据列） | array <br> `[{title: string, dataIndex: string}]` <br>          | 可使用`@/components/page/Sorts/addition`中提供的`extSortColumns` |
+| extSortColumns | 额外排序列（不包含在表格展示列dataTable.columns中的其它数据列） | array <br> `[{title: string, dataIndex: string}]` <br>          | 可使用`@/components/page/Sorts/addition`中提供的`extSortColumns` |
 | onSortsChange  | 排序项变更事件回调                                            | (sorts) => void                                                 |                                                                  |
 | onSortsSubmit  | 排序项应用事件回调                                            | () => void                                                      |                                                                  |
 
