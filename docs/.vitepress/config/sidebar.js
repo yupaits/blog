@@ -458,24 +458,8 @@ const sidebar = {
         ]
       },
       {
-        text: 'yutool-cli高效工作套件',
-        base: '/个人项目/yutool-cli高效工作套件/',
-        items: [
-          { text: 'yutool-cli功能清单', link: 'yutool-cli功能清单' },
-          { text: 'yutool-cli运营模式', link: 'yutool-cli运营模式' },
-        ]
-      },
-      {
-        text: 'yutool-metadata元数据',
-        base: '/个人项目/yutool-metadata元数据/',
-        items: [
-          { text: '元数据自定义对象管理设计', link: '元数据自定义对象管理设计' },
-          { text: '自定义对象核心功能设计及实现', link: '自定义对象核心功能设计及实现' },
-        ]
-      },
-      {
-        text: 'yutool-biz业务组件',
-        base: '/个人项目/yutool-biz业务组件/',
+        text: 'yutool-biz业务模块',
+        base: '/个人项目/yutool-biz业务模块/',
         items: [
           { text: 'yutool-biz 整体设计', link: 'yutool-biz 整体设计' },
           { text: 'yutool-api API接口', link: 'yutool-api API接口' },
@@ -484,6 +468,15 @@ const sidebar = {
           { text: 'yutool-menu 系统菜单', link: 'yutool-menu 系统菜单' },
           { text: 'yutool-oauth 认证平台接入', link: 'yutool-oauth 认证平台接入' },
           { text: 'yutool-oss 文件存储', link: 'yutool-oss 文件存储' },
+          {
+            text: 'yutool-metadata 元数据',
+            base: '/个人项目/yutool-biz业务模块/yutool-metadata 元数据/',
+            collapsed: true,
+            items: [
+              { text: '元数据自定义对象管理设计', link: '元数据自定义对象管理设计' },
+              { text: '自定义对象核心功能设计及实现', link: '自定义对象核心功能设计及实现' },
+            ]
+          },
           { text: 'admin-ui 管理界面', link: 'admin-ui 管理界面' },
           { text: 'yutool-user 用户🪦', link: 'yutool-user 用户' },
           { text: 'yutool-org 组织架构🪦', link: 'yutool-org 组织架构' },
@@ -491,6 +484,14 @@ const sidebar = {
           { text: 'yutool-auth 认证授权🪦', link: 'yutool-auth 认证授权' },
           { text: 'yutool-notify 通知消息🪦', link: 'yutool-notify 通知消息' },
           { text: 'yutool-casdoor 对接Casdoor🪦', link: 'yutool-casdoor 对接Casdoor' },
+        ]
+      },
+      {
+        text: 'yutool-cli高效工作套件',
+        base: '/个人项目/yutool-cli高效工作套件/',
+        items: [
+          { text: 'yutool-cli功能清单', link: 'yutool-cli功能清单' },
+          { text: 'yutool-cli运营模式', link: 'yutool-cli运营模式' },
         ]
       },
       {
