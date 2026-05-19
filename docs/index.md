@@ -34,3 +34,12 @@ features:
     details: 滴水穿石，时光成诗
 ---
 
+<script setup>
+import {useData} from 'vitepress'
+const {theme} = useData()
+</script>
+
+<LinkCardGroup style="margin-top: 4rem" :data="[{
+  text: '近期更新',
+  items: (theme?.posts ?? []).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 12)
+}]"/>

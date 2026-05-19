@@ -1,13 +1,14 @@
 // @ts-nocheck
-import { defineConfig } from 'vitepress'
-import taskList from 'markdown-it-task-checkbox'
-import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import markdownItVideo from '@vrcd-community/markdown-it-video'
+import mdItCustomAttrs from 'markdown-it-custom-attrs'
+import taskList from 'markdown-it-task-checkbox'
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+import { defineConfig } from 'vitepress'
 import nav from './config/nav'
 import sidebar from './config/sidebar'
+import { addPost } from './theme/utils/posts'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -153,7 +154,10 @@ export default defineConfig({
     notFound: {
       quote: '众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。',
       linkText: '返回主页'
-    }
+    },
+
+    // 带有文章封面、最近更新时间信息的全站文章数据，可用于首页按需展示
+    posts: []
   },
   markdown: {
     theme: { light: 'slack-ochin', dark: 'monokai' },
@@ -180,5 +184,8 @@ export default defineConfig({
         resolvers: [ElementPlusResolver()]
       })
     ]
+  },
+  async transformPageData(pageData, { siteConfig }) {
+    addPost(pageData, siteConfig)
   }
 })
