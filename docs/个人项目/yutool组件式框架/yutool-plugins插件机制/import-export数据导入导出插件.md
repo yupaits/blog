@@ -1,7 +1,9 @@
 # import-export数据导入导出插件
 
+> [EasyExcel](https://github.com/alibaba/easyexcel)已停止更新，v1.4.2版本迁移至FastExcel进行过渡，待[FESOD](https://github.com/apache/fesod)孵化完成
+
 ## 实现原理
-基于easyexcel整合yutool-orm组件的基础能力，设计并开发了import-export数据导入导出插件。通过ImportTemplate和ExportTemplate模版工具类实现了一行代码实现导入导出功能。
+基于FastExcel整合yutool-orm组件的基础能力，设计并开发了import-export数据导入导出插件。通过ImportTemplate和ExportTemplate模版工具类实现了一行代码实现导入导出功能。
 
 - ImportTemplate模版方法：
 ```java
