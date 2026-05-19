@@ -1,7 +1,10 @@
 <template>
   <a class="linkcard no-icon" :href="option?.link" target="_blank">
-    <img :ref="getImgRefName(group?.label, option?.text)"
-      :style="{ height: option.imgHeight ?? group.imgHeight ?? '48px', minWidth: option.imgWidth ?? group.imgWidth ?? '48px' }" />
+    <img :ref="getImgRefName(group?.label, option?.text)" :style="{
+      height: option.imgHeight ?? group.imgHeight ?? '48px',
+      minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
+      maxWidth: option.imgMaxWidth ?? group.imgMaxWidth ?? '64px'
+    }" />
     <p class="description">
       <strong class="title" v-if="option?.text">{{ option?.text }}<br></strong>
       <span class="subtitle" v-html="option?.description" v-if="option?.description"></span>

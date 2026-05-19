@@ -15,7 +15,7 @@
 
 <script setup>
 import LinkCard from './LinkCard.vue'
-const { data, block, imgHeight, imgWidth } = defineProps(['data', 'block', 'imgHeight', 'imgWidth'])
+const { data, block, imgHeight, imgWidth, imgMaxWidth } = defineProps(['data', 'block', 'imgHeight', 'imgWidth', 'imgMaxWidth'])
 
 const isBlock = () => {
   return block === '' || (typeof block === 'boolean' && block)
@@ -26,7 +26,8 @@ const linkGroup = (groupItem) => {
     label: groupItem.text,
     type: groupItem.type,
     imgWidth: groupItem.imgWidth ?? imgWidth,
-    imgHeight: groupItem.imgHeight ?? imgHeight
+    imgHeight: groupItem.imgHeight ?? imgHeight,
+    imgMaxWidth: groupItem.imgMaxWidth ?? imgMaxWidth
   }
 }
 </script>
