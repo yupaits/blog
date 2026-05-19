@@ -432,12 +432,12 @@ const sidebar = {
               { text: 'history-data历史数据处理插件', link: 'history-data历史数据处理插件' },
               { text: 'import-export数据导入导出插件', link: 'import-export数据导入导出插件' },
               { text: 'cache-adapter缓存适配插件', link: 'cache-adapter缓存适配插件' },
-              { text: 'trace-analysis链路追踪插件🪦', link: 'trace-analysis链路追踪插件' },
               { text: 'native-mobile本地手机号登录插件🪦', link: 'native-mobile本地手机号登录插件' },
               { text: 'sms-reply-storage短信回复内容存储插件🪦', link: 'sms-reply-storage短信回复内容存储插件' },
               { text: 'sms-verify短信验证码插件🪦', link: 'sms-verify短信验证码插件' },
               { text: 'dynamic-thread-pool动态线程池管理插件🪦', link: 'dynamic-thread-pool动态线程池管理插件' },
               { text: 'multi-ds-tx多数据源事务插件🪦', link: 'multi-ds-tx多数据源事务插件' },
+              { text: 'trace-analysis链路追踪插件🪦', link: 'trace-analysis链路追踪插件' },
               { text: 'swagger-support Swagger接口文档插件🪦', link: 'swagger-support Swagger接口文档插件' },
               { text: 'jwt-helper JWT工具插件🪦', link: 'jwt-helper JWT工具插件' },
             ]
