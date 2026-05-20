@@ -1,10 +1,13 @@
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import timezone from 'dayjs/plugin/timezone'
 import fs from 'fs'
 import path from 'path'
 
 dayjs.extend(relativeTime).locale('zh-cn')
+dayjs.extend(timezone)
+dayjs.tz.setDefault('Asia/Shanghai')
 
 const dateFormat = "YYYY-MM-DD HH:mm"
 const imageRegex = /!\[.*?\]\((.*?)(?:\s+"[^"]*")?\)/
