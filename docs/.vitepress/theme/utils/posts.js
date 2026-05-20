@@ -11,6 +11,10 @@ const imageRegex = /!\[.*?\]\((.*?)(?:\s+"[^"]*")?\)/
 
 export const addPost = (pageData, siteConfig) => {
   const relativePath = pageData.relativePath
+  //网站首页不记录在近期更新文章中
+  if (relativePath === 'index.md') {
+    return
+  }
   const date = pageData.lastUpdated
   const content = fs.readFileSync(path.resolve(siteConfig.root, pageData.relativePath), 'utf-8')
   siteConfig.site.themeConfig.posts.push({
