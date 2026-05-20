@@ -5,7 +5,11 @@
       <div class="card-container">
         <div class="card-group">
           <template v-for="item in group.items">
-            <LinkCard :group="linkGroup(group)" :option="item" :class="{ 'block': isBlock() }" />
+            <LinkCard :group="linkGroup(group)" :option="item" :class="{ 'block': isBlock() }">
+              <template v-slot:description v-if="item?.description?.name">
+                <component :is="item?.description?.name" v-bind="item.description?.props" />
+              </template>
+            </LinkCard>
           </template>
         </div>
       </div>

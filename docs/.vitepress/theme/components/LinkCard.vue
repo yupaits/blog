@@ -6,8 +6,12 @@
       maxWidth: option.imgMaxWidth ?? group.imgMaxWidth ?? '64px'
     }" />
     <p class="description">
-      <strong class="title" v-if="option?.text">{{ option?.text }}<br></strong>
-      <span class="subtitle" v-html="option?.description" v-if="option?.description"></span>
+      <strong class="title" v-if="option?.text">{{ option?.text }}</strong>
+      <br>
+      <span class="subtitle" v-if="$slots.description">
+        <slot name="description"></slot>
+      </span>
+      <span class="subtitle" v-html="option.description" v-else />
     </p>
   </a>
 </template>
