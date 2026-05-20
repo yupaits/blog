@@ -10,8 +10,12 @@ const dateFormat = "YYYY-MM-DD HH:mm"
 const imageRegex = /!\[.*?\]\((.*?)(?:\s+"[^"]*")?\)/
 
 export const addPost = (pageData, siteConfig) => {
+  //草稿状态的文章不记录
+  if (pageData.frontmatter.draft === true) {
+    return
+  }
   const relativePath = pageData.relativePath
-  //网站首页不记录在近期更新文章中
+  //网站首页不记录
   if (relativePath === 'index.md') {
     return
   }
