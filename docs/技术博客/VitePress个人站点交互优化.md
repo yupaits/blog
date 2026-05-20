@@ -1501,3 +1501,126 @@ export default defineConfig({
 
 - [ ] 待办项
 - [x] 已完成
+
+### 首页近期更新文章展示
+
+默认主题无法有效获取最近更新了哪些文章的信息，所以开发了在首页展示近期更新文章的功能，效果如下。
+
+![首页近期文章展示](/images/技术博客/VitePress个人站点交互优化/首页近期文章展示.png)
+
+该功能具体的实现代码为：
+
+::: code-group
+```js [.vitepress/config.mjs]
+import { addPost } from './theme/utils/posts'
+
+export default defineConfig({
+  themeConfig: {
+    // 带有文章封面、最近更新时间信息的全站文章数据，可用于首页按需展示
+    posts: []
+  },
+  async transformPageData(pageData, { siteConfig }) {
+    addPost(pageData, siteConfig)
+  }
+})
+```
+
+```js [.vitepress/theme/utils/posts.js]
+import fs from 'fs'
+import path from 'path'
+
+const imageRegex = /!\[.*?\]\((.*?)(?:\s+"[^"]*")?\)/
+
+export const addPost = (pageData, siteConfig) => {
+  //草稿状态的文章不记录
+  if (pageData.frontmatter.draft === true) {
+    return
+  }
+  const relativePath = pageData.relativePath
+  //网站首页不记录
+  if (relativePath === 'index.md') {
+    return
+  }
+  const date = pageData.lastUpdated
+  const content = fs.readFileSync(path.resolve(siteConfig.root, pageData.relativePath), 'utf-8')
+  siteConfig.site.themeConfig.posts.push({
+    text: getPostTitle(pageData.title, relativePath),
+    description: { name: 'PostDate', props: { date: date } },
+    link: `/${relativePath.replace(/\.md$/, '').replace(/\\/g, '/')}`,
+    date: date,
+    icon: getPostImage(content, relativePath)
+  })
+}
+
+const getPostTitle = (title, relativePath) => {
+  const basename = path.basename(relativePath, '.md')
+  if (basename === 'index') {
+    return path.dirname(relativePath)
+  }
+  if (title && title !== '') {
+    return title
+  }
+  return basename
+}
+
+const getPostImage = (content, relativePath) => {
+  const match = content.match(imageRegex)
+  return match ? match[1] : '/home/post.png'
+}
+```
+
+```vue [.vitepress/theme/components/PostDate.vue]
+<template>
+  <span :title="dayjs(date).tz(tz).format(dateFormat)">{{ dayjs(date).fromNow() }}</span>
+</template>
+
+<script setup>
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
+import { defineProps } from 'vue'
+
+dayjs.extend(relativeTime).extend(utc).extend(timezone).locale('zh-cn')
+
+const tz = 'Asia/Shanghai'
+const dateFormat = "YYYY-MM-DD HH:mm"
+const { date } = defineProps(['date'])
+</script>
+```
+
+```js [.vitepress/theme/index.js]
+import DefaultTheme from 'vitepress/theme'
+import MyLayout from './MyLayout.vue'
+import PostDate from './components/PostDate.vue'
+
+export default {
+  extends: DefaultTheme,
+  Layout: MyLayout,
+  enhanceApp({ app }) {
+    app.component('PostDate', PostDate)
+  }
+}
+```
+
+```md [index.md]
+---
+# https://vitepress.dev/reference/default-theme-home-page
+layout: home
+---
+
+<script setup>
+import {useData} from 'vitepress'
+const {theme} = useData()
+</script>
+
+<LinkCardGroup style="margin-top: 4rem" :data="[{
+  text: '近期更新',
+  items: (theme?.posts ?? []).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 12)
+}]"/>
+
+```
+:::
+
+代码示例中`index.md`选取了最近更新的`12`篇文章进行展示，该数量可以通过修改`slice(0, 12)`中的数字按需进行调整。
