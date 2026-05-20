@@ -116,7 +116,7 @@ public class ProxyFilter {
 
 页面功能主要由JavaScript实现，我们选择Vue前端框架，最终实现效果如下：
 
-![](/images/软件开发/编程基础/开发语言/Java教程/Spring Cloud开发/编写UI/1708686566226-93fde314-3b87-49b7-95ba-772a169b7dd6.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring%20Cloud开发/编写UI/1708686566226-93fde314-3b87-49b7-95ba-772a169b7dd6.png)
 
 最后，在后台注册时，如果检测到本地开发环境，就自动调用内部API给用户添加一些资产，否则新注册用户无法交易。
 ### 小结
