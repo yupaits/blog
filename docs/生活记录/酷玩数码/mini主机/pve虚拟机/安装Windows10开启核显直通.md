@@ -9,7 +9,7 @@
 - virtio-win.iso驱动包（[下载地址](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/)）
 - 核显直通rom文件（可以在github上搜索下载，或是在部分硬件厂商的用户QQ群资料中获取）
 
-![win10镜像virtio-win驱动](./安装Windows10开启核显直通/win10镜像virtio-win驱动.png)
+![win10镜像virtio-win驱动](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装Windows10开启核显直通/win10镜像virtio-win驱动.png)
 
 ## 安装过程
 
@@ -21,7 +21,7 @@
 
 1. 启用IOMMU支持
 
-![开启iommu](./安装Windows10开启核显直通/开启iommu.png)
+![开启iommu](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装Windows10开启核显直通/开启iommu.png)
 
 进入pve系统的Shell环境，编辑`/etc/default/grub`文件，在`GRUB_CMDLINE_LINUX_DEFAULT`参数中添加`intel_iommu=on`。
 
@@ -29,7 +29,7 @@
 
 2. 添加驱动黑名单
 
-![设置驱动黑名单](./安装Windows10开启核显直通/设置驱动黑名单.png)
+![设置驱动黑名单](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装Windows10开启核显直通/设置驱动黑名单.png)
 
 编辑`/etc/modprobe.d/pve-blacklist.conf`文件，添加以下内容以屏蔽核显驱动和HDMI声卡驱动：
 
@@ -46,7 +46,7 @@ blacklist nvidiafb
 
 4. 编辑win10虚拟机配置文件
 
-![win10虚拟机核显直通配置](./安装Windows10开启核显直通/win10虚拟机核显直通配置.png)
+![win10虚拟机核显直通配置](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装Windows10开启核显直通/win10虚拟机核显直通配置.png)
 
   - 编辑`/etc/pve/qemu-server/103.conf`（103是win10虚拟机的编号，按需替换成实际编号），在文件头部添加以下内容：
 
@@ -63,7 +63,7 @@ blacklist nvidiafb
 
   - 在win10虚拟机的`硬件`中，将`显示`的显卡项设置为`无`。
 
-  ![win10虚拟机显示设置](./安装Windows10开启核显直通/win10虚拟机显示设置.png)
+  ![win10虚拟机显示设置](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装Windows10开启核显直通/win10虚拟机显示设置.png)
 
 使用HDMI线连接mini主机和显示器，就可以开始安装win10系统了。除了核显直通外，如果想使用键盘、鼠标、音响等设备或是连接WiFi，则还需要将USB接口、音频接口及无线网卡等设备直通给win10虚拟机。
 

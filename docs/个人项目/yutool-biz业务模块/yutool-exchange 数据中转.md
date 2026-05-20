@@ -147,7 +147,7 @@
 ## 数据中转流程
 ### Rest接口
 
-![](./yutool-exchange%20数据中转/1669434607132-c757f7f1-14d0-45c9-93ce-5499839a9213.jpeg)
+![](/images/个人项目/yutool-biz业务模块/yutool-exchange%20数据中转/1669434607132-c757f7f1-14d0-45c9-93ce-5499839a9213.jpeg)
 
 **扩展点：**
 
@@ -163,7 +163,7 @@
    - onFail回调
 ### Rest接口批量
 
-![](./yutool-exchange%20数据中转/1669438614690-9563df60-0cb4-4d24-bbfc-0bdcb65ba4b3.jpeg)
+![](/images/个人项目/yutool-biz业务模块/yutool-exchange%20数据中转/1669438614690-9563df60-0cb4-4d24-bbfc-0bdcb65ba4b3.jpeg)
 
 **扩展点：**
 

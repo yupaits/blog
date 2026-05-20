@@ -250,7 +250,7 @@ public static void main(String[] args) throws Exception {
 ```
 上述Web应用程序就是我们使用Spring MVC时的一个最小启动功能集。由于使用了JDBC和数据库，用户的注册、登录信息会被持久化：
 
-![](./开发Web应用/1656255113063-94cf5485-8fce-4c04-9c24-556d045bc663.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255113063-94cf5485-8fce-4c04-9c24-556d045bc663.png)
 
 #### 编写Controller
 
@@ -408,7 +408,7 @@ public class ApiController {
 ```
 编写REST接口只需要定义`@RestController`，然后，每个方法都是一个API接口，输入和输出只要能被Jackson序列化或反序列化为JSON就没有问题。我们用浏览器测试GET请求，可直接显示JSON响应：
 
-![](./开发Web应用/1656255123001-6109189c-16ae-488c-a5fd-67914b247edd.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255123001-6109189c-16ae-488c-a5fd-67914b247edd.png)
 
 要测试POST请求，可以用curl命令：
 ```bash
@@ -822,7 +822,7 @@ public class UserController {
 
 注意到我们返回了一个新的`ModelAndView`，这样在应用程序内部如果发生了预料之外的异常，可以给用户显示一个出错页面，而不是简单的500 Internal Server Error或404 Not Found。例如B站的错误页：
 
-![](./开发Web应用/1656255140897-b9c7c7f5-7ef5-47c9-81cf-8391ffa27608.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255140897-b9c7c7f5-7ef5-47c9-81cf-8391ffa27608.png)
 
 可以编写多个错误处理方法，每个方法针对特定的异常。例如，处理`LoginException`使得页面可以自动跳转到登录页。
 
@@ -905,7 +905,7 @@ $.getJSON( "http://local.liaoxuefeng.com:8080/api/users", (data) => console.log(
 ```
 上述源站的域是`http://localhost:8080`，跨域访问的是`http://local.liaoxuefeng.com:8080`，因为配置的CORS不允许`localhost`访问，所以不出意外地得到一个错误：
 
-![](./开发Web应用/1656255150333-8a835998-70cb-448f-a26c-66e6a9bd7887.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255150333-8a835998-70cb-448f-a26c-66e6a9bd7887.png)
 
 浏览题打印了错误原因就是`been blocked by CORS policy`。
 
@@ -915,7 +915,7 @@ $.getJSON( "http://localhost:8080/api/users", (data) => console.log(JSON.stringi
 ```
 因为CORS规则允许来自`http://local.liaoxuefeng.com:8080`的访问，因此访问成功，打印出API的返回值：
 
-![](./开发Web应用/1656255150342-3d630f0e-a788-4d9e-a644-c6b80fa19161.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255150342-3d630f0e-a788-4d9e-a644-c6b80fa19161.png)
 
 #### 小结
 
@@ -1141,11 +1141,11 @@ public class LocaleController {
 ```
 在页面设计中，通常在右上角给用户提供一个语言选择列表，来看看效果：
 
-![](./开发Web应用/1656255277350-b9204401-981a-4063-9f2c-a3d994084268.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255277350-b9204401-981a-4063-9f2c-a3d994084268.png)
 
 切换到中文：
 
-![](./开发Web应用/1656255277327-ba72c48d-c473-4a6d-92cb-a8fb90ace4e2.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255277327-ba72c48d-c473-4a6d-92cb-a8fb90ace4e2.png)
 
 #### 小结
 
@@ -1239,11 +1239,11 @@ public DeferredResult<User> user(@PathVariable("id") long id) {
 
 运行程序，当我们访问`http://localhost:8080/api/users/1`时，假定用户存在，则浏览器在1秒后返回结果：
 
-![](./开发Web应用/1656255289306-d894420f-fc3e-4708-a625-91fdb40fd140.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255289306-d894420f-fc3e-4708-a625-91fdb40fd140.png)
 
 访问一个不存在的User ID，则等待1秒后返回错误结果：
 
-![](./开发Web应用/1656255289308-4c66fc18-efb5-4ece-9ba2-7c5a58e44384.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255289308-4c66fc18-efb5-4ece-9ba2-7c5a58e44384.png)
 
 #### 使用Filter
 
@@ -1475,7 +1475,7 @@ window.chatWs.send(JSON.stringify({text: inputText}));
 ```
 最后，连调浏览器和服务器端，如果一切无误，可以开多个不同的浏览器测试WebSocket的推送和广播：
 
-![](./开发Web应用/1656255308125-e4e6949a-3f72-46a3-91fc-ad671a805f3a.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Spring开发/开发Web应用/1656255308125-e4e6949a-3f72-46a3-91fc-ad671a805f3a.png)
 
 和上一节我们介绍的异步处理类似，Servlet的线程模型并不适合大规模的长链接。基于NIO的Netty等框架更适合处理WebSocket长链接，我们将在后面介绍。
 

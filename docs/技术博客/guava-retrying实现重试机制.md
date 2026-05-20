@@ -84,7 +84,7 @@ try {
 ### RetryerBuilder 方法介绍
 RetryerBuilder 用于构造重试器，是整个 guava-retrying 库的核心，决定了重试的行为，下面详细介绍 RetryerBuilder 的方法。
 
-![image.png](./guava-retrying实现重试机制/1669083898826-f172cdde-aadc-49a2-a637-31159a743400.png)
+![image.png](/images/技术博客/guava-retrying实现重试机制/1669083898826-f172cdde-aadc-49a2-a637-31159a743400.png)
 
 通过 newBuilder 方法获取 RetryerBuilder 实例，通过 build 方法构造 Retryer：
 ```java

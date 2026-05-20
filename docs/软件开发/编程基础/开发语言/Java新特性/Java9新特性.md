@@ -52,7 +52,7 @@ JShell 的代码和普通的可编译代码，有什么不一样？
 
 任意一个 jar 文件，只要加上一个模块描述文件（`module-info.java`），就可以升级为一个模块。
 
-![module-structure](./Java9新特性/module-structure.png)
+![module-structure](/images/软件开发/编程基础/开发语言/Java新特性/Java9新特性/module-structure.png)
 
 在引入了模块系统之后，JDK 被重新组织成 94 个模块。Java 应用可以通过新增的 [jlink](http://openjdk.java.net/jeps/282) 工具 (Jlink 是随 Java 9 一起发布的新命令行工具。它允许开发人员为基于模块的 Java 应用程序创建自己的轻量级、定制的 JRE)，创建出只包含所依赖的 JDK 模块的自定义运行时镜像。这样可以极大的减少 Java 运行时环境的大小。
 
@@ -224,7 +224,7 @@ System.out.println(currentProcess.info());
 
 `ProcessHandle` 接口概览：
 
-![posthanlder](./Java9新特性/posthanlder.png)
+![posthanlder](/images/软件开发/编程基础/开发语言/Java新特性/Java9新特性/posthanlder.png)
 
 ## 响应式流（Reactive Streams）
 

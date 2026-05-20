@@ -151,7 +151,7 @@ Tomcat started.
 ```
 在浏览器输入`http://localhost:8080/hello/`即可看到`HelloServlet`的输出：
 
-![](./Servlet开发/1656259478124-07b5a84c-5d92-4356-aaa9-002751cc67d4.jpeg)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259478124-07b5a84c-5d92-4356-aaa9-002751cc67d4.jpeg)
 
 细心的童鞋可能会问，为啥路径是`/hello/`而不是`/`？因为一个Web服务器允许同时运行多个Web App，而我们的Web App叫`hello`，因此，第一级目录`/hello`表示Web App的名字，后面的`/`才是我们在`HelloServlet`中映射的路径。
 
@@ -204,9 +204,9 @@ Web应用程序必须按固定结构组织并打包为`.war`文件；
 
 这个过程是不是很繁琐？如果我们想在IDE中断点调试，还需要打开Tomcat的远程调试端口并且连接上去。
 
-![](./Servlet开发/1656259487710-b4c0d76b-4e0c-496e-bf44-af9cee7674a5.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259487710-b4c0d76b-4e0c-496e-bf44-af9cee7674a5.png)
 
-![](./Servlet开发/1656259487713-222c2884-d4c9-480e-bdee-bcdd743d36ec.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259487713-222c2884-d4c9-480e-bdee-bcdd743d36ec.png)
 
 许多初学者经常卡在如何在IDE中启动Tomcat并加载webapp，更不要说断点调试了。
 
@@ -296,7 +296,7 @@ public class Main {
 ```
 这样，我们直接运行`main()`方法，即可启动嵌入式Tomcat服务器，然后，通过预设的`tomcat.addWebapp("", new File("src/main/webapp")`，Tomcat会自动加载当前工程作为根webapp，可直接在浏览器访问`http://localhost:8080/`：
 
-![](./Servlet开发/1656259487685-b3649bdb-07f5-42f8-a7af-20982dced188.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259487685-b3649bdb-07f5-42f8-a7af-20982dced188.png)
 
 通过`main()`方法启动Tomcat服务器并加载我们自己的webapp有如下好处：
 
@@ -506,7 +506,7 @@ Location: /hello
 ```
 观察Chrome浏览器的网络请求，可以看到两次HTTP请求：
 
-![](./Servlet开发/1656259598096-c0672a7f-b9fe-44ea-b51d-1c3b92ae8cda.jpeg)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259598096-c0672a7f-b9fe-44ea-b51d-1c3b92ae8cda.jpeg)
 
 并且浏览器的地址栏路径自动更新为`/hello`。
 
@@ -554,7 +554,7 @@ req.getRequestDispatcher("/hello").forward(req, resp);
 ```
 转发和重定向的区别在于，转发是在Web服务器内部完成的，对浏览器来说，它只发出了一个HTTP请求：
 
-![](./Servlet开发/1656259598075-2508448b-69a7-490a-b5de-727f2c92a4fd.jpeg)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259598075-2508448b-69a7-490a-b5de-727f2c92a4fd.jpeg)
 
 注意到使用转发的时候，浏览器的地址栏路径仍然是`/morning`，浏览器并不知道该请求在Web服务器内部实际上做了一次转发。
 
@@ -667,7 +667,7 @@ public class SignOutServlet extends HttpServlet {
 ```
 而服务器识别Session的关键就是依靠一个名为`JSESSIONID`的Cookie。在Servlet中第一次调用`req.getSession()`时，Servlet容器自动创建一个Session ID，然后通过一个名为`JSESSIONID`的Cookie发送给浏览器：
 
-![](./Servlet开发/1656259619422-ee15e237-44b7-48dd-a5ab-c9566c96e7fc.jpeg)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259619422-ee15e237-44b7-48dd-a5ab-c9566c96e7fc.jpeg)
 
 这里要注意的几点是：
 
@@ -745,7 +745,7 @@ public class LanguageServlet extends HttpServlet {
 
 我们可以在浏览器看到服务器发送的Cookie：
 
-![](./Servlet开发/1656259619319-049d63c3-0df7-42b2-94fb-3d5c4bc8049d.jpeg)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/Servlet开发/1656259619319-049d63c3-0df7-42b2-94fb-3d5c4bc8049d.jpeg)
 
 如果我们要读取Cookie，例如，在`IndexServlet`中，读取名为`lang`的Cookie以获取用户设置的语言，可以写一个方法如下：
 ```java

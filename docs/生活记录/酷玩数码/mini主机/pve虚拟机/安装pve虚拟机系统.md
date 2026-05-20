@@ -8,7 +8,7 @@
 
 进入[pve系统镜像的下载页面](https://www.proxmox.com/en/downloads/proxmox-virtual-environment/iso)，选择并下载最新版本的ISO镜像。我在安装pve的时候最新版本是8.2-2。
 
-![下载pve系统镜像](./安装pve虚拟机系统/下载pve系统镜像.png)
+![下载pve系统镜像](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装pve虚拟机系统/下载pve系统镜像.png)
 
 ## 制作安装U盘
 
@@ -30,19 +30,19 @@
 
 完成安装后，使用网线连接**安装时选择的mini主机网卡网口**和管理电脑（另外一台电脑）的网口，在管理电脑的浏览器中输入`http://[pve系统IP]:8006`进入pve管理页面，pve系统IP需要填写为设置的IP。使用`root`用户名和设置的管理员密码即可登录。
 
-![登录pve管理页面](./安装pve虚拟机系统/登录pve管理页面.png)
+![登录pve管理页面](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装pve虚拟机系统/登录pve管理页面.png)
 
 登录之后可以在右上角的用户菜单里设置语言和主题颜色。
 
-![设置语言和主题颜色](./安装pve虚拟机系统/设置语言和主题颜色.png)
+![设置语言和主题颜色](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装pve虚拟机系统/设置语言和主题颜色.png)
 
 在`pve -> 系统 -> 网络`中可以看到，**安装时选择的mini主机网卡**已经自动完成了桥接。
 
-![pve网络](./安装pve虚拟机系统/pve网络.png)
+![pve网络](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装pve虚拟机系统/pve网络.png)
 
 在`pve -> 系统 -> DNS`中填写有效的DNS地址，以便后续步骤能正常进行。
 
-![pve系统DNS设置](./安装pve虚拟机系统/pve系统DNS设置.png)
+![pve系统DNS设置](/images/生活记录/酷玩数码/mini主机/pve虚拟机/安装pve虚拟机系统/pve系统DNS设置.png)
 
 此时，pve系统还无法正常联网使用，建议在安装并配置爱快软路由，系统能够正常联网之后使用[pve_source工具](https://bbs.x86pi.cn/thread?topicId=20)对pve进行更多优化。
 

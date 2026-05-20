@@ -370,7 +370,7 @@ provide('toggle-appearance', async ({ x, y }) => {
 
 ### BackToTop 回到顶部
 
-![backtotop](./VitePress个人站点交互优化/backtotop.png)
+![backtotop](/images/技术博客/VitePress个人站点交互优化/backtotop.png)
 
 ::: code-group
 ```vue [.vitepress/theme/components/BackToTop.vue]
@@ -540,7 +540,7 @@ const { Layout } = DefaultTheme
 
 ### PageCopyright 版权声明
 
-![pagecopyright](./VitePress个人站点交互优化/pagecopyright.png)
+![pagecopyright](/images/技术博客/VitePress个人站点交互优化/pagecopyright.png)
 
 ::: code-group
 ```vue [.vitepress/theme/components/PageCopyright.vue]
@@ -644,7 +644,7 @@ const hasComment = computed(() => {
 
 ### PageMetadata 文章信息
 
-![pagemetadata](./VitePress个人站点交互优化/pagemetadata.png)
+![pagemetadata](/images/技术博客/VitePress个人站点交互优化/pagemetadata.png)
 
 安装dayjs依赖：
 
@@ -792,7 +792,7 @@ const hideWm = computed(() => {
 
 ### CommentRule 评论区准则
 
-![commentrule](./VitePress个人站点交互优化/commentrule.png)
+![commentrule](/images/技术博客/VitePress个人站点交互优化/commentrule.png)
 
 ::: code-group
 ```vue [.vitepress/theme/components/CommentRule.vue]
@@ -846,7 +846,7 @@ const hasComment = computed(() => {
 
 ### Progress 进度条
 
-![progress](./VitePress个人站点交互优化/progress.png)
+![progress](/images/技术博客/VitePress个人站点交互优化/progress.png)
 
 Progress进度条组件在文章正文中也有使用到，因此需要在`.vitepress/theme/index.js`中注册。
 
@@ -926,7 +926,7 @@ export default {
 
 ### DraftAnnounce 草稿声明
 
-![draftannounce](./VitePress个人站点交互优化/draftannounce.png)
+![draftannounce](/images/技术博客/VitePress个人站点交互优化/draftannounce.png)
 
 在文档的`frontmatter`中可以声明草稿、是否启用预览，以及设置文章撰写进度。
 
@@ -1138,7 +1138,7 @@ const hasComment = computed(() => {
 
 ### 五彩纸屑
 
-![canfetti](./VitePress个人站点交互优化/canfetti.png)
+![canfetti](/images/技术博客/VitePress个人站点交互优化/canfetti.png)
 
 安装依赖：
 
@@ -1253,7 +1253,7 @@ const isHome = computed(() => {
 
 完成之后的效果如下：
 
-![visitor](./VitePress个人站点交互优化/visitor.png)
+![visitor](/images/技术博客/VitePress个人站点交互优化/visitor.png)
 
 ### BProgress加载进度条
 
@@ -1355,7 +1355,7 @@ export default {
 
 完成之后的效果如下：
 
-![giscus](./VitePress个人站点交互优化/giscus.png)
+![giscus](/images/技术博客/VitePress个人站点交互优化/giscus.png)
 
 ## 其他
 
@@ -1436,7 +1436,7 @@ watch(
 
 不少文章都推荐参考[vitepress issue#854](https://github.com/vuejs/vitepress/issues/854)的方案使用medium-zoom来实现图片缩放，但其实有更优雅的方式，那就是使用Fancybox。
 
-![fancybox](./VitePress个人站点交互优化/fancybox.png)
+![fancybox](/images/技术博客/VitePress个人站点交互优化/fancybox.png)
 
 安装依赖：
 

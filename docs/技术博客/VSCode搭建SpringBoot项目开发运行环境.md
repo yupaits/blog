@@ -10,7 +10,7 @@ JetBrains的IDEA作为当前最受Java开发者青睐的开发工具之一，确
 
 1. Extension Pack for Java
   
-    ![ExtensionPackForJava插件](./VSCode搭建SpringBoot项目开发运行环境/ExtensionPackForJava插件.png)
+    ![ExtensionPackForJava插件](/images/技术博客/VSCode搭建SpringBoot项目开发运行环境/ExtensionPackForJava插件.png)
 
     该插件是一个集合包，会将以下6个插件打包进行安装：
 
@@ -24,7 +24,7 @@ JetBrains的IDEA作为当前最受Java开发者青睐的开发工具之一，确
 
 2. Spring Boot Extension Pack
 
-    ![SpringBootExtensionPack插件](./VSCode搭建SpringBoot项目开发运行环境/SpringBootExtensionPack插件.png)
+    ![SpringBootExtensionPack插件](/images/技术博客/VSCode搭建SpringBoot项目开发运行环境/SpringBootExtensionPack插件.png)
 
     该插件同样也是一个集合包，会打包安装以下3个插件：
 
@@ -56,14 +56,14 @@ JetBrains的IDEA作为当前最受Java开发者青睐的开发工具之一，确
 
 使用VS Code打开Spring Boot项目目录，等待`Spring Boot Dashboard`完成项目扫描之后，进入到`Application`类，选择Run（运行）或者Debug（调试）即可启动项目。
 
-![启动SpringBoot项目](./VSCode搭建SpringBoot项目开发运行环境/启动SpringBoot项目.png)
+![启动SpringBoot项目](/images/技术博客/VSCode搭建SpringBoot项目开发运行环境/启动SpringBoot项目.png)
 
 图中的两个位置都可以点击启动。启动后，控制台会打印日志信息。
 
-![控制台日志](./VSCode搭建SpringBoot项目开发运行环境/控制台日志.png)
+![控制台日志](/images/技术博客/VSCode搭建SpringBoot项目开发运行环境/控制台日志.png)
 
 ## 断点调试示例
 
 使用Debug（调试）模式启动项目后，可以使用VS Code自带的**运行和调试**功能在打断点的地方进行代码调试。
 
-![代码调试](./VSCode搭建SpringBoot项目开发运行环境/代码调试.png)
+![代码调试](/images/技术博客/VSCode搭建SpringBoot项目开发运行环境/代码调试.png)

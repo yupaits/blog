@@ -86,11 +86,11 @@ Buffer有3个重要的属性
 0 <= position <= limit <= capacity
 初始状态：
 
-![nio-buffer-1.png](./NIO模型/1658848624510-68f9dcf2-9aef-4120-bfe6-28548cfcd564.png)
+![nio-buffer-1.png](/images/软件开发/编程基础/常用算法/NIO模型/1658848624510-68f9dcf2-9aef-4120-bfe6-28548cfcd564.png)
 
 从Channel中读入5个字到ByteBuffer：
 
-![nio-buffer-2.png](./NIO模型/1658848628127-396acc72-85ae-4f59-8235-1ea125a811dc.png)
+![nio-buffer-2.png](/images/软件开发/编程基础/常用算法/NIO模型/1658848628127-396acc72-85ae-4f59-8235-1ea125a811dc.png)
 
 flip()，准备写入或输出：
 ```java
@@ -102,11 +102,11 @@ public final Buffer flip() {
 }
 ```
 
-![nio-buffer-3.png](./NIO模型/1658848633396-031377b7-6d58-4573-93ae-4a656bf89ca0.png)
+![nio-buffer-3.png](/images/软件开发/编程基础/常用算法/NIO模型/1658848633396-031377b7-6d58-4573-93ae-4a656bf89ca0.png)
 
 输出内容后，position就移动到跟limit相同的位置上：
 
-![nio-buffer-4.png](./NIO模型/1658848636212-807732bd-de83-4d53-8bb0-549b0a8e426c.png)
+![nio-buffer-4.png](/images/软件开发/编程基础/常用算法/NIO模型/1658848636212-807732bd-de83-4d53-8bb0-549b0a8e426c.png)
 
 ByteBuffer如果要重复利用，需要清理，position和limit回到初始状态时的位置，然后可以接着中这个Buffer来读写数据，不需要再new新的Buffer：
 ```java
@@ -118,7 +118,7 @@ public final Buffer clear() {
 }
 ```
 
-![nio-buffer-5.png](./NIO模型/1658848652678-b70ab1cc-a744-4f57-b307-30f444e82e90.png)
+![nio-buffer-5.png](/images/软件开发/编程基础/常用算法/NIO模型/1658848652678-b70ab1cc-a744-4f57-b307-30f444e82e90.png)
 
 ## Netty框架
 ### 优点

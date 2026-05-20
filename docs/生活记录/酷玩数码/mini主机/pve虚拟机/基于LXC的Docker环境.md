@@ -4,25 +4,25 @@
 
 Alpine Linux是一个面向安全，轻量级的基于musl libc与busybox项目的Linux发行版。这里选择Alpine Linux系统容器作为Docker的宿主系统。
 
-![下载apline容器模板](./基于LXC的Docker环境/下载apline容器模板.png)
+![下载apline容器模板](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/下载apline容器模板.png)
 
 下载alpine的CT模板之后，创建CT容器。
 
-![创建LXC容器-1](./基于LXC的Docker环境/创建LXC容器-1.png)
+![创建LXC容器-1](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/创建LXC容器-1.png)
 
-![创建LXC容器-2](./基于LXC的Docker环境/创建LXC容器-2.png)
+![创建LXC容器-2](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/创建LXC容器-2.png)
 
-![创建LXC容器-3](./基于LXC的Docker环境/创建LXC容器-3.png)
+![创建LXC容器-3](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/创建LXC容器-3.png)
 
-![创建LXC容器-4](./基于LXC的Docker环境/创建LXC容器-4.png)
+![创建LXC容器-4](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/创建LXC容器-4.png)
 
-![创建LXC容器-5](./基于LXC的Docker环境/创建LXC容器-5.png)
+![创建LXC容器-5](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/创建LXC容器-5.png)
 
-![创建LXC容器-6](./基于LXC的Docker环境/创建LXC容器-6.png)
+![创建LXC容器-6](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/创建LXC容器-6.png)
 
 创建完成后，进入`选项`，双击`功能`，启用嵌套、NFS、SMB/CIFS和FUSE。
 
-![启用LXC容器特权功能](./基于LXC的Docker环境/启用LXC容器特权功能.png)
+![启用LXC容器特权功能](/images/生活记录/酷玩数码/mini主机/pve虚拟机/基于LXC的Docker环境/启用LXC容器特权功能.png)
 
 进入`pve -> Shell`，输入`nano /etc/pve/lxc/102.conf`（102为alpine容器编号，按需替换成实际编号）设置apline LXC的权限，在文件底部追加以下两行配置信息并保存文件：
 

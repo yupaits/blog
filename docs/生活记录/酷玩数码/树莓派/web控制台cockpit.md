@@ -31,17 +31,17 @@ server {
 
 在浏览器访问`https://cockpit.pi.com:9090/`可进入cockpit的登录页面。
 
-![image.png](./web控制台cockpit/1667709668371-260a3c91-a2e9-478d-b57d-5b9345594d0f.png)
+![image.png](/images/生活记录/酷玩数码/树莓派/web控制台cockpit/1667709668371-260a3c91-a2e9-478d-b57d-5b9345594d0f.png)
 
 输入可登录树莓派系统的账户密码后，进入管理界面。
 
-![image.png](./web控制台cockpit/1667710876812-04b95a10-8fe5-464d-b647-a266a4a02cf7.png)
+![image.png](/images/生活记录/酷玩数码/树莓派/web控制台cockpit/1667710876812-04b95a10-8fe5-464d-b647-a266a4a02cf7.png)
 ## 启用网络模块
 cockpit的网络模块依赖NetworkManager服务，如果没有安装，在首次进入页面时会提示启用NetworkManager。启用之后如果出现树莓派网络连接失败的情况，需要进行如下处理：
 
 进入控制台输入`sudo raspi-config`，选择`Advanced Options`->`Network Config`->`NetworkManager`并确定，启用NetworkManager管理网络。
 
-![image.png](./web控制台cockpit/1667712317469-2e94fedd-9a95-4d79-bda8-88250a2d96d0.png)
+![image.png](/images/生活记录/酷玩数码/树莓派/web控制台cockpit/1667712317469-2e94fedd-9a95-4d79-bda8-88250a2d96d0.png)
 
 如果使用WiFi连接网络，需要手动设置一次WiFi并连接，之后开机会自动连接WiFi网络。手动设置WiFi连接命令
 

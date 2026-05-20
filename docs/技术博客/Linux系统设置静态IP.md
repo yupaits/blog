@@ -3,11 +3,11 @@
 在日常工作中，常常会由于动态IP分配导致指定主机或者服务器的内网IP发生变化，造成很多不便，通过设置静态IP可以有效解决此问题。本文简单介绍如何在CentOS 7和Ubuntu 18.04系统中设置静态IP。
 ## CentOS 7
 ### 1. 通过ifconfig命令查看当前的网络设置
-![获取网卡信息.png](./Linux系统设置静态IP/1658762850166-8eb19000-0f9b-406d-a675-cecaec7dc75d.png)
+![获取网卡信息.png](/images/技术博客/Linux系统设置静态IP/1658762850166-8eb19000-0f9b-406d-a675-cecaec7dc75d.png)
 ### 2. 修改网卡配置
 找到 `/etc/sysconfig/network-scripts/` 目录下网卡xxx的配置文件并修改为如下内容：
 
-![网卡配置文件.png](./Linux系统设置静态IP/1658762854588-b7e6cbd2-bedd-441c-b2b9-4eedecad4b75.png)
+![网卡配置文件.png](/images/技术博客/Linux系统设置静态IP/1658762854588-b7e6cbd2-bedd-441c-b2b9-4eedecad4b75.png)
 ```toml
 TYPE="Ethernet"
 PROXY_METHOD="none"

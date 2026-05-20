@@ -72,7 +72,7 @@ public class UserServlet extends HttpServlet {
 
 我们在浏览器访问`http://localhost:8080/user`，请求首先由`UserServlet`处理，然后交给`user.jsp`渲染：
 
-![](./MVC开发/1656259759984-dfb4e286-90a3-4b17-82ab-ce7ddd8cc6ef.jpeg)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/MVC开发/1656259759984-dfb4e286-90a3-4b17-82ab-ce7ddd8cc6ef.jpeg)
 
 我们把`UserServlet`看作业务逻辑处理，把`User`看作模型，把`user.jsp`看作渲染，这种设计模式通常被称为MVC：Model-View-Controller，即`UserServlet`作为控制器（Controller），`User`作为模型（Model），`user.jsp`作为视图（View），整个MVC架构如下：
 ```java
@@ -497,7 +497,7 @@ public class FileServlet extends HttpServlet {
 ```
 运行代码，在浏览器中输入URL`http://localhost:8080/hello?name=Bob`可以看到如下页面：
 
-![](./MVC开发/1656259780047-0f346162-0423-4bb9-a5c5-069aea86ee70.png)
+![](/images/软件开发/编程基础/开发语言/Java教程/Web开发/MVC开发/1656259780047-0f346162-0423-4bb9-a5c5-069aea86ee70.png)
 
 为了把方法参数的名称编译到class文件中，以便处理`@GetMapping`时使用，我们需要打开编译器的一个参数，在Eclipse中勾选`Preferences-Java-Compiler-Store information about method parameters (usable via reflection)`；在Idea中选择`Preferences-Build, Execution, Deployment-Compiler-Java Compiler-Additional command line parameters`，填入`-parameters`；在Maven的`pom.xml`添加一段配置如下：
 ```xml
