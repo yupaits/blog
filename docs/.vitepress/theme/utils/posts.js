@@ -7,8 +7,8 @@ import path from 'path'
 
 dayjs.extend(relativeTime).locale('zh-cn')
 dayjs.extend(timezone)
-dayjs.tz.setDefault('Asia/Shanghai')
 
+const tz = 'Asia/Shanghai'
 const dateFormat = "YYYY-MM-DD HH:mm"
 const imageRegex = /!\[.*?\]\((.*?)(?:\s+"[^"]*")?\)/
 
@@ -45,7 +45,7 @@ const getPostTitle = (title, relativePath) => {
 }
 
 const getPostDescription = (date) => {
-  return `<span title="${dayjs(date).format(dateFormat)}">${dayjs(date).fromNow()}</span>`
+  return `<span title="${dayjs(date).tz(tz).format(dateFormat)}">${dayjs(date).fromNow()}</span>`
 }
 
 const getPostImage = (content, relativePath) => {
