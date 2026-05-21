@@ -1,5 +1,5 @@
 <template>
-  <a class="linkcard no-icon" :href="option?.link" target="_blank">
+  <a class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" :href="option?.link" target="_blank">
     <img :ref="getImgRefName(group?.label, option?.text)" :style="{
       height: option.imgHeight ?? group.imgHeight ?? '48px',
       minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
@@ -65,6 +65,12 @@ onMounted(() => {
   border-radius: 8px;
   transition: color 0.5s, background-color 0.5s;
   text-decoration: none;
+}
+
+.linkcard.linkcard-subfield {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 /* 卡片鼠标悬停 */

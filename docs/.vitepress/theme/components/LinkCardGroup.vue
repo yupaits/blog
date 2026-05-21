@@ -18,12 +18,11 @@
 </template>
 
 <script setup>
-import LinkCard from './LinkCard.vue'
-const { data, block, imgHeight, imgWidth, imgMaxWidth } = defineProps(['data', 'block', 'imgHeight', 'imgWidth', 'imgMaxWidth'])
+import LinkCard from './LinkCard.vue';
+const { data, block, imgHeight, imgWidth, imgMaxWidth, subfield } = defineProps(['data', 'block', 'imgHeight', 'imgWidth', 'imgMaxWidth', 'subfield'])
 
-const isBlock = () => {
-  return block === '' || (typeof block === 'boolean' && block)
-}
+const isBlock = () => block === '' || (typeof block === 'boolean' && block)
+const isSubfield = () => subfield === '' || (typeof subfield === 'boolean' && subfield)
 
 const linkGroup = (groupItem) => {
   return {
@@ -31,7 +30,8 @@ const linkGroup = (groupItem) => {
     type: groupItem.type,
     imgWidth: groupItem.imgWidth ?? imgWidth,
     imgHeight: groupItem.imgHeight ?? imgHeight,
-    imgMaxWidth: groupItem.imgMaxWidth ?? imgMaxWidth
+    imgMaxWidth: groupItem.imgMaxWidth ?? imgMaxWidth,
+    subfield: isSubfield()
   }
 }
 </script>
