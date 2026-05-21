@@ -3,7 +3,7 @@
     <span class="badge">{{ author }}</span>
     <span class="badge badge-tag" v-if="tag">{{ tag }}</span>
     <br>
-    <span>{{ intro }}</span>
+    <span v-html="intro"></span>
   </span>
 </template>
 

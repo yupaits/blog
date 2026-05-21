@@ -61,9 +61,6 @@ onMounted(() => {
 <style scoped>
 /* 卡片背景 */
 .linkcard {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
   background-color: var(--vp-c-bg-soft);
   border-radius: 8px;
   transition: color 0.5s, background-color 0.5s;
@@ -84,7 +81,7 @@ a::after.linkcard {
   flex: 1;
   line-height: 25px;
   color: var(--vp-c-text-1);
-  margin: 0 0 0 16px;
+  margin: 0;
   transition: color 0.5s;
 }
 
@@ -96,11 +93,13 @@ a::after.linkcard {
 /* 描述链接副标题 */
 .linkcard .description .subtitle {
   font-size: 14px;
+  line-height: 1.65;
 }
 
 /* 图片 */
 .linkcard img {
-  object-fit: contain;
+  float: left;
+  margin-right: 16px;
   background: var(--vp-c-bg-elv);
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
