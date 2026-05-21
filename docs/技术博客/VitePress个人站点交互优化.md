@@ -1585,7 +1585,7 @@ import { defineProps } from 'vue'
 dayjs.extend(relativeTime).extend(utc).extend(timezone).locale('zh-cn')
 
 const tz = 'Asia/Shanghai'
-const dateFormat = "YYYY-MM-DD HH:mm"
+const dateFormat = "YYYY/M/D HH:mm"
 const { date } = defineProps(['date'])
 </script>
 ```
