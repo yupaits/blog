@@ -8,7 +8,6 @@ import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
-import { defineProps } from 'vue'
 
 dayjs.extend(relativeTime).extend(utc).extend(timezone).locale('zh-cn')
 

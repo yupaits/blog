@@ -8,7 +8,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 const { author, tag, intro } = defineProps(['author', 'tag', 'intro'])
 </script>
 
