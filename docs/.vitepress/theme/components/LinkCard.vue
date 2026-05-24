@@ -1,5 +1,5 @@
 <template>
-  <a class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" :href="option?.link" target="_blank">
+  <a class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" :href="option?.link" :target="{ '_blank': group.external}">
     <img :ref="getImgRefName(group?.label, option?.text)" :style="{
       height: option.imgHeight ?? group.imgHeight ?? '48px',
       minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance } from 'vue'
+import { getCurrentInstance, onMounted } from 'vue';
 const { group, option } = defineProps(['group', 'option'])
 const defaultIconUrl = '/icon/url.png'
 
