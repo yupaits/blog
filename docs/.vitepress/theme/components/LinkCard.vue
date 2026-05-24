@@ -1,5 +1,5 @@
 <template>
-  <a class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" :href="option?.link" :target="{ '_blank': group.external}">
+  <a class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" :href="option?.link" :target="group.external ? '_blank' : '_self'">
     <img :ref="getImgRefName(group?.label, option?.text)" :style="{
       height: option.imgHeight ?? group.imgHeight ?? '48px',
       minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
