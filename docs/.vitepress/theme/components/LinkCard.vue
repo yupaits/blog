@@ -1,5 +1,5 @@
 <template>
-  <a class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" :href="option?.link" :target="group.external ? '_blank' : '_self'">
+  <div class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" @click="navigatePage(option?.link)">
     <img :ref="getImgRefName(group?.label, option?.text)" :style="{
       height: option.imgHeight ?? group.imgHeight ?? '48px',
       minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
@@ -13,13 +13,23 @@
       </span>
       <span class="subtitle" v-html="option.description" v-else />
     </p>
-  </a>
+  </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vitepress';
 import { getCurrentInstance, onMounted } from 'vue';
 const { group, option } = defineProps(['group', 'option'])
+const router  = useRouter()
 const defaultIconUrl = '/icon/url.png'
+
+const navigatePage = (link) => {
+  if (group.external) {
+    window.open(link, '_blank')
+  } else {
+    router.go(link)
+  }
+}
 
 const isValidImageUrl = (url) => {
   return new Promise((resolve, reject) => {
@@ -61,10 +71,11 @@ onMounted(() => {
 <style scoped>
 /* 卡片背景 */
 .linkcard {
+  cursor: pointer;
+  padding: 16px;
   background-color: var(--vp-c-bg-soft);
   border-radius: 8px;
   transition: color 0.5s, background-color 0.5s;
-  text-decoration: none;
 }
 
 .linkcard.linkcard-subfield {
@@ -76,10 +87,6 @@ onMounted(() => {
 /* 卡片鼠标悬停 */
 .linkcard:hover {
   background-color: var(--vp-c-yellow-soft);
-}
-
-a::after.linkcard {
-  content: none;
 }
 
 /* 描述链接文字 */
@@ -110,9 +117,5 @@ a::after.linkcard {
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   padding: 4px;
-}
-
-.vp-doc a:not(.link-card) {
-  padding: 16px;
 }
 </style>
