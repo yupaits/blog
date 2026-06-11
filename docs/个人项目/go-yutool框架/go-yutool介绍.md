@@ -1,6 +1,6 @@
 # go-yutool介绍
 
-近期在做yutool相关项目的技术升级工作，直接升级到Java25版本，也用上了带`GraalVM`的`LibericaNIK-25-OpenJDK-25`。Spring Boot版本一步到位升级到4.0+版本，**虚拟线程**在升级3.5+版本时也是早早就用上了。为了适配Spring Boot 4.0+版本，光迁移到`Jackson3`就花了不少时间，也尝鲜了使用`GraalVM`构建的`native-image`等。
+近期在做yutool相关项目的技术升级工作，直接升级到Java25版本，也用上了带`GraalVM`的`LibericaNIK-25-OpenJDK-25`。Spring Boot版本一步到位升级到4.0+版本，**虚拟线程**在升级3.5.x版本时也是早早就用上了。为了适配Spring Boot 4.0.x版本，光迁移到`Jackson3`就花了不少时间，也尝鲜了使用`GraalVM`构建的`native-image`等。
 
 这些新技术确实将Java项目的工程化和性能都提升到了新的高度，但却也成为了让我下定决心使用Golang生态重构yutool等项目的导火索。原因主要有以下几点：
 1. Java项目现在确实更轻更快更成熟了，但对比Rust/Golang等**依然很重**。简单对比一组数据：
