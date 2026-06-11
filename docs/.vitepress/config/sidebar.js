@@ -422,7 +422,7 @@ const sidebar = {
                 text: 'go-yutool框架',
                 base: '/个人项目/go-yutool框架/',
                 items: [
-                    {text: '', link: ''},
+                    {text: 'go-yutool介绍', link: 'go-yutool介绍'},
                 ],
             },
             {
