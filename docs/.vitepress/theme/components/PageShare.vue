@@ -5,8 +5,9 @@
 </template>
 
 <script setup>
-import { useData } from 'vitepress'
-const { page } = useData()
+import {useData} from 'vitepress'
+
+const {page} = useData()
 
 const nativeShare = async () => {
   // 检测浏览器是否支持原生分享API

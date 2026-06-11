@@ -1,18 +1,18 @@
 <template>
-  <div class="progress-container" :style="{ width: `${width ?? '100%'}` }">
-    <div class="progress-label" :style="{ width: `${labelWidth ?? '120px'}` }" v-if="label">{{ label }}</div>
+  <div :style="{ width: `${width ?? '100%'}` }" class="progress-container">
+    <div v-if="label" :style="{ width: `${labelWidth ?? '120px'}` }" class="progress-label">{{ label }}</div>
     <div class="progress-bar">
-      <div class="progress-value" :style="{ width: `${percent}%` }"></div>
+      <div :style="{ width: `${percent}%` }" class="progress-value"></div>
     </div>
-    <div class="percentage-label" v-if="percent">
+    <div v-if="percent" class="percentage-label">
       <span v-if="percent >= 100">✔</span>
-      <span style="font-style: italic;" v-else>{{ percent }}%</span>
+      <span v-else style="font-style: italic;">{{ percent }}%</span>
     </div>
   </div>
 </template>
 
 <script setup>
-const { label, width, labelWidth, percent } = defineProps(['label', 'width', 'labelWidth', 'percent'])
+const {label, width, labelWidth, percent} = defineProps(['label', 'width', 'labelWidth', 'percent'])
 </script>
 
 <style scoped>

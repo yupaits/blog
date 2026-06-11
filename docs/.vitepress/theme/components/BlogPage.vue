@@ -1,35 +1,36 @@
 <template>
   <Layout>
     <template #doc-before>
-      <DraftAnnounce v-if="isDraft" :preview="previewDraft" />
-      <PageMetadata v-if="showMeta" />
+      <DraftAnnounce v-if="isDraft" :preview="previewDraft"/>
+      <PageMetadata v-if="showMeta"/>
     </template>
 
     <template #doc-after>
-      <CommentRule v-if="hasComment" />
+      <CommentRule v-if="hasComment"/>
     </template>
 
     <template #doc-footer-before>
-      <PageCopyRight v-if="hasComment" />
-      <PageShare v-if="hasComment" />
-      <BackToTop />
+      <PageCopyRight v-if="hasComment"/>
+      <PageShare v-if="hasComment"/>
+      <BackToTop/>
     </template>
   </Layout>
 </template>
 
 <script setup>
-import { useData, useRoute } from 'vitepress'
+import {useData, useRoute} from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import { computed, onMounted, watch } from 'vue'
+import {computed, onMounted, watch} from 'vue'
 import BackToTop from './BackToTop.vue'
 import CommentRule from './CommentRule.vue'
 import DraftAnnounce from './DraftAnnounce.vue'
 import PageCopyRight from './PageCopyright.vue'
 import PageMetadata from './PageMetadata.vue'
 import PageShare from './PageShare.vue'
-const { hasMeta } = defineProps(['hasMeta'])
-const { Layout } = DefaultTheme
-const { frontmatter } = useData()
+
+const {hasMeta} = defineProps(['hasMeta'])
+const {Layout} = DefaultTheme
+const {frontmatter} = useData()
 const route = useRoute()
 
 const showMeta = computed(() => {
@@ -58,9 +59,9 @@ onMounted(() => {
 })
 
 watch(
-  () => route.path,
-  () => {
-    handleDoc()
-  }
+    () => route.path,
+    () => {
+      handleDoc()
+    }
 )
 </script>

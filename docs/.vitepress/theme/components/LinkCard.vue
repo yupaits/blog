@@ -1,26 +1,27 @@
 <template>
-  <div class="linkcard no-icon" :class="{ 'linkcard-subfield': group.subfield }" @click="navigatePage(option?.link)">
+  <div :class="{ 'linkcard-subfield': group.subfield }" class="linkcard no-icon" @click="navigatePage(option?.link)">
     <img :ref="getImgRefName(group?.label, option?.text)" :style="{
       height: option.imgHeight ?? group.imgHeight ?? '48px',
       minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
       maxWidth: option.imgMaxWidth ?? group.imgMaxWidth ?? '64px'
-    }" />
+    }"/>
     <p class="description">
-      <strong class="title" v-if="option?.text">{{ option?.text }}</strong>
+      <strong v-if="option?.text" class="title">{{ option?.text }}</strong>
       <br>
-      <span class="subtitle" v-if="$slots.description">
+      <span v-if="$slots.description" class="subtitle">
         <slot name="description"></slot>
       </span>
-      <span class="subtitle" v-html="option.description" v-else />
+      <span v-else class="subtitle" v-html="option.description"/>
     </p>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vitepress';
-import { getCurrentInstance, onMounted } from 'vue';
-const { group, option } = defineProps(['group', 'option'])
-const router  = useRouter()
+import {useRouter} from 'vitepress';
+import {getCurrentInstance, onMounted} from 'vue';
+
+const {group, option} = defineProps(['group', 'option'])
+const router = useRouter()
 const defaultIconUrl = '/icon/url.png'
 
 const navigatePage = (link) => {

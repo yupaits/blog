@@ -1,10 +1,10 @@
-import { BProgress } from '@bprogress/core'
+import {BProgress} from '@bprogress/core'
 import confetti from 'canvas-confetti'
-import { ElTimeline, ElTimelineItem } from 'element-plus'
-import { useData, useRoute, useRouter } from 'vitepress'
+import {ElTimeline, ElTimelineItem} from 'element-plus'
+import {useData, useRoute, useRouter} from 'vitepress'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import DefaultTheme from 'vitepress/theme'
-import { onMounted } from 'vue'
+import {onMounted} from 'vue'
 import MyLayout from './MyLayout.vue'
 import LinkButton from './components/LinkButton.vue'
 import LinkCard from './components/LinkCard.vue'
@@ -18,57 +18,57 @@ import 'element-plus/dist/index.css'
 import './style/var.css'
 
 export default {
-  extends: DefaultTheme,
-  Layout: MyLayout,
-  setup() {
-    const { frontmatter } = useData()
-    const route = useRoute()
-    const router = useRouter()
+    extends: DefaultTheme,
+    Layout: MyLayout,
+    setup() {
+        const {frontmatter} = useData()
+        const route = useRoute()
+        const router = useRouter()
 
-    // 页面加载进度条
-    router.onBeforePageLoad = () => {
-      BProgress.start()
+        // 页面加载进度条
+        router.onBeforePageLoad = () => {
+            BProgress.start()
+        }
+        router.onAfterPageLoad = () => {
+            BProgress.done()
+        }
+
+        // Giscus评论
+        giscusTalk({
+            repo: 'yupaits/giscus',
+            repoId: 'R_kgDOOciJmA',
+            category: 'General',
+            categoryId: 'DIC_kwDOOciJmM4CpRt2',
+            mapping: 'pathname',
+            reactionsEnabled: '1',
+            inputPosition: 'bottom',
+            lang: 'zh-CN',
+            loading: 'lazy'
+        }, {
+            frontmatter, route
+        }, true)
+
+        // 五彩纸屑动画
+        const initConfetti = () => {
+            confetti({
+                particleCount: 100,
+                spread: 170,
+                origin: {y: 0.6}
+            })
+        }
+
+        onMounted(() => {
+            initConfetti()
+        })
+    },
+    enhanceApp({app}) {
+        app.component('LinkButton', LinkButton)
+        app.component('LinkCard', LinkCard)
+        app.component('LinkCardGroup', LinkCardGroup)
+        app.component('Progress', Progress)
+        app.component('PostDate', PostDate)
+        app.component('BookDetail', BookDetail)
+        app.component('Timeline', ElTimeline)
+        app.component('TimelineItem', ElTimelineItem)
     }
-    router.onAfterPageLoad = () => {
-      BProgress.done()
-    }
-
-    // Giscus评论
-    giscusTalk({
-      repo: 'yupaits/giscus',
-      repoId: 'R_kgDOOciJmA',
-      category: 'General',
-      categoryId: 'DIC_kwDOOciJmM4CpRt2',
-      mapping: 'pathname',
-      reactionsEnabled: '1',
-      inputPosition: 'bottom',
-      lang: 'zh-CN',
-      loading: 'lazy'
-    }, {
-      frontmatter, route
-    }, true)
-
-    // 五彩纸屑动画
-    const initConfetti = () => {
-      confetti({
-        particleCount: 100,
-        spread: 170,
-        origin: { y: 0.6 }
-      })
-    }
-
-    onMounted(() => {
-      initConfetti()
-    })
-  },
-  enhanceApp({ app }) {
-    app.component('LinkButton', LinkButton)
-    app.component('LinkCard', LinkCard)
-    app.component('LinkCardGroup', LinkCardGroup)
-    app.component('Progress', Progress)
-    app.component('PostDate', PostDate)
-    app.component('BookDetail', BookDetail)
-    app.component('Timeline', ElTimeline)
-    app.component('TimelineItem', ElTimelineItem)
-  }
 }

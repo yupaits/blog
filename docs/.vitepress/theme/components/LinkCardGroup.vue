@@ -1,13 +1,13 @@
 <template>
   <div>
     <div v-for="group in data">
-      <h2 :id="group.text" class="card-group-title" v-if="group.text">{{ group.text }}</h2>
+      <h2 v-if="group.text" :id="group.text" class="card-group-title">{{ group.text }}</h2>
       <div class="card-container">
         <div class="card-group">
           <template v-for="item in group.items">
-            <LinkCard :group="linkGroup(group)" :option="item" :class="{ 'block': isBlock() }">
-              <template v-slot:description v-if="item?.description?.name">
-                <component :is="item?.description?.name" v-bind="item.description?.props" />
+            <LinkCard :class="{ 'block': isBlock() }" :group="linkGroup(group)" :option="item">
+              <template v-if="item?.description?.name" v-slot:description>
+                <component :is="item?.description?.name" v-bind="item.description?.props"/>
               </template>
             </LinkCard>
           </template>
@@ -19,7 +19,16 @@
 
 <script setup>
 import LinkCard from './LinkCard.vue';
-const { data, block, imgHeight, imgWidth, imgMaxWidth, subfield, external } = defineProps(['data', 'block', 'imgHeight', 'imgWidth', 'imgMaxWidth', 'subfield', 'external'])
+
+const {
+  data,
+  block,
+  imgHeight,
+  imgWidth,
+  imgMaxWidth,
+  subfield,
+  external
+} = defineProps(['data', 'block', 'imgHeight', 'imgWidth', 'imgMaxWidth', 'subfield', 'external'])
 
 const isBlock = () => block === '' || (typeof block === 'boolean' && block)
 const isSubfield = () => subfield === '' || (typeof subfield === 'boolean' && subfield)

@@ -1,9 +1,9 @@
 <template>
-  <a class="link-btn" :href="link?.href" :target="link?.target">{{ value }}</a>
+  <a :href="link?.href" :target="link?.target" class="link-btn">{{ value }}</a>
 </template>
 
 <script setup>
-const { value, link } = defineProps(['value', 'link'])
+const {value, link} = defineProps(['value', 'link'])
 </script>
 
 <style scoped>

@@ -7,10 +7,11 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue'
-import { useData, useRoute } from 'vitepress'
+import {onMounted, ref, watch} from 'vue'
+import {useData, useRoute} from 'vitepress'
 import dayjs from 'dayjs'
-const { page } = useData()
+
+const {page} = useData()
 const route = useRoute()
 const wordcount = ref(0)
 const readTime = ref(0)
@@ -68,10 +69,10 @@ onMounted(() => {
 })
 
 watch(
-  () => route.path,
-  () => {
-    analyse()
-  }
+    () => route.path,
+    () => {
+      analyse()
+    }
 )
 </script>
 

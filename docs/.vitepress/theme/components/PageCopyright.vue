@@ -4,15 +4,17 @@
     <p><strong class="label">文章链接：</strong><a :href="link" target="_blank">{{ decodeURI(link) }}</a></p>
     <p>
       <strong class="label">版权声明：</strong>
-      <span>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA
+      <span>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+                                                 target="_blank">CC BY-NC-SA
           4.0</a> 许可协议。转载请注明原始来源信息为 <a href="/" target="_blank">yupaits notes</a></span>
     </p>
   </div>
 </template>
 
 <script setup>
-import { useRoute } from 'vitepress'
-import { onMounted, ref, watch } from 'vue'
+import {useRoute} from 'vitepress'
+import {onMounted, ref, watch} from 'vue'
+
 const link = ref('')
 const route = useRoute()
 
@@ -25,10 +27,10 @@ onMounted(() => {
 })
 
 watch(
-  () => route.path,
-  () => {
-    usePageUrl()
-  }
+    () => route.path,
+    () => {
+      usePageUrl()
+    }
 )
 </script>
 

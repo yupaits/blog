@@ -1,24 +1,25 @@
 <template>
-  <section class="draft-announce-container" :class="{ 'has-content': preview }">
+  <section :class="{ 'has-content': preview }" class="draft-announce-container">
     <div class="draft-box">
       <div>
         <strong class="badge">草稿</strong>
-        <strong class="badge badge-preview" v-if="preview">预览模式</strong>
+        <strong v-if="preview" class="badge badge-preview">预览模式</strong>
       </div>
-      <div class="draft-tip" v-if="preview">当前文章尚未完成，预览模式下可以提前查看文章内容。</div>
-      <div class="draft-tip" v-else>当前文章尚未完成，敬请期待...</div>
+      <div v-if="preview" class="draft-tip">当前文章尚未完成，预览模式下可以提前查看文章内容。</div>
+      <div v-else class="draft-tip">当前文章尚未完成，敬请期待...</div>
       <p v-if="frontmatter?.draftPercent">
-        <Progress label="编写进度" labelWidth="100px" :percent="frontmatter?.draftPercent" />
+        <Progress :percent="frontmatter?.draftPercent" label="编写进度" labelWidth="100px"/>
       </p>
     </div>
   </section>
 </template>
 
 <script setup>
-import { useData } from 'vitepress'
+import {useData} from 'vitepress'
 import Progress from './Progress.vue'
-const { frontmatter } = useData()
-const { preview } = defineProps(['preview'])
+
+const {frontmatter} = useData()
+const {preview} = defineProps(['preview'])
 </script>
 
 <style scoped>

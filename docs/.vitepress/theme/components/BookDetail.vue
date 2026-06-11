@@ -1,14 +1,14 @@
 <template>
   <span>
     <span class="badge">{{ author }}</span>
-    <span class="badge badge-tag" v-if="tag">{{ tag }}</span>
+    <span v-if="tag" class="badge badge-tag">{{ tag }}</span>
     <br>
     <span v-html="intro"></span>
   </span>
 </template>
 
 <script setup>
-const { author, tag, intro } = defineProps(['author', 'tag', 'intro'])
+const {author, tag, intro} = defineProps(['author', 'tag', 'intro'])
 </script>
 
 <style scoped>
