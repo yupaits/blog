@@ -1,6 +1,6 @@
 # go-yutool介绍
 
-近期在做yutool相关项目的技术升级工作，直接升级到Java25版本，也用上了带`GraalVM`的`LibericaNIK-25-OpenJDK-25`。Spring Boot版本一步到位升级到4.0+版本，**虚拟线程**在升级3.5.x版本时也是早早就用上了。为了适配Spring Boot 4.0.x版本，光迁移到`Jackson3`就花了不少时间，也尝鲜了使用`GraalVM`构建的`native-image`等。
+近期在做yutool相关项目的技术升级工作，直接升级到Java25版本，也用上了带`GraalVM`的`LibericaNIK-25-OpenJDK-25`。Spring Boot版本一步到位升级到4.0.x版本，**虚拟线程**在升级3.5.x版本时也是早早就用上了。为了适配Spring Boot 4.0.x版本，光迁移到`Jackson3`就花了不少时间，也尝鲜了使用`GraalVM`构建的`native-image`等。
 
 这些新技术确实将Java项目的工程化和性能都提升到了新的高度，但却也成为了让我下定决心使用Golang生态重构yutool等项目的导火索。原因主要有以下几点：
 1. Java项目现在确实更轻更快更成熟了，但对比Rust/Golang等**依然很重**。简单对比一组数据：
@@ -29,3 +29,16 @@ go-yutool的模块说明：
 |      cache      | 缓存，基于fido                                     |        ✔        |                   |
 |      cron       | 定时任务调度，基于robfig/cron                          |        ✔        |                   |
 |      menu       | 系统菜单管理                                        |        ✔        |                   |
+
+类似yutool，go-yutool也提供了一系列代码模板用于快速生成业务代码，包括：
+- service服务
+- logic逻辑
+  - service接口实现
+  - dto转entity
+  - entity转vo
+- model模型
+  - entity实体对象
+  - dto对象
+  - vo对象
+  - query查询对象
+- routes路由匹配
