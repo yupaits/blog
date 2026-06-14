@@ -16,8 +16,8 @@
 }
 
 :root {
-    --vp-font-family-base: "975Maru SC";
-    --vp-font-family-mono: "ZSFT-443", "975Maru SC";
+    --vp-font-family-base: "LXGW 975 Maru SC 400W";
+    --vp-font-family-mono: "ZSFT-443", "LXGW 975 Maru SC 400W";
 }
 
 .vp-doc strong {
