@@ -16,6 +16,8 @@
 - [Gorm](https://gorm.io/zh_CN/docs/index.html) 一个致力于对开发者友好的优秀 Golang ORM 库。
 - [Viper](https://github.com/spf13/viper) Go 应用的完整配置解决方案。
 
+---
+
 go-yutool的模块说明：
 
 | <nobr>模块</nobr> | 简介                                            | <nobr>验收</nobr> | <nobr>版本变更</nobr> |
@@ -30,6 +32,8 @@ go-yutool的模块说明：
 |      cron       | 定时任务调度，基于robfig/cron                          |        ✔        |                   |
 |      menu       | 系统菜单管理                                        |        ✔        |                   |
 
+---
+
 类似yutool，go-yutool也提供了一系列代码模板用于快速生成业务代码，包括：
 - service服务
 - logic逻辑
@@ -42,3 +46,35 @@ go-yutool的模块说明：
   - vo对象
   - query查询对象
 - routes路由匹配
+
+---
+
+推荐的项目结构：
+```
+├─ hack/            # 工具脚本 (如 CLI 配置、shell脚本)
+├─ internal/        # (核心) 内部业务逻辑，通过Go的internal特性对外隐藏
+│  ├─ cmd/          # 命令行入口，负责启动流程、路由注册
+│  ├─ consts/       # 项目全局常量定义
+│  ├─ model/        # 数据结构管理层
+│  │  ├─ dto/       # dto对象
+│  │  ├─ entity/    # 数据模型，与数据表一一对应
+│  │  ├─ query/     # 查询对象
+│  │  └─ vo/        # vo对象
+│  ├─ routes/       # 路由匹配，接收请求调用服务
+│  ├─ logic/        # 业务逻辑封装层，实现具体的业务逻辑
+│  ├─ service/      # 业务接口定义层，用于模块间解耦
+│  └─ task/         # 定时任务，任务注册
+├─ manifest/        # 交付清单，存放配置、部署、Docker等文件
+│  ├─ config/       # 配置文件目录
+│  └─ docker/       # Docker镜像相关文件
+├─ resource/        # 静态资源文件，可用于存放web前端项目的构建产物
+│  ├─ static/       # js、css、图片等静态资源
+│  └─ templates/    # 页面Html模板
+├─ web/             # 前端项目
+├─ vendor/          # 存放所有外部依赖，通过go mod vendor命令生成
+├─ main.go          # 程序主入口文件
+├─ main_test.go     # 测试入口文件
+├─ go.mod           # Go模块依赖管理
+├─ go.sum           # Go模块依赖校验
+└─ README.md        # 项目介绍文档
+```
