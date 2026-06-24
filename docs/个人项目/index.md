@@ -20,4 +20,6 @@ import GithubButton from 'vue-github-button'
 
 如果您对任何项目感兴趣或有合作意向，请随时通过 GitHub 平台向我发起 Issue 或 Pull Request。同时，我也热衷于接受各类技术问题咨询和交流，让我们共同成长，共享知识的力量。再次欢迎您参与到项目的共建中来，共同推动技术和社区的发展！
 
+在重构yutool等项目之后，个人已全面**拥抱Golang生态**，基于Java及Spring Boot的项目均已归档🗃️，不再继续开发。
+
 **使用🪦标注的功能和组件已经废弃或移除，不再进行后续开发及维护。**
