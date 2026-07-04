@@ -427,60 +427,11 @@ const sidebar = {
                 ],
             },
             {
-                text: 'yutool组件式框架🗃️',
-                base: '/个人项目/yutool组件式框架/',
-                items: [
-                    {text: 'yutool模块划分', link: 'yutool模块划分'},
-                    {text: 'yutool-commons公共模块', link: 'yutool-commons公共模块'},
-                    {
-                        text: 'yutool-orm ORM组件',
-                        base: '/个人项目/yutool组件式框架/yutool-orm ORM组件/',
-                        collapsed: true,
-                        items: [
-                            {text: 'yutool-orm-core', link: 'yutool-orm-core'},
-                            {text: 'yutool-orm-mybatis', link: 'yutool-orm-mybatis'},
-                        ]
-                    },
-                    {
-                        text: 'yutool-mq消息组件',
-                        base: '/个人项目/yutool组件式框架/yutool-mq消息组件/',
-                        collapsed: true,
-                        items: [
-                            {text: 'yutool-mq-core', link: 'yutool-mq-core'},
-                            {text: 'yutool-mq-kafka', link: 'yutool-mq-kafka'},
-                            {text: 'yutool-mq-rabbitmq', link: 'yutool-mq-rabbitmq'},
-                            {text: 'yutool-mq-rocketmq', link: 'yutool-mq-rocketmq'},
-                        ]
-                    },
-                    {text: 'yutool-state状态机组件', link: 'yutool-state状态机组件'},
-                    {
-                        text: 'yutool-plugins插件机制',
-                        base: '/个人项目/yutool组件式框架/yutool-plugins插件机制/',
-                        collapsed: true,
-                        items: [
-                            {text: 'api-idempotent接口幂等插件', link: 'api-idempotent接口幂等插件'},
-                            {text: 'api-logger接口访问日志插件', link: 'api-logger接口访问日志插件'},
-                            {text: 'audit-logger审计日志插件', link: 'audit-logger审计日志插件'},
-                            {text: 'auth-filter权限过滤插件', link: 'auth-filter权限过滤插件'},
-                            {text: 'distributed-lock分布式锁插件', link: 'distributed-lock分布式锁插件'},
-                            {text: 'history-data历史数据处理插件', link: 'history-data历史数据处理插件'},
-                            {text: 'import-export数据导入导出插件', link: 'import-export数据导入导出插件'},
-                            {text: 'cache-adapter缓存适配插件', link: 'cache-adapter缓存适配插件'},
-                        ]
-                    },
-                ]
-            },
-            {
                 text: 'yutool-biz业务模块🗃️',
                 base: '/个人项目/yutool-biz业务模块/',
                 items: [
-                    {text: 'yutool-biz 整体设计', link: 'yutool-biz 整体设计'},
-                    {text: 'yutool-api API接口', link: 'yutool-api API接口'},
-                    {text: 'yutool-dict 数据字典', link: 'yutool-dict 数据字典'},
                     {text: 'yutool-exchange 数据中转', link: 'yutool-exchange 数据中转'},
-                    {text: 'yutool-menu 系统菜单', link: 'yutool-menu 系统菜单'},
                     {text: 'yutool-oauth 认证平台接入', link: 'yutool-oauth 认证平台接入'},
-                    {text: 'yutool-oss 文件存储', link: 'yutool-oss 文件存储'},
                     {
                         text: 'yutool-metadata 元数据',
                         base: '/个人项目/yutool-biz业务模块/yutool-metadata 元数据/',
@@ -494,11 +445,10 @@ const sidebar = {
                 ]
             },
             {
-                text: 'yutool-cli高效工作套件🗃️',
-                base: '/个人项目/yutool-cli高效工作套件/',
+                text: 'yutool-cli效率工具🗃️',
+                base: '/个人项目/yutool-cli效率工具/',
                 items: [
                     {text: 'yutool-cli功能清单', link: 'yutool-cli功能清单'},
-                    {text: 'yutool-cli运营模式', link: 'yutool-cli运营模式'},
                 ]
             },
             {
@@ -564,9 +514,6 @@ const sidebar = {
                             {text: '运行情况监控', link: '运行情况监控'},
                             {text: '基于Aria2的下载机', link: '基于Aria2的下载机'},
                             {text: '搭建v2rayA', link: '搭建v2rayA'},
-                            {text: 'web控制台cockpit', link: 'web控制台cockpit'},
-                            {text: '使用rclone同步onedrive', link: '使用rclone同步onedrive'},
-                            {text: 'yutool-cli高效工作套件', link: 'yutool-cli高效工作套件'},
                             {text: 'OpenWrt系统安装及配置', link: 'OpenWrt系统安装及配置'},
                             {text: '树莓派变身高性能复古游戏机', link: '树莓派变身高性能复古游戏机'},
                         ]
