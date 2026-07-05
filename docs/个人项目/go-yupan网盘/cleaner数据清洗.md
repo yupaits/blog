@@ -65,6 +65,8 @@ type Context[T model.Resource] struct {
 }
 ```
 
+调用`registerExecutor[T model.Resource](name string, executor *cleaner.Executor[T])`方法注册清洗任务执行器，`name`参数传入任务名称即可关联清洗任务。
+
 ### 特殊处理
 
 | 方法定义                                                     | 说明               |
