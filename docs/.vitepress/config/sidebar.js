@@ -423,8 +423,25 @@ const sidebar = {
                 text: 'go-yutool框架🔥',
                 base: '/个人项目/go-yutool框架/',
                 items: [
-                    {text: 'go-yutool介绍', link: 'go-yutool介绍'},
+                    {text: '框架概述', link: '框架概述'},
                 ],
+            },
+            {
+                text: 'go-yutool-cli效率工具',
+                base: '/个人项目/go-yutool-cli效率工具/',
+                items: [
+                    {text: '功能清单', link: '功能清单'},
+                ]
+            },
+            {
+                text: 'go-yupan网盘',
+                base: '/个人项目/go-yupan网盘/',
+                items: [
+                    {text: 'yupan架构', link: 'yupan架构'},
+                    {text: 'crawler 数据收集', link: 'crawler数据收集'},
+                    {text: 'data 数据存储', link: 'data数据存储'},
+                    {text: 'cleaner 数据清洗', link: 'cleaner数据清洗'},
+                ]
             },
             {
                 text: 'yutool-biz业务模块🗃️',
@@ -442,23 +459,6 @@ const sidebar = {
                         ]
                     },
                     {text: 'admin-ui 管理界面', link: 'admin-ui 管理界面'},
-                ]
-            },
-            {
-                text: 'yutool-cli效率工具🗃️',
-                base: '/个人项目/yutool-cli效率工具/',
-                items: [
-                    {text: 'yutool-cli功能清单', link: 'yutool-cli功能清单'},
-                ]
-            },
-            {
-                text: 'yupan网盘🗃️',
-                base: '/个人项目/yupan网盘/',
-                items: [
-                    {text: 'yupan架构', link: 'yupan架构'},
-                    {text: 'yupan-crawler 数据收集', link: 'yupan-crawler数据收集'},
-                    {text: 'yupan-data 数据存储', link: 'yupan-data数据存储'},
-                    {text: 'yupan-cleaner 数据清洗', link: 'yupan-cleaner数据清洗'},
                 ]
             },
         ]
