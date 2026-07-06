@@ -1,0 +1,49 @@
+name: 构建站点文件
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:24-alpine
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 配置Alpine镜像源
+        run: |
+          echo -e 'https://mirrors.ustc.edu.cn/alpine/v3.22/main\nhttps://mirrors.ustc.edu.cn/alpine/v3.22/community' > /etc/apk/repositories
+          apk update && apk add git
+
+      - name: 设置pnpm
+        run: |
+          npm config set registry https://registry.npmmirror.com
+          npm install -g corepack@latest
+          corepack enable
+
+      - name: 缓存pnpm依赖
+        uses: actions/cache@v4
+        with:
+          path: /.pnpm-store
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-
+
+      - name: 安装依赖
+        run: |
+          npx pnpm config set store-dir /.pnpm-store
+          npx pnpm config set registry https://registry.npmmirror.com
+          npx pnpm install
+
+      - name: 构建
+        run: npx pnpm run docs:build
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: docs/.vitepress/dist
+          retention-days: 7
