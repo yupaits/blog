@@ -36,7 +36,7 @@ jobs:
         run: |
           npx pnpm config set store-dir /.pnpm-store
           npx pnpm config set registry https://registry.npmmirror.com
-          npx pnpm install
+          npx pnpm install --shamefully-hoist
 
       - name: 构建
         run: npx pnpm run docs:build
