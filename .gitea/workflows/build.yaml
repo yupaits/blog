@@ -35,6 +35,6 @@ jobs:
           npx pnpm install
       - name: 构建并输出
         run: |
-          mkdir -p /output/yupaits-notes
           npx pnpm run docs:build
+          mkdir -p /output/yupaits-notes
           cp -r docs/.vitepress/dist/* /output/yupaits-notes/
