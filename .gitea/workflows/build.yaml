@@ -10,16 +10,13 @@ jobs:
       image: node:24-alpine
 
     steps:
-      - name: 调试域名解析
+      - name: 配置 hosts
         run: |
+          echo "192.168.2.3 gitea.yupaits.top" >> /etc/hosts
           cat /etc/hosts
-          nslookup gitea.yupaits.top || echo "nslookup not found"
-          ping -c 1 gitea.yupaits.top || echo "ping failed"
 
       - name: 拉取代码
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: 配置Alpine镜像源
         run: |
