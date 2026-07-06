@@ -14,21 +14,17 @@ jobs:
         run: |
           echo "192.168.2.3 gitea.yupaits.top" >> /etc/hosts
           cat /etc/hosts
-
       - name: 拉取代码
         uses: actions/checkout@v4
-
       - name: 配置Alpine镜像源
         run: |
           echo -e 'https://mirrors.ustc.edu.cn/alpine/v3.22/main\nhttps://mirrors.ustc.edu.cn/alpine/v3.22/community' > /etc/apk/repositories
           apk update && apk add git
-
       - name: 设置pnpm
         run: |
           npm config set registry https://registry.npmmirror.com
           npm install -g corepack@latest
           corepack enable
-
       - name: 缓存pnpm依赖
         uses: actions/cache@v4
         with:
@@ -36,15 +32,11 @@ jobs:
           key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             pnpm-store-
-
       - name: 安装依赖
         run: |
           npx pnpm config set store-dir /.pnpm-store
           npx pnpm config set registry https://registry.npmmirror.com
           npx pnpm install
-
       - name: 构建并输出
         run: |
           npx pnpm run docs:build
-          mkdir -p /output/yupaits-notes
-          cp -r docs/.vitepress/dist/* /output/yupaits-notes/

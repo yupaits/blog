@@ -4,7 +4,7 @@
     "@vrcd-community/markdown-it-video": "^1.1.1",
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
-    "element-plus": "^2.8.3",
+    "element-plus": "2.11.3",
     "markdown-it-custom-attrs": "^1.0.2",
     "markdown-it-task-checkbox": "^1.0.6",
     "unplugin-auto-import": "^0.18.3",
@@ -18,5 +18,5 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
-  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b"
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
 }
