@@ -10,6 +10,12 @@ jobs:
       image: node:24-alpine
 
     steps:
+      - name: 调试域名解析
+        run: |
+          cat /etc/hosts
+          nslookup gitea.yupaits.top || echo "nslookup not found"
+          ping -c 1 gitea.yupaits.top || echo "ping failed"
+
       - name: 拉取代码
         uses: actions/checkout@v4
         with:
