@@ -36,3 +36,5 @@ jobs:
       - name: 构建
         run: |
           npx pnpm run docs:build
+          mkdir -p /output/yupaits-notes
+          cp -r docs/.vitepress/dist/* /output/yupaits-notes/
