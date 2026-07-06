@@ -33,8 +33,8 @@ jobs:
           npx pnpm config set store-dir /.pnpm-store
           npx pnpm config set registry https://registry.npmmirror.com
           npx pnpm install
-      - name: 构建
+      - name: 构建并输出
         run: |
-          npx pnpm run docs:build
           mkdir -p /output/yupaits-notes
+          npx pnpm run docs:build
           cp -r docs/.vitepress/dist/* /output/yupaits-notes/
