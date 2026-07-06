@@ -10,11 +10,6 @@ jobs:
       image: node:24-alpine
 
     steps:
-      - name: 配置 hosts
-        run: |
-          echo "192.168.2.3 gitea.yupaits.top" >> /etc/hosts
-          cat /etc/hosts
-
       - name: 拉取代码
         uses: actions/checkout@v4
 
@@ -43,12 +38,7 @@ jobs:
           npx pnpm config set registry https://registry.npmmirror.com
           npx pnpm install
 
-      - name: 构建
-        run: npx pnpm run docs:build
-
-      - name: 上传构建产物
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: docs/.vitepress/dist
-          retention-days: 7
+      - name: 构建并输出
+        run: |
+          npx pnpm run docs:build
+          cp -r docs/.vitepress/dist/* /output/yupaits-notes/
