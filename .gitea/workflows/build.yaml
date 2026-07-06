@@ -13,7 +13,7 @@ jobs:
       - name: 拉取代码
         uses: actions/checkout@v4
         with:
-          set-safe-directory: false
+          fetch-depth: 0
 
       - name: 配置Alpine镜像源
         run: |
