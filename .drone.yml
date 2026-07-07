@@ -29,7 +29,7 @@ steps:
       - corepack enable
       - npx pnpm config set store-dir /.pnpm-store
       - npx pnpm config set registry https://registry.npmmirror.com
-      - npx pnpm install --shamefully-hoist
+      - npx pnpm install --frozen-lockfile
       - npx pnpm run docs:build
 
 volumes:
