@@ -35,8 +35,10 @@ jobs:
           npx pnpm install --frozen-lockfile
       - name: 验证挂载
         run: |
-          echo "=== 检查挂载点 ==="
-          mount | grep /output
+          echo "=== 当前挂载列表 ==="
+          mount
+          echo "=== 检查 /output 是否为挂载点 ==="
+          mount | grep /output || echo "❌ /output 不是挂载点"
           echo "=== 尝试写入文件 ==="
           echo "test" > /output/test.txt && echo "✅ 写入成功" || echo "❌ 写入失败"
       - name: 构建并输出
