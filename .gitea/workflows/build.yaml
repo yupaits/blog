@@ -24,17 +24,17 @@ jobs:
       - name: 缓存pnpm依赖
         uses: actions/cache@v4
         with:
-          path: /data/cache/.pnpm-store
+          path: /.pnpm-store
           key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             pnpm-store-
       - name: 安装依赖
         run: |
-          npx pnpm config set store-dir /data/cache/.pnpm-store
+          npx pnpm config set store-dir /.pnpm-store
           npx pnpm config set registry https://registry.npmmirror.com
-          npx pnpm install
+          npx pnpm install --frozen-lockfile
       - name: 构建并输出
         run: |
           npx pnpm run docs:build
-          mkdir -p /data/yupaits-notes
-          cp -r docs/.vitepress/dist/* /data/yupaits-notes/
+          mkdir -p /output/yupaits-notes
+          cp -r docs/.vitepress/dist/* /output/yupaits-notes/
