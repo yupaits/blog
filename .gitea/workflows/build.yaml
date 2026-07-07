@@ -33,6 +33,12 @@ jobs:
           npx pnpm config set store-dir /.pnpm-store
           npx pnpm config set registry https://registry.npmmirror.com
           npx pnpm install --frozen-lockfile
+      - name: 验证挂载
+        run: |
+          echo "=== 检查挂载点 ==="
+          mount | grep /output
+          echo "=== 尝试写入文件 ==="
+          echo "test" > /output/test.txt && echo "✅ 写入成功" || echo "❌ 写入失败"
       - name: 构建并输出
         run: |
           npx pnpm run docs:build
