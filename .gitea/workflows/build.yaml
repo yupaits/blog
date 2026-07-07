@@ -21,17 +21,11 @@ jobs:
           npm config set registry https://registry.npmmirror.com
           npm install -g corepack@latest
           corepack enable
-      - name: 计算pnpm依赖hash
-        uses: actions/go-hashfiles@v0.0.1
-        id: get-hash
-        with:
-          patterns: |-
-            **/pnpm-lock.yaml
       - name: 缓存pnpm依赖
         uses: actions/cache@v4
         with:
           path: /.pnpm-store
-          key: pnpm-store-${{ steps.get-hash.outputs.hash }}
+          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             pnpm-store-
       - name: 安装依赖
