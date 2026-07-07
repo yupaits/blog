@@ -21,11 +21,17 @@ jobs:
           npm config set registry https://registry.npmmirror.com
           npm install -g corepack@latest
           corepack enable
+      - name: 计算pnpm依赖hash
+        uses: actions/go-hashfiles@v0.0.1
+        id: get-hash
+        with:
+          patterns: |-
+            **/pnpm-lock.yaml
       - name: 缓存pnpm依赖
         uses: actions/cache@v4
         with:
           path: /.pnpm-store
-          key: pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key: pnpm-store-${{ steps.get-hash.outputs.hash }}
           restore-keys: |
             pnpm-store-
       - name: 安装依赖
@@ -35,6 +41,7 @@ jobs:
           npx pnpm install --frozen-lockfile
       - name: 验证挂载
         run: |
+          mkdir -p /output
           echo "=== 当前挂载列表 ==="
           mount
           echo "=== 检查 /output 是否为挂载点 ==="
