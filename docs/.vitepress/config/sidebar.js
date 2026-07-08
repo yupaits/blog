@@ -493,8 +493,8 @@ const sidebar = {
                 base: '/生活记录/酷玩数码/',
                 items: [
                     {
-                        text: '极空间',
-                        base: '/生活记录/酷玩数码/极空间/',
+                        text: 'NAS设备',
+                        base: '/生活记录/酷玩数码/NAS设备/',
                         collapsed: true,
                         items: [
                             {text: '极空间Docker使用攻略', link: '极空间Docker使用攻略'},
