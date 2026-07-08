@@ -503,6 +503,7 @@ const sidebar = {
                                 text: '安装Jellyfin实现IPTV播放及自建家庭影视系统',
                                 link: '安装Jellyfin实现IPTV播放及自建家庭影视系统'
                             },
+                            {text: '绿联云Docker搭建全能个人服务器', link: '绿联云Docker搭建全能个人服务器'},
                         ]
                     },
                     {
