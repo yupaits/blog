@@ -413,6 +413,7 @@ const sidebar = {
                         base: '/软件开发/实战总结/实战技巧/',
                         collapsed: true,
                         items: [
+                            {text: 'Go', link: 'Go'},
                             {text: 'Java', link: 'Java'},
                             {text: 'Spring & Spring Boot', link: 'Spring & Spring Boot'},
                             {text: 'MySQL', link: 'MySQL'},
