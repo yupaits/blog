@@ -407,12 +407,20 @@ const sidebar = {
                 text: '实战总结',
                 base: '/软件开发/实战总结/',
                 items: [
-                    {text: '常见异常解决方案', link: '常见异常解决方案'},
-                    {text: 'Java', link: 'Java'},
-                    {text: 'Spring & Spring Boot', link: 'Spring & Spring Boot'},
-                    {text: 'MySQL', link: 'MySQL'},
-                    {text: 'Vue', link: 'Vue'},
-                    {text: '其他', link: '其他'},
+                    {text: '异常解决', link: '异常解决'},
+                    {
+                        text: '实战技巧',
+                        base: '/软件开发/实战总结/实战技巧/',
+                        collapsed: true,
+                        items: [
+                            {text: 'Java', link: 'Java'},
+                            {text: 'Spring & Spring Boot', link: 'Spring & Spring Boot'},
+                            {text: 'MySQL', link: 'MySQL'},
+                            {text: 'Vue', link: 'Vue'},
+                            {text: '其他', link: '其他'},
+                        ]
+                    },
+
                 ]
             },
         ]
