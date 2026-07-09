@@ -288,6 +288,48 @@ const sidebar = {
                                     {text: 'Java25 新特性🚀', link: 'Java25新特性'},
                                 ],
                             },
+                            {
+                                text: 'Go指南',
+                                base: '/软件开发/编程基础/开发语言/Go指南/',
+                                collapsed: true,
+                                items: [
+                                    {text: 'Go语言介绍', link: 'Go语言介绍'},
+                                    {text: '语法基础', link: '语法基础'},
+                                    {text: '接口', link: '接口'},
+                                    {text: '泛型', link: '泛型'},
+                                    {text: '迭代器', link: '迭代器'},
+                                    {text: '类型', link: '类型'},
+                                    {text: '错误', link: '错误'},
+                                    {text: '文件', link: '文件'},
+                                    {text: '反射', link: '反射'},
+                                    {text: '并发', link: '并发'},
+                                    {text: '模块', link: '模块'},
+                                    {text: '测试', link: '测试'},
+                                    {text: 'CGO', link: 'CGO'},
+                                    {text: '性能分析', link: '性能分析'},
+                                    {
+                                        text: '标准库',
+                                        base: '/软件开发/编程基础/开发语言/Go指南/标准库/',
+                                        collapsed: true,
+                                        items: [
+                                            {text: 'Go标准库介绍', link: 'Go标准库介绍'},
+                                            {text: 'encode', link: 'encode'},
+                                            {text: 'flag', link: 'flag'},
+                                            {text: 'http', link: 'http'},
+                                            {text: 'log', link: 'log'},
+                                            {text: 'math', link: 'math'},
+                                            {text: 'net', link: 'net'},
+                                            {text: 'sort', link: 'sort'},
+                                            {text: 'strconv', link: 'strconv'},
+                                            {text: 'strings', link: 'strings'},
+                                            {text: 'template', link: 'template'},
+                                            {text: 'time', link: 'time'},
+                                            {text: 'unicode', link: 'unicode'},
+                                            {text: 'unsafe', link: 'unsafe'},
+                                        ]
+                                    },
+                                ]
+                            },
                         ]
                     },
                     {
