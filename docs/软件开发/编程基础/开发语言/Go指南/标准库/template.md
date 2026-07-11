@@ -1,4 +1,5 @@
 # template
+<div v-pre>
 
 官方文档：[template package - text/template - Go Packages](https://pkg.go.dev/text/template)
 
@@ -898,3 +899,4 @@ func ParseFiles(filenames ...string) (*Template, error)
 ```
 
 `ParseGlob`基于通配符匹配，`ParseFiles`基于文件名，它们都是使用的本地文件系统。如果是用于展示在前端的`html`文件，建议使用`html/template`包，它提供的 API 与`text/template`完全一致，但是针对`html`，`css`，`js`做了安全处理。
+</div>
