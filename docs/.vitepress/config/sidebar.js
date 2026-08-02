@@ -636,7 +636,6 @@ const sidebar = {
                 items: [
                     {text: '技术博客', link: '技术博客'},
                     {text: '在线工具', link: '在线工具'},
-                    {text: '免费素材', link: '免费素材'},
                     {text: 'AI生产力', link: 'AI生产力'},
                 ]
             }
