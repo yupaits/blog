@@ -33,8 +33,6 @@ export default defineConfig({
       })();
       `
         ],
-        // 字体
-        ['link', {rel: 'stylesheet', href: 'https://fontsapi.zeoseven.com/184/main/result.css'}],
         // fancybox
         ['link', {
             rel: 'stylesheet',

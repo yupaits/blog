@@ -16,12 +16,7 @@
 }
 
 :root {
-    --vp-font-family-base: "LXGW 975 Yuan SC 400W";
-    --vp-font-family-mono: "ZSFT-443", "LXGW 975 Yuan SC 400W";
-}
-
-.vp-doc strong {
-    text-shadow: 0.5px 0 0 currentColor;
+    --vp-font-family-mono: "ZSFT-443";
 }
 
 /* 链接文本去除下划线 */
@@ -214,7 +209,6 @@ img:not(.VPImage) {
 
 /* 代码组：添加样式及阴影 */
 .vp-code-group {
-    color: var(--vp-c-black-soft);
     border-radius: 8px;
     box-shadow: 0 10px 30px 0 var(--vp-c-border);
 }
@@ -259,7 +253,7 @@ img:not(.VPImage) {
 .vp-code-group div[class*="language-"].vp-adaptive-theme {
     border-radius: 8px;
     box-shadow: none;
-    padding-top: 0px;
+    padding-top: 0;
 }
 
 /* 代码组（无行号）：隐藏小圆点 */
