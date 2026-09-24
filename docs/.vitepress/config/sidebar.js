@@ -634,8 +634,7 @@ const sidebar = {
                 text: '站点收录',
                 base: '/站点收录/',
                 items: [
-                    {text: '技术博客', link: '技术博客'},
-                    {text: '在线工具', link: '在线工具'},
+                    {text: '行业博客', link: '行业博客'},
                     {text: 'AI生产力', link: 'AI生产力'},
                 ]
             }

@@ -15,8 +15,7 @@ export default [
             {
                 text: '站点收录',
                 items: [
-                    {text: '技术博客', link: '/站点收录/技术博客'},
-                    {text: '在线工具', link: '/站点收录/在线工具'},
+                    {text: '行业博客', link: '/站点收录/行业博客'},
                     {text: 'AI生产力', link: '/站点收录/AI生产力'},
                 ]
             },
