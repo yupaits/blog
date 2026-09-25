@@ -4,6 +4,7 @@ export default {
       {
         text: '研发',
         items: [
+          { text: '黄大年茶思屋', link: 'https://www.chaspark.com/#/home', icon: 'https://www.chaspark.com/pkg/chaspark-framework-portal/26.8.0-20260918161520/favicon.ico' },
           { text: '阿里云开发者', link: 'https://developer.aliyun.com/profile/6ibaby6qg4ku4' },
           { text: '美团技术团队', link: 'https://tech.meituan.com/', icon: 'https://awps-assets.meituan.net/mit/blog/v20190629/asset/icon/android-icon-192x192.png?v=Whistle&t=20181017-1r' },
           { text: '阮一峰的个人网站', link: 'http://www.ruanyifeng.com/' },

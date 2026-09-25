@@ -15,10 +15,9 @@ export default {
       {
         text: '专业领域',
         items: [
-          { text: 'QClaw', description: '从日常提醒到自动化开发，QClaw 帮你解锁无限可能', link: 'https://qclaw.qq.com/', icon: 'https://cdn.qclaw.qq.com/qclaw/website/image/favicon.png' },
-          { text: 'Seedance 2.5', description: '具备30秒长叙事、精准参考与编辑能力的新一代音视频生成模型', link: 'https://seed.bytedance.com/zh/seedance2_5', icon: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/favicon_1/favicon.ico' },
+          { text: 'WorkBuddy', description: '智能 AI 工作台，一人指挥，全行业专家执行，从策略到交付一站搞定', link: 'https://www.codebuddy.cn/work/', icon: 'https://download.codebuddy.cn/web/website/eb02746771ab068964c9ce8804176ef2692ddd80/assets/logo.svg' },
           { text: 'Trae', description: '一个能理解需求、调动工具、独立完成各类开发任务的超级AI开发工程师', link: 'https://www.trae.cn/', icon: 'https://lf-cdn.trae.com.cn/obj/trae-com-cn/trae_website_prod_cn/favicon.png' },
-          { text: 'CodeBuddy', description: '构建一个产品、设计、研发无缝协作的共生环境', link: 'https://www.codebuddy.cn/ide/', icon: 'https://download.codebuddy.cn/web/website/eb02746771ab068964c9ce8804176ef2692ddd80/assets/logo.svg' },
+          { text: 'Seedance 2.5', description: '具备30秒长叙事、精准参考与编辑能力的新一代音视频生成模型', link: 'https://seed.bytedance.com/zh/seedance2_5', icon: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/favicon_1/favicon.ico' },
           { text: 'KroWork', description: '把重复性的工作，变成你的Kro', link: 'https://kro.work/zh/index', icon: 'https://s15-def.ap4r.com/kos/s101/nlav112936/home/Kro.svg' },
           { text: 'ARC', description: '探索挑战智能媒体相关前沿技术', link: 'https://arc.tencent.com/zh/index', icon: 'https://arc.tencent.com/logo.ico' },
           { text: '蚂蚁阿福', description: '健康是福，健康的事就找阿福', link: 'https://www.antafu.com/', icon: 'https://mdn.alipayobjects.com/rms/afts/file/A*1LduTae8R5sAAAAAQaAAAAgAehQnAQ' },
