@@ -1,6 +1,6 @@
 /* 字体 */
 :root {
-    --vp-font-family-mono:"Cascadia Code", monospace, consolas;
+    --vp-font-family-mono: "Cascadia Code", monospace, consolas;
 }
 
 /* 链接文本去除下划线 */
