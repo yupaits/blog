@@ -77,11 +77,18 @@ if (!import.meta.env.SSR) {
     if (!clipboardData) {
       return
     }
-    const text = window?.getSelection()?.toString()
-    if (text) {
-      event.preventDefault()
-      clipboardData.setData('text/plain', `${text}\n${copyright}${decodeURI(window.location.origin + window.location.pathname)}`)
+    const selection = window?.getSelection()
+    const text = selection?.toString()
+    if (!text || text.length < 100) {
+      return
     }
+    const anchor = selection?.anchorNode
+    const element = anchor?.nodeType === 3 ? anchor.parentElement : anchor
+    if (element?.closest('pre, code, .vp-code-group')) {
+      return
+    }
+    event.preventDefault()
+    clipboardData.setData('text/plain', `${text}\n${copyright}${decodeURI(window.location.origin + window.location.pathname)}`)
   })
 }
 </script>
