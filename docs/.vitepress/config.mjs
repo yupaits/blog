@@ -87,6 +87,30 @@ export default defineConfig({
                 apiKey: '244a6a5082f48c51e9ac7afe0468bf02',
                 indexName: 'vitepress_pages',
                 detailedView: true,
+                miniSearch: {
+                    options: {
+                        // 中文按单字切分，英文与数字按词切分
+                        tokenize: (text) => {
+                            const tokens = []
+                            for (const match of text.toLowerCase().matchAll(/[\u3400-\u9fff]+|[a-z0-9_]+/g)) {
+                                const segment = match[0]
+                                if (/[\u3400-\u9fff]/.test(segment)) {
+                                    tokens.push(...Array.from(segment))
+                                } else {
+                                    tokens.push(segment)
+                                }
+                            }
+                            return tokens
+                        },
+                        processTerm: (term) => term.toLowerCase()
+                    },
+                    searchOptions: {prefix: true, fuzzy: 0.2, boost: {title: 4, titles: 2}}
+                },
+                // 构建索引前剔除围栏代码块，返回 HTML 供分段器按标题切分
+                _render: (src, env, md) => {
+                    const html = md.render(src.replace(/^```[\s\S]*?^```/gm, ''), env)
+                    return env.frontmatter?.search === false ? '' : html
+                },
                 placeholder: '搜索文档',
                 translations: {
                     button: {
