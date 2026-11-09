@@ -254,3 +254,24 @@ img:not(.VPImage) {
 #giscus {
     width: calc(100% - 8px);
 }
+
+/* 视频按需加载占位按钮 */
+.vp-doc .embed-responsive {
+  position: relative;
+}
+
+.vp-doc .video-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.vp-doc .video-play:hover {
+  background-color: var(--vp-c-brand-soft);
+}

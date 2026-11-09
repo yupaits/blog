@@ -24,6 +24,8 @@ export default defineConfig({
             (function() {
                 var hm = document.createElement("script");
                 hm.src = "https://hm.baidu.com/hm.js?323b19e5eb3d913ab6600badb878e7a3";
+                hm.async = true;
+                hm.defer = true;
                 var s = document.getElementsByTagName("script")[0]; 
                 s.parentNode.insertBefore(hm, s);
             })();
@@ -34,7 +36,10 @@ export default defineConfig({
             rel: 'stylesheet',
             href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css'
         }],
-        ['script', {src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js'}],
+        ['script', {
+            src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js',
+            defer: 'defer'
+        }],
     ],
     cleanUrls: true,
     ignoreDeadLinks: true,
@@ -191,6 +196,13 @@ export default defineConfig({
             md.use(markdownItVideo, {
                 bilibili: {width: '100%', height: '387px'}
             })
+            // 视频延后到用户点击时才请求，避免首屏加载外部 iframe
+            const renderVideo = md.renderer.rules.video
+            if (renderVideo) {
+                md.renderer.rules.video = (tokens, idx, options, env, self) =>
+                    renderVideo(tokens, idx, options, env, self)
+                        .replace(/\ssrc="([^"]+)"/, ' data-src="$1" loading="lazy"')
+            }
         }
     }
 })
