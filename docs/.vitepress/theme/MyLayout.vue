@@ -1,24 +1,30 @@
 <template>
   <BlogPage v-if="hideWm" :hasMeta="false"/>
-  <el-watermark v-else :content="site.title" :font="font">
+  <el-watermark v-else :content="site.title" :font="font" :gap="[160, 120]">
     <BlogPage :hasMeta="true"/>
   </el-watermark>
 </template>
 
 <script setup>
 import {ElWatermark} from 'element-plus'
-import {useData} from 'vitepress'
+import {useData, useRoute} from 'vitepress'
 import {computed, nextTick, provide, reactive, watch} from 'vue'
 import BlogPage from './components/BlogPage.vue'
 
 const {frontmatter, site, isDark} = useData()
+const route = useRoute()
 
 const font = reactive({
-  color: 'rgba(0, 0, 0, .08)'
+  color: 'rgba(0, 0, 0, .08)',
+  fontSize: 13
 })
 
+// 水印仅在文章页展示：首页、栏目页、草稿页默认关闭
 const hideWm = computed(() => {
-  return frontmatter.value.watermark === 'hidden'
+  const fm = frontmatter.value
+  const path = route.path
+  const isIndex = path === '/' || /^\/[^/]+\/$/.test(path)
+  return fm.watermark === 'hidden' || fm.layout === 'home' || isIndex || fm.draft === true
 })
 
 // 启用深色/浅色主题切换动画
