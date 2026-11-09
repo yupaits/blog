@@ -83,7 +83,7 @@ onMounted(() => {
 
 /* 卡片鼠标悬停 */
 .linkcard:hover {
-  background-color: var(--vp-c-yellow-soft);
+  background-color: var(--vp-c-brand-soft);
 }
 
 /* 描述链接文字 */

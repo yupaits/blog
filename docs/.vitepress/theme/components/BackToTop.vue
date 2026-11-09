@@ -115,7 +115,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", onScroll))
 
 .progress-ring-background {
   fill: none;
-  stroke: rgba(62, 175, 124, 0.15);
+  stroke: var(--vp-c-brand-soft);
   stroke-width: 3;
 }
 

@@ -65,10 +65,10 @@ img:not(.VPImage) {
 :root {
     /* hero标题文字渐变色 */
     --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--vp-c-brand-1) 20%, var(--vp-c-brand-3));
 
     /* hero图片背景渐变色 */
-    --vp-home-hero-image-background-image: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+    --vp-home-hero-image-background-image: -webkit-linear-gradient(120deg, var(--vp-c-brand-1) 20%, var(--vp-c-brand-3));
     --vp-home-hero-image-filter: blur(40px);
 }
 
