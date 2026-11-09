@@ -181,6 +181,12 @@ export default defineConfig({
             linkText: '返回主页'
         }
     },
+    // 浅克隆 / 无 git 历史时，用 frontmatter.date 兜底最后更新时间
+    transformPageData(pageData) {
+        if (!pageData.lastUpdated && pageData.frontmatter.date) {
+            pageData.lastUpdated = new Date(pageData.frontmatter.date).getTime()
+        }
+    },
     markdown: {
         theme: {light: 'slack-ochin', dark: 'monokai'},
         lineNumbers: false,
