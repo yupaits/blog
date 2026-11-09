@@ -9,7 +9,7 @@ const {value, link} = defineProps(['value', 'link'])
 <style scoped>
 a.link-btn {
   border: 1px solid var(--vp-c-border);
-  border-radius: .25rem;
+  border-radius: var(--blog-radius-sm);
   background-color: var(--vp-c-bg);
   padding: 5px 10px;
   height: 16px;

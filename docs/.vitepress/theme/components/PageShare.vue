@@ -55,14 +55,15 @@ const share = async () => {
 }
 
 .share-btn {
-  min-width: 108px;
-  padding: 4px 8px;
+  min-width: 96px;
+  height: var(--blog-pill-height);
+  padding: 0 var(--blog-space-3);
   border: 1px solid var(--vp-c-border);
-  border-radius: 999px;
+  border-radius: var(--blog-radius-pill);
   background-color: var(--vp-c-bg);
   color: var(--vp-c-brand-1);
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1;
   cursor: pointer;
 }
 

@@ -6,7 +6,7 @@
 /* 链接文本去除下划线 */
 .vp-doc a {
     text-decoration: none;
-    padding: 0 4px;
+    padding: 0 var(--blog-space-1);
 }
 
 /* 正文图片居中：限定作用域，避免影响卡片图标与评论区头像 */
@@ -226,4 +226,19 @@
 
 .vp-doc .video-play:hover {
   background-color: var(--vp-c-brand-soft);
+}
+
+/* 统一节奏：间距、圆角、状态胶囊与动效时长 */
+:root {
+    --blog-space-1: 4px;
+    --blog-space-2: 8px;
+    --blog-space-3: 12px;
+    --blog-space-4: 16px;
+    --blog-space-6: 24px;
+    --blog-radius-sm: 4px;
+    --blog-radius: 8px;
+    --blog-radius-pill: 999px;
+    --blog-pill-height: 26px;
+    --blog-duration-fast: 150ms;
+    --blog-duration: 250ms;
 }
