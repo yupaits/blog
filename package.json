@@ -5,13 +5,9 @@
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
     "element-plus": "2.11.3",
-    "markdown-it-custom-attrs": "^1.0.2",
     "markdown-it-task-checkbox": "^1.0.6",
-    "unplugin-auto-import": "^0.18.3",
-    "unplugin-vue-components": "^0.27.4",
     "vitepress": "1.6.4",
-    "vitepress-plugin-comment-with-giscus": "^1.1.15",
-    "vue-github-button": "^3.1.0"
+    "vitepress-plugin-comment-with-giscus": "^1.1.15"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",

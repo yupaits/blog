@@ -12,8 +12,6 @@ export default defineConfig({
     lang: 'zh-CN',
     head: [
         ['link', {rel: 'icon', href: '/favicon.ico'}],
-        // Algolia
-        ['meta', {name: 'algolia-site-verification', content: '61973CBB63FA493B'}],
         // 百度统计
         [
             'script',
@@ -87,9 +85,6 @@ export default defineConfig({
             // 已接入algolia，目前本地搜索引擎结果更准确
             provider: 'local',
             options: {
-                appId: 'SBFHH164J9',
-                apiKey: '244a6a5082f48c51e9ac7afe0468bf02',
-                indexName: 'vitepress_pages',
                 detailedView: true,
                 miniSearch: {
                     options: {
