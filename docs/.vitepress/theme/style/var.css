@@ -1,6 +1,24 @@
-/* 字体 */
+/* 字体：自托管 JetBrains Mono（latin 子集约 21KB/字重），中文注释回退正文字体 */
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/fonts/jetbrains-mono-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/fonts/jetbrains-mono-700.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
-    --vp-font-family-mono: "Cascadia Code", monospace, consolas;
+    --vp-font-family-mono: "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    /* 行内代码与代码块字号从 0.875em 提升，长文阅读更省力 */
+    --vp-code-font-size: 0.9em;
 }
 
 /* 链接文本去除下划线 */
