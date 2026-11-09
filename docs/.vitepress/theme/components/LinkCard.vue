@@ -24,13 +24,16 @@
 
 <script setup>
 import {computed, ref} from 'vue';
+import {getSiteIcon} from '../utils/siteIcons.mjs'
 
 const {group, option} = defineProps(['group', 'option'])
 const defaultIconUrl = '/icon/url.png'
 const fallback = ref(false)
 
 // 服务端直接输出图标地址：不再依赖 mounted 后异步探测或本地 ref 名称
-const iconUrl = computed(() => fallback.value ? defaultIconUrl : option?.icon || defaultIconUrl)
+const iconUrl = computed(() => fallback.value
+    ? defaultIconUrl
+    : option?.icon || getSiteIcon(option?.link))
 const onIconError = () => {
     fallback.value = true
 }
