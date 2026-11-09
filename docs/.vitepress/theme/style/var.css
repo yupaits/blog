@@ -9,9 +9,9 @@
     padding: 0 4px;
 }
 
-/* 图片居中显示 */
-img:not(.VPImage) {
-    text-align: center;
+/* 正文图片居中：限定作用域，避免影响卡片图标与评论区头像 */
+.vp-doc p > img {
+    display: block;
     margin: 0 auto;
 }
 
