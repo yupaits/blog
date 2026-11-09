@@ -287,7 +287,11 @@ export default defineConfig({
                 const html = imageWithLightbox(tokens, idx, options, env, self)
                 const title = tokens[idx].attrGet('title')
                 if (!title) return html
-                const caption = title.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"')
+                const caption = title
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
                 return `<figure class="vp-figure">${html}<figcaption>${caption}</figcaption></figure>`
             }
 

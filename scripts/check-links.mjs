@@ -40,6 +40,6 @@ for (const file of mdFiles) {
 }
 
 console.log(`检查 ${mdFiles.length} 篇文档、${references} 处本地图片引用`)
-console.log(`缺失 ${missing.length} 处，路径编码待规范 ${encoded.size} 篇`)
+console.log(`缺失 ${missing.length} 处，使用 %20 规范编码 ${encoded.size} 篇`)
 missing.slice(0, 20).forEach(item => console.log(`  MISS ${item}`))
 if (missing.length) process.exit(1)

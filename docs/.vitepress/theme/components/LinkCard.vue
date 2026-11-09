@@ -17,7 +17,7 @@
       <span v-else-if="$slots.description" class="subtitle">
         <slot name="description"></slot>
       </span>
-      <span v-else class="subtitle" v-html="option.description"/>
+      <span v-else class="subtitle">{{ option.description }}</span>
     </p>
   </a>
 </template>
