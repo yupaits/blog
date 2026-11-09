@@ -42,7 +42,7 @@ export default defineConfig({
         }],
     ],
     cleanUrls: true,
-    ignoreDeadLinks: true,
+    ignoreDeadLinks: [/^https?:\/\//, /%20/],
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         logo: '/favicon.ico',
