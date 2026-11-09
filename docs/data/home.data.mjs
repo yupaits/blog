@@ -141,6 +141,35 @@ export default createContentLoader('**/*.md', {
             .sort((a, b) => b[0] - a[0])
             .map(([year, list]) => ({year, posts: list}))
 
+        // 精选篇目由独立配置维护；配置缺失或路径失效时回退到最近更新的文章
+        let config = []
+        try {
+            config = JSON.parse(fs.readFileSync(path.resolve(srcDir, 'data/featured.json'), 'utf8'))
+        } catch {
+            // 无配置文件时走兜底
+        }
+        const byUrl = new Map(posts.map(post => [post.url, post]))
+        const categoryOf = (url) => decodeURIComponent(url).split('/').filter(Boolean)[0] ?? ''
+        const picked = config
+            .map(item => {
+                const post = byUrl.get(item.url)
+                return post ? {
+                    title: post.title,
+                    url: post.url,
+                    category: categoryOf(post.url),
+                    date: post.date,
+                    note: item.note ?? ''
+                } : null
+            })
+            .filter(Boolean)
+        const featured = picked.length ? picked : posts.slice(0, 6).map(post => ({
+            title: post.title,
+            url: post.url,
+            category: categoryOf(post.url),
+            date: post.date,
+            note: ''
+        }))
+
         return {
             stats: {
                 posts: posts.length,
@@ -150,7 +179,8 @@ export default createContentLoader('**/*.md', {
                 updated: posts[0]?.date ?? 0
             },
             categories: CATEGORIES.map(item => ({...item, count: counts.get(item.name) ?? 0})),
-            years
+            years,
+            featured
         }
     }
 })
