@@ -35,11 +35,10 @@ features:
 ---
 
 <script setup>
-import {useData} from 'vitepress'
-const {theme} = useData()
+import {data as posts} from './data/posts.data.mjs'
 </script>
 
 <LinkCardGroup subfield style="margin-top: 4rem" :data="[{
   text: '近期更新',
-  items: (theme?.posts ?? []).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 12)
+  items: posts.slice(0, 12)
 }]"/>
