@@ -285,3 +285,10 @@
         scroll-behavior: auto !important;
     }
 }
+
+/* 键盘可达：统一焦点样式 */
+:where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--vp-c-brand-1);
+    outline-offset: 2px;
+    border-radius: var(--blog-radius-sm);
+}
