@@ -242,3 +242,34 @@
     --blog-duration-fast: 150ms;
     --blog-duration: 250ms;
 }
+
+/* 长文表格与配图说明 */
+.vp-doc .vp-table-wrapper {
+    overflow-x: auto;
+    margin: var(--blog-space-4) 0;
+}
+
+.vp-doc .vp-table-wrapper table {
+    margin: 0;
+}
+
+.vp-doc .vp-figure {
+    margin: var(--blog-space-4) 0;
+}
+
+.vp-doc .vp-figure img {
+    display: block;
+    margin: 0 auto;
+}
+
+.vp-doc .vp-figure figcaption {
+    margin-top: var(--blog-space-2);
+    text-align: center;
+    font-size: 12px;
+    color: var(--vp-c-text-3);
+}
+
+/* 暗色主题下代码分隔线与品牌色协调 */
+.dark {
+    --vp-code-block-divider-color: rgba(255, 255, 255, 0.12);
+}

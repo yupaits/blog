@@ -225,6 +225,24 @@ export default defineConfig({
             md.use(markdownItVideo, {
                 bilibili: {width: '100%', height: '387px'}
             })
+            // 长表格加滚动容器，避免窄屏撑破正文
+            const tableOpen = md.renderer.rules.table_open
+            const tableClose = md.renderer.rules.table_close
+            md.renderer.rules.table_open = (...args) =>
+                '<div class="vp-table-wrapper">' + (tableOpen ? tableOpen(...args) : '<table>')
+            md.renderer.rules.table_close = (...args) =>
+                (tableClose ? tableClose(...args) : '</table>') + '</div>'
+
+            // 带标题的图片补 figcaption，便于长文配图说明
+            const imageWithLightbox = md.renderer.rules.image
+            md.renderer.rules.image = (tokens, idx, options, env, self) => {
+                const html = imageWithLightbox(tokens, idx, options, env, self)
+                const title = tokens[idx].attrGet('title')
+                if (!title) return html
+                const caption = title.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"')
+                return `<figure class="vp-figure">${html}<figcaption>${caption}</figcaption></figure>`
+            }
+
             // 视频延后到用户点击时才请求，避免首屏加载外部 iframe
             const renderVideo = md.renderer.rules.video
             if (renderVideo) {
