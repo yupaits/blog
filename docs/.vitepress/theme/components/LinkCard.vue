@@ -49,7 +49,7 @@ const onIconError = () => {
   background-color: var(--vp-c-bg-soft);
   border: 1px solid transparent;
   border-radius: 8px;
-  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  transition: transform var(--blog-duration) ease, border-color var(--blog-duration) ease, background-color var(--blog-duration) ease;
 }
 
 /* 箭头占位：hover 才显现，不产生布局跳动 */
@@ -61,7 +61,7 @@ const onIconError = () => {
   font-size: 14px;
   color: var(--vp-c-brand-1);
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity var(--blog-duration) ease;
 }
 
 .linkcard.linkcard-subfield {
@@ -86,7 +86,7 @@ const onIconError = () => {
   line-height: 25px;
   color: var(--vp-c-text-1);
   margin: 0;
-  transition: color 0.5s;
+  transition: color var(--blog-duration);
 }
 
 /* 描述链接标题 */

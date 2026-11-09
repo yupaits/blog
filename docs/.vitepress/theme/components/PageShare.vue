@@ -69,6 +69,6 @@ const share = async () => {
 
 .share-btn:hover {
   box-shadow: 0 2px 4px 0 var(--vp-shadow-2);
-  transition: box-shadow 0.25s ease-in-out;
+  transition: box-shadow var(--blog-duration) ease-in-out;
 }
 </style>

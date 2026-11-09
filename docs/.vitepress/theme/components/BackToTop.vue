@@ -98,7 +98,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", onScroll))
   align-items: center;
   justify-content: center;
   z-index: 2;
-  transition: background-color 0.2s ease;
+  transition: background-color var(--blog-duration-fast) ease;
 }
 
 .vitepress-backTop-main:hover {
@@ -125,7 +125,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", onScroll))
   stroke-width: 3;
   stroke-dasharray: 264;
   stroke-linecap: round;
-  transition: stroke-dashoffset 0.15s ease-out;
+  transition: stroke-dashoffset var(--blog-duration-fast) ease-out;
 }
 
 .icon {
@@ -136,7 +136,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", onScroll))
 /* 进入 退出动画 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity var(--blog-duration) ease;
 }
 
 .fade-enter-from,
