@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref, watch} from 'vue'
+import {nextTick, onMounted, ref, watch} from 'vue'
 import {useData, useRoute} from 'vitepress'
 import dayjs from 'dayjs'
 
@@ -55,10 +55,13 @@ const calcImageTime = (count) => {
 
 const analyse = () => {
   const container = document.querySelector('.vp-doc')
-  const content = container?.textContent
+  if (!container) return
+  const clone = container.cloneNode(true)
+  clone.querySelectorAll('pre, code, .vp-code-group, .line-numbers-wrapper').forEach(el => el.remove())
+  const content = clone.textContent
   let wordCount = calcWords(content)
   wordcount.value = formatWordCount(wordCount)
-  let imageCount = container?.querySelectorAll('img')?.length ?? 0
+  let imageCount = container.querySelectorAll('img')?.length ?? 0
   const wordTime = calcWordTime(wordCount)
   const imageTime = calcImageTime(imageCount)
   readTime.value = Math.ceil((wordTime + imageTime) / 60)
@@ -70,7 +73,8 @@ onMounted(() => {
 
 watch(
     () => route.path,
-    () => {
+    async () => {
+      await nextTick()
       analyse()
     }
 )
