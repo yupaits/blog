@@ -103,46 +103,26 @@ img:not(.VPImage) {
     }
 }
 
-/* 导航栏毛玻璃 */
-:root {
+/* 导航栏毛玻璃：提到顶层，避免 :root 嵌套带来的特异性异常 */
+.VPNavBar:not(.has-sidebar):not(.home.top),
+.curtain,
+.VPLocalNav {
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+}
 
-    /* 首页下滑后导航透明 */
+@media (min-width: 960px) {
+  .VPNavBar:not(.home.top) .content-body {
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+  }
+}
 
-    .VPNavBar:not(.has-sidebar):not(.home.top) {
-        background-color: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(10px);
-    }
-
-    /* Feature透明 */
-
-    .VPFeature {
-        border: none;
-        box-shadow: 0 10px 30px 0 rgb(0 0 0 / 15%);
-        background-color: transparent;
-    }
-
-    /* 文档页侧边栏顶部透明 */
-
-    .curtain {
-        background-color: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(10px);
-    }
-
-    @media (min-width: 960px) {
-
-        /* 文档页导航中间透明 */
-        .VPNavBar:not(.home.top) .content-body {
-            background-color: rgba(255, 255, 255, 0);
-            backdrop-filter: blur(10px);
-        }
-    }
-
-    /* 移动端大纲栏透明 */
-
-    .VPLocalNav {
-        background-color: rgba(255, 255, 255, 0);
-        backdrop-filter: blur(10px);
-    }
+/* 首页 Feature 卡片 */
+.VPFeature {
+  border: none;
+  box-shadow: 0 10px 30px 0 var(--vp-shadow-2);
+  background-color: transparent;
 }
 
 /* 代码块：增加留空边距 增加阴影 */
