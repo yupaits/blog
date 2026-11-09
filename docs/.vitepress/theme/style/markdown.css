@@ -1,0 +1,416 @@
+/* ==========================================================================
+   Markdown 元素
+   - 引用块、行内代码、代码块与代码组、提示容器
+   - 表格、图片与图注、脚注、视频占位
+   ========================================================================== */
+
+/* ---------- 引用块 ---------- */
+/* 左侧品牌色竖条 + 浅底，和提示容器同一套结构 */
+.VPDoc .vp-doc blockquote {
+  margin: 22px 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--vp-c-brand-2);
+  border-radius: 0 var(--blog-radius, 8px) var(--blog-radius, 8px) 0;
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+}
+
+.VPDoc .vp-doc blockquote > p {
+  margin: 6px 0;
+}
+
+/* ---------- 行内代码 ---------- */
+/* 与正文保持 0.85 的比例，标题/表格/列表内同样相对父级缩放 */
+.VPDoc .vp-doc :not(pre) > code {
+  padding: 2px 6px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 5px;
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+  font-size: 0.85em;
+}
+
+/* ---------- 代码块 ---------- */
+/* 代码块：顶部留白、macOS 圆点与行号偏移统一由变量驱动 */
+:root {
+  --vp-code-pad-top: 20px;
+  --vp-code-line-top: 40px;
+  --vp-code-group-line-top: 20px;
+  --vp-code-dot-size: 12px;
+}
+
+.vp-doc div[class*="language-"],
+.vp-code-group {
+  border-radius: 8px;
+  /* 不再使用向下偏移的投影，避免暗色下底部出现发亮的色带 */
+  box-shadow: none;
+}
+
+.vp-doc div[class*="language-"] {
+  padding-top: var(--vp-code-pad-top);
+}
+
+/* macOS 风格三色圆点：独立代码块与代码组共用 */
+.vp-doc div[class*="language-"]::before,
+.vp-code-group .tabs::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: var(--vp-code-dot-size);
+  height: var(--vp-code-dot-size);
+  border-radius: 50%;
+  background-color: #ff5f56;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+  z-index: 1;
+}
+
+.vp-code-group .tabs {
+  position: relative;
+  padding-top: var(--vp-code-pad-top);
+}
+
+/* 代码组内部不再重复绘制阴影与圆点 */
+.vp-code-group div[class*="language-"] {
+  padding-top: 0;
+  box-shadow: none;
+}
+
+.vp-code-group div[class*="language-"]::before {
+  display: none;
+}
+
+/* 行号：随顶部留白偏移，右侧竖线只画一条 */
+.vp-doc .line-numbers-wrapper {
+  padding-top: var(--vp-code-line-top);
+  border-right: none;
+}
+
+.vp-doc .line-numbers-wrapper::after {
+  content: "";
+  position: absolute;
+  top: var(--vp-code-line-top);
+  right: 0;
+  height: calc(100% - var(--vp-code-line-top) - 20px);
+  border-right: 1px solid var(--vp-code-block-divider-color);
+}
+
+.vp-code-group .line-numbers-wrapper {
+  padding-top: var(--vp-code-group-line-top);
+}
+
+.vp-code-group .line-numbers-wrapper::after {
+  top: var(--vp-code-group-line-top);
+  height: calc(100% - var(--vp-code-group-line-top) - 20px);
+}
+
+/* 用 1px 描边界定边界，不使用投影，避免底部出现色带 */
+.VPDoc .vp-doc div[class*='language-'] {
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: none;
+}
+
+/* 代码组由外层容器统一描边，内部代码块不再重复 */
+.VPDoc .vp-doc .vp-code-group div[class*='language-'] {
+  border: 0;
+}
+
+/* 语言标识：小号胶囊，hover 时让位给复制按钮 */
+.VPDoc .vp-doc [class*='language-'] > span.lang {
+  top: 10px;
+  right: 12px;
+  padding: 1px 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-pill, 999px);
+  background-color: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-3);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  transition: opacity var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPDoc .vp-doc [class*='language-'] > button.copy {
+  top: 8px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--blog-radius-sm, 4px);
+  border-color: var(--vp-c-divider);
+  transition: opacity var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    border-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPDoc .vp-doc [class*='language-'] > button.copy:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+/* 行内高亮与错误行沿用默认主题的 class，只换配色 */
+:root {
+  --vp-code-line-highlight-color: rgba(212, 56, 13, 0.08);
+}
+
+.dark {
+  --vp-code-line-highlight-color: rgba(255, 156, 110, 0.14);
+}
+
+/* 代码组 */
+.vp-code-group {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius, 8px);
+}
+
+/* 标签栏默认的 inset 分隔线和 border-bottom 叠成两条浅线，只保留一条 */
+.vp-code-group .tabs {
+  border-bottom: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg-soft);
+  box-shadow: none;
+}
+
+.vp-code-group .tabs label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 内部代码块继承的下边距会在容器底部露出 16px 页面底色，形成白条 */
+.vp-code-group div[class*='language-'] {
+  margin-bottom: 0 !important;
+}
+
+/* 暗色主题下代码分隔线与品牌色协调 */
+.dark {
+  --vp-code-block-divider-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- 提示容器 ---------- */
+/* 提示框背景颜色 */
+:root {
+  --vp-custom-block-tip-bg: var(--vp-c-green-soft);
+}
+
+.custom-block.tip {
+  border-color: var(--vp-c-green-2);
+}
+
+.custom-block.warning {
+  border-color: var(--vp-c-yellow-2);
+}
+
+.custom-block.danger {
+  border-color: var(--vp-c-red-2);
+}
+
+.VPDoc .vp-doc .custom-block {
+  padding: 16px 18px;
+  border: 1px solid var(--vp-c-divider);
+  border-left-width: 3px;
+  border-radius: var(--blog-radius, 8px);
+  background-color: var(--vp-c-bg-soft);
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+.VPDoc .vp-doc .custom-block.tip {
+  border-left-color: var(--vp-c-green-2);
+}
+
+.VPDoc .vp-doc .custom-block.warning {
+  border-left-color: var(--vp-c-yellow-2);
+}
+
+.VPDoc .vp-doc .custom-block.danger {
+  border-left-color: var(--vp-c-red-2);
+}
+
+.VPDoc .vp-doc .custom-block-title {
+  margin-bottom: 6px;
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+}
+
+.VPDoc .vp-doc .custom-block p:first-child {
+  margin-top: 0;
+}
+
+.VPDoc .vp-doc .custom-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- 表格 ---------- */
+/* 长文表格滚动容器 */
+.vp-doc .vp-table-wrapper {
+  overflow-x: auto;
+  margin: var(--blog-space-4) 0;
+}
+
+.vp-doc .vp-table-wrapper table {
+  margin: 0;
+}
+
+/* 边界只用 1px 描边（与代码块一致），不使用投影/滚动阴影 */
+.VPDoc .vp-doc .vp-table-wrapper {
+  margin: 22px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-card, 12px);
+  background-color: var(--vp-c-bg);
+  box-shadow: none;
+  background-image: none;
+  overflow-x: auto;
+}
+
+/* 表头首行的顶边叠在外层描边上会形成一条更粗的深色边，去掉 */
+.VPDoc .vp-doc .vp-table-wrapper tr:first-child {
+  border-top: 0;
+}
+
+.VPDoc .vp-doc .vp-table-wrapper table {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  display: table;
+  font-size: 14px;
+}
+
+.VPDoc .vp-doc table th,
+.VPDoc .vp-doc table td {
+  padding: 9px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--vp-c-divider);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.65;
+}
+
+.VPDoc .vp-doc table th {
+  background-color: var(--vp-c-bg-soft);
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
+}
+
+.VPDoc .vp-doc table tr:nth-child(2n) {
+  background-color: transparent;
+}
+
+.VPDoc .vp-doc table tbody tr {
+  transition: background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPDoc .vp-doc table tbody tr:hover {
+  background-color: var(--vp-c-bg-soft);
+}
+
+.VPDoc .vp-doc table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ---------- 图片与图注 ---------- */
+.vp-doc .vp-figure {
+  margin: var(--blog-space-4) 0;
+}
+
+.vp-doc .vp-figure img {
+  display: block;
+  margin: 0 auto;
+}
+
+.vp-doc .vp-figure figcaption {
+  margin-top: var(--blog-space-2);
+  text-align: center;
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+}
+
+.VPDoc .vp-doc p > img,
+.VPDoc .vp-doc .vp-figure img {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius, 8px);
+  background-color: var(--vp-c-bg-soft);
+}
+
+.VPDoc .vp-doc [data-fancybox] {
+  cursor: zoom-in;
+}
+
+.VPDoc .vp-doc .vp-figure {
+  margin: 24px 0;
+}
+
+.VPDoc .vp-doc .vp-figure figcaption {
+  margin-top: 10px;
+  color: var(--vp-c-text-3);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+/* ---------- 脚注 ---------- */
+.VPDoc .vp-doc .footnotes {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+}
+
+.VPDoc .vp-doc sup.footnote-ref a {
+  padding: 0 3px;
+  border-bottom: 0;
+  font-size: 11px;
+}
+
+/* ---------- 视频按需加载占位按钮 ---------- */
+.vp-doc .embed-responsive {
+  position: relative;
+}
+
+.vp-doc .video-play {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.vp-doc .video-play:hover {
+  background-color: var(--vp-c-brand-soft);
+}
+
+/* ---------- 移动端 Markdown 元素 ---------- */
+@media (max-width: 639px) {
+  .VPDoc .vp-doc div[class*='language-'] {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .vp-code-group {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .VPDoc .vp-doc [class*='language-'] > span.lang {
+    top: 8px;
+    right: 10px;
+  }
+
+  .VPDoc .vp-doc .vp-table-wrapper {
+    margin: 18px 0;
+  }
+
+  .VPDoc .vp-doc table th,
+  .VPDoc .vp-doc table td {
+    padding: 8px 12px;
+  }
+}

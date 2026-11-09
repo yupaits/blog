@@ -1,3 +1,9 @@
+/* ==========================================================================
+   设计变量与基础层
+   - 字体、颜色、间距、圆角、阴影、动效等全站 token
+   - 只放跨页面共用的基础规则，具体组件样式见 nav / home / doc / markdown / components
+   ========================================================================== */
+
 /* 字体：自托管 JetBrains Mono（latin 子集约 21KB/字重），中文注释回退正文字体 */
 @font-face {
     font-family: "JetBrains Mono";
@@ -16,15 +22,72 @@
 }
 
 :root {
-    --vp-font-family-mono: "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
-    /* 行内代码与代码块字号从 0.875em 提升，长文阅读更省力 */
-    --vp-code-font-size: 0.9em;
+    /* 正文：拉丁字形优先走系统 UI 字体，中文回退到各平台自带黑体，不额外加载中文字体 */
+    --blog-font-sans:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI Variable Text",
+        "Segoe UI",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        "Noto Sans SC",
+        "Source Han Sans SC",
+        "WenQuanYi Micro Hei",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    /* 标题：优先系统 Display 字面，字面更紧凑，正文与标题共用中文回退 */
+    --blog-font-heading:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI Variable Display",
+        "Segoe UI",
+        "PingFang SC",
+        "Microsoft YaHei",
+        "Noto Sans SC",
+        "Source Han Sans SC",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+    --vp-font-family-base: var(--blog-font-sans);
+    /* 代码：等宽英文优先（自托管 JetBrains Mono 子集），
+       依次回退到系统等宽字体；中文注释回退系统黑体，末尾保留通用 monospace */
+    --vp-font-family-mono:
+        "JetBrains Mono",
+        "Fira Code",
+        "Cascadia Code",
+        "SF Mono",
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        "Liberation Mono",
+        "PingFang SC",
+        "Microsoft YaHei",
+        "Noto Sans SC",
+        monospace;
+    /* 行内代码与代码块统一为正文的 0.85，行高收紧到 1.6 */
+    --vp-code-font-size: 0.85em;
+    --vp-code-line-height: 1.6;
 }
 
-/* 链接文本去除下划线 */
+/* 代码优先保证辨识度：关闭连字与上下文替换，避免 != / => 被连成图形 */
+.vp-doc code,
+.vp-doc kbd,
+.vp-doc samp,
+.vp-doc pre {
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "calt" 0;
+}
+
+/* 标题使用紧凑字面栈，中文标题跟随系统黑体 */
+.VPDoc .vp-doc :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--blog-font-heading);
+}
+
+/* 链接文本去除下划线（hover 反馈由 doc.css 统一处理） */
 .vp-doc a {
     text-decoration: none;
-    padding: 0 var(--blog-space-1);
 }
 
 /* 正文图片居中：限定作用域，避免影响卡片图标与评论区头像 */
@@ -33,217 +96,25 @@
     margin: 0 auto;
 }
 
-/* 导航栏、侧边栏选项选中时字体加粗 */
-.VPNavBarMenuLink.active,
-.VPNavBarMenuGroup.active .text,
-.VPMenuLink .active,
-.VPSidebarItem.is-link.is-active .VPLink .text {
-    text-shadow: 0.5px 0 0 currentColor;
-}
-
-/* 导航栏下拉菜单分组标题 */
-.VPMenuGroup .title {
-    font-size: 11px;
-    color: var(--vp-c-text-3);
-}
-
 /* 主题色 */
 :root {
     --vp-c-brand-1: #d4380d;
     --vp-c-brand-2: #fa541c;
     --vp-c-brand-3: #ff7a45;
+    /* 品牌浅底跟随主色，避免沿用默认蓝色导致 hover / 选中态串色 */
+    --vp-c-brand-soft: color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
 }
 
 .dark {
     --vp-c-brand-1: #ff9c6e;
     --vp-c-brand-2: #ff7a45;
     --vp-c-brand-3: #fa541c;
-}
-
-/* 提示框背景颜色 */
-:root {
-    --vp-custom-block-tip-bg: var(--vp-c-green-soft);
-}
-
-/* 提示框 */
-.custom-block.tip {
-    border-color: var(--vp-c-green-2);
-}
-
-/* 警告框 */
-.custom-block.warning {
-    border-color: var(--vp-c-yellow-2);
-}
-
-/* 危险框 */
-.custom-block.danger {
-    border-color: var(--vp-c-red-2);
-}
-
-:root {
-    /* hero标题文字渐变色 */
-    --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--vp-c-brand-1) 20%, var(--vp-c-brand-3));
-
-    /* hero图片背景渐变色 */
-    --vp-home-hero-image-background-image: -webkit-linear-gradient(120deg, var(--vp-c-brand-1) 20%, var(--vp-c-brand-3));
-    --vp-home-hero-image-filter: blur(40px);
-}
-
-/* hero图片圆角 */
-.VPImage.image-src {
-    border-radius: 1rem;
-}
-
-/* Element Plus组件样式优化 */
-.vp-doc {
-    .timeline {
-
-        /* 时间线元素去除li前面的圆点 */
-
-        li {
-            list-style: none;
-            margin-top: 0;
-        }
-
-        .title {
-            color: var(--vp-c-text-1)
-        }
-
-        .label {
-            font-size: 12px;
-            color: var(--vp-c-text-2);
-        }
-
-        .content {
-            color: var(--vp-c-text-1)
-        }
-    }
-}
-
-/* 导航栏毛玻璃：提到顶层，避免 :root 嵌套带来的特异性异常 */
-.VPNavBar:not(.has-sidebar):not(.home.top),
-.curtain,
-.VPLocalNav {
-  background-color: transparent;
-  backdrop-filter: blur(10px);
-}
-
-@media (min-width: 960px) {
-  .VPNavBar:not(.home.top) .content-body {
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-  }
-}
-
-/* 首页 Feature 卡片 */
-.VPFeature {
-  border: none;
-  box-shadow: 0 10px 30px 0 var(--vp-shadow-2);
-  background-color: transparent;
-}
-
-/* 代码块：顶部留白、macOS 圆点与行号偏移统一由变量驱动 */
-:root {
-    --vp-code-pad-top: 20px;
-    --vp-code-line-top: 40px;
-    --vp-code-group-line-top: 20px;
-    --vp-code-dot-size: 12px;
-}
-
-.vp-doc div[class*="language-"],
-.vp-code-group {
-    border-radius: 8px;
-    box-shadow: 0 10px 30px 0 var(--vp-c-border);
-}
-
-.vp-doc div[class*="language-"] {
-    padding-top: var(--vp-code-pad-top);
-}
-
-/* macOS 风格三色圆点：独立代码块与代码组共用 */
-.vp-doc div[class*="language-"]::before,
-.vp-code-group .tabs::before {
-    content: "";
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    width: var(--vp-code-dot-size);
-    height: var(--vp-code-dot-size);
-    border-radius: 50%;
-    background-color: #ff5f56;
-    box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
-    z-index: 1;
-}
-
-.vp-code-group .tabs {
-    position: relative;
-    padding-top: var(--vp-code-pad-top);
-}
-
-/* 代码组内部不再重复绘制阴影与圆点 */
-.vp-code-group div[class*="language-"] {
-    padding-top: 0;
-    box-shadow: none;
-}
-
-.vp-code-group div[class*="language-"]::before {
-    display: none;
-}
-
-/* 行号：随顶部留白偏移，右侧竖线只画一条 */
-.vp-doc .line-numbers-wrapper {
-    padding-top: var(--vp-code-line-top);
-    border-right: none;
-}
-
-.vp-doc .line-numbers-wrapper::after {
-    content: "";
-    position: absolute;
-    top: var(--vp-code-line-top);
-    right: 0;
-    height: calc(100% - var(--vp-code-line-top) - 20px);
-    border-right: 1px solid var(--vp-code-block-divider-color);
-}
-
-.vp-code-group .line-numbers-wrapper {
-    padding-top: var(--vp-code-group-line-top);
-}
-
-.vp-code-group .line-numbers-wrapper::after {
-    top: var(--vp-code-group-line-top);
-    height: calc(100% - var(--vp-code-group-line-top) - 20px);
+    --vp-c-brand-soft: color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
 }
 
 /* 页面加载进度条适配主题色 */
 :root {
     --bprogress-color: var(--vp-c-brand-1);
-}
-
-/* giscus评论区宽度优化 */
-#giscus {
-    width: calc(100% - 8px);
-}
-
-/* 视频按需加载占位按钮 */
-.vp-doc .embed-responsive {
-  position: relative;
-}
-
-.vp-doc .video-play {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background-color: var(--vp-c-bg-soft);
-  color: var(--vp-c-brand-1);
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.vp-doc .video-play:hover {
-  background-color: var(--vp-c-brand-soft);
 }
 
 /* 统一节奏：间距、圆角、状态胶囊与动效时长 */
@@ -256,41 +127,83 @@
     --blog-space-6: 24px;
     --blog-radius-sm: 4px;
     --blog-radius: 8px;
+    --blog-radius-card: 12px;
     --blog-radius-pill: 999px;
     --blog-pill-height: 26px;
     --blog-duration-fast: 150ms;
     --blog-duration: 250ms;
+    --blog-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --blog-shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 12px 32px -24px rgba(16, 24, 40, 0.18);
 }
 
-/* 长文表格与配图说明 */
-.vp-doc .vp-table-wrapper {
-    overflow-x: auto;
-    margin: var(--blog-space-4) 0;
-}
-
-.vp-doc .vp-table-wrapper table {
-    margin: 0;
-}
-
-.vp-doc .vp-figure {
-    margin: var(--blog-space-4) 0;
-}
-
-.vp-doc .vp-figure img {
-    display: block;
-    margin: 0 auto;
-}
-
-.vp-doc .vp-figure figcaption {
-    margin-top: var(--blog-space-2);
-    text-align: center;
-    font-size: 12px;
-    color: var(--vp-c-text-3);
-}
-
-/* 暗色主题下代码分隔线与品牌色协调 */
 .dark {
-    --vp-code-block-divider-color: rgba(255, 255, 255, 0.12);
+    --blog-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -24px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 滚动条：全站统一为细窄、圆角、低对比 ---------- */
+:root {
+    --blog-scroll-thumb: rgba(16, 24, 40, 0.16);
+    --blog-scroll-thumb-hover: rgba(16, 24, 40, 0.3);
+}
+
+.dark {
+    --blog-scroll-thumb: rgba(255, 255, 255, 0.14);
+    --blog-scroll-thumb-hover: rgba(255, 255, 255, 0.26);
+}
+
+/* Firefox：Chromium 支持 ::-webkit-scrollbar 时不写标准属性，
+   避免浏览器改用原生滚动条而忽略 6px 的细滚条 */
+@supports not selector(::-webkit-scrollbar) {
+    html,
+    .VPSidebar,
+    .VPDocAsideOutline .content,
+    .VPDoc .vp-doc [class*='language-'] pre,
+    .VPDoc .vp-doc .vp-table-wrapper {
+        scrollbar-width: thin;
+        scrollbar-color: var(--blog-scroll-thumb) transparent;
+    }
+}
+
+html::-webkit-scrollbar,
+.VPSidebar::-webkit-scrollbar,
+.VPDocAsideOutline .content::-webkit-scrollbar,
+.VPDoc .vp-doc [class*='language-'] pre::-webkit-scrollbar,
+.VPDoc .vp-doc .vp-table-wrapper::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+html::-webkit-scrollbar-track,
+.VPSidebar::-webkit-scrollbar-track,
+.VPDocAsideOutline .content::-webkit-scrollbar-track,
+.VPDoc .vp-doc [class*='language-'] pre::-webkit-scrollbar-track,
+.VPDoc .vp-doc .vp-table-wrapper::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+.VPSidebar::-webkit-scrollbar-thumb,
+.VPDocAsideOutline .content::-webkit-scrollbar-thumb,
+.VPDoc .vp-doc [class*='language-'] pre::-webkit-scrollbar-thumb,
+.VPDoc .vp-doc .vp-table-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background-color: var(--blog-scroll-thumb);
+    background-clip: padding-box;
+    border: 1px solid transparent;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+.VPSidebar::-webkit-scrollbar-thumb:hover,
+.VPDocAsideOutline .content::-webkit-scrollbar-thumb:hover,
+.VPDoc .vp-doc [class*='language-'] pre::-webkit-scrollbar-thumb:hover,
+.VPDoc .vp-doc .vp-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: var(--blog-scroll-thumb-hover);
+}
+
+html::-webkit-scrollbar-corner,
+.VPSidebar::-webkit-scrollbar-corner,
+.VPDocAsideOutline .content::-webkit-scrollbar-corner {
+    background-color: transparent;
 }
 
 /* 尊重系统减少动效偏好：所有动画与平滑滚动统一降级 */
@@ -305,9 +218,8 @@
     }
 }
 
-/* 键盘可达：统一焦点样式 */
+/* 键盘可达：统一焦点样式（描边自动跟随元素圆角） */
 :where(a, button, [tabindex]):focus-visible {
     outline: 2px solid var(--vp-c-brand-1);
     outline-offset: 2px;
-    border-radius: var(--blog-radius-sm);
 }

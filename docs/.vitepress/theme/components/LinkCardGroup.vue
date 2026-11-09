@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="link-card-group">
     <div v-for="group in data">
       <h2 v-if="group.text" :id="group.text" class="card-group-title">{{ group.text }}</h2>
       <div class="card-container">
@@ -48,39 +48,58 @@ const linkGroup = (groupItem) => {
 </script>
 
 <style scoped>
-.card-group-title {
-  margin: 0px;
-  font-size: 16px;
-  color: var(--vp-c-brand-1);
-  border-top: 0px;
-  border-left: 4px solid var(--vp-c-brand-1);
-  border-radius: 6px;
-  padding-left: 8px;
-  padding-top: 0px;
-  line-height: 40px;
-  background-color: var(--vp-c-bg-elv);
+/* 前缀 .link-card-group 用于压过文章页 h2 的全局样式 */
+.link-card-group .card-group-title {
+  position: relative;
+  margin: 32px 0 14px;
+  padding: 0 0 0 14px;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--vp-c-text-1);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
 }
 
-.card-container {
-  margin: 16px auto;
+.link-card-group .card-group-title::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--vp-c-brand-1);
+}
+
+.link-card-group .card-container {
+  width: 100%;
+  margin: 0 auto var(--blog-space-5, 20px);
   max-width: 1152px;
   container-type: inline-size;
 }
 
-.card-container .card-group {
+.link-card-group .card-group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--blog-space-4, 16px);
   align-items: stretch;
 }
 
-.linkcard.block {
+.link-card-group .linkcard {
+  min-width: 0;
+}
+
+.link-card-group .linkcard.block {
   grid-column: 1 / -1;
 }
 
 @container (max-width: 560px) {
-  .card-container .card-group {
-    grid-template-columns: 1fr;
+  .link-card-group .card-group {
+    /* minmax(0, 1fr) 防止长内容把单列撑宽，保证所有卡片与正文同宽 */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 </style>

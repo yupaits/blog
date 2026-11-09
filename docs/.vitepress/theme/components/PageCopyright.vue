@@ -1,5 +1,10 @@
 <template>
   <div class="page-copyright">
+    <svg class="copyright-mark" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false">
+      <circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M10.5 6a3.2 3.2 0 1 0 0 4" fill="none" stroke="currentColor" stroke-width="1.3"
+            stroke-linecap="round"/>
+    </svg>
     <p><strong class="label">文章作者：</strong><a href="mailto:ts495606653@hotmail.com">yupaits</a></p>
     <p><strong class="label">文章链接：</strong><a :href="link" target="_blank">{{ decodeURI(link) }}</a></p>
     <p>
@@ -37,39 +42,50 @@ watch(
 <style>
 .page-copyright {
   position: relative;
+  margin-bottom: var(--blog-space-5, 20px);
+  padding: 16px 20px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-card, 12px);
+  background-color: var(--vp-c-bg-soft);
   color: var(--vp-c-text-2);
-  border: 1px solid var(--vp-c-border);
-  border-radius: 8px;
-  font-size: 15px;
-  padding: 12px 16px;
-  margin-bottom: 2rem;
+  font-size: 13.5px;
+  line-height: 1.9;
 }
 
-.page-copyright:before {
+.page-copyright p {
+  margin: 0;
+}
+
+/* 版权标识：内联 SVG，跟随文字颜色，不单独响应 hover */
+.copyright-mark {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  content: '©';
-  color: var(--vp-c-brand-1);
-  font-size: 1.3rem;
-}
-
-.page-copyright:hover {
-  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 15%);
-  transition: box-shadow 0.3s ease-in-out;
+  top: 17px;
+  right: 16px;
+  display: block;
+  color: inherit;
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 .page-copyright .label {
-  color: var(--vp-c-brand-1);
+  color: var(--vp-c-text-1);
+  font-weight: 600;
 }
 
 .page-copyright a {
-  text-decoration: underline;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
 }
 
 .page-copyright a:hover {
-  text-decoration: none;
-  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 639px) {
+  .page-copyright {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
 }
 </style>

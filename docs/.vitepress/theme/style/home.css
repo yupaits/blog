@@ -1,0 +1,267 @@
+/* ==========================================================================
+   首页
+   - Hero 区、Feature 卡片与首页各扩展板块
+   - 扩展板块只作用于 .home-sections 前缀，避免污染全局
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+:root {
+  /* hero标题文字渐变色 */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--vp-c-brand-1) 20%, var(--vp-c-brand-3));
+
+  /* hero图片背景渐变色 */
+  --vp-home-hero-image-background-image: -webkit-linear-gradient(120deg, var(--vp-c-brand-1) 20%, var(--vp-c-brand-3));
+  --vp-home-hero-image-filter: blur(40px);
+}
+
+/* hero图片圆角 */
+.VPImage.image-src {
+  border-radius: 1rem;
+}
+
+.VPHero {
+  position: relative;
+}
+
+/* 顶部一层极淡的品牌光晕，向下自然过渡到首页区块 */
+.VPHero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 55% at 10% 6%, var(--vp-c-brand-soft), transparent 72%),
+    radial-gradient(42% 45% at 92% 2%, color-mix(in srgb, var(--vp-c-brand-3) 12%, transparent), transparent 70%);
+}
+
+.VPHero .name,
+.VPHero .text {
+  letter-spacing: -0.9px;
+}
+
+.VPHero .tagline {
+  color: var(--vp-c-text-2);
+  letter-spacing: 0.2px;
+}
+
+.VPHero .actions {
+  gap: 2px;
+}
+
+.VPHero .VPButton.medium {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: var(--blog-radius-pill, 999px);
+  line-height: 38px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    border-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    box-shadow var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPHero .VPButton.brand {
+  box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--vp-c-brand-1) 70%, transparent);
+}
+
+.VPHero .VPButton.brand:hover {
+  box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--vp-c-brand-1) 80%, transparent);
+}
+
+/* ---------- Feature 卡片 ---------- */
+.VPFeature {
+  border: none;
+  box-shadow: 0 10px 30px 0 var(--vp-shadow-2);
+  background-color: transparent;
+}
+
+/* ---------- 首页扩展板块 ---------- */
+/* 与 VitePress 首页内容区（.vp-doc.container 的内边距内沿）对齐，不再二次收窄 */
+.home-sections {
+  max-width: 1152px;
+  margin: 4rem auto 0;
+  padding: 0;
+}
+
+.home-block {
+  margin-top: 3.5rem;
+}
+
+/* 概览筛选后滚动到时间轴时，避开吸顶导航 */
+#home-timeline {
+  scroll-margin-top: 88px;
+}
+
+.home-sections > .home-block:first-child {
+  margin-top: 0;
+}
+
+.home-sections .home-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--blog-space-2, 8px) var(--blog-space-3, 12px);
+  margin: 0 0 var(--blog-space-5, 20px);
+  padding: 0;
+  border: none;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+  color: var(--vp-c-text-1);
+}
+
+/* 三块共用的唯一装饰：标题文字前的小色点，随文字流换行，不占固定宽度 */
+.home-sections .home-title > span::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: var(--blog-space-2, 8px);
+  border-radius: 50%;
+  background-color: var(--vp-c-brand-1);
+  vertical-align: 0.3em;
+}
+
+.home-sections .home-title small {
+  margin-left: var(--blog-space-2, 8px);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+  color: var(--vp-c-text-3);
+}
+
+.home-card {
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-card, 12px);
+  box-shadow: var(--blog-shadow-card, none);
+}
+
+/* 提高一级特异性，避免被 .vp-doc a 的品牌色覆盖；标题默认中性色，hover 再变品牌色 */
+.home-sections .home-link {
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.home-sections .home-link:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.home-muted {
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.home-sections a:focus-visible,
+.home-sections summary:focus-visible,
+.home-sections button:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+.home-pill {
+  display: inline-flex;
+  align-items: center;
+  height: var(--blog-pill-height, 26px);
+  padding: 0 9px;
+  border-radius: var(--blog-radius-pill, 999px);
+  background-color: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* 首页计数徽标：栏目分布与时间轴年份共用同一套视觉语言 */
+.home-count {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+  flex: none;
+  min-width: 54px;
+  padding: 3px 8px;
+  border-radius: var(--blog-radius-pill, 999px);
+  background-color: var(--vp-c-bg-elv);
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: var(--vp-c-text-2);
+  transition: background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.home-count-unit {
+  margin-left: 1px;
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.65;
+}
+
+@media (max-width: 639px) {
+  .VPHero {
+    padding-bottom: 40px;
+  }
+
+  .VPHero .name,
+  .VPHero .text {
+    letter-spacing: -0.6px;
+  }
+
+  .VPHero .tagline {
+    padding-top: 10px;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .VPHero .actions {
+    padding-top: 24px;
+  }
+
+  .VPHero .VPButton.medium {
+    height: 38px;
+    padding: 0 18px;
+    line-height: 36px;
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-sections {
+    margin-top: 2.5rem;
+  }
+
+  .home-block {
+    margin-top: 2.5rem;
+  }
+
+  .home-sections .home-title {
+    margin-bottom: var(--blog-space-4, 16px);
+  }
+
+  /* 三个板块统一：窄屏下副标题另起一行，不再与标题挤在同一行 */
+  .home-sections .home-title small {
+    display: block;
+    margin-top: 2px;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-sections *,
+  .home-sections *::before,
+  .home-sections *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

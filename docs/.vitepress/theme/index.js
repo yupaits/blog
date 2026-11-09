@@ -14,7 +14,7 @@ import '@bprogress/core/css'
 import 'element-plus/theme-chalk/base.css'
 import 'element-plus/theme-chalk/el-timeline.css'
 import 'element-plus/theme-chalk/el-timeline-item.css'
-import './style/var.css'
+import './style/index.css'
 
 export default {
     extends: DefaultTheme,

@@ -1,0 +1,124 @@
+/* ==========================================================================
+   通用组件
+   - 文章页水印、评论容器、页脚
+   - Element Plus 时间线（正文中的 Timeline 组件）
+   - LinkCard / 阅读计划 / 回到顶部等组件样式随各自的 .vue 文件就近维护
+   ========================================================================== */
+
+/* ---------- Element Plus 时间线 ---------- */
+.vp-doc {
+    .timeline {
+
+        /* 时间线元素去除li前面的圆点 */
+
+        li {
+            list-style: none;
+            margin-top: 0;
+        }
+
+        .title {
+            color: var(--vp-c-text-1)
+        }
+
+        .label {
+            font-size: 12px;
+            color: var(--vp-c-text-2);
+        }
+
+        .content {
+            color: var(--vp-c-text-1)
+        }
+    }
+}
+
+/* ---------- 文章页水印 ---------- */
+/* 固定层铺在正文之下，不包裹任何布局节点 */
+.blog-watermark {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: repeat;
+    background-position: 0 0;
+}
+
+/* ---------- 评论区 ---------- */
+/* giscus 宽度与正文留出一点呼吸，并与上方正文拉开间距 */
+#giscus {
+    width: calc(100% - 8px);
+    margin-top: 28px;
+}
+
+/* ---------- 页脚 ---------- */
+body .VPFooter.VPFooter {
+  padding: 40px 24px 36px;
+  border-top: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg);
+}
+
+body .VPFooter .container {
+  max-width: 1152px;
+}
+
+body .VPFooter .message,
+body .VPFooter .copyright {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--vp-c-text-2);
+}
+
+body .VPFooter .message {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* 版权行与许可说明之间用一条居中的短分隔线，避免整行横线过重 */
+body .VPFooter .copyright {
+  position: relative;
+  margin-top: 16px;
+  padding-top: 16px;
+  color: var(--vp-c-text-2);
+}
+
+body .VPFooter .copyright::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 40px;
+  height: 1px;
+  transform: translateX(-50%);
+  background-color: var(--vp-c-divider);
+}
+
+body .VPFooter a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  transition: text-decoration-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+/* hover 不跳色，只补下划线 */
+body .VPFooter a:hover {
+  color: var(--vp-c-brand-1);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+body .VPFooter a:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+@media (max-width: 639px) {
+  body .VPFooter.VPFooter {
+    padding: 32px 20px 28px;
+  }
+
+  body .VPFooter .message,
+  body .VPFooter .copyright {
+    font-size: 12.5px;
+    line-height: 1.75;
+  }
+}

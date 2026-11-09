@@ -1,0 +1,234 @@
+/* ==========================================================================
+   文章页正文与目录
+   - 文章标题、正文排版层级、右侧目录、上一篇/下一篇
+   - Markdown 元素（代码块/表格/提示容器等）见 markdown.css
+   ========================================================================== */
+
+/* ---------- 文章标题区 ---------- */
+.VPDoc .vp-doc > h1:first-child {
+  margin: 2px 0 28px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  font-size: clamp(26px, 2.4vw, 34px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+}
+
+/* ---------- 正文排版 ---------- */
+.VPDoc .vp-doc :is(h1, h2, h3, h4, h5, h6) {
+  scroll-margin-top: calc(var(--vp-nav-height) + 16px);
+}
+
+.VPDoc .vp-doc h2 {
+  position: relative;
+  margin: 44px 0 16px;
+  padding: 0 0 0 14px;
+  border-top: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+/* 与首页板块标题一致的小圆点，作为全站唯一的标题装饰 */
+.VPDoc .vp-doc h2::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--vp-c-brand-1);
+}
+
+.VPDoc .vp-doc h2 .header-anchor {
+  top: 0.15em;
+}
+
+.VPDoc .vp-doc h3 {
+  margin: 32px 0 12px;
+  font-size: 18px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+.VPDoc .vp-doc h4 {
+  margin: 24px 0 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.VPDoc .vp-doc p {
+  margin: 18px 0;
+  line-height: 1.8;
+}
+
+.VPDoc .vp-doc li {
+  line-height: 1.8;
+}
+
+.VPDoc .vp-doc li + li {
+  margin-top: 6px;
+}
+
+.VPDoc .vp-doc li > ol,
+.VPDoc .vp-doc li > ul {
+  margin: 6px 0 0;
+}
+
+.VPDoc .vp-doc strong {
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+}
+
+.VPDoc .vp-doc hr {
+  margin: 40px 0;
+  border: 0;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+.VPDoc .vp-doc ::selection {
+  background-color: var(--vp-c-brand-soft);
+}
+
+/* 外链沿用默认主题的箭头图标，这里只统一颜色与 hover 反馈 */
+.VPDoc .vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPDoc .vp-doc a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.VPDoc .vp-doc .header-anchor:hover {
+  text-decoration: none;
+}
+
+/* ---------- 右侧目录 ---------- */
+.VPDocAsideOutline .content {
+  max-height: calc(100vh - var(--vp-nav-height) - 96px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.VPDocAsideOutline .content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.VPDocAsideOutline .outline-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: var(--vp-c-text-3);
+}
+
+.VPDocAsideOutline .outline-link {
+  display: block;
+  padding: 3px 0;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  line-height: 1.6;
+  transition: color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPDocAsideOutline .outline-link:hover {
+  color: var(--vp-c-text-1);
+}
+
+.VPDocAsideOutline .outline-link.active {
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
+}
+
+.VPDocAsideOutline .outline-marker {
+  width: 3px;
+  border-radius: 3px;
+  background-color: var(--vp-c-brand-1);
+}
+
+.VPDocAsideOutline .outline-link:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+/* ---------- 上一篇 / 下一篇 ---------- */
+.VPDocFooter {
+  margin-top: 56px;
+}
+
+.prev-next {
+  padding-top: 24px;
+}
+
+.pager-link {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-card, 12px);
+  padding: 14px 18px;
+  transition: border-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.pager-link:hover {
+  border-color: var(--vp-c-brand-2);
+  background-color: var(--vp-c-bg-soft);
+}
+
+.pager-link .desc {
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.pager-link .title {
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  font-weight: 600;
+  transition: color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.pager-link:hover .title {
+  color: var(--vp-c-brand-1);
+}
+
+.pager-link:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+.edit-link-button {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---------- 移动端正文 ---------- */
+@media (max-width: 639px) {
+  .VPDoc .vp-doc > h1:first-child {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    font-size: 24px;
+  }
+
+  .VPDoc .vp-doc h2 {
+    margin-top: 36px;
+    font-size: 19px;
+  }
+
+  .VPDoc .vp-doc h3 {
+    margin-top: 28px;
+    font-size: 17px;
+  }
+
+  .VPDoc .vp-doc p {
+    margin: 16px 0;
+  }
+
+  .VPDocFooter {
+    margin-top: 40px;
+  }
+}

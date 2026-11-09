@@ -1,0 +1,389 @@
+/* ==========================================================================
+   导航与搜索
+   - 顶部导航栏、移动端导航、搜索入口与搜索面板
+   - 桌面/移动端侧边栏及其文章列表
+   ========================================================================== */
+
+:root {
+  /* 与 60px 的导航高度一起，收紧整个头部节奏 */
+  --vp-nav-height: 60px;
+}
+
+/* ---------- 顶部导航 ---------- */
+.VPNavBarTitle .title {
+  gap: 10px;
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* 侧栏页：品牌区底边线横在侧栏与导航之间，去掉后由侧栏背景自然衔接 */
+@media (min-width: 960px) {
+  body .VPNavBar .VPNavBarTitle.has-sidebar .title {
+    border-bottom-color: transparent;
+  }
+}
+
+/* logo：正方形圆角，等比缩放不裁切图形，1px 实描边保证暗色边缘清晰 */
+.VPNavBarTitle .title .VPImage.logo {
+  width: 26px;
+  height: 26px;
+  margin-right: 0;
+  border-radius: 7px;
+  object-fit: contain;
+  background-color: transparent;
+  box-shadow: 0 0 0 1px var(--vp-c-divider);
+}
+
+.VPNavBarMenuLink {
+  position: relative;
+  color: var(--vp-c-text-2);
+  font-weight: 500;
+  transition: color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+/* 当前页与 hover 使用同一条品牌色细线，避免布局跳动 */
+.VPNavBarMenuLink::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: calc(var(--vp-nav-height) / 2 - 12px);
+  left: 12px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: var(--vp-c-brand-1);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--blog-duration, 250ms) var(--blog-ease, ease);
+}
+
+.VPNavBarMenuLink:hover {
+  color: var(--vp-c-text-1);
+}
+
+.VPNavBarMenuLink:hover::after,
+.VPNavBarMenuLink.active::after {
+  transform: scaleX(1);
+}
+
+.VPNavBarMenuLink.active {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* 导航底部不再画分割线，靠毛玻璃背景与正文区分层次 */
+body .VPNavBar .divider-line {
+  background-color: transparent;
+}
+
+/* 键盘焦点：导航、主题切换、社交入口统一使用品牌色焦点环 */
+.VPNavBarTitle .title:focus-visible,
+.VPNavBarMenuLink:focus-visible,
+.VPNavBarHamburger:focus-visible,
+.VPSwitchAppearance:focus-visible,
+.VPSocialLink:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+  border-radius: var(--blog-radius-sm, 4px);
+}
+
+/* 搜索框位置固定：桌面端让首页/栏目页的品牌区预留与侧边栏一致的内宽，
+   使 .content 的起点与文章页（has-sidebar 的 padding-left）完全重合 */
+@media (min-width: 960px) {
+  .VPNavBar:not(.has-sidebar) .container > .title {
+    width: calc(var(--vp-sidebar-width) - 32px);
+    flex-shrink: 0;
+  }
+}
+
+/* 导航栏、侧边栏选项选中时字体加粗 */
+.VPNavBarMenuLink.active,
+.VPNavBarMenuGroup.active .text,
+.VPMenuLink .active,
+.VPSidebarItem.is-link.is-active .VPLink .text {
+  font-weight: 600;
+}
+
+/* 导航栏下拉菜单分组标题 */
+.VPMenuGroup .title {
+  font-size: 11px;
+  color: var(--vp-c-text-3);
+}
+
+/* 导航栏毛玻璃：滚动后统一为一层半透明底 + 背景模糊，避免只有局部区域磨砂 */
+.VPNavBar:not(.home.top):not(.screen-open) {
+  background-color: color-mix(in srgb, var(--vp-c-bg) 84%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+}
+
+.VPNavBar:not(.home.top) .content-body,
+.VPNavBar:not(.home.top) .title {
+  background-color: transparent;
+}
+
+.VPLocalNav {
+  background-color: color-mix(in srgb, var(--vp-c-bg) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+}
+
+.curtain {
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+}
+
+/* ---------- 搜索入口 ---------- */
+#local-search .DocSearch-Button {
+  height: 38px;
+  padding: 0 10px 0 13px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-pill, 999px);
+  background-color: var(--vp-c-bg-soft);
+  transition: border-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    box-shadow var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+#local-search .DocSearch-Button:hover {
+  border-color: var(--vp-c-brand-2);
+  background-color: var(--vp-c-bg-soft);
+  box-shadow: 0 0 0 3px var(--vp-c-brand-soft);
+}
+
+#local-search .DocSearch-Button:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+#local-search .DocSearch-Button-Placeholder {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* 快捷键提示拆成两枚独立小键帽 */
+#local-search .DocSearch-Button-Keys {
+  gap: 4px;
+}
+
+#local-search .DocSearch-Button-Key,
+#local-search .DocSearch-Button-Key + .DocSearch-Button-Key {
+  margin: 0;
+  padding: 0 5px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-sm, 4px);
+  background-color: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-3);
+  line-height: 18px;
+  height: 20px;
+}
+
+/* 搜索面板与全站圆角/描边语言保持一致（组件样式为 scoped，需提高一级优先级） */
+body .VPLocalSearchBox .backdrop {
+  backdrop-filter: blur(4px);
+}
+
+body .VPLocalSearchBox .shell {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-card, 12px);
+  box-shadow: var(--blog-shadow-card, none);
+}
+
+body .VPLocalSearchBox .search-bar {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: var(--blog-radius-pill, 999px);
+  background-color: var(--vp-c-bg-soft);
+}
+
+body .VPLocalSearchBox .search-input {
+  font-size: 14px;
+}
+
+body .VPLocalSearchBox .result {
+  border-radius: var(--blog-radius, 8px);
+}
+
+body .VPLocalSearchBox .result.selected {
+  background-color: var(--vp-c-bg-soft);
+}
+
+/* ---------- 侧边栏 ---------- */
+@media (min-width: 960px) {
+  .VPSidebar {
+    /* 竖向分隔从导航下方开始，避免在导航区域内多画一条线 */
+    border-right: 0;
+    background-image: linear-gradient(
+      to right,
+      transparent calc(100% - 1px),
+      var(--vp-c-divider) calc(100% - 1px)
+    );
+    background-position: 0 var(--vp-nav-height);
+    background-size: 100% calc(100% - var(--vp-nav-height));
+    background-repeat: no-repeat;
+  }
+}
+
+/* 导航栏是固定层，给侧栏内容再让出一点顶部留白，避免首条贴住导航 */
+.VPSidebar .nav {
+  padding-top: 12px;
+}
+
+/* 分组标题：字号略小、字重更重，靠字重与颜色分层，不加粗描边 */
+.VPSidebarItem.level-0 {
+  padding-bottom: 16px;
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  padding: 6px 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  color: var(--vp-c-text-1);
+}
+
+/* 条目：密度适中，长标题允许换行而不是被裁掉 */
+.VPSidebarItem .text {
+  padding: 5px 0;
+  font-size: 13.5px;
+  line-height: 21px;
+  overflow-wrap: anywhere;
+}
+
+/* 层级缩进线只保留一条极淡的引导线，不参与层级分隔 */
+.VPSidebarItem.level-1 .items,
+.VPSidebarItem.level-2 .items,
+.VPSidebarItem.level-3 .items,
+.VPSidebarItem.level-4 .items,
+.VPSidebarItem.level-5 .items {
+  border-left: 1px solid color-mix(in srgb, var(--vp-c-divider) 62%, transparent);
+  padding-left: 14px;
+}
+
+/* 链接条目：整行可点，hover 轻底色，激活态用左侧短指示条 + 浅品牌底 */
+.VPSidebarItem:not(.level-0) > .item > .link {
+  margin: 0 -8px;
+  padding: 0 8px;
+  border-radius: 6px;
+  transition: background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPSidebarItem:not(.level-0) > .item > .link:hover {
+  background-color: var(--vp-c-bg-soft);
+}
+
+/* 一级条目激活时也给出品牌色指示条，与更深层级保持一致 */
+.VPSidebarItem.is-active > .item > .indicator {
+  top: 50%;
+  bottom: auto;
+  width: 2px;
+  height: 16px;
+  border-radius: 2px;
+  background-color: var(--vp-c-brand-1);
+  transform: translateY(-50%);
+}
+
+.VPSidebarItem:not(.level-0).is-active > .item > .link {
+  background-color: var(--vp-c-brand-soft);
+}
+
+.VPSidebarItem.level-1.is-active > .item > .link > .text {
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
+}
+
+.VPSidebarItem .link:hover .text {
+  color: var(--vp-c-text-1);
+}
+
+.VPSidebarItem.level-0 > .item:hover > .text {
+  color: var(--vp-c-brand-1);
+}
+
+.VPSidebarItem .link:focus-visible,
+.VPSidebarItem > .item > .caret:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+/* 折叠箭头：更大的点击区域 + 轻底色反馈，展开动画只做旋转 */
+.VPSidebarItem .caret {
+  width: 28px;
+  height: 28px;
+  margin-right: -6px;
+  border-radius: var(--blog-radius-sm, 6px);
+  transition:
+    color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
+}
+
+.VPSidebarItem .caret:hover {
+  background-color: var(--vp-c-bg-soft);
+}
+
+.VPSidebarItem .caret-icon {
+  font-size: 16px;
+  transition: transform var(--blog-duration, 250ms) var(--blog-ease, ease);
+}
+
+/* 展开/收起：内容区裁掉溢出，保持圆角内的整洁 */
+.VPSidebarItem > .items {
+  overflow: hidden;
+}
+
+/* 窄屏抽屉：与桌面共用条目节奏，底部留出安全区 */
+@media (max-width: 959px) {
+  .VPSidebar {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .VPSidebarItem .caret {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ---------- 移动端导航与搜索 ---------- */
+@media (max-width: 767px) {
+  #local-search .DocSearch-Button {
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  #local-search .DocSearch-Button:hover {
+    border-color: transparent;
+    background-color: var(--vp-c-bg-soft);
+    box-shadow: none;
+  }
+
+  .VPNavScreen .container {
+    padding-top: 16px;
+  }
+
+  .VPNavScreenMenuLink {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .VPNavScreenMenuLink:hover {
+    color: var(--vp-c-brand-1);
+  }
+}
+
+@media (max-width: 639px) {
+  /* 只留图标：文字用可访问的视觉隐藏，不移出无障碍树 */
+  .VPNavBarTitle .title > span:not([class]) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}

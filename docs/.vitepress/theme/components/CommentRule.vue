@@ -12,11 +12,30 @@
 
 <style>
 .comment-rule {
-  margin-top: 1rem;
+  margin-top: 40px;
+  padding: 16px 20px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  padding: 12px 16px;
+  border-radius: var(--blog-radius-card, 12px);
+  background-color: var(--vp-c-bg-soft);
   color: var(--vp-c-text-2);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.comment-rule h4 {
+  margin: 0 0 6px;
   font-size: 14px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.comment-rule p {
+  margin: 2px 0;
+}
+
+@media (max-width: 639px) {
+  .comment-rule {
+    padding: 14px 16px;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="share-box">
     <button type="button" class="share-btn" @click="share">
-      <span>📤 {{ label }}</span>
+      <span aria-live="polite">{{ label }}</span>
     </button>
   </div>
 </template>
@@ -51,24 +51,28 @@ const share = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: var(--blog-space-5, 20px);
 }
 
 .share-btn {
-  min-width: 96px;
-  height: var(--blog-pill-height);
-  padding: 0 var(--blog-space-3);
-  border: 1px solid var(--vp-c-border);
-  border-radius: var(--blog-radius-pill);
+  min-width: 104px;
+  height: 32px;
+  padding: 0 var(--blog-space-4, 16px);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-pill, 999px);
   background-color: var(--vp-c-bg);
-  color: var(--vp-c-brand-1);
-  font-size: 14px;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
   line-height: 1;
   cursor: pointer;
+  transition: border-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    background-color var(--blog-duration-fast, 150ms) var(--blog-ease, ease),
+    color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
 }
 
 .share-btn:hover {
-  box-shadow: 0 2px 4px 0 var(--vp-shadow-2);
-  transition: box-shadow var(--blog-duration) ease-in-out;
+  border-color: var(--vp-c-brand-2);
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
 }
 </style>
