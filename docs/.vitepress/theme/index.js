@@ -1,7 +1,6 @@
 import {BProgress} from '@bprogress/core'
 import {ElTimeline, ElTimelineItem} from 'element-plus'
 import {useData, useRoute, useRouter} from 'vitepress'
-import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import DefaultTheme from 'vitepress/theme'
 import {nextTick, onMounted, watch} from 'vue'
 import MyLayout from './MyLayout.vue'
@@ -33,21 +32,6 @@ export default {
         router.onAfterPageLoad = () => {
             BProgress.done()
         }
-
-        // Giscus评论
-        giscusTalk({
-            repo: 'yupaits/giscus',
-            repoId: 'R_kgDOOciJmA',
-            category: 'General',
-            categoryId: 'DIC_kwDOOciJmM4CpRt2',
-            mapping: 'pathname',
-            reactionsEnabled: '1',
-            inputPosition: 'bottom',
-            lang: 'zh-CN',
-            loading: 'lazy'
-        }, {
-            frontmatter, route
-        }, true)
 
         // 五彩纸屑：仅首页每天首次访问、尊重减少动效偏好，可通过 localStorage 关闭
         const initConfetti = async () => {

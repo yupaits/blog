@@ -7,6 +7,7 @@
 
     <template #doc-after>
       <CommentRule v-if="hasComment"/>
+      <GiscusComment v-if="hasComment && isArticle && commentReady"/>
     </template>
 
     <template #doc-footer-before>
@@ -20,8 +21,11 @@
 <script setup>
 import {useData, useRoute} from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import {computed, nextTick, onMounted, watch} from 'vue'
+import {computed, defineAsyncComponent, nextTick, onMounted, ref, watch} from 'vue'
 import BackToTop from './BackToTop.vue'
+
+const GiscusComment = defineAsyncComponent(() => import('./GiscusComment.vue'))
+const commentReady = ref(false)
 import CommentRule from './CommentRule.vue'
 import DraftAnnounce from './DraftAnnounce.vue'
 import PageCopyRight from './PageCopyright.vue'
@@ -49,6 +53,11 @@ const hasComment = computed(() => {
   return frontmatter.value.comment !== false
 })
 
+const isArticle = computed(() => {
+  const path = route.path
+  return frontmatter.value.layout !== 'home' && path !== '/' && !/^\/[^/]+\/$/.test(path)
+})
+
 const handleDoc = async () => {
   await nextTick()
   const hidden = frontmatter.value.draft === true && frontmatter.value.draftPreview !== true
@@ -66,8 +75,15 @@ const handleDoc = async () => {
   }
 }
 
+// 评论区延后到首屏空闲再加载，避免阻塞文章渲染
 onMounted(() => {
   handleDoc()
+  const schedule = window.requestIdleCallback
+    ? cb => window.requestIdleCallback(cb, {timeout: 2000})
+    : cb => setTimeout(cb, 1200)
+  schedule(() => {
+    commentReady.value = true
+  })
 })
 
 watch(
