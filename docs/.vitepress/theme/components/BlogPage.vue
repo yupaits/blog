@@ -20,7 +20,7 @@
 <script setup>
 import {useData, useRoute} from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import {computed, onMounted, watch} from 'vue'
+import {computed, nextTick, onMounted, watch} from 'vue'
 import BackToTop from './BackToTop.vue'
 import CommentRule from './CommentRule.vue'
 import DraftAnnounce from './DraftAnnounce.vue'
@@ -49,9 +49,21 @@ const hasComment = computed(() => {
   return frontmatter.value.comment !== false
 })
 
-const handleDoc = () => {
-  const hideDoc = frontmatter.value.draft === true && frontmatter.value.draftPreview !== true
-  document.querySelector('main .vp-doc')?.setAttribute('style', hideDoc ? 'display: none' : undefined)
+const handleDoc = async () => {
+  await nextTick()
+  const hidden = frontmatter.value.draft === true && frontmatter.value.draftPreview !== true
+  document.querySelector('main .vp-doc')?.classList.toggle('draft-hidden', hidden)
+  let meta = document.querySelector('meta[name="robots"]')
+  if (hidden) {
+    if (!meta) {
+      meta = document.createElement('meta')
+      meta.name = 'robots'
+      meta.content = 'noindex, nofollow'
+      document.head.appendChild(meta)
+    }
+  } else if (meta) {
+    meta.remove()
+  }
 }
 
 onMounted(() => {
@@ -65,3 +77,9 @@ watch(
     }
 )
 </script>
+
+<style>
+main .vp-doc.draft-hidden {
+  display: none;
+}
+</style>
