@@ -33,3 +33,9 @@ features:
     title: ACCUMULATION - 积累
     details: 滴水穿石，时光成诗
 ---
+
+<script setup>
+import HomeSections from './.vitepress/theme/components/HomeSections.vue'
+</script>
+
+<HomeSections/>

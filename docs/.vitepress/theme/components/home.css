@@ -1,0 +1,93 @@
+/* 首页扩展板块的共享样式：只作用于 .home-sections 前缀，避免污染全局 */
+.home-sections {
+  max-width: 1152px;
+  margin: 4rem auto 0;
+  padding: 0 var(--blog-space-6, 24px);
+}
+
+.home-block {
+  margin-top: 3rem;
+}
+
+.home-sections > .home-block:first-child {
+  margin-top: 0;
+}
+
+.home-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--blog-space-3, 12px);
+  margin: 0 0 var(--blog-space-4, 16px);
+  padding-left: var(--blog-space-2, 8px);
+  border-left: 4px solid var(--vp-c-brand-1);
+  border-radius: var(--blog-radius-sm, 4px);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--vp-c-brand-1);
+}
+
+.home-title small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--vp-c-text-2);
+}
+
+.home-card {
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius, 8px);
+}
+
+.home-link {
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+}
+
+.home-link:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.home-muted {
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+}
+
+.home-sections a:focus-visible,
+.home-sections summary:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+  border-radius: var(--blog-radius-sm, 4px);
+}
+
+.home-pill {
+  display: inline-flex;
+  align-items: center;
+  height: var(--blog-pill-height, 26px);
+  padding: 0 9px;
+  border-radius: var(--blog-radius-pill, 999px);
+  background-color: var(--vp-c-bg-elv);
+  color: var(--vp-c-text-2);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .home-sections {
+    margin-top: 2.5rem;
+    padding: 0 var(--blog-space-4, 16px);
+  }
+
+  .home-block {
+    margin-top: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-sections *,
+  .home-sections *::before,
+  .home-sections *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
