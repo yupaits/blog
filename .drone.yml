@@ -11,7 +11,7 @@ steps:
     extra_hosts:
       - "gitea.yupaits.top:192.168.2.3"
     commands:
-      # 全量克隆保留 git 历史：lastUpdated 与首页近期更新依赖提交时间
+      # 全量克隆保留 git 历史：lastUpdated 依赖提交时间
       - git clone https://gitea.yupaits.top/yupaits/blog-md.git .
   - name: pnpm构建
     image: node:24-alpine

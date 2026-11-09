@@ -33,12 +33,3 @@ features:
     title: ACCUMULATION - 积累
     details: 滴水穿石，时光成诗
 ---
-
-<script setup>
-import {data as posts} from './data/posts.data.mjs'
-</script>
-
-<LinkCardGroup subfield style="margin-top: 4rem" :data="[{
-  text: '近期更新',
-  items: posts.slice(0, 12)
-}]"/>

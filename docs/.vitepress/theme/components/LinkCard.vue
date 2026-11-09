@@ -11,10 +11,7 @@
     <p class="description">
       <strong v-if="option?.text" class="title">{{ option?.text }}</strong>
       <br>
-      <span v-if="option?.date" class="subtitle">
-        <PostDate :date="option.date"/>
-      </span>
-      <span v-else-if="$slots.description" class="subtitle">
+      <span v-if="$slots.description" class="subtitle">
         <slot name="description"></slot>
       </span>
       <span v-else class="subtitle">{{ option.description }}</span>
