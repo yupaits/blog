@@ -64,33 +64,23 @@ const linkGroup = (groupItem) => {
 .card-container {
   margin: 16px auto;
   max-width: 1152px;
+  container-type: inline-size;
 }
 
 .card-container .card-group {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 12px;
+  align-items: stretch;
 }
 
 .linkcard.block {
-  width: 100%;
+  grid-column: 1 / -1;
 }
 
-@media screen and (min-width: 768px) {
-  .linkcard:not(.block) {
-    width: calc(100% / 3 - 8px);
-  }
-}
-
-@media screen and (min-width: 540px) and (max-width: 768px) {
-  .linkcard:not(.block) {
-    width: calc(100% / 2 - 6px);
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .linkcard:not(.block) {
-    width: 100%;
+@container (max-width: 560px) {
+  .card-container .card-group {
+    grid-template-columns: 1fr;
   }
 }
 </style>
