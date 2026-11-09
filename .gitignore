@@ -19,3 +19,5 @@ docs/.vitepress/temp/
 
 docs/.vitepress/.temp/
 .workbuddy/
+.trae/
+.screenshots/
