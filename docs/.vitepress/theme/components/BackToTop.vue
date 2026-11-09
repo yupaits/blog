@@ -3,7 +3,7 @@
     <div v-show="showBackTop" class="back-top-container">
       <svg class="progress-ring" viewBox=" 0 0 100 100">
         <circle class="progress-ring-background" cx="50" cy="50" r="42"/>
-        <circle :style="{ 'stroke-dashoffset': circumference - (scrollProgress * circumference) }"
+        <circle :style="{ '--ring-offset': circumference - (scrollProgress * circumference) }"
                 class="progress-ring-circle" cx="50" cy="50"
                 r="42"/>
       </svg>
@@ -21,55 +21,41 @@
 <script setup>
 import {computed, onBeforeUnmount, onMounted, ref} from 'vue'
 
-// 是否显示返回顶部
 const showBackTop = ref(false)
 const scrollProgress = ref(0)
-
-//圆形进度条计算
 const radius = 42
 const circumference = computed(() => 2 * Math.PI * radius)
+let frame = 0
 
 function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  })
-}
-
-// 节流
-function throttle(fn, delay = 50) {
-  let timer = null
-  return function (...args) {
-    if (!timer) {
-      timer = setTimeout(() => {
-        fn.apply(this, args)
-        timer = null
-      }, delay)
-    }
-  }
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'})
 }
 
 const updateScrollProgress = () => {
-  const {scrollY, innerHeight} = window
-  const {scrollHeight} = document.documentElement
-  const totalScroll = scrollHeight - innerHeight
-  scrollProgress.value = totalScroll > 0 ? Math.min(scrollY / totalScroll, 1) : 0
+  const totalScroll = document.documentElement.scrollHeight - window.innerHeight
+  scrollProgress.value = totalScroll > 0 ? Math.min(window.scrollY / totalScroll, 1) : 0
+  showBackTop.value = window.scrollY > 150
 }
 
-const onScroll = throttle(() => {
-  // 当滚动超过指定高度时显示
-  showBackTop.value = Boolean(window.scrollY > 150)
-  updateScrollProgress()
-})
+// passive 监听 + rAF 合并，避免滚动时反复触发布局计算
+const onScroll = () => {
+  if (frame) return
+  frame = requestAnimationFrame(() => {
+    updateScrollProgress()
+    frame = 0
+  })
+}
 
-// 监听滚动事件
 onMounted(() => {
-  window.addEventListener("scroll", onScroll)
+  window.addEventListener('scroll', onScroll, {passive: true})
   updateScrollProgress()
 })
 
-// 移除监听事件
-onBeforeUnmount(() => window.removeEventListener("scroll", onScroll))
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll)
+  if (frame) cancelAnimationFrame(frame)
+})
 </script>
 
 <style scoped>
@@ -124,6 +110,7 @@ onBeforeUnmount(() => window.removeEventListener("scroll", onScroll))
   stroke: var(--vp-c-brand-2);
   stroke-width: 3;
   stroke-dasharray: 264;
+  stroke-dashoffset: var(--ring-offset, 264);
   stroke-linecap: round;
   transition: stroke-dashoffset var(--blog-duration-fast) ease-out;
 }
