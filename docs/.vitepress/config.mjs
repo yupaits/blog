@@ -41,6 +41,9 @@ export default defineConfig({
         }],
     ],
     cleanUrls: true,
+    sitemap: {
+        hostname: 'https://yupaits.top'
+    },
     ignoreDeadLinks: [/^https?:\/\//, /%20/],
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
@@ -186,6 +189,45 @@ export default defineConfig({
         if (!pageData.lastUpdated && pageData.frontmatter.date) {
             pageData.lastUpdated = new Date(pageData.frontmatter.date).getTime()
         }
+    },
+    // 按页生成 canonical、Open Graph 与 BlogPosting 结构化数据
+    transformHead({pageData, siteData, title, description}) {
+        const raw = pageData.relativePath.replace(/\.md$/, '')
+        const segments = raw === 'index' ? [] : raw.replace(/\/index$/, '').split('/').filter(Boolean)
+        const path = '/' + segments.map(encodeURIComponent).join('/') + (raw.endsWith('/index') ? '/' : '')
+        const canonical = `https://yupaits.top${path}`
+        const head = [
+            ['link', {rel: 'canonical', href: canonical}],
+            ['meta', {property: 'og:type', content: pageData.frontmatter.layout === 'home' ? 'website' : 'article'}],
+            ['meta', {property: 'og:site_name', content: siteData.title}],
+            ['meta', {property: 'og:title', content: title}],
+            ['meta', {property: 'og:description', content: description}],
+            ['meta', {property: 'og:url', content: canonical}],
+            ['meta', {name: 'twitter:card', content: 'summary'}]
+        ]
+        const cover = pageData.frontmatter.cover
+        if (cover) {
+            head.push(['meta', {
+                property: 'og:image',
+                content: /^https?:\/\//.test(cover) ? cover : `https://yupaits.top${cover}`
+            }])
+        }
+        if (pageData.frontmatter.draft === true) {
+            head.push(['meta', {name: 'robots', content: 'noindex, nofollow'}])
+        }
+        if (pageData.frontmatter.layout !== 'home' && raw !== 'index' && !raw.endsWith('/index')) {
+            head.push(['script', {type: 'application/ld+json'}, JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'BlogPosting',
+                headline: title,
+                description,
+                url: canonical,
+                datePublished: pageData.frontmatter.date,
+                author: {'@type': 'Person', name: 'yupaits'},
+                license: 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+            })])
+        }
+        return head
     },
     markdown: {
         theme: {light: 'slack-ochin', dark: 'monokai'},
