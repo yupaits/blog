@@ -1,5 +1,4 @@
 import {BProgress} from '@bprogress/core'
-import confetti from 'canvas-confetti'
 import {ElTimeline, ElTimelineItem} from 'element-plus'
 import {useData, useRoute, useRouter} from 'vitepress'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
@@ -50,13 +49,17 @@ export default {
             frontmatter, route
         }, true)
 
-        // 五彩纸屑动画
-        const initConfetti = () => {
-            confetti({
-                particleCount: 100,
-                spread: 170,
-                origin: {y: 0.6}
-            })
+        // 五彩纸屑：仅首页每天首次访问、尊重减少动效偏好，可通过 localStorage 关闭
+        const initConfetti = async () => {
+            if (frontmatter.value.layout !== 'home') return
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+            if (localStorage.getItem('blog-confetti') === 'off') return
+            const key = 'blog-confetti-date'
+            const today = new Date().toISOString().slice(0, 10)
+            if (localStorage.getItem(key) === today) return
+            const {default: confetti} = await import('canvas-confetti')
+            confetti({particleCount: 100, spread: 170, origin: {y: 0.6}})
+            localStorage.setItem(key, today)
         }
 
         // 视频按需加载：构建期已把 src 移到 data-src，点击占位按钮后才请求
