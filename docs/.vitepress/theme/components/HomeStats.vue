@@ -39,21 +39,29 @@ const items = computed(() => [
 .stat-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--blog-space-2, 8px);
-  padding: 18px var(--blog-space-4, 16px);
+  padding: 22px var(--blog-space-4, 16px);
+  transition: border-color var(--blog-duration, 250ms) ease, box-shadow var(--blog-duration, 250ms) ease;
+}
+
+.stat-item:hover {
+  border-color: var(--vp-c-brand-soft);
+  box-shadow: 0 6px 18px var(--vp-shadow-1);
 }
 
 .stat-value {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   line-height: 1.2;
   font-variant-numeric: tabular-nums;
   color: var(--vp-c-brand-1);
 }
 
 .stat-label {
-  font-size: 13px;
-  color: var(--vp-c-text-2);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--vp-c-text-3);
 }
 
 @media (max-width: 640px) {
@@ -61,8 +69,12 @@ const items = computed(() => [
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .stat-item {
+    padding: 16px var(--blog-space-3, 12px);
+  }
+
   .stat-value {
-    font-size: 20px;
+    font-size: 21px;
   }
 }
 </style>

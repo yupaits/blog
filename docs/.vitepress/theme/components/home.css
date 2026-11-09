@@ -6,7 +6,7 @@
 }
 
 .home-block {
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 .home-sections > .home-block:first-child {
@@ -16,21 +16,24 @@
 .home-title {
   display: flex;
   align-items: baseline;
-  gap: var(--blog-space-3, 12px);
-  margin: 0 0 var(--blog-space-4, 16px);
-  padding-left: var(--blog-space-2, 8px);
-  border-left: 4px solid var(--vp-c-brand-1);
-  border-radius: var(--blog-radius-sm, 4px);
-  font-size: 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--blog-space-2, 8px) var(--blog-space-3, 12px);
+  margin: 0 0 var(--blog-space-5, 20px);
+  padding-left: var(--blog-space-3, 12px);
+  border-left: 3px solid var(--vp-c-brand-1);
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.6;
-  color: var(--vp-c-brand-1);
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  color: var(--vp-c-text-1);
 }
 
 .home-title small {
   font-size: 12px;
   font-weight: 400;
-  color: var(--vp-c-text-2);
+  letter-spacing: 0;
+  color: var(--vp-c-text-3);
 }
 
 .home-card {

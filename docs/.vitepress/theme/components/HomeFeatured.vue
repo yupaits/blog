@@ -27,21 +27,22 @@ const formatDate = (seconds) => {
 <style scoped>
 .featured-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: var(--blog-space-3, 12px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--blog-space-4, 16px);
 }
 
 .featured-card {
   display: flex;
   flex-direction: column;
   gap: var(--blog-space-2, 8px);
-  padding: var(--blog-space-4, 16px);
-  transition: transform var(--blog-duration, 250ms) ease, border-color var(--blog-duration, 250ms) ease;
+  padding: var(--blog-space-5, 20px);
+  transition: transform var(--blog-duration, 250ms) ease, border-color var(--blog-duration, 250ms) ease, box-shadow var(--blog-duration, 250ms) ease;
 }
 
 .featured-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: var(--vp-c-brand-2);
+  box-shadow: 0 8px 24px var(--vp-shadow-1);
 }
 
 .featured-meta {
@@ -52,13 +53,24 @@ const formatDate = (seconds) => {
 }
 
 .featured-title {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.5;
+  transition: color var(--blog-duration-fast, 150ms) ease;
+}
+
+.featured-card:hover .featured-title {
+  color: var(--vp-c-brand-1);
 }
 
 .featured-note {
   margin: 0;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+
+.featured-card:hover .featured-note {
+  color: var(--vp-c-text-1);
 }
 </style>

@@ -48,37 +48,44 @@ const formatDay = (seconds) => {
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: var(--blog-space-2, 8px);
+  gap: var(--blog-space-3, 12px);
 }
 
 .year-group {
-  padding: 0 var(--blog-space-4, 16px);
+  padding: 0 var(--blog-space-5, 20px);
 }
 
 .year-head {
   display: flex;
   align-items: center;
   gap: var(--blog-space-3, 12px);
-  padding: 12px 0;
+  padding: 14px 0;
   cursor: pointer;
   list-style: none;
+  user-select: none;
+  transition: color var(--blog-duration-fast, 150ms) ease;
 }
 
 .year-head::-webkit-details-marker {
   display: none;
 }
 
+.year-head:hover .year-label {
+  color: var(--vp-c-brand-2);
+}
+
 .year-label {
   min-width: 48px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 700;
   color: var(--vp-c-brand-1);
   font-variant-numeric: tabular-nums;
+  transition: color var(--blog-duration-fast, 150ms) ease;
 }
 
 .year-bar {
   flex: 1;
-  height: 6px;
+  height: 4px;
   overflow: hidden;
   border-radius: var(--blog-radius-pill, 999px);
   background-color: var(--vp-c-bg-elv);
@@ -96,7 +103,7 @@ const formatDay = (seconds) => {
 }
 
 .post-list {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   padding: 0;
   list-style: none;
 }
@@ -105,16 +112,27 @@ const formatDay = (seconds) => {
   display: flex;
   align-items: baseline;
   gap: var(--blog-space-3, 12px);
-  padding: 4px 0;
+  margin: 0 calc(var(--blog-space-2, 8px) * -1);
+  padding: 5px var(--blog-space-2, 8px);
+  border-radius: var(--blog-radius-sm, 4px);
   font-size: 14px;
+  transition: background-color var(--blog-duration-fast, 150ms) ease;
+}
+
+.post-row:hover {
+  background-color: var(--vp-c-bg-elv);
 }
 
 .post-date {
   flex: none;
   width: 44px;
   font-size: 12px;
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-3);
   font-variant-numeric: tabular-nums;
+}
+
+.post-row:hover .post-date {
+  color: var(--vp-c-text-2);
 }
 
 .post-title {
@@ -125,11 +143,18 @@ const formatDay = (seconds) => {
 }
 
 .more {
-  margin-bottom: 12px;
+  margin: 0 calc(var(--blog-space-2, 8px) * -1) 14px;
+  padding: 0 var(--blog-space-2, 8px);
 }
 
 .more-toggle {
   cursor: pointer;
   padding: 4px 0;
+  border-radius: var(--blog-radius-sm, 4px);
+  transition: color var(--blog-duration-fast, 150ms) ease;
+}
+
+.more-toggle:hover {
+  color: var(--vp-c-brand-1);
 }
 </style>
