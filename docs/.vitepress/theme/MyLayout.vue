@@ -66,39 +66,29 @@ const watermarkImage = computed(() => {
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`
 })
 
-// 启用深色/浅色主题切换动画
-const enableTransitions = () =>
-    'startViewTransition' in document &&
-    window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+// 深浅色切换：整体用颜色过渡完成。
+// 之前用 View Transition 的整页快照 + 圆形裁剪，切换瞬间新快照会先完整绘制一帧，
+// 从深色切浅色时就是那一下闪白；改成只过渡颜色属性后不存在快照中转帧。
+let themeTimer = 0
 
-provide('toggle-appearance', async ({x, y}) => {
-    if (!enableTransitions()) {
+provide('toggle-appearance', () => {
+    const root = document.documentElement
+
+    // 减少动效偏好下直接切换，不做过渡
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         isDark.value = !isDark.value
         return
     }
 
-    const clipPath = [
-        `circle(0px at ${x}px ${y}px)`,
-        `circle(${Math.hypot(
-            Math.max(x, innerWidth - x),
-            Math.max(y, innerHeight - y)
-        )}px at ${x}px ${y}px)`
-    ]
+    root.classList.add('theme-transitioning')
+    // 先强制一次样式计算，让过渡属性在当前主题的颜色上生效
+    void root.offsetHeight
+    isDark.value = !isDark.value
 
-    await document.startViewTransition(async () => {
-        isDark.value = !isDark.value
-        await nextTick()
-    }).ready
-
-    document.documentElement.animate(
-        {clipPath: isDark.value ? clipPath.reverse() : clipPath},
-        {
-            duration: 300,
-            easing: 'ease-in',
-            fill: 'forwards',
-            pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
-        }
-    )
+    window.clearTimeout(themeTimer)
+    themeTimer = window.setTimeout(() => {
+        root.classList.remove('theme-transitioning')
+    }, 300)
 })
 
 // 五彩纸屑：仅首页每天首次访问、尊重减少动效偏好，可通过 localStorage 关闭
@@ -209,20 +199,29 @@ main .vp-doc.draft-hidden {
   display: none;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+/* 深浅色切换：只过渡颜色相关属性（背景、文字、边框、图标描边），
+   不碰 backdrop-filter / box-shadow / 尺寸，避免切换时整页重绘掉帧 */
+html {
+  background-color: var(--vp-c-bg);
 }
 
-::view-transition-old(root),
-.dark::view-transition-new(root) {
-  z-index: 1;
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition-property: background-color, border-color, color, fill, stroke, outline-color !important;
+  transition-duration: 240ms !important;
+  transition-timing-function: ease !important;
+  transition-delay: 0s !important;
 }
 
-::view-transition-new(root),
-.dark::view-transition-old(root) {
-  z-index: 9999;
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning *::before,
+  html.theme-transitioning *::after {
+    transition-duration: 0s !important;
+  }
 }
 
 .VPSwitchAppearance {
