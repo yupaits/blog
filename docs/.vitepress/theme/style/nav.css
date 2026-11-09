@@ -271,28 +271,40 @@ body .VPLocalSearchBox .result.selected {
   background-color: var(--vp-c-bg-soft);
 }
 
-/* 一级条目激活时也给出品牌色指示条，与更深层级保持一致 */
+/* 竖线落在该条目所在层级的基准线上：每层缩进为 16px padding + 1px 引导线，
+   left:-17px 正好让竖线左缘贴住该层引导线，随层级移动但不再额外左右偏移。
+   默认主题还给 .indicator 声明了 background-color 0.25s 过渡，切换选中项时旧竖线
+   会在旧位置淡出，看起来像先闪一下再跳位；这里一并禁用过渡 */
+.VPSidebarItem .item > .indicator {
+  transition: none;
+}
+
+/* 直角、整数像素定位：条目高 31px，top:6px + 18px 高正好落在整数坐标上，
+   也不使用 transform 位移，避免半像素抗锯齿导致边缘发虚 */
 .VPSidebarItem.is-active > .item > .indicator {
-  top: 50%;
+  top: 6px;
   bottom: auto;
-  width: 2px;
-  height: 16px;
-  border-radius: 2px;
+  left: -17px;
+  width: 3px;
+  height: 18px;
+  border-radius: 0;
   background-color: var(--vp-c-brand-1);
-  transform: translateY(-50%);
 }
 
+/* 选中态只用竖线 + 文字色表达，不再铺高亮底色 */
 .VPSidebarItem:not(.level-0).is-active > .item > .link {
-  background-color: var(--vp-c-brand-soft);
+  background-color: transparent;
 }
 
-.VPSidebarItem.level-1.is-active > .item > .link > .text {
+.VPSidebarItem:not(.level-0).is-active > .item > .link > .text {
   color: var(--vp-c-brand-1);
   font-weight: 500;
 }
 
-.VPSidebarItem .link:hover .text {
-  color: var(--vp-c-text-1);
+/* hover 只做轻底色 + 正文文字色，避免和选中态的品牌色混淆；
+   排除 active 条目；默认主题的 scoped 规则带了 data-v 属性优先级更高，这里用 !important 压过 */
+.VPSidebarItem:not(.level-0):not(.is-active) > .item > .link:hover > .text {
+  color: var(--vp-c-text-1) !important;
 }
 
 .VPSidebarItem.level-0 > .item:hover > .text {
@@ -323,11 +335,6 @@ body .VPLocalSearchBox .result.selected {
 .VPSidebarItem .caret-icon {
   font-size: 16px;
   transition: transform var(--blog-duration, 250ms) var(--blog-ease, ease);
-}
-
-/* 展开/收起：内容区裁掉溢出，保持圆角内的整洁 */
-.VPSidebarItem > .items {
-  overflow: hidden;
 }
 
 /* 窄屏抽屉：与桌面共用条目节奏，底部留出安全区 */

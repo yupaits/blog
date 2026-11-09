@@ -111,13 +111,16 @@
 }
 
 /* ---------- 右侧目录 ---------- */
-.VPDocAsideOutline .content {
+/* 滚动容器放在外层，.content 保持 overflow 可见：
+   这样 .content 的左侧基准线不会被横向裁剪，指示条 left:-1px 才能真正盖住基准线，
+   否则基准线会压在指示条最左侧一列上，形成一条灰色毛边 */
+.VPDocAsideOutline {
   max-height: calc(100vh - var(--vp-nav-height) - 96px);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
-.VPDocAsideOutline .content::-webkit-scrollbar {
+.VPDocAsideOutline::-webkit-scrollbar {
   width: 6px;
 }
 
@@ -133,7 +136,9 @@
   padding: 3px 0;
   color: var(--vp-c-text-2);
   font-size: 13px;
-  line-height: 1.6;
+  /* 26 + 3 + 3 = 32px，与默认行高一致：默认脚本按 offsetTop + 39 定位竖线，
+     只有行高为 32px 时竖线才会和文字行框垂直居中，同时保证坐标是整数像素 */
+  line-height: 26px;
   transition: color var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
 }
 
@@ -146,9 +151,11 @@
   font-weight: 500;
 }
 
+/* 沿用默认的滑动指示条：它挂在 .content 的左侧基准线上，所有层级共用同一个 x；
+   这里只把粗细调到与左侧边栏一致，并改成直角避免圆角在小尺寸下产生发虚的边缘 */
 .VPDocAsideOutline .outline-marker {
   width: 3px;
-  border-radius: 3px;
+  border-radius: 0;
   background-color: var(--vp-c-brand-1);
 }
 
