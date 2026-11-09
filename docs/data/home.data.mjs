@@ -8,14 +8,8 @@ const srcDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const repoRoot = path.resolve(srcDir, '..')
 
 // 首页板块只覆盖这五个内容栏目，排除「站点收录」与栏目 index 页
-const CATEGORIES = [
-    {name: '技术博客', url: '/技术博客/', icon: '/home/idea.png', desc: '踩过的坑，和想明白的事'},
-    {name: '软件开发', url: '/软件开发/', icon: '/home/action.png', desc: '语言、工程与系统设计'},
-    {name: '文章收录', url: '/文章收录/', icon: '/home/accumulation.png', desc: '值得留存的好文章'},
-    {name: '生活记录', url: '/生活记录/', icon: '/home/post.png', desc: '日常、数码与路上的风景'},
-    {name: '个人项目', url: '/个人项目/', icon: '/home/action.png', desc: '从想法到上线的小作品'}
-]
-const categoryNames = new Set(CATEGORIES.map(item => item.name))
+const CATEGORY_NAMES = ['技术博客', '软件开发', '文章收录', '生活记录', '个人项目']
+const categoryNames = new Set(CATEGORY_NAMES)
 
 // 文章几乎没有 date frontmatter，工作区 mtime 又等于 clone 时间。
 // 直接用「最后提交时间」会被批量导入/批量重构污染（254 篇挤在 2026），
@@ -106,7 +100,6 @@ const yearOf = (seconds) => new Date((seconds + 8 * 3600) * 1000).getUTCFullYear
 export default createContentLoader('**/*.md', {
     transform(pages) {
         const posts = []
-        const counts = new Map(CATEGORIES.map(item => [item.name, 0]))
         for (const page of pages) {
             const url = page.url
             if (url === '/' || url.endsWith('/') || page.frontmatter.draft === true) continue
@@ -122,7 +115,6 @@ export default createContentLoader('**/*.md', {
                 date: getDate(page, relativePath),
                 words: meta.words
             })
-            counts.set(category, counts.get(category) + 1)
         }
         posts.sort((a, b) => b.date - a.date)
 
@@ -175,10 +167,8 @@ export default createContentLoader('**/*.md', {
                 posts: posts.length,
                 words: posts.reduce((sum, post) => sum + post.words, 0),
                 years: years.length,
-                categories: CATEGORIES.length,
                 updated: posts[0]?.date ?? 0
             },
-            categories: CATEGORIES.map(item => ({...item, count: counts.get(item.name) ?? 0})),
             years,
             featured
         }

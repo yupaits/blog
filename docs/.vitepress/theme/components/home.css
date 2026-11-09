@@ -72,19 +72,6 @@
   white-space: nowrap;
 }
 
-.home-split {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: var(--blog-space-6, 24px);
-  align-items: start;
-}
-
-@media (max-width: 900px) {
-  .home-split {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 640px) {
   .home-sections {
     margin-top: 2.5rem;
