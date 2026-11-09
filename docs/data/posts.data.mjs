@@ -6,7 +6,6 @@ import {createContentLoader} from 'vitepress'
 
 const srcDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const repoRoot = path.resolve(srcDir, '..')
-const imageRegex = /!\[.*?\]\((.*?)(?:\s+"[^"]*")?\)/
 
 // 一次性读取 git 历史，得到每篇文章的最后提交时间；无 git 环境时回退到文件修改时间
 const readGitDates = () => {
@@ -47,6 +46,15 @@ const getTitle = (page) => {
 
 const getCategory = (url) => decodeURIComponent(url).split('/').filter(Boolean)[0] ?? ''
 
+// 无显式封面时按栏目使用内置小图，避免首页加载文章内的大尺寸截图
+const categoryIcons = {
+    '技术博客': '/home/idea.png',
+    '软件开发': '/home/action.png',
+    '文章收录': '/home/accumulation.png',
+    '生活记录': '/home/post.png',
+    '个人项目': '/home/action.png'
+}
+
 const getDate = (page, relativePath) => {
     if (page.frontmatter.date) return new Date(page.frontmatter.date).getTime()
     const gitDate = gitDates.get(`docs/${relativePath}`)
@@ -59,7 +67,6 @@ const getDate = (page, relativePath) => {
 }
 
 export default createContentLoader('**/*.md', {
-    includeSrc: true,
     transform(pages) {
         return pages
             .filter(page => page.url !== '/' && !page.url.endsWith('/') && page.frontmatter.draft !== true)
@@ -68,7 +75,11 @@ export default createContentLoader('**/*.md', {
                 category: getCategory(page.url),
                 link: page.url,
                 date: getDate(page, toRelativePath(page.url)),
-                icon: page.src?.match(imageRegex)?.[1] ?? '/home/post.png'
+                icon: page.frontmatter.cover ?? categoryIcons[getCategory(page.url)] ?? '/home/post.png',
+                summary: (page.frontmatter.description ?? page.excerpt ?? '')
+                    .replace(/<[^>]+>/g, '')
+                    .replace(/[*_`]/g, '')
+                    .slice(0, 46)
             }))
             .sort((a, b) => b.date - a.date)
     }
