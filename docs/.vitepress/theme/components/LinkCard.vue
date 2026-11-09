@@ -1,5 +1,7 @@
 <template>
-  <div :class="{ 'linkcard-subfield': group.subfield }" class="linkcard no-icon" @click="navigatePage(option?.link)">
+  <a :class="{ 'linkcard-subfield': group.subfield }" class="linkcard no-icon"
+     :href="option?.link" :target="group.external ? '_blank' : undefined"
+     :rel="group.external ? 'noopener noreferrer' : undefined">
     <img :ref="getImgRefName(group?.label, option?.text)" :style="{
       height: option.imgHeight ?? group.imgHeight ?? '48px',
       minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
@@ -16,24 +18,14 @@
       </span>
       <span v-else class="subtitle" v-html="option.description"/>
     </p>
-  </div>
+  </a>
 </template>
 
 <script setup>
-import {useRouter} from 'vitepress';
 import {getCurrentInstance, onMounted} from 'vue';
 
 const {group, option} = defineProps(['group', 'option'])
-const router = useRouter()
 const defaultIconUrl = '/icon/url.png'
-
-const navigatePage = (link) => {
-  if (group.external) {
-    window.open(link, '_blank')
-  } else {
-    router.go(link)
-  }
-}
 
 const isValidImageUrl = (url) => {
   return new Promise((resolve, reject) => {
@@ -75,6 +67,7 @@ onMounted(() => {
 <style scoped>
 /* 卡片背景 */
 .linkcard {
+  display: block;
   cursor: pointer;
   padding: 16px;
   background-color: var(--vp-c-bg-soft);
