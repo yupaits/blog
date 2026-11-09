@@ -1,6 +1,5 @@
 // @ts-nocheck
 import markdownItVideo from '@vrcd-community/markdown-it-video'
-import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import taskList from 'markdown-it-task-checkbox'
 import {defineConfig} from 'vitepress'
 import nav from './config/nav'
@@ -190,9 +189,28 @@ export default defineConfig({
         },
         config: (md) => {
             md.use(taskList)
-            md.use(mdItCustomAttrs, 'image', {
-                'data-fancybox': 'gallery'
-            })
+
+            // 灯箱：按文章分组，只对正文大图生效，避免跨文章串图与小图标入组
+            const imageRule = md.renderer.rules.image
+            md.renderer.rules.image = (tokens, idx, options, env, self) => {
+                const token = tokens[idx]
+                const src = token.attrGet('src') || ''
+                const isSmallAsset = /^\/(icon|home|favicon)|\.(svg|ico)(\?|$)/i.test(src)
+                const isRemote = /^(https?:)?\/\//.test(src)
+                const hasSize = token.attrGet('width') || token.attrGet('height')
+                if (!isSmallAsset && !isRemote && !hasSize) {
+                    const group = String(env?.relativePath ?? env?.path ?? 'gallery')
+                        .replace(/\.md$/, '')
+                        .replace(/[^\w\u4e00-\u9fa5]+/g, '-')
+                    token.attrSet('data-fancybox', group)
+                    token.attrSet('decoding', 'async')
+                    if (token.content) token.attrSet('data-caption', token.content)
+                }
+                return imageRule
+                    ? imageRule(tokens, idx, options, env, self)
+                    : self.renderToken(tokens, idx, options)
+            }
+
             md.use(markdownItVideo, {
                 bilibili: {width: '100%', height: '387px'}
             })
