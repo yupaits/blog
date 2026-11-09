@@ -183,12 +183,23 @@ export default defineConfig({
     },
     markdown: {
         theme: {light: 'slack-ochin', dark: 'monokai'},
-        lineNumbers: true,
+        lineNumbers: false,
         image: {
             lazyLoading: true
         },
         config: (md) => {
             md.use(taskList)
+
+            // 全局关闭行号，仅长代码块按需显示，显著减小页面 chunk
+            md.core.ruler.push('adaptive-line-numbers', state => {
+                for (const token of state.tokens) {
+                    if (token.type !== 'fence') continue
+                    if (/:line-numbers|:no-line-numbers/.test(token.info)) continue
+                    if (token.content.split('\n').length >= 15) {
+                        token.info = `${token.info.trim()} :line-numbers`
+                    }
+                }
+            })
 
             // 灯箱：按文章分组，只对正文大图生效，避免跨文章串图与小图标入组
             const imageRule = md.renderer.rules.image
