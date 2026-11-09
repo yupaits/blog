@@ -125,104 +125,76 @@
   background-color: transparent;
 }
 
-/* 代码块：增加留空边距 增加阴影 */
-.vp-doc div[class*=language-] {
-    box-shadow: 0 10px 30px 0 var(--vp-c-border);
-    padding-top: 20px;
+/* 代码块：顶部留白、macOS 圆点与行号偏移统一由变量驱动 */
+:root {
+    --vp-code-pad-top: 20px;
+    --vp-code-line-top: 40px;
+    --vp-code-group-line-top: 20px;
+    --vp-code-dot-size: 12px;
 }
 
-/* 代码块：添加macOS风格的小圆点 */
-.vp-doc div[class*=language-]::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    width: 12px;
-    height: 12px;
-    background-color: #ff5f56;
-    border-radius: 50%;
-    box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
-    z-index: 1;
-}
-
-/* 代码块：下移行号 隐藏右侧竖线 */
-.vp-doc .line-numbers-wrapper {
-    padding-top: 40px;
-    border-right: none;
-}
-
-/* 代码块：重建行号右侧竖线 */
-.vp-doc .line-numbers-wrapper::after {
-    content: "";
-    position: absolute;
-    top: 40px;
-    right: 0;
-    border-right: 1px solid var(--vp-code-block-divider-color);
-    height: calc(100% - 60px);
-}
-
-.vp-doc div[class*='language-'].line-numbers-mode {
-    margin-bottom: 20px;
-}
-
-/* 代码组：tab间距 */
-.vp-code-group .tabs {
-    padding-top: 20px;
-}
-
-/* 代码组：添加样式及阴影 */
+.vp-doc div[class*="language-"],
 .vp-code-group {
     border-radius: 8px;
     box-shadow: 0 10px 30px 0 var(--vp-c-border);
 }
 
-/* 代码组：添加macOS风格的小圆点 */
+.vp-doc div[class*="language-"] {
+    padding-top: var(--vp-code-pad-top);
+}
+
+/* macOS 风格三色圆点：独立代码块与代码组共用 */
+.vp-doc div[class*="language-"]::before,
 .vp-code-group .tabs::before {
-    content: ' ';
+    content: "";
     position: absolute;
     top: 12px;
     left: 12px;
-    height: 12px;
-    width: 12px;
-    background: #fc625d;
+    width: var(--vp-code-dot-size);
+    height: var(--vp-code-dot-size);
     border-radius: 50%;
-    box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+    background-color: #ff5f56;
+    box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+    z-index: 1;
 }
 
-/* 代码组：修正倒角、阴影、边距 */
-.vp-code-group div[class*="language-"].vp-adaptive-theme.line-numbers-mode {
-    border-radius: 8px;
-    box-shadow: none;
-    padding-top: 0px;
+.vp-code-group .tabs {
+    position: relative;
+    padding-top: var(--vp-code-pad-top);
 }
 
-/* 代码组：隐藏小圆点 */
-.vp-code-group div[class*="language-"].vp-adaptive-theme.line-numbers-mode::before {
-    display: none;
-}
-
-/* 代码组：修正行号位置 */
-.vp-code-group .line-numbers-mode .line-numbers-wrapper {
-    padding-top: 20px;
-}
-
-/* 代码组：修正行号右侧竖线位置 */
-.vp-code-group .line-numbers-mode .line-numbers-wrapper::after {
-    top: 24px;
-    height: calc(100% - 45px);
-}
-
-/* 代码组（无行号）：修正倒角、阴影、边距 */
-.vp-code-group div[class*="language-"].vp-adaptive-theme {
-    border-radius: 8px;
-    box-shadow: none;
+/* 代码组内部不再重复绘制阴影与圆点 */
+.vp-code-group div[class*="language-"] {
     padding-top: 0;
+    box-shadow: none;
 }
 
-/* 代码组（无行号）：隐藏小圆点 */
-.vp-code-group div[class*="language-"].vp-adaptive-theme::before {
+.vp-code-group div[class*="language-"]::before {
     display: none;
+}
+
+/* 行号：随顶部留白偏移，右侧竖线只画一条 */
+.vp-doc .line-numbers-wrapper {
+    padding-top: var(--vp-code-line-top);
+    border-right: none;
+}
+
+.vp-doc .line-numbers-wrapper::after {
+    content: "";
+    position: absolute;
+    top: var(--vp-code-line-top);
+    right: 0;
+    height: calc(100% - var(--vp-code-line-top) - 20px);
+    border-right: 1px solid var(--vp-code-block-divider-color);
+}
+
+.vp-code-group .line-numbers-wrapper {
+    padding-top: var(--vp-code-group-line-top);
+}
+
+.vp-code-group .line-numbers-wrapper::after {
+    top: var(--vp-code-group-line-top);
+    height: calc(100% - var(--vp-code-group-line-top) - 20px);
 }
 
 /* 页面加载进度条适配主题色 */
