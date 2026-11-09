@@ -2,9 +2,6 @@
 import markdownItVideo from '@vrcd-community/markdown-it-video'
 import mdItCustomAttrs from 'markdown-it-custom-attrs'
 import taskList from 'markdown-it-task-checkbox'
-import AutoImport from 'unplugin-auto-import/vite'
-import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
-import Components from 'unplugin-vue-components/vite'
 import {defineConfig} from 'vitepress'
 import nav from './config/nav'
 import sidebar from './config/sidebar'
@@ -195,15 +192,5 @@ export default defineConfig({
                 bilibili: {width: '100%', height: '387px'}
             })
         }
-    },
-    vite: {
-        plugins: [
-            AutoImport({
-                resolvers: [ElementPlusResolver()]
-            }),
-            Components({
-                resolvers: [ElementPlusResolver()]
-            })
-        ]
     }
 })

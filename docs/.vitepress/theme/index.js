@@ -14,7 +14,9 @@ import PostDate from './components/PostDate.vue'
 import BookDetail from './components/BookDetail.vue'
 
 import '@bprogress/core/css'
-import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/base.css'
+import 'element-plus/theme-chalk/el-timeline.css'
+import 'element-plus/theme-chalk/el-timeline-item.css'
 import './style/var.css'
 
 export default {
