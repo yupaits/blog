@@ -2,7 +2,8 @@
   <a :class="{ 'linkcard-subfield': group.subfield }" class="linkcard no-icon"
      :href="option?.link" :target="group.external ? '_blank' : undefined"
      :rel="group.external ? 'noopener noreferrer' : undefined">
-    <img :ref="getImgRefName(group?.label, option?.text)" :style="{
+    <img :src="iconUrl" :alt="`${option?.text ?? '链接'} 图标`" width="48" height="48"
+         loading="lazy" decoding="async" @error="onIconError" :style="{
       height: option.imgHeight ?? group.imgHeight ?? '48px',
       minWidth: option.imgWidth ?? group.imgWidth ?? '48px',
       maxWidth: option.imgMaxWidth ?? group.imgMaxWidth ?? '64px'
@@ -22,57 +23,42 @@
 </template>
 
 <script setup>
-import {getCurrentInstance, onMounted} from 'vue';
+import {computed, ref} from 'vue';
 
 const {group, option} = defineProps(['group', 'option'])
 const defaultIconUrl = '/icon/url.png'
+const fallback = ref(false)
 
-const isValidImageUrl = (url) => {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onerror = () => resolve(false)
-    img.onload = () => resolve(true)
-    img.src = url
-  })
+// 服务端直接输出图标地址：不再依赖 mounted 后异步探测或本地 ref 名称
+const iconUrl = computed(() => fallback.value ? defaultIconUrl : option?.icon || defaultIconUrl)
+const onIconError = () => {
+    fallback.value = true
 }
-
-const correctIconUrl = async (item) => {
-  if (item?.icon) {
-    return item.icon
-  }
-  if (!item?.link) {
-    return defaultIconUrl
-  }
-  const urlObj = new URL(item?.link)
-  const iconLink = `${urlObj.protocol}//${urlObj.hostname}${urlObj.port ? ':' + urlObj.port : ''}/favicon.ico`
-  const isValid = await isValidImageUrl(iconLink)
-  return isValid ? iconLink : defaultIconUrl
-}
-
-const getImgRefName = (groupLabel, optionText) => {
-  return `iconImg_${groupLabel}_${optionText}`
-}
-
-onMounted(() => {
-  const instance = getCurrentInstance()
-  correctIconUrl(option).then(iconUrl => {
-    const iconImgEle = instance.refs[getImgRefName(group?.label, option?.text)]
-    if (iconImgEle) {
-      iconImgEle.src = iconUrl
-    }
-  })
-})
 </script>
 
 <style scoped>
 /* 卡片背景 */
 .linkcard {
   display: block;
+  position: relative;
   cursor: pointer;
   padding: 16px;
   background-color: var(--vp-c-bg-soft);
+  border: 1px solid transparent;
   border-radius: 8px;
-  transition: color 0.5s, background-color 0.5s;
+  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+/* 箭头占位：hover 才显现，不产生布局跳动 */
+.linkcard::after {
+  content: '↗';
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 14px;
+  color: var(--vp-c-brand-1);
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }
 
 .linkcard.linkcard-subfield {
@@ -83,7 +69,12 @@ onMounted(() => {
 
 /* 卡片鼠标悬停 */
 .linkcard:hover {
-  background-color: var(--vp-c-brand-soft);
+  transform: translateY(-2px);
+  border-color: var(--vp-c-brand-2);
+}
+
+.linkcard:hover::after {
+  opacity: 1;
 }
 
 /* 描述链接文字 */
