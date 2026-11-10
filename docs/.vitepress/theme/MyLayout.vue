@@ -125,15 +125,54 @@ const initLazyVideos = () => {
     })
 }
 
-// Fancybox 脚本 defer 后按需重新绑定
-const bindFancybox = () => {
-    const Fancybox = window.Fancybox
+// Fancybox 按需加载：只有当前页出现正文大图（data-fancybox）时才拉取 CDN 资源
+let fancyboxTask = null
+const loadFancybox = () => {
+    if (window.Fancybox?.bind) return Promise.resolve(window.Fancybox)
+    if (fancyboxTask) return fancyboxTask
+    fancyboxTask = new Promise((resolve, reject) => {
+        if (!document.querySelector('link[data-fancybox-css]')) {
+            const css = document.createElement('link')
+            css.rel = 'stylesheet'
+            css.href = 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css'
+            css.dataset.fancyboxCss = ''
+            document.head.appendChild(css)
+        }
+        const script = document.createElement('script')
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js'
+        script.async = true
+        script.onload = () => window.Fancybox?.bind
+            ? resolve(window.Fancybox)
+            : reject(new Error('Fancybox 未就绪'))
+        script.onerror = () => reject(new Error('Fancybox 加载失败'))
+        document.head.appendChild(script)
+    }).catch(() => {
+        // 网络异常时允许下次路由切换重试，正文图片不受影响
+        fancyboxTask = null
+        return null
+    })
+    return fancyboxTask
+}
+
+const bindFancybox = async () => {
+    if (!document.querySelector('.vp-doc [data-fancybox]')) return
+    const Fancybox = await loadFancybox()
     if (!Fancybox?.bind) return
     try {
         Fancybox.unbind('[data-fancybox]')
         Fancybox.bind('[data-fancybox]')
     } catch {
-        // 脚本尚未就绪时由 load 事件重试
+        // 绑定失败时保持原生 img 行为
+    }
+}
+
+// 首屏空闲后再加载，避免与 LCP 抢带宽；路由切换后重新绑定新页面的图片
+const scheduleBindFancybox = () => {
+    const run = () => bindFancybox()
+    if (window.requestIdleCallback) {
+        window.requestIdleCallback(run, {timeout: 2500})
+    } else {
+        setTimeout(run, 800)
     }
 }
 
@@ -157,7 +196,7 @@ watch(() => route.path, async () => {
     await nextTick()
     handleDoc()
     initLazyVideos()
-    bindFancybox()
+    scheduleBindFancybox()
 })
 
 // 评论区延后到首屏空闲再加载，避免阻塞文章渲染
@@ -165,7 +204,7 @@ onMounted(() => {
     initConfetti()
     handleDoc()
     initLazyVideos()
-    window.addEventListener('load', bindFancybox, {once: true})
+    scheduleBindFancybox()
     const schedule = window.requestIdleCallback
         ? cb => window.requestIdleCallback(cb, {timeout: 2000})
         : cb => setTimeout(cb, 1200)
