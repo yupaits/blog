@@ -51,15 +51,7 @@ export default defineConfig({
             })();
             `
         ],
-        // fancybox
-        ['link', {
-            rel: 'stylesheet',
-            href: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.min.css'
-        }],
-        ['script', {
-            src: 'https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/4.0.31/fancybox.umd.js',
-            defer: 'defer'
-        }],
+        // fancybox 不再全局引入，改由 MyLayout 在文章页出现正文大图时按需加载
     ],
     cleanUrls: true,
     sitemap: {
