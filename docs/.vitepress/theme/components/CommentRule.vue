@@ -7,9 +7,6 @@
   </section>
 </template>
 
-<script setup>
-</script>
-
 <style>
 .comment-rule {
   margin-top: 40px;

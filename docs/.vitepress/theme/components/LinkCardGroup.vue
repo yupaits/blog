@@ -36,8 +36,6 @@ const isExternal = () => external === '' || (typeof external === 'boolean' && ex
 
 const linkGroup = (groupItem) => {
   return {
-    label: groupItem.text,
-    type: groupItem.type,
     imgWidth: groupItem.imgWidth ?? imgWidth,
     imgHeight: groupItem.imgHeight ?? imgHeight,
     imgMaxWidth: groupItem.imgMaxWidth ?? imgMaxWidth,
