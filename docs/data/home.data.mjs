@@ -42,7 +42,9 @@ const FEATURED_CONFIG = {
 // 文章几乎没有 date frontmatter，工作区 mtime 又等于 clone 时间。
 // 直接用「最后提交时间」会被批量导入/批量重构污染（254 篇挤在 2026），
 // 因此：跳过一次改动超过 10 个 md 的批量提交，取最近一次正常提交；
-// 没有正常提交的文件回退到首次写入时间，最后才是 mtime。
+// 没有正常提交的文件回退到首次写入时间；再没有（例如文件是重命名/移动来的，
+// 拿不到 A 记录）就用最近一次触碰该文件的提交，最后才是 mtime。
+// mtime 只适合没有 git 的场景：它等于 clone/构建时间，部署后会变成当天。
 const BULK_COMMIT_THRESHOLD = 10
 
 const parseLog = (text) => {
@@ -68,9 +70,14 @@ const gitLog = (...args) => execFileSync('git', ['-c', 'core.quotepath=false', '
 
 const readGitDates = () => {
     const dates = new Map()
+    const last = new Map()
     try {
         const all = parseLog(gitLog('--pretty=format:@@@%ct', '--name-only', '--', 'docs'))
         const adds = parseLog(gitLog('--diff-filter=A', '--pretty=format:@@@%ct', '--name-only', '--', 'docs'))
+        // 由新到旧，记录每个文件最近一次被任何提交触碰的时间
+        for (const commit of all) {
+            for (const file of commit.files) if (!last.has(file)) last.set(file, commit.ts)
+        }
         // 由旧到新取最早一次添加
         for (let i = adds.length - 1; i >= 0; i--) {
             for (const file of adds[i].files) if (!dates.has(file)) dates.set(file, adds[i].ts)
@@ -85,9 +92,9 @@ const readGitDates = () => {
     } catch {
         // 非 git / 浅克隆环境交给 getDate 回退
     }
-    return dates
+    return {dates, last}
 }
-const gitDates = readGitDates()
+const {dates: gitDates, last: lastCommitDates} = readGitDates()
 
 const toRelativePath = (url) => {
     const clean = decodeURIComponent(url).replace(/^\//, '')
@@ -144,7 +151,8 @@ const readMeta = (relativePath) => {
 
 const getDate = (page, relativePath) => {
     if (page.frontmatter.date) return Math.floor(new Date(page.frontmatter.date).getTime() / 1000)
-    const git = gitDates.get(`docs/${relativePath}`)
+    const key = `docs/${relativePath}`
+    const git = gitDates.get(key) ?? lastCommitDates.get(key)
     if (git) return git
     try {
         return Math.floor(fs.statSync(path.resolve(srcDir, relativePath)).mtimeMs / 1000)
