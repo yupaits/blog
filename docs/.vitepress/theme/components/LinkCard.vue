@@ -431,7 +431,8 @@ onBeforeUnmount(hideTip)
   -webkit-line-clamp: 2;
   overflow: hidden;
   margin-top: 4px;
-  color: var(--vp-c-text-3);
+  /* 简介统一用次级文字色：比 text-3 更易读，又低于标题所在的 text-1 */
+  color: var(--vp-c-text-2);
   font-size: 13px;
   line-height: 1.65;
 }
