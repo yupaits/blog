@@ -1,33 +1,163 @@
 /* ==========================================================================
    通用组件
    - 文章页水印、评论容器、页脚
-   - Element Plus 时间线（正文中的 Timeline 组件）
+   - 正文时间线（本地 Timeline 组件）
    - LinkCard / 阅读计划 / 回到顶部等组件样式随各自的 .vue 文件就近维护
    ========================================================================== */
 
-/* ---------- Element Plus 时间线 ---------- */
-.vp-doc {
-    .timeline {
+/* ---------- 正文时间线 ---------- */
+/* 结构：.timeline > .timeline-item > 竖线 + 节点 + 内容（时间标签、标题、描述） */
+.vp-doc .timeline {
+    --tl-line: var(--vp-c-divider);
+    --tl-node: var(--vp-c-brand-1);
+    /* 与正文共用同一套字族，避免局部回退到其它字体 */
+    font-family: var(--vp-font-family-base);
+    list-style: none;
+    margin: 24px 0;
+    padding: 0;
+}
 
-        /* 时间线元素去除li前面的圆点 */
+/* 支持时补齐中英文/数字之间的自动间距，避免“12刀”“案件发生前”贴在一起 */
+@supports (text-autospace: normal) {
+    .vp-doc .timeline {
+        text-autospace: normal;
+    }
+}
 
-        li {
-            list-style: none;
-            margin-top: 0;
-        }
+.vp-doc .timeline-item {
+    position: relative;
+    padding-left: 26px;
+}
 
-        .title {
-            color: var(--vp-c-text-1)
-        }
+.vp-doc .timeline-item + .timeline-item {
+    margin-top: 22px;
+}
 
-        .label {
-            font-size: 12px;
-            color: var(--vp-c-text-2);
-        }
+/* 竖线从当前节点下方连到下一条节点，最后一条不画 */
+.vp-doc .timeline-item__tail {
+    position: absolute;
+    left: 5px;
+    top: 16px;
+    bottom: -22px;
+    width: 2px;
+    border-radius: 1px;
+    background-color: var(--tl-line);
+}
 
-        .content {
-            color: var(--vp-c-text-1)
-        }
+.vp-doc .timeline-item:last-child .timeline-item__tail {
+    display: none;
+}
+
+/* 空心节点用页面底色填住竖线，边框取类型色 */
+.vp-doc .timeline-item__node {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--tl-node);
+    box-shadow: 0 0 0 4px var(--vp-c-bg);
+}
+
+.vp-doc .timeline-item__node.is-hollow {
+    background-color: var(--vp-c-bg);
+    border: 2px solid var(--tl-node);
+}
+
+.vp-doc .timeline-item.is-primary {
+    --tl-node: var(--vp-c-brand-1);
+}
+
+.vp-doc .timeline-item.is-success {
+    --tl-node: var(--vp-c-success-1);
+}
+
+.vp-doc .timeline-item.is-warning {
+    --tl-node: var(--vp-c-warning-1);
+}
+
+.vp-doc .timeline-item.is-danger {
+    --tl-node: var(--vp-c-danger-1);
+}
+
+.vp-doc .timeline-item.is-info {
+    --tl-node: var(--vp-c-text-3);
+}
+
+.vp-doc .timeline-item.is-normal .timeline-item__node {
+    left: 0;
+    width: 12px;
+    height: 12px;
+}
+
+.vp-doc .timeline-item.is-large .timeline-item__node {
+    left: -1px;
+    width: 14px;
+    height: 14px;
+}
+
+.vp-doc .timeline-item__timestamp {
+    margin-bottom: 6px;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    /* 等宽数字，避免“次日上午/12:00”这类时间文案切换时左右跳动 */
+    font-variant-numeric: tabular-nums;
+    color: var(--vp-c-text-2);
+}
+
+.vp-doc .timeline-item__content > :first-child {
+    margin-top: 0;
+}
+
+.vp-doc .timeline .title {
+    margin: 0 0 6px;
+    font-family: var(--blog-font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: 0;
+    color: var(--vp-c-text-1);
+}
+
+/* 标题下方的描述条目：去掉圆点，行高与正文段落一致 */
+.vp-doc .timeline .timeline-item__content ul {
+    margin: 0;
+    padding: 0;
+}
+
+.vp-doc .timeline .timeline-item__content ul li {
+    margin: 6px 0;
+    list-style: none;
+    line-height: 1.8;
+}
+
+.vp-doc .timeline .label {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: inherit;
+    letter-spacing: 0.01em;
+    color: var(--vp-c-text-2);
+}
+
+.vp-doc .timeline .content {
+    font-weight: 400;
+    color: var(--vp-c-text-1);
+}
+
+@media (max-width: 640px) {
+    .vp-doc .timeline-item {
+        padding-left: 22px;
+    }
+
+    .vp-doc .timeline-item__tail {
+        left: 4px;
+    }
+
+    .vp-doc .timeline .title {
+        font-size: 16px;
     }
 }
 
