@@ -1,9 +1,28 @@
 // @ts-nocheck
+import fs from 'node:fs'
 import markdownItVideo from '@vrcd-community/markdown-it-video'
 import taskList from 'markdown-it-task-checkbox'
 import {defineConfig} from 'vitepress'
 import nav from './config/nav'
 import sidebar from './config/sidebar'
+
+// 构建期图片优化清单（scripts/optimize-images.mjs 生成）：原图不动，按需换成压缩版并补宽高
+let imageManifest = {}
+try {
+    imageManifest = JSON.parse(fs.readFileSync(new URL('./cache/image-manifest.json', import.meta.url), 'utf8'))
+} catch {
+    // 未生成时直接使用原图
+}
+const lookupImage = (raw) => {
+    if (!raw || /^(https?:)?\/\//.test(raw) || raw.startsWith('data:')) return null
+    const clean = raw.split('?')[0]
+    let decoded = clean
+    try {
+        decoded = decodeURIComponent(clean)
+    } catch {
+    }
+    return imageManifest[decoded] || imageManifest[clean] || null
+}
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -256,6 +275,17 @@ export default defineConfig({
                 const isSmallAsset = /^\/(icon|home|favicon)|\.(svg|ico)(\?|$)/i.test(src)
                 const isRemote = /^(https?:)?\/\//.test(src)
                 const hasSize = token.attrGet('width') || token.attrGet('height')
+                // 命中构建期清单：换成压缩版，并写入原始宽高供浏览器预留占位（消除 CLS）
+                const optimized = lookupImage(src)
+                if (optimized) {
+                    if (!hasSize) {
+                        token.attrSet('width', String(optimized.width))
+                        token.attrSet('height', String(optimized.height))
+                    }
+                    if (optimized.src !== src) {
+                        token.attrSet('src', optimized.src)
+                    }
+                }
                 if (!isSmallAsset && !isRemote && !hasSize) {
                     const group = String(env?.relativePath ?? env?.path ?? 'gallery')
                         .replace(/\.md$/, '')

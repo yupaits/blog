@@ -21,6 +21,8 @@ const collect = (dir, matcher, out = []) => {
 }
 
 const images = collect(publicDir, name => extensions.has(path.extname(name).toLowerCase()))
+    // images-opt 是构建期生成的压缩产物，不计入源资产预算
+    .filter(file => !file.includes(`${path.sep}public${path.sep}images-opt${path.sep}`))
     .map(file => ({file: path.relative(root, file).replace(/\\/g, '/'), size: fs.statSync(file).size}))
 const byExt = {}
 for (const image of images) {

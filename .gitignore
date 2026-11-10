@@ -6,6 +6,9 @@
 # TODO: where does this rule come from?
 docs/_book
 
+# 构建期生成的压缩图片与清单（原图不动）
+docs/public/images-opt/
+
 # TODO: where does this rule come from?
 test/
 

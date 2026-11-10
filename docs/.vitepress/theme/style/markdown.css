@@ -332,6 +332,8 @@
   border: 1px solid var(--vp-c-divider);
   border-radius: var(--blog-radius, 8px);
   background-color: var(--vp-c-bg-soft);
+  /* 带 width/height 属性时按比例缩放，避免宽高被固定 */
+  height: auto;
 }
 
 .VPDoc .vp-doc [data-fancybox] {
