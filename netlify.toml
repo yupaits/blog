@@ -1,0 +1,51 @@
+# Netlify 站点配置（仓库根目录，Netlify 自动读取）
+# 构建在仓库根执行，发布 docs/.vitepress/dist
+
+[build]
+  command = "pnpm run docs:build"
+  publish = "docs/.vitepress/dist"
+
+[build.environment]
+  # 与本机 24.21.0 对齐；Netlify 默认也是 24，显式固定避免以后默认值变化
+  NODE_VERSION = "24"
+
+# ---------- 缓存头 ----------
+# 规则按声明顺序匹配（先匹配先生效），具体路径放前面。
+# HTML、hashmap.json、vp-icons.css、favicon 不写规则：
+# 走 Netlify 默认 public, max-age=0, must-revalidate，部署后立即生效。
+
+# VitePress 产物带内容 hash，改名即换地址，可一年强缓存
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# 原图：文件名固定，给 7 天；若确认永不覆盖同名文件可改 1 年 immutable
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# 构建期压缩产物：优化参数变化时同名文件内容会变，7 天是上限容忍
+[[headers]]
+  for = "/images-opt/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# 自托管字体，基本不变
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# 首页 hero 等
+[[headers]]
+  for = "/home/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# sitemap 更新频率低，短缓存即可
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
