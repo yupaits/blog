@@ -4,7 +4,6 @@
     "@vrcd-community/markdown-it-video": "^1.1.1",
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
-    "element-plus": "2.11.3",
     "markdown-it-task-checkbox": "^1.0.6",
     "sharp": "^0.35.5",
     "vitepress": "1.6.4"
