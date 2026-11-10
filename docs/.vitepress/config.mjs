@@ -216,6 +216,10 @@ export default defineConfig({
             ['meta', {name: 'twitter:card', content: 'summary'}]
         ]
         const cover = pageData.frontmatter.cover
+        // 首页 LCP 是 hero 图，提前预加载，避免等 HTML 解析到后才发现
+        if (pageData.frontmatter.layout === 'home') {
+            head.unshift(['link', {rel: 'preload', as: 'image', href: '/home/hero.webp', fetchpriority: 'high'}])
+        }
         if (cover) {
             head.push(['meta', {
                 property: 'og:image',
