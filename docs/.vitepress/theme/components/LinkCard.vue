@@ -1,5 +1,5 @@
 <template>
-  <a :class="{ 'linkcard-subfield': group.subfield, 'linkcard-external': group.external }"
+  <a :class="{ 'linkcard-subfield': group.subfield }"
      class="linkcard no-icon" draggable="false"
      :href="option?.link" :target="group.external ? '_blank' : undefined"
      :rel="group.external ? 'noopener noreferrer' : undefined"
@@ -346,6 +346,12 @@ onBeforeUnmount(hideTip)
   border-color: color-mix(in srgb, var(--vp-c-brand-2) 55%, var(--vp-c-divider));
   background-color: var(--vp-c-bg-elv);
   box-shadow: 0 12px 28px -20px color-mix(in srgb, var(--vp-c-brand-1) 45%, transparent);
+}
+
+/* 正文 a:hover 会命中卡片外壳并给内部文字补下划线，这里用更高特异性只取消卡片的下划线，
+   描边、阴影、位移等 hover 反馈保持不变 */
+.linkcard.linkcard:hover {
+  text-decoration: none;
 }
 
 .linkcard:focus-visible {

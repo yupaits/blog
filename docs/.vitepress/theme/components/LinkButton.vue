@@ -18,7 +18,10 @@ a.link-btn {
   white-space: nowrap;
 }
 
-a.link-btn:hover {
+/* 正文 a:hover 会给按钮补下划线，这里提高一级特异性只取消按钮的文字下划线，
+   底色 hover 反馈保持不变 */
+a.link-btn.link-btn:hover {
+  text-decoration: none;
   background-color: var(--vp-c-bg-soft);
 }
 
