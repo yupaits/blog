@@ -66,9 +66,11 @@ const watermarkImage = computed(() => {
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`
 })
 
-// 深浅色切换：整体用颜色过渡完成。
-// 之前用 View Transition 的整页快照 + 圆形裁剪，切换瞬间新快照会先完整绘制一帧，
-// 从深色切浅色时就是那一下闪白；改成只过渡颜色属性后不存在快照中转帧。
+// 深浅色切换：只过渡页面底色 + 内容整体淡入，不再给每个元素挂颜色过渡。
+// 之前 html.theme-transitioning * 会让上万个元素同时跑 background-color / color / border-color
+// 插值（实测每次切换 1.1 万条过渡），主线程逐帧重绘整页文字导致卡顿；1px 边框与分割线各自
+// 插值还会在底色变浅/变深途中出现明暗不一致的"闪"。现在文字与线条在切换瞬间一次性落定，
+// 只让页面底色和导航/侧栏几处承载层做底色过渡，再用内容淡入盖住硬跳，全程十来条过渡。
 let themeTimer = 0
 
 provide('toggle-appearance', () => {
@@ -80,15 +82,17 @@ provide('toggle-appearance', () => {
         return
     }
 
+    // 内容从 55% 淡入，底色做颜色过渡
     root.classList.add('theme-transitioning')
-    // 先强制一次样式计算，让过渡属性在当前主题的颜色上生效
-    void root.offsetHeight
+    // 只刷新样式计算（不触发整页布局），让过渡规则与旧主题底色先确定下来，
+    // 否则同一帧内新增过渡规则再改主题，浏览器不会生成过渡
+    void getComputedStyle(root).backgroundColor
     isDark.value = !isDark.value
 
     window.clearTimeout(themeTimer)
     themeTimer = window.setTimeout(() => {
         root.classList.remove('theme-transitioning')
-    }, 300)
+    }, 320)
 })
 
 // 五彩纸屑：仅首页每天首次访问、尊重减少动效偏好，可通过 localStorage 关闭
@@ -199,28 +203,50 @@ main .vp-doc.draft-hidden {
   display: none;
 }
 
-/* 深浅色切换：只过渡颜色相关属性（背景、文字、边框、图标描边），
-   不碰 backdrop-filter / box-shadow / 尺寸，避免切换时整页重绘掉帧 */
+/* 深浅色切换：只让少数大面积底色做过渡，文字与线条瞬时落定后再靠整体淡入遮住，
+   避免上万条逐元素插值造成的掉帧，也避免 1px 线条各自插值产生的明暗闪动 */
 html {
   background-color: var(--vp-c-bg);
 }
 
 html.theme-transitioning,
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-  transition-property: background-color, border-color, color, fill, stroke, outline-color !important;
-  transition-duration: 240ms !important;
-  transition-timing-function: ease !important;
-  transition-delay: 0s !important;
+html.theme-transitioning body,
+html.theme-transitioning .VPNavBar,
+html.theme-transitioning .VPSidebar,
+html.theme-transitioning .VPLocalNav,
+html.theme-transitioning .VPContent,
+html.theme-transitioning .VPDoc,
+html.theme-transitioning .VPFooter {
+  transition: background-color 240ms ease !important;
+}
+
+@keyframes theme-content-fade {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+html.theme-transitioning #app {
+  animation: theme-content-fade 240ms ease both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html.theme-transitioning,
-  html.theme-transitioning *,
-  html.theme-transitioning *::before,
-  html.theme-transitioning *::after {
+  html.theme-transitioning body,
+  html.theme-transitioning .VPNavBar,
+  html.theme-transitioning .VPSidebar,
+  html.theme-transitioning .VPLocalNav,
+  html.theme-transitioning .VPContent,
+  html.theme-transitioning .VPDoc,
+  html.theme-transitioning .VPFooter {
     transition-duration: 0s !important;
+  }
+
+  html.theme-transitioning #app {
+    animation: none !important;
   }
 }
 
