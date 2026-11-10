@@ -7,6 +7,8 @@ import LinkCard from './components/LinkCard.vue'
 import LinkCardGroup from './components/LinkCardGroup.vue'
 import Progress from './components/Progress.vue'
 import BookDetail from './components/BookDetail.vue'
+import Timeline from './components/Timeline.vue'
+import TimelineItem from './components/TimelineItem.vue'
 
 import '@bprogress/core/css'
 import './style/index.css'
@@ -31,5 +33,7 @@ export default {
         app.component('LinkCardGroup', LinkCardGroup)
         app.component('Progress', Progress)
         app.component('BookDetail', BookDetail)
+        app.component('Timeline', Timeline)
+        app.component('TimelineItem', TimelineItem)
     }
 }
