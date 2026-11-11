@@ -29,6 +29,7 @@ import {computed, defineAsyncComponent, nextTick, onMounted, provide, ref, watch
 import BackToTop from './components/BackToTop.vue'
 import CommentRule from './components/CommentRule.vue'
 import DraftAnnounce from './components/DraftAnnounce.vue'
+import {fitTablesSoon, initTableFit} from './table-fit.js'
 import PageCopyRight from './components/PageCopyright.vue'
 import PageMetadata from './components/PageMetadata.vue'
 import PageShare from './components/PageShare.vue'
@@ -196,6 +197,7 @@ watch(() => route.path, async () => {
     await nextTick()
     handleDoc()
     initLazyVideos()
+    fitTablesSoon()
     scheduleBindFancybox()
 })
 
@@ -204,6 +206,7 @@ onMounted(() => {
     initConfetti()
     handleDoc()
     initLazyVideos()
+    initTableFit()
     scheduleBindFancybox()
     const schedule = window.requestIdleCallback
         ? cb => window.requestIdleCallback(cb, {timeout: 2000})

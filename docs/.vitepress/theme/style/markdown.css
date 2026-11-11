@@ -283,6 +283,23 @@
   border-top: 0;
 }
 
+/* 列宽脚本测量完成前先不绘制表格（visibility 保留占位，不影响布局），
+   避免先按默认列宽画一遍、再被脚本撑开造成的跳动；
+   脚本算完会打上 data-table-fit="done"。2.5s 后兜底显示，
+   防止脚本异常时表格一直不可见。无 JS（scripting: none）时整段不生效。 */
+@media (scripting: enabled) {
+  .VPDoc .vp-doc .vp-table-wrapper:not([data-table-fit='done']) {
+    visibility: hidden;
+    animation: vp-table-fit-reveal 0s linear 2.5s forwards;
+  }
+}
+
+@keyframes vp-table-fit-reveal {
+  to {
+    visibility: visible;
+  }
+}
+
 .VPDoc .vp-doc .vp-table-wrapper table {
   width: 100%;
   margin: 0;
