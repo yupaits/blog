@@ -29,14 +29,14 @@
       </div>
     </div>
     <div class="featured-shell">
-      <div class="featured-detail home-card" aria-live="polite">
+      <div ref="detailEl" class="featured-detail home-card" aria-live="polite">
         <div v-if="active" :key="active.url" class="detail-inner detail-enter">
           <div class="detail-meta">
             <span class="home-pill">{{ active.category }}</span>
             <span class="home-muted">{{ formatDate(active.date) }}</span>
           </div>
           <h3 class="detail-title">{{ active.title }}</h3>
-          <p v-if="active.note" class="detail-note">{{ active.note }}</p>
+          <p v-if="active.note" ref="noteEl" class="detail-note" :style="noteStyle">{{ active.note }}</p>
           <a class="detail-link" :href="active.url">
             阅读全文
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -76,7 +76,7 @@
 </template>
 
 <script setup>
-import {computed, ref, watch} from 'vue'
+import {computed, nextTick, onBeforeUnmount, onMounted, ref, watch} from 'vue'
 
 const {featured} = defineProps(['featured'])
 
@@ -120,6 +120,42 @@ const categories = computed(() => groups.value.map(group => ({
 })))
 
 const active = computed(() => flatList.value[Math.min(current.value, flatList.value.length - 1)])
+
+// 标题按实际行数撑开、不参与收缩；简介只占剩余高度，按整行数截断并省略，避免出现滚动条
+const detailEl = ref(null)
+const noteEl = ref(null)
+const noteLines = ref(2)
+const noteStyle = computed(() => ({'-webkit-line-clamp': String(noteLines.value)}))
+
+let frame = 0
+const measureNote = () => {
+    cancelAnimationFrame(frame)
+    frame = requestAnimationFrame(() => {
+        const note = noteEl.value
+        if (!note) return
+        const lineHeight = parseFloat(getComputedStyle(note).lineHeight)
+        if (!lineHeight) return
+        // note 由 flex 分配到剩余高度，按行高折算可完整显示的行数
+        noteLines.value = Math.max(1, Math.floor((note.clientHeight + 1) / lineHeight))
+    })
+}
+
+watch(active, async () => {
+    await nextTick()
+    measureNote()
+})
+
+let observer
+onMounted(() => {
+    measureNote()
+    observer = new ResizeObserver(measureNote)
+    if (detailEl.value) observer.observe(detailEl.value)
+})
+
+onBeforeUnmount(() => {
+    cancelAnimationFrame(frame)
+    observer?.disconnect()
+})
 
 watch(list, () => {
     current.value = 0
@@ -311,31 +347,31 @@ const formatDate = (seconds) => {
 
 .detail-meta {
   display: flex;
+  flex: none;
   align-items: center;
   gap: var(--blog-space-3, 12px);
 }
 
+/* 标题完整显示，允许自然换行；不参与 flex 收缩，避免固定高度下被压掉最后一行 */
 .detail-title {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
+  flex: none;
   margin: 0;
   font-size: 20px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0.2px;
+  overflow-wrap: break-word;
   color: var(--vp-c-text-1);
 }
 
+/* 简介只占标题之外的剩余高度，按计算出的行数截断并省略，不产生滚动条 */
 .detail-note {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   flex: 1 1 auto;
   min-height: 0;
   margin: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: var(--vp-c-divider) transparent;
+  overflow: hidden;
   font-size: 14px;
   line-height: 1.8;
   color: var(--vp-c-text-2);
@@ -343,6 +379,7 @@ const formatDate = (seconds) => {
 
 .detail-link {
   display: inline-flex;
+  flex: none;
   align-items: center;
   gap: 6px;
   align-self: flex-start;
