@@ -422,10 +422,14 @@ const formatDate = (seconds) => {
 .featured-list {
   height: 100%;
   min-height: 0;
+  /* 与左侧概览卡片同一套描边与圆角，列表项与边框之间留出内边距 */
+  /* 顶部不留内边距：吸顶标题的底色直接贴到容器上边缘，滚动内容不会从上方缝隙穿出 */
+  padding: 0 var(--blog-space-2, 8px) var(--blog-space-2, 8px);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--blog-radius-card, 12px);
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  padding-right: 4px;
   scrollbar-width: thin;
   scrollbar-color: var(--vp-c-divider) transparent;
 }
@@ -452,8 +456,9 @@ const formatDate = (seconds) => {
   justify-content: space-between;
   gap: var(--blog-space-2, 8px);
   min-height: 26px;
-  margin-bottom: 2px;
-  padding: 0 10px;
+  margin: 0 0 2px;
+  /* 顶部留白放在吸顶标题自身，底色随标题一起延伸，滚动时不会透出条目 */
+  padding: var(--blog-space-2, 8px) var(--blog-space-3, 12px) 0;
   background-color: var(--vp-c-bg);
   border-bottom: 1px solid var(--vp-c-divider);
   font-size: 11px;
