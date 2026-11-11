@@ -36,7 +36,9 @@
             <span class="home-muted">{{ formatDate(active.date) }}</span>
           </div>
           <h3 class="detail-title">{{ active.title }}</h3>
-          <p v-if="active.note" ref="noteEl" class="detail-note" :style="noteStyle">{{ active.note }}</p>
+          <div v-if="active.note" ref="noteBoxEl" class="detail-note-box">
+            <p ref="noteEl" class="detail-note" :style="noteStyle">{{ active.note }}</p>
+          </div>
           <a class="detail-link" :href="active.url">
             阅读全文
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -121,22 +123,32 @@ const categories = computed(() => groups.value.map(group => ({
 
 const active = computed(() => flatList.value[Math.min(current.value, flatList.value.length - 1)])
 
-// 标题按实际行数撑开、不参与收缩；简介只占剩余高度，按整行数截断并省略，避免出现滚动条
+// 标题按实际行数撑开、不参与收缩；简介外层只承接剩余高度，简介段落自身按整行截断，
+// 这样段落高度恒为「行高 × 整数行」，不会在容器底部露出半行
 const detailEl = ref(null)
+const noteBoxEl = ref(null)
 const noteEl = ref(null)
 const noteLines = ref(2)
-const noteStyle = computed(() => ({'-webkit-line-clamp': String(noteLines.value)}))
+const noteFits = ref(true)
+const noteStyle = computed(() => (noteFits.value
+    ? {'-webkit-line-clamp': String(noteLines.value)}
+    : {display: 'none'}))
 
 let frame = 0
 const measureNote = () => {
     cancelAnimationFrame(frame)
     frame = requestAnimationFrame(() => {
+        const box = noteBoxEl.value
         const note = noteEl.value
-        if (!note) return
+        if (!box || !note) return
         const lineHeight = parseFloat(getComputedStyle(note).lineHeight)
         if (!lineHeight) return
-        // note 由 flex 分配到剩余高度，按行高折算可完整显示的行数
-        noteLines.value = Math.max(1, Math.floor((note.clientHeight + 1) / lineHeight))
+        // 外层由 flex 分配到剩余高度，取其小数高度折算「能完整放下」的行数，
+        // 向下取整后即使容器高度不是行高整数倍也只会留白，不会切字
+        const lines = Math.floor((box.getBoundingClientRect().height + 0.5) / lineHeight)
+        // 连一行都放不下时整段隐藏，避免露出半行
+        noteFits.value = lines >= 1
+        noteLines.value = Math.max(1, lines)
     })
 }
 
@@ -150,6 +162,8 @@ onMounted(() => {
     measureNote()
     observer = new ResizeObserver(measureNote)
     if (detailEl.value) observer.observe(detailEl.value)
+    // 简介外层的高度随标题行数变化，也要跟着重新折算行数
+    if (noteBoxEl.value) observer.observe(noteBoxEl.value)
 })
 
 onBeforeUnmount(() => {
@@ -364,12 +378,17 @@ const formatDate = (seconds) => {
   color: var(--vp-c-text-1);
 }
 
-/* 简介只占标题之外的剩余高度，按计算出的行数截断并省略，不产生滚动条 */
+/* 简介外层只承接标题之外的剩余高度，真正截断交给内部段落，外层不参与裁字 */
+.detail-note-box {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 简介段落高度自适应（受 clamp 限制），因此高度恒为行高的整数倍，末行完整且带省略号 */
 .detail-note {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  flex: 1 1 auto;
-  min-height: 0;
   margin: 0;
   overflow: hidden;
   font-size: 14px;
