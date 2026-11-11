@@ -132,6 +132,21 @@
   transition: opacity var(--blog-duration-fast, 150ms) var(--blog-ease, ease);
 }
 
+/* 纯文本块不显示语言标识：plaintext 与 shiki 的 text / txt 别名都算，
+   代码组内的单个块同样隐藏，复制按钮与代码块留白不受影响 */
+.VPDoc .vp-doc div.language-plaintext > span.lang,
+.VPDoc .vp-doc div.language-text > span.lang,
+.VPDoc .vp-doc div.language-txt > span.lang {
+  display: none;
+}
+
+/* 无语言的围栏（``` 后为空）渲染成 div[class~='language-']，
+   其 span.lang 为空串，同样隐藏，避免出现空标识胶囊 */
+.VPDoc .vp-doc div[class~='language-'] > span.lang,
+.VPDoc .vp-doc div[class*='language-'] > span.lang:empty {
+  display: none;
+}
+
 .VPDoc .vp-doc [class*='language-'] > button.copy {
   top: 8px;
   right: 10px;
