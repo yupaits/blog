@@ -19,6 +19,7 @@ docs/.vitepress/temp/
 
 .vscode/
 .idea/
+.openidea/
 
 docs/.vitepress/.temp/
 .workbuddy/
