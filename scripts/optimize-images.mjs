@@ -39,14 +39,35 @@ const statFile = async (file) => {
 
 const key = (rel) => '/images/' + rel.split(path.sep).join('/')
 
+const readManifest = async (file) => {
+    try {
+        return JSON.parse(await fs.readFile(file, 'utf8'))
+    } catch {
+        return {}
+    }
+}
+
+// 回退原图时的清单条目；noGain 记录源图指纹，供下次构建直接跳过重复转码
+const originalEntry = (url, width, height, srcStat, noGain = false) => {
+    const entry = {src: url, width, height, bytes: srcStat.size}
+    if (noGain) {
+        entry.noGain = true
+        entry.srcBytes = srcStat.size
+        entry.srcMtimeMs = Math.round(srcStat.mtimeMs)
+    }
+    return entry
+}
+
 const main = async () => {
     await fs.mkdir(OUT_DIR, {recursive: true})
     const files = await walk(SRC_DIR)
+    const prevManifest = await readManifest(MANIFEST)
     const manifest = {}
     const used = new Set()
     let sourceBytes = 0
     let outputBytes = 0
     let converted = 0
+    let skipped = 0
     let failed = 0
 
     for (const rel of files) {
@@ -69,8 +90,17 @@ const main = async () => {
         sourceBytes += srcStat.size
 
         if (!needResize && !needCompress) {
-            manifest[url] = {src: url, width, height, bytes: srcStat.size}
+            manifest[url] = originalEntry(url, width, height, srcStat)
             outputBytes += srcStat.size
+            continue
+        }
+
+        // 上次已判定「压缩无收益」且源图未改动：沿用判定，跳过重复转码
+        const prev = prevManifest[url]
+        if (prev?.noGain && prev.srcBytes === srcStat.size && prev.srcMtimeMs === Math.round(srcStat.mtimeMs)) {
+            manifest[url] = originalEntry(url, width, height, srcStat, true)
+            outputBytes += srcStat.size
+            skipped++
             continue
         }
 
@@ -113,12 +143,12 @@ const main = async () => {
             outputBytes += srcStat.size
             continue
         }
-        // 压缩版反而更大时保留原图（例如已高度优化的 webp）
+        // 压缩版反而更大时保留原图（例如已高度优化的 webp），并记录判定结果避免下次重转
         if (finalStat.size >= srcStat.size * 0.95) {
             await fs.unlink(outFile).catch(() => {
             })
             used.delete(outFile)
-            manifest[url] = {src: url, width, height, bytes: srcStat.size}
+            manifest[url] = originalEntry(url, width, height, srcStat, true)
             outputBytes += srcStat.size
             continue
         }
@@ -153,7 +183,7 @@ const main = async () => {
     await fs.writeFile(MANIFEST, JSON.stringify(manifest))
 
     const mb = (n) => (n / 1024 / 1024).toFixed(1)
-    console.log(`[images] ${files.length} 张，转码 ${converted} 张，失败 ${failed} 张`)
+    console.log(`[images] ${files.length} 张，转码 ${converted} 张，跳过 ${skipped} 张，失败 ${failed} 张`)
     console.log(`[images] 源图 ${mb(sourceBytes)}MB → 页面实际使用 ${mb(outputBytes)}MB`)
 }
 
