@@ -14,28 +14,23 @@ steps:
       # 全量克隆保留 git 历史：lastUpdated 依赖提交时间
       - git clone https://gitea.yupaits.top/yupaits/blog-md.git .
 
-  # CI 构建镜像（预装 git 与 pnpm@11.9.0，见 docker/ci/Dockerfile）：
-  # 用 Dockerfile 内容的短哈希作主标签，内容不变且本地已有镜像时直接跳过构建；
-  # 再补一个稳定别名 yupaits/blog-md-ci:node24，供后续 step 的 image 字段引用。
-  # 刻意不用 docker:cli：它是本地未缓存的镜像，首次要从 docker.io 拉取，国内会卡住；
-  # 这里复用「拉取代码」step 已在用的 alpine/git（本地必然存在），
-  # 再从 USTC 的 apk 源装 docker 客户端后连宿主 socket 构建。
+  # CI 构建镜像 yupaits/blog-md-ci:node24（node:24-alpine + git + pnpm@12.18.0，见 docker/ci/Dockerfile）
+  # 按 Dockerfile 内容的短哈希打标签：本地已有该哈希就跳过构建，只补 node24 别名。
+  # 使用固定版本 tag（不用 docker:cli 这类可变 tag），宿主机需预置该镜像：
+  # docker pull docker:29.9.3-cli
+  # 缺失时 Drone 仍会去 registry 拉取（国内可能卡住）；if-not-exists 保证缓存命中后不再重复拉取。
   - name: 构建镜像
-    image: alpine/git:2.47.2
+    image: docker:29.9.3-cli
     pull: if-not-exists
     depends_on:
       - 拉取代码
     volumes:
-      # 复用宿主机 Docker daemon，使本 step 构建的镜像对 runner 与后续 step 可见
+      # 复用宿主机 Docker daemon：构建出的镜像对 runner 与后续 step 可见
       - name: docker_sock
         path: /var/run/docker.sock
     commands:
-      # 换成国内 apk 源，安装一次性的 docker 客户端（容器用完即弃，不影响站点产物）
-      - sed -i 's#dl-cdn.alpinelinux.org#mirrors.ustc.edu.cn#' /etc/apk/repositories
-      - apk add --no-cache docker-cli
       - TAG=yupaits/blog-md-ci:node24
       - HASH="yupaits/blog-md-ci:$(sha256sum docker/ci/Dockerfile | cut -c1-12)"
-      # 只取 docker image inspect 的退出码判断标签是否存在
       - |
         if docker image inspect "$HASH" >/dev/null 2>&1; then
           echo "[ci-image] 跳过：本地已存在 $HASH，本次不重建"
@@ -45,28 +40,24 @@ steps:
           # 上下文收窄到 docker/ci：Dockerfile 无 COPY/ADD，不需要整个仓库
           docker build -f docker/ci/Dockerfile -t "$HASH" -t "$TAG" docker/ci
         fi
-      - |
-        echo "[ci-image] 就绪，当前标签："
-        docker image ls yupaits/blog-md-ci
 
+  # 镜像由上一 step 构建并打好 node24 别名，这里绝不访问 registry
   - name: pnpm构建
     image: yupaits/blog-md-ci:node24
     depends_on:
       - 构建镜像
-    # 镜像由上一 step 在本机 daemon 构建，这里禁止拉取，避免「拉取早于构建」；
-    # 全新 runner 上需先在宿主机执行一次 docker build（见 docker/ci/Dockerfile 注释）
     pull: never
     volumes:
-      # pnpm store
+      # pnpm 全局 store：跨构建复用已下载的包
       - name: cache
         path: /.pnpm-store
-      # VitePress 依赖预打包缓存 + 图片清单 image-manifest.json
+      # VitePress 依赖预打包缓存 + 图片优化清单 image-manifest.json
       - name: vp-cache
         path: /drone/src/docs/.vitepress/cache
-      # 图片压缩产物，配合脚本的 mtime 判定做增量转码
+      # 图片压缩产物：配合清单里的 mtime 判定做增量转码
       - name: images-opt
         path: /drone/src/docs/public/images-opt
-      # 站点产物发布目录
+      # 站点产物发布目录，宿主机上的 web 服务直接指向这里
       - name: dist
         path: /drone/src/docs/.vitepress/dist
     commands:
@@ -90,7 +81,7 @@ volumes:
   - name: dist
     host:
       path: /volume3/docker/dev/drone/yupaits-notes
-  # 宿主机 Docker socket，仅供「构建镜像」step 挂载
+  # 宿主机 Docker socket，仅供「构建镜像」step 使用
   - name: docker_sock
     host:
       path: /var/run/docker.sock
