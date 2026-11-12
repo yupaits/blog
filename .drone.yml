@@ -13,33 +13,76 @@ steps:
     commands:
       # 全量克隆保留 git 历史：lastUpdated 依赖提交时间
       - git clone https://gitea.yupaits.top/yupaits/blog-md.git .
-  - name: pnpm构建
-    image: node:24-alpine
+
+  # CI 构建镜像（预装 git 与 pnpm@11.9.0，见 docker/ci/Dockerfile）：
+  # 用 Dockerfile 内容的短哈希作主标签，内容不变且本地已有镜像时直接跳过构建；
+  # 再补一个稳定别名 yupaits/blog-md-ci:node24，供后续 step 的 image 字段引用。
+  - name: 构建镜像
+    image: docker:cli
+    depends_on:
+      - 拉取代码
     volumes:
+      # 复用宿主机 Docker daemon，使本 step 构建的镜像对 runner 与后续 step 可见
+      - name: docker_sock
+        path: /var/run/docker.sock
+    commands:
+      - TAG=yupaits/blog-md-ci:node24
+      - HASH="yupaits/blog-md-ci:$(sha256sum docker/ci/Dockerfile | cut -c1-12)"
+      # 只取 docker image inspect 的退出码判断标签是否存在
+      - |
+        if docker image inspect "$HASH" >/dev/null 2>&1; then
+          echo "[ci-image] 跳过：本地已存在 $HASH，本次不重建"
+          docker tag "$HASH" "$TAG"
+        else
+          echo "[ci-image] 构建：本地缺少 $HASH，开始 docker build"
+          # 上下文收窄到 docker/ci：Dockerfile 无 COPY/ADD，不需要整个仓库
+          docker build -f docker/ci/Dockerfile -t "$HASH" -t "$TAG" docker/ci
+        fi
+      - |
+        echo "[ci-image] 就绪，当前标签："
+        docker image ls yupaits/blog-md-ci
+
+  - name: pnpm构建
+    image: yupaits/blog-md-ci:node24
+    depends_on:
+      - 构建镜像
+    # 镜像由上一 step 在本机 daemon 构建，这里禁止拉取，避免「拉取早于构建」
+    pull: never
+    volumes:
+      # pnpm store
       - name: cache
         path: /.pnpm-store
+      # VitePress 依赖预打包缓存 + 图片清单 image-manifest.json
+      - name: vp-cache
+        path: /drone/src/docs/.vitepress/cache
+      # 图片压缩产物，配合脚本的 mtime 判定做增量转码
+      - name: images-opt
+        path: /drone/src/docs/public/images-opt
+      # 站点产物发布目录
       - name: dist
         path: /drone/src/docs/.vitepress/dist
     commands:
-      - cat /etc/apk/repositories
-      - echo -e 'https://mirrors.ustc.edu.cn/alpine/v3.22/main\nhttps://mirrors.ustc.edu.cn/alpine/v3.22/community' > /etc/apk/repositories
-      - apk update && apk add git
-      - git version
-      - npm config set registry https://registry.npmmirror.com
-      - npm install -g corepack@latest
-      - corepack enable
-      - npx pnpm config set store-dir /.pnpm-store
-      - npx pnpm config set registry https://registry.npmmirror.com
-      - npx pnpm install --frozen-lockfile
-      - npx pnpm run check:links
-      - npx pnpm run check:assets
-      - npx pnpm run docs:build
-      - npx pnpm run check:bundle
+      - pnpm config set store-dir /.pnpm-store
+      - pnpm install --frozen-lockfile
+      - pnpm run check:links
+      - pnpm run check:assets
+      - pnpm run docs:build
+      - pnpm run check:bundle
 
 volumes:
   - name: cache
     host:
       path: /volume3/docker/dev/drone/pnpm/cache
+  - name: vp-cache
+    host:
+      path: /volume3/docker/dev/drone/yupaits-notes-vp-cache
+  - name: images-opt
+    host:
+      path: /volume3/docker/dev/drone/yupaits-notes-images-opt
   - name: dist
     host:
       path: /volume3/docker/dev/drone/yupaits-notes
+  # 宿主机 Docker socket，仅供「构建镜像」step 挂载
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
