@@ -1,3 +1,7 @@
 allowBuilds:
   esbuild: true
   vue-demi: true
+
+# pnpm 12 默认在每次 pnpm run 前校验依赖与锁文件是否同步（并尝试补装）。
+# 流水线同一步内已执行 pnpm install --frozen-lockfile，这里关闭重复校验。
+verifyDepsBeforeRun: false
