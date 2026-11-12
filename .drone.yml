@@ -17,8 +17,12 @@ steps:
   # CI 构建镜像（预装 git 与 pnpm@11.9.0，见 docker/ci/Dockerfile）：
   # 用 Dockerfile 内容的短哈希作主标签，内容不变且本地已有镜像时直接跳过构建；
   # 再补一个稳定别名 yupaits/blog-md-ci:node24，供后续 step 的 image 字段引用。
+  # 刻意不用 docker:cli：它是本地未缓存的镜像，首次要从 docker.io 拉取，国内会卡住；
+  # 这里复用「拉取代码」step 已在用的 alpine/git（本地必然存在），
+  # 再从 USTC 的 apk 源装 docker 客户端后连宿主 socket 构建。
   - name: 构建镜像
-    image: docker:cli
+    image: alpine/git:2.47.2
+    pull: if-not-exists
     depends_on:
       - 拉取代码
     volumes:
@@ -26,6 +30,9 @@ steps:
       - name: docker_sock
         path: /var/run/docker.sock
     commands:
+      # 换成国内 apk 源，安装一次性的 docker 客户端（容器用完即弃，不影响站点产物）
+      - sed -i 's#dl-cdn.alpinelinux.org#mirrors.ustc.edu.cn#' /etc/apk/repositories
+      - apk add --no-cache docker-cli
       - TAG=yupaits/blog-md-ci:node24
       - HASH="yupaits/blog-md-ci:$(sha256sum docker/ci/Dockerfile | cut -c1-12)"
       # 只取 docker image inspect 的退出码判断标签是否存在
@@ -46,7 +53,8 @@ steps:
     image: yupaits/blog-md-ci:node24
     depends_on:
       - 构建镜像
-    # 镜像由上一 step 在本机 daemon 构建，这里禁止拉取，避免「拉取早于构建」
+    # 镜像由上一 step 在本机 daemon 构建，这里禁止拉取，避免「拉取早于构建」；
+    # 全新 runner 上需先在宿主机执行一次 docker build（见 docker/ci/Dockerfile 注释）
     pull: never
     volumes:
       # pnpm store
