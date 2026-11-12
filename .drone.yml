@@ -58,19 +58,12 @@ steps:
       - name: dist
         path: /drone/src/docs/.vitepress/dist
     commands:
-      # 诊断（<1s）：确认 images-opt 卷是否挂上、图片清单是否能读到
-      - |
-        echo "[diag] start $(date +%T) images_opt=$(ls -A docs/public/images-opt 2>/dev/null | wc -l) manifest=$(wc -c < docs/public/images-opt/image-manifest.json 2>/dev/null || echo missing)"
-        mount | grep -E 'images-opt' || echo "[diag] images-opt 未出现在 mount 输出中"
       - pnpm config set store-dir /.pnpm-store
       - pnpm install --frozen-lockfile
       - pnpm run check:links
       - pnpm run check:assets
       - pnpm run docs:build
       - pnpm run check:bundle
-      # 诊断：确认构建后清单是否写回挂载点
-      - |
-        echo "[diag] end $(date +%T) images_opt=$(ls -A docs/public/images-opt 2>/dev/null | wc -l) manifest=$(wc -c < docs/public/images-opt/image-manifest.json 2>/dev/null || echo missing)"
 
 volumes:
   - name: cache
