@@ -17,5 +17,5 @@
     "check:assets": "node scripts/check-assets.mjs",
     "check:bundle": "node scripts/check-bundle.mjs"
   },
-  "packageManager": "pnpm@12.18.0+sha512.nXiC1dyCFH7PxOBiqjSDTgrQKWcQoYN6ERWuASEn02txCeMhrBWYod0KZVl2gbHpmRfhLtDXSerpEYeUM2O+sw=="
+  "packageManager": "pnpm@12.18.0"
 }
