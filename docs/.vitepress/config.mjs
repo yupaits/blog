@@ -9,7 +9,7 @@ import sidebar from './config/sidebar'
 // 构建期图片优化清单（scripts/optimize-images.mjs 生成）：原图不动，按需换成压缩版并补宽高
 let imageManifest = {}
 try {
-    imageManifest = JSON.parse(fs.readFileSync(new URL('./cache/image-manifest.json', import.meta.url), 'utf8'))
+    imageManifest = JSON.parse(fs.readFileSync(new URL('../public/images-opt/image-manifest.json', import.meta.url), 'utf8'))
 } catch {
     // 未生成时直接使用原图
 }

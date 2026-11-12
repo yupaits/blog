@@ -51,30 +51,31 @@ steps:
       # pnpm 全局 store：跨构建复用已下载的包
       - name: cache
         path: /.pnpm-store
-      # VitePress 依赖预打包缓存 + 图片优化清单 image-manifest.json
-      - name: vp-cache
-        path: /drone/src/docs/.vitepress/cache
-      # 图片压缩产物：配合清单里的 mtime 判定做增量转码
+      # 图片压缩产物 + 清单 image-manifest.json：两者同卷，生命周期一致
       - name: images-opt
         path: /drone/src/docs/public/images-opt
       # 站点产物发布目录，宿主机上的 web 服务直接指向这里
       - name: dist
         path: /drone/src/docs/.vitepress/dist
     commands:
+      # 诊断（<1s）：确认 images-opt 卷是否挂上、图片清单是否能读到
+      - |
+        echo "[diag] start $(date +%T) images_opt=$(ls -A docs/public/images-opt 2>/dev/null | wc -l) manifest=$(wc -c < docs/public/images-opt/image-manifest.json 2>/dev/null || echo missing)"
+        mount | grep -E 'images-opt' || echo "[diag] images-opt 未出现在 mount 输出中"
       - pnpm config set store-dir /.pnpm-store
       - pnpm install --frozen-lockfile
       - pnpm run check:links
       - pnpm run check:assets
       - pnpm run docs:build
       - pnpm run check:bundle
+      # 诊断：确认构建后清单是否写回挂载点
+      - |
+        echo "[diag] end $(date +%T) images_opt=$(ls -A docs/public/images-opt 2>/dev/null | wc -l) manifest=$(wc -c < docs/public/images-opt/image-manifest.json 2>/dev/null || echo missing)"
 
 volumes:
   - name: cache
     host:
       path: /volume3/docker/dev/drone/pnpm/cache
-  - name: vp-cache
-    host:
-      path: /volume3/docker/dev/drone/yupaits-notes-vp-cache
   - name: images-opt
     host:
       path: /volume3/docker/dev/drone/yupaits-notes-images-opt

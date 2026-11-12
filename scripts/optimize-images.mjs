@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import {createHash} from 'node:crypto'
 import sharp from 'sharp'
 
 // 构建期图片优化：原图保持不动，按需生成压缩版到 public/images-opt，
@@ -7,7 +8,7 @@ import sharp from 'sharp'
 const ROOT = path.resolve('docs')
 const SRC_DIR = path.join(ROOT, 'public', 'images')
 const OUT_DIR = path.join(ROOT, 'public', 'images-opt')
-const MANIFEST = path.join(ROOT, '.vitepress', 'cache', 'image-manifest.json')
+const MANIFEST = path.join(ROOT, 'public', 'images-opt', 'image-manifest.json')
 const MAX_WIDTH = 1400        // 超过该宽度等比缩小，兼顾正文最大显示宽度与高分屏
 const MIN_BYTES = 200 * 1024  // 小于该体积且不超宽的原图直接复用，避免无意义转码
 const QUALITY = 78
@@ -39,6 +40,10 @@ const statFile = async (file) => {
 
 const key = (rel) => '/images/' + rel.split(path.sep).join('/')
 
+// 内容指纹：git clone 会把所有文件 mtime 重置为检出时间，
+// 用 mtime 判新鲜度在 CI 上永远不命中，因此改用「体积 + 内容哈希」
+const hashFile = async (file) => createHash('sha1').update(await fs.readFile(file)).digest('hex')
+
 const readManifest = async (file) => {
     try {
         return JSON.parse(await fs.readFile(file, 'utf8'))
@@ -47,14 +52,10 @@ const readManifest = async (file) => {
     }
 }
 
-// 回退原图时的清单条目；noGain 记录源图指纹，供下次构建直接跳过重复转码
-const originalEntry = (url, width, height, srcStat, noGain = false) => {
-    const entry = {src: url, width, height, bytes: srcStat.size}
-    if (noGain) {
-        entry.noGain = true
-        entry.srcBytes = srcStat.size
-        entry.srcMtimeMs = Math.round(srcStat.mtimeMs)
-    }
+// 回退原图时的清单条目；noGain 表示已判定压缩无收益，下次直接跳过重转
+const originalEntry = (url, width, height, srcStat, fingerprint, noGain = false) => {
+    const entry = {src: url, width, height, bytes: srcStat.size, ...fingerprint}
+    if (noGain) entry.noGain = true
     return entry
 }
 
@@ -67,13 +68,39 @@ const main = async () => {
     let sourceBytes = 0
     let outputBytes = 0
     let converted = 0
-    let skipped = 0
+    let noGain = 0
+    let reused = 0
     let failed = 0
 
     for (const rel of files) {
         const srcFile = path.join(SRC_DIR, rel)
         const srcStat = await statFile(srcFile)
         if (!srcStat) continue
+        const url = key(rel)
+        sourceBytes += srcStat.size
+        const fingerprint = {srcBytes: srcStat.size, srcHash: await hashFile(srcFile)}
+        const prev = prevManifest[url]
+
+        // 源图内容未变：沿用上次判定与产物，连 sharp 元数据都不用读
+        if (prev && prev.srcBytes === fingerprint.srcBytes && prev.srcHash === fingerprint.srcHash) {
+            if (prev.noGain) {
+                manifest[url] = prev
+                outputBytes += srcStat.size
+                noGain++
+                continue
+            }
+            if (prev.src?.startsWith('/images-opt/')) {
+                const prevOut = path.join(OUT_DIR, prev.src.slice('/images-opt/'.length))
+                if (await statFile(prevOut)) {
+                    used.add(prevOut)
+                    manifest[url] = prev
+                    outputBytes += prev.bytes
+                    reused++
+                    continue
+                }
+            }
+        }
+
         let meta
         try {
             meta = await sharp(srcFile).metadata()
@@ -86,60 +113,42 @@ const main = async () => {
         const canOptimize = OPTIMIZABLE.has(ext)
         const needResize = canOptimize && width > MAX_WIDTH
         const needCompress = canOptimize && srcStat.size > MIN_BYTES
-        const url = key(rel)
-        sourceBytes += srcStat.size
 
         if (!needResize && !needCompress) {
-            manifest[url] = originalEntry(url, width, height, srcStat)
+            manifest[url] = originalEntry(url, width, height, srcStat, fingerprint)
             outputBytes += srcStat.size
-            continue
-        }
-
-        // 上次已判定「压缩无收益」且源图未改动：沿用判定，跳过重复转码
-        const prev = prevManifest[url]
-        if (prev?.noGain && prev.srcBytes === srcStat.size && prev.srcMtimeMs === Math.round(srcStat.mtimeMs)) {
-            manifest[url] = originalEntry(url, width, height, srcStat, true)
-            outputBytes += srcStat.size
-            skipped++
             continue
         }
 
         const outRel = rel.replace(/\.(png|jpe?g|webp)$/i, '.webp')
         const outFile = path.join(OUT_DIR, outRel)
         used.add(outFile)
-        const outStat = await statFile(outFile)
         let outWidth = needResize ? MAX_WIDTH : width
         // 原图较小但体积大时只重编码，不放大小图
         let outHeight = width ? Math.round(height * outWidth / width) : height
 
-        const fresh = outStat && outStat.mtimeMs >= srcStat.mtimeMs
-        if (!fresh) {
-            try {
-                const buffer = await sharp(srcFile)
-                    .resize({width: needResize ? MAX_WIDTH : undefined, withoutEnlargement: true})
-                    .webp({quality: QUALITY, effort: 4})
-                    .toBuffer()
-                await fs.mkdir(path.dirname(outFile), {recursive: true})
-                await fs.writeFile(outFile, buffer)
-                const outMeta = await sharp(buffer).metadata()
-                outWidth = outMeta.width
-                outHeight = outMeta.height
-                converted++
-            } catch (e) {
-                failed++
-                manifest[url] = {src: url, width, height, bytes: srcStat.size}
-                outputBytes += srcStat.size
-                continue
-            }
-        } else {
-            const outMeta = await sharp(outFile).metadata()
+        // 走到这里说明源图内容变了或产物缺失，必须重新转码
+        try {
+            const buffer = await sharp(srcFile)
+                .resize({width: needResize ? MAX_WIDTH : undefined, withoutEnlargement: true})
+                .webp({quality: QUALITY, effort: 4})
+                .toBuffer()
+            await fs.mkdir(path.dirname(outFile), {recursive: true})
+            await fs.writeFile(outFile, buffer)
+            const outMeta = await sharp(buffer).metadata()
             outWidth = outMeta.width
             outHeight = outMeta.height
+            converted++
+        } catch {
+            failed++
+            manifest[url] = originalEntry(url, width, height, srcStat, fingerprint)
+            outputBytes += srcStat.size
+            continue
         }
 
         const finalStat = await statFile(outFile)
         if (!finalStat) {
-            manifest[url] = {src: url, width, height, bytes: srcStat.size}
+            manifest[url] = originalEntry(url, width, height, srcStat, fingerprint)
             outputBytes += srcStat.size
             continue
         }
@@ -148,7 +157,7 @@ const main = async () => {
             await fs.unlink(outFile).catch(() => {
             })
             used.delete(outFile)
-            manifest[url] = originalEntry(url, width, height, srcStat, true)
+            manifest[url] = originalEntry(url, width, height, srcStat, fingerprint, true)
             outputBytes += srcStat.size
             continue
         }
@@ -156,7 +165,8 @@ const main = async () => {
             src: '/images-opt/' + outRel.split(path.sep).join('/'),
             width: outWidth,
             height: outHeight,
-            bytes: finalStat.size
+            bytes: finalStat.size,
+            ...fingerprint
         }
         outputBytes += finalStat.size
     }
@@ -171,7 +181,7 @@ const main = async () => {
                 const left = await fs.readdir(file).catch(() => [])
                 if (!left.length) await fs.rmdir(file).catch(() => {
                 })
-            } else if (!used.has(file)) {
+            } else if (entry.name !== 'image-manifest.json' && !used.has(file)) {
                 await fs.unlink(file).catch(() => {
                 })
             }
@@ -183,7 +193,7 @@ const main = async () => {
     await fs.writeFile(MANIFEST, JSON.stringify(manifest))
 
     const mb = (n) => (n / 1024 / 1024).toFixed(1)
-    console.log(`[images] ${files.length} 张，转码 ${converted} 张，跳过 ${skipped} 张，失败 ${failed} 张`)
+    console.log(`[images] ${files.length} 张，转码 ${converted} 张，跳过 ${noGain + reused} 张（无收益 ${noGain} / 复用 ${reused}），失败 ${failed} 张`)
     console.log(`[images] 源图 ${mb(sourceBytes)}MB → 页面实际使用 ${mb(outputBytes)}MB`)
 }
 
